@@ -13,7 +13,6 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google {
             content {
@@ -30,3 +29,4 @@ rootProject.name = "Diary"
 
 include(":target:androidApp")
 include(":target:jvmApp")
+include(":target:jsApp")
