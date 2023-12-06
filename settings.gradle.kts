@@ -28,5 +28,6 @@ dependencyResolutionManagement {
 rootProject.name = "Diary"
 
 include(":target:androidApp")
+include(":target:iosApp")
 include(":target:jvmApp")
 include(":target:jsApp")

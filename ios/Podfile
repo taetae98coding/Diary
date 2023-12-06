@@ -1,0 +1,5 @@
+target 'Diary' do
+  use_frameworks!
+  platform :ios, '17.0'
+  pod 'iosApp', :path => '../target/iosApp'
+end
