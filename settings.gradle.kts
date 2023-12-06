@@ -27,4 +27,6 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Diary"
+
 include(":target:androidApp")
+include(":target:jvmApp")

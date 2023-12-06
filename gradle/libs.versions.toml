@@ -13,6 +13,7 @@ android-activity-compose = { group = "androidx.activity", name = "activity-compo
 
 [plugins]
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 
 android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
 
