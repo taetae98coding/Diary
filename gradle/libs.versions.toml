@@ -1,0 +1,19 @@
+[versions]
+kotlin = "1.9.21"                                   # https://github.com/JetBrains/kotlin/releases
+
+android-gradle-plugin = "8.2.0"                     # https://developer.android.com/build/releases/gradle-plugin?hl=en
+android-material = "1.10.0"                         # https://github.com/material-components/material-components-android/releases
+android-activity = "1.8.1"                          # https://developer.android.com/jetpack/androidx/releases/activity?hl=en
+
+compose-multiplatform = "1.5.11"                    # https://github.com/JetBrains/compose-multiplatform/releases
+
+[libraries]
+android-material = { group = "com.google.android.material", name = "material", version.ref = "android-material" }
+android-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "android-activity" }
+
+[plugins]
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+
+android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
+
+compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
