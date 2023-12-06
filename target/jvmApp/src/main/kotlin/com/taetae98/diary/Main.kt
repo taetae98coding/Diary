@@ -1,11 +1,11 @@
 package com.taetae98.diary
 
 
-import androidx.compose.material3.Text
 import androidx.compose.ui.window.singleWindowApplication
+import com.taetae98.diary.app.App
 
 public fun main() {
     singleWindowApplication {
-        Text(text = "Hello World")
+        App()
     }
 }

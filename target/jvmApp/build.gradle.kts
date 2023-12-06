@@ -9,6 +9,14 @@ kotlin {
 }
 
 dependencies {
+    implementation(project(":app"))
+
     implementation(compose.desktop.currentOs)
-    implementation(compose.material3)
+    implementation(compose.ui)
+}
+
+compose.desktop {
+    application {
+        mainClass = "com.taetae98.diary.MainKt"
+    }
 }

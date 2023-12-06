@@ -30,6 +30,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":app"))
+
     implementation(libs.android.material)
     implementation(libs.android.activity.compose)
 
