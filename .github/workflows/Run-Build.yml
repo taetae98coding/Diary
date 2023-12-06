@@ -1,0 +1,35 @@
+name: Run Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Set up JDK
+        uses: actions/setup-java@main
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Set up gradle permission
+        run: chmod +x gradlew
+
+      - name: Cache Gradle
+        uses: actions/cache@main
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Build Gradle
+        uses: gradle/gradle-build-action@main
+        with:
+          arguments: build
