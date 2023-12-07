@@ -33,3 +33,5 @@ include(":target:jvmApp")
 include(":target:jsApp")
 
 include(":app")
+
+include(":feature:memo")

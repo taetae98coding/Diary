@@ -21,7 +21,6 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(project(":feature:memo"))
                 implementation(compose.material3)
             }
         }
@@ -29,7 +28,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.taetae98.diary.app"
+    namespace = "com.taetae98.diary.feature.memo"
 
     compileSdk = 34
 
