@@ -1,11 +1,6 @@
 plugins {
-    alias(libs.plugins.kotlin.jvm)
+    id("diary.jvm")
     alias(libs.plugins.compose.multiplatform)
-}
-
-kotlin {
-    explicitApi()
-    jvmToolchain(17)
 }
 
 dependencies {
