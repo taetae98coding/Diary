@@ -1,13 +1,14 @@
 package com.taetae98.diary.app
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.taetae98.diary.feature.memo.MemoEntryPoint
-import com.taetae98.diary.navigation.core.AppEntry
+import com.taetae98.diary.navigation.core.app.AppEntry
 
 @Composable
 public fun App(
@@ -17,6 +18,13 @@ public fun App(
     MaterialTheme(
         colorScheme = if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme(),
     ) {
-        MemoEntryPoint()
+        Scaffold(
+            modifier = modifier,
+        ) {
+            AppNavHost(
+                modifier = Modifier.padding(it),
+                entry = entry,
+            )
+        }
     }
 }

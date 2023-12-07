@@ -1,12 +1,13 @@
 plugins {
     id("diary.multiplatform")
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(libs.decompose)
+                api(libs.decompose)
             }
         }
     }

@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.arkivanov.decompose.defaultComponentContext
 import com.taetae98.diary.app.App
-import com.taetae98.diary.navigation.core.AppEntry
+import com.taetae98.diary.navigation.core.app.AppEntry
 
 internal class DiaryActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

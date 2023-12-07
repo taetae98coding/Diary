@@ -11,6 +11,7 @@ kotlin {
                 implementation(project(":navigation:core"))
 
                 implementation(compose.material3)
+                implementation(libs.decompose.compose)
             }
         }
     }

@@ -5,7 +5,7 @@ import androidx.compose.ui.window.CanvasBasedWindow
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.taetae98.diary.app.App
-import com.taetae98.diary.navigation.core.AppEntry
+import com.taetae98.diary.navigation.core.app.AppEntry
 import org.jetbrains.skiko.wasm.onWasmReady
 
 @OptIn(ExperimentalComposeUiApi::class)
