@@ -39,3 +39,6 @@ include(":app")
 include(":feature:memo")
 
 include(":navigation:core")
+
+include(":ui:compose")
+include(":ui:decompose-compose")

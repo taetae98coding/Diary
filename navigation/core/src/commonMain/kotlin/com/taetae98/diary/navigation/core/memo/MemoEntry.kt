@@ -31,7 +31,7 @@ public class MemoEntry(
 
                 MemoAdd -> MemoAddEntry(
                     context = context,
-                    navigateUp = navigation::pop,
+                    navigateUp = ::navigateUp,
                 )
 
                 else -> illegalRoute(route)
@@ -41,5 +41,9 @@ public class MemoEntry(
 
     private fun navigateToMemoAdd() {
         navigation.push(MemoAdd)
+    }
+
+    public fun navigateUp() {
+        navigation.pop()
     }
 }
