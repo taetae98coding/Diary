@@ -8,6 +8,8 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":feature:memo"))
+                implementation(project(":navigation:core"))
+
                 implementation(compose.material3)
             }
         }

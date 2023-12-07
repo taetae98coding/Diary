@@ -1,11 +1,14 @@
 [versions]
 kotlin = "1.9.21"                                   # https://github.com/JetBrains/kotlin/releases
 
-android-gradle = "8.2.0"                     # https://developer.android.com/build/releases/gradle-plugin?hl=en
+android-gradle = "8.2.0"                            # https://developer.android.com/build/releases/gradle-plugin?hl=en
 android-material = "1.10.0"                         # https://github.com/material-components/material-components-android/releases
 android-activity = "1.8.1"                          # https://developer.android.com/jetpack/androidx/releases/activity?hl=en
 
 compose-multiplatform = "1.5.11"                    # https://github.com/JetBrains/compose-multiplatform/releases
+
+decompose = "2.2.0"                                 # https://github.com/arkivanov/Decompose/releases
+decompose-lifecycle = "1.3.0"                       # https://github.com/arkivanov/Essenty/releases
 
 [libraries]
 kotlin-gradle = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
@@ -13,6 +16,9 @@ kotlin-gradle = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin",
 android-gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "android-gradle" }
 android-material = { group = "com.google.android.material", name = "material", version.ref = "android-material" }
 android-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "android-activity" }
+
+decompose = { group = "com.arkivanov.decompose", name = "decompose", version.ref = "decompose" }
+decompose-lifecycle = { group = "com.arkivanov.essenty", name = "lifecycle", version.ref = "decompose-lifecycle" }
 
 [plugins]
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
