@@ -22,5 +22,10 @@ gradlePlugin {
             id = "diary.ios"
             implementationClass = "plugin.ios.IosPlugin"
         }
+
+        register("diary.js") {
+            id = "diary.js"
+            implementationClass = "plugin.js.JsPlugin"
+        }
     }
 }
