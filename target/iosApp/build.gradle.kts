@@ -1,16 +1,10 @@
 plugins {
-    alias(libs.plugins.kotlin.multiplatform)
+    id("diary.ios")
     alias(libs.plugins.kotlin.cocoapods)
     alias(libs.plugins.compose.multiplatform)
 }
 
 kotlin {
-    explicitApi()
-    jvmToolchain(17)
-
-    iosArm64()
-    iosSimulatorArm64()
-
     cocoapods {
         version = "1.0.0"
         homepage = "homepage"
