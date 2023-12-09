@@ -1,6 +1,6 @@
 plugins {
     id("diary.multiplatform")
-    alias(libs.plugins.compose.multiplatform)
+    id("diary.compose.multiplatform")
 }
 
 kotlin {

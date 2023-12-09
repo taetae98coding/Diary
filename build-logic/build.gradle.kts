@@ -37,5 +37,10 @@ gradlePlugin {
             id = "diary.multiplatform"
             implementationClass = "plugin.diary.DiaryMultiplatformPlugin"
         }
+
+        register("diary.compose.multiplatform") {
+            id = "diary.compose.multiplatform"
+            implementationClass = "plugin.compose.ComposeMultiplatformPlugin"
+        }
     }
 }

@@ -1,6 +1,6 @@
 plugins {
     id("diary.multiplatform")
-    alias(libs.plugins.compose.multiplatform)
+    id("diary.compose.multiplatform")
 }
 
 kotlin {
@@ -9,6 +9,12 @@ kotlin {
             dependencies {
                 implementation(compose.material3)
                 implementation(compose.materialIconsExtended)
+            }
+        }
+
+        androidMain {
+            dependencies {
+                implementation(compose.uiTooling)
             }
         }
     }

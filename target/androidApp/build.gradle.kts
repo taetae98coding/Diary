@@ -1,6 +1,6 @@
 plugins {
     id("diary.android.app")
-    alias(libs.plugins.compose.multiplatform)
+    id("diary.compose.multiplatform")
 }
 
 android {
@@ -27,5 +27,6 @@ dependencies {
     implementation(libs.android.activity.compose)
 
     implementation(compose.ui)
+
     implementation(libs.decompose)
 }
