@@ -12,12 +12,12 @@ kotlin {
                 implementation(project(":ui:decompose-compose"))
 
                 implementation(compose.material3)
-                implementation(libs.decompose)
+                implementation(libs.decompose.compose)
             }
         }
     }
 }
 
 android {
-    namespace = "${Build.NAMESPACE}.feature.memo"
+    namespace = "${Build.NAMESPACE}.feature.more"
 }

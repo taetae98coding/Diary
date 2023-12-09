@@ -37,6 +37,7 @@ include(":target:jsApp")
 include(":app")
 
 include(":feature:memo")
+include(":feature:more")
 
 include(":navigation:core")
 
