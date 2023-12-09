@@ -8,6 +8,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(compose.material3)
+                implementation(compose.materialIconsExtended)
             }
         }
     }

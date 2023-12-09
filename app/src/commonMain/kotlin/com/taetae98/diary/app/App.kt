@@ -20,6 +20,9 @@ public fun App(
     ) {
         Scaffold(
             modifier = modifier,
+            bottomBar = {
+                AppBottomBar(entry = entry)
+            }
         ) {
             AppNavHost(
                 modifier = Modifier.scaffoldPadding(it),

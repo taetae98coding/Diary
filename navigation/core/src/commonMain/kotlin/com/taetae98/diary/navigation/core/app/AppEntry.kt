@@ -3,11 +3,15 @@ package com.taetae98.diary.navigation.core.app
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
+import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.popWhile
 import com.arkivanov.decompose.value.Value
 import com.taetae98.diary.navigation.core.ext.illegalRoute
 import com.taetae98.diary.navigation.core.memo.MemoEntry
+import com.taetae98.diary.navigation.core.more.MoreEntry
 import com.taetae98.diary.navigation.core.route.MemoRoute
+import com.taetae98.diary.navigation.core.route.MoreRoute
 import com.taetae98.diary.navigation.core.route.Route
 
 public class AppEntry(
@@ -23,8 +27,18 @@ public class AppEntry(
         childFactory = { route, context ->
             when (route) {
                 MemoRoute -> MemoEntry(context = context)
+                MoreRoute -> MoreEntry(context = context)
                 else -> illegalRoute(route)
             }
         }
     )
+
+    public fun navigateToMemo() {
+        navigation.popWhile { it != MemoRoute }
+    }
+
+    public fun navigateToMore() {
+        navigation.popWhile { it != MemoRoute && it != MoreRoute }
+        navigation.bringToFront(MoreRoute)
+    }
 }
