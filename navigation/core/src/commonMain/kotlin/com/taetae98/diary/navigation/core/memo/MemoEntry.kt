@@ -8,8 +8,8 @@ import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.taetae98.diary.navigation.core.ext.illegalRoute
-import com.taetae98.diary.navigation.core.route.MemoAdd
-import com.taetae98.diary.navigation.core.route.MemoList
+import com.taetae98.diary.navigation.core.route.MemoAddRoute
+import com.taetae98.diary.navigation.core.route.MemoListRoute
 import com.taetae98.diary.navigation.core.route.Route
 
 public class MemoEntry(
@@ -19,17 +19,17 @@ public class MemoEntry(
 
     public val stack: Value<ChildStack<*, ComponentContext>> = childStack(
         source = navigation,
-        initialConfiguration = MemoList,
+        initialConfiguration = MemoListRoute,
         handleBackButton = true,
         serializer = Route.serializer(),
         childFactory = { route, context ->
             when (route) {
-                MemoList -> MemoListEntry(
+                MemoListRoute -> MemoListEntry(
                     context = context,
                     navigateToMemoAdd = ::navigateToMemoAdd,
                 )
 
-                MemoAdd -> MemoAddEntry(
+                MemoAddRoute -> MemoAddEntry(
                     context = context,
                     navigateUp = ::navigateUp,
                 )
@@ -40,10 +40,10 @@ public class MemoEntry(
     )
 
     private fun navigateToMemoAdd() {
-        navigation.push(MemoAdd)
+        navigation.push(MemoAddRoute)
     }
 
-    public fun navigateUp() {
+    private fun navigateUp() {
         navigation.pop()
     }
 }

@@ -38,6 +38,7 @@ include(":app")
 
 include(":feature:memo")
 include(":feature:more")
+include(":feature:account")
 
 include(":navigation:core")
 

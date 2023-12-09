@@ -7,10 +7,6 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(project(":feature:memo"))
-                implementation(project(":feature:more"))
-                implementation(project(":feature:account"))
-
                 implementation(project(":navigation:core"))
                 implementation(project(":ui:compose"))
                 implementation(project(":ui:decompose-compose"))
@@ -23,5 +19,5 @@ kotlin {
 }
 
 android {
-    namespace = "${Build.NAMESPACE}.app"
+    namespace = "${Build.NAMESPACE}.feature.account"
 }

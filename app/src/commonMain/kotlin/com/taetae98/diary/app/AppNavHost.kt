@@ -2,8 +2,10 @@ package com.taetae98.diary.app
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.taetae98.diary.feature.memo.MemoRoute
-import com.taetae98.diary.feature.more.MoreRoute
+import com.taetae98.diary.feature.account.AccountEntryPoint
+import com.taetae98.diary.feature.memo.MemoEntryPoint
+import com.taetae98.diary.feature.more.MoreEntryPoint
+import com.taetae98.diary.navigation.core.account.AccountEntry
 import com.taetae98.diary.navigation.core.app.AppEntry
 import com.taetae98.diary.navigation.core.memo.MemoEntry
 import com.taetae98.diary.navigation.core.more.MoreEntry
@@ -19,8 +21,9 @@ internal fun AppNavHost(
         stack = entry.stack,
     ) {
         when (val instance = it.instance) {
-            is MemoEntry -> MemoRoute(entry = instance)
-            is MoreEntry -> MoreRoute(entry = instance)
+            is MemoEntry -> MemoEntryPoint(entry = instance)
+            is MoreEntry -> MoreEntryPoint(entry = instance)
+            is AccountEntry -> AccountEntryPoint(entry = instance)
         }
     }
 }

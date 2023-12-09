@@ -2,14 +2,15 @@ package com.taetae98.diary.feature.more
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.taetae98.diary.navigation.core.more.MoreEntry
 
 @Composable
-internal fun MoreRoute(
+public fun MoreEntryPoint(
     modifier: Modifier = Modifier,
-    onAccount: () -> Unit
+    entry: MoreEntry
 ) {
-    MoreScreen(
+    MoreRoute(
         modifier = modifier,
-        onAccount = onAccount,
+        onAccount = entry.navigateToAccount,
     )
 }

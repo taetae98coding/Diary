@@ -10,7 +10,7 @@ import com.taetae98.diary.navigation.core.memo.MemoListEntry
 import com.taetae98.diary.ui.decompose.compose.AnimationChildren
 
 @Composable
-public fun MemoRoute(
+public fun MemoEntryPoint(
     modifier: Modifier = Modifier,
     entry: MemoEntry,
 ) {
@@ -19,8 +19,13 @@ public fun MemoRoute(
         stack = entry.stack,
     ) {
         when (val instance = it.instance) {
-            is MemoListEntry -> MemoListRoute(entry = instance)
-            is MemoAddEntry -> MemoAddRoute(entry = instance)
+            is MemoListEntry -> MemoListRoute(
+                onNavigateToMemoAdd = instance.navigateToMemoAdd,
+            )
+
+            is MemoAddEntry -> MemoAddRoute(
+                onNavigateUp = instance.navigateUp
+            )
         }
     }
 }
