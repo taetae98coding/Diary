@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.taetae98.diary.library.google.auth.compose.rememberGoogleAuthManager
 import com.taetae98.diary.ui.compose.modifier.scaffoldPadding
 import com.taetae98.diary.ui.compose.topbar.NavigateUpTopBar
 
@@ -85,9 +86,11 @@ private fun GuestButtonLayout(
 private fun GoogleLoginButton(
     modifier: Modifier = Modifier,
 ) {
+    val googleAuthManager = rememberGoogleAuthManager()
+
     FilledIconButton(
         modifier = modifier,
-        onClick = {},
+        onClick = googleAuthManager::signIn,
     ) {
         Text(text = "구글 로그인")
     }

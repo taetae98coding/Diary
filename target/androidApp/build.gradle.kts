@@ -40,7 +40,7 @@ dependencies {
     implementation(project(":navigation:core"))
 
     implementation(libs.android.material)
-    implementation(libs.android.activity.compose)
+    implementation(libs.androidx.activity.compose)
 
     implementation(compose.ui)
 

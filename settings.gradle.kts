@@ -44,3 +44,7 @@ include(":navigation:core")
 
 include(":ui:compose")
 include(":ui:decompose-compose")
+
+include(":library:google-auth-api")
+include(":library:google-auth-impl")
+include(":library:google-auth-compose")
