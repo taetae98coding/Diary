@@ -8,8 +8,8 @@ android-activity = "1.8.1"                          # https://developer.android.
 
 compose-multiplatform = "1.5.11"                    # https://github.com/JetBrains/compose-multiplatform/releases
 
-decompose = "2.2.0"                                 # https://github.com/arkivanov/Decompose/releases
-decompose-extension = "2.2.0-compose-experimental"  # https://github.com/arkivanov/Decompose/releases
+decompose = "2.2.1"                                 # https://github.com/arkivanov/Decompose/releases
+decompose-extension = "2.2.1-compose-experimental"  # https://github.com/arkivanov/Decompose/releases
 decompose-lifecycle = "1.3.0"                       # https://github.com/arkivanov/Essenty/releases
 
 [libraries]
