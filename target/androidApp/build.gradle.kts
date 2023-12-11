@@ -1,3 +1,5 @@
+import org.jetbrains.compose.internal.utils.getLocalProperty
+
 plugins {
     id("diary.android.app")
     id("diary.compose.multiplatform")
@@ -12,7 +14,21 @@ android {
         versionName = "1.0.0"
     }
 
+    signingConfigs {
+        create("debugSigning") {
+            storeFile = file("keystore/debug.jks")
+            storePassword = getLocalProperty("key.debug.store.password")
+            keyAlias = getLocalProperty("key.debug.alias")
+            keyPassword = getLocalProperty("key.debug.password")
+        }
+    }
+
     buildTypes {
+        debug {
+            applicationIdSuffix = ".debug"
+            signingConfig = signingConfigs.getByName("debugSigning")
+        }
+
         release {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
