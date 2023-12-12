@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.taetae98.diary.ui.compose.modifier.itemContentPadding
 import com.taetae98.diary.ui.compose.modifier.itemPadding
-import com.taetae98.diary.ui.compose.modifier.scaffoldPadding
 import com.taetae98.diary.ui.compose.topbar.TitleTopBar
 
 @Composable
@@ -27,7 +26,7 @@ internal fun MoreScreen(
         topBar = { TitleTopBar(title = "더보기") }
     ) {
         Content(
-            modifier = Modifier.scaffoldPadding(it),
+            modifier = Modifier.padding(it),
             onAccount = onAccount,
         )
     }

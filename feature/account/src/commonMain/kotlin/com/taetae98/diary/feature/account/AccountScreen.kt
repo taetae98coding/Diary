@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -12,7 +13,6 @@ import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.taetae98.diary.library.google.auth.compose.rememberGoogleAuthManager
-import com.taetae98.diary.ui.compose.modifier.scaffoldPadding
 import com.taetae98.diary.ui.compose.topbar.NavigateUpTopBar
 
 @Composable
@@ -32,7 +32,7 @@ internal fun AccountScreen(
         Content(
             modifier = Modifier
                 .fillMaxSize()
-                .scaffoldPadding(it),
+                .padding(it),
             uiState = uiState,
         )
     }

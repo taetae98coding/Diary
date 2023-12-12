@@ -7,8 +7,8 @@ plugins {
 kotlin {
     cocoapods {
         version = "1.0.0"
-        homepage = "homepage"
-        summary = "summary"
+        summary = "Diary"
+        homepage = "https://github.com/taetae98coding/Diary"
 
         framework {
             baseName = "iosApp"

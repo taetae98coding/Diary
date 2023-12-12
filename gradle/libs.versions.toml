@@ -17,6 +17,8 @@ decompose-lifecycle = "1.3.0"                       # https://github.com/arkivan
 
 google-id = "1.1.0"                                 # https://developers.google.com/identity/android-credential-manager/releases?hl=en
 
+buildkonfig = "0.15.1"                              # https://github.com/yshrsmz/BuildKonfig/releases
+
 [libraries]
 kotlin-gradle = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotinx-coroutines" }
@@ -47,3 +49,5 @@ android-application = { id = "com.android.application", version.ref = "android-g
 android-library = { id = "com.android.library", version.ref = "android-gradle" }
 
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
+
+buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }

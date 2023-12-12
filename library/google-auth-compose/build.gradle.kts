@@ -19,6 +19,12 @@ kotlin {
                 implementation(compose.ui)
             }
         }
+
+        iosMain {
+            dependencies {
+                implementation(compose.ui)
+            }
+        }
     }
 }
 

@@ -8,7 +8,6 @@ struct DiaryApp: App {
 	var body: some Scene {
 		WindowGroup {
             ContentView(appEntry: appDelegate.contextHolder.appEntry)
-                .ignoresSafeArea(.all)
 		}
 	}
 }
