@@ -13,7 +13,7 @@ compose-multiplatform = "1.5.11"                    # https://github.com/JetBrai
 
 decompose = "2.2.1"                                 # https://github.com/arkivanov/Decompose/releases
 decompose-extension = "2.2.1-compose-experimental"  # https://github.com/arkivanov/Decompose/releases
-decompose-lifecycle = "1.3.0"                       # https://github.com/arkivanov/Essenty/releases
+decompose-essenty = "1.3.0"                         # https://github.com/arkivanov/Essenty/releases
 
 google-id = "1.1.0"                                 # https://developers.google.com/identity/android-credential-manager/releases?hl=en
 
@@ -21,7 +21,7 @@ buildkonfig = "0.15.1"                              # https://github.com/yshrsmz
 
 [libraries]
 kotlin-gradle = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
-kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotinx-coroutines" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotinx-coroutines" }
 
 android-gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "android-gradle" }
 android-material = { group = "com.google.android.material", name = "material", version.ref = "android-material" }
@@ -33,7 +33,8 @@ androidx-credentials-play-services-auth = { group = "androidx.credentials", name
 
 decompose = { group = "com.arkivanov.decompose", name = "decompose", version.ref = "decompose" }
 decompose-compose = { group = "com.arkivanov.decompose", name = "extensions-compose-jetbrains", version.ref = "decompose-extension" }
-decompose-lifecycle = { group = "com.arkivanov.essenty", name = "lifecycle", version.ref = "decompose-lifecycle" }
+decompose-lifecycle = { group = "com.arkivanov.essenty", name = "lifecycle", version.ref = "decompose-essenty" }
+decompose-instance = { group = "com.arkivanov.essenty", name = "instance-keeper", version.ref = "decompose-essenty" }
 
 google-id = { group = "com.google.android.libraries.identity.googleid", name = "googleid", version.ref = "google-id" }
 
