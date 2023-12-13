@@ -62,6 +62,7 @@ private fun ButtonLayout(
         is AccountUiState.Guest -> {
             GuestButtonLayout(
                 modifier = modifier,
+                uiState = uiState,
             )
         }
 
@@ -72,12 +73,14 @@ private fun ButtonLayout(
 @Composable
 private fun GuestButtonLayout(
     modifier: Modifier = Modifier,
+    uiState: State<AccountUiState>,
 ) {
     Column(
         modifier = modifier,
     ) {
         GoogleLoginButton(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            uiState = uiState,
         )
     }
 }
@@ -85,12 +88,19 @@ private fun GuestButtonLayout(
 @Composable
 private fun GoogleLoginButton(
     modifier: Modifier = Modifier,
+    uiState: State<AccountUiState>,
 ) {
     val googleAuthManager = rememberGoogleAuthManager()
 
     FilledIconButton(
         modifier = modifier,
-        onClick = googleAuthManager::signIn,
+        onClick = {
+            googleAuthManager.signIn()
+            val value = uiState.value
+            if (value is AccountUiState.Guest) {
+                value.onLogin()
+            }
+        },
     ) {
         Text(text = "구글 로그인")
     }

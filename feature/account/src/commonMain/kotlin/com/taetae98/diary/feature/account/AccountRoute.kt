@@ -9,10 +9,11 @@ import androidx.compose.ui.Modifier
 internal fun AccountRoute(
     modifier: Modifier,
     onNavigateUp: () -> Unit,
+    viewModel: AccountViewModel,
 ) {
     AccountScreen(
         modifier = modifier,
         onNavigateUp = onNavigateUp,
-        uiState = remember { mutableStateOf(AccountUiState.Guest) }
+        uiState = remember { mutableStateOf(viewModel.uiState) }
     )
 }

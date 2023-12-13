@@ -4,7 +4,9 @@ import androidx.compose.runtime.Stable
 
 @Stable
 internal sealed class AccountUiState {
-    data object Guest : AccountUiState()
+    data class Guest(
+        val onLogin: () -> Unit,
+    ) : AccountUiState()
 
     data object Member : AccountUiState()
 }

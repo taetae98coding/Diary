@@ -30,6 +30,10 @@ public class GoogleAuthManagerImpl(
         coroutineScope.launch {
             runCatching {
                 CredentialManager.create(context).getCredential(context, request)
+            }.onSuccess {
+                println("PASSZ : $it")
+            }.onFailure {
+                println("PASSZ : $it")
             }
         }
     }

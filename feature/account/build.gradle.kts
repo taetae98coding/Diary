@@ -14,6 +14,7 @@ kotlin {
                 implementation(project(":ui:decompose-compose"))
                 implementation(project(":library:google-auth-compose"))
                 implementation(project(":library:viewmodel"))
+                implementation(project(":library:koin-navigation-compose"))
 
                 implementation(compose.material3)
             }

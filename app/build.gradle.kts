@@ -8,6 +8,8 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation(project(":domain:usecase"))
+
                 implementation(project(":feature:memo"))
                 implementation(project(":feature:more"))
                 implementation(project(":feature:account"))
