@@ -36,6 +36,8 @@ include(":target:jsApp")
 
 include(":app")
 
+include(":domain:usecase")
+
 include(":feature:memo")
 include(":feature:more")
 include(":feature:account")

@@ -33,6 +33,11 @@ gradlePlugin {
             implementationClass = "plugin.js.JsPlugin"
         }
 
+        register("diary.module") {
+            id = "diary.module"
+            implementationClass = "plugin.diary.DiaryModulePlugin"
+        }
+
         register("diary.multiplatform") {
             id = "diary.multiplatform"
             implementationClass = "plugin.diary.DiaryMultiplatformPlugin"
