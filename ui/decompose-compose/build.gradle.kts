@@ -9,13 +9,8 @@ kotlin {
             dependencies {
                 implementation(compose.ui)
                 implementation(libs.decompose)
-                implementation(libs.decompose.compose)
-            }
-        }
 
-        iosMain {
-            dependencies {
-                implementation(compose.animation)
+                api(libs.decompose.compose)
             }
         }
     }

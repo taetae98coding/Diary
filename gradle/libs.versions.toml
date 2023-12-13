@@ -17,7 +17,11 @@ decompose-essenty = "1.3.0"                         # https://github.com/arkivan
 
 google-id = "1.1.0"                                 # https://developers.google.com/identity/android-credential-manager/releases?hl=en
 
+koin = "3.5.1"                                      # https://github.com/InsertKoinIO/koin/releases
+koin-annotations = "1.3.0"                          # https://github.com/InsertKoinIO/koin-annotations/releases
+
 buildkonfig = "0.15.1"                              # https://github.com/yshrsmz/BuildKonfig/releases
+ksp = "1.9.21-1.0.15"                               # https://github.com/google/ksp/releases
 
 [libraries]
 kotlin-gradle = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
@@ -38,6 +42,12 @@ decompose-instance = { group = "com.arkivanov.essenty", name = "instance-keeper"
 
 google-id = { group = "com.google.android.libraries.identity.googleid", name = "googleid", version.ref = "google-id" }
 
+koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin" }
+koin-core = { group = "io.insert-koin", name = "koin-core" }
+koin-annotations-bom = { group = "io.insert-koin", name = "koin-annotations-bom", version.ref = "koin-annotations" }
+koin-annotations = { group = "io.insert-koin", name = "koin-annotations" }
+koin-compiler = { group = "io.insert-koin", name = "koin-ksp-compiler" }
+
 [plugins]
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
@@ -52,3 +62,4 @@ android-library = { id = "com.android.library", version.ref = "android-gradle" }
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 
 buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

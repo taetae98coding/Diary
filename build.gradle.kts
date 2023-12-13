@@ -12,4 +12,5 @@ plugins {
     alias(libs.plugins.compose.multiplatform).apply(false)
 
     alias(libs.plugins.buildkonfig).apply(false)
+    alias(libs.plugins.ksp).apply(false)
 }

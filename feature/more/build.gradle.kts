@@ -12,7 +12,6 @@ kotlin {
                 implementation(project(":ui:decompose-compose"))
 
                 implementation(compose.material3)
-                implementation(libs.decompose.compose)
             }
         }
     }
