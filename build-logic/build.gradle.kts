@@ -45,7 +45,12 @@ gradlePlugin {
 
         register("diary.compose.multiplatform") {
             id = "diary.compose.multiplatform"
-            implementationClass = "plugin.compose.ComposeMultiplatformPlugin"
+            implementationClass = "plugin.kotlin.ComposeMultiplatformPlugin"
+        }
+
+        register("diary.koin.multiplatform") {
+            id = "diary.koin.multiplatform"
+            implementationClass = "plugin.kotlin.KoinMultiplatformPlugin"
         }
     }
 }
