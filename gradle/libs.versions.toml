@@ -44,6 +44,7 @@ google-id = { group = "com.google.android.libraries.identity.googleid", name = "
 
 koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin" }
 koin-core = { group = "io.insert-koin", name = "koin-core" }
+koin-android = { group = "io.insert-koin", name = "koin-android" }
 koin-annotations-bom = { group = "io.insert-koin", name = "koin-annotations-bom", version.ref = "koin-annotations" }
 koin-annotations = { group = "io.insert-koin", name = "koin-annotations" }
 koin-compiler = { group = "io.insert-koin", name = "koin-ksp-compiler" }

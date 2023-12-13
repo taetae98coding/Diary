@@ -1,6 +1,7 @@
 plugins {
     id("diary.multiplatform")
     id("diary.compose.multiplatform")
+    id("diary.koin.multiplatform")
 }
 
 kotlin {
