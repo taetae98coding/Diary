@@ -1,8 +1,8 @@
 package com.taetae98.diary.feature.account
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import com.taetae98.diary.library.compose.runtime.collectAsStateOnLifecycle
 
 @Composable
 internal fun AccountRoute(
@@ -13,6 +13,6 @@ internal fun AccountRoute(
     AccountScreen(
         modifier = modifier,
         onNavigateUp = onNavigateUp,
-        uiState = viewModel.uiState.collectAsState()
+        uiState = viewModel.uiState.collectAsStateOnLifecycle()
     )
 }

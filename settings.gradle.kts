@@ -55,6 +55,7 @@ include(":navigation:core")
 include(":ui:compose")
 include(":ui:decompose-compose")
 
+include(":library:compose-runtime")
 include(":library:firebase-auth-api")
 include(":library:firebase-auth-impl")
 include(":library:google-sign-api")

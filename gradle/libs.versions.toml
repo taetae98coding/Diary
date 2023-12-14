@@ -9,6 +9,7 @@ androidx-core = "1.12.0"                            # https://developer.android.
 androidx-activity = "1.8.1"                         # https://developer.android.com/jetpack/androidx/releases/activity?hl=en
 androidx-credentials = "1.2.0"                      # https://developer.android.com/jetpack/androidx/releases/credentials?hl=en
 androidx-startup = "1.1.1"                          # https://developer.android.com/jetpack/androidx/releases/startup?hl=en
+androidx-lifecycle = "2.6.2"                         # https://developer.android.com/jetpack/androidx/releases/lifecycle?hl=en
 
 compose-multiplatform = "1.5.11"                    # https://github.com/JetBrains/compose-multiplatform/releases
 
@@ -37,6 +38,7 @@ android-material = { group = "com.google.android.material", name = "material", v
 androidx-core = { group = "androidx.core", name = "core-ktx", version.ref = "androidx-core" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity" }
 androidx-startup = { group = "androidx.startup", name = "startup-runtime", version.ref = "androidx-startup" }
+androidx-lifecycle-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 
 androidx-credentials = { group = "androidx.credentials", name = "credentials", version.ref = "androidx-credentials" }
 androidx-credentials-play-services-auth = { group = "androidx.credentials", name = "credentials-play-services-auth", version.ref = "androidx-credentials" }
