@@ -8,6 +8,9 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":domain:repository"))
+                implementation(libs.kotlinx.coroutines.core)
+
+                api(project(":domain:entity"))
             }
         }
     }

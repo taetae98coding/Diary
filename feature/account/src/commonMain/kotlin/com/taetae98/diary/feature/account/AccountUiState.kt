@@ -1,12 +1,17 @@
 package com.taetae98.diary.feature.account
 
 import androidx.compose.runtime.Stable
+import com.taetae98.diary.domain.entity.account.Credential
 
 @Stable
 internal sealed class AccountUiState {
     data class Guest(
-        val onLogin: (String) -> Unit,
+        val onSignIn: (Credential) -> Unit,
     ) : AccountUiState()
 
-    data object Member : AccountUiState()
+    data class Member(
+        val uid: String,
+        val email: String?,
+        val onSignOut: () -> Unit,
+    ) : AccountUiState()
 }

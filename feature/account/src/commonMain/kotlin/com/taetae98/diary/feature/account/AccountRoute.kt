@@ -1,8 +1,7 @@
 package com.taetae98.diary.feature.account
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 
 @Composable
@@ -14,6 +13,6 @@ internal fun AccountRoute(
     AccountScreen(
         modifier = modifier,
         onNavigateUp = onNavigateUp,
-        uiState = remember { mutableStateOf(viewModel.uiState) }
+        uiState = viewModel.uiState.collectAsState()
     )
 }

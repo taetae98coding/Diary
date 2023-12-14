@@ -14,7 +14,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.taetae98.diary.library.google.auth.compose.rememberGoogleAuthManager
+import com.taetae98.diary.domain.entity.account.Credential
+import com.taetae98.diary.library.google.sign.api.GoogleCredential
+import com.taetae98.diary.library.google.sign.compose.rememberGoogleAuthManager
 import com.taetae98.diary.ui.compose.topbar.NavigateUpTopBar
 import kotlinx.coroutines.launch
 
@@ -46,13 +48,39 @@ private fun Content(
     modifier: Modifier = Modifier,
     uiState: State<AccountUiState>,
 ) {
-    Box(
+    Column(
         modifier = modifier,
     ) {
-        ButtonLayout(
-            modifier = Modifier.align(Alignment.BottomCenter),
-            uiState = uiState,
+        UserInfoLayout(
+            modifier = Modifier.fillMaxWidth()
+                .weight(1F),
+            uiState = uiState
         )
+        ButtonLayout(uiState = uiState)
+    }
+}
+
+@Composable
+private fun UserInfoLayout(
+    modifier: Modifier = Modifier,
+    uiState: State<AccountUiState>,
+) {
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center,
+    ) {
+        when (val value = uiState.value) {
+            is AccountUiState.Member -> {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Text(text = value.uid)
+                    value.email?.let { Text(text = it) }
+                }
+            }
+
+            else -> Unit
+        }
     }
 }
 
@@ -61,29 +89,34 @@ private fun ButtonLayout(
     modifier: Modifier = Modifier,
     uiState: State<AccountUiState>,
 ) {
-    when (uiState.value) {
+    when (val value = uiState.value) {
         is AccountUiState.Guest -> {
             GuestButtonLayout(
                 modifier = modifier,
-                uiState = uiState,
+                onSignIn = value.onSignIn,
             )
         }
 
-        else -> Unit
+        is AccountUiState.Member -> {
+            MemberButtonLayout(
+                modifier = modifier,
+                onSignOut = value.onSignOut,
+            )
+        }
     }
 }
 
 @Composable
 private fun GuestButtonLayout(
     modifier: Modifier = Modifier,
-    uiState: State<AccountUiState>,
+    onSignIn: (Credential) -> Unit,
 ) {
     Column(
         modifier = modifier,
     ) {
         GoogleLoginButton(
             modifier = Modifier.fillMaxWidth(),
-            uiState = uiState,
+            onSignIn = onSignIn,
         )
     }
 }
@@ -91,24 +124,42 @@ private fun GuestButtonLayout(
 @Composable
 private fun GoogleLoginButton(
     modifier: Modifier = Modifier,
-    uiState: State<AccountUiState>,
+    onSignIn: (Credential) -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
     val googleAuthManager = rememberGoogleAuthManager()
-    val onSignIn = remember {
-        invoke@{
-            val state = uiState.value as? AccountUiState.Guest ?: return@invoke
-
+    val onClick = remember<() -> Unit> {
+        {
             coroutineScope.launch {
-                state.onLogin(googleAuthManager.signIn())
+                googleAuthManager.signIn()?.toDomain()?.let(onSignIn)
             }
         }
     }
 
     FilledIconButton(
         modifier = modifier,
-        onClick = onSignIn
+        onClick = onClick,
     ) {
         Text(text = "구글 로그인")
     }
+}
+
+@Composable
+private fun MemberButtonLayout(
+    modifier: Modifier = Modifier,
+    onSignOut: () -> Unit,
+) {
+    FilledIconButton(
+        modifier = modifier.fillMaxWidth(),
+        onClick = onSignOut
+    ) {
+        Text(text = "로그아웃")
+    }
+}
+
+private fun GoogleCredential.toDomain(): Credential {
+    return Credential.Google(
+        idToken = idToken,
+        accessToken = accessToken,
+    )
 }

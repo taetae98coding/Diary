@@ -9,6 +9,8 @@ kotlin {
             dependencies {
                 implementation(project(":core:auth-api"))
                 implementation(project(":domain:repository"))
+
+                implementation(libs.kotlinx.coroutines.core)
             }
         }
     }

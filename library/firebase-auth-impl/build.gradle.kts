@@ -13,6 +13,8 @@ kotlin {
 
         commonMain {
             dependencies {
+                implementation(libs.kotlinx.coroutines.core)
+
                 api(project(":library:firebase-auth-api"))
             }
         }

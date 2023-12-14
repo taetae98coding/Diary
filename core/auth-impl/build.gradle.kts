@@ -7,8 +7,10 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                api(project(":core:auth-api"))
+                implementation(project(":core:auth-api"))
                 implementation(project(":library:firebase-auth-api"))
+
+                implementation(libs.kotlinx.coroutines.core)
             }
         }
     }
