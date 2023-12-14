@@ -13,6 +13,7 @@ public abstract class FlowUseCase<P, R> internal constructor() {
         }.map {
             Result.success(it)
         }.catch {
+            it.printStackTrace()
             Result.failure<R>(it)
         }
     }

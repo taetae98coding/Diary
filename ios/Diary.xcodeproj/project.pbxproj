@@ -52,6 +52,21 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		3D7575B92B2B44CA00ECD13D /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				3D7575BA2B2B44D600ECD13D /* Dev */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		3D7575BA2B2B44D600ECD13D /* Dev */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Dev;
+			sourceTree = "<group>";
+		};
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +89,7 @@
 		7555FF7D242A565900829871 /* Diary */ = {
 			isa = PBXGroup;
 			children = (
+				3D7575B92B2B44CA00ECD13D /* Firebase */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF82242A565900829871 /* ContentView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
@@ -115,6 +131,7 @@
 				9F723FA344352F2C664242BA /* Frameworks */,
 				7899B6A9306A041193933B65 /* [CP] Copy Pods Resources */,
 				A17D84E323B1B74B659345B8 /* [CP] Embed Pods Frameworks */,
+				3D7575BC2B2B452200ECD13D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -172,6 +189,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3D7575BC2B2B452200ECD13D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncase \"${CONFIGURATION}\" in\n  \"Debug\" )\ncp -r \"$SRCROOT/Diary/Firebase/Dev/GoogleService-Info.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\" ;;\n  \"Release\" )\ncp -r \"$SRCROOT/Diary/Firebase/Release/GoogleService-Info.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\" ;;\n*)\n;;\nesac\n";
+		};
 		3DA4B92FD933ADC819E4C307 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

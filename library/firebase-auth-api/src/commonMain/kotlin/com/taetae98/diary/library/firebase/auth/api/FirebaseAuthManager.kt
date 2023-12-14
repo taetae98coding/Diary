@@ -6,5 +6,5 @@ public interface FirebaseAuthManager {
     public suspend fun signInWithGoogleToken(idToken: String, accessToken: String?)
     public suspend fun signOut()
 
-    public fun getUser(): Flow<FirebaseUser?>
+    public fun getUser(): Flow<FirebaseAccount?>
 }

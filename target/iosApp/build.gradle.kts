@@ -26,6 +26,9 @@ kotlin {
                 implementation(project(":app"))
                 implementation(compose.ui)
 
+                implementation(project.dependencies.platform(libs.koin.bom))
+                implementation(libs.koin.core)
+
                 api(project(":navigation:core"))
                 api(libs.decompose)
                 api(libs.decompose.lifecycle)

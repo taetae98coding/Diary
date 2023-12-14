@@ -4,4 +4,5 @@ target 'Diary' do
   pod 'iosApp', :path => '../target/iosApp'
 
   pod 'GoogleSignIn', '7.0.0'
+  pod 'FirebaseAuth', '10.5.0'
 end

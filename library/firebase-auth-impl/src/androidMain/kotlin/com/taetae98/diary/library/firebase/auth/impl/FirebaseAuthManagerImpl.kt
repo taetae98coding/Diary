@@ -2,8 +2,8 @@ package com.taetae98.diary.library.firebase.auth.impl
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.taetae98.diary.library.firebase.auth.api.FirebaseAccount
 import com.taetae98.diary.library.firebase.auth.api.FirebaseAuthManager
-import com.taetae98.diary.library.firebase.auth.api.FirebaseUser
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -20,14 +20,14 @@ public class FirebaseAuthManagerImpl : FirebaseAuthManager {
         FirebaseAuth.getInstance().signOut()
     }
 
-    override fun getUser(): Flow<FirebaseUser?> {
+    override fun getUser(): Flow<FirebaseAccount?> {
         return callbackFlow {
             val listener = FirebaseAuth.AuthStateListener {
                 val user = it.currentUser
                 if (user == null) {
                     trySend(null)
                 } else {
-                    trySend(FirebaseUser(user.uid, user.email))
+                    trySend(FirebaseAccount(user.uid, user.email))
                 }
             }
 

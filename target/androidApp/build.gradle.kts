@@ -51,6 +51,6 @@ dependencies {
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
 
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.analytics)
+    implementation(platform(libs.firebase.android.bom))
+    implementation(libs.firebase.android.analytics)
 }

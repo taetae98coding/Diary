@@ -4,12 +4,12 @@ plugins {
 
 kotlin {
     sourceSets {
-        val nonSupportTargetMain = maybeCreate("nonSupportTargetMain")
+        val nonAndroidMain = maybeCreate("nonAndroidMain")
 
-        nonSupportTargetMain.dependsOn(commonMain.get())
-        iosMain.get().dependsOn(nonSupportTargetMain)
-        jvmMain.get().dependsOn(nonSupportTargetMain)
-        jsMain.get().dependsOn(nonSupportTargetMain)
+        nonAndroidMain.dependsOn(commonMain.get())
+        iosMain.get().dependsOn(nonAndroidMain)
+        jvmMain.get().dependsOn(nonAndroidMain)
+        jsMain.get().dependsOn(nonAndroidMain)
 
         commonMain {
             dependencies {
@@ -21,9 +21,13 @@ kotlin {
 
         androidMain {
             dependencies {
-                implementation(project.dependencies.platform(libs.firebase.bom))
-                implementation(libs.firebase.auth)
+                implementation(project.dependencies.platform(libs.firebase.android.bom))
+                implementation(libs.firebase.android.auth)
             }
+        }
+
+        nonAndroidMain.dependencies {
+            implementation(libs.firebase.multiplatform.auth)
         }
     }
 }
