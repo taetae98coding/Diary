@@ -24,7 +24,7 @@ public class GoogleAuthManagerImpl(
         }
     }
 
-    override suspend fun signIn() {
+    override suspend fun signIn(): String {
         return suspendCancellableCoroutine {
             runCatching {
                 GIDSignIn.sharedInstance.signInWithPresentingViewController(

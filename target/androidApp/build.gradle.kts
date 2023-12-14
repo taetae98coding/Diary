@@ -3,6 +3,7 @@ import org.jetbrains.compose.internal.utils.getLocalProperty
 plugins {
     id("diary.android.app")
     id("diary.compose.multiplatform")
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -41,6 +42,7 @@ dependencies {
 
     implementation(libs.android.material)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.startup)
 
     implementation(compose.ui)
 
@@ -48,4 +50,7 @@ dependencies {
 
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
 }

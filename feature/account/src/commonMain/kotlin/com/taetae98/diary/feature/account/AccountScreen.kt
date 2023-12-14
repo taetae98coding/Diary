@@ -10,10 +10,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.taetae98.diary.library.google.auth.compose.rememberGoogleAuthManager
 import com.taetae98.diary.ui.compose.topbar.NavigateUpTopBar
+import kotlinx.coroutines.launch
 
 @Composable
 internal fun AccountScreen(
@@ -90,17 +93,21 @@ private fun GoogleLoginButton(
     modifier: Modifier = Modifier,
     uiState: State<AccountUiState>,
 ) {
+    val coroutineScope = rememberCoroutineScope()
     val googleAuthManager = rememberGoogleAuthManager()
+    val onSignIn = remember {
+        invoke@{
+            val state = uiState.value as? AccountUiState.Guest ?: return@invoke
+
+            coroutineScope.launch {
+                state.onLogin(googleAuthManager.signIn())
+            }
+        }
+    }
 
     FilledIconButton(
         modifier = modifier,
-        onClick = {
-            googleAuthManager.signIn()
-            val value = uiState.value
-            if (value is AccountUiState.Guest) {
-                value.onLogin()
-            }
-        },
+        onClick = onSignIn
     ) {
         Text(text = "구글 로그인")
     }

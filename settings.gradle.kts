@@ -34,19 +34,28 @@ include(":target:iosApp")
 include(":target:jvmApp")
 include(":target:jsApp")
 
-include(":app")
+include(":core:auth-api")
+include(":core:auth-impl")
+include(":core:auth-koin")
 
-include(":domain:usecase")
+include(":data:repository")
+
+include(":app")
 
 include(":feature:memo")
 include(":feature:more")
 include(":feature:account")
+
+include(":domain:repository")
+include(":domain:usecase")
 
 include(":navigation:core")
 
 include(":ui:compose")
 include(":ui:decompose-compose")
 
+include(":library:firebase-auth-api")
+include(":library:firebase-auth-impl")
 include(":library:google-auth-api")
 include(":library:google-auth-impl")
 include(":library:google-auth-compose")

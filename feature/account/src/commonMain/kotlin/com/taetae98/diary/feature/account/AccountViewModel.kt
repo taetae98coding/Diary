@@ -13,9 +13,9 @@ internal class AccountViewModel(
         onLogin = ::login,
     )
 
-    private fun login() {
+    private fun login(idToken: String) {
         viewModelScope.launch {
-            loginUseCase("")
+            loginUseCase(idToken)
         }
     }
 }

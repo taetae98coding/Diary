@@ -12,7 +12,7 @@ import kotlinx.cinterop.ExperimentalForeignApi
 public actual fun rememberGoogleAuthManager(): GoogleAuthManager {
     val uiViewController = LocalUIViewController.current
 
-    return remember(uiViewController) {
+    return remember {
         GoogleAuthManagerImpl(uiViewController)
     }
 }

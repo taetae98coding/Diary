@@ -8,6 +8,8 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation(project(":core:auth-koin"))
+                implementation(project(":data:repository"))
                 implementation(project(":domain:usecase"))
 
                 implementation(project(":feature:memo"))
