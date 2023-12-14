@@ -5,14 +5,11 @@ import androidx.credentials.CredentialManager
 import androidx.credentials.GetCredentialRequest
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.taetae98.diary.library.google.auth.api.GoogleAuthManager
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 
 public class GoogleAuthManagerImpl(
     private val context: Context,
-    private val coroutineScope: CoroutineScope,
 ) : GoogleAuthManager {
-    override fun signIn() {
+    override suspend fun signIn() {
         val googleIdOption: GetGoogleIdOption = GetGoogleIdOption.Builder()
             .setFilterByAuthorizedAccounts(false)
             .setAutoSelectEnabled(false)
@@ -26,15 +23,13 @@ public class GoogleAuthManagerImpl(
         execute(request)
     }
 
-    private fun execute(request: GetCredentialRequest) {
-        coroutineScope.launch {
-            runCatching {
-                CredentialManager.create(context).getCredential(context, request)
-            }.onSuccess {
-                println("PASSZ : $it")
-            }.onFailure {
-                println("PASSZ : $it")
-            }
+    private suspend fun execute(request: GetCredentialRequest) {
+        runCatching {
+            CredentialManager.create(context).getCredential(context, request)
+        }.onSuccess {
+            println("PASSZ : $it")
+        }.onFailure {
+            println("PASSZ : $it")
         }
     }
 }

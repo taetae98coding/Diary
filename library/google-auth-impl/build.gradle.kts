@@ -18,6 +18,12 @@ kotlin {
     }
 
     sourceSets {
+        val nonSupportTargetMain = maybeCreate("nonSupportTargetMain")
+
+        nonSupportTargetMain.dependsOn(commonMain.get())
+        jvmMain.get().dependsOn(nonSupportTargetMain)
+        jsMain.get().dependsOn(nonSupportTargetMain)
+
         commonMain {
             dependencies {
                 implementation(project(":library:google-auth-api"))
@@ -35,6 +41,12 @@ kotlin {
                 implementation(libs.androidx.credentials.play.services.auth)
 
                 implementation(libs.google.id)
+            }
+        }
+
+        iosMain {
+            dependencies {
+                implementation(libs.kotlinx.coroutines.core)
             }
         }
     }
