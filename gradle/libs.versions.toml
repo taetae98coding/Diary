@@ -26,6 +26,9 @@ firebase-multiplatform = "1.10.4"                   # https://github.com/GitLive
 koin = "3.5.1"                                      # https://github.com/InsertKoinIO/koin/releases
 koin-annotations = "1.3.0"                          # https://github.com/InsertKoinIO/koin-annotations/releases
 
+kotest = "5.8.0"                                    # https://github.com/kotest/kotest/releases
+mockk = "1.13.8"                                    # https://github.com/mockk/mockk/releases
+
 buildkonfig = "0.15.1"                              # https://github.com/yshrsmz/BuildKonfig/releases
 ksp = "1.9.21-1.0.15"                               # https://github.com/google/ksp/releases
 
@@ -63,6 +66,13 @@ firebase-android-analytics = { group = "com.google.firebase", name = "firebase-a
 firebase-android-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
 firebase-multiplatform-auth = { group = "dev.gitlive", name = "firebase-auth", version.ref = "firebase-multiplatform" }
 
+kotest-engine = { group = "io.kotest", name = "kotest-framework-engine", version.ref = "kotest" }
+kotest-assertions = { group = "io.kotest", name = "kotest-assertions-core", version.ref = "kotest" }
+kotest-property = { group = "io.kotest", name = "kotest-property", version.ref = "kotest" }
+kotest-junit5 = { group = "io.kotest", name = "kotest-runner-junit5", version.ref = "kotest" }
+
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+
 [plugins]
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
@@ -78,5 +88,10 @@ compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-m
 
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 
+kotest = { id = "io.kotest.multiplatform", version.ref = "kotest" }
+
 buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+[bundles]
+kotest = ["kotest-engine", "kotest-assertions", "kotest-property"]

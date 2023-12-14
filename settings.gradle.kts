@@ -46,6 +46,7 @@ include(":feature:memo")
 include(":feature:more")
 include(":feature:account")
 
+include(":domain:exception")
 include(":domain:entity")
 include(":domain:repository")
 include(":domain:usecase")

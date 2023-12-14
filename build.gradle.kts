@@ -13,6 +13,8 @@ plugins {
 
     alias(libs.plugins.google.services).apply(false)
 
+    alias(libs.plugins.kotest).apply(false)
+
     alias(libs.plugins.buildkonfig).apply(false)
     alias(libs.plugins.ksp).apply(false)
 }
