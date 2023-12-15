@@ -8,8 +8,7 @@
 
 import Foundation
 import SwiftUI
-import iosApp
-import FirebaseCore
+import Firebase
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     let contextHolder = ContextHolder()
