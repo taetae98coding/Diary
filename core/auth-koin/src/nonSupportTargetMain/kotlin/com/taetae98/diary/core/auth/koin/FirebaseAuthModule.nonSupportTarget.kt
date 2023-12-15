@@ -6,7 +6,7 @@ import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Module
 
 @Module
-internal actual class FirebaseAuthModule {
+internal actual class FirebaseAuthModule actual constructor() {
     @Factory
     actual fun providesFirebaseAuthManager(): FirebaseAuthManager {
         return FirebaseAuthManagerImpl()

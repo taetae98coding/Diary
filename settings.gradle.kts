@@ -4,6 +4,7 @@ pluginManagement {
             content {
                 includeGroupByRegex("com.android.*")
                 includeGroupByRegex("com.google.*")
+                includeGroupByRegex("android.*")
                 includeGroupByRegex("androidx.*")
             }
         }
@@ -20,6 +21,7 @@ dependencyResolutionManagement {
             content {
                 includeGroupByRegex("com.android.*")
                 includeGroupByRegex("com.google.*")
+                includeGroupByRegex("android.*")
                 includeGroupByRegex("androidx.*")
             }
         }

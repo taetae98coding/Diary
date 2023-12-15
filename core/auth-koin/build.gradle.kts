@@ -5,6 +5,12 @@ plugins {
 
 kotlin {
     sourceSets {
+        val nonSupportTargetMain = maybeCreate("nonSupportTargetMain")
+
+        nonSupportTargetMain.dependsOn(commonMain.get())
+        jvmMain.get().dependsOn(nonSupportTargetMain)
+        jsMain.get().dependsOn(nonSupportTargetMain)
+
         commonMain {
             dependencies {
                 implementation(project(":core:auth-impl"))

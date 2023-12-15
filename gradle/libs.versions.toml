@@ -1,7 +1,7 @@
 [versions]
 kotlin = "1.9.21"                                   # https://github.com/JetBrains/kotlin/releases
-kotinx-coroutines = "1.7.3"                         # https://github.com/Kotlin/kotlinx.coroutines/releases
-kotinx-serialiation = "1.6.2"                       # https://github.com/Kotlin/kotlinx.serialization/releases
+kotlinx-coroutines = "1.7.3"                         # https://github.com/Kotlin/kotlinx.coroutines/releases
+kotlinx-serialiation = "1.6.2"                       # https://github.com/Kotlin/kotlinx.serialization/releases
 
 android-gradle = "8.2.0"                            # https://developer.android.com/build/releases/gradle-plugin?hl=en
 android-material = "1.10.0"                         # https://github.com/material-components/material-components-android/releases
@@ -34,7 +34,8 @@ ksp = "1.9.21-1.0.15"                               # https://github.com/google/
 
 [libraries]
 kotlin-gradle = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
-kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotinx-coroutines" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 
 android-gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "android-gradle" }
 android-material = { group = "com.google.android.material", name = "material", version.ref = "android-material" }
