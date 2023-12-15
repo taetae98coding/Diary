@@ -24,6 +24,13 @@ android {
             keyAlias = getLocalProperty("key.debug.alias")
             keyPassword = getLocalProperty("key.debug.password")
         }
+
+        create("releaseSigning") {
+            storeFile = file("keystore/release.jks")
+            storePassword = getLocalProperty("key.release.store.password")
+            keyAlias = getLocalProperty("key.release.alias")
+            keyPassword = getLocalProperty("key.release.password")
+        }
     }
 
     buildTypes {
@@ -33,6 +40,7 @@ android {
         }
 
         release {
+            signingConfig = signingConfigs.getByName("releaseSigning")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }

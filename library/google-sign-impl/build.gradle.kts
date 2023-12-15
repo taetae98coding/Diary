@@ -68,7 +68,7 @@ android {
             buildConfigField(
                 type = "String",
                 name = "GOOGLE_SERVER_CLIENT_ID",
-                value = "\"${getLocalProperty("google.debug.server.client.id")}\""
+                value = "\"${getLocalProperty("google.release.server.client.id")}\""
             )
         }
     }
@@ -98,6 +98,24 @@ buildkonfig {
                 type = FieldSpec.Type.STRING,
                 name = "GOOGLE_CLIENT_ID",
                 value = getLocalProperty("google.debug.ios.client.id"),
+                const = true
+            )
+        }
+    }
+
+    targetConfigs("release") {
+        create("ios") {
+            buildConfigField(
+                type = FieldSpec.Type.STRING,
+                name = "GOOGLE_SERVER_CLIENT_ID",
+                value = getLocalProperty("google.release.server.client.id"),
+                const = true
+            )
+
+            buildConfigField(
+                type = FieldSpec.Type.STRING,
+                name = "GOOGLE_CLIENT_ID",
+                value = getLocalProperty("google.release.ios.client.id"),
                 const = true
             )
         }
