@@ -5,10 +5,13 @@ plugins {
 kotlin {
     sourceSets {
         val nonAndroidMain = maybeCreate("nonAndroidMain")
+        val nonSupportMain = maybeCreate("nonSupportMain")
 
         nonAndroidMain.dependsOn(commonMain.get())
+        nonSupportMain.dependsOn(commonMain.get())
+
         iosMain.get().dependsOn(nonAndroidMain)
-        jvmMain.get().dependsOn(nonAndroidMain)
+        jvmMain.get().dependsOn(nonSupportMain)
         jsMain.get().dependsOn(nonAndroidMain)
 
         commonMain {

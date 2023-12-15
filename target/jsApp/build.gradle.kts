@@ -15,7 +15,11 @@ kotlin {
                 implementation(project(":navigation:core"))
 
                 implementation(compose.ui)
+
                 implementation(libs.decompose)
+
+                implementation(project.dependencies.platform(libs.koin.bom))
+                implementation(libs.koin.core)
             }
         }
     }

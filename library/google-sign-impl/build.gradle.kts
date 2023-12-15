@@ -18,11 +18,11 @@ kotlin {
     }
 
     sourceSets {
-        val nonSupportTargetMain = maybeCreate("nonSupportTargetMain")
+        val nonSupportMain = maybeCreate("nonSupportMain")
 
-        nonSupportTargetMain.dependsOn(commonMain.get())
-        jvmMain.get().dependsOn(nonSupportTargetMain)
-        jsMain.get().dependsOn(nonSupportTargetMain)
+        nonSupportMain.dependsOn(commonMain.get())
+        jvmMain.get().dependsOn(nonSupportMain)
+        jsMain.get().dependsOn(nonSupportMain)
 
         commonMain {
             dependencies {

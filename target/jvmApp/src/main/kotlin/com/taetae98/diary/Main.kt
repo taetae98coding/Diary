@@ -7,9 +7,6 @@ import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.taetae98.diary.app.App
 import com.taetae98.diary.app.AppModule
 import com.taetae98.diary.navigation.core.app.AppEntry
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import org.koin.core.context.startKoin
 import org.koin.ksp.generated.module
 
@@ -20,10 +17,6 @@ public fun main() {
 
     startKoin {
         modules(AppModule().module)
-    }
-
-    CoroutineScope(Dispatchers.Main.immediate).launch {
-        println("Hello")
     }
 
     singleWindowApplication {
