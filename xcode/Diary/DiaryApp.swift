@@ -1,14 +1,15 @@
-//
-//  DiaryApp.swift
-//  Diary
-//
-//  Created by WK10695 on 12/16/23.
-//
-
 import SwiftUI
+import iosApp
 
 @main
 struct DiaryApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self)
+    var appDelegate: AppDelegate
+    
+    init() {
+        KoinKt.doInit()
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
