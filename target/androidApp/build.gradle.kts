@@ -5,6 +5,7 @@ plugins {
     id("diary.compose.multiplatform")
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.firebase.performance)
 }
 
 android {
@@ -55,4 +56,5 @@ dependencies {
     implementation(platform(libs.firebase.android.bom))
     implementation(libs.firebase.android.analytics)
     implementation(libs.firebase.android.crashlytics)
+    implementation(libs.firebase.android.performance)
 }

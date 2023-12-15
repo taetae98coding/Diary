@@ -22,6 +22,7 @@ google-id = "1.1.0"                                 # https://developers.google.
 
 firebase-android = "32.7.0"                         # https://firebase.google.com/support/release-notes/android?hl=en
 firebase-crashlytics = "2.9.9"                      # https://firebase.google.com/support/release-notes/android?hl=en
+firebase-performance = "1.4.2"                      # https://firebase.google.com/support/release-notes/android?hl=en
 firebase-multiplatform = "1.10.4"                   # https://github.com/GitLiveApp/firebase-kotlin-sdk/releases
 
 koin = "3.5.1"                                      # https://github.com/InsertKoinIO/koin/releases
@@ -66,6 +67,7 @@ koin-compiler = { group = "io.insert-koin", name = "koin-ksp-compiler" }
 firebase-android-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-android" }
 firebase-android-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
 firebase-android-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
+firebase-android-performance = { group = "com.google.firebase", name = "firebase-perf-ktx" }
 firebase-android-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
 firebase-multiplatform-auth = { group = "dev.gitlive", name = "firebase-auth", version.ref = "firebase-multiplatform" }
 
@@ -92,6 +94,7 @@ compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-m
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics" }
+firebase-performance = { id = "com.google.firebase.firebase-perf", version.ref = "firebase-performance" }
 
 kotest = { id = "io.kotest.multiplatform", version.ref = "kotest" }
 
