@@ -34,6 +34,8 @@ public class GoogleAuthManagerImpl(
                 idToken = googleIdTokenCredential.idToken,
                 accessToken = null,
             )
+        }.onFailure {
+            it.printStackTrace()
         }.getOrNull()
     }
 }

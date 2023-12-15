@@ -29,6 +29,35 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
+      - name: Set LocalProperties
+        run:
+          echo "google.debug.server.client.id=$GOOGLE_SERVER_CLIENT_ID
+            
+          google.debug.ios.client.id=$GOOGLE_SERVER_CLIENT_ID" > ./local.properties
+        shell: bash
+        env:
+          ANDROID_DEBUG_KEY_PASSWORD: ${{ secrets.ANDROID_DEBUG_KEY_PASSWORD }}
+          ANDROID_DEBUG_KEY_ALIAS: ${{ secrets.ANDROID_DEBUG_KEY_ALIAS }}
+          ANDROID_DEBUG_KEY_ALIAS_PASSWORD: ${{ secrets.ANDROID_DEBUG_KEY_ALIAS_PASSWORD }}
+          GOOGLE_SERVER_CLIENT_ID: ${{ secrets.GOOGLE_SERVER_CLIENT_ID }}
+          GOOGLE_IOS_CLIENT_ID: ${{ secrets.GOOGLE_IOS_CLIENT_ID }}
+
+      - name: Set Android Debug GoogleServiceJson
+        run:
+          echo "$GOOGLE_SERVICE_JSON" > ./target/androidApp/src/debug/google-services.json
+          echo "$GOOGLE_SERVICE_JSON" > ./target/androidApp/src/release/google-services.json
+        shell: bash
+        env:
+          GOOGLE_SERVICE_JSON: ${{ secrets.ANDROID_DEBUG_GOOGLE_SERVICE_JSON }}
+
+      - name: Set iOS Debug GoogleServicePlist
+        run:
+          echo "$GOOGLE_SERVICE_PLIST" > ./ios/Diary/Firebase/Dev/GoogleService-Info.plist
+          echo "$GOOGLE_SERVICE_PLIST" > ./ios/Diary/Firebase/Release/GoogleService-Info.plist
+        shell: bash
+        env:
+          GOOGLE_SERVICE_PLIST: ${{ secrets.IOS_DEBUG_GOOGLE_SERVICE_PLIST }}
+
       - name: Build Gradle
         uses: gradle/gradle-build-action@main
         with:

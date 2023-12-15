@@ -63,6 +63,14 @@ android {
                 value = "\"${getLocalProperty("google.debug.server.client.id")}\""
             )
         }
+
+        release {
+            buildConfigField(
+                type = "String",
+                name = "GOOGLE_SERVER_CLIENT_ID",
+                value = "\"${getLocalProperty("google.debug.server.client.id")}\""
+            )
+        }
     }
 
     buildFeatures {

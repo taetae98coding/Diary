@@ -24,6 +24,8 @@ public class GoogleAuthManagerImpl(
                     serverClientID = BuildKonfig.GOOGLE_SERVER_CLIENT_ID,
                 )
             )
+        }.onFailure {
+            it.printStackTrace()
         }
     }
 
@@ -36,6 +38,8 @@ public class GoogleAuthManagerImpl(
                         it.onSignInComplete(result)
                     }
                 )
+            }.onFailure {
+                it.printStackTrace()
             }
         }
     }
