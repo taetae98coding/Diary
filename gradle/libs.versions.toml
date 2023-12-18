@@ -1,21 +1,20 @@
 [versions]
 kotlin = "1.9.21"                                   # https://github.com/JetBrains/kotlin/releases
-kotlinx-coroutines = "1.7.3"                         # https://github.com/Kotlin/kotlinx.coroutines/releases
-kotlinx-serialiation = "1.6.2"                       # https://github.com/Kotlin/kotlinx.serialization/releases
+kotlinx-coroutines = "1.7.3"                        # https://github.com/Kotlin/kotlinx.coroutines/releases
+kotlinx-serialiation = "1.6.2"                      # https://github.com/Kotlin/kotlinx.serialization/releases
 
 android-gradle = "8.2.0"                            # https://developer.android.com/build/releases/gradle-plugin?hl=en
-android-material = "1.10.0"                         # https://github.com/material-components/material-components-android/releases
+android-material = "1.11.0"                         # https://github.com/material-components/material-components-android/releases
 androidx-core = "1.12.0"                            # https://developer.android.com/jetpack/androidx/releases/core?hl=en
-androidx-activity = "1.8.1"                         # https://developer.android.com/jetpack/androidx/releases/activity?hl=en
+androidx-activity = "1.8.2"                         # https://developer.android.com/jetpack/androidx/releases/activity?hl=en
 androidx-credentials = "1.2.0"                      # https://developer.android.com/jetpack/androidx/releases/credentials?hl=en
 androidx-startup = "1.1.1"                          # https://developer.android.com/jetpack/androidx/releases/startup?hl=en
-androidx-lifecycle = "2.6.2"                         # https://developer.android.com/jetpack/androidx/releases/lifecycle?hl=en
+androidx-lifecycle = "2.6.2"                        # https://developer.android.com/jetpack/androidx/releases/lifecycle?hl=en
 
 compose-multiplatform = "1.5.11"                    # https://github.com/JetBrains/compose-multiplatform/releases
 
-decompose = "2.2.1"                                 # https://github.com/arkivanov/Decompose/releases
-decompose-extension = "2.2.1-compose-experimental"  # https://github.com/arkivanov/Decompose/releases
-decompose-essenty = "1.3.0"                         # https://github.com/arkivanov/Essenty/releases
+decompose = "3.0.0-alpha03"                         # https://github.com/arkivanov/Decompose/releases
+decompose-essenty = "2.0.0-alpha02"                 # https://github.com/arkivanov/Essenty/releases
 
 google-services = "4.4.0"                           # https://developers.google.com/android/guides/google-services-plugin?hl=en
 google-id = "1.1.0"                                 # https://developers.google.com/identity/android-credential-manager/releases?hl=en
@@ -32,7 +31,7 @@ kotest = "5.8.0"                                    # https://github.com/kotest/
 mockk = "1.13.8"                                    # https://github.com/mockk/mockk/releases
 
 buildkonfig = "0.15.1"                              # https://github.com/yshrsmz/BuildKonfig/releases
-ksp = "1.9.21-1.0.15"                               # https://github.com/google/ksp/releases
+ksp = "1.9.21-1.0.16"                               # https://github.com/google/ksp/releases
 
 [libraries]
 kotlin-gradle = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
@@ -50,9 +49,11 @@ androidx-credentials = { group = "androidx.credentials", name = "credentials", v
 androidx-credentials-play-services-auth = { group = "androidx.credentials", name = "credentials-play-services-auth", version.ref = "androidx-credentials" }
 
 decompose = { group = "com.arkivanov.decompose", name = "decompose", version.ref = "decompose" }
-decompose-compose = { group = "com.arkivanov.decompose", name = "extensions-compose-jetbrains", version.ref = "decompose-extension" }
+decompose-compose = { group = "com.arkivanov.decompose", name = "extensions-compose", version.ref = "decompose" }
 decompose-lifecycle = { group = "com.arkivanov.essenty", name = "lifecycle", version.ref = "decompose-essenty" }
+decompose-state = { group = "com.arkivanov.essenty", name = "state-keeper", version.ref = "decompose-essenty" }
 decompose-instance = { group = "com.arkivanov.essenty", name = "instance-keeper", version.ref = "decompose-essenty" }
+decompose-back = { group = "com.arkivanov.essenty", name = "back-handler", version.ref = "decompose-essenty" }
 
 google-id = { group = "com.google.android.libraries.identity.googleid", name = "googleid", version.ref = "google-id" }
 
@@ -103,3 +104,4 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 [bundles]
 kotest = ["kotest-engine", "kotest-assertions", "kotest-property"]
+decompose-essenty = ["decompose-lifecycle", "decompose-state", "decompose-instance", "decompose-back"]

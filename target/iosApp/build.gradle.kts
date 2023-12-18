@@ -16,6 +16,7 @@ kotlin {
 
                 export(project(":navigation:core"))
                 export(libs.decompose)
+                export(libs.bundles.decompose.essenty)
             }
         }
 
@@ -31,6 +32,7 @@ kotlin {
 
                 api(project(":navigation:core"))
                 api(libs.decompose)
+                api(libs.bundles.decompose.essenty)
             }
         }
     }
