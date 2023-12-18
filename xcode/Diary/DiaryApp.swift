@@ -12,7 +12,7 @@ struct DiaryApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(entry: appDelegate.entry)
         }
     }
 }

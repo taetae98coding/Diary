@@ -13,6 +13,9 @@ kotlin {
             target.binaries.framework {
                 baseName = "iosApp"
                 isStatic = true
+
+                export(project(":navigation:core"))
+                export(libs.decompose)
             }
         }
 
@@ -26,7 +29,8 @@ kotlin {
                 implementation(project.dependencies.platform(libs.koin.bom))
                 implementation(libs.koin.core)
 
-                implementation(libs.decompose)
+                api(project(":navigation:core"))
+                api(libs.decompose)
             }
         }
     }
