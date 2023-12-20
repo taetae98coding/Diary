@@ -5,12 +5,12 @@ import androidx.compose.runtime.remember
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.essenty.instancekeeper.getOrCreate
 import com.taetae98.diary.library.viewmodel.ViewModel
-import org.koin.compose.getKoinScope
 import kotlin.reflect.KClass
+import org.koin.compose.getKoin
 
 @Composable
 public inline fun <reified T : ViewModel> ComponentContext.koinInject(): T {
-    val scope = getKoinScope()
+    val scope = getKoin()
 
     return remember(this, scope) {
         instanceKeeper.getOrCreate { scope.get() }

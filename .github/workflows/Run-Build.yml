@@ -79,9 +79,9 @@ jobs:
 
       - name: Set iOS Debug GoogleServicePlist
         run:
-          echo "$GOOGLE_DEBUG_SERVICE_PLIST" > ./ios/Diary/Firebase/Dev/GoogleService-Info.plist
+          echo "$GOOGLE_DEBUG_SERVICE_PLIST" > ./xcode/Diary/GoogleService/debug/GoogleService-Info.plist
           
-          echo "$GOOGLE_RELEASE_SERVICE_PLIST" > ./ios/Diary/Firebase/Release/GoogleService-Info.plist
+          echo "$GOOGLE_RELEASE_SERVICE_PLIST" > ./xcode/Diary/GoogleService/release/GoogleService-Info.plist
         shell: bash
         env:
           GOOGLE_DEBUG_SERVICE_PLIST: ${{ secrets.IOS_DEBUG_GOOGLE_SERVICE_PLIST }}
