@@ -1,8 +1,6 @@
 package com.taetae98.diary.feature.memo.add
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.taetae98.diary.feature.memo.detail.MemoDetailScreen
 import com.taetae98.diary.library.compose.runtime.collectAsStateOnLifecycle
@@ -16,7 +14,7 @@ internal fun MemoAddRoute(
     MemoDetailScreen(
         modifier = modifier,
         onNavigateUp = onNavigateUp,
-        uiState = remember { mutableStateOf(viewModel.uiState) },
+        uiState = viewModel.uiState.collectAsStateOnLifecycle(),
         detailUiState = viewModel.detailUiState.collectAsStateOnLifecycle()
     )
 }

@@ -7,6 +7,5 @@ import org.koin.core.annotation.Factory
 @Factory
 internal class MemoRepositoryImpl : MemoRepository {
     override suspend fun upsert(memo: Memo) {
-        TODO("Not yet implemented")
     }
 }
