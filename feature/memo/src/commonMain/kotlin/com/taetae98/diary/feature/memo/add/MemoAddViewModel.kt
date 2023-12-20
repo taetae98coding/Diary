@@ -4,6 +4,7 @@ import com.taetae98.diary.domain.entity.account.Memo
 import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
 import com.taetae98.diary.feature.memo.detail.MemoDetailMessage
 import com.taetae98.diary.feature.memo.detail.MemoDetailUiState
+import com.taetae98.diary.library.uuid.getUuid
 import com.taetae98.diary.library.viewmodel.ViewModel
 import com.taetae98.diary.ui.compose.entity.EntityDetailUiState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -59,7 +60,7 @@ internal class MemoAddViewModel(
     private fun add() {
         viewModelScope.launch {
             val memo = Memo(
-                id = "",
+                id = getUuid(),
                 title = _title.value
             )
 
