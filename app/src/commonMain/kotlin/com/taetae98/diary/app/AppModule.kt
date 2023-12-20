@@ -5,12 +5,14 @@ import com.taetae98.diary.data.repository.RepositoryModule
 import com.taetae98.diary.domain.usecase.UseCaseModule
 import com.taetae98.diary.feature.account.AccountModule
 import com.taetae98.diary.feature.memo.MemoModule
+import com.taetae98.diary.local.impl.LocalDataSourceModule
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
 
 @Module(
     includes = [
         AuthModule::class,
+        LocalDataSourceModule::class,
         RepositoryModule::class,
         UseCaseModule::class,
         AccountModule::class,

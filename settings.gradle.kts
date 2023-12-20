@@ -40,6 +40,9 @@ include(":core:auth-api")
 include(":core:auth-impl")
 include(":core:auth-koin")
 
+include(":data:dto")
+include(":data:local-api")
+include(":data:local-impl")
 include(":data:repository")
 
 include(":app")
