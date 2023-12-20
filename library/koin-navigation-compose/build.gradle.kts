@@ -7,12 +7,12 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(project(":library:viewmodel"))
-
                 implementation(compose.runtime)
                 implementation(libs.decompose)
                 implementation(project.dependencies.platform(libs.koin.bom))
                 implementation(libs.koin.compose)
+
+                api(project(":library:viewmodel"))
             }
         }
     }

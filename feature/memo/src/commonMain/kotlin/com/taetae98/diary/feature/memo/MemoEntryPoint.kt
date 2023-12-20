@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.taetae98.diary.feature.memo.add.MemoAddRoute
 import com.taetae98.diary.feature.memo.list.MemoListRoute
+import com.taetae98.diary.library.koin.navigation.compose.koinInject
 import com.taetae98.diary.navigation.core.memo.MemoAddEntry
 import com.taetae98.diary.navigation.core.memo.MemoEntry
 import com.taetae98.diary.navigation.core.memo.MemoListEntry
@@ -24,7 +25,8 @@ public fun MemoEntryPoint(
             )
 
             is MemoAddEntry -> MemoAddRoute(
-                onNavigateUp = instance.navigateUp
+                onNavigateUp = instance.navigateUp,
+                viewModel = instance.koinInject(),
             )
         }
     }
