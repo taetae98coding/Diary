@@ -1,5 +1,5 @@
 plugins {
-    id("diary.module")
+    id("diary.multiplatform")
     id("diary.koin.multiplatform")
 }
 
@@ -13,10 +13,16 @@ kotlin {
                 implementation(project(":data:local-api"))
                 implementation(project(":domain:repository"))
 
+                implementation(project(":library:paging"))
+
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.paging.common)
             }
         }
     }
+}
+
+android {
+    namespace = "${Build.NAMESPACE}.data.repository"
 }

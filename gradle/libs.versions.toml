@@ -83,6 +83,7 @@ sqldelight-paging = { group = "app.cash.sqldelight", name = "androidx-paging3-ex
 sqldelight-android-driver = { group = "app.cash.sqldelight", name = "android-driver", version.ref = "sqldelight" }
 
 paging-common = { group = "app.cash.paging", name = "paging-common", version.ref = "paging-multiplatform" }
+paging-compose = { group = "app.cash.paging", name = "paging-compose-common", version.ref = "paging-multiplatform" }
 
 kotest-engine = { group = "io.kotest", name = "kotest-framework-engine", version.ref = "kotest" }
 kotest-assertions = { group = "io.kotest", name = "kotest-assertions-core", version.ref = "kotest" }

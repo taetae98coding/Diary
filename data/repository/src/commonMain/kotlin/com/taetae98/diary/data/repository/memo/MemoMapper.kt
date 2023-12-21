@@ -11,3 +11,10 @@ internal fun Memo.toDto(): MemoDto {
         updateAt = Clock.System.now()
     )
 }
+
+internal fun MemoDto.toDomain(): Memo {
+    return Memo(
+        id = id,
+        title = title,
+    )
+}
