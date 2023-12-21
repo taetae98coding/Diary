@@ -22,6 +22,26 @@ kotlin {
                 implementation(libs.sqldelight.android.driver)
             }
         }
+
+        iosMain {
+            dependencies {
+                implementation(libs.sqldelight.native.driver)
+                implementation(libs.stately.collections)
+            }
+        }
+
+        jvmMain {
+            dependencies {
+                implementation(libs.sqldelight.sqlite.driver)
+            }
+        }
+
+        jsMain {
+            dependencies {
+                implementation(libs.sqldelight.web.driver)
+                implementation(libs.stately.collections)
+            }
+        }
     }
 }
 

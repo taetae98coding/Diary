@@ -23,8 +23,6 @@ internal class MemoRepositoryImpl(
         return createPager(
             config = createPagingConfig(
                 pageSize = 30,
-                initialLoadSize = 30,
-                jumpThreshold = 60
             ),
             pagingSourceFactory = {
                 localDataSource.page()

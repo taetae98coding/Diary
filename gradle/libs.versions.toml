@@ -14,6 +14,8 @@ androidx-lifecycle = "2.6.2"                        # https://developer.android.
 
 compose-multiplatform = "1.5.11"                    # https://github.com/JetBrains/compose-multiplatform/releases
 paging-multiplatform = "3.3.0-alpha02-0.4.0"        # https://github.com/cashapp/multiplatform-paging/releases
+stately = "2.0.6"                                   # https://github.com/touchlab/Stately/releases
+
 
 decompose = "3.0.0-alpha03"                         # https://github.com/arkivanov/Decompose/releases
 decompose-essenty = "2.0.0-alpha02"                 # https://github.com/arkivanov/Essenty/releases
@@ -81,9 +83,14 @@ sqldelight-dialect = { group = "app.cash.sqldelight", name = "sqlite-3-38-dialec
 sqldelight-adapter = { group = "app.cash.sqldelight", name = "primitive-adapters", version.ref = "sqldelight" }
 sqldelight-paging = { group = "app.cash.sqldelight", name = "androidx-paging3-extensions", version.ref = "sqldelight" }
 sqldelight-android-driver = { group = "app.cash.sqldelight", name = "android-driver", version.ref = "sqldelight" }
+sqldelight-native-driver = { group = "app.cash.sqldelight", name = "native-driver", version.ref = "sqldelight" }
+sqldelight-sqlite-driver = { group = "app.cash.sqldelight", name = "sqlite-driver", version.ref = "sqldelight" }
+sqldelight-web-driver = { group = "app.cash.sqldelight", name = "web-worker-driver", version.ref = "sqldelight" }
 
 paging-common = { group = "app.cash.paging", name = "paging-common", version.ref = "paging-multiplatform" }
 paging-compose = { group = "app.cash.paging", name = "paging-compose-common", version.ref = "paging-multiplatform" }
+
+stately-collections = { group = "co.touchlab", name = "stately-iso-collections", version.ref = "stately" }
 
 kotest-engine = { group = "io.kotest", name = "kotest-framework-engine", version.ref = "kotest" }
 kotest-assertions = { group = "io.kotest", name = "kotest-assertions-core", version.ref = "kotest" }

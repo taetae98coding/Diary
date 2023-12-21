@@ -9,6 +9,8 @@
 **/Podfile.lock
 **/*.xcconfig
 
+**/*.db
+
 **/google-services.json
 **/GoogleService-Info.plist
 
