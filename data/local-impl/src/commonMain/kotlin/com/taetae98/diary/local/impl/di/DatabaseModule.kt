@@ -1,11 +1,36 @@
 package com.taetae98.diary.local.impl.di
 
-import com.taetae98.diary.local.impl.memo.MemoDao
-import org.koin.core.annotation.Factory
+import app.cash.sqldelight.db.SqlDriver
+import com.taetae98.diary.data.local.impl.DiaryDatabase
+import com.taetae98.diary.data.local.impl.MemoEntity
+import com.taetae98.diary.local.impl.DatabaseDispatcher
+import com.taetae98.diary.local.impl.adapter.InstantAdapter
+import kotlinx.coroutines.CoroutineDispatcher
 import org.koin.core.annotation.Module
+import org.koin.core.annotation.Named
+import org.koin.core.annotation.Singleton
 
 @Module
-internal expect class DatabaseModule() {
-    @Factory
-    fun providesMemoDao(): MemoDao
+internal class DatabaseModule {
+    @Singleton
+    fun providesMemoDao(
+        driver: SqlDriver
+    ): DiaryDatabase {
+        return DiaryDatabase(
+            driver = driver,
+            MemoEntityAdapter = MemoEntity.Adapter(
+                updateAtAdapter = InstantAdapter,
+            )
+        )
+    }
+
+    @Named(DATABASE_DISPATCHER)
+    @Singleton
+    fun providesDatabaseDispatcher(): CoroutineDispatcher {
+        return DatabaseDispatcher
+    }
+
+    companion object {
+        internal const val DATABASE_DISPATCHER = "databaseDispatcher"
+    }
 }

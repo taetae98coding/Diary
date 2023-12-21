@@ -7,7 +7,9 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":data:dto"))
+
                 implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.paging.common)
             }
         }
     }
