@@ -10,7 +10,10 @@ upsert:
 INSERT INTO MemoEntity
 VALUES ?
 ON CONFLICT (id) DO
-UPDATE SET title = excluded.title;
+UPDATE SET
+title = excluded.title,
+updateAt = excluded.updateAt
+;
 
 count:
 SELECT COUNT(*) FROM MemoEntity;
