@@ -20,6 +20,10 @@ internal class MemoLocalDataSourceImpl(
         database.memoEntityQueries.upsert(memo.toEntity())
     }
 
+    override suspend fun delete(id: String) {
+        database.memoEntityQueries.delete(id)
+    }
+
     override fun page(): PagingSource<Int, MemoDto> {
         val queries = database.memoEntityQueries
 

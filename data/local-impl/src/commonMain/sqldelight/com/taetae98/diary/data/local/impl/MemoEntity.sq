@@ -22,3 +22,7 @@ page:
 SELECT *
 FROM MemoEntity
 LIMIT :limit OFFSET :offset;
+
+delete:
+DELETE FROM MemoEntity
+WHERE id = :id;

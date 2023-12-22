@@ -4,6 +4,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -42,7 +43,7 @@ private fun Content(
     LazyColumn(
         modifier = modifier,
         contentPadding = PaddingValues(4.dp),
-        verticalArrangement = Arrangement.spacedBy(4.dp)
+        verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
         items(
             count = memoItems.itemCount,
@@ -59,12 +60,18 @@ private fun Content(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun Memo(
     modifier: Modifier = Modifier,
     uiState: MemoListUiState?
 ) {
-    Card(modifier = modifier) {
+    Card(
+        modifier = modifier,
+        onClick = {
+            uiState?.onDelete()
+        }
+    ) {
         Text(
             modifier = Modifier.padding(12.dp),
             text = uiState?.title.orEmpty()

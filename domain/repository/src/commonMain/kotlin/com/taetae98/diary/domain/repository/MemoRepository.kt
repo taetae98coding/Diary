@@ -6,5 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 public interface MemoRepository {
     public suspend fun upsert(memo: Memo)
+    public suspend fun delete(id: String)
     public fun page(): Flow<PagingData<Memo>>
 }

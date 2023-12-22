@@ -19,6 +19,10 @@ internal class MemoRepositoryImpl(
         localDataSource.upsert(memo.toDto())
     }
 
+    override suspend fun delete(id: String) {
+        localDataSource.delete(id)
+    }
+
     override fun page(): Flow<PagingData<Memo>> {
         return createPager(
             config = createPagingConfig(
