@@ -1,6 +1,6 @@
 package com.taetae98.diary.app
 
-import com.taetae98.diary.core.auth.koin.AuthModule
+import com.taetae98.diary.core.auth.module.AuthModule
 import com.taetae98.diary.core.firestore.module.FireStoreModule
 import com.taetae98.diary.data.repository.RepositoryModule
 import com.taetae98.diary.domain.usecase.UseCaseModule

@@ -38,7 +38,7 @@ include(":target:jsApp")
 
 include(":core:auth-api")
 include(":core:auth-impl")
-include(":core:auth-koin")
+include(":core:auth-module")
 include(":core:firestore-module")
 
 include(":data:dto")
