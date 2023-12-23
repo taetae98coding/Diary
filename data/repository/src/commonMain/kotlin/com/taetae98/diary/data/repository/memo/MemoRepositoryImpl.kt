@@ -13,10 +13,14 @@ import org.koin.core.annotation.Factory
 
 @Factory
 internal class MemoRepositoryImpl(
+    private val fireStore: MemoFireStore,
     private val localDataSource: MemoLocalDataSource,
 ) : MemoRepository {
     override suspend fun upsert(memo: Memo) {
-        localDataSource.upsert(memo.toDto())
+        val dto = memo.toDto()
+
+        fireStore.upsert(dto)
+        localDataSource.upsert(dto)
     }
 
     override suspend fun delete(id: String) {
