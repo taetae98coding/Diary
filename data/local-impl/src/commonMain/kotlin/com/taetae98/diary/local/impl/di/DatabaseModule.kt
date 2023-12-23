@@ -5,6 +5,7 @@ import com.taetae98.diary.data.local.impl.DiaryDatabase
 import com.taetae98.diary.data.local.impl.MemoEntity
 import com.taetae98.diary.local.impl.DatabaseDispatcher
 import com.taetae98.diary.local.impl.adapter.InstantAdapter
+import com.taetae98.diary.local.impl.adapter.MemoStateAdapter
 import kotlinx.coroutines.CoroutineDispatcher
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Named
@@ -20,6 +21,7 @@ internal class DatabaseModule {
             driver = driver,
             MemoEntityAdapter = MemoEntity.Adapter(
                 updateAtAdapter = InstantAdapter,
+                stateAdapter = MemoStateAdapter,
             )
         )
     }

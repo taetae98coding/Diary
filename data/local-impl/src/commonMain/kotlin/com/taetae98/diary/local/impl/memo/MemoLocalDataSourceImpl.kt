@@ -32,7 +32,7 @@ internal class MemoLocalDataSourceImpl(
             transacter = queries,
             context = dispatcher,
             queryProvider = { limit, offset ->
-                queries.page(limit, offset, ::MemoDto)
+                queries.page(limit, offset, ::mapToMemoDto)
             },
         )
     }

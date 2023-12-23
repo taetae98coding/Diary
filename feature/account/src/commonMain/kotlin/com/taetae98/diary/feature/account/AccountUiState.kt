@@ -1,7 +1,7 @@
 package com.taetae98.diary.feature.account
 
 import androidx.compose.runtime.Stable
-import com.taetae98.diary.domain.entity.account.Credential
+import com.taetae98.diary.domain.entity.account.account.Credential
 
 @Stable
 internal sealed class AccountUiState {

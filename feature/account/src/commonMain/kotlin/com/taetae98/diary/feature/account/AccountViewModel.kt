@@ -1,7 +1,7 @@
 package com.taetae98.diary.feature.account
 
-import com.taetae98.diary.domain.entity.account.Account
-import com.taetae98.diary.domain.entity.account.Credential
+import com.taetae98.diary.domain.entity.account.account.Account
+import com.taetae98.diary.domain.entity.account.account.Credential
 import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
 import com.taetae98.diary.domain.usecase.account.SignInUseCase
 import com.taetae98.diary.domain.usecase.account.SignOutUseCase

@@ -1,7 +1,7 @@
 package com.taetae98.diary.domain.usecase.memo
 
 import app.cash.paging.PagingData
-import com.taetae98.diary.domain.entity.account.Memo
+import com.taetae98.diary.domain.entity.account.memo.Memo
 import com.taetae98.diary.domain.repository.MemoRepository
 import com.taetae98.diary.domain.usecase.core.FlowUseCase
 import kotlinx.coroutines.flow.Flow

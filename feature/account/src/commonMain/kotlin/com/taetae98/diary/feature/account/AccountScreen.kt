@@ -14,7 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.taetae98.diary.domain.entity.account.Credential
+import com.taetae98.diary.domain.entity.account.account.Credential
 import com.taetae98.diary.library.google.sign.api.GoogleCredential
 import com.taetae98.diary.library.google.sign.compose.rememberGoogleAuthManager
 import com.taetae98.diary.ui.compose.topbar.NavigateUpTopBar

@@ -1,7 +1,7 @@
 package com.taetae98.diary.domain.repository
 
-import com.taetae98.diary.domain.entity.account.Account
-import com.taetae98.diary.domain.entity.account.Credential
+import com.taetae98.diary.domain.entity.account.account.Account
+import com.taetae98.diary.domain.entity.account.account.Credential
 import kotlinx.coroutines.flow.Flow
 
 public interface AccountRepository {

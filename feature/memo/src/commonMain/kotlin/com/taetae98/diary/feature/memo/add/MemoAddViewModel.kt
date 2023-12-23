@@ -1,6 +1,7 @@
 package com.taetae98.diary.feature.memo.add
 
-import com.taetae98.diary.domain.entity.account.Memo
+import com.taetae98.diary.domain.entity.account.memo.Memo
+import com.taetae98.diary.domain.entity.account.memo.MemoState
 import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
 import com.taetae98.diary.feature.memo.detail.MemoDetailMessage
 import com.taetae98.diary.feature.memo.detail.MemoDetailUiState
@@ -61,7 +62,8 @@ internal class MemoAddViewModel(
         viewModelScope.launch {
             val memo = Memo(
                 id = getUuid(),
-                title = _title.value
+                title = _title.value,
+                state = MemoState.NONE,
             )
 
             upsertMemoUseCase(memo).onSuccess {

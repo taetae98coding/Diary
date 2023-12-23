@@ -1,6 +1,6 @@
 package com.taetae98.diary.domain.usecase.memo
 
-import com.taetae98.diary.domain.entity.account.Memo
+import com.taetae98.diary.domain.entity.account.memo.Memo
 import com.taetae98.diary.domain.exception.TitleEmptyException
 import com.taetae98.diary.domain.repository.MemoRepository
 import com.taetae98.diary.domain.usecase.core.UseCase
