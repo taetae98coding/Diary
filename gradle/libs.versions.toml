@@ -77,7 +77,9 @@ firebase-android-analytics = { group = "com.google.firebase", name = "firebase-a
 firebase-android-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
 firebase-android-performance = { group = "com.google.firebase", name = "firebase-perf-ktx" }
 firebase-android-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
+firebase-android-firestore = { group = "com.google.firebase", name = "firebase-firestore-ktx" }
 firebase-multiplatform-auth = { group = "dev.gitlive", name = "firebase-auth", version.ref = "firebase-multiplatform" }
+firebase-multiplatform-firestore = { group = "dev.gitlive", name = "firebase-firestore", version.ref = "firebase-multiplatform" }
 
 sqldelight-dialect = { group = "app.cash.sqldelight", name = "sqlite-3-38-dialect", version.ref = "sqldelight" }
 sqldelight-adapter = { group = "app.cash.sqldelight", name = "primitive-adapters", version.ref = "sqldelight" }

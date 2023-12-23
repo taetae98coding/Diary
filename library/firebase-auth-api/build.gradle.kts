@@ -1,5 +1,5 @@
 plugins {
-    id("diary.multiplatform")
+    id("diary.module")
 }
 
 
@@ -11,8 +11,4 @@ kotlin {
             }
         }
     }
-}
-
-android {
-    namespace = "${Build.NAMESPACE}.library.firebase.auth.api"
 }

@@ -9,6 +9,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":core:auth-koin"))
+                implementation(project(":core:firestore-module"))
                 implementation(project(":data:local-impl"))
                 implementation(project(":data:repository"))
                 implementation(project(":domain:usecase"))
