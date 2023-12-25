@@ -1,7 +1,7 @@
 plugins {
     id("diary.module")
     id("diary.koin.multiplatform")
-    alias(libs.plugins.kotest)
+    id("diary.kotest.multiplatform")
 }
 
 kotlin {
@@ -17,23 +17,5 @@ kotlin {
                 api(project(":domain:entity"))
             }
         }
-
-        commonTest {
-            dependencies {
-                implementation(libs.bundles.kotest)
-            }
-        }
-
-        jvmTest {
-            dependencies {
-                implementation(libs.mockk)
-
-                runtimeOnly(libs.kotest.junit5)
-            }
-        }
     }
-}
-
-tasks.named<Test>("jvmTest") {
-    useJUnitPlatform()
 }

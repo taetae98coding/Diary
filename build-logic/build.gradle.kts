@@ -52,5 +52,10 @@ gradlePlugin {
             id = "diary.koin.multiplatform"
             implementationClass = "plugin.kotlin.KoinMultiplatformPlugin"
         }
+
+        register("diary.kotest.multiplatform") {
+            id = "diary.kotest.multiplatform"
+            implementationClass = "plugin.kotlin.KotestMultiplatformPlugin"
+        }
     }
 }
