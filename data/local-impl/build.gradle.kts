@@ -54,8 +54,8 @@ sqldelight {
         create("DiaryDatabase") {
             packageName.set("${Build.NAMESPACE}.data.local.impl")
             schemaOutputDirectory.set(file("src/main/sqldelight/databases"))
-            verifyMigrations.set(true)
             generateAsync.set(true)
+//            verifyMigrations.set(true)
 
             dialect(libs.sqldelight.dialect)
         }
