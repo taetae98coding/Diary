@@ -4,7 +4,7 @@ import kotlinx.datetime.Instant;
 CREATE TABLE MemoEntity (
     id TEXT NOT NULL PRIMARY KEY,
     title TEXT NOT NULL,
-    state TEXT AS MemoStateEntity NOT NULL,
+    state INTEGER AS MemoStateEntity NOT NULL,
     updateAt TEXT AS Instant NOT NULL
 );
 
@@ -18,16 +18,20 @@ state = excluded.state,
 updateAt = excluded.updateAt;
 
 count:
-SELECT COUNT(*) FROM MemoEntity;
+SELECT COUNT(*)
+FROM MemoEntity
+WHERE state = 0;
 
 page:
 SELECT *
 FROM MemoEntity
+WHERE state = 0
 LIMIT :limit OFFSET :offset;
 
-updateState:
+finish:
 UPDATE MemoEntity
-SET state = :state;
+SET state = 1
+WHERE id = :id;
 
 delete:
 DELETE FROM MemoEntity

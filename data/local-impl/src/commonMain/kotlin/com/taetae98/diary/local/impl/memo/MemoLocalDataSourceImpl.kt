@@ -21,7 +21,7 @@ internal class MemoLocalDataSourceImpl(
     }
 
     override suspend fun finish(id: String) {
-        database.memoEntityQueries.updateState(MemoStateEntity.FINISH)
+        database.memoEntityQueries.finish(id)
     }
 
     override suspend fun delete(id: String) {

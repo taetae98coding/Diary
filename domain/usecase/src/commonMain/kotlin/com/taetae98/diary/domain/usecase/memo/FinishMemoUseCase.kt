@@ -9,6 +9,6 @@ public class FinishMemoUseCase internal constructor(
     private val memoRepository: MemoRepository,
 ) : UseCase<String, Unit>() {
     override suspend fun execute(params: String) {
-        memoRepository.delete(params)
+        memoRepository.finish(params)
     }
 }
