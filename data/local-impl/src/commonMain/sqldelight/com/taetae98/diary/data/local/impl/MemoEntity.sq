@@ -15,8 +15,7 @@ ON CONFLICT (id) DO
 UPDATE SET
 title = excluded.title,
 state = excluded.state,
-updateAt = excluded.updateAt
-;
+updateAt = excluded.updateAt;
 
 count:
 SELECT COUNT(*) FROM MemoEntity;
@@ -25,6 +24,10 @@ page:
 SELECT *
 FROM MemoEntity
 LIMIT :limit OFFSET :offset;
+
+updateState:
+UPDATE MemoEntity
+SET state = :state;
 
 delete:
 DELETE FROM MemoEntity

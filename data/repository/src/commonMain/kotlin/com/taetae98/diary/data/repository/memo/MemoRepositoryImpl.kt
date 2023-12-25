@@ -23,6 +23,11 @@ internal class MemoRepositoryImpl(
         localDataSource.upsert(dto)
     }
 
+    override suspend fun finish(id: String) {
+        fireStore.finish(id)
+        localDataSource.finish(id)
+    }
+
     override suspend fun delete(id: String) {
         fireStore.delete(id)
         localDataSource.delete(id)

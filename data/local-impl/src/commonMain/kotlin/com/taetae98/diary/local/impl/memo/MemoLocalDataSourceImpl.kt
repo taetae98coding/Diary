@@ -20,6 +20,10 @@ internal class MemoLocalDataSourceImpl(
         database.memoEntityQueries.upsert(memo.toEntity())
     }
 
+    override suspend fun finish(id: String) {
+        database.memoEntityQueries.updateState(MemoStateEntity.FINISH)
+    }
+
     override suspend fun delete(id: String) {
         database.memoEntityQueries.delete(id)
     }

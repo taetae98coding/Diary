@@ -27,12 +27,23 @@ internal class MemoFireStore(
             .upsert(data)
     }
 
+    suspend fun finish(id: String) {
+        updateState(id, MemoFireStoreStateEntity.FINISH)
+    }
+
     suspend fun delete(id: String) {
+        updateState(id, MemoFireStoreStateEntity.DELETE)
+    }
+
+    private suspend fun updateState(
+        id: String,
+        stateEntity: MemoFireStoreStateEntity
+    ) {
         fireStore.collection(COLLECTION)
             .document(id)
             .update(
                 mapOf(
-                    STATE to MemoFireStoreStateEntity.DELETE,
+                    STATE to stateEntity.value,
                     UPDATE_AT to Clock.System.now().toFireStoreTimestamp(),
                 )
             )
