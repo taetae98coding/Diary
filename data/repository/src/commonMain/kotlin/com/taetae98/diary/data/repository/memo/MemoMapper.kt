@@ -40,10 +40,19 @@ internal fun MemoDto.toDomain(): Memo {
     )
 }
 
+internal fun MemoStateDto.toFireStore(): MemoFireStoreStateEntity {
+    return when (this) {
+        MemoStateDto.NONE -> MemoFireStoreStateEntity.NONE
+        MemoStateDto.FINISH -> MemoFireStoreStateEntity.FINISH
+        MemoStateDto.DELETE -> MemoFireStoreStateEntity.DELETE
+    }
+}
+
 internal fun MemoDto.toFireStore(): Map<String, Any> {
     return mapOf(
         "id" to id,
         "title" to title,
+        "state" to state.toFireStore().value,
         "updateAt" to updateAt.toFireStoreTimestamp(),
     )
 }
