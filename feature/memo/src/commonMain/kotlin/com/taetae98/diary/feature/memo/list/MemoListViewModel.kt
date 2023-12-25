@@ -7,7 +7,6 @@ import com.taetae98.diary.domain.usecase.memo.PageMemoUseCase
 import com.taetae98.diary.library.paging.mapPagingLatest
 import com.taetae98.diary.library.viewmodel.ViewModel
 import kotlinx.coroutines.flow.mapLatest
-import kotlinx.coroutines.launch
 import org.koin.core.annotation.Factory
 
 @Factory
@@ -22,13 +21,14 @@ internal class MemoListViewModel(
         MemoListUiState(
             id = it.id,
             title = it.title,
-            delete = ::delete,
         )
     }
 
-    private fun delete(id: String) {
-        viewModelScope.launch {
-            deleteMemoUseCase(id)
-        }
+    fun finish(id: String) {
+
+    }
+
+    fun delete(id: String) {
+
     }
 }

@@ -13,6 +13,8 @@ internal fun MemoListRoute(
     MemoListScreen(
         modifier = modifier,
         onAdd = onNavigateToMemoAdd,
-        memoItems = viewModel.memoPagingData.collectAsLazyPagingItems()
+        memoItems = viewModel.memoPagingData.collectAsLazyPagingItems(),
+        onMemoFinish = viewModel::finish,
+        onMemoDelete = viewModel::delete,
     )
 }
