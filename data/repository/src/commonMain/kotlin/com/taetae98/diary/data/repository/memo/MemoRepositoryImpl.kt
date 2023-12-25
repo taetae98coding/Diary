@@ -24,6 +24,7 @@ internal class MemoRepositoryImpl(
     }
 
     override suspend fun delete(id: String) {
+        fireStore.delete(id)
         localDataSource.delete(id)
     }
 

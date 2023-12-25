@@ -50,9 +50,9 @@ internal fun MemoStateDto.toFireStore(): MemoFireStoreStateEntity {
 
 internal fun MemoDto.toFireStore(): Map<String, Any> {
     return mapOf(
-        "id" to id,
-        "title" to title,
-        "state" to state.toFireStore().value,
-        "updateAt" to updateAt.toFireStoreTimestamp(),
+        MemoFireStore.ID to id,
+        MemoFireStore.TITLE to title,
+        MemoFireStore.STATE to state.toFireStore().value,
+        MemoFireStore.UPDATE_AT to updateAt.toFireStoreTimestamp(),
     )
 }

@@ -4,9 +4,13 @@ import com.taetae98.diary.library.firestore.api.Document
 import dev.gitlive.firebase.firestore.DocumentReference
 
 internal class DocumentImpl(
-    private val reference: DocumentReference
+    private val document: DocumentReference
 ) : Document {
     override suspend fun upsert(entity: Any) {
-        reference.set(entity)
+        document.set(entity)
+    }
+
+    override suspend fun update(queries: Map<String, Any?>) {
+        document.update(fieldsAndValues = queries.toList().toTypedArray())
     }
 }

@@ -9,4 +9,8 @@ internal class DocumentImpl(
     override suspend fun upsert(entity: Any) {
         document.set(entity)
     }
+
+    override suspend fun update(queries: Map<String, Any?>) {
+        document.update(queries)
+    }
 }

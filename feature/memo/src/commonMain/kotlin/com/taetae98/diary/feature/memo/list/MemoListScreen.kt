@@ -86,11 +86,11 @@ private fun SwipeMemo(
         confirmValueChange = {
             when (it) {
                 DismissValue.DismissedToStart -> {
-                    uiState?.id?.let(onMemoFinish)
+                    uiState?.id?.let(onMemoDelete)
                 }
 
                 DismissValue.DismissedToEnd -> {
-                    uiState?.id?.let(onMemoDelete)
+                    uiState?.id?.let(onMemoFinish)
                 }
 
                 else -> Unit
