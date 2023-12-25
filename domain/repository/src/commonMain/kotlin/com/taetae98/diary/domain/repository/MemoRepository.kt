@@ -9,5 +9,5 @@ public interface MemoRepository {
     public suspend fun finish(id: String)
     public suspend fun delete(id: String)
 
-    public fun page(): Flow<PagingData<Memo>>
+    public fun page(ownerId: String?): Flow<PagingData<Memo>>
 }

@@ -28,15 +28,20 @@ internal class MemoLocalDataSourceImpl(
         database.memoEntityQueries.delete(id)
     }
 
-    override fun page(): PagingSource<Int, MemoDto> {
+    override fun page(ownerId: String?): PagingSource<Int, MemoDto> {
         val queries = database.memoEntityQueries
 
         return QueryPagingSource(
-            countQuery = queries.count(),
+            countQuery = queries.count(ownerId = ownerId),
             transacter = queries,
             context = dispatcher,
             queryProvider = { limit, offset ->
-                queries.page(limit, offset, ::mapToMemoDto)
+                queries.page(
+                    ownerId = ownerId,
+                    limit = limit,
+                    offset = offset,
+                    mapper = ::mapToMemoDto
+                )
             },
         )
     }

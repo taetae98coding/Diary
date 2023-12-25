@@ -7,5 +7,5 @@ public interface MemoLocalDataSource {
     public suspend fun upsert(memo: MemoDto)
     public suspend fun finish(id: String)
     public suspend fun delete(id: String)
-    public fun page(): PagingSource<Int, MemoDto>
+    public fun page(ownerId: String?): PagingSource<Int, MemoDto>
 }

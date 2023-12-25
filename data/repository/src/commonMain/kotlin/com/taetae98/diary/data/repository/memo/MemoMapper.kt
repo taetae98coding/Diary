@@ -19,6 +19,7 @@ internal fun Memo.toDto(): MemoDto {
     return MemoDto(
         id = id,
         title = title,
+        ownerId = ownerId,
         state = state.toDto(),
         updateAt = Clock.System.now()
     )
@@ -36,6 +37,7 @@ internal fun MemoDto.toDomain(): Memo {
     return Memo(
         id = id,
         title = title,
+        ownerId = ownerId,
         state = state.toDomain(),
     )
 }
@@ -48,11 +50,12 @@ internal fun MemoStateDto.toFireStore(): MemoFireStoreStateEntity {
     }
 }
 
-internal fun MemoDto.toFireStore(): Map<String, Any> {
+internal fun MemoDto.toFireStore(): Map<String, Any?> {
     return mapOf(
         MemoFireStore.ID to id,
         MemoFireStore.TITLE to title,
         MemoFireStore.STATE to state.toFireStore().value,
+        MemoFireStore.OWNER_ID to ownerId,
         MemoFireStore.UPDATE_AT to updateAt.toFireStoreTimestamp(),
     )
 }

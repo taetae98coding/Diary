@@ -1,30 +1,21 @@
 package com.taetae98.diary.data.repository.memo
 
-import com.taetae98.diary.core.auth.api.AccountEntity
-import com.taetae98.diary.core.auth.api.AuthManager
 import com.taetae98.diary.data.dto.memo.MemoDto
 import com.taetae98.diary.library.firestore.api.FireStore
-import com.taetae98.diary.library.firestore.api.const.Const
 import com.taetae98.diary.library.firestore.api.ext.toFireStoreTimestamp
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.datetime.Clock
 import org.koin.core.annotation.Factory
 
 @Factory
 internal class MemoFireStore(
-    private val authManager: AuthManager,
     private val fireStore: FireStore,
 ) {
     suspend fun upsert(memo: MemoDto) {
-        val account = authManager.getAccount().firstOrNull() as? AccountEntity.Member ?: return
-        val data = buildMap {
-            putAll(memo.toFireStore())
-            put(Const.OWNER_ID, account.uid)
-        }
+        if (memo.ownerId == null) return
 
         fireStore.collection(COLLECTION)
             .document(memo.id)
-            .upsert(data)
+            .upsert(memo.toFireStore())
     }
 
     suspend fun finish(id: String) {
@@ -55,6 +46,7 @@ internal class MemoFireStore(
         const val ID = "id"
         const val TITLE = "title"
         const val STATE = "state"
+        const val OWNER_ID = "ownerId"
         const val UPDATE_AT = "updateAt"
     }
 }

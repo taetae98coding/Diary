@@ -33,13 +33,13 @@ internal class MemoRepositoryImpl(
         localDataSource.delete(id)
     }
 
-    override fun page(): Flow<PagingData<Memo>> {
+    override fun page(ownerId: String?): Flow<PagingData<Memo>> {
         return createPager(
             config = createPagingConfig(
                 pageSize = 30,
             ),
             pagingSourceFactory = {
-                localDataSource.page()
+                localDataSource.page(ownerId = ownerId)
             }
         ).mapPaging(MemoDto::toDomain)
     }
