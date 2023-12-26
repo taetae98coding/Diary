@@ -1,9 +1,23 @@
 package com.taetae98.diary.feature.memo.list
 
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.foundation.layout.*
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.DismissDirection
+import androidx.compose.material3.DismissState
+import androidx.compose.material3.DismissValue
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SwipeToDismiss
+import androidx.compose.material3.Text
+import androidx.compose.material3.rememberDismissState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -12,7 +26,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import app.cash.paging.compose.LazyPagingItems
 import app.cash.paging.compose.itemKey
@@ -140,13 +154,11 @@ private fun BoxScope.SwipeDeleteButton(
     state: DismissState,
 ) {
     SwipeIcon(
+        modifier = modifier,
         state = state,
         dismissValue = DismissValue.DismissedToStart,
-    ) { align, size ->
-        DeleteIcon(
-            modifier = modifier.align(align)
-                .size(size)
-        )
+    ) {
+        DeleteIcon()
     }
 }
 
@@ -157,41 +169,52 @@ private fun BoxScope.SwipeFinishButton(
     state: DismissState,
 ) {
     SwipeIcon(
+        modifier = modifier,
         state = state,
         dismissValue = DismissValue.DismissedToEnd,
-    ) { align, size ->
-        FinishIcon(
-            modifier = modifier.align(align)
-                .size(size)
-        )
+    ) {
+        FinishIcon()
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun BoxScope.SwipeIcon(
+    modifier: Modifier = Modifier,
     state: DismissState,
     dismissValue: DismissValue,
-    content: @Composable (align: Alignment, size: Dp) -> Unit,
+    content: @Composable () -> Unit,
 ) {
     val alignment = when (dismissValue) {
         DismissValue.DismissedToEnd -> Alignment.CenterStart
         DismissValue.DismissedToStart -> Alignment.CenterEnd
         else -> Alignment.Center
     }
-    val size by animateDpAsState(
+
+    val scale by animateFloatAsState(
         when (state.targetValue) {
-            dismissValue -> 32.dp
-            else -> 16.dp
+            dismissValue -> 1.33F
+            else -> 0.66F
         }
     )
 
     when (state.targetValue) {
-        dismissValue -> content(alignment, size)
+        dismissValue -> Box(
+            modifier = modifier.align(alignment)
+                .graphicsLayer {
+                    scaleX = scale
+                    scaleY = scale
+                }
+        ) {
+            content()
+        }
 
         DismissValue.Default -> CircleIcon(
-            modifier = Modifier.align(alignment)
-                .size(size)
+            modifier = modifier.align(alignment)
+                .graphicsLayer {
+                    scaleX = scale
+                    scaleY = scale
+                }
         )
 
         else -> Unit

@@ -1,6 +1,7 @@
 package com.taetae98.diary.feature.memo.detail
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -88,6 +89,9 @@ private fun Content(
     Column(
         modifier = modifier.verticalScroll(state = rememberScrollState())
     ) {
-        EntityDetail(uiState = detailUiState)
+        EntityDetail(
+            modifier = Modifier.fillMaxWidth(),
+            uiState = detailUiState
+        )
     }
 }

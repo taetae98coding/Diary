@@ -1,6 +1,8 @@
 package com.taetae98.diary.ui.compose.entity
 
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -24,7 +26,7 @@ public fun EntityDetail(
     uiState: EntityDetailUiState,
 ) {
     Card(
-        modifier = modifier
+        modifier = modifier.width(intrinsicSize = IntrinsicSize.Min)
     ) {
         TextField(
             modifier = Modifier.fillMaxWidth(),

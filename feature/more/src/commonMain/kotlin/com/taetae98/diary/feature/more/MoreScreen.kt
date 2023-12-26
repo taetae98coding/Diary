@@ -44,6 +44,7 @@ private fun Content(
         verticalArrangement = Arrangement.spacedBy(itemPadding)
     ) {
         TitleItem(
+            modifier = Modifier.fillMaxWidth(),
             title = "계정",
             onClick = onAccount,
         )
@@ -58,7 +59,7 @@ private fun TitleItem(
     onClick: () -> Unit,
 ) {
     Card(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier,
         onClick = onClick,
     ) {
         Text(
