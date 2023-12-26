@@ -1,10 +1,10 @@
 package com.taetae98.diary.feature.memo
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.taetae98.diary.feature.memo.add.MemoAddRoute
+import com.taetae98.diary.feature.memo.detail.MemoDetailRoute
 import com.taetae98.diary.feature.memo.list.MemoListRoute
 import com.taetae98.diary.library.koin.navigation.compose.koinInject
 import com.taetae98.diary.navigation.core.memo.MemoAddEntry
@@ -33,9 +33,10 @@ public fun MemoEntryPoint(
                 viewModel = instance.koinInject(),
             )
 
-            is MemoDetailEntry -> {
-                Text(text = instance.memoId)
-            }
+            is MemoDetailEntry -> MemoDetailRoute(
+                onNavigateUp = instance.navigateUp,
+                memoDetailViewModel = instance.koinInject(),
+            )
         }
     }
 }

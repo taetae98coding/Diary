@@ -38,6 +38,7 @@ public class MemoEntry(
 
                 is MemoDetailRoute -> MemoDetailEntry(
                     context = context,
+                    navigateUp = ::navigateUp,
                     memoId = route.memoId,
                 )
 

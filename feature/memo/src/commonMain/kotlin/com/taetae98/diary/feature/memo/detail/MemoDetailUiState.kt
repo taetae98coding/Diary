@@ -9,4 +9,9 @@ internal sealed class MemoDetailUiState {
         override val message: MemoDetailMessage?,
         override val onMessageShown: () -> Unit,
     ) : MemoDetailUiState()
+
+    data class Detail(
+        override val message: MemoDetailMessage?,
+        override val onMessageShown: () -> Unit,
+    ) : MemoDetailUiState()
 }

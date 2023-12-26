@@ -78,6 +78,8 @@ private fun FloatingButton(
                 onAdd = value.onAdd
             )
         }
+
+        else -> Unit
     }
 }
 
