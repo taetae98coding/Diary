@@ -7,6 +7,8 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation(libs.kotlinx.serialization)
+
                 api(libs.decompose)
             }
         }

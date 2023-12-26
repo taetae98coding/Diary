@@ -33,6 +33,10 @@ internal class MemoRepositoryImpl(
         localDataSource.delete(id)
     }
 
+    override suspend fun find(id: String): Memo? {
+        return localDataSource.find(id)?.toDomain()
+    }
+
     override fun page(ownerId: String?): Flow<PagingData<Memo>> {
         return createPager(
             config = createPagingConfig(

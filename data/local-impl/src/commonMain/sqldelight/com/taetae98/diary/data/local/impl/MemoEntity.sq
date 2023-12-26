@@ -41,3 +41,8 @@ WHERE id = :id;
 delete:
 DELETE FROM MemoEntity
 WHERE id = :id;
+
+find:
+SELECT *
+FROM MemoEntity
+WHERE id = :id;

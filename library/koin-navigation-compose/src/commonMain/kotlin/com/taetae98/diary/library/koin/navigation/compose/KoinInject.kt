@@ -16,14 +16,16 @@ import org.koin.compose.getKoin
 import org.koin.core.parameter.ParametersHolder
 
 @Composable
-public inline fun <reified T : ViewModel> ComponentContext.koinInject(): T {
+public inline fun <reified T : ViewModel> ComponentContext.koinInject(
+    savedState: Map<String, JsonElement> = emptyMap()
+): T {
     val scope = getKoin()
     val key = remember { requireNotNull(getKClassForKViewModel<T>().simpleName) }
     val map = instanceKeeper.getOrCreateSimple {
         stateKeeper.consume(
             key = key,
             strategy = MapSerializer(String.serializer(), JsonElement.serializer()),
-        )?.toMutableMap() ?: mutableMapOf()
+        )?.toMutableMap() ?: savedState.toMutableMap()
     }
 
     LaunchedEffect(this) {

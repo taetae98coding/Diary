@@ -9,7 +9,7 @@ import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonPrimitive
 
 public class SavedStateHandle(
-    private val cache: MutableMap<String, JsonElement> = mutableMapOf()
+    private val savedState: MutableMap<String, JsonElement> = mutableMapOf()
 ) {
     private val stateFlowMap = mutableMapOf<String, MutableStateFlow<*>>()
 
@@ -17,7 +17,7 @@ public class SavedStateHandle(
     public fun <T> getStateFlow(key: String, initialValue: T): StateFlow<T> {
         val stateFlow = when (initialValue) {
             is String? -> stateFlowMap.getOrPut(key) {
-                val jsonElement = cache.getOrPut(key) { JsonPrimitive(initialValue) }
+                val jsonElement = savedState.getOrPut(key) { JsonPrimitive(initialValue) }
                 val value = jsonElement.jsonPrimitive.contentOrNull
 
                 MutableStateFlow(value)
@@ -35,7 +35,7 @@ public class SavedStateHandle(
             is String? -> {
                 val flow = stateFlowMap.getOrPut(key) { MutableStateFlow(value) }
 
-                cache[key] = JsonPrimitive(value)
+                savedState[key] = JsonPrimitive(value)
                 (flow as? MutableStateFlow<T>)?.value = value
             }
         }
