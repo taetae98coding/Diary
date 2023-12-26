@@ -7,6 +7,7 @@ import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
 import com.taetae98.diary.feature.memo.detail.MemoDetailMessage
 import com.taetae98.diary.feature.memo.detail.MemoDetailUiState
 import com.taetae98.diary.library.uuid.getUuid
+import com.taetae98.diary.library.viewmodel.SavedStateHandle
 import com.taetae98.diary.library.viewmodel.ViewModel
 import com.taetae98.diary.ui.compose.entity.EntityDetailUiState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,11 +20,15 @@ import org.koin.core.annotation.Factory
 
 @Factory
 internal class MemoAddViewModel(
+    private val savedStateHandle: SavedStateHandle,
     private val getAccountUseCase: GetAccountUseCase,
     private val upsertMemoUseCase: UpsertMemoUseCase,
 ) : ViewModel() {
     private val _message = MutableStateFlow<MemoDetailMessage?>(null)
-    private val _title = MutableStateFlow("")
+    private val _title = savedStateHandle.getStateFlow(
+        key = TITLE,
+        initialValue = "",
+    )
 
     val uiState = _message.mapLatest {
         MemoDetailUiState.Add(
@@ -56,9 +61,7 @@ internal class MemoAddViewModel(
     )
 
     private fun setTitle(title: String) {
-        viewModelScope.launch {
-            _title.emit(title)
-        }
+        savedStateHandle[TITLE] = title
     }
 
     private fun add() {
@@ -78,8 +81,8 @@ internal class MemoAddViewModel(
         }
     }
 
-    private suspend fun clearInput() {
-        _title.emit("")
+    private fun clearInput() {
+        savedStateHandle[TITLE] = ""
     }
 
     private suspend fun showAddMessage() {
@@ -94,5 +97,9 @@ internal class MemoAddViewModel(
         viewModelScope.launch {
             clearMessage()
         }
+    }
+
+    companion object {
+        private const val TITLE = "title"
     }
 }

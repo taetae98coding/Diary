@@ -13,7 +13,7 @@ internal class DiaryActivity : ComponentActivity() {
 
         val context = defaultComponentContext()
         val appEntry = AppEntry(context = context)
-
+        
         setContent {
             App(entry = appEntry)
         }

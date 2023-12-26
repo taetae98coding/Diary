@@ -8,7 +8,10 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(compose.runtime)
+
+                implementation(libs.kotlinx.serialization)
                 implementation(libs.decompose)
+
                 implementation(project.dependencies.platform(libs.koin.bom))
                 implementation(libs.koin.compose)
 
