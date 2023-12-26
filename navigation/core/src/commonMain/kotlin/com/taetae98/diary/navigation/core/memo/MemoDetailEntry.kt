@@ -1,6 +1,8 @@
 package com.taetae98.diary.navigation.core.memo
 
 import com.arkivanov.decompose.ComponentContext
+import kotlinx.collections.immutable.ImmutableMap
+import kotlinx.collections.immutable.persistentMapOf
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 
@@ -9,7 +11,7 @@ public class MemoDetailEntry(
     public val navigateUp: () -> Unit,
     memoId: String
 ) : ComponentContext by context {
-    public val savedState: Map<String, JsonElement> = mapOf(
+    public val savedState: ImmutableMap<String, JsonElement> = persistentMapOf(
         ID to JsonPrimitive(memoId),
     )
 

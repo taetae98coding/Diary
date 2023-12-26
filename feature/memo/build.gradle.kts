@@ -17,6 +17,7 @@ kotlin {
                 implementation(project(":library:uuid"))
                 implementation(project(":library:paging"))
 
+                implementation(libs.kotlinx.immutable)
                 implementation(compose.material3)
                 implementation(libs.decompose.compose)
                 implementation(libs.paging.compose)

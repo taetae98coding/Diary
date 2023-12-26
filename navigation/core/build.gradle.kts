@@ -8,6 +8,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.kotlinx.serialization)
+                implementation(libs.kotlinx.immutable)
 
                 api(libs.decompose)
             }
