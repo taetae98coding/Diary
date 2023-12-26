@@ -9,6 +9,7 @@ import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.taetae98.diary.navigation.core.ext.illegalRoute
 import com.taetae98.diary.navigation.core.route.MemoAddRoute
+import com.taetae98.diary.navigation.core.route.MemoDetailRoute
 import com.taetae98.diary.navigation.core.route.MemoListRoute
 import com.taetae98.diary.navigation.core.route.Route
 
@@ -27,11 +28,17 @@ public class MemoEntry(
                 MemoListRoute -> MemoListEntry(
                     context = context,
                     navigateToMemoAdd = ::navigateToMemoAdd,
+                    navigateToMemoDetail = ::navigateToMemoDetail,
                 )
 
                 MemoAddRoute -> MemoAddEntry(
                     context = context,
                     navigateUp = ::navigateUp,
+                )
+
+                is MemoDetailRoute -> MemoDetailEntry(
+                    context = context,
+                    memoId = route.memoId,
                 )
 
                 else -> illegalRoute(route)
@@ -45,5 +52,9 @@ public class MemoEntry(
 
     private fun navigateUp() {
         navigation.pop()
+    }
+
+    private fun navigateToMemoDetail(memoId: String) {
+        navigation.push(MemoDetailRoute(memoId))
     }
 }

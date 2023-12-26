@@ -2,8 +2,7 @@ package com.taetae98.diary.navigation.core.memo
 
 import com.arkivanov.decompose.ComponentContext
 
-public class MemoListEntry(
+public class MemoDetailEntry(
     context: ComponentContext,
-    public val navigateToMemoAdd: () -> Unit,
-    public val navigateToMemoDetail: (memoId: String) -> Unit,
+    private val memoId: String
 ) : ComponentContext by context

@@ -1,6 +1,7 @@
 package com.taetae98.diary.feature.memo.list
 
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -42,8 +43,9 @@ internal fun MemoListScreen(
     modifier: Modifier = Modifier,
     onAdd: () -> Unit,
     memoItems: LazyPagingItems<MemoListUiState>,
-    onMemoFinish: (String) -> Unit,
-    onMemoDelete: (String) -> Unit,
+    onNavigateToMemoDetail: (memoId: String) -> Unit,
+    onMemoFinish: (memoId: String) -> Unit,
+    onMemoDelete: (memoId: String) -> Unit,
 ) {
     Scaffold(
         modifier = modifier,
@@ -54,6 +56,7 @@ internal fun MemoListScreen(
             modifier = Modifier.padding(it)
                 .fillMaxSize(),
             memoItems = memoItems,
+            onNavigateToMemoDetail = onNavigateToMemoDetail,
             onMemoFinish = onMemoFinish,
             onMemoDelete = onMemoDelete,
         )
@@ -64,8 +67,9 @@ internal fun MemoListScreen(
 private fun Content(
     modifier: Modifier = Modifier,
     memoItems: LazyPagingItems<MemoListUiState>,
-    onMemoFinish: (String) -> Unit,
-    onMemoDelete: (String) -> Unit,
+    onNavigateToMemoDetail: (memoId: String) -> Unit,
+    onMemoFinish: (memoId: String) -> Unit,
+    onMemoDelete: (memoId: String) -> Unit,
 ) {
     LazyColumn(
         modifier = modifier,
@@ -77,9 +81,18 @@ private fun Content(
             key = memoItems.itemKey { it.id },
             contentType = { "Memo" },
         ) {
+            val uiState = memoItems[it]
+
             SwipeMemo(
-                modifier = Modifier.fillParentMaxWidth(),
-                uiState = memoItems[it],
+                modifier = Modifier
+                    .fillParentMaxWidth()
+                    .clickable(
+                        enabled = uiState != null,
+                        onClickLabel = uiState?.title,
+                        onClick = { uiState?.id?.let(onNavigateToMemoDetail) }
+                    ),
+                uiState = uiState,
+                onNavigateToMemoDetail = onNavigateToMemoDetail,
                 onMemoFinish = onMemoFinish,
                 onMemoDelete = onMemoDelete,
             )
@@ -92,8 +105,9 @@ private fun Content(
 private fun SwipeMemo(
     modifier: Modifier = Modifier,
     uiState: MemoListUiState?,
-    onMemoFinish: (String) -> Unit,
-    onMemoDelete: (String) -> Unit,
+    onNavigateToMemoDetail: (memoId: String) -> Unit,
+    onMemoFinish: (memoId: String) -> Unit,
+    onMemoDelete: (memoId: String) -> Unit,
 ) {
     val state = rememberDismissState(
         initialValue = DismissValue.Default,
