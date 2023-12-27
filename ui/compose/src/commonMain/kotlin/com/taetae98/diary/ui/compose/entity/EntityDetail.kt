@@ -4,10 +4,10 @@ import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
+import com.taetae98.diary.ui.compose.text.ClearTextField
 
 @Composable
 public fun EntityDetail(
@@ -28,7 +28,7 @@ public fun EntityDetail(
     Card(
         modifier = modifier.width(intrinsicSize = IntrinsicSize.Min)
     ) {
-        TextField(
+        ClearTextField(
             modifier = Modifier.fillMaxWidth(),
             value = uiState.title,
             onValueChange = uiState.setTitle,
