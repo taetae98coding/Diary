@@ -9,7 +9,7 @@ import com.taetae98.diary.feature.memo.detail.MemoDetailUiState
 import com.taetae98.diary.library.uuid.getUuid
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
 import com.taetae98.diary.library.viewmodel.ViewModel
-import com.taetae98.diary.ui.compose.entity.EntityDetailUiState
+import com.taetae98.diary.ui.compose.text.TextFieldUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.first
@@ -46,17 +46,17 @@ internal class MemoAddViewModel(
         )
     )
 
-    val detailUiState = _title.mapLatest { title ->
-        EntityDetailUiState(
-            title = title,
-            setTitle = ::setTitle,
+    val titleUiState = _title.mapLatest { title ->
+        TextFieldUiState(
+            value = title,
+            onValueChange = ::setTitle,
         )
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Eagerly,
-        initialValue = EntityDetailUiState(
-            title = _title.value,
-            setTitle = ::setTitle,
+        initialValue = TextFieldUiState(
+            value = _title.value,
+            onValueChange = ::setTitle,
         )
     )
 

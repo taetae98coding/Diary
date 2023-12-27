@@ -8,30 +8,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import com.taetae98.diary.ui.compose.text.ClearTextField
+import com.taetae98.diary.ui.compose.text.TextFieldUiState
 
 @Composable
 public fun EntityDetail(
     modifier: Modifier = Modifier,
-    uiState: State<EntityDetailUiState>,
-) {
-    EntityDetail(
-        modifier = modifier,
-        uiState = uiState.value
-    )
-}
-
-@Composable
-public fun EntityDetail(
-    modifier: Modifier = Modifier,
-    uiState: EntityDetailUiState,
+    titleUiState: State<TextFieldUiState>,
 ) {
     Card(
         modifier = modifier.width(intrinsicSize = IntrinsicSize.Min)
     ) {
         ClearTextField(
             modifier = Modifier.fillMaxWidth(),
-            value = uiState.title,
-            onValueChange = uiState.setTitle,
+            uiState = titleUiState,
         )
     }
 }

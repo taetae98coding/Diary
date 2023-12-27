@@ -15,7 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.taetae98.diary.ui.compose.button.AddFloatingButton
 import com.taetae98.diary.ui.compose.entity.EntityDetail
-import com.taetae98.diary.ui.compose.entity.EntityDetailUiState
+import com.taetae98.diary.ui.compose.text.TextFieldUiState
 import com.taetae98.diary.ui.compose.topbar.NavigateUpTopBar
 
 @Composable
@@ -23,7 +23,7 @@ internal fun MemoDetailScreen(
     modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit,
     uiState: State<MemoDetailUiState>,
-    detailUiState: State<EntityDetailUiState>
+    titleUiState: State<TextFieldUiState>,
 ) {
     val hostState = remember { SnackbarHostState() }
 
@@ -39,7 +39,7 @@ internal fun MemoDetailScreen(
     ) {
         Content(
             modifier = Modifier.padding(it),
-            detailUiState = detailUiState,
+            titleUiState = titleUiState,
         )
     }
 
@@ -86,14 +86,14 @@ private fun FloatingButton(
 @Composable
 private fun Content(
     modifier: Modifier = Modifier,
-    detailUiState: State<EntityDetailUiState>
+    titleUiState: State<TextFieldUiState>,
 ) {
     Column(
         modifier = modifier.verticalScroll(state = rememberScrollState())
     ) {
         EntityDetail(
             modifier = Modifier.fillMaxWidth(),
-            uiState = detailUiState
+            titleUiState = titleUiState
         )
     }
 }

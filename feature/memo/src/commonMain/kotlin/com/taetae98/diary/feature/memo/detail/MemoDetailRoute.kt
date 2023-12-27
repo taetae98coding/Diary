@@ -11,12 +11,12 @@ internal fun MemoDetailRoute(
     memoDetailViewModel: MemoDetailViewModel,
 ) {
     val uiState = memoDetailViewModel.uiState.collectAsStateOnLifecycle()
-    val detailUiState = memoDetailViewModel.detailUiState.collectAsStateOnLifecycle()
+    val titleUiState = memoDetailViewModel.titleUiState.collectAsStateOnLifecycle()
 
     MemoDetailScreen(
         modifier = modifier,
         onNavigateUp = onNavigateUp,
         uiState = uiState,
-        detailUiState = detailUiState,
+        titleUiState = titleUiState,
     )
 }
