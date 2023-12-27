@@ -11,11 +11,13 @@ import com.taetae98.diary.ui.compose.icon.ClearIcon
 public fun ClearTextField(
     modifier: Modifier = Modifier,
     uiState: State<TextFieldUiState>,
+    label: @Composable (() -> Unit)? = null,
 ) {
     TextField(
         modifier = modifier,
         value = uiState.value.value,
         onValueChange = uiState.value.onValueChange,
+        label = label,
         trailingIcon = {
             if (uiState.value.value.isNotEmpty()) {
                 ClearButton(uiState = uiState)

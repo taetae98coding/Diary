@@ -9,6 +9,7 @@ import com.taetae98.diary.domain.entity.account.memo.Memo
 import com.taetae98.diary.domain.repository.MemoRepository
 import com.taetae98.diary.library.paging.mapPaging
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import org.koin.core.annotation.Factory
 
 @Factory
@@ -23,9 +24,14 @@ internal class MemoRepositoryImpl(
         localDataSource.upsert(dto)
     }
 
-    override suspend fun finish(id: String) {
-        fireStore.finish(id)
-        localDataSource.finish(id)
+    override suspend fun complete(id: String) {
+        fireStore.complete(id)
+        localDataSource.complete(id)
+    }
+
+    override suspend fun incomplete(id: String) {
+        fireStore.incomplete(id)
+        localDataSource.incomplete(id)
     }
 
     override suspend fun delete(id: String) {
@@ -33,8 +39,9 @@ internal class MemoRepositoryImpl(
         localDataSource.delete(id)
     }
 
-    override suspend fun find(id: String): Memo? {
-        return localDataSource.find(id)?.toDomain()
+    override fun find(id: String): Flow<Memo?> {
+        return localDataSource.find(id)
+            .map { it?.toDomain() }
     }
 
     override fun page(ownerId: String?): Flow<PagingData<Memo>> {

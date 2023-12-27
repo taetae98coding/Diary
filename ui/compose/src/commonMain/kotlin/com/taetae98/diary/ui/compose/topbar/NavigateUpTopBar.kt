@@ -1,5 +1,6 @@
 package com.taetae98.diary.ui.compose.topbar
 
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.TopAppBar
@@ -12,6 +13,7 @@ import com.taetae98.diary.ui.compose.icon.NavigateUpIcon
 public fun NavigateUpTopBar(
     modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit,
+    actions: @Composable RowScope.() -> Unit = {},
 ) {
     TopAppBar(
         modifier = modifier,
@@ -20,6 +22,7 @@ public fun NavigateUpTopBar(
             IconButton(onClick = onNavigateUp) {
                 NavigateUpIcon()
             }
-        }
+        },
+        actions = actions,
     )
 }

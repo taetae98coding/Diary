@@ -1,6 +1,7 @@
 package com.taetae98.diary.domain.usecase.memo
 
 import app.cash.paging.PagingData
+import com.taetae98.diary.domain.entity.account.account.Account
 import com.taetae98.diary.domain.entity.account.memo.Memo
 import com.taetae98.diary.domain.repository.MemoRepository
 import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
@@ -16,8 +17,8 @@ public class PageMemoUseCase internal constructor(
     private val memoRepository: MemoRepository,
 ) : FlowUseCase<Unit, PagingData<Memo>>() {
     override fun execute(params: Unit): Flow<PagingData<Memo>> {
-        return getAccountUseCase(Unit).mapLatest { it.getOrThrow() }
+        return getAccountUseCase(Unit).mapLatest(Result<Account>::getOrThrow)
             .mapLatest { it.uid }
-            .flatMapLatest { memoRepository.page(it) }
+            .flatMapLatest(memoRepository::page)
     }
 }

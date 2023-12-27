@@ -13,6 +13,7 @@ kotlin {
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.sqldelight.adapter)
+                implementation(libs.sqldelight.coroutines)
                 implementation(libs.sqldelight.paging)
             }
         }

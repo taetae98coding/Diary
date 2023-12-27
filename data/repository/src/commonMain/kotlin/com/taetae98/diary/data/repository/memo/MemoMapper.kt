@@ -9,8 +9,8 @@ import kotlinx.datetime.Clock
 
 internal fun MemoState.toDto(): MemoStateDto {
     return when (this) {
-        MemoState.NONE -> MemoStateDto.NONE
-        MemoState.FINISH -> MemoStateDto.FINISH
+        MemoState.INCOMPLETE -> MemoStateDto.INCOMPLETE
+        MemoState.COMPLETE -> MemoStateDto.COMPLETE
         MemoState.DELETE -> MemoStateDto.DELETE
     }
 }
@@ -27,8 +27,8 @@ internal fun Memo.toDto(): MemoDto {
 
 internal fun MemoStateDto.toDomain(): MemoState {
     return when (this) {
-        MemoStateDto.NONE -> MemoState.NONE
-        MemoStateDto.FINISH -> MemoState.FINISH
+        MemoStateDto.INCOMPLETE -> MemoState.INCOMPLETE
+        MemoStateDto.COMPLETE -> MemoState.COMPLETE
         MemoStateDto.DELETE -> MemoState.DELETE
     }
 }
@@ -44,8 +44,8 @@ internal fun MemoDto.toDomain(): Memo {
 
 internal fun MemoStateDto.toFireStore(): MemoFireStoreStateEntity {
     return when (this) {
-        MemoStateDto.NONE -> MemoFireStoreStateEntity.NONE
-        MemoStateDto.FINISH -> MemoFireStoreStateEntity.FINISH
+        MemoStateDto.INCOMPLETE -> MemoFireStoreStateEntity.INCOMPLETE
+        MemoStateDto.COMPLETE -> MemoFireStoreStateEntity.COMPLETE
         MemoStateDto.DELETE -> MemoFireStoreStateEntity.DELETE
     }
 }

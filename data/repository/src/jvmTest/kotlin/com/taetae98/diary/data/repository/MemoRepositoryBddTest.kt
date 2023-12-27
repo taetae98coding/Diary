@@ -21,7 +21,7 @@ class MemoRepositoryBddTest : BehaviorSpec({
 
     Given("MemoState NONE Memo가 주어졌을 때") {
         val memo = mockk<Memo>(relaxed = true, relaxUnitFun = true) {
-            every { state } returns MemoState.NONE
+            every { state } returns MemoState.INCOMPLETE
         }
 
         When("upsert 호출하면") {
@@ -41,14 +41,27 @@ class MemoRepositoryBddTest : BehaviorSpec({
     Given("id가 주어졌을 때") {
         val id = "id"
 
-        When("finish 호출하면") {
-            repository.finish(id)
+        When("complete 호출하면") {
+            repository.complete(id)
 
-            Then("fireStore finish 1회 호출한다.") {
-                coVerify(exactly = 1) { fireStore.finish(id) }
+            Then("fireStore complete 1회 호출한다.") {
+                coVerify(exactly = 1) { fireStore.complete(id) }
             }
-            Then("localDataSource finish 1회 호출한다.") {
-                coVerify(exactly = 1) { localDataSource.finish(id) }
+            Then("localDataSource complete 1회 호출한다.") {
+                coVerify(exactly = 1) { localDataSource.complete(id) }
+            }
+
+            clearAllMocks(answers = false)
+        }
+
+        When("incomplete 호출하면") {
+            repository.incomplete(id)
+
+            Then("fireStore incomplete 1회 호출한다.") {
+                coVerify(exactly = 1) { fireStore.incomplete(id) }
+            }
+            Then("localDataSource incomplete 1회 호출한다.") {
+                coVerify(exactly = 1) { localDataSource.incomplete(id) }
             }
 
             clearAllMocks(answers = false)
@@ -60,7 +73,7 @@ class MemoRepositoryBddTest : BehaviorSpec({
             Then("fireStore delete 1회 호출한다.") {
                 coVerify(exactly = 1) { fireStore.delete(id) }
             }
-            Then("localDataSource finish 1회 호출한다.") {
+            Then("localDataSource delete 1회 호출한다.") {
                 coVerify(exactly = 1) { localDataSource.delete(id) }
             }
 

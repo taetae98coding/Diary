@@ -16,7 +16,7 @@ internal fun MemoListRoute(
         onAdd = onNavigateToMemoAdd,
         memoItems = viewModel.memoPagingData.collectAsLazyPagingItems(),
         onNavigateToMemoDetail = onNavigateToMemoDetail,
-        onMemoFinish = viewModel::finish,
+        onMemoComplete = viewModel::complete,
         onMemoDelete = viewModel::delete,
     )
 }

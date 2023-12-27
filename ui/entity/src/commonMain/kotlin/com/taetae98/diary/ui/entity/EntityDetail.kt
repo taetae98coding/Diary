@@ -1,9 +1,10 @@
-package com.taetae98.diary.ui.compose.entity
+package com.taetae98.diary.ui.entity
 
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
@@ -21,6 +22,9 @@ public fun EntityDetail(
         ClearTextField(
             modifier = Modifier.fillMaxWidth(),
             uiState = titleUiState,
+            label = {
+                Text(text = "제목")
+            }
         )
     }
 }

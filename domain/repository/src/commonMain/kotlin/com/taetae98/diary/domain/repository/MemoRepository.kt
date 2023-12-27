@@ -6,9 +6,10 @@ import kotlinx.coroutines.flow.Flow
 
 public interface MemoRepository {
     public suspend fun upsert(memo: Memo)
-    public suspend fun finish(id: String)
+    public suspend fun complete(id: String)
+    public suspend fun incomplete(id: String)
     public suspend fun delete(id: String)
-    public suspend fun find(id: String): Memo?
+    public fun find(id: String): Flow<Memo?>
 
     public fun page(ownerId: String?): Flow<PagingData<Memo>>
 }

@@ -60,6 +60,7 @@ include(":domain:usecase")
 include(":navigation:core")
 
 include(":ui:compose")
+include(":ui:entity")
 
 include(":library:compose-runtime")
 include(":library:firebase-auth-api")

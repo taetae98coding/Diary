@@ -5,6 +5,7 @@ import com.taetae98.diary.domain.entity.account.memo.MemoState
 import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
 import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
 import com.taetae98.diary.feature.memo.detail.MemoDetailMessage
+import com.taetae98.diary.feature.memo.detail.MemoDetailToolbarUiState
 import com.taetae98.diary.feature.memo.detail.MemoDetailUiState
 import com.taetae98.diary.library.uuid.getUuid
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
@@ -12,6 +13,7 @@ import com.taetae98.diary.library.viewmodel.ViewModel
 import com.taetae98.diary.ui.compose.text.TextFieldUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
@@ -25,6 +27,7 @@ internal class MemoAddViewModel(
     private val upsertMemoUseCase: UpsertMemoUseCase,
 ) : ViewModel() {
     private val _message = MutableStateFlow<MemoDetailMessage?>(null)
+    private val _toolbarUiState = MutableStateFlow(MemoDetailToolbarUiState.Add)
     private val _title = savedStateHandle.getStateFlow(
         key = TITLE,
         initialValue = "",
@@ -45,6 +48,8 @@ internal class MemoAddViewModel(
             onMessageShown = ::messageShown,
         )
     )
+
+    val toolbarUiState = _toolbarUiState.asStateFlow()
 
     val titleUiState = _title.mapLatest { title ->
         TextFieldUiState(
@@ -71,7 +76,7 @@ internal class MemoAddViewModel(
                 id = getUuid(),
                 title = _title.value,
                 ownerId = ownerId,
-                state = MemoState.NONE,
+                state = MemoState.INCOMPLETE,
             )
 
             upsertMemoUseCase(memo).onSuccess {

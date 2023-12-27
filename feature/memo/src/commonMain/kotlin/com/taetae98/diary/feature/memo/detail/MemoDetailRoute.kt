@@ -10,13 +10,11 @@ internal fun MemoDetailRoute(
     onNavigateUp: () -> Unit,
     memoDetailViewModel: MemoDetailViewModel,
 ) {
-    val uiState = memoDetailViewModel.uiState.collectAsStateOnLifecycle()
-    val titleUiState = memoDetailViewModel.titleUiState.collectAsStateOnLifecycle()
-
     MemoDetailScreen(
         modifier = modifier,
         onNavigateUp = onNavigateUp,
-        uiState = uiState,
-        titleUiState = titleUiState,
+        uiState = memoDetailViewModel.uiState.collectAsStateOnLifecycle(),
+        toolbarUiState = memoDetailViewModel.toolbarUiState.collectAsStateOnLifecycle(),
+        titleUiState = memoDetailViewModel.titleUiState.collectAsStateOnLifecycle(),
     )
 }

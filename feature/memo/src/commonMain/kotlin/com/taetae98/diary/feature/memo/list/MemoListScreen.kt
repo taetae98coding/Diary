@@ -44,7 +44,7 @@ internal fun MemoListScreen(
     onAdd: () -> Unit,
     memoItems: LazyPagingItems<MemoListUiState>,
     onNavigateToMemoDetail: (memoId: String) -> Unit,
-    onMemoFinish: (memoId: String) -> Unit,
+    onMemoComplete: (memoId: String) -> Unit,
     onMemoDelete: (memoId: String) -> Unit,
 ) {
     Scaffold(
@@ -57,7 +57,7 @@ internal fun MemoListScreen(
                 .fillMaxSize(),
             memoItems = memoItems,
             onNavigateToMemoDetail = onNavigateToMemoDetail,
-            onMemoFinish = onMemoFinish,
+            onMemoComplete = onMemoComplete,
             onMemoDelete = onMemoDelete,
         )
     }
@@ -68,7 +68,7 @@ private fun Content(
     modifier: Modifier = Modifier,
     memoItems: LazyPagingItems<MemoListUiState>,
     onNavigateToMemoDetail: (memoId: String) -> Unit,
-    onMemoFinish: (memoId: String) -> Unit,
+    onMemoComplete: (memoId: String) -> Unit,
     onMemoDelete: (memoId: String) -> Unit,
 ) {
     LazyColumn(
@@ -93,7 +93,7 @@ private fun Content(
                     ),
                 uiState = uiState,
                 onNavigateToMemoDetail = onNavigateToMemoDetail,
-                onMemoFinish = onMemoFinish,
+                onMemoComplete = onMemoComplete,
                 onMemoDelete = onMemoDelete,
             )
         }
@@ -106,7 +106,7 @@ private fun SwipeMemo(
     modifier: Modifier = Modifier,
     uiState: MemoListUiState?,
     onNavigateToMemoDetail: (memoId: String) -> Unit,
-    onMemoFinish: (memoId: String) -> Unit,
+    onMemoComplete: (memoId: String) -> Unit,
     onMemoDelete: (memoId: String) -> Unit,
 ) {
     val state = rememberDismissState(
@@ -118,7 +118,7 @@ private fun SwipeMemo(
                 }
 
                 DismissValue.DismissedToEnd -> {
-                    uiState?.id?.let(onMemoFinish)
+                    uiState?.id?.let(onMemoComplete)
                 }
 
                 else -> Unit

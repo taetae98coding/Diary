@@ -33,9 +33,14 @@ state = 0 AND
 ownerId = :ownerId
 LIMIT :limit OFFSET :offset;
 
-finish:
+complete:
 UPDATE MemoEntity
 SET state = 1
+WHERE id = :id;
+
+incomplete:
+UPDATE MemoEntity
+SET state = 0
 WHERE id = :id;
 
 delete:

@@ -18,8 +18,12 @@ internal class MemoFireStore(
             .upsert(memo.toFireStore())
     }
 
-    suspend fun finish(id: String) {
-        updateState(id, MemoFireStoreStateEntity.FINISH)
+    suspend fun complete(id: String) {
+        updateState(id, MemoFireStoreStateEntity.COMPLETE)
+    }
+
+    suspend fun incomplete(id: String) {
+        updateState(id, MemoFireStoreStateEntity.INCOMPLETE)
     }
 
     suspend fun delete(id: String) {

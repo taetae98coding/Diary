@@ -3,7 +3,7 @@ package com.taetae98.diary.feature.memo.list
 import app.cash.paging.PagingData
 import app.cash.paging.cachedIn
 import com.taetae98.diary.domain.usecase.memo.DeleteMemoUseCase
-import com.taetae98.diary.domain.usecase.memo.FinishMemoUseCase
+import com.taetae98.diary.domain.usecase.memo.CompleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.PageMemoUseCase
 import com.taetae98.diary.library.paging.mapPagingLatest
 import com.taetae98.diary.library.viewmodel.ViewModel
@@ -14,7 +14,7 @@ import org.koin.core.annotation.Factory
 @Factory
 internal class MemoListViewModel(
     pageMemoUseCase: PageMemoUseCase,
-    private val finishMemoUseCase: FinishMemoUseCase,
+    private val completeMemoUseCase: CompleteMemoUseCase,
     private val deleteMemoUseCase: DeleteMemoUseCase,
 ) : ViewModel() {
     private val pagingData = pageMemoUseCase(Unit).mapLatest { it.getOrNull() ?: PagingData.empty() }
@@ -27,9 +27,9 @@ internal class MemoListViewModel(
         )
     }
 
-    fun finish(id: String) {
+    fun complete(id: String) {
         viewModelScope.launch {
-            finishMemoUseCase(id)
+            completeMemoUseCase(id)
         }
     }
 

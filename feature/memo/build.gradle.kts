@@ -9,8 +9,10 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":navigation:core"))
-                implementation(project(":ui:compose"))
                 implementation(project(":domain:usecase"))
+
+                implementation(project(":ui:compose"))
+                implementation(project(":ui:entity"))
 
                 implementation(project(":library:koin-navigation-compose"))
                 implementation(project(":library:compose-runtime"))
