@@ -4,6 +4,7 @@ import com.taetae98.diary.data.dto.memo.MemoDto
 import com.taetae98.diary.library.firestore.api.FireStore
 import com.taetae98.diary.library.firestore.api.ext.toFireStoreTimestamp
 import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 import org.koin.core.annotation.Factory
 
 @Factory
@@ -28,6 +29,10 @@ internal class MemoFireStore(
 
     suspend fun delete(id: String) {
         updateState(id, MemoFireStoreStateEntity.DELETE)
+    }
+
+    suspend fun pageByUpdateAt(updateAt: Instant?): List<MemoDto> {
+        return emptyList()
     }
 
     private suspend fun updateState(

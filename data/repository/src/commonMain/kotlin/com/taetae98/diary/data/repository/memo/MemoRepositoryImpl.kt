@@ -10,20 +10,21 @@ import com.taetae98.diary.domain.repository.MemoRepository
 import com.taetae98.diary.library.paging.mapPaging
 import com.taetae98.diary.pref.api.MemoPrefDataSource
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import org.koin.core.annotation.Factory
 
 @Factory
 internal class MemoRepositoryImpl(
     private val fireStore: MemoFireStore,
-    private val memoPrefDataSource: MemoPrefDataSource,
+    private val prefDataSource: MemoPrefDataSource,
     private val localDataSource: MemoLocalDataSource,
 ) : MemoRepository {
     override suspend fun upsert(memo: Memo) {
         val dto = memo.toDto()
 
         fireStore.upsert(dto)
-        localDataSource.upsert(dto)
+        localDataSource.upsert(listOf(dto))
     }
 
     override suspend fun complete(id: String) {
@@ -42,7 +43,13 @@ internal class MemoRepositoryImpl(
     }
 
     override suspend fun fetch() {
-        TODO("Not yet implemented")
+        while (true) {
+            val updateAt = prefDataSource.getFetchedUpdateAt().firstOrNull()
+            val data = fireStore.pageByUpdateAt(updateAt).takeIf { it.isNotEmpty() } ?: break
+
+            prefDataSource.setFetchedUpdateAt(data.last().updateAt)
+            localDataSource.upsert(data)
+        }
     }
 
     override fun find(id: String): Flow<Memo?> {

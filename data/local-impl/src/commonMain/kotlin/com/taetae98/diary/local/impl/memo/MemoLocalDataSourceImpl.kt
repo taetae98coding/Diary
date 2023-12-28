@@ -1,7 +1,6 @@
 package com.taetae98.diary.local.impl.memo
 
 import app.cash.paging.PagingSource
-import app.cash.sqldelight.async.coroutines.awaitAsOneOrNull
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToOneOrNull
 import app.cash.sqldelight.paging3.QueryPagingSource
@@ -20,8 +19,10 @@ internal class MemoLocalDataSourceImpl(
     @Named(DatabaseModule.DATABASE_DISPATCHER)
     private val dispatcher: CoroutineDispatcher,
 ) : MemoLocalDataSource {
-    override suspend fun upsert(memo: MemoDto) {
-        database.memoEntityQueries.upsert(memo.toEntity())
+    override suspend fun upsert(memo: List<MemoDto>) {
+        database.transaction {
+            memo.forEach { database.memoEntityQueries.upsert(it.toEntity()) }
+        }
     }
 
     override suspend fun complete(id: String) {
