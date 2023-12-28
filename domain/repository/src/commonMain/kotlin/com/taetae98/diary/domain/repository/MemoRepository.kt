@@ -9,7 +9,7 @@ public interface MemoRepository {
     public suspend fun complete(id: String)
     public suspend fun incomplete(id: String)
     public suspend fun delete(id: String)
+    public suspend fun sync()
     public fun find(id: String): Flow<Memo?>
-
     public fun page(ownerId: String?): Flow<PagingData<Memo>>
 }

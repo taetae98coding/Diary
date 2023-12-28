@@ -11,6 +11,7 @@ kotlin {
                 implementation(project(":core:auth-api"))
 
                 implementation(project(":data:dto"))
+                implementation(project(":data:pref-api"))
                 implementation(project(":data:local-api"))
                 implementation(project(":domain:repository"))
 

@@ -42,6 +42,8 @@ include(":core:auth-module")
 include(":core:firestore-module")
 
 include(":data:dto")
+include(":data:pref-api")
+include(":data:pref-impl")
 include(":data:local-api")
 include(":data:local-impl")
 include(":data:repository")

@@ -2,6 +2,7 @@ package com.taetae98.diary.app
 
 import com.taetae98.diary.core.auth.module.AuthModule
 import com.taetae98.diary.core.firestore.module.FireStoreModule
+import com.taetae98.diary.data.pref.impl.PrefDataSourceModule
 import com.taetae98.diary.data.repository.RepositoryModule
 import com.taetae98.diary.domain.usecase.UseCaseModule
 import com.taetae98.diary.feature.account.AccountModule
@@ -14,6 +15,7 @@ import org.koin.core.annotation.Module
     includes = [
         AuthModule::class,
         FireStoreModule::class,
+        PrefDataSourceModule::class,
         LocalDataSourceModule::class,
         RepositoryModule::class,
         UseCaseModule::class,

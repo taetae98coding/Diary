@@ -8,6 +8,7 @@ import com.taetae98.diary.data.local.api.MemoLocalDataSource
 import com.taetae98.diary.domain.entity.account.memo.Memo
 import com.taetae98.diary.domain.repository.MemoRepository
 import com.taetae98.diary.library.paging.mapPaging
+import com.taetae98.diary.pref.api.MemoPrefDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.koin.core.annotation.Factory
@@ -15,6 +16,7 @@ import org.koin.core.annotation.Factory
 @Factory
 internal class MemoRepositoryImpl(
     private val fireStore: MemoFireStore,
+    private val memoPrefDataSource: MemoPrefDataSource,
     private val localDataSource: MemoLocalDataSource,
 ) : MemoRepository {
     override suspend fun upsert(memo: Memo) {
@@ -37,6 +39,10 @@ internal class MemoRepositoryImpl(
     override suspend fun delete(id: String) {
         fireStore.delete(id)
         localDataSource.delete(id)
+    }
+
+    override suspend fun sync() {
+        TODO("Not yet implemented")
     }
 
     override fun find(id: String): Flow<Memo?> {
