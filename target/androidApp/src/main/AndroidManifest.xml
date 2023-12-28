@@ -36,6 +36,10 @@
             <meta-data
                 android:name="com.taetae98.diary.startup.FirebaseStartup"
                 android:value="androidx.startup" />
+
+            <meta-data
+                android:name="com.taetae98.diary.startup.FetchDataStartUp"
+                android:value="androidx.startup" />
         </provider>
     </application>
 

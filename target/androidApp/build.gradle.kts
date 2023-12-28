@@ -48,11 +48,13 @@ android {
 
 dependencies {
     implementation(project(":app"))
+    implementation(project(":domain:usecase"))
     implementation(project(":navigation:core"))
 
     implementation(libs.android.material)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.startup)
+    implementation(libs.androidx.lifecycle.process)
 
     implementation(compose.ui)
 

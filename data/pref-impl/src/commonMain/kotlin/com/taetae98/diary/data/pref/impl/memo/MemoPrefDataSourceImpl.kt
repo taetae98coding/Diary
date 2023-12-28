@@ -7,11 +7,11 @@ import org.koin.core.annotation.Factory
 
 @Factory
 internal class MemoPrefDataSourceImpl : MemoPrefDataSource {
-    override suspend fun setSyncAt(migrateAt: Instant) {
+    override suspend fun setFetchAt(migrateAt: Instant) {
         TODO("Not yet implemented")
     }
 
-    override fun getSyncAt(): Flow<Instant> {
+    override fun getFetchAt(): Flow<Instant> {
         TODO("Not yet implemented")
     }
 }

@@ -41,7 +41,7 @@ internal class MemoRepositoryImpl(
         localDataSource.delete(id)
     }
 
-    override suspend fun sync() {
+    override suspend fun fetch() {
         TODO("Not yet implemented")
     }
 
