@@ -47,6 +47,7 @@
 		3D8527D02B2CCCFA009A4BE0 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 3D8527CF2B2CCCFA009A4BE0 /* FirebaseStorage */; };
 		3D8527D22B2CCCFA009A4BE0 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 3D8527D12B2CCCFA009A4BE0 /* FirebaseStorageCombine-Community */; };
 		3DF625082B3F06D30041D9A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF625072B3F06D30041D9A1 /* SceneDelegate.swift */; };
+		3DF6250B2B3F0A680041D9A1 /* Release-LocalProperties.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3DF6250A2B3F0A680041D9A1 /* Release-LocalProperties.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,9 @@
 		3D78D7DF2B2CBE5B004AA34F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3D85279B2B2CCC67009A4BE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DF625072B3F06D30041D9A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		3DF625092B3F0A000041D9A1 /* Debug-LocalProperties.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Debug-LocalProperties.xcconfig"; sourceTree = "<group>"; };
+		3DF6250A2B3F0A680041D9A1 /* Release-LocalProperties.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Release-LocalProperties.xcconfig"; sourceTree = "<group>"; };
+		3DF6250C2B3F0B230041D9A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,8 @@
 		3D78D7CC2B2CBE59004AA34F = {
 			isa = PBXGroup;
 			children = (
+				3DF6250A2B3F0A680041D9A1 /* Release-LocalProperties.xcconfig */,
+				3DF625092B3F0A000041D9A1 /* Debug-LocalProperties.xcconfig */,
 				3D78D7D72B2CBE59004AA34F /* Diary */,
 				3D78D7D62B2CBE59004AA34F /* Products */,
 			);
@@ -123,6 +129,7 @@
 		3D78D7D72B2CBE59004AA34F /* Diary */ = {
 			isa = PBXGroup;
 			children = (
+				3DF6250C2B3F0B230041D9A1 /* Info.plist */,
 				3DF625072B3F06D30041D9A1 /* SceneDelegate.swift */,
 				3D78D7D82B2CBE59004AA34F /* DiaryApp.swift */,
 				3D78D7DA2B2CBE59004AA34F /* ContentView.swift */,
@@ -241,6 +248,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DF6250B2B3F0A680041D9A1 /* Release-LocalProperties.xcconfig in Resources */,
 				3D78D7E02B2CBE5B004AA34F /* Preview Assets.xcassets in Resources */,
 				3D78D7DD2B2CBE5B004AA34F /* Assets.xcassets in Resources */,
 			);
@@ -302,6 +310,7 @@
 /* Begin XCBuildConfiguration section */
 		3D78D7E12B2CBE5B004AA34F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3DF625092B3F0A000041D9A1 /* Debug-LocalProperties.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -365,6 +374,7 @@
 		};
 		3D78D7E22B2CBE5B004AA34F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3DF6250A2B3F0A680041D9A1 /* Release-LocalProperties.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -421,6 +431,7 @@
 		};
 		3D78D7E42B2CBE5B004AA34F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3DF625092B3F0A000041D9A1 /* Debug-LocalProperties.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -432,6 +443,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../target/iosApp/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Diary/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Diary-Debug";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -459,6 +471,7 @@
 		};
 		3D78D7E52B2CBE5B004AA34F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3DF6250A2B3F0A680041D9A1 /* Release-LocalProperties.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -470,7 +483,8 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../target/iosApp/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Diary;
+				INFOPLIST_FILE = Diary/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Diary-Debug";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

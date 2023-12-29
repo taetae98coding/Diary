@@ -25,7 +25,7 @@ public class FetchDataWorker(
     private var job: Job? = null
 
     public fun execute() {
-        if (job?.isCompleted == null || job?.isCompleted == true) {
+        if (job == null || job?.isCompleted == true) {
             job = scope.launch {
                 observeAccount()
             }
@@ -34,6 +34,7 @@ public class FetchDataWorker(
 
     public fun cancel() {
         job?.cancel()
+        job = null
     }
 
     private suspend fun observeAccount() {
