@@ -8,6 +8,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation(project(":core:coroutines"))
                 implementation(project(":data:dto"))
                 implementation(project(":data:local-api"))
                 implementation(libs.kotlinx.coroutines.core)

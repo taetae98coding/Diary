@@ -36,6 +36,7 @@ include(":target:iosApp")
 include(":target:jvmApp")
 include(":target:jsApp")
 
+include(":core:coroutines")
 include(":core:auth-api")
 include(":core:auth-impl")
 include(":core:auth-module")

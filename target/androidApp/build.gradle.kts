@@ -48,7 +48,6 @@ android {
 
 dependencies {
     implementation(project(":app"))
-    implementation(project(":domain:usecase"))
     implementation(project(":navigation:core"))
 
     implementation(libs.android.material)

@@ -1,9 +1,9 @@
 package com.taetae98.diary.local.impl.di
 
 import app.cash.sqldelight.db.SqlDriver
+import com.taetae98.diary.core.coroutines.CoroutinesModule
 import com.taetae98.diary.data.local.impl.DiaryDatabase
 import com.taetae98.diary.data.local.impl.MemoEntity
-import com.taetae98.diary.local.impl.DatabaseDispatcher
 import com.taetae98.diary.local.impl.adapter.InstantAdapter
 import com.taetae98.diary.local.impl.adapter.MemoStateAdapter
 import kotlinx.coroutines.CoroutineDispatcher
@@ -28,8 +28,11 @@ internal class DatabaseModule {
 
     @Named(DATABASE_DISPATCHER)
     @Singleton
-    fun providesDatabaseDispatcher(): CoroutineDispatcher {
-        return DatabaseDispatcher
+    fun providesDatabaseDispatcher(
+        @Named(CoroutinesModule.IO)
+        dispatcher: CoroutineDispatcher
+    ): CoroutineDispatcher {
+        return dispatcher
     }
 
     companion object {

@@ -8,6 +8,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation(project(":core:coroutines"))
                 implementation(project(":core:auth-module"))
                 implementation(project(":core:firestore-module"))
                 implementation(project(":data:pref-impl"))
