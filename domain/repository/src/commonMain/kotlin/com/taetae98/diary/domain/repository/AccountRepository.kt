@@ -7,6 +7,5 @@ import kotlinx.coroutines.flow.Flow
 public interface AccountRepository {
     public suspend fun signIn(credential: Credential)
     public suspend fun signOut()
-
     public fun getAccount(): Flow<Account>
 }

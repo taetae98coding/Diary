@@ -27,11 +27,19 @@
             </intent-filter>
         </activity>
 
+        <service
+            android:name=".service.FetchDataService"
+            android:exported="false" />
+
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
             android:exported="false"
             tools:node="merge">
+
+            <meta-data
+                android:name="com.taetae98.diary.startup.KoinStartUp"
+                android:value="androidx.startup" />
 
             <meta-data
                 android:name="com.taetae98.diary.startup.FirebaseStartup"
@@ -40,6 +48,7 @@
             <meta-data
                 android:name="com.taetae98.diary.startup.FetchDataStartUp"
                 android:value="androidx.startup" />
+
         </provider>
     </application>
 
