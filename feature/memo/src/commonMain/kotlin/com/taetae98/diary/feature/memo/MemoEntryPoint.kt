@@ -2,7 +2,7 @@ package com.taetae98.diary.feature.memo
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.arkivanov.decompose.extensions.compose.stack.Children
+import com.arkivanov.decompose.extensions.compose.jetbrains.stack.Children
 import com.taetae98.diary.feature.memo.add.MemoAddRoute
 import com.taetae98.diary.feature.memo.detail.MemoDetailRoute
 import com.taetae98.diary.feature.memo.list.MemoListRoute

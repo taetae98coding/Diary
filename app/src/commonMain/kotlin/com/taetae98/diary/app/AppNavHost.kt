@@ -1,13 +1,8 @@
 package com.taetae98.diary.app
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
-import com.arkivanov.decompose.extensions.compose.stack.Children
-import com.arkivanov.decompose.extensions.compose.stack.animation.LocalStackAnimationProvider
-import com.arkivanov.decompose.extensions.compose.stack.animation.StackAnimation
-import com.arkivanov.decompose.extensions.compose.stack.animation.StackAnimationProvider
-import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
+import com.arkivanov.decompose.extensions.compose.jetbrains.stack.Children
 import com.taetae98.diary.feature.account.AccountEntryPoint
 import com.taetae98.diary.feature.memo.MemoEntryPoint
 import com.taetae98.diary.feature.more.MoreEntryPoint
@@ -21,9 +16,9 @@ internal fun AppNavHost(
     modifier: Modifier = Modifier,
     entry: AppEntry,
 ) {
-    CompositionLocalProvider(
-        LocalStackAnimationProvider provides DiaryStackAnimationProvider
-    ) {
+//    CompositionLocalProvider(
+//        LocalStackAnimationProvider provides DiaryStackAnimationProvider
+//    ) {
         Children(
             modifier = modifier,
             stack = entry.stack,
@@ -34,9 +29,9 @@ internal fun AppNavHost(
                 is AccountEntry -> AccountEntryPoint(entry = instance)
             }
         }
-    }
+//    }
 }
 
-private val DiaryStackAnimationProvider = object : StackAnimationProvider {
-    override fun <C : Any, T : Any> provide(): StackAnimation<C, T> = stackAnimation()
-}
+//private val DiaryStackAnimationProvider = object : StackAnimationProvider {
+//    override fun <C : Any, T : Any> provide(): StackAnimation<C, T> = stackAnimation()
+//}
