@@ -6,7 +6,7 @@ import com.taetae98.diary.library.firestore.api.Document
 
 internal class CollectionImpl(
     private val collection: CollectionReference
-) : Collection {
+) : QueryImpl(collection), Collection {
     override fun document(document: String): Document {
         return DocumentImpl(collection.document(document))
     }

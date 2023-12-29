@@ -5,7 +5,8 @@ import com.taetae98.diary.data.dto.memo.MemoDto
 import kotlinx.coroutines.flow.Flow
 
 public interface MemoLocalDataSource {
-    public suspend fun upsert(memo: List<MemoDto>)
+    public suspend fun upsert(memo: MemoDto)
+    public suspend fun fetch(memo: List<MemoDto>)
     public suspend fun complete(id: String)
     public suspend fun incomplete(id: String)
     public suspend fun delete(id: String)

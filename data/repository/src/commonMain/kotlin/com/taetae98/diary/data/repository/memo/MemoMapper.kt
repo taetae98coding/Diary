@@ -50,6 +50,14 @@ internal fun MemoStateDto.toFireStore(): MemoFireStoreStateEntity {
     }
 }
 
+internal fun MemoFireStoreStateEntity.toDto(): MemoStateDto {
+    return when (this) {
+        MemoFireStoreStateEntity.INCOMPLETE -> MemoStateDto.INCOMPLETE
+        MemoFireStoreStateEntity.COMPLETE -> MemoStateDto.COMPLETE
+        MemoFireStoreStateEntity.DELETE -> MemoStateDto.DELETE
+    }
+}
+
 internal fun MemoDto.toFireStore(): Map<String, Any?> {
     return mapOf(
         MemoFireStore.ID to id,

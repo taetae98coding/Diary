@@ -24,7 +24,7 @@ internal class MemoRepositoryImpl(
         val dto = memo.toDto()
 
         fireStore.upsert(dto)
-        localDataSource.upsert(listOf(dto))
+        localDataSource.upsert(dto)
     }
 
     override suspend fun complete(id: String) {
@@ -45,10 +45,10 @@ internal class MemoRepositoryImpl(
     override suspend fun fetch(uid: String) {
         while (true) {
             val updateAt = prefDataSource.getFetchedUpdateAt(uid).firstOrNull()
-            val data = fireStore.pageByUpdateAt(updateAt).takeIf { it.isNotEmpty() } ?: break
+            val data = fireStore.pageByUpdateAt(uid, updateAt).takeIf { it.isNotEmpty() } ?: break
 
             prefDataSource.setFetchedUpdateAt(uid, data.last().updateAt)
-            localDataSource.upsert(data)
+            localDataSource.fetch(data)
         }
     }
 
