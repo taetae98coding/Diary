@@ -92,7 +92,6 @@ private fun Content(
                         onClick = { uiState?.id?.let(onNavigateToMemoDetail) }
                     ),
                 uiState = uiState,
-                onNavigateToMemoDetail = onNavigateToMemoDetail,
                 onMemoComplete = onMemoComplete,
                 onMemoDelete = onMemoDelete,
             )
@@ -105,7 +104,6 @@ private fun Content(
 private fun SwipeMemo(
     modifier: Modifier = Modifier,
     uiState: MemoListUiState?,
-    onNavigateToMemoDetail: (memoId: String) -> Unit,
     onMemoComplete: (memoId: String) -> Unit,
     onMemoDelete: (memoId: String) -> Unit,
 ) {
@@ -129,7 +127,8 @@ private fun SwipeMemo(
     )
 
     SwipeToDismiss(
-        modifier = modifier.clip(MemoDefaults.shape),
+        modifier = Modifier.clip(MemoDefaults.shape)
+            .then(modifier),
         state = state,
         background = {
             Box(
