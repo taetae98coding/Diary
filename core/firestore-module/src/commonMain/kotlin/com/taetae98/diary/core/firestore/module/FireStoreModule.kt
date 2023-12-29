@@ -7,7 +7,9 @@ import org.koin.core.annotation.Module
 
 @Module
 @ComponentScan
-public expect class FireStoreModule() {
+public class FireStoreModule {
     @Factory
-    public fun providesFireStore(): FireStore
+    public fun providesFireStore(): FireStore {
+        return getFireStore()
+    }
 }

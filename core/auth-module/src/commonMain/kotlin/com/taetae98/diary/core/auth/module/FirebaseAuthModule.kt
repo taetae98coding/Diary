@@ -5,7 +5,9 @@ import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Module
 
 @Module
-internal expect class FirebaseAuthModule() {
+internal class FirebaseAuthModule {
     @Factory
-    fun providesFirebaseAuthManager(): FirebaseAuthManager
+    fun providesFirebaseAuthManager(): FirebaseAuthManager {
+        return getFirebaseAuthManager()
+    }
 }
