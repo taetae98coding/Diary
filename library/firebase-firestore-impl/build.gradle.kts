@@ -16,6 +16,9 @@ kotlin {
 
         commonMain {
             dependencies {
+                implementation(libs.kotlinx.serialization)
+                implementation(libs.kotlinx.datetime)
+
                 api(project(":library:firebase-firestore-api"))
             }
         }

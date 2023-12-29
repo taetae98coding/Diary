@@ -20,6 +20,7 @@ kotlin {
 
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kotlinx.datetime)
+                implementation(libs.kotlinx.serialization)
                 implementation(libs.paging.common)
             }
         }

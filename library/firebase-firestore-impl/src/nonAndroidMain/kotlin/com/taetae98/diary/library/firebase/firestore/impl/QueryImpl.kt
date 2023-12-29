@@ -1,5 +1,6 @@
 package com.taetae98.diary.library.firebase.firestore.impl
 
+import com.taetae98.diary.library.firestore.api.FireStoreData
 import com.taetae98.diary.library.firestore.api.Query
 import com.taetae98.diary.library.firestore.api.model.Order
 import dev.gitlive.firebase.firestore.Direction
@@ -29,8 +30,8 @@ internal open class QueryImpl(private val query: FirebaseQuery) : Query {
         return QueryImpl(query.limit(limit))
     }
 
-    override suspend fun getData(): List<Map<String, Any?>> {
+    override suspend fun getData(): List<FireStoreData> {
         return query.get().documents
-            .map { it.data() }
+            .map { FireStoreDataImpl(it) }
     }
 }

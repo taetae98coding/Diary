@@ -8,5 +8,5 @@ public interface Query {
     public fun orderBy(field: String, order: Order): Query
     public fun limit(limit: Long): Query
 
-    public suspend fun getData(): List<Map<String, Any?>>
+    public suspend fun getData(): List<FireStoreData>
 }

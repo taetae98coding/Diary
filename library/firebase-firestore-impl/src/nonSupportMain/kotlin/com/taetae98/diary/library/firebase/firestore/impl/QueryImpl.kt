@@ -1,5 +1,6 @@
 package com.taetae98.diary.library.firebase.firestore.impl
 
+import com.taetae98.diary.library.firestore.api.FireStoreData
 import com.taetae98.diary.library.firestore.api.Query
 import com.taetae98.diary.library.firestore.api.model.Order
 
@@ -20,7 +21,7 @@ internal open class QueryImpl : Query {
         return QueryImpl()
     }
 
-    override suspend fun getData(): List<Map<String, Any?>> {
+    override suspend fun getData(): List<FireStoreData> {
         return emptyList()
     }
 }

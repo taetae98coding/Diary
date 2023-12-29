@@ -4,6 +4,7 @@ import com.taetae98.diary.data.dto.memo.MemoDto
 import com.taetae98.diary.data.dto.memo.MemoStateDto
 import com.taetae98.diary.domain.entity.account.memo.Memo
 import com.taetae98.diary.domain.entity.account.memo.MemoState
+import com.taetae98.diary.library.firestore.api.FireStoreData
 import com.taetae98.diary.library.firestore.api.ext.toFireStoreTimestamp
 import kotlinx.datetime.Clock
 
@@ -65,5 +66,15 @@ internal fun MemoDto.toFireStore(): Map<String, Any?> {
         MemoFireStore.STATE to state.toFireStore().value,
         MemoFireStore.OWNER_ID to ownerId,
         MemoFireStore.UPDATE_AT to updateAt.toFireStoreTimestamp(),
+    )
+}
+
+internal fun FireStoreData.toMemoDto(): MemoDto {
+    return MemoDto(
+        id = getString(MemoFireStore.ID),
+        title = getString(MemoFireStore.TITLE),
+        state = MemoFireStoreStateEntity.valueOf(getLong(MemoFireStore.STATE)).toDto(),
+        ownerId = getString(MemoFireStore.OWNER_ID),
+        updateAt = getInstant(MemoFireStore.UPDATE_AT),
     )
 }

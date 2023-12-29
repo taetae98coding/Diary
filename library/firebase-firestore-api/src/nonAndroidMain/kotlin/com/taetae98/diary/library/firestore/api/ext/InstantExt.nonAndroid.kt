@@ -6,8 +6,3 @@ import kotlinx.datetime.Instant
 public actual fun Instant.toFireStoreTimestamp(): Any {
     return Timestamp(epochSeconds, nanosecondsOfSecond)
 }
-
-public actual fun Any.toFireStoreInstant(): Instant {
-    val timestamp = this as Timestamp
-    return Instant.fromEpochSeconds(timestamp.seconds, timestamp.nanoseconds)
-}

@@ -2,7 +2,7 @@ package com.taetae98.diary.data.repository.memo
 
 import com.taetae98.diary.data.dto.memo.MemoDto
 import com.taetae98.diary.library.firestore.api.FireStore
-import com.taetae98.diary.library.firestore.api.ext.toFireStoreInstant
+import com.taetae98.diary.library.firestore.api.FireStoreData
 import com.taetae98.diary.library.firestore.api.ext.toFireStoreTimestamp
 import com.taetae98.diary.library.firestore.api.model.Order
 import kotlinx.datetime.Clock
@@ -45,15 +45,7 @@ internal class MemoFireStore(
             .greaterThan(UPDATE_AT, startAfterInstant.toFireStoreTimestamp())
             .limit(200L)
             .getData()
-            .map {
-                MemoDto(
-                    id = it[ID] as String,
-                    title = (it[TITLE] as? String).orEmpty(),
-                    state = MemoFireStoreStateEntity.valueOf(it[STATE] as Long).toDto(),
-                    ownerId = it[OWNER_ID] as? String,
-                    updateAt = (it[UPDATE_AT] as Any).toFireStoreInstant(),
-                )
-            }
+            .map(FireStoreData::toMemoDto)
     }
 
     private suspend fun updateState(
