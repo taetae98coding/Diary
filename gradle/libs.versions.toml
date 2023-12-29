@@ -16,7 +16,7 @@ androidx-lifecycle = "2.6.2"                        # https://developer.android.
 compose-multiplatform = "1.5.11"                    # https://github.com/JetBrains/compose-multiplatform/releases
 paging-multiplatform = "3.3.0-alpha02-0.4.0"        # https://github.com/cashapp/multiplatform-paging/releases
 stately = "2.0.6"                                   # https://github.com/touchlab/Stately/releases
-datastore = "1.1.0-alpha07"                         # https://developer.android.com/jetpack/androidx/releases/datastore#1.1.0-alpha07
+datastore = "1.1.0-alpha07"                         # https://developer.android.com/jetpack/androidx/releases/datastore?hl=en
 
 decompose = "3.0.0-alpha04"                         # https://github.com/arkivanov/Decompose/releases
 decompose-essenty = "2.0.0-alpha02"                 # https://github.com/arkivanov/Essenty/releases
