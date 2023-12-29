@@ -5,12 +5,12 @@ import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.native.NativeSqliteDriver
 import co.touchlab.sqliter.DatabaseConfiguration
 import com.taetae98.diary.data.local.impl.DiaryDatabase
-import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Module
+import org.koin.core.annotation.Singleton
 
 @Module
 internal actual class SqldelightModule {
-    @Factory
+    @Singleton
     actual fun provideSqlDriver(): SqlDriver {
         return NativeSqliteDriver(
             schema = DiaryDatabase.Schema.synchronous(),

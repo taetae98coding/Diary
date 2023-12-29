@@ -6,17 +6,17 @@ import app.cash.sqldelight.async.coroutines.synchronous
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import com.taetae98.diary.data.local.impl.DiaryDatabase
-import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Module
+import org.koin.core.annotation.Singleton
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 @Module
 internal actual class SqldelightModule : KoinComponent {
-    private val context by inject<Context>()
-
-    @Factory
+    @Singleton
     actual fun provideSqlDriver(): SqlDriver {
+        val context by inject<Context>()
+
         return AndroidSqliteDriver(
             schema = DiaryDatabase.Schema.synchronous(),
             context = context,

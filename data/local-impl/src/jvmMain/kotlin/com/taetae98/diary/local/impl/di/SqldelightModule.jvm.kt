@@ -6,12 +6,12 @@ import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 import com.taetae98.diary.data.local.impl.DiaryDatabase
 import java.io.File
 import java.util.Properties
-import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Module
+import org.koin.core.annotation.Singleton
 
 @Module
 internal actual class SqldelightModule {
-    @Factory
+    @Singleton
     actual fun provideSqlDriver(): SqlDriver {
         return JdbcSqliteDriver(
             url = "jdbc:sqlite:diary.db",

@@ -13,10 +13,12 @@ public class FetchDataUseCase internal constructor(
     private val fetchMemoUseCase: FetchMemoUseCase,
 ) : UseCase<Unit, Unit>() {
     override suspend fun execute(params: Unit) {
-        getAccountUseCase(Unit).collectLatest {
-            if (it.getOrNull() is Account.Member) {
-                fetchMemoUseCase(Unit)
-            }
-        }
+        getAccountUseCase(Unit).collectLatest(::fetchData)
+    }
+
+    private suspend fun fetchData(result: Result<Account>) {
+        val uid = result.getOrNull()?.uid ?: return
+
+        fetchMemoUseCase(uid)
     }
 }

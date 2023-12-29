@@ -12,9 +12,9 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 internal class FetchDataStartUp : Initializer<Unit>, KoinComponent {
-    private val fetchDataUseCase by inject<FetchDataUseCase>()
-
     override fun create(context: Context) {
+        val fetchDataUseCase by inject<FetchDataUseCase>()
+
         ProcessLifecycleOwner.get().lifecycleScope.launch {
             ProcessLifecycleOwner.get().repeatOnLifecycle(Lifecycle.State.STARTED) {
                 fetchDataUseCase(Unit)

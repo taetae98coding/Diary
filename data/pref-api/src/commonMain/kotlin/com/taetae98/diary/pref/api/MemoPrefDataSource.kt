@@ -4,6 +4,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.Instant
 
 public interface MemoPrefDataSource {
-    public suspend fun setFetchedUpdateAt(updateAt: Instant)
-    public fun getFetchedUpdateAt(): Flow<Instant?>
+    public suspend fun setFetchedUpdateAt(uid: String, updateAt: Instant)
+    public fun getFetchedUpdateAt(uid: String): Flow<Instant?>
 }
