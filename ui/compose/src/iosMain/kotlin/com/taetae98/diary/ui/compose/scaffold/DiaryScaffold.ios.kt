@@ -3,6 +3,7 @@ package com.taetae98.diary.ui.compose.scaffold
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -39,10 +40,23 @@ public actual fun DiaryScaffold(
             }
 
             Box(
-                modifier = Modifier.padding(16.dp)
-                    .align(alignment = Alignment.BottomEnd)
+                modifier = Modifier.align(alignment = Alignment.BottomCenter)
             ) {
-                floatingActionButton()
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    snackbarHost()
+                    Box(
+                        modifier = Modifier.padding(
+                            start = 16.dp,
+                            top = 0.dp,
+                            end = 16.dp,
+                            bottom = 16.dp,
+                        ).align(Alignment.End)
+                    ) {
+                        floatingActionButton()
+                    }
+                }
             }
         }
     }

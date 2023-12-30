@@ -1,6 +1,7 @@
 package com.taetae98.diary.feature.memo.list
 
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -63,6 +64,7 @@ internal fun MemoListScreen(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun Content(
     modifier: Modifier = Modifier,
@@ -86,6 +88,7 @@ private fun Content(
             SwipeMemo(
                 modifier = Modifier
                     .fillParentMaxWidth()
+                    .animateItemPlacement()
                     .clickable(
                         enabled = uiState != null,
                         onClickLabel = uiState?.title,
