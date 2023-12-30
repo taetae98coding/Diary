@@ -5,6 +5,13 @@ plugins {
 
 kotlin {
     sourceSets {
+        val nonIosMain = maybeCreate("nonIosMain")
+
+        nonIosMain.dependsOn(commonMain.get())
+        androidMain.get().dependsOn(nonIosMain)
+        jvmMain.get().dependsOn(nonIosMain)
+        jsMain.get().dependsOn(nonIosMain)
+
         commonMain {
             dependencies {
                 implementation(compose.material3)

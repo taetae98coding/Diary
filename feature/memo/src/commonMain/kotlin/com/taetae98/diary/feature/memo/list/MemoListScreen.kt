@@ -15,7 +15,6 @@ import androidx.compose.material3.DismissDirection
 import androidx.compose.material3.DismissState
 import androidx.compose.material3.DismissValue
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SwipeToDismiss
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDismissState
@@ -36,6 +35,7 @@ import com.taetae98.diary.ui.compose.button.AddFloatingButton
 import com.taetae98.diary.ui.compose.icon.CircleIcon
 import com.taetae98.diary.ui.compose.icon.DeleteIcon
 import com.taetae98.diary.ui.compose.icon.FinishIcon
+import com.taetae98.diary.ui.compose.scaffold.DiaryScaffold
 import com.taetae98.diary.ui.compose.topbar.TitleTopBar
 
 @Composable
@@ -47,7 +47,7 @@ internal fun MemoListScreen(
     onMemoComplete: (memoId: String) -> Unit,
     onMemoDelete: (memoId: String) -> Unit,
 ) {
-    Scaffold(
+    DiaryScaffold(
         modifier = modifier,
         topBar = { TitleTopBar(title = "메모") },
         floatingActionButton = { AddFloatingButton(onAdd = onAdd) }

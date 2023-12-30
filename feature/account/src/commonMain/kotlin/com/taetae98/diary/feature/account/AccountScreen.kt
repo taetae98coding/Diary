@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.FilledIconButton
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -17,6 +16,7 @@ import androidx.compose.ui.Modifier
 import com.taetae98.diary.domain.entity.account.account.Credential
 import com.taetae98.diary.library.google.sign.api.GoogleCredential
 import com.taetae98.diary.library.google.sign.compose.rememberGoogleAuthManager
+import com.taetae98.diary.ui.compose.scaffold.DiaryScaffold
 import com.taetae98.diary.ui.compose.topbar.NavigateUpTopBar
 import kotlinx.coroutines.launch
 
@@ -26,7 +26,7 @@ internal fun AccountScreen(
     onNavigateUp: () -> Unit,
     uiState: State<AccountUiState>,
 ) {
-    Scaffold(
+    DiaryScaffold(
         modifier = modifier,
         topBar = {
             NavigateUpTopBar(

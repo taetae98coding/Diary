@@ -8,12 +8,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.taetae98.diary.ui.compose.modifier.itemContentPadding
 import com.taetae98.diary.ui.compose.modifier.itemPadding
+import com.taetae98.diary.ui.compose.scaffold.DiaryScaffold
 import com.taetae98.diary.ui.compose.topbar.TitleTopBar
 
 @Composable
@@ -21,7 +21,7 @@ internal fun MoreScreen(
     modifier: Modifier = Modifier,
     onAccount: () -> Unit,
 ) {
-    Scaffold(
+    DiaryScaffold(
         modifier = modifier,
         topBar = { TitleTopBar(title = "더보기") }
     ) {

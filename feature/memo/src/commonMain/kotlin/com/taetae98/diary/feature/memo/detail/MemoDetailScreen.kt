@@ -8,7 +8,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
@@ -20,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.taetae98.diary.ui.compose.button.AddFloatingButton
 import com.taetae98.diary.ui.compose.icon.DeleteIcon
 import com.taetae98.diary.ui.compose.icon.FinishIcon
+import com.taetae98.diary.ui.compose.scaffold.DiaryScaffold
 import com.taetae98.diary.ui.compose.text.TextFieldUiState
 import com.taetae98.diary.ui.compose.topbar.NavigateUpTopBar
 import com.taetae98.diary.ui.entity.EntityDetail
@@ -34,7 +34,7 @@ internal fun MemoDetailScreen(
 ) {
     val hostState = remember { SnackbarHostState() }
 
-    Scaffold(
+    DiaryScaffold(
         modifier = modifier,
         topBar = {
             TopBar(
