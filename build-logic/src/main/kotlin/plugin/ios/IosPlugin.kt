@@ -21,6 +21,7 @@ internal class IosPlugin : Plugin<Project>{
         explicitApi()
         jvmToolchain(Build.JDK_VERSION)
 
+        iosX64()
         iosArm64()
         iosSimulatorArm64()
 
