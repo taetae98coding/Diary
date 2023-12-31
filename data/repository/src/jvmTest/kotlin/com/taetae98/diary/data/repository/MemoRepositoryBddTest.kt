@@ -5,6 +5,7 @@ import com.taetae98.diary.data.repository.memo.MemoFireStore
 import com.taetae98.diary.data.repository.memo.MemoRepositoryImpl
 import com.taetae98.diary.domain.entity.account.memo.Memo
 import com.taetae98.diary.domain.entity.account.memo.MemoState
+import com.taetae98.diary.pref.api.MemoPrefDataSource
 import io.kotest.core.spec.style.BehaviorSpec
 import io.mockk.clearAllMocks
 import io.mockk.coVerify
@@ -14,9 +15,11 @@ import io.mockk.mockk
 class MemoRepositoryBddTest : BehaviorSpec({
     val fireStore = mockk<MemoFireStore>(relaxed = true, relaxUnitFun = true)
     val localDataSource = mockk<MemoLocalDataSource>(relaxed = true, relaxUnitFun = true)
+    val prefDataSource = mockk<MemoPrefDataSource>(relaxed = true, relaxUnitFun = true)
     val repository = MemoRepositoryImpl(
         fireStore = fireStore,
         localDataSource = localDataSource,
+        prefDataSource = prefDataSource,
     )
 
     Given("MemoState NONE Memo가 주어졌을 때") {
