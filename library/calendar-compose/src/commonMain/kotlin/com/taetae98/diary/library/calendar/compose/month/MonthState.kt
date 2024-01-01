@@ -7,7 +7,5 @@ public data class MonthState(
     val year: Int,
     val month: Month,
 ) {
-    internal val weekState by lazy {
-        List(6) { WeekState(year, month, it) }
-    }
+    internal val weekState = List(6) { WeekState(year, month, it) }
 }

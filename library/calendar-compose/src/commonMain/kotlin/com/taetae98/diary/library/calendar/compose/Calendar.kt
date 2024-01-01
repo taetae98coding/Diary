@@ -20,7 +20,7 @@ public fun Calendar(
     ) {
         Month(
             modifier = Modifier.fillMaxSize(),
-            state = state.monthState[it],
+            state = state.getMonthState(it),
         )
     }
 }

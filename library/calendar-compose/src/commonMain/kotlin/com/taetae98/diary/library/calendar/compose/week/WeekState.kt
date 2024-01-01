@@ -8,14 +8,12 @@ public data class WeekState(
     val month: Month,
     val weekOfMonth: Int,
 ) {
-    internal val weekDayState by lazy {
-        List(7) {
-            WeekDayState(
-                year = year,
-                month = month,
-                weekOfMonth = weekOfMonth,
-                dayOfWeek = it.toChristDayOfWeek()
-            )
-        }
+    internal val weekDayState = List(7) {
+        WeekDayState(
+            year = year,
+            month = month,
+            weekOfMonth = weekOfMonth,
+            dayOfWeek = it.toChristDayOfWeek()
+        )
     }
 }

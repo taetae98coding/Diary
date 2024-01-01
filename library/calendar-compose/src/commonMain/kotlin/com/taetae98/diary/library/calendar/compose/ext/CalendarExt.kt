@@ -2,6 +2,7 @@ package com.taetae98.diary.library.calendar.compose.ext
 
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.isoDayNumber
 
 private const val FIRST_YEAR = 1900
 private const val LAST_YEAR = 2100
@@ -26,5 +27,12 @@ internal fun Int.toChristDayOfWeek(): DayOfWeek {
     return when (this) {
         0 -> DayOfWeek.SUNDAY
         else -> DayOfWeek(this)
+    }
+}
+
+internal fun DayOfWeek.toChristDayNumber(): Int {
+    return when(this) {
+        DayOfWeek.SUNDAY -> 0
+        else -> isoDayNumber
     }
 }
