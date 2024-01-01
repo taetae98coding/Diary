@@ -1,6 +1,7 @@
 import Foundation
-import SwiftUI
 import Firebase
+import FirebaseAuth
+import SwiftUI
 import iosApp
 
 class AppDelegate: NSObject, UIApplicationDelegate {
