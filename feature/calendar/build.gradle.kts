@@ -11,6 +11,7 @@ kotlin {
                 implementation(project(":ui:compose"))
                 implementation(project(":library:calendar-compose"))
 
+                implementation(libs.kotlinx.datetime)
                 implementation(compose.material3)
             }
         }
