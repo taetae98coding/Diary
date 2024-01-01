@@ -40,8 +40,6 @@ kotlin {
 
         jsMain {
             dependencies {
-                implementation(libs.sqldelight.web.driver)
-                implementation(devNpm("copy-webpack-plugin", "9.1.0"))
                 implementation(libs.stately.collections)
             }
         }
