@@ -10,10 +10,12 @@ import com.arkivanov.decompose.router.stack.popWhile
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.taetae98.diary.navigation.core.account.AccountEntry
+import com.taetae98.diary.navigation.core.calendar.CalendarEntry
 import com.taetae98.diary.navigation.core.ext.illegalRoute
 import com.taetae98.diary.navigation.core.memo.MemoEntry
 import com.taetae98.diary.navigation.core.more.MoreEntry
 import com.taetae98.diary.navigation.core.route.AccountRoute
+import com.taetae98.diary.navigation.core.route.CalendarRoute
 import com.taetae98.diary.navigation.core.route.MemoRoute
 import com.taetae98.diary.navigation.core.route.MoreRoute
 import com.taetae98.diary.navigation.core.route.Route
@@ -34,6 +36,10 @@ public class AppEntry(
                     context = context
                 )
 
+                CalendarRoute -> CalendarEntry(
+                    context = context,
+                )
+
                 MoreRoute -> MoreEntry(
                     context = context,
                     navigateToAccount = ::navigateToAccount,
@@ -50,15 +56,23 @@ public class AppEntry(
     )
 
     public fun navigateToMemo() {
-        navigation.popWhile { it != MemoRoute }
+        navigateToAppBottomBar(MemoRoute)
+    }
+
+    public fun navigateToCalendar() {
+        navigateToAppBottomBar(CalendarRoute)
     }
 
     public fun navigateToMore() {
-        navigation.popWhile { it != MemoRoute && it != MoreRoute }
-        navigation.bringToFront(MoreRoute)
+        navigateToAppBottomBar(MoreRoute)
     }
 
     private fun navigateToAccount() {
         navigation.push(AccountRoute)
+    }
+
+    private fun navigateToAppBottomBar(route: Route) {
+        navigation.popWhile { it != MemoRoute && it != route }
+        navigation.bringToFront(route)
     }
 }

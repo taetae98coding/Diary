@@ -16,9 +16,11 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
 import com.taetae98.diary.navigation.core.app.AppEntry
+import com.taetae98.diary.navigation.core.calendar.CalendarEntry
 import com.taetae98.diary.navigation.core.memo.MemoEntry
 import com.taetae98.diary.navigation.core.memo.MemoListEntry
 import com.taetae98.diary.navigation.core.more.MoreEntry
+import com.taetae98.diary.ui.compose.icon.CalendarIcon
 import com.taetae98.diary.ui.compose.icon.MemoIcon
 import com.taetae98.diary.ui.compose.icon.MoreIcon
 
@@ -31,7 +33,7 @@ internal fun AppBottomBar(
 
     AnimatedVisibility(
         modifier = modifier,
-        visible = instance is MemoListEntry || instance is MoreEntry,
+        visible = instance.isAppBottomBarEntry(),
         enter = fadeIn() + expandVertically(),
         exit = fadeOut() + shrinkVertically()
     ) {
@@ -59,6 +61,14 @@ private fun Content(
         )
 
         NavigationBarItem(
+            selected = instance is CalendarEntry,
+            onClick = entry::navigateToCalendar,
+            icon = { CalendarIcon() },
+            label = { Text(text = "캘린더") },
+            alwaysShowLabel = false,
+        )
+
+        NavigationBarItem(
             selected = instance is MoreEntry,
             onClick = entry::navigateToMore,
             icon = { MoreIcon() },
@@ -76,4 +86,8 @@ private fun Value<ChildStack<*, ComponentContext>>.getCurrentInstance(): Compone
         is MemoEntry -> instance.stack.getCurrentInstance()
         else -> instance
     }
+}
+
+private fun ComponentContext.isAppBottomBarEntry(): Boolean {
+    return this is MemoListEntry || this is CalendarEntry || this is MoreEntry
 }
