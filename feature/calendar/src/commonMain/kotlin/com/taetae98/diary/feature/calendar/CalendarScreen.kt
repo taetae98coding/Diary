@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
@@ -25,8 +26,10 @@ import com.taetae98.diary.library.calendar.compose.CalendarState
 import com.taetae98.diary.library.calendar.compose.runtime.rememberCalendarState
 import com.taetae98.diary.ui.compose.icon.DropdownDownIcon
 import com.taetae98.diary.ui.compose.icon.DropdownUpIcon
+import com.taetae98.diary.ui.compose.icon.TodayIcon
 import com.taetae98.diary.ui.compose.scaffold.DiaryScaffold
 import kotlinx.coroutines.launch
+import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
@@ -59,11 +62,27 @@ private fun TopBar(
     modifier: Modifier = Modifier,
     state: CalendarState,
 ) {
-
     TopAppBar(
         modifier = modifier,
         title = {
             Title(state = state)
+        },
+        actions = {
+            val coroutineScope = rememberCoroutineScope()
+            val scrollToNow: () -> Unit by remember {
+                mutableStateOf({
+                    coroutineScope.launch {
+                        val now = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+                        state.scrollTo(now.year, now.month)
+                    }
+                })
+            }
+
+            IconButton(
+                onClick = scrollToNow
+            ) {
+                TodayIcon()
+            }
         }
     )
 }
@@ -96,7 +115,7 @@ private fun Title(
                 .toEpochMilliseconds()
         }
 
-        val onSelect: (Long) -> Unit by remember {
+        val selectDate: (Long) -> Unit by remember {
             mutableStateOf({
                 coroutineScope.launch {
                     val dateTime = Instant.fromEpochMilliseconds(it).toLocalDateTime(TimeZone.UTC)
@@ -110,7 +129,7 @@ private fun Title(
         MonthPicker(
             initialDate = current,
             onDismissRequest = { isDatePickerVisible = false },
-            onSelect = onSelect,
+            onSelect = selectDate,
         )
     }
 }
