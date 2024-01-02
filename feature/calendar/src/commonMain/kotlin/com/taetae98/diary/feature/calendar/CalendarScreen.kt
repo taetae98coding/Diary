@@ -1,17 +1,38 @@
 package com.taetae98.diary.feature.calendar
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.taetae98.diary.library.calendar.compose.Calendar
-import com.taetae98.diary.library.calendar.compose.runtime.rememberCalendarState
 import com.taetae98.diary.library.calendar.compose.CalendarState
+import com.taetae98.diary.library.calendar.compose.runtime.rememberCalendarState
+import com.taetae98.diary.ui.compose.icon.DropdownDownIcon
+import com.taetae98.diary.ui.compose.icon.DropdownUpIcon
 import com.taetae98.diary.ui.compose.scaffold.DiaryScaffold
+import kotlinx.coroutines.launch
+import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.number
+import kotlinx.datetime.toLocalDateTime
 
 @Composable
 internal fun CalendarScreen(
@@ -38,10 +59,93 @@ private fun TopBar(
     modifier: Modifier = Modifier,
     state: CalendarState,
 ) {
+
     TopAppBar(
         modifier = modifier,
         title = {
-            Text(text = "${state.currentYear}년 ${state.currentMonth.number}월")
+            Title(state = state)
         }
     )
+}
+
+@Composable
+private fun Title(
+    modifier: Modifier = Modifier,
+    state: CalendarState,
+) {
+    val coroutineScope = rememberCoroutineScope()
+    var isDatePickerVisible by rememberSaveable { mutableStateOf(false) }
+
+    Row(
+        modifier = modifier.clickable { isDatePickerVisible = !isDatePickerVisible },
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Text(text = "${state.currentYear}년 ${state.currentMonth.number}월")
+
+        if (isDatePickerVisible) {
+            DropdownUpIcon()
+        } else {
+            DropdownDownIcon()
+        }
+    }
+
+    if (isDatePickerVisible) {
+        val current = remember {
+            LocalDate(state.currentYear, state.currentMonth, 1)
+                .atStartOfDayIn(TimeZone.UTC)
+                .toEpochMilliseconds()
+        }
+
+        val onSelect: (Long) -> Unit by remember {
+            mutableStateOf({
+                coroutineScope.launch {
+                    val dateTime = Instant.fromEpochMilliseconds(it).toLocalDateTime(TimeZone.UTC)
+
+                    isDatePickerVisible = false
+                    state.scrollTo(dateTime.year, dateTime.month)
+                }
+            })
+        }
+
+        MonthPicker(
+            initialDate = current,
+            onDismissRequest = { isDatePickerVisible = false },
+            onSelect = onSelect,
+        )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun MonthPicker(
+    modifier: Modifier = Modifier,
+    initialDate: Long,
+    onDismissRequest: () -> Unit,
+    onSelect: (Long) -> Unit,
+) {
+    val datePickerState = rememberDatePickerState(initialSelectedDateMillis = initialDate)
+
+    DatePickerDialog(
+        modifier = modifier,
+        onDismissRequest = onDismissRequest,
+        confirmButton = {
+            TextButton(
+                enabled = datePickerState.selectedDateMillis != null,
+                onClick = { datePickerState.selectedDateMillis?.let(onSelect) },
+            ) {
+                Text(text = "선택")
+            }
+        },
+        dismissButton = {
+            TextButton(
+                onClick = onDismissRequest,
+            ) {
+                Text(text = "취소")
+            }
+        }
+    ) {
+        DatePicker(
+            state = datePickerState
+        )
+    }
 }
