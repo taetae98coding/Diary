@@ -12,6 +12,8 @@ kotlin {
                 implementation(project(":library:calendar-compose"))
 
                 implementation(libs.kotlinx.datetime)
+                implementation(libs.kotlinx.immutable)
+
                 implementation(compose.material3)
             }
         }

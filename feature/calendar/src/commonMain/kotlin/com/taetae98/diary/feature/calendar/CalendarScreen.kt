@@ -23,11 +23,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.taetae98.diary.library.calendar.compose.Calendar
 import com.taetae98.diary.library.calendar.compose.CalendarState
+import com.taetae98.diary.library.calendar.compose.model.DateRange
 import com.taetae98.diary.library.calendar.compose.runtime.rememberCalendarState
 import com.taetae98.diary.ui.compose.icon.DropdownDownIcon
 import com.taetae98.diary.ui.compose.icon.DropdownUpIcon
 import com.taetae98.diary.ui.compose.icon.TodayIcon
 import com.taetae98.diary.ui.compose.scaffold.DiaryScaffold
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
@@ -52,6 +54,11 @@ internal fun CalendarScreen(
                 .fillMaxSize()
                 .padding(it),
             state = state,
+            primaryDateRange = remember {
+                val now = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+
+                mutableStateOf(persistentListOf(DateRange(now.date, now.date)))
+            }
         )
     }
 }

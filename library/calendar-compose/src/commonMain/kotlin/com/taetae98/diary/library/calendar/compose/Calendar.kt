@@ -9,17 +9,24 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import com.taetae98.diary.library.calendar.compose.model.DateRange
 import com.taetae98.diary.library.calendar.compose.month.Month
 import com.taetae98.diary.library.calendar.compose.provider.LocalWeekSaturdayColor
 import com.taetae98.diary.library.calendar.compose.provider.LocalWeekSundayColor
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.datetime.DayOfWeek
 
 @Composable
 public fun Calendar(
     modifier: Modifier = Modifier,
     state: CalendarState,
+    primaryDateRange: State<ImmutableList<DateRange>> = remember { mutableStateOf(persistentListOf()) }
 ) {
     Column(
         modifier = modifier,
@@ -27,10 +34,10 @@ public fun Calendar(
         DayOfWeek()
         Content(
             modifier = Modifier.weight(1F),
-            state = state
+            state = state,
+            primaryDateRange = primaryDateRange,
         )
     }
-
 }
 
 @Composable
@@ -79,6 +86,7 @@ private fun DayOfWeek(
 private fun Content(
     modifier: Modifier = Modifier,
     state: CalendarState,
+    primaryDateRange: State<ImmutableList<DateRange>>,
 ) {
     HorizontalPager(
         modifier = modifier,
@@ -88,6 +96,7 @@ private fun Content(
         Month(
             modifier = Modifier.fillMaxSize(),
             state = state.getMonthState(it),
+            primaryDateRange = primaryDateRange,
         )
     }
 }

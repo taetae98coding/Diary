@@ -3,13 +3,17 @@ package com.taetae98.diary.library.calendar.compose.month
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
+import com.taetae98.diary.library.calendar.compose.model.DateRange
 import com.taetae98.diary.library.calendar.compose.week.Week
+import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 public fun Month(
     modifier: Modifier = Modifier,
     state: MonthState,
+    primaryDateRange: State<ImmutableList<DateRange>>,
 ) {
     Column(
         modifier = modifier,
@@ -18,7 +22,8 @@ public fun Month(
             Week(
                 modifier = Modifier.fillMaxWidth()
                     .weight(1F),
-                state = it
+                state = it,
+                primaryDateRange = primaryDateRange,
             )
         }
     }
