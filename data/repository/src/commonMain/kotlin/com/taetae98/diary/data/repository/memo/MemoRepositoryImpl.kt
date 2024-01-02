@@ -5,10 +5,10 @@ import app.cash.paging.createPager
 import app.cash.paging.createPagingConfig
 import com.taetae98.diary.data.dto.memo.MemoDto
 import com.taetae98.diary.data.local.api.MemoLocalDataSource
+import com.taetae98.diary.data.pref.api.MemoPrefDataSource
 import com.taetae98.diary.domain.entity.account.memo.Memo
 import com.taetae98.diary.domain.repository.MemoRepository
 import com.taetae98.diary.library.paging.mapPaging
-import com.taetae98.diary.pref.api.MemoPrefDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map

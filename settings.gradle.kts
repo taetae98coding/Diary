@@ -47,6 +47,8 @@ include(":data:pref-api")
 include(":data:pref-impl")
 include(":data:local-api")
 include(":data:local-impl")
+include(":data:remote-api")
+include(":data:remote-impl")
 include(":data:repository")
 
 include(":app")

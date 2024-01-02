@@ -1,4 +1,4 @@
-import com.taetae98.diary.local.impl.memo.MemoStateEntity;
+import com.taetae98.diary.data.local.impl.memo.MemoStateEntity;
 import kotlinx.datetime.Instant;
 
 CREATE TABLE MemoEntity (
