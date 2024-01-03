@@ -13,6 +13,7 @@ kotlin {
                 implementation(project(":core:firestore-module"))
                 implementation(project(":data:pref-impl"))
                 implementation(project(":data:local-impl"))
+                implementation(project(":data:remote-impl"))
                 implementation(project(":data:repository"))
                 implementation(project(":domain:usecase"))
 

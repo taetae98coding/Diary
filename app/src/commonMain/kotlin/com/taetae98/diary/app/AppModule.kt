@@ -5,6 +5,7 @@ import com.taetae98.diary.core.coroutines.CoroutinesModule
 import com.taetae98.diary.core.firestore.module.FireStoreModule
 import com.taetae98.diary.data.local.impl.LocalDataSourceModule
 import com.taetae98.diary.data.pref.impl.PrefDataSourceModule
+import com.taetae98.diary.data.remote.impl.RemoteDataSourceModule
 import com.taetae98.diary.data.repository.RepositoryModule
 import com.taetae98.diary.domain.usecase.UseCaseModule
 import com.taetae98.diary.feature.account.AccountModule
@@ -19,6 +20,7 @@ import org.koin.core.annotation.Module
         FireStoreModule::class,
         PrefDataSourceModule::class,
         LocalDataSourceModule::class,
+        RemoteDataSourceModule::class,
         RepositoryModule::class,
         UseCaseModule::class,
         AccountModule::class,

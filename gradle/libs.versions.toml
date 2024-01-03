@@ -97,6 +97,8 @@ sqldelight-sqlite-driver = { group = "app.cash.sqldelight", name = "sqlite-drive
 sqldelight-web-driver = { group = "app.cash.sqldelight", name = "web-worker-driver", version.ref = "sqldelight" }
 
 ktor-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-content = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
 paging-common = { group = "app.cash.paging", name = "paging-common", version.ref = "paging-multiplatform" }
 paging-compose = { group = "app.cash.paging", name = "paging-compose-common", version.ref = "paging-multiplatform" }
@@ -140,3 +142,4 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 [bundles]
 kotest = ["kotest-engine", "kotest-assertions", "kotest-property"]
 decompose-essenty = ["decompose-lifecycle", "decompose-state", "decompose-instance", "decompose-back"]
+ktor = ["ktor-core", "ktor-content", "ktor-json"]
