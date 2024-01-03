@@ -31,19 +31,19 @@ kotlin {
 
         androidMain {
             dependencies {
-                runtimeOnly(libs.ktor.okhttp)
+                implementation(libs.ktor.okhttp)
             }
         }
 
         iosMain {
             dependencies {
-                runtimeOnly(libs.ktor.darwin)
+                implementation(libs.ktor.darwin)
             }
         }
 
         jvmMain {
             dependencies {
-                runtimeOnly(libs.ktor.okhttp)
+                implementation(libs.ktor.okhttp)
             }
         }
     }
