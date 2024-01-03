@@ -1,7 +1,7 @@
 package com.taetae98.diary.feature.calendar
 
 import com.taetae98.diary.domain.usecase.holiday.GetHolidayUseCase
-import com.taetae98.diary.library.calendar.compose.CalendarItem
+import com.taetae98.diary.library.compose.calendar.CalendarItem
 import com.taetae98.diary.library.viewmodel.ViewModel
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList

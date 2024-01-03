@@ -1,4 +1,4 @@
-package com.taetae98.diary.library.calendar.compose.week
+package com.taetae98.diary.library.compose.calendar.week
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Badge
@@ -15,10 +15,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import com.taetae98.diary.library.calendar.compose.CalendarItem
-import com.taetae98.diary.library.calendar.compose.model.DateRange
-import com.taetae98.diary.library.calendar.compose.provider.LocalWeekSaturdayColor
-import com.taetae98.diary.library.calendar.compose.provider.LocalWeekSundayColor
+import com.taetae98.diary.library.compose.calendar.CalendarItem
+import com.taetae98.diary.library.compose.calendar.model.DateRange
+import com.taetae98.diary.library.compose.calendar.provider.LocalWeekSaturdayColor
+import com.taetae98.diary.library.compose.calendar.provider.LocalWeekSundayColor
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.datetime.DayOfWeek
 

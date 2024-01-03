@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import com.taetae98.diary.library.calendar.compose.runtime.rememberCalendarState
+import com.taetae98.diary.library.compose.calendar.runtime.rememberCalendarState
 
 @Composable
 internal fun CalendarRoute(

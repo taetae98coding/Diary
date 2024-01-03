@@ -1,4 +1,4 @@
-package com.taetae98.diary.library.calendar.compose.model
+package com.taetae98.diary.library.compose.calendar.model
 
 import kotlinx.datetime.LocalDate
 

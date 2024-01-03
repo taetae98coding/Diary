@@ -1,4 +1,4 @@
-package com.taetae98.diary.library.calendar.compose
+package com.taetae98.diary.library.compose.calendar
 
 import androidx.compose.runtime.Immutable
 import kotlinx.datetime.LocalDate

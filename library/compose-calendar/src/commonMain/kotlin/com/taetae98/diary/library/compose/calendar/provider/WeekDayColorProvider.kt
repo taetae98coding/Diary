@@ -1,4 +1,4 @@
-package com.taetae98.diary.library.calendar.compose.provider
+package com.taetae98.diary.library.compose.calendar.provider
 
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.staticCompositionLocalOf

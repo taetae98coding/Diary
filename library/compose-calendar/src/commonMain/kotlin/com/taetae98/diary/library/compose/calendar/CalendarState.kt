@@ -1,11 +1,11 @@
-package com.taetae98.diary.library.calendar.compose
+package com.taetae98.diary.library.compose.calendar
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Stable
-import com.taetae98.diary.library.calendar.compose.ext.pageToLocalDate
-import com.taetae98.diary.library.calendar.compose.ext.toPage
-import com.taetae98.diary.library.calendar.compose.month.MonthState
+import com.taetae98.diary.library.compose.calendar.ext.pageToLocalDate
+import com.taetae98.diary.library.compose.calendar.ext.toPage
+import com.taetae98.diary.library.compose.calendar.month.MonthState
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month
 

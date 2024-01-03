@@ -1,6 +1,6 @@
-package com.taetae98.diary.library.calendar.compose.month
+package com.taetae98.diary.library.compose.calendar.month
 
-import com.taetae98.diary.library.calendar.compose.week.WeekState
+import com.taetae98.diary.library.compose.calendar.week.WeekState
 import kotlinx.datetime.Month
 
 public data class MonthState(

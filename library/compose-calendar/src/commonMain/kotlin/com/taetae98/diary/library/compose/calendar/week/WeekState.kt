@@ -1,6 +1,6 @@
-package com.taetae98.diary.library.calendar.compose.week
+package com.taetae98.diary.library.compose.calendar.week
 
-import com.taetae98.diary.library.calendar.compose.ext.toChristDayOfWeek
+import com.taetae98.diary.library.compose.calendar.ext.toChristDayOfWeek
 import kotlinx.datetime.Month
 
 public data class WeekState(

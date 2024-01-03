@@ -22,10 +22,10 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.taetae98.diary.library.calendar.compose.Calendar
-import com.taetae98.diary.library.calendar.compose.CalendarItem
-import com.taetae98.diary.library.calendar.compose.CalendarState
-import com.taetae98.diary.library.calendar.compose.model.DateRange
+import com.taetae98.diary.library.compose.calendar.Calendar
+import com.taetae98.diary.library.compose.calendar.CalendarItem
+import com.taetae98.diary.library.compose.calendar.CalendarState
+import com.taetae98.diary.library.compose.calendar.model.DateRange
 import com.taetae98.diary.ui.compose.icon.DropdownDownIcon
 import com.taetae98.diary.ui.compose.icon.DropdownUpIcon
 import com.taetae98.diary.ui.compose.icon.TodayIcon

@@ -1,4 +1,4 @@
-package com.taetae98.diary.library.calendar.compose
+package com.taetae98.diary.library.compose.calendar
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
@@ -14,10 +14,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import com.taetae98.diary.library.calendar.compose.model.DateRange
-import com.taetae98.diary.library.calendar.compose.month.Month
-import com.taetae98.diary.library.calendar.compose.provider.LocalWeekSaturdayColor
-import com.taetae98.diary.library.calendar.compose.provider.LocalWeekSundayColor
+import com.taetae98.diary.library.compose.calendar.model.DateRange
+import com.taetae98.diary.library.compose.calendar.month.Month
+import com.taetae98.diary.library.compose.calendar.provider.LocalWeekSaturdayColor
+import com.taetae98.diary.library.compose.calendar.provider.LocalWeekSundayColor
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.datetime.DayOfWeek

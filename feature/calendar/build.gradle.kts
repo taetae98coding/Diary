@@ -14,7 +14,7 @@ kotlin {
                 implementation(project(":ui:compose"))
 
                 implementation(project(":library:compose-runtime"))
-                implementation(project(":library:calendar-compose"))
+                implementation(project(":library:compose-calendar"))
                 implementation(project(":library:viewmodel"))
                 implementation(project(":library:koin-navigation-compose"))
 

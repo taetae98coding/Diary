@@ -1,13 +1,13 @@
-package com.taetae98.diary.library.calendar.compose.month
+package com.taetae98.diary.library.compose.calendar.month
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
-import com.taetae98.diary.library.calendar.compose.CalendarItem
-import com.taetae98.diary.library.calendar.compose.model.DateRange
-import com.taetae98.diary.library.calendar.compose.week.Week
+import com.taetae98.diary.library.compose.calendar.CalendarItem
+import com.taetae98.diary.library.compose.calendar.model.DateRange
+import com.taetae98.diary.library.compose.calendar.week.Week
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable

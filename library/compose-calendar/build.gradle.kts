@@ -21,5 +21,5 @@ kotlin {
 }
 
 android {
-    namespace = "${Build.NAMESPACE}.library.calendar.compose"
+    namespace = "${Build.NAMESPACE}.library.compose.calendar"
 }

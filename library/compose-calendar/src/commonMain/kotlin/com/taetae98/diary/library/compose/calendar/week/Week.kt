@@ -1,4 +1,4 @@
-package com.taetae98.diary.library.calendar.compose.week
+package com.taetae98.diary.library.compose.calendar.week
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -21,10 +21,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.text.style.TextAlign
-import com.taetae98.diary.library.calendar.compose.CalendarItem
-import com.taetae98.diary.library.calendar.compose.ext.toChristDayNumber
-import com.taetae98.diary.library.calendar.compose.model.DateRange
-import com.taetae98.diary.library.calendar.compose.provider.LocalWeekSundayColor
+import com.taetae98.diary.library.compose.calendar.CalendarItem
+import com.taetae98.diary.library.compose.calendar.ext.toChristDayNumber
+import com.taetae98.diary.library.compose.calendar.model.DateRange
+import com.taetae98.diary.library.compose.calendar.provider.LocalWeekSundayColor
 import com.taetae98.diary.library.compose.color.toContrastColor
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
