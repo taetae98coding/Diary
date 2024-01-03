@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import com.taetae98.diary.library.calendar.compose.CalendarItem
 import com.taetae98.diary.library.calendar.compose.model.DateRange
 import com.taetae98.diary.library.calendar.compose.provider.LocalWeekSaturdayColor
 import com.taetae98.diary.library.calendar.compose.provider.LocalWeekSundayColor
@@ -26,9 +27,10 @@ internal fun WeekDay(
     modifier: Modifier = Modifier,
     state: WeekDayState,
     primaryDate: State<ImmutableList<DateRange>>,
+    holiday: State<ImmutableList<CalendarItem.Holiday>>,
 ) {
     val isPrimaryDate by remember {
-        derivedStateOf { primaryDate.value.any { state.localDate in it } }
+        derivedStateOf { primaryDate.value.any { it.contains(state.localDate) } }
     }
 
     if (isPrimaryDate) {
@@ -39,7 +41,8 @@ internal fun WeekDay(
     } else {
         NormalWeekDay(
             modifier = modifier,
-            state = state
+            state = state,
+            holiday = holiday,
         )
     }
 }
@@ -64,10 +67,15 @@ private fun PrimaryWeekDay(
 private fun NormalWeekDay(
     modifier: Modifier = Modifier,
     state: WeekDayState,
+    holiday: State<ImmutableList<CalendarItem.Holiday>>,
 ) {
-    val color = when (state.dayOfWeek) {
-        DayOfWeek.SUNDAY -> LocalWeekSundayColor.current
-        DayOfWeek.SATURDAY -> LocalWeekSaturdayColor.current
+    val isHoliday by remember {
+        derivedStateOf { holiday.value.any { it.contains(state.localDate) } }
+    }
+
+    val color = when  {
+        state.dayOfWeek == DayOfWeek.SUNDAY || isHoliday -> LocalWeekSundayColor.current
+        state.dayOfWeek == DayOfWeek.SATURDAY -> LocalWeekSaturdayColor.current
         else -> LocalContentColor.current
     }.copy(
         alpha = if (state.isSameMonth()) {

@@ -34,6 +34,18 @@ kotlin {
                 runtimeOnly(libs.ktor.okhttp)
             }
         }
+
+        iosMain {
+            dependencies {
+                runtimeOnly(libs.ktor.darwin)
+            }
+        }
+
+        jvmMain {
+            dependencies {
+                runtimeOnly(libs.ktor.okhttp)
+            }
+        }
     }
 }
 

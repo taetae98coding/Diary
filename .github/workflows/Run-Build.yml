@@ -53,7 +53,15 @@ jobs:
           
           google.debug.server.client.id=$GOOGLE_DEBUG_SERVER_CLIENT_ID
           
-          google.debug.ios.client.id=GOOGLE_DEBUG_IOS_CLIENT_ID" > ./local.properties
+          google.debug.ios.client.id=$GOOGLE_DEBUG_IOS_CLIENT_ID
+          
+          open.api.debug.holiday.url=$OPEN_API_DEBUG_HOLIDAY_URL
+          
+          open.api.debug.holiday.key=$OPEN_API_DEBUG_HOLIDAY_KEY
+          
+          open.api.release.holiday.url=OPEN_API_RELEASE_HOLIDAY_URL
+          
+          open.api.release.holiday.key=OPEN_API_RELEASE_HOLIDAY_KEY" > ./local.properties
         shell: bash
         env:
           ANDROID_DEBUG_KEY_PASSWORD: ${{ secrets.ANDROID_DEBUG_KEY_PASSWORD }}

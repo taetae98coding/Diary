@@ -68,6 +68,7 @@ internal class MemoDetailViewModel(
         )
     )
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     val toolbarUiState = memo.mapLatest {
         MemoDetailToolbarUiState.Detail(
             isComplete = it?.state == MemoState.COMPLETE,

@@ -1,12 +1,16 @@
 package com.taetae98.diary.library.calendar.compose.week
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -15,10 +19,13 @@ import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.text.style.TextAlign
 import com.taetae98.diary.library.calendar.compose.CalendarItem
 import com.taetae98.diary.library.calendar.compose.ext.toChristDayNumber
 import com.taetae98.diary.library.calendar.compose.model.DateRange
+import com.taetae98.diary.library.calendar.compose.provider.LocalWeekSundayColor
+import com.taetae98.diary.library.compose.color.toContrastColor
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.datetime.DateTimeUnit
@@ -32,7 +39,7 @@ public fun Week(
     modifier: Modifier = Modifier,
     state: WeekState,
     primaryDate: State<ImmutableList<DateRange>>,
-    holiday: State<ImmutableList<CalendarItem>>,
+    holiday: State<ImmutableList<CalendarItem.Holiday>>,
 ) {
     Column(
         modifier = modifier,
@@ -40,6 +47,7 @@ public fun Week(
         WeekDayLayout(
             state = state,
             primaryDate = primaryDate,
+            holiday = holiday,
         )
         CalendarItemLayout(
             modifier = Modifier.fillMaxWidth()
@@ -55,6 +63,7 @@ private fun WeekDayLayout(
     modifier: Modifier = Modifier,
     state: WeekState,
     primaryDate: State<ImmutableList<DateRange>>,
+    holiday: State<ImmutableList<CalendarItem.Holiday>>,
 ) {
     Row(
         modifier = modifier,
@@ -64,6 +73,7 @@ private fun WeekDayLayout(
                 modifier = Modifier.weight(1F),
                 state = it,
                 primaryDate = primaryDate,
+                holiday = holiday,
             )
         }
     }
@@ -88,6 +98,14 @@ private fun CalendarItemLayout(
         derivedStateOf {
             val holidayList = holiday.value
                 .filterNot { it.endInclusive < weekStart || it.start > weekEndInclusive }
+                .groupBy { it.name }
+                .map { entry ->
+                    CalendarItem.Holiday(
+                        name = entry.key,
+                        start = entry.value.minOf { it.start },
+                        endInclusive = entry.value.maxOf { it.endInclusive }
+                    )
+                }
                 .toMutableList()
             val list = buildList {
                 while (holidayList.isNotEmpty()) {
@@ -127,6 +145,7 @@ private fun WeekdayItemLayout(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun WeekdayItemRow(
     modifier: Modifier = Modifier,
@@ -143,11 +162,18 @@ private fun WeekdayItemRow(
 
                 is WeekDayItem.Item -> {
                     key(it.key) {
+                        val backgroundColor = it.color.takeOrElse { LocalWeekSundayColor.current }
+
                         Text(
                             modifier = Modifier.weight(it.weight)
-                                .background(it.color),
+                                .fillMaxHeight()
+                                .background(backgroundColor)
+                                .basicMarquee(iterations = Int.MAX_VALUE),
                             text = it.name,
+                            color = backgroundColor.toContrastColor(),
                             textAlign = TextAlign.Center,
+                            maxLines = 1,
+                            style = MaterialTheme.typography.bodyMedium
                         )
                     }
                 }
@@ -187,7 +213,7 @@ private fun MutableList<WeekDayItem>.addAll(
                     key = item.key,
                     name = item.name,
                     weight = itemEndCursor - itemStartCursor + 1F,
-                    color = Color.Red,
+                    color = Color.Unspecified,
                 )
             )
 

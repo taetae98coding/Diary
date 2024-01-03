@@ -8,6 +8,8 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation(project(":library:compose-color"))
+
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.kotlinx.immutable)
 

@@ -42,14 +42,7 @@ internal class HolidayRemoteDataSourceImpl(
             .response
             .body
             .getHolidayList()
-            .groupBy { it.name }
-            .map { entry ->
-                HolidayDto(
-                    name = entry.key,
-                    start = entry.value.minOf { it.getLocalDate() },
-                    endInclusive = entry.value.maxOf { it.getLocalDate() }
-                )
-            }
+            .map(HolidayEntity::toDto)
     }
 
     private fun HolidayResponseEntity.getHolidayList(): List<HolidayEntity> {

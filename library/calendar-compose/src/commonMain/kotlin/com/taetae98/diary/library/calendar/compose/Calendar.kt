@@ -27,7 +27,7 @@ public fun Calendar(
     modifier: Modifier = Modifier,
     state: CalendarState,
     primaryDate: State<ImmutableList<DateRange>> = remember { mutableStateOf(persistentListOf()) },
-    holiday: State<ImmutableList<CalendarItem>> = remember { mutableStateOf(persistentListOf()) },
+    holiday: State<ImmutableList<CalendarItem.Holiday>> = remember { mutableStateOf(persistentListOf()) },
 ) {
     Column(
         modifier = modifier,
@@ -89,7 +89,7 @@ private fun Content(
     modifier: Modifier = Modifier,
     state: CalendarState,
     primaryDate: State<ImmutableList<DateRange>>,
-    holiday: State<ImmutableList<CalendarItem>>,
+    holiday: State<ImmutableList<CalendarItem.Holiday>>,
 ) {
     HorizontalPager(
         modifier = modifier,

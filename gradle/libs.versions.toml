@@ -100,6 +100,7 @@ ktor-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor"
 ktor-content = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
+ktor-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor" }
 
 paging-common = { group = "app.cash.paging", name = "paging-common", version.ref = "paging-multiplatform" }
 paging-compose = { group = "app.cash.paging", name = "paging-compose-common", version.ref = "paging-multiplatform" }

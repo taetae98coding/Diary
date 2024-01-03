@@ -15,7 +15,7 @@ public fun Month(
     modifier: Modifier = Modifier,
     state: MonthState,
     primaryDate: State<ImmutableList<DateRange>>,
-    holiday: State<ImmutableList<CalendarItem>>,
+    holiday: State<ImmutableList<CalendarItem.Holiday>>,
 ) {
     Column(
         modifier = modifier,

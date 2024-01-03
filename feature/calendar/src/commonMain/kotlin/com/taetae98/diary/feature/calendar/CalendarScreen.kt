@@ -26,7 +26,6 @@ import com.taetae98.diary.library.calendar.compose.Calendar
 import com.taetae98.diary.library.calendar.compose.CalendarItem
 import com.taetae98.diary.library.calendar.compose.CalendarState
 import com.taetae98.diary.library.calendar.compose.model.DateRange
-import com.taetae98.diary.library.calendar.compose.runtime.rememberCalendarState
 import com.taetae98.diary.ui.compose.icon.DropdownDownIcon
 import com.taetae98.diary.ui.compose.icon.DropdownUpIcon
 import com.taetae98.diary.ui.compose.icon.TodayIcon
@@ -45,10 +44,9 @@ import kotlinx.datetime.toLocalDateTime
 @Composable
 internal fun CalendarScreen(
     modifier: Modifier = Modifier,
-    holiday: State<ImmutableList<CalendarItem>>
+    state: CalendarState,
+    holiday: State<ImmutableList<CalendarItem.Holiday>>
 ) {
-    val state = rememberCalendarState()
-
     DiaryScaffold(
         modifier = modifier,
         topBar = { TopBar(state = state) },

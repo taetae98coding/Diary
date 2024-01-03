@@ -69,6 +69,7 @@ include(":ui:compose")
 include(":ui:entity")
 
 include(":library:calendar-compose")
+include(":library:compose-color")
 include(":library:compose-runtime")
 include(":library:firebase-auth-api")
 include(":library:firebase-auth-impl")

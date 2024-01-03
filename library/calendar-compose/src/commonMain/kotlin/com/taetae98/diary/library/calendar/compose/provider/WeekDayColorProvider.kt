@@ -5,9 +5,9 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
 internal val LocalWeekSundayColor: ProvidableCompositionLocal<Color> = staticCompositionLocalOf {
-    Color(0xFFEA5148)
+    Color(0xFFFF5F56)
 }
 
 internal val LocalWeekSaturdayColor: ProvidableCompositionLocal<Color> = staticCompositionLocalOf {
-    Color(0xFF2B7BE7)
+    Color(0xFF2133FF)
 }

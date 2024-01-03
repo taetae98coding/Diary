@@ -7,5 +7,4 @@ import kotlinx.serialization.Serializable
 internal data class OpenApiResponseEntity<T>(
     @SerialName("response")
     val response: T
-) {
-}
+)

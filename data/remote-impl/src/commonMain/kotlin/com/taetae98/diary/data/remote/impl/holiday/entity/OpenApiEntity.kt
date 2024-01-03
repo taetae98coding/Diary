@@ -7,5 +7,4 @@ import kotlinx.serialization.Serializable
 internal data class OpenApiEntity<T>(
     @SerialName("body")
     val body: T
-) {
-}
+)
