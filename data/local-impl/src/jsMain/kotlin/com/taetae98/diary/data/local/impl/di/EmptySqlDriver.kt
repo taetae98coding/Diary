@@ -6,7 +6,6 @@ import app.cash.sqldelight.db.QueryResult
 import app.cash.sqldelight.db.SqlCursor
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.db.SqlPreparedStatement
-import com.taetae98.diary.local.impl.di.EmptyTransaction
 
 internal class EmptySqlDriver : SqlDriver {
     override fun addListener(vararg queryKeys: String, listener: Query.Listener) = Unit
