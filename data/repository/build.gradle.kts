@@ -13,6 +13,7 @@ kotlin {
                 implementation(project(":data:dto"))
                 implementation(project(":data:pref-api"))
                 implementation(project(":data:local-api"))
+                implementation(project(":data:remote-api"))
                 implementation(project(":domain:repository"))
 
                 implementation(project(":library:paging"))

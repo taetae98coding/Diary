@@ -1,5 +1,6 @@
 plugins {
     id("diary.multiplatform")
+    id("diary.koin.multiplatform")
     id("diary.compose.multiplatform")
 }
 
@@ -8,8 +9,13 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":navigation:core"))
+                implementation(project(":domain:usecase"))
+
                 implementation(project(":ui:compose"))
+
                 implementation(project(":library:calendar-compose"))
+                implementation(project(":library:viewmodel"))
+                implementation(project(":library:koin-navigation-compose"))
 
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.kotlinx.immutable)

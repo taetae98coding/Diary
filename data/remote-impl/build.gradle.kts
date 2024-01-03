@@ -28,6 +28,12 @@ kotlin {
                 implementation(libs.bundles.ktor)
             }
         }
+
+        androidMain {
+            dependencies {
+                runtimeOnly(libs.ktor.cio)
+            }
+        }
     }
 }
 

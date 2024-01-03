@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 @Composable
 internal fun CalendarRoute(
     modifier: Modifier = Modifier,
+    viewModel: CalendarViewModel,
 ) {
     CalendarScreen(modifier = modifier)
 }
