@@ -26,7 +26,8 @@ import kotlinx.datetime.DayOfWeek
 public fun Calendar(
     modifier: Modifier = Modifier,
     state: CalendarState,
-    primaryDateRange: State<ImmutableList<DateRange>> = remember { mutableStateOf(persistentListOf()) }
+    primaryDate: State<ImmutableList<DateRange>> = remember { mutableStateOf(persistentListOf()) },
+    holiday: State<ImmutableList<CalendarItem>> = remember { mutableStateOf(persistentListOf()) },
 ) {
     Column(
         modifier = modifier,
@@ -35,7 +36,8 @@ public fun Calendar(
         Content(
             modifier = Modifier.weight(1F),
             state = state,
-            primaryDateRange = primaryDateRange,
+            primaryDate = primaryDate,
+            holiday = holiday,
         )
     }
 }
@@ -86,7 +88,8 @@ private fun DayOfWeek(
 private fun Content(
     modifier: Modifier = Modifier,
     state: CalendarState,
-    primaryDateRange: State<ImmutableList<DateRange>>,
+    primaryDate: State<ImmutableList<DateRange>>,
+    holiday: State<ImmutableList<CalendarItem>>,
 ) {
     HorizontalPager(
         modifier = modifier,
@@ -96,7 +99,8 @@ private fun Content(
         Month(
             modifier = Modifier.fillMaxSize(),
             state = state.getMonthState(it),
-            primaryDateRange = primaryDateRange,
+            primaryDate = primaryDate,
+            holiday = holiday,
         )
     }
 }

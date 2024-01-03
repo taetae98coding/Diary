@@ -25,10 +25,10 @@ import kotlinx.datetime.DayOfWeek
 internal fun WeekDay(
     modifier: Modifier = Modifier,
     state: WeekDayState,
-    primaryDateRange: State<ImmutableList<DateRange>>,
+    primaryDate: State<ImmutableList<DateRange>>,
 ) {
     val isPrimaryDate by remember {
-        derivedStateOf { primaryDateRange.value.any { state.localDate in it } }
+        derivedStateOf { primaryDate.value.any { state.localDate in it } }
     }
 
     if (isPrimaryDate) {

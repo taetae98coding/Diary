@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
+import com.taetae98.diary.library.calendar.compose.CalendarItem
 import com.taetae98.diary.library.calendar.compose.model.DateRange
 import com.taetae98.diary.library.calendar.compose.week.Week
 import kotlinx.collections.immutable.ImmutableList
@@ -13,7 +14,8 @@ import kotlinx.collections.immutable.ImmutableList
 public fun Month(
     modifier: Modifier = Modifier,
     state: MonthState,
-    primaryDateRange: State<ImmutableList<DateRange>>,
+    primaryDate: State<ImmutableList<DateRange>>,
+    holiday: State<ImmutableList<CalendarItem>>,
 ) {
     Column(
         modifier = modifier,
@@ -23,7 +25,8 @@ public fun Month(
                 modifier = Modifier.fillMaxWidth()
                     .weight(1F),
                 state = it,
-                primaryDateRange = primaryDateRange,
+                primaryDate = primaryDate,
+                holiday = holiday,
             )
         }
     }

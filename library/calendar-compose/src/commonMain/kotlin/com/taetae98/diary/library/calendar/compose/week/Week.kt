@@ -1,25 +1,51 @@
 package com.taetae98.diary.library.calendar.compose.week
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.key
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
+import com.taetae98.diary.library.calendar.compose.CalendarItem
+import com.taetae98.diary.library.calendar.compose.ext.toChristDayNumber
 import com.taetae98.diary.library.calendar.compose.model.DateRange
 import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.DayOfWeek
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.minus
+import kotlinx.datetime.plus
 
 @Composable
 public fun Week(
     modifier: Modifier = Modifier,
     state: WeekState,
-    primaryDateRange: State<ImmutableList<DateRange>>,
+    primaryDate: State<ImmutableList<DateRange>>,
+    holiday: State<ImmutableList<CalendarItem>>,
 ) {
     Column(
         modifier = modifier,
     ) {
         WeekDayLayout(
             state = state,
-            primaryDateRange = primaryDateRange,
+            primaryDate = primaryDate,
+        )
+        CalendarItemLayout(
+            modifier = Modifier.fillMaxWidth()
+                .weight(1F),
+            state = state,
+            holiday = holiday,
         )
     }
 }
@@ -28,7 +54,7 @@ public fun Week(
 private fun WeekDayLayout(
     modifier: Modifier = Modifier,
     state: WeekState,
-    primaryDateRange: State<ImmutableList<DateRange>>,
+    primaryDate: State<ImmutableList<DateRange>>,
 ) {
     Row(
         modifier = modifier,
@@ -37,8 +63,143 @@ private fun WeekDayLayout(
             WeekDay(
                 modifier = Modifier.weight(1F),
                 state = it,
-                primaryDateRange = primaryDateRange,
+                primaryDate = primaryDate,
             )
         }
+    }
+}
+
+@Composable
+private fun CalendarItemLayout(
+    modifier: Modifier,
+    state: WeekState,
+    holiday: State<ImmutableList<CalendarItem>>,
+) {
+    val weekStart = remember {
+        val date = LocalDate(state.year, state.month, 1)
+
+        date.minus(date.dayOfWeek.toChristDayNumber(), DateTimeUnit.DAY)
+            .plus(state.weekOfMonth, DateTimeUnit.WEEK)
+    }
+
+    val weekEndInclusive = remember { weekStart.plus(6, DateTimeUnit.DAY) }
+
+    val weekDayItem = remember {
+        derivedStateOf {
+            val holidayList = holiday.value
+                .filterNot { it.endInclusive < weekStart || it.start > weekEndInclusive }
+                .toMutableList()
+            val list = buildList {
+                while (holidayList.isNotEmpty()) {
+                    val row = buildList {
+                        addAll(
+                            weekStart = weekStart,
+                            weekEndInclusive = weekEndInclusive,
+                            iterator = holidayList.iterator(),
+                        )
+                    }
+
+                    add(row.toImmutableList())
+                }
+            }
+
+            list.toImmutableList()
+        }
+    }
+
+    WeekdayItemLayout(
+        modifier = modifier,
+        weekDayItem = weekDayItem
+    )
+}
+
+@Composable
+private fun WeekdayItemLayout(
+    modifier: Modifier = Modifier,
+    weekDayItem: State<ImmutableList<ImmutableList<WeekDayItem>>>
+) {
+    Column(
+        modifier = modifier.verticalScroll(state = rememberScrollState()),
+    ) {
+        weekDayItem.value.forEach {
+            WeekdayItemRow(weekDayItem = it)
+        }
+    }
+}
+
+@Composable
+private fun WeekdayItemRow(
+    modifier: Modifier = Modifier,
+    weekDayItem: ImmutableList<WeekDayItem>
+) {
+    Row(
+        modifier = modifier,
+    ) {
+        weekDayItem.forEach {
+            when (it) {
+                is WeekDayItem.Space -> {
+                    Spacer(modifier = Modifier.weight(it.weight))
+                }
+
+                is WeekDayItem.Item -> {
+                    key(it.key) {
+                        Text(
+                            modifier = Modifier.weight(it.weight)
+                                .background(it.color),
+                            text = it.name,
+                            textAlign = TextAlign.Center,
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+private fun MutableList<WeekDayItem>.addAll(
+    weekStart: LocalDate,
+    weekEndInclusive: LocalDate,
+    iterator: MutableIterator<CalendarItem>
+) {
+    val sundayCursor = DayOfWeek.SUNDAY.toChristDayNumber()
+    val saturdayCursor = DayOfWeek.SATURDAY.toChristDayNumber()
+    var cursor = sundayCursor
+
+    while (iterator.hasNext()) {
+        val item = iterator.next()
+        val itemStartCursor = if (item.start < weekStart) {
+            sundayCursor
+        } else {
+            item.start.dayOfWeek.toChristDayNumber()
+        }
+        val itemEndCursor = if (item.endInclusive > weekEndInclusive) {
+            saturdayCursor
+        } else {
+            item.endInclusive.dayOfWeek.toChristDayNumber()
+        }
+
+        if (cursor < itemStartCursor) {
+            add(WeekDayItem.Space((itemStartCursor - cursor).toFloat()))
+        }
+        if (cursor <= itemStartCursor) {
+            add(
+                WeekDayItem.Item(
+                    key = item.key,
+                    name = item.name,
+                    weight = itemEndCursor - itemStartCursor + 1F,
+                    color = Color.Red,
+                )
+            )
+
+            iterator.remove()
+            cursor = itemEndCursor + 1
+            if (cursor > saturdayCursor) {
+                break
+            }
+        }
+    }
+
+    if (cursor <= saturdayCursor) {
+        add(WeekDayItem.Space(saturdayCursor - cursor + 1F))
     }
 }

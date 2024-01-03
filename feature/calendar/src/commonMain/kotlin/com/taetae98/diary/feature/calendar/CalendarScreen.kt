@@ -13,6 +13,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -22,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.taetae98.diary.library.calendar.compose.Calendar
+import com.taetae98.diary.library.calendar.compose.CalendarItem
 import com.taetae98.diary.library.calendar.compose.CalendarState
 import com.taetae98.diary.library.calendar.compose.model.DateRange
 import com.taetae98.diary.library.calendar.compose.runtime.rememberCalendarState
@@ -29,6 +31,7 @@ import com.taetae98.diary.ui.compose.icon.DropdownDownIcon
 import com.taetae98.diary.ui.compose.icon.DropdownUpIcon
 import com.taetae98.diary.ui.compose.icon.TodayIcon
 import com.taetae98.diary.ui.compose.scaffold.DiaryScaffold
+import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
@@ -42,6 +45,7 @@ import kotlinx.datetime.toLocalDateTime
 @Composable
 internal fun CalendarScreen(
     modifier: Modifier = Modifier,
+    holiday: State<ImmutableList<CalendarItem>>
 ) {
     val state = rememberCalendarState()
 
@@ -54,11 +58,12 @@ internal fun CalendarScreen(
                 .fillMaxSize()
                 .padding(it),
             state = state,
-            primaryDateRange = remember {
+            primaryDate = remember {
                 val now = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
 
                 mutableStateOf(persistentListOf(DateRange(now.date, now.date)))
-            }
+            },
+            holiday = holiday,
         )
     }
 }
