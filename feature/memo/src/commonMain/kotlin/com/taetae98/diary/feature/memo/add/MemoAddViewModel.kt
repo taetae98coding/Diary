@@ -12,6 +12,7 @@ import com.taetae98.diary.library.uuid.getUuid
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
 import com.taetae98.diary.library.viewmodel.ViewModel
 import com.taetae98.diary.ui.compose.text.TextFieldUiState
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
@@ -34,6 +35,7 @@ internal class MemoAddViewModel(
         initialValue = "",
     )
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     val uiState = _message.mapLatest {
         MemoDetailUiState.Add(
             onAdd = ::add,
@@ -52,6 +54,7 @@ internal class MemoAddViewModel(
 
     val toolbarUiState = _toolbarUiState.asStateFlow()
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     val titleUiState = _title.mapLatest { title ->
         TextFieldUiState(
             value = title,

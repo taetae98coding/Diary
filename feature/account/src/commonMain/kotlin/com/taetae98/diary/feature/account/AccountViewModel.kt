@@ -6,6 +6,7 @@ import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
 import com.taetae98.diary.domain.usecase.account.SignInUseCase
 import com.taetae98.diary.domain.usecase.account.SignOutUseCase
 import com.taetae98.diary.library.viewmodel.ViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
@@ -18,9 +19,11 @@ internal class AccountViewModel(
     private val signInUseCase: SignInUseCase,
     private val signOutUseCase: SignOutUseCase,
 ) : ViewModel() {
+    @OptIn(ExperimentalCoroutinesApi::class)
     private val account = getAccountUseCase(Unit)
         .mapLatest { it.getOrNull() ?: Account.Guest }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     val uiState = account.mapLatest {
         when (it) {
             Account.Guest -> AccountUiState.Guest(onSignIn = ::signIn)

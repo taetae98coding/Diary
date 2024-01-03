@@ -5,6 +5,7 @@ import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
 import com.taetae98.diary.domain.usecase.app.FetchDataUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.collectLatest
@@ -37,6 +38,7 @@ public class FetchDataWorker(
         job = null
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     private suspend fun observeAccount() {
         getAccountUseCase(Unit).mapLatest { it.getOrNull() }
             .mapLatest { it?.uid }

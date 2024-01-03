@@ -12,6 +12,7 @@ import com.taetae98.diary.library.viewmodel.SavedStateHandle
 import com.taetae98.diary.library.viewmodel.ViewModel
 import com.taetae98.diary.navigation.core.memo.MemoDetailEntry
 import com.taetae98.diary.ui.compose.text.TextFieldUiState
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flatMapLatest
@@ -36,6 +37,7 @@ internal class MemoDetailViewModel(
     )
     private val _message = MutableStateFlow<MemoDetailMessage?>(null)
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     private val memo = id.flatMapLatest { findMemoUseCase(it) }
         .mapLatest(Result<Memo?>::getOrNull)
         .onEach(::onMemoChanged)
