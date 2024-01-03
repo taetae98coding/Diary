@@ -94,7 +94,7 @@ private fun NormalWeekDay(
 
 
 @Composable
-private inline fun WeekDayText(
+private fun WeekDayText(
     modifier: Modifier = Modifier,
     state: WeekDayState,
     color: Color = Color.Unspecified,
