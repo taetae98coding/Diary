@@ -31,7 +31,7 @@ kotlin {
 
         androidMain {
             dependencies {
-                runtimeOnly(libs.ktor.cio)
+                runtimeOnly(libs.ktor.okhttp)
             }
         }
     }

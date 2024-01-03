@@ -8,7 +8,6 @@ import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.mapLatest
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.datetime.Month
 import org.koin.core.annotation.Factory
@@ -20,9 +19,6 @@ internal class CalendarViewModel(
     @OptIn(ExperimentalCoroutinesApi::class)
     val holiday = getHolidayUseCase(GetHolidayUseCase.Params(2024, Month.JANUARY))
         .mapLatest { it.getOrNull().orEmpty() }
-        .onEach {
-            println("result : $it")
-        }
         .mapLatest { list ->
             list.map {
                 CalendarItem.Holiday(
