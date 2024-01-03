@@ -1,33 +1,27 @@
-package com.taetae98.diary.library.compose.calendar.month
+package com.taetae98.diary.library.compose.calendar.week
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import com.taetae98.diary.library.compose.calendar.CalendarItem
-import com.taetae98.diary.library.compose.calendar.CalendarState
 import com.taetae98.diary.library.compose.calendar.model.DateRange
-import com.taetae98.diary.library.compose.calendar.week.Week
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable
-public fun Month(
+internal fun WeekDayLayout(
     modifier: Modifier = Modifier,
-    state: MonthState,
-    calendarState: CalendarState,
+    state: WeekState,
     primaryDate: State<ImmutableList<DateRange>>,
     holiday: State<ImmutableList<CalendarItem.Holiday>>,
 ) {
-    Column(
+    Row(
         modifier = modifier,
     ) {
-        state.weekState.forEach {
-            Week(
-                modifier = Modifier.fillMaxWidth()
-                    .weight(1F),
+        state.weekDayState.forEach {
+            WeekDay(
+                modifier = Modifier.weight(1F),
                 state = it,
-                calendarState = calendarState,
                 primaryDate = primaryDate,
                 holiday = holiday,
             )
