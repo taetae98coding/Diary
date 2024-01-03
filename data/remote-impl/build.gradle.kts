@@ -1,6 +1,7 @@
 plugins {
     id("diary.multiplatform")
     id("diary.koin.multiplatform")
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 kotlin {
@@ -9,7 +10,11 @@ kotlin {
             dependencies {
                 implementation(project(":data:dto"))
                 implementation(project(":data:remote-api"))
+
                 implementation(libs.kotlinx.datetime)
+                implementation(libs.kotlinx.serialization)
+
+                implementation(libs.ktor.core)
             }
         }
     }

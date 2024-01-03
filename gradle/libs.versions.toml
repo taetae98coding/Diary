@@ -33,6 +33,7 @@ koin = "3.5.3"                                      # https://github.com/InsertK
 koin-annotations = "1.3.0"                          # https://github.com/InsertKoinIO/koin-annotations/releases
 
 sqldelight = "2.0.1"                                # https://github.com/cashapp/sqldelight/releases
+ktor = "2.3.7"                                      # https://github.com/ktorio/ktor/releases
 
 kotest = "5.8.0"                                    # https://github.com/kotest/kotest/releases
 mockk = "1.13.8"                                    # https://github.com/mockk/mockk/releases
@@ -94,6 +95,8 @@ sqldelight-android-driver = { group = "app.cash.sqldelight", name = "android-dri
 sqldelight-native-driver = { group = "app.cash.sqldelight", name = "native-driver", version.ref = "sqldelight" }
 sqldelight-sqlite-driver = { group = "app.cash.sqldelight", name = "sqlite-driver", version.ref = "sqldelight" }
 sqldelight-web-driver = { group = "app.cash.sqldelight", name = "web-worker-driver", version.ref = "sqldelight" }
+
+ktor-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
 
 paging-common = { group = "app.cash.paging", name = "paging-common", version.ref = "paging-multiplatform" }
 paging-compose = { group = "app.cash.paging", name = "paging-compose-common", version.ref = "paging-multiplatform" }
