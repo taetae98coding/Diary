@@ -1,11 +1,11 @@
 package com.taetae98.diary.data.repository
 
 import com.taetae98.diary.data.local.api.MemoLocalDataSource
+import com.taetae98.diary.data.pref.api.MemoPrefDataSource
 import com.taetae98.diary.data.repository.memo.MemoFireStore
 import com.taetae98.diary.data.repository.memo.MemoRepositoryImpl
 import com.taetae98.diary.domain.entity.account.memo.Memo
 import com.taetae98.diary.domain.entity.account.memo.MemoState
-import com.taetae98.diary.pref.api.MemoPrefDataSource
 import io.kotest.core.spec.style.BehaviorSpec
 import io.mockk.clearAllMocks
 import io.mockk.coVerify
