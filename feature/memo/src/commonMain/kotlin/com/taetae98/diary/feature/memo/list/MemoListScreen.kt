@@ -51,7 +51,7 @@ internal fun MemoListScreen(
     DiaryScaffold(
         modifier = modifier,
         topBar = { TitleTopBar(title = "메모") },
-        floatingActionButton = { AddFloatingButton(onAdd = onAdd) }
+        floatingActionButton = { AddFloatingButton(onClick = onAdd) }
     ) {
         Content(
             modifier = Modifier.padding(it)

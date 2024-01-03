@@ -11,6 +11,7 @@ internal sealed class MemoDetailUiState {
     ) : MemoDetailUiState()
 
     data class Detail(
+        val onUpdate: () -> Unit,
         override val message: MemoDetailMessage?,
         override val onMessageShown: () -> Unit,
     ) : MemoDetailUiState()

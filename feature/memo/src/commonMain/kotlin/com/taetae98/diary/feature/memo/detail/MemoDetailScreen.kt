@@ -17,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.taetae98.diary.ui.compose.button.AddFloatingButton
+import com.taetae98.diary.ui.compose.button.CheckFloatingButton
 import com.taetae98.diary.ui.compose.icon.DeleteIcon
 import com.taetae98.diary.ui.compose.icon.FinishIcon
 import com.taetae98.diary.ui.compose.scaffold.DiaryScaffold
@@ -105,6 +106,11 @@ private fun Message(
                 uiState.value.onMessageShown()
             }
 
+            MemoDetailMessage.TitleEmpty -> {
+                hostState.showSnackbar("제목을 입력해주세요.")
+                uiState.value.onMessageShown()
+            }
+
             else -> Unit
         }
     }
@@ -119,11 +125,16 @@ private fun FloatingButton(
         is MemoDetailUiState.Add -> {
             AddFloatingButton(
                 modifier = modifier,
-                onAdd = value.onAdd
+                onClick = value.onAdd
             )
         }
 
-        else -> Unit
+        is MemoDetailUiState.Detail -> {
+            CheckFloatingButton(
+                modifier = modifier,
+                onClick = value.onUpdate
+            )
+        }
     }
 }
 

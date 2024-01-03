@@ -2,6 +2,7 @@ package com.taetae98.diary.feature.memo.add
 
 import com.taetae98.diary.domain.entity.account.memo.Memo
 import com.taetae98.diary.domain.entity.account.memo.MemoState
+import com.taetae98.diary.domain.exception.TitleEmptyException
 import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
 import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
 import com.taetae98.diary.feature.memo.detail.MemoDetailMessage
@@ -44,7 +45,7 @@ internal class MemoAddViewModel(
         started = SharingStarted.Eagerly,
         initialValue = MemoDetailUiState.Add(
             onAdd = ::add,
-            message = null,
+            message = _message.value,
             onMessageShown = ::messageShown,
         )
     )
@@ -82,7 +83,15 @@ internal class MemoAddViewModel(
             upsertMemoUseCase(memo).onSuccess {
                 showAddMessage()
                 clearInput()
+            }.onFailure {
+                handleThrowable(it)
             }
+        }
+    }
+
+    private suspend fun handleThrowable(throwable: Throwable) {
+        when(throwable) {
+            is TitleEmptyException -> _message.emit(MemoDetailMessage.TitleEmpty)
         }
     }
 
@@ -94,13 +103,9 @@ internal class MemoAddViewModel(
         _message.emit(MemoDetailMessage.Add)
     }
 
-    private suspend fun clearMessage() {
-        _message.emit(null)
-    }
-
     private fun messageShown() {
         viewModelScope.launch {
-            clearMessage()
+            _message.emit(null)
         }
     }
 

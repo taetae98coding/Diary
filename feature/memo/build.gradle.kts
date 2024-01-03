@@ -9,6 +9,8 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":navigation:core"))
+
+                implementation(project(":domain:exception"))
                 implementation(project(":domain:usecase"))
 
                 implementation(project(":ui:compose"))

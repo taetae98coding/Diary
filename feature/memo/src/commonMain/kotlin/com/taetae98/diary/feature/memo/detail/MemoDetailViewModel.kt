@@ -2,10 +2,12 @@ package com.taetae98.diary.feature.memo.detail
 
 import com.taetae98.diary.domain.entity.account.memo.Memo
 import com.taetae98.diary.domain.entity.account.memo.MemoState
+import com.taetae98.diary.domain.exception.TitleEmptyException
 import com.taetae98.diary.domain.usecase.memo.CompleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.DeleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.FindMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.IncompleteMemoUseCase
+import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
 import com.taetae98.diary.library.viewmodel.ViewModel
 import com.taetae98.diary.navigation.core.memo.MemoDetailEntry
@@ -26,11 +28,13 @@ internal class MemoDetailViewModel(
     private val completeMemoUseCase: CompleteMemoUseCase,
     private val incompleteMemoUseCase: IncompleteMemoUseCase,
     private val deleteMemoUseCase: DeleteMemoUseCase,
+    private val upsertMemoUseCase: UpsertMemoUseCase,
 ) : ViewModel() {
     private val id = savedStateHandle.getStateFlow<String?>(
         key = MemoDetailEntry.ID,
         initialValue = null
     )
+    private val _message = MutableStateFlow<MemoDetailMessage?>(null)
 
     private val memo = id.flatMapLatest { findMemoUseCase(it) }
         .mapLatest(Result<Memo?>::getOrNull)
@@ -46,10 +50,19 @@ internal class MemoDetailViewModel(
         initialValue = ""
     )
 
-    val uiState = MutableStateFlow(
+    val uiState = _message.mapLatest {
         MemoDetailUiState.Detail(
-            message = null,
-            onMessageShown = {},
+            onUpdate = ::upsert,
+            message = it,
+            onMessageShown = ::messageShown,
+        )
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.Eagerly,
+        initialValue = MemoDetailUiState.Detail(
+            onUpdate = ::upsert,
+            message = _message.value,
+            onMessageShown = ::messageShown,
         )
     )
 
@@ -104,8 +117,41 @@ internal class MemoDetailViewModel(
     }
 
     private fun delete() {
+        val id = id.value ?: return
+
         viewModelScope.launch {
-            id.value?.let { deleteMemoUseCase(it) }
+            deleteMemoUseCase(id).onSuccess {
+                _message.emit(MemoDetailMessage.Delete)
+            }
+        }
+    }
+
+    private fun upsert() {
+        val memo = Memo(
+            id = id.value ?: return,
+            title = title.value,
+            ownerId = memo.value?.ownerId,
+            state = memo.value?.state ?: return
+        )
+
+        viewModelScope.launch {
+            upsertMemoUseCase(memo).onSuccess {
+                _message.emit(MemoDetailMessage.Update)
+            }.onFailure {
+                handleThrowable(it)
+            }
+        }
+    }
+
+    private suspend fun handleThrowable(throwable: Throwable) {
+        when (throwable) {
+            is TitleEmptyException -> _message.emit(MemoDetailMessage.TitleEmpty)
+        }
+    }
+
+    private fun messageShown() {
+        viewModelScope.launch {
+            _message.emit(null)
         }
     }
 
