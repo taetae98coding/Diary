@@ -1,7 +1,7 @@
 package com.taetae98.diary.feature.memo.detail
 
-import com.taetae98.diary.domain.entity.account.memo.Memo
-import com.taetae98.diary.domain.entity.account.memo.MemoState
+import com.taetae98.diary.domain.entity.memo.Memo
+import com.taetae98.diary.domain.entity.memo.MemoState
 import com.taetae98.diary.domain.exception.TitleEmptyException
 import com.taetae98.diary.domain.usecase.memo.CompleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.DeleteMemoUseCase
@@ -11,7 +11,6 @@ import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
 import com.taetae98.diary.library.viewmodel.ViewModel
 import com.taetae98.diary.navigation.core.memo.MemoDetailEntry
-import com.taetae98.diary.ui.compose.text.TextFieldUiState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -24,7 +23,7 @@ import org.koin.core.annotation.Factory
 
 @Factory
 internal class MemoDetailViewModel(
-    private val savedStateHandle: SavedStateHandle,
+    savedStateHandle: SavedStateHandle,
     private val findMemoUseCase: FindMemoUseCase,
     private val completeMemoUseCase: CompleteMemoUseCase,
     private val incompleteMemoUseCase: IncompleteMemoUseCase,
@@ -47,11 +46,21 @@ internal class MemoDetailViewModel(
             initialValue = null,
         )
 
-    private val title = savedStateHandle.getStateFlow(
+    val titleUiStateHolder = TextFieldUiStateHolder(
+        scope = viewModelScope,
+        initialValue = "",
         key = TITLE,
-        initialValue = ""
+        savedStateHandle = savedStateHandle,
     )
 
+    val descriptionUiStateHolder = TextFieldUiStateHolder(
+        scope = viewModelScope,
+        initialValue = "",
+        key = DESCRIPTION,
+        savedStateHandle = savedStateHandle,
+    )
+
+    @OptIn(ExperimentalCoroutinesApi::class)
     val uiState = _message.mapLatest {
         MemoDetailUiState.Detail(
             onUpdate = ::upsert,
@@ -85,26 +94,9 @@ internal class MemoDetailViewModel(
         )
     )
 
-    val titleUiState = title.mapLatest {
-        TextFieldUiState(
-            value = it,
-            onValueChange = ::setTitle,
-        )
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-        initialValue = TextFieldUiState(
-            value = title.value,
-            onValueChange = ::setTitle,
-        )
-    )
-
     private fun onMemoChanged(memo: Memo?) {
-        setTitle(memo?.title.orEmpty())
-    }
-
-    private fun setTitle(title: String) {
-        savedStateHandle[TITLE] = title
+        titleUiStateHolder.setValue(memo?.title.orEmpty())
+        descriptionUiStateHolder.setValue(memo?.description.orEmpty())
     }
 
     private fun toggleComplete() {
@@ -132,7 +124,10 @@ internal class MemoDetailViewModel(
     private fun upsert() {
         val memo = Memo(
             id = id.value ?: return,
-            title = title.value,
+            title = titleUiStateHolder.getValue().value,
+            description = descriptionUiStateHolder.getValue().value,
+            dateRangeColor = null,
+            dateRange = null,
             ownerId = memo.value?.ownerId,
             state = memo.value?.state ?: return
         )
@@ -160,5 +155,6 @@ internal class MemoDetailViewModel(
 
     companion object {
         private const val TITLE = "title"
+        private const val DESCRIPTION = "description"
     }
 }

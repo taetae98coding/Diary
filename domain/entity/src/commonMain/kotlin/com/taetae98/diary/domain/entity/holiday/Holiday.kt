@@ -1,4 +1,4 @@
-package com.taetae98.diary.domain.entity.account.holiday
+package com.taetae98.diary.domain.entity.holiday
 
 import kotlinx.datetime.LocalDate
 

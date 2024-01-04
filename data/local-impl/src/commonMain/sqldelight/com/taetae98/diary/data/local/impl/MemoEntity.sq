@@ -1,9 +1,14 @@
 import com.taetae98.diary.data.local.impl.memo.MemoStateEntity;
 import kotlinx.datetime.Instant;
+import kotlinx.datetime.LocalDate;
 
 CREATE TABLE MemoEntity (
     id TEXT NOT NULL PRIMARY KEY,
     title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    dateRangeColor INTEGER,
+    dateRangeStart TEXT AS LocalDate,
+    dateRangeEnd TEXT AS LocalDate,
     state INTEGER AS MemoStateEntity NOT NULL,
     ownerId TEXT,
     updateAt TEXT AS Instant NOT NULL
@@ -15,6 +20,7 @@ VALUES ?
 ON CONFLICT (id) DO
 UPDATE SET
 title = excluded.title,
+description = excluded.description,
 state = excluded.state,
 updateAt = excluded.updateAt;
 

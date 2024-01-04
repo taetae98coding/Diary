@@ -5,6 +5,7 @@ import com.taetae98.diary.core.coroutines.CoroutinesModule
 import com.taetae98.diary.data.local.impl.DiaryDatabase
 import com.taetae98.diary.data.local.impl.MemoEntity
 import com.taetae98.diary.data.local.impl.adapter.InstantAdapter
+import com.taetae98.diary.data.local.impl.adapter.LocalDateAdapter
 import com.taetae98.diary.data.local.impl.adapter.MemoStateAdapter
 import kotlinx.coroutines.CoroutineDispatcher
 import org.koin.core.annotation.Module
@@ -20,8 +21,10 @@ internal class DatabaseModule {
         return DiaryDatabase(
             driver = driver,
             MemoEntityAdapter = MemoEntity.Adapter(
-                updateAtAdapter = InstantAdapter,
+                dateRangeStartAdapter = LocalDateAdapter,
+                dateRangeEndAdapter = LocalDateAdapter,
                 stateAdapter = MemoStateAdapter,
+                updateAtAdapter = InstantAdapter,
             )
         )
     }

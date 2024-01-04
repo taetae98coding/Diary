@@ -7,16 +7,17 @@ import kotlinx.datetime.Instant
 internal class FireStoreDataImpl(
     private val documentSnapshot: DocumentSnapshot
 ) : FireStoreData {
-    override fun getString(key: String): String {
-        return requireNotNull(documentSnapshot.getString(key))
+    override fun getString(key: String): String? {
+        return documentSnapshot.getString(key)
     }
 
-    override fun getLong(key: String): Long {
-        return requireNotNull(documentSnapshot.getLong(key))
+    override fun getLong(key: String): Long? {
+        return documentSnapshot.getLong(key)
     }
 
-    override fun getInstant(key: String): Instant {
-        val timestamp = requireNotNull(documentSnapshot.getTimestamp(key))
-        return Instant.fromEpochSeconds(timestamp.seconds, timestamp.nanoseconds)
+    override fun getInstant(key: String): Instant? {
+        return documentSnapshot.getTimestamp(key)?.let {
+            Instant.fromEpochSeconds(it.seconds, it.nanoseconds)
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.taetae98.diary.domain.entity.account.device
+package com.taetae98.diary.domain.entity.device
 
 public data class DeviceInfo(
     val deviceNickname: String,

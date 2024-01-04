@@ -1,6 +1,6 @@
 package com.taetae98.diary.domain.repository
 
-import com.taetae98.diary.domain.entity.account.holiday.Holiday
+import com.taetae98.diary.domain.entity.holiday.Holiday
 import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.Month
 

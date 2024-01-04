@@ -1,5 +1,6 @@
 package com.taetae98.diary.feature.memo.detail
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -23,7 +24,8 @@ import com.taetae98.diary.ui.compose.icon.FinishIcon
 import com.taetae98.diary.ui.compose.scaffold.DiaryScaffold
 import com.taetae98.diary.ui.compose.text.TextFieldUiState
 import com.taetae98.diary.ui.compose.topbar.NavigateUpTopBar
-import com.taetae98.diary.ui.entity.EntityDetail
+import com.taetae98.diary.ui.entity.EntityDescription
+import com.taetae98.diary.ui.entity.EntityTitle
 
 @Composable
 internal fun MemoDetailScreen(
@@ -32,6 +34,7 @@ internal fun MemoDetailScreen(
     uiState: State<MemoDetailUiState>,
     toolbarUiState: State<MemoDetailToolbarUiState>,
     titleUiState: State<TextFieldUiState>,
+    descriptionUiState: State<TextFieldUiState>,
 ) {
     val hostState = remember { SnackbarHostState() }
 
@@ -53,6 +56,7 @@ internal fun MemoDetailScreen(
         Content(
             modifier = Modifier.padding(it),
             titleUiState = titleUiState,
+            descriptionUiState = descriptionUiState,
         )
     }
 
@@ -142,15 +146,21 @@ private fun FloatingButton(
 private fun Content(
     modifier: Modifier = Modifier,
     titleUiState: State<TextFieldUiState>,
+    descriptionUiState: State<TextFieldUiState>,
 ) {
     Column(
         modifier = modifier
             .padding(horizontal = 8.dp)
-            .verticalScroll(state = rememberScrollState())
+            .verticalScroll(state = rememberScrollState()),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        EntityDetail(
+        EntityTitle(
             modifier = Modifier.fillMaxWidth(),
-            titleUiState = titleUiState
+            uiState = titleUiState
+        )
+        EntityDescription(
+            modifier = Modifier.fillMaxWidth(),
+            uiState = descriptionUiState,
         )
     }
 }

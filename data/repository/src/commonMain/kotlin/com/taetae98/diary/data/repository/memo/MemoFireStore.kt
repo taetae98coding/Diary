@@ -67,6 +67,10 @@ internal class MemoFireStore(
 
         const val ID = "id"
         const val TITLE = "title"
+        const val DESCRIPTION = "description"
+        const val DATE_RANGE_COLOR = "dateRangeColor"
+        const val DATE_RANGE_START = "dateRangeStart"
+        const val DATE_RANGE_END = "dateRangeEnd"
         const val STATE = "state"
         const val OWNER_ID = "ownerId"
         const val UPDATE_AT = "updateAt"

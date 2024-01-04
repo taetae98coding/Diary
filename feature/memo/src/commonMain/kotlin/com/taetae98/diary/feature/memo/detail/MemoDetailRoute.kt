@@ -18,7 +18,8 @@ internal fun MemoDetailRoute(
         onNavigateUp = onNavigateUp,
         uiState = uiState,
         toolbarUiState = memoDetailViewModel.toolbarUiState.collectAsStateOnLifecycle(),
-        titleUiState = memoDetailViewModel.titleUiState.collectAsStateOnLifecycle(),
+        titleUiState = memoDetailViewModel.titleUiStateHolder.uiState.collectAsStateOnLifecycle(),
+        descriptionUiState = memoDetailViewModel.descriptionUiStateHolder.uiState.collectAsStateOnLifecycle()
     )
 
     LaunchedEffect(uiState.value.message) {

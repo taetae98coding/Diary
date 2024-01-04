@@ -12,16 +12,16 @@ import com.taetae98.diary.ui.compose.text.ClearTextField
 import com.taetae98.diary.ui.compose.text.TextFieldUiState
 
 @Composable
-public fun EntityDetail(
+public fun EntityTitle(
     modifier: Modifier = Modifier,
-    titleUiState: State<TextFieldUiState>,
+    uiState: State<TextFieldUiState>,
 ) {
     Card(
         modifier = modifier.width(intrinsicSize = IntrinsicSize.Min)
     ) {
         ClearTextField(
             modifier = Modifier.fillMaxWidth(),
-            uiState = titleUiState,
+            uiState = uiState,
             label = {
                 Text(text = "제목")
             },

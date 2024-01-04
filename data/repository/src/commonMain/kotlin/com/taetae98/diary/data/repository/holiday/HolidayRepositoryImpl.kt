@@ -2,7 +2,7 @@ package com.taetae98.diary.data.repository.holiday
 
 import com.taetae98.diary.data.dto.holiday.HolidayDto
 import com.taetae98.diary.data.remote.api.HolidayRemoteDataSource
-import com.taetae98.diary.domain.entity.account.holiday.Holiday
+import com.taetae98.diary.domain.entity.holiday.Holiday
 import com.taetae98.diary.domain.repository.HolidayRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

@@ -1,17 +1,17 @@
 package com.taetae98.diary.feature.memo.add
 
-import com.taetae98.diary.domain.entity.account.memo.Memo
-import com.taetae98.diary.domain.entity.account.memo.MemoState
+import com.taetae98.diary.domain.entity.memo.Memo
+import com.taetae98.diary.domain.entity.memo.MemoState
 import com.taetae98.diary.domain.exception.TitleEmptyException
 import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
 import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
 import com.taetae98.diary.feature.memo.detail.MemoDetailMessage
 import com.taetae98.diary.feature.memo.detail.MemoDetailToolbarUiState
 import com.taetae98.diary.feature.memo.detail.MemoDetailUiState
+import com.taetae98.diary.feature.memo.detail.TextFieldUiStateHolder
 import com.taetae98.diary.library.uuid.getUuid
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
 import com.taetae98.diary.library.viewmodel.ViewModel
-import com.taetae98.diary.ui.compose.text.TextFieldUiState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -24,16 +24,12 @@ import org.koin.core.annotation.Factory
 
 @Factory
 internal class MemoAddViewModel(
-    private val savedStateHandle: SavedStateHandle,
+    savedStateHandle: SavedStateHandle,
     private val getAccountUseCase: GetAccountUseCase,
     private val upsertMemoUseCase: UpsertMemoUseCase,
 ) : ViewModel() {
     private val _message = MutableStateFlow<MemoDetailMessage?>(null)
     private val _toolbarUiState = MutableStateFlow(MemoDetailToolbarUiState.Add)
-    private val _title = savedStateHandle.getStateFlow(
-        key = TITLE,
-        initialValue = "",
-    )
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val uiState = _message.mapLatest {
@@ -53,32 +49,28 @@ internal class MemoAddViewModel(
     )
 
     val toolbarUiState = _toolbarUiState.asStateFlow()
-
-    @OptIn(ExperimentalCoroutinesApi::class)
-    val titleUiState = _title.mapLatest { title ->
-        TextFieldUiState(
-            value = title,
-            onValueChange = ::setTitle,
-        )
-    }.stateIn(
+    val titleUiStateHolder = TextFieldUiStateHolder(
         scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-        initialValue = TextFieldUiState(
-            value = _title.value,
-            onValueChange = ::setTitle,
-        )
+        initialValue = "",
+        key = TITLE,
+        savedStateHandle = savedStateHandle,
     )
-
-    private fun setTitle(title: String) {
-        savedStateHandle[TITLE] = title
-    }
+    val descriptionUiStateHolder = TextFieldUiStateHolder(
+        scope = viewModelScope,
+        initialValue = "",
+        key = DESCRIPTION,
+        savedStateHandle = savedStateHandle,
+    )
 
     private fun add() {
         viewModelScope.launch {
             val ownerId = getAccountUseCase(Unit).firstOrNull()?.getOrNull()?.uid
             val memo = Memo(
                 id = getUuid(),
-                title = _title.value,
+                title = titleUiStateHolder.getValue().value,
+                description = descriptionUiStateHolder.getValue().value,
+                dateRangeColor = null,
+                dateRange = null,
                 ownerId = ownerId,
                 state = MemoState.INCOMPLETE,
             )
@@ -93,13 +85,14 @@ internal class MemoAddViewModel(
     }
 
     private suspend fun handleThrowable(throwable: Throwable) {
-        when(throwable) {
+        when (throwable) {
             is TitleEmptyException -> _message.emit(MemoDetailMessage.TitleEmpty)
         }
     }
 
     private fun clearInput() {
-        savedStateHandle[TITLE] = ""
+        titleUiStateHolder.setValue("")
+        descriptionUiStateHolder.setValue("")
     }
 
     private suspend fun showAddMessage() {
@@ -114,5 +107,6 @@ internal class MemoAddViewModel(
 
     companion object {
         private const val TITLE = "title"
+        private const val DESCRIPTION = "description"
     }
 }

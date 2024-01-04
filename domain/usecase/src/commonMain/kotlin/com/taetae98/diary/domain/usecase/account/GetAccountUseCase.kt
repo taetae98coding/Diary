@@ -1,6 +1,6 @@
 package com.taetae98.diary.domain.usecase.account
 
-import com.taetae98.diary.domain.entity.account.account.Account
+import com.taetae98.diary.domain.entity.account.Account
 import com.taetae98.diary.domain.repository.AccountRepository
 import com.taetae98.diary.domain.usecase.core.FlowUseCase
 import kotlinx.coroutines.flow.Flow

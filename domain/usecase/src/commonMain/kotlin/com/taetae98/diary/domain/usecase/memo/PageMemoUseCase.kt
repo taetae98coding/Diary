@@ -1,8 +1,8 @@
 package com.taetae98.diary.domain.usecase.memo
 
 import app.cash.paging.PagingData
-import com.taetae98.diary.domain.entity.account.account.Account
-import com.taetae98.diary.domain.entity.account.memo.Memo
+import com.taetae98.diary.domain.entity.account.Account
+import com.taetae98.diary.domain.entity.memo.Memo
 import com.taetae98.diary.domain.repository.MemoRepository
 import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
 import com.taetae98.diary.domain.usecase.core.FlowUseCase

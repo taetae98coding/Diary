@@ -1,15 +1,13 @@
-package com.taetae98.diary.data.dto.memo
+package com.taetae98.diary.domain.entity.memo
 
-import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 
-public data class MemoDto(
+public data class Memo(
     val id: String,
     val title: String,
     val description: String,
     val dateRangeColor: Long?,
     val dateRange: ClosedRange<LocalDate>?,
-    val state: MemoStateDto,
     val ownerId: String?,
-    val updateAt: Instant,
+    val state: MemoState,
 )

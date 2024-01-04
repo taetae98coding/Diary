@@ -1,6 +1,6 @@
 package com.taetae98.diary.domain.usecase.holiday
 
-import com.taetae98.diary.domain.entity.account.holiday.Holiday
+import com.taetae98.diary.domain.entity.holiday.Holiday
 import com.taetae98.diary.domain.repository.HolidayRepository
 import com.taetae98.diary.domain.usecase.core.FlowUseCase
 import kotlinx.coroutines.flow.Flow

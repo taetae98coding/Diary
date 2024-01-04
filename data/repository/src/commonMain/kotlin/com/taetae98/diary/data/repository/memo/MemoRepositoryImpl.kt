@@ -6,7 +6,7 @@ import app.cash.paging.createPagingConfig
 import com.taetae98.diary.data.dto.memo.MemoDto
 import com.taetae98.diary.data.local.api.MemoLocalDataSource
 import com.taetae98.diary.data.pref.api.MemoPrefDataSource
-import com.taetae98.diary.domain.entity.account.memo.Memo
+import com.taetae98.diary.domain.entity.memo.Memo
 import com.taetae98.diary.domain.repository.MemoRepository
 import com.taetae98.diary.library.paging.mapPaging
 import kotlinx.coroutines.flow.Flow
