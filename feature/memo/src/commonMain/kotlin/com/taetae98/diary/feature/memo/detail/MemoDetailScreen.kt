@@ -24,6 +24,7 @@ import com.taetae98.diary.ui.compose.icon.FinishIcon
 import com.taetae98.diary.ui.compose.scaffold.DiaryScaffold
 import com.taetae98.diary.ui.compose.text.TextFieldUiState
 import com.taetae98.diary.ui.compose.topbar.NavigateUpTopBar
+import com.taetae98.diary.ui.entity.EntityDateRange
 import com.taetae98.diary.ui.entity.EntityDescription
 import com.taetae98.diary.ui.entity.EntityTitle
 
@@ -161,6 +162,9 @@ private fun Content(
         EntityDescription(
             modifier = Modifier.fillMaxWidth(),
             uiState = descriptionUiState,
+        )
+        EntityDateRange(
+            modifier = Modifier.fillMaxWidth(),
         )
     }
 }
