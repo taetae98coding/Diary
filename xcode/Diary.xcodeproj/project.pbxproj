@@ -310,7 +310,6 @@
 /* Begin XCBuildConfiguration section */
 		3D78D7E12B2CBE5B004AA34F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3DF625092B3F0A000041D9A1 /* Debug-LocalProperties.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -374,7 +373,6 @@
 		};
 		3D78D7E22B2CBE5B004AA34F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3DF6250A2B3F0A680041D9A1 /* Release-LocalProperties.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
