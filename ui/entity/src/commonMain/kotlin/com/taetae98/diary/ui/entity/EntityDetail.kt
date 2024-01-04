@@ -24,7 +24,10 @@ public fun EntityDetail(
             uiState = titleUiState,
             label = {
                 Text(text = "제목")
-            }
+            },
+            singleLine = true,
+            maxLines = 1,
+            minLines = 1,
         )
     }
 }

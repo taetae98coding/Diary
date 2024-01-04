@@ -12,6 +12,9 @@ public fun ClearTextField(
     modifier: Modifier = Modifier,
     uiState: State<TextFieldUiState>,
     label: @Composable (() -> Unit)? = null,
+    singleLine: Boolean = false,
+    maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
+    minLines: Int = 1,
 ) {
     TextField(
         modifier = modifier,
@@ -23,6 +26,9 @@ public fun ClearTextField(
                 ClearButton(uiState = uiState)
             }
         },
+        singleLine = singleLine,
+        maxLines = maxLines,
+        minLines = minLines,
         colors = DiaryTextField.transparentIndicatorColor(),
     )
 }
