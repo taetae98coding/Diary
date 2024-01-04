@@ -8,6 +8,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":ui:compose"))
+                implementation(project(":library:compose-color"))
                 implementation(compose.material3)
             }
         }
