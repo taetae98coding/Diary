@@ -21,6 +21,9 @@ ON CONFLICT (id) DO
 UPDATE SET
 title = excluded.title,
 description = excluded.description,
+dateRangeColor = excluded.dateRangeColor,
+dateRangeStart = excluded.dateRangeStart,
+dateRangeEnd = excluded.dateRangeEnd,
 state = excluded.state,
 updateAt = excluded.updateAt;
 
@@ -53,7 +56,14 @@ delete:
 DELETE FROM MemoEntity
 WHERE id = :id;
 
-find:
+findById:
 SELECT *
 FROM MemoEntity
 WHERE id = :id;
+
+findByYearAndMonth:
+SELECT *
+FROM MemoEntity
+WHERE (dateRangeEnd >= :start AND dateRangeStart <= :end)
+AND ownerId =: ownerId
+AND state != 2;

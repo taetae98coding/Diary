@@ -47,7 +47,6 @@
 		3D8527D02B2CCCFA009A4BE0 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 3D8527CF2B2CCCFA009A4BE0 /* FirebaseStorage */; };
 		3D8527D22B2CCCFA009A4BE0 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 3D8527D12B2CCCFA009A4BE0 /* FirebaseStorageCombine-Community */; };
 		3DF625082B3F06D30041D9A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF625072B3F06D30041D9A1 /* SceneDelegate.swift */; };
-		3DF6250B2B3F0A680041D9A1 /* Release-LocalProperties.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3DF6250A2B3F0A680041D9A1 /* Release-LocalProperties.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,9 +56,9 @@
 		3D78D7DC2B2CBE5B004AA34F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D78D7DF2B2CBE5B004AA34F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3D85279B2B2CCC67009A4BE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3DA4C98C2B487B980006521A /* Release-LocalProperties.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Release-LocalProperties.xcconfig"; sourceTree = "<group>"; };
+		3DA4C98D2B487BF40006521A /* Debug-LocalProperties.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Debug-LocalProperties.xcconfig"; sourceTree = "<group>"; };
 		3DF625072B3F06D30041D9A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3DF625092B3F0A000041D9A1 /* Debug-LocalProperties.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Debug-LocalProperties.xcconfig"; sourceTree = "<group>"; };
-		3DF6250A2B3F0A680041D9A1 /* Release-LocalProperties.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Release-LocalProperties.xcconfig"; sourceTree = "<group>"; };
 		3DF6250C2B3F0B230041D9A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,8 +110,8 @@
 		3D78D7CC2B2CBE59004AA34F = {
 			isa = PBXGroup;
 			children = (
-				3DF6250A2B3F0A680041D9A1 /* Release-LocalProperties.xcconfig */,
-				3DF625092B3F0A000041D9A1 /* Debug-LocalProperties.xcconfig */,
+				3DA4C98D2B487BF40006521A /* Debug-LocalProperties.xcconfig */,
+				3DA4C98C2B487B980006521A /* Release-LocalProperties.xcconfig */,
 				3D78D7D72B2CBE59004AA34F /* Diary */,
 				3D78D7D62B2CBE59004AA34F /* Products */,
 			);
@@ -248,7 +247,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DF6250B2B3F0A680041D9A1 /* Release-LocalProperties.xcconfig in Resources */,
 				3D78D7E02B2CBE5B004AA34F /* Preview Assets.xcassets in Resources */,
 				3D78D7DD2B2CBE5B004AA34F /* Assets.xcassets in Resources */,
 			);
@@ -310,6 +308,7 @@
 /* Begin XCBuildConfiguration section */
 		3D78D7E12B2CBE5B004AA34F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3DA4C98D2B487BF40006521A /* Debug-LocalProperties.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -373,6 +372,7 @@
 		};
 		3D78D7E22B2CBE5B004AA34F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3DA4C98C2B487B980006521A /* Release-LocalProperties.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -429,14 +429,13 @@
 		};
 		3D78D7E42B2CBE5B004AA34F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3DF625092B3F0A000041D9A1 /* Debug-LocalProperties.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_ASSET_PATHS = "\"Diary/Preview Content\"";
-				DEVELOPMENT_TEAM = VKGAQDGK5R;
+				DEVELOPMENT_TEAM = 4TV6L66XZ8;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../target/iosApp/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
@@ -469,14 +468,13 @@
 		};
 		3D78D7E52B2CBE5B004AA34F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3DF6250A2B3F0A680041D9A1 /* Release-LocalProperties.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_ASSET_PATHS = "\"Diary/Preview Content\"";
-				DEVELOPMENT_TEAM = VKGAQDGK5R;
+				DEVELOPMENT_TEAM = 4TV6L66XZ8;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../target/iosApp/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";

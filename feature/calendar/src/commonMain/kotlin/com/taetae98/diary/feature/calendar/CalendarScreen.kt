@@ -46,6 +46,7 @@ import kotlinx.datetime.toLocalDateTime
 internal fun CalendarScreen(
     modifier: Modifier = Modifier,
     state: CalendarState,
+    schedule: State<ImmutableList<CalendarItem.Schedule>>,
     holiday: State<ImmutableList<CalendarItem.Holiday>>
 ) {
     DiaryScaffold(
@@ -61,6 +62,7 @@ internal fun CalendarScreen(
                 val now = localDateNow()
                 mutableStateOf(persistentListOf(DateRange(now, now)))
             },
+            schedule = schedule,
             holiday = holiday,
         )
     }

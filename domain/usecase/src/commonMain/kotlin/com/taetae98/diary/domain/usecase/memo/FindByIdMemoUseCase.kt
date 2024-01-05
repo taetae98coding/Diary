@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.flowOf
 import org.koin.core.annotation.Factory
 
 @Factory
-public class FindMemoUseCase(
+public class FindByIdMemoUseCase(
     private val memoRepository: MemoRepository,
 ) : FlowUseCase<String?, Memo?>() {
     override fun execute(params: String?): Flow<Memo?> {

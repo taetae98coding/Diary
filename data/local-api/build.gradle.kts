@@ -9,6 +9,7 @@ kotlin {
                 implementation(project(":data:dto"))
 
                 implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.kotlinx.datetime)
                 implementation(libs.paging.common)
             }
         }

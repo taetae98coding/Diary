@@ -16,6 +16,7 @@ public fun Week(
     state: WeekState,
     calendarState: CalendarState,
     primaryDate: State<ImmutableList<DateRange>>,
+    schedule: State<ImmutableList<CalendarItem.Schedule>>,
     holiday: State<ImmutableList<CalendarItem.Holiday>>,
 ) {
     Box(
@@ -30,6 +31,7 @@ public fun Week(
             modifier = Modifier.fillMaxSize(),
             state = state,
             primaryDate = primaryDate,
+            schedule = schedule,
             holiday = holiday,
         )
     }

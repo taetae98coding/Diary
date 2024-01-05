@@ -33,12 +33,17 @@ import kotlinx.datetime.LocalDate
 internal fun CalendarItemLayout(
     modifier: Modifier,
     state: WeekState,
+    schedule: State<ImmutableList<CalendarItem.Schedule>>,
     holiday: State<ImmutableList<CalendarItem>>,
 ) {
     val weekDayItem = remember {
         derivedStateOf {
+            val scheduleList = schedule.value
+                .filter { it.endInclusive >= state.start && it.start <= state.endInclusive }
+                .toMutableList()
+
             val holidayList = holiday.value
-                .filterNot { it.endInclusive < state.start || it.start > state.endInclusive }
+                .filter { it.endInclusive >= state.start && it.start <= state.endInclusive }
                 .groupBy { it.name }
                 .map { entry ->
                     CalendarItem.Holiday(
@@ -48,13 +53,25 @@ internal fun CalendarItemLayout(
                     )
                 }
                 .toMutableList()
+
+            val itemList = buildList {
+                addAll(scheduleList)
+                addAll(holidayList)
+            }.sortedWith { a, b ->
+                if (a.start != b.start) {
+                    compareValues(a.start, b.start)
+                } else {
+                    -compareValues(a.endInclusive, b.endInclusive)
+                }
+            }.toMutableList()
+
             val list = buildList {
-                while (holidayList.isNotEmpty()) {
+                while (itemList.isNotEmpty()) {
                     val row = buildList {
                         addAll(
                             weekStart = state.start,
                             weekEndInclusive = state.endInclusive,
-                            iterator = holidayList.iterator(),
+                            iterator = itemList.iterator(),
                         )
                     }
 
@@ -130,7 +147,7 @@ private fun MutableList<WeekDayItem>.addAll(
 ) {
     val sundayCursor = DayOfWeek.SUNDAY.toChristDayNumber()
     val saturdayCursor = DayOfWeek.SATURDAY.toChristDayNumber()
-    var cursor = sundayCursor
+    var cursor = sumOf { it.weight.toInt() }
 
     while (iterator.hasNext()) {
         val item = iterator.next()
@@ -149,12 +166,18 @@ private fun MutableList<WeekDayItem>.addAll(
             add(WeekDayItem.Space((itemStartCursor - cursor).toFloat()))
         }
         if (cursor <= itemStartCursor) {
+            val color = if (item is CalendarItem.Schedule) {
+                Color(item.color)
+            } else {
+                Color.Unspecified
+            }
+
             add(
                 WeekDayItem.Item(
                     key = item.key,
                     name = item.name,
                     weight = itemEndCursor - itemStartCursor + 1F,
-                    color = Color.Unspecified,
+                    color = color,
                 )
             )
 

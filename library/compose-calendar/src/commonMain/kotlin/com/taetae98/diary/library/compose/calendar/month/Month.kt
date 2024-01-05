@@ -17,6 +17,7 @@ public fun Month(
     state: MonthState,
     calendarState: CalendarState,
     primaryDate: State<ImmutableList<DateRange>>,
+    schedule: State<ImmutableList<CalendarItem.Schedule>>,
     holiday: State<ImmutableList<CalendarItem.Holiday>>,
 ) {
     Column(
@@ -29,6 +30,7 @@ public fun Month(
                 state = it,
                 calendarState = calendarState,
                 primaryDate = primaryDate,
+                schedule = schedule,
                 holiday = holiday,
             )
         }

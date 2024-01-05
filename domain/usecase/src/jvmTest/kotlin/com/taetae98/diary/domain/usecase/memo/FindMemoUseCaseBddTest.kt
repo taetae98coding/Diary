@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.first
 
 class FindMemoUseCaseBddTest : BehaviorSpec({
     val memoRepository = mockk<MemoRepository>(relaxed = true, relaxUnitFun = true)
-    val useCase = FindMemoUseCase(
+    val useCase = FindByIdMemoUseCase(
         memoRepository = memoRepository
     )
 

@@ -2,6 +2,7 @@ package com.taetae98.diary.data.local.impl.memo
 
 import app.cash.paging.PagingSource
 import app.cash.sqldelight.coroutines.asFlow
+import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.coroutines.mapToOneOrNull
 import app.cash.sqldelight.paging3.QueryPagingSource
 import com.taetae98.diary.data.dto.memo.MemoDto
@@ -11,6 +12,11 @@ import com.taetae98.diary.data.local.impl.DiaryDatabase
 import com.taetae98.diary.data.local.impl.di.DatabaseModule
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.Month
+import kotlinx.datetime.minus
+import kotlinx.datetime.plus
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Named
 
@@ -48,9 +54,18 @@ internal class MemoLocalDataSourceImpl(
     }
 
     override fun find(id: String): Flow<MemoDto?> {
-        return database.memoEntityQueries.find(id, ::mapToMemoDto)
+        return database.memoEntityQueries.findById(id, ::mapToMemoDto)
             .asFlow()
             .mapToOneOrNull(dispatcher)
+    }
+
+    override fun find(dateRange: ClosedRange<LocalDate>, ownerId: String?): Flow<List<MemoDto>> {
+        return database.memoEntityQueries.findByYearAndMonth(
+            start = dateRange.start,
+            end = dateRange.endInclusive,
+            ownerId = ownerId,
+            mapper = ::mapToMemoDto
+        ).asFlow().mapToList(dispatcher)
     }
 
     override fun page(ownerId: String?): PagingSource<Int, MemoDto> {

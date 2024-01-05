@@ -29,6 +29,7 @@ public fun Calendar(
     modifier: Modifier = Modifier,
     state: CalendarState,
     primaryDate: State<ImmutableList<DateRange>> = remember { mutableStateOf(persistentListOf()) },
+    schedule: State<ImmutableList<CalendarItem.Schedule>> = remember { mutableStateOf(persistentListOf()) },
     holiday: State<ImmutableList<CalendarItem.Holiday>> = remember { mutableStateOf(persistentListOf()) },
 ) {
     Column(
@@ -39,6 +40,7 @@ public fun Calendar(
             modifier = Modifier.weight(1F),
             state = state,
             primaryDate = primaryDate,
+            schedule = schedule,
             holiday = holiday,
         )
     }
@@ -50,6 +52,7 @@ private fun Content(
     modifier: Modifier = Modifier,
     state: CalendarState,
     primaryDate: State<ImmutableList<DateRange>>,
+    schedule: State<ImmutableList<CalendarItem.Schedule>>,
     holiday: State<ImmutableList<CalendarItem.Holiday>>,
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -120,6 +123,7 @@ private fun Content(
             state = state.getMonthState(it),
             calendarState = state,
             primaryDate = primaryDate,
+            schedule = schedule,
             holiday = holiday,
         )
     }

@@ -5,10 +5,9 @@ import com.taetae98.diary.domain.entity.memo.MemoState
 import com.taetae98.diary.domain.exception.TitleEmptyException
 import com.taetae98.diary.domain.usecase.memo.CompleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.DeleteMemoUseCase
-import com.taetae98.diary.domain.usecase.memo.FindMemoUseCase
+import com.taetae98.diary.domain.usecase.memo.FindByIdMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.IncompleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
-import com.taetae98.diary.feature.memo.add.MemoAddViewModel
 import com.taetae98.diary.library.kotlin.ext.localDateNow
 import com.taetae98.diary.library.kotlin.ext.randomRgbColor
 import com.taetae98.diary.library.kotlin.ext.toEpochMilliseconds
@@ -16,8 +15,6 @@ import com.taetae98.diary.library.kotlin.ext.toLocalDate
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
 import com.taetae98.diary.library.viewmodel.ViewModel
 import com.taetae98.diary.navigation.core.memo.MemoDetailEntry
-import kotlin.random.Random
-import kotlin.random.nextLong
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -31,7 +28,7 @@ import org.koin.core.annotation.Factory
 @Factory
 internal class MemoDetailViewModel(
     savedStateHandle: SavedStateHandle,
-    private val findMemoUseCase: FindMemoUseCase,
+    private val findByIdMemoUseCase: FindByIdMemoUseCase,
     private val completeMemoUseCase: CompleteMemoUseCase,
     private val incompleteMemoUseCase: IncompleteMemoUseCase,
     private val deleteMemoUseCase: DeleteMemoUseCase,
@@ -44,7 +41,7 @@ internal class MemoDetailViewModel(
     private val _message = MutableStateFlow<MemoDetailMessage?>(null)
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    private val memo = id.flatMapLatest { findMemoUseCase(it) }
+    private val memo = id.flatMapLatest { findByIdMemoUseCase(it) }
         .mapLatest(Result<Memo?>::getOrNull)
         .onEach(::onMemoChanged)
         .stateIn(

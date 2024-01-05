@@ -14,6 +14,7 @@ internal fun WeekForeground(
     modifier: Modifier = Modifier,
     state: WeekState,
     primaryDate: State<ImmutableList<DateRange>>,
+    schedule: State<ImmutableList<CalendarItem.Schedule>>,
     holiday: State<ImmutableList<CalendarItem.Holiday>>,
 ) {
     Column(
@@ -28,6 +29,7 @@ internal fun WeekForeground(
             modifier = Modifier.fillMaxWidth()
                 .weight(1F),
             state = state,
+            schedule = schedule,
             holiday = holiday,
         )
     }

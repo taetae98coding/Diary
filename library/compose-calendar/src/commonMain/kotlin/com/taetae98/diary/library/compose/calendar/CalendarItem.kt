@@ -15,4 +15,12 @@ public sealed class CalendarItem : ClosedRange<LocalDate> {
     ) : CalendarItem() {
         override val key: Any = toString()
     }
+
+    public data class Schedule(
+        override val key: Any,
+        override val name: String,
+        val color: Long,
+        override val start: LocalDate,
+        override val endInclusive: LocalDate,
+    ) : CalendarItem()
 }

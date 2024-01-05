@@ -12,6 +12,8 @@ import com.taetae98.diary.library.paging.mapPaging
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.Month
 import org.koin.core.annotation.Factory
 
 @Factory
@@ -55,6 +57,11 @@ internal class MemoRepositoryImpl(
     override fun find(id: String): Flow<Memo?> {
         return localDataSource.find(id)
             .map { it?.toDomain() }
+    }
+
+    override fun find(dateRange: ClosedRange<LocalDate>, ownerId: String?): Flow<List<Memo>> {
+        return localDataSource.find(dateRange, ownerId)
+            .map { it.map(MemoDto::toDomain) }
     }
 
     override fun page(ownerId: String?): Flow<PagingData<Memo>> {
