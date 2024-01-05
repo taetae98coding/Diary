@@ -16,6 +16,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -25,20 +26,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.taetae98.diary.library.compose.color.ColorPickerDialog
 
 @Composable
 public fun EntityDateRange(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    uiState: State<DateRangeUiState>,
 ) {
     Card(
         modifier = modifier.width(intrinsicSize = IntrinsicSize.Min)
     ) {
         Column {
-            SwitchLayout(modifier = Modifier.fillMaxWidth())
-            ColorLayout(modifier = Modifier.fillMaxWidth())
+            SwitchLayout(
+                modifier = Modifier.fillMaxWidth(),
+                uiState = uiState,
+            )
+            ColorLayout(
+                modifier = Modifier.fillMaxWidth(),
+                uiState = uiState,
+            )
         }
     }
 }
@@ -46,6 +55,7 @@ public fun EntityDateRange(
 @Composable
 private fun SwitchLayout(
     modifier: Modifier = Modifier,
+    uiState: State<DateRangeUiState>,
 ) {
     Row(
         modifier = modifier.toggleable(
@@ -69,6 +79,7 @@ private fun SwitchLayout(
 @Composable
 private fun ColorLayout(
     modifier: Modifier = Modifier,
+    uiState: State<DateRangeUiState>,
 ) {
     var isColorPickerDialogVisible by rememberSaveable { mutableStateOf(false) }
 
@@ -87,18 +98,23 @@ private fun ColorLayout(
             modifier = Modifier.size(32.dp)
                 .clip(CircleShape)
                 .border(
-                    width = 2.dp,
+                    width = 1.dp,
                     color = MaterialTheme.colorScheme.outlineVariant,
                     shape = CircleShape,
                 )
                 .drawBehind {
-                    drawCircle(Color.Red)
+                    drawCircle(Color(uiState.value.color))
                 }
         )
     }
 
     if (isColorPickerDialogVisible) {
         ColorPickerDialog(
+            color = Color(uiState.value.color),
+            onSelect = {
+                uiState.value.onColorChange(it.toArgb().toLong())
+                isColorPickerDialogVisible = false
+            },
             onDismissRequest = { isColorPickerDialogVisible = false }
         )
     }

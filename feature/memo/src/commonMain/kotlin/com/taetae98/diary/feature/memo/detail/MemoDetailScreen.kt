@@ -25,6 +25,7 @@ import com.taetae98.diary.ui.compose.scaffold.DiaryScaffold
 import com.taetae98.diary.ui.compose.text.TextFieldUiState
 import com.taetae98.diary.ui.compose.topbar.NavigateUpTopBar
 import com.taetae98.diary.ui.entity.EntityDateRange
+import com.taetae98.diary.ui.entity.DateRangeUiState
 import com.taetae98.diary.ui.entity.EntityDescription
 import com.taetae98.diary.ui.entity.EntityTitle
 
@@ -36,6 +37,7 @@ internal fun MemoDetailScreen(
     toolbarUiState: State<MemoDetailToolbarUiState>,
     titleUiState: State<TextFieldUiState>,
     descriptionUiState: State<TextFieldUiState>,
+    dateRangeUiState: State<DateRangeUiState>,
 ) {
     val hostState = remember { SnackbarHostState() }
 
@@ -58,6 +60,7 @@ internal fun MemoDetailScreen(
             modifier = Modifier.padding(it),
             titleUiState = titleUiState,
             descriptionUiState = descriptionUiState,
+            dateRangeUiState = dateRangeUiState,
         )
     }
 
@@ -148,6 +151,7 @@ private fun Content(
     modifier: Modifier = Modifier,
     titleUiState: State<TextFieldUiState>,
     descriptionUiState: State<TextFieldUiState>,
+    dateRangeUiState: State<DateRangeUiState>,
 ) {
     Column(
         modifier = modifier
@@ -165,6 +169,7 @@ private fun Content(
         )
         EntityDateRange(
             modifier = Modifier.fillMaxWidth(),
+            uiState = dateRangeUiState,
         )
     }
 }

@@ -11,6 +11,8 @@ import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
 import com.taetae98.diary.library.viewmodel.ViewModel
 import com.taetae98.diary.navigation.core.memo.MemoDetailEntry
+import kotlin.random.Random
+import kotlin.random.nextLong
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -46,20 +48,6 @@ internal class MemoDetailViewModel(
             initialValue = null,
         )
 
-    val titleUiStateHolder = TextFieldUiStateHolder(
-        scope = viewModelScope,
-        initialValue = "",
-        key = TITLE,
-        savedStateHandle = savedStateHandle,
-    )
-
-    val descriptionUiStateHolder = TextFieldUiStateHolder(
-        scope = viewModelScope,
-        initialValue = "",
-        key = DESCRIPTION,
-        savedStateHandle = savedStateHandle,
-    )
-
     @OptIn(ExperimentalCoroutinesApi::class)
     val uiState = _message.mapLatest {
         MemoDetailUiState.Detail(
@@ -92,6 +80,27 @@ internal class MemoDetailViewModel(
             onComplete = ::toggleComplete,
             onDelete = ::delete,
         )
+    )
+
+    val titleUiStateHolder = TextFieldUiStateHolder(
+        scope = viewModelScope,
+        initialValue = "",
+        key = TITLE,
+        savedStateHandle = savedStateHandle,
+    )
+
+    val descriptionUiStateHolder = TextFieldUiStateHolder(
+        scope = viewModelScope,
+        initialValue = "",
+        key = DESCRIPTION,
+        savedStateHandle = savedStateHandle,
+    )
+
+    val dateRangeUiStateHolder = DateRangeUiStateHolder(
+        scope = viewModelScope,
+        initialColor = Random.nextLong(0..0xFFFFFFFF),
+        colorKey = COLOR,
+        savedStateHandle = savedStateHandle,
     )
 
     private fun onMemoChanged(memo: Memo?) {
@@ -156,5 +165,6 @@ internal class MemoDetailViewModel(
     companion object {
         private const val TITLE = "title"
         private const val DESCRIPTION = "description"
+        private const val COLOR = "color"
     }
 }

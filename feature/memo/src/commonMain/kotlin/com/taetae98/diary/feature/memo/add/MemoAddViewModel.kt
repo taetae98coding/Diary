@@ -5,6 +5,7 @@ import com.taetae98.diary.domain.entity.memo.MemoState
 import com.taetae98.diary.domain.exception.TitleEmptyException
 import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
 import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
+import com.taetae98.diary.feature.memo.detail.DateRangeUiStateHolder
 import com.taetae98.diary.feature.memo.detail.MemoDetailMessage
 import com.taetae98.diary.feature.memo.detail.MemoDetailToolbarUiState
 import com.taetae98.diary.feature.memo.detail.MemoDetailUiState
@@ -12,6 +13,8 @@ import com.taetae98.diary.feature.memo.detail.TextFieldUiStateHolder
 import com.taetae98.diary.library.uuid.getUuid
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
 import com.taetae98.diary.library.viewmodel.ViewModel
+import kotlin.random.Random
+import kotlin.random.nextLong
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -28,11 +31,11 @@ internal class MemoAddViewModel(
     private val getAccountUseCase: GetAccountUseCase,
     private val upsertMemoUseCase: UpsertMemoUseCase,
 ) : ViewModel() {
-    private val _message = MutableStateFlow<MemoDetailMessage?>(null)
+    private val message = MutableStateFlow<MemoDetailMessage?>(null)
     private val _toolbarUiState = MutableStateFlow(MemoDetailToolbarUiState.Add)
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val uiState = _message.mapLatest {
+    val uiState = message.mapLatest {
         MemoDetailUiState.Add(
             onAdd = ::add,
             message = it,
@@ -43,12 +46,13 @@ internal class MemoAddViewModel(
         started = SharingStarted.Eagerly,
         initialValue = MemoDetailUiState.Add(
             onAdd = ::add,
-            message = _message.value,
+            message = message.value,
             onMessageShown = ::messageShown,
         )
     )
 
     val toolbarUiState = _toolbarUiState.asStateFlow()
+
     val titleUiStateHolder = TextFieldUiStateHolder(
         scope = viewModelScope,
         initialValue = "",
@@ -59,6 +63,13 @@ internal class MemoAddViewModel(
         scope = viewModelScope,
         initialValue = "",
         key = DESCRIPTION,
+        savedStateHandle = savedStateHandle,
+    )
+
+    val dateRangeUiStateHolder = DateRangeUiStateHolder(
+        scope = viewModelScope,
+        initialColor = Random.nextLong(0..0xFFFFFFFF),
+        colorKey = COLOR,
         savedStateHandle = savedStateHandle,
     )
 
@@ -86,7 +97,7 @@ internal class MemoAddViewModel(
 
     private suspend fun handleThrowable(throwable: Throwable) {
         when (throwable) {
-            is TitleEmptyException -> _message.emit(MemoDetailMessage.TitleEmpty)
+            is TitleEmptyException -> message.emit(MemoDetailMessage.TitleEmpty)
         }
     }
 
@@ -96,17 +107,18 @@ internal class MemoAddViewModel(
     }
 
     private suspend fun showAddMessage() {
-        _message.emit(MemoDetailMessage.Add)
+        message.emit(MemoDetailMessage.Add)
     }
 
     private fun messageShown() {
         viewModelScope.launch {
-            _message.emit(null)
+            message.emit(null)
         }
     }
 
     companion object {
         private const val TITLE = "title"
         private const val DESCRIPTION = "description"
+        private const val COLOR = "color"
     }
 }

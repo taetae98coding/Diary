@@ -17,6 +17,7 @@ internal fun MemoAddRoute(
         uiState = viewModel.uiState.collectAsStateOnLifecycle(),
         toolbarUiState = viewModel.toolbarUiState.collectAsStateOnLifecycle(),
         titleUiState = viewModel.titleUiStateHolder.uiState.collectAsStateOnLifecycle(),
-        descriptionUiState = viewModel.descriptionUiStateHolder.uiState.collectAsStateOnLifecycle()
+        descriptionUiState = viewModel.descriptionUiStateHolder.uiState.collectAsStateOnLifecycle(),
+        dateRangeUiState = viewModel.dateRangeUiStateHolder.uiState.collectAsStateOnLifecycle(),
     )
 }
