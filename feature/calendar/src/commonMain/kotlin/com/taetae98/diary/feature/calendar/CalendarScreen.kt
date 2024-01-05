@@ -26,6 +26,8 @@ import com.taetae98.diary.library.compose.calendar.Calendar
 import com.taetae98.diary.library.compose.calendar.CalendarItem
 import com.taetae98.diary.library.compose.calendar.CalendarState
 import com.taetae98.diary.library.compose.calendar.model.DateRange
+import com.taetae98.diary.library.kotlin.ext.localDateNow
+import com.taetae98.diary.library.kotlin.ext.getLocalDateTimeNow
 import com.taetae98.diary.ui.compose.icon.DropdownDownIcon
 import com.taetae98.diary.ui.compose.icon.DropdownUpIcon
 import com.taetae98.diary.ui.compose.icon.TodayIcon
@@ -33,7 +35,6 @@ import com.taetae98.diary.ui.compose.scaffold.DiaryScaffold
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.launch
-import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
@@ -57,9 +58,8 @@ internal fun CalendarScreen(
                 .padding(it),
             state = state,
             primaryDate = remember {
-                val now = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
-
-                mutableStateOf(persistentListOf(DateRange(now.date, now.date)))
+                val now = localDateNow()
+                mutableStateOf(persistentListOf(DateRange(now, now)))
             },
             holiday = holiday,
         )
@@ -82,7 +82,7 @@ private fun TopBar(
             val scrollToNow: () -> Unit by remember {
                 mutableStateOf({
                     coroutineScope.launch {
-                        val now = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+                        val now = getLocalDateTimeNow()
                         state.scrollTo(now.year, now.month)
                     }
                 })

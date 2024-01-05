@@ -10,6 +10,9 @@ import com.taetae98.diary.feature.memo.detail.MemoDetailMessage
 import com.taetae98.diary.feature.memo.detail.MemoDetailToolbarUiState
 import com.taetae98.diary.feature.memo.detail.MemoDetailUiState
 import com.taetae98.diary.feature.memo.detail.TextFieldUiStateHolder
+import com.taetae98.diary.library.kotlin.ext.localDateNow
+import com.taetae98.diary.library.kotlin.ext.toEpochMilliseconds
+import com.taetae98.diary.library.kotlin.ext.toLocalDate
 import com.taetae98.diary.library.uuid.getUuid
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
 import com.taetae98.diary.library.viewmodel.ViewModel
@@ -55,33 +58,44 @@ internal class MemoAddViewModel(
 
     val titleUiStateHolder = TextFieldUiStateHolder(
         scope = viewModelScope,
-        initialValue = "",
         key = TITLE,
+        initialValue = "",
         savedStateHandle = savedStateHandle,
     )
     val descriptionUiStateHolder = TextFieldUiStateHolder(
         scope = viewModelScope,
-        initialValue = "",
         key = DESCRIPTION,
+        initialValue = "",
         savedStateHandle = savedStateHandle,
     )
 
     val dateRangeUiStateHolder = DateRangeUiStateHolder(
         scope = viewModelScope,
-        initialColor = Random.nextLong(0..0xFFFFFFFF),
-        colorKey = COLOR,
         savedStateHandle = savedStateHandle,
     )
 
     private fun add() {
         viewModelScope.launch {
             val ownerId = getAccountUseCase(Unit).firstOrNull()?.getOrNull()?.uid
+            val dateRangeColor = dateRangeUiStateHolder.getValue().color.takeIf { dateRangeUiStateHolder.getValue().hasDate }
+            val start = dateRangeUiStateHolder.getValue().start
+                .takeIf { dateRangeUiStateHolder.getValue().hasDate }
+                ?.toLocalDate()
+            val endInclusive = dateRangeUiStateHolder.getValue().endInclusive
+                .takeIf { dateRangeUiStateHolder.getValue().hasDate }
+                ?.toLocalDate()
+            val dateRange = if (start != null && endInclusive != null) {
+                start..endInclusive
+            } else {
+                null
+            }
+
             val memo = Memo(
                 id = getUuid(),
                 title = titleUiStateHolder.getValue().value,
                 description = descriptionUiStateHolder.getValue().value,
-                dateRangeColor = null,
-                dateRange = null,
+                dateRangeColor = dateRangeColor,
+                dateRange = dateRange,
                 ownerId = ownerId,
                 state = MemoState.INCOMPLETE,
             )
@@ -102,8 +116,13 @@ internal class MemoAddViewModel(
     }
 
     private fun clearInput() {
+        val now = localDateNow().toEpochMilliseconds()
+
         titleUiStateHolder.setValue("")
         descriptionUiStateHolder.setValue("")
+        dateRangeUiStateHolder.setHasDate(false)
+        dateRangeUiStateHolder.setStart(now)
+        dateRangeUiStateHolder.setEndInclusive(now)
     }
 
     private suspend fun showAddMessage() {
@@ -119,6 +138,5 @@ internal class MemoAddViewModel(
     companion object {
         private const val TITLE = "title"
         private const val DESCRIPTION = "description"
-        private const val COLOR = "color"
     }
 }

@@ -17,6 +17,7 @@ kotlin {
                 implementation(project(":library:compose-calendar"))
                 implementation(project(":library:viewmodel"))
                 implementation(project(":library:koin-navigation-compose"))
+                implementation(project(":library:kotlin-ext"))
 
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.kotlinx.immutable)

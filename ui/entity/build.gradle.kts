@@ -9,6 +9,9 @@ kotlin {
             dependencies {
                 implementation(project(":ui:compose"))
                 implementation(project(":library:compose-color"))
+                implementation(project(":library:kotlin-ext"))
+
+                implementation(libs.kotlinx.datetime)
                 implementation(compose.material3)
             }
         }

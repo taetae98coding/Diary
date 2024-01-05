@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.stateIn
 
 public class TextFieldUiStateHolder(
     scope: CoroutineScope,
+    private val key: String = "TextFieldUiStateHolder",
     initialValue: String,
-    private val key: String,
     private val savedStateHandle: SavedStateHandle,
 ) {
     private val value = savedStateHandle.getStateFlow(

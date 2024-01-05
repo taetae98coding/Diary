@@ -8,6 +8,11 @@ import com.taetae98.diary.domain.usecase.memo.DeleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.FindMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.IncompleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
+import com.taetae98.diary.feature.memo.add.MemoAddViewModel
+import com.taetae98.diary.library.kotlin.ext.localDateNow
+import com.taetae98.diary.library.kotlin.ext.randomRgbColor
+import com.taetae98.diary.library.kotlin.ext.toEpochMilliseconds
+import com.taetae98.diary.library.kotlin.ext.toLocalDate
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
 import com.taetae98.diary.library.viewmodel.ViewModel
 import com.taetae98.diary.navigation.core.memo.MemoDetailEntry
@@ -84,28 +89,30 @@ internal class MemoDetailViewModel(
 
     val titleUiStateHolder = TextFieldUiStateHolder(
         scope = viewModelScope,
-        initialValue = "",
         key = TITLE,
+        initialValue = "",
         savedStateHandle = savedStateHandle,
     )
 
     val descriptionUiStateHolder = TextFieldUiStateHolder(
         scope = viewModelScope,
-        initialValue = "",
         key = DESCRIPTION,
+        initialValue = "",
         savedStateHandle = savedStateHandle,
     )
 
     val dateRangeUiStateHolder = DateRangeUiStateHolder(
         scope = viewModelScope,
-        initialColor = Random.nextLong(0..0xFFFFFFFF),
-        colorKey = COLOR,
         savedStateHandle = savedStateHandle,
     )
 
     private fun onMemoChanged(memo: Memo?) {
         titleUiStateHolder.setValue(memo?.title.orEmpty())
         descriptionUiStateHolder.setValue(memo?.description.orEmpty())
+        dateRangeUiStateHolder.setHasDate(memo?.dateRangeColor != null || memo?.dateRange != null)
+        dateRangeUiStateHolder.setColor(memo?.dateRangeColor ?: randomRgbColor())
+        dateRangeUiStateHolder.setStart(memo?.dateRange?.start?.toEpochMilliseconds() ?: localDateNow().toEpochMilliseconds())
+        dateRangeUiStateHolder.setEndInclusive(memo?.dateRange?.endInclusive?.toEpochMilliseconds() ?: localDateNow().toEpochMilliseconds())
     }
 
     private fun toggleComplete() {
@@ -131,12 +138,25 @@ internal class MemoDetailViewModel(
     }
 
     private fun upsert() {
+        val dateRangeColor = dateRangeUiStateHolder.getValue().color.takeIf { dateRangeUiStateHolder.getValue().hasDate }
+        val start = dateRangeUiStateHolder.getValue().start
+            .takeIf { dateRangeUiStateHolder.getValue().hasDate }
+            ?.toLocalDate()
+        val endInclusive = dateRangeUiStateHolder.getValue().endInclusive
+            .takeIf { dateRangeUiStateHolder.getValue().hasDate }
+            ?.toLocalDate()
+        val dateRange = if (start != null && endInclusive != null) {
+            start..endInclusive
+        } else {
+            null
+        }
+
         val memo = Memo(
             id = id.value ?: return,
             title = titleUiStateHolder.getValue().value,
             description = descriptionUiStateHolder.getValue().value,
-            dateRangeColor = null,
-            dateRange = null,
+            dateRangeColor = dateRangeColor,
+            dateRange = dateRange,
             ownerId = memo.value?.ownerId,
             state = memo.value?.state ?: return
         )
@@ -165,6 +185,5 @@ internal class MemoDetailViewModel(
     companion object {
         private const val TITLE = "title"
         private const val DESCRIPTION = "description"
-        private const val COLOR = "color"
     }
 }

@@ -4,19 +4,17 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import com.taetae98.diary.library.compose.calendar.CalendarState
 import com.taetae98.diary.library.compose.calendar.ext.CALENDAR_PAGE_SIZE
 import com.taetae98.diary.library.compose.calendar.ext.toPage
-import com.taetae98.diary.library.compose.calendar.CalendarState
-import kotlinx.datetime.Clock
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
+import com.taetae98.diary.library.kotlin.ext.localDateNow
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 public fun rememberCalendarState(): CalendarState {
-    val now = remember { Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()) }
+    val now = remember { localDateNow() }
     val pagerState = rememberPagerState(
-        initialPage = now.date.toPage(),
+        initialPage = now.toPage(),
         initialPageOffsetFraction = 0F
     ) {
         CALENDAR_PAGE_SIZE

@@ -19,9 +19,12 @@ kotlin {
                 implementation(project(":library:koin-navigation-compose"))
                 implementation(project(":library:compose-runtime"))
                 implementation(project(":library:uuid"))
+                implementation(project(":library:kotlin-ext"))
                 implementation(project(":library:paging"))
 
                 implementation(libs.kotlinx.immutable)
+                implementation(libs.kotlinx.datetime)
+
                 implementation(compose.material3)
                 implementation(libs.decompose.compose)
                 implementation(libs.paging.compose)

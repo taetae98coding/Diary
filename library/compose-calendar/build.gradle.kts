@@ -9,6 +9,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":library:compose-color"))
+                implementation(project(":library:kotlin-ext"))
 
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.kotlinx.immutable)

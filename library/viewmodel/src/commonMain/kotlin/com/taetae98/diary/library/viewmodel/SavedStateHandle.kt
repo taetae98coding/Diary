@@ -30,6 +30,13 @@ public class SavedStateHandle(
                 MutableStateFlow(value)
             }
 
+            is Boolean? -> stateFlowMap.getOrPut(key) {
+                val jsonElement = savedState.getOrPut(key) { JsonPrimitive(initialValue) }
+                val value = jsonElement.jsonPrimitive.contentOrNull?.toBooleanStrictOrNull()
+
+                MutableStateFlow(value)
+            }
+
             else -> error("Not Support Type : $initialValue")
         }
 
@@ -47,6 +54,13 @@ public class SavedStateHandle(
             }
 
             is Long? -> {
+                val flow = stateFlowMap.getOrPut(key) { MutableStateFlow(value) }
+
+                savedState[key] = JsonPrimitive(value)
+                (flow as? MutableStateFlow<T>)?.value = value
+            }
+
+            is Boolean? -> {
                 val flow = stateFlowMap.getOrPut(key) { MutableStateFlow(value) }
 
                 savedState[key] = JsonPrimitive(value)
