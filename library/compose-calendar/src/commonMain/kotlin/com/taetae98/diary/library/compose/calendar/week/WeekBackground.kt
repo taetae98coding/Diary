@@ -27,7 +27,7 @@ internal fun WeekBackground(
     state: WeekState,
     calendarState: CalendarState,
 ) {
-    val dateRange by remember {
+    val dateRange by remember(calendarState) {
         derivedStateOf {
             val range = calendarState.selectDateRange ?: return@derivedStateOf null
 
@@ -39,7 +39,7 @@ internal fun WeekBackground(
     }
 
     dateRange?.let {
-        if (!(it.endInclusive < state.start || it.start > state.endInclusive)) {
+        if (it.endInclusive >= state.start && it.start <= state.endInclusive) {
             BackgroundLayout(
                 modifier = modifier,
                 state = state,

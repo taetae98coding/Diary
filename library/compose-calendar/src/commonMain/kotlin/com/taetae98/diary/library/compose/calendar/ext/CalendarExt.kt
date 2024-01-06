@@ -22,17 +22,3 @@ internal fun Int.pageToLocalDate(): LocalDate {
 
     return LocalDate(year, month, 1)
 }
-
-internal fun Int.toChristDayOfWeek(): DayOfWeek {
-    return when (this) {
-        0 -> DayOfWeek.SUNDAY
-        else -> DayOfWeek(this)
-    }
-}
-
-internal fun DayOfWeek.toChristDayNumber(): Int {
-    return when(this) {
-        DayOfWeek.SUNDAY -> 0
-        else -> isoDayNumber
-    }
-}

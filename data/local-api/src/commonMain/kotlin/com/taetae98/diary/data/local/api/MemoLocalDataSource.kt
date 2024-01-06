@@ -13,6 +13,6 @@ public interface MemoLocalDataSource {
     public suspend fun incomplete(id: String)
     public suspend fun delete(id: String)
     public fun find(id: String): Flow<MemoDto?>
-    public fun find(dateRange: ClosedRange<LocalDate>, ownerId: String?): Flow<List<MemoDto>>
+    public fun find(ownerId: String?, dateRange: ClosedRange<LocalDate>): Flow<List<MemoDto>>
     public fun page(ownerId: String?): PagingSource<Int, MemoDto>
 }

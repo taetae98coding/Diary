@@ -13,9 +13,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
-import com.taetae98.diary.library.compose.calendar.ext.toChristDayNumber
 import com.taetae98.diary.library.compose.calendar.model.DateRange
 import com.taetae98.diary.library.compose.calendar.month.Month
+import com.taetae98.diary.library.kotlin.ext.toChristDayNumber
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.launch
@@ -72,7 +72,7 @@ private fun Content(
     }
 
     HorizontalPager(
-        modifier = modifier.pointerInput(state.pagerState) {
+        modifier = modifier.pointerInput(state) {
             var touchPoint: LocalDate? = null
 
             detectDragGesturesAfterLongPress(

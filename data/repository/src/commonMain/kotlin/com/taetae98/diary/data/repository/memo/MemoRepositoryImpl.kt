@@ -59,8 +59,8 @@ internal class MemoRepositoryImpl(
             .map { it?.toDomain() }
     }
 
-    override fun find(dateRange: ClosedRange<LocalDate>, ownerId: String?): Flow<List<Memo>> {
-        return localDataSource.find(dateRange, ownerId)
+    override fun find(ownerId: String?, dateRange: ClosedRange<LocalDate>): Flow<List<Memo>> {
+        return localDataSource.find(ownerId, dateRange)
             .map { it.map(MemoDto::toDomain) }
     }
 

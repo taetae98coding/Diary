@@ -12,11 +12,11 @@ public class FindByDateRangeUseCase(
     private val memoRepository: MemoRepository,
 ) : FlowUseCase<FindByDateRangeUseCase.Params, List<Memo>>() {
     override fun execute(params: Params): Flow<List<Memo>> {
-        return memoRepository.find(params.dateRange, params.ownerId)
+        return memoRepository.find(params.ownerId, params.dateRange)
     }
 
     public data class Params(
+        val ownerId: String?,
         val dateRange: ClosedRange<LocalDate>,
-        val ownerId: String?
     )
 }

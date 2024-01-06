@@ -1,7 +1,7 @@
 package com.taetae98.diary.library.compose.calendar.week
 
 import androidx.compose.runtime.Immutable
-import com.taetae98.diary.library.compose.calendar.ext.toChristDayNumber
+import com.taetae98.diary.library.kotlin.ext.toChristDayNumber
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate

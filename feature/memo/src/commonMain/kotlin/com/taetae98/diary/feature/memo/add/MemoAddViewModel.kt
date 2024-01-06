@@ -16,6 +16,7 @@ import com.taetae98.diary.library.kotlin.ext.toLocalDate
 import com.taetae98.diary.library.uuid.getUuid
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
 import com.taetae98.diary.library.viewmodel.ViewModel
+import com.taetae98.diary.navigation.core.memo.MemoAddEntry
 import kotlin.random.Random
 import kotlin.random.nextLong
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -71,6 +72,9 @@ internal class MemoAddViewModel(
 
     val dateRangeUiStateHolder = DateRangeUiStateHolder(
         scope = viewModelScope,
+        hasDateKey = MemoAddEntry.HAS_DATE,
+        startKey = MemoAddEntry.START,
+        endInclusiveKey = MemoAddEntry.END_INCLUSIVE,
         savedStateHandle = savedStateHandle,
     )
 

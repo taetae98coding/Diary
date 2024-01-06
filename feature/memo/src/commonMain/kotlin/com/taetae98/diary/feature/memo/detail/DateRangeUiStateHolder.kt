@@ -13,7 +13,10 @@ import kotlinx.coroutines.flow.stateIn
 
 public class DateRangeUiStateHolder(
     scope: CoroutineScope,
-    private val key: String = "DateRangeUiStateHolder",
+    private val hasDateKey: String = HAS_DATE_KEY,
+    private val colorKey: String = COLOR_KEY,
+    private val startKey: String = START_KEY,
+    private val endInclusiveKey: String = END_INCLUSIVE_KEY,
     initialHasDate: Boolean = false,
     initialColor: Long = randomRgbColor(),
     initialStart: Long = localDateNow().toEpochMilliseconds(),
@@ -21,22 +24,22 @@ public class DateRangeUiStateHolder(
     private val savedStateHandle: SavedStateHandle,
 ) {
     private val hasDate = savedStateHandle.getStateFlow(
-        key = "$key$HAS_DATE_KEY",
+        key = hasDateKey,
         initialValue = initialHasDate,
     )
 
     private val color = savedStateHandle.getStateFlow(
-        key = "$key$COLOR_KEY",
+        key = colorKey,
         initialValue = initialColor,
     )
 
     private val start = savedStateHandle.getStateFlow(
-        key = "$key$START_KEY",
+        key = startKey,
         initialValue = initialStart,
     )
 
     private val endInclusive = savedStateHandle.getStateFlow(
-        key = "$key$END_INCLUSIVE_KEY",
+        key = endInclusiveKey,
         initialValue = initialEnd,
     )
 
@@ -76,24 +79,24 @@ public class DateRangeUiStateHolder(
     }
 
     public fun setHasDate(hasDate: Boolean) {
-        savedStateHandle["$key$HAS_DATE_KEY"] = hasDate
+        savedStateHandle[hasDateKey] = hasDate
     }
 
     public fun setColor(color: Long) {
-        savedStateHandle["$key$COLOR_KEY"] = color
+        savedStateHandle[COLOR_KEY] = color
     }
 
     public fun setStart(milliSeconds: Long) {
-        savedStateHandle["$key$START_KEY"] = milliSeconds
+        savedStateHandle[startKey] = milliSeconds
         if (endInclusive.value < milliSeconds) {
-            savedStateHandle["$key$END_INCLUSIVE_KEY"] = milliSeconds
+            savedStateHandle[endInclusiveKey] = milliSeconds
         }
     }
 
     public fun setEndInclusive(milliSeconds: Long) {
-        savedStateHandle["$key$END_INCLUSIVE_KEY"] = milliSeconds
+        savedStateHandle[endInclusiveKey] = milliSeconds
         if (start.value > milliSeconds) {
-            savedStateHandle["$key$START_KEY"] = milliSeconds
+            savedStateHandle[startKey] = milliSeconds
         }
     }
 

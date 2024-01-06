@@ -16,6 +16,7 @@ import com.taetae98.diary.navigation.core.memo.MemoEntry
 import com.taetae98.diary.navigation.core.more.MoreEntry
 import com.taetae98.diary.navigation.core.route.AccountRoute
 import com.taetae98.diary.navigation.core.route.CalendarRoute
+import com.taetae98.diary.navigation.core.route.MemoAddRoute
 import com.taetae98.diary.navigation.core.route.MemoRoute
 import com.taetae98.diary.navigation.core.route.MoreRoute
 import com.taetae98.diary.navigation.core.route.Route
@@ -27,17 +28,20 @@ public class AppEntry(
 
     public val stack: Value<ChildStack<*, ComponentContext>> = childStack(
         source = navigation,
-        initialConfiguration = MemoRoute,
+        initialConfiguration = MemoRoute(),
         handleBackButton = true,
         serializer = Route.serializer(),
         childFactory = { route, context ->
             when (route) {
-                MemoRoute -> MemoEntry(
-                    context = context
+                is MemoRoute -> MemoEntry(
+                    context = context,
+                    initialRoute = route.initialRoute,
+                    finish = navigation::pop,
                 )
 
                 CalendarRoute -> CalendarEntry(
                     context = context,
+                    navigateToMemoAdd = ::navigateToMemoAdd,
                 )
 
                 MoreRoute -> MoreEntry(
@@ -56,7 +60,7 @@ public class AppEntry(
     )
 
     public fun navigateToMemo() {
-        navigateToAppBottomBar(MemoRoute)
+        navigateToAppBottomBar(MemoRoute())
     }
 
     public fun navigateToCalendar() {
@@ -67,12 +71,16 @@ public class AppEntry(
         navigateToAppBottomBar(MoreRoute)
     }
 
+    private fun navigateToMemoAdd(dateRange: ClosedRange<Long>) {
+        navigation.push(MemoRoute(MemoAddRoute(dateRange)))
+    }
+
     private fun navigateToAccount() {
         navigation.push(AccountRoute)
     }
 
     private fun navigateToAppBottomBar(route: Route) {
-        navigation.popWhile { it != MemoRoute && it != route }
+        navigation.popWhile { it !is MemoRoute && it != route }
         navigation.bringToFront(route)
     }
 }

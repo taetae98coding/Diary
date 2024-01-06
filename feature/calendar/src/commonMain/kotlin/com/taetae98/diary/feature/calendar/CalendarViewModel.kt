@@ -4,6 +4,7 @@ import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
 import com.taetae98.diary.domain.usecase.holiday.GetHolidayUseCase
 import com.taetae98.diary.domain.usecase.memo.FindByDateRangeUseCase
 import com.taetae98.diary.library.compose.calendar.CalendarItem
+import com.taetae98.diary.library.kotlin.ext.toChristDayNumber
 import com.taetae98.diary.library.viewmodel.ViewModel
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
@@ -39,12 +40,21 @@ internal class CalendarViewModel(
         _year.mapNotNull { it },
         _month.mapNotNull { it },
     ) { year, month ->
-        LocalDate(year, month, 1).minus(2, DateTimeUnit.MONTH)..LocalDate(year, month, 1).plus(2, DateTimeUnit.MONTH)
+        year to month
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val schedule = combine(ownerId, yearAndMonth) { ownerId, range ->
-        findByDateRangeUseCase(FindByDateRangeUseCase.Params(range, ownerId))
+    val schedule = combine(ownerId, yearAndMonth) { ownerId, yearAndMonth ->
+        val start = LocalDate(yearAndMonth.first, yearAndMonth.second, 1)
+            .minus(1, DateTimeUnit.MONTH)
+            .run { minus(dayOfWeek.toChristDayNumber(), DateTimeUnit.DAY) }
+        val endInclusive = LocalDate(yearAndMonth.first, yearAndMonth.second, 1)
+            .plus(1, DateTimeUnit.MONTH)
+            .run { minus(dayOfWeek.toChristDayNumber(), DateTimeUnit.DAY) }
+            .run { plus(6, DateTimeUnit.WEEK) }
+            .run { minus(1, DateTimeUnit.DAY) }
+
+        findByDateRangeUseCase(FindByDateRangeUseCase.Params(ownerId, start..endInclusive))
     }.flatMapLatest {
         it
     }.mapLatest {
@@ -68,13 +78,9 @@ internal class CalendarViewModel(
     )
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val holiday = yearAndMonth.flatMapLatest { range ->
-        val list = buildList {
-            var cursor = range.start
-            while (cursor <= range.endInclusive) {
-                add(cursor)
-                cursor = cursor.plus(1, DateTimeUnit.MONTH)
-            }
+    val holiday = yearAndMonth.flatMapLatest { yearAndMonth ->
+        val list = IntRange(-2, 2).map {
+            LocalDate(yearAndMonth.first, yearAndMonth.second, 1).plus(it, DateTimeUnit.MONTH)
         }
 
         combine(list.map { getHolidayUseCase(GetHolidayUseCase.Params(it.year, it.month)) }) { array ->

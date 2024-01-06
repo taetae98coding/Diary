@@ -59,7 +59,7 @@ internal class MemoLocalDataSourceImpl(
             .mapToOneOrNull(dispatcher)
     }
 
-    override fun find(dateRange: ClosedRange<LocalDate>, ownerId: String?): Flow<List<MemoDto>> {
+    override fun find(ownerId: String?, dateRange: ClosedRange<LocalDate>, ): Flow<List<MemoDto>> {
         return database.memoEntityQueries.findByYearAndMonth(
             start = dateRange.start,
             end = dateRange.endInclusive,

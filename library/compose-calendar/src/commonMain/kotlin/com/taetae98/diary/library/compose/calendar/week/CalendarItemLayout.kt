@@ -21,9 +21,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.text.style.TextAlign
 import com.taetae98.diary.library.compose.calendar.CalendarItem
-import com.taetae98.diary.library.compose.calendar.ext.toChristDayNumber
 import com.taetae98.diary.library.compose.calendar.provider.LocalWeekSundayColor
 import com.taetae98.diary.library.compose.color.toContrastColor
+import com.taetae98.diary.library.kotlin.ext.toChristDayNumber
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.datetime.DayOfWeek

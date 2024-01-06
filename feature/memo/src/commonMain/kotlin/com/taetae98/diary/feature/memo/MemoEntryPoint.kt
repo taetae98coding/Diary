@@ -30,7 +30,7 @@ public fun MemoEntryPoint(
 
             is MemoAddEntry -> MemoAddRoute(
                 onNavigateUp = instance.navigateUp,
-                viewModel = instance.koinInject(),
+                viewModel = instance.koinInject(instance.savedState),
             )
 
             is MemoDetailEntry -> MemoDetailRoute(

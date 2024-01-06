@@ -2,17 +2,24 @@ package com.taetae98.diary.feature.calendar
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.taetae98.diary.library.compose.calendar.CalendarState
+import com.taetae98.diary.library.compose.calendar.model.DateRange
 import com.taetae98.diary.library.compose.calendar.runtime.rememberCalendarState
 import com.taetae98.diary.library.compose.runtime.collectAsStateOnLifecycle
+import com.taetae98.diary.library.kotlin.ext.toEpochMilliseconds
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month
 
 @Composable
 internal fun CalendarRoute(
     modifier: Modifier = Modifier,
     viewModel: CalendarViewModel,
+    navigateToMemoDetail: (dateRange: ClosedRange<Long>) -> Unit,
 ) {
     val state = rememberCalendarState()
 
@@ -26,15 +33,28 @@ internal fun CalendarRoute(
     ObserveCalendarState(
         state = state,
         onYearAndMonthChanged = viewModel::setYearAndMonth,
+        onDateSelectFinished = navigateToMemoDetail
     )
 }
 
 @Composable
 private fun ObserveCalendarState(
     state: CalendarState,
-    onYearAndMonthChanged: (year: Int, month: Month) -> Unit
+    onYearAndMonthChanged: (year: Int, month: Month) -> Unit,
+    onDateSelectFinished: (dateRange: ClosedRange<Long>) -> Unit,
 ) {
+    val prevSelectDateRange: MutableState<DateRange?> = remember { mutableStateOf(null) }
+
     LaunchedEffect(state.currentYear, state.currentMonth) {
         onYearAndMonthChanged(state.currentYear, state.currentMonth)
+    }
+
+    LaunchedEffect(state.selectDateRange) {
+        val captureDateRange = prevSelectDateRange.value
+        if (captureDateRange != null && state.selectDateRange == null) {
+            onDateSelectFinished(captureDateRange.start.toEpochMilliseconds()..captureDateRange.endInclusive.toEpochMilliseconds())
+        }
+
+        prevSelectDateRange.value = state.selectDateRange
     }
 }
