@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.taetae98.diary"
-        versionCode = 10000
+        versionCode = 1
         versionName = "1.0.0"
     }
 
