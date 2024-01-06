@@ -5,4 +5,5 @@ import com.arkivanov.decompose.ComponentContext
 public class CalendarEntry(
     context: ComponentContext,
     public val navigateToMemoAdd: (dateRange: ClosedRange<Long>) -> Unit,
+    public val navigateToMemoDetail: (memoId: String) -> Unit,
 ) : ComponentContext by context

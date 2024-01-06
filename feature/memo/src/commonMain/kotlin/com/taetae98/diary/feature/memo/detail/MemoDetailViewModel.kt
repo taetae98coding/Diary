@@ -15,6 +15,7 @@ import com.taetae98.diary.library.kotlin.ext.toLocalDate
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
 import com.taetae98.diary.library.viewmodel.ViewModel
 import com.taetae98.diary.navigation.core.memo.MemoDetailEntry
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -41,16 +42,6 @@ internal class MemoDetailViewModel(
     private val _message = MutableStateFlow<MemoDetailMessage?>(null)
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    private val memo = id.flatMapLatest { findByIdMemoUseCase(it) }
-        .mapLatest(Result<Memo?>::getOrNull)
-        .onEach(::onMemoChanged)
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.Eagerly,
-            initialValue = null,
-        )
-
-    @OptIn(ExperimentalCoroutinesApi::class)
     val uiState = _message.mapLatest {
         MemoDetailUiState.Detail(
             onUpdate = ::upsert,
@@ -64,23 +55,6 @@ internal class MemoDetailViewModel(
             onUpdate = ::upsert,
             message = _message.value,
             onMessageShown = ::messageShown,
-        )
-    )
-
-    @OptIn(ExperimentalCoroutinesApi::class)
-    val toolbarUiState = memo.mapLatest {
-        MemoDetailToolbarUiState.Detail(
-            isComplete = it?.state == MemoState.COMPLETE,
-            onComplete = ::toggleComplete,
-            onDelete = ::delete,
-        )
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-        initialValue = MemoDetailToolbarUiState.Detail(
-            isComplete = memo.value?.state == MemoState.COMPLETE,
-            onComplete = ::toggleComplete,
-            onDelete = ::delete,
         )
     )
 
@@ -101,6 +75,33 @@ internal class MemoDetailViewModel(
     val dateRangeUiStateHolder = DateRangeUiStateHolder(
         scope = viewModelScope,
         savedStateHandle = savedStateHandle,
+    )
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    private val memo = id.flatMapLatest { findByIdMemoUseCase(it) }
+        .mapLatest(Result<Memo?>::getOrNull)
+        .onEach(::onMemoChanged)
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.Eagerly,
+            initialValue = null,
+        )
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val toolbarUiState = memo.mapLatest {
+        MemoDetailToolbarUiState.Detail(
+            isComplete = it?.state == MemoState.COMPLETE,
+            onComplete = ::toggleComplete,
+            onDelete = ::delete,
+        )
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.Eagerly,
+        initialValue = MemoDetailToolbarUiState.Detail(
+            isComplete = memo.value?.state == MemoState.COMPLETE,
+            onComplete = ::toggleComplete,
+            onDelete = ::delete,
+        )
     )
 
     private fun onMemoChanged(memo: Memo?) {

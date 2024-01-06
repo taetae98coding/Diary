@@ -18,6 +18,7 @@ public fun Week(
     primaryDate: State<ImmutableList<DateRange>>,
     schedule: State<ImmutableList<CalendarItem.Schedule>>,
     holiday: State<ImmutableList<CalendarItem.Holiday>>,
+    onHoliday: (key: Any) -> Unit,
 ) {
     Box(
         modifier = modifier,
@@ -33,6 +34,7 @@ public fun Week(
             primaryDate = primaryDate,
             schedule = schedule,
             holiday = holiday,
+            onHoliday = onHoliday,
         )
     }
 }

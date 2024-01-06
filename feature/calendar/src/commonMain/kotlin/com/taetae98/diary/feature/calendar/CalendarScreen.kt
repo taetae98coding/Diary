@@ -47,7 +47,8 @@ internal fun CalendarScreen(
     modifier: Modifier = Modifier,
     state: CalendarState,
     schedule: State<ImmutableList<CalendarItem.Schedule>>,
-    holiday: State<ImmutableList<CalendarItem.Holiday>>
+    holiday: State<ImmutableList<CalendarItem.Holiday>>,
+    onHoliday: (key: Any) -> Unit,
 ) {
     DiaryScaffold(
         modifier = modifier,
@@ -64,6 +65,7 @@ internal fun CalendarScreen(
             },
             schedule = schedule,
             holiday = holiday,
+            onHoliday = onHoliday,
         )
     }
 }

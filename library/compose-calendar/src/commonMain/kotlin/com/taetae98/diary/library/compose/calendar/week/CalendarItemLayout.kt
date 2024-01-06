@@ -3,6 +3,7 @@ package com.taetae98.diary.library.compose.calendar.week
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -35,6 +36,7 @@ internal fun CalendarItemLayout(
     state: WeekState,
     schedule: State<ImmutableList<CalendarItem.Schedule>>,
     holiday: State<ImmutableList<CalendarItem>>,
+    onHoliday: (key: Any) -> Unit,
 ) {
     val weekDayItem = remember {
         derivedStateOf {
@@ -85,20 +87,25 @@ internal fun CalendarItemLayout(
 
     WeekdayItemLayout(
         modifier = modifier,
-        weekDayItem = weekDayItem
+        weekDayItem = weekDayItem,
+        onHoliday = onHoliday,
     )
 }
 
 @Composable
 private fun WeekdayItemLayout(
     modifier: Modifier = Modifier,
-    weekDayItem: State<ImmutableList<ImmutableList<WeekDayItem>>>
+    weekDayItem: State<ImmutableList<ImmutableList<WeekDayItem>>>,
+    onHoliday: (key: Any) -> Unit,
 ) {
     Column(
         modifier = modifier.verticalScroll(state = rememberScrollState()),
     ) {
         weekDayItem.value.forEach {
-            WeekdayItemRow(weekDayItem = it)
+            WeekdayItemRow(
+                weekDayItem = it,
+                onHoliday = onHoliday,
+            )
         }
     }
 }
@@ -107,7 +114,8 @@ private fun WeekdayItemLayout(
 @Composable
 private fun WeekdayItemRow(
     modifier: Modifier = Modifier,
-    weekDayItem: ImmutableList<WeekDayItem>
+    weekDayItem: ImmutableList<WeekDayItem>,
+    onHoliday: (key: Any) -> Unit,
 ) {
     Row(
         modifier = modifier,
@@ -126,6 +134,7 @@ private fun WeekdayItemRow(
                             modifier = Modifier.weight(it.weight)
                                 .fillMaxHeight()
                                 .background(backgroundColor)
+                                .clickable { onHoliday(it.key) }
                                 .basicMarquee(iterations = Int.MAX_VALUE),
                             text = it.name,
                             color = backgroundColor.toContrastColor(),

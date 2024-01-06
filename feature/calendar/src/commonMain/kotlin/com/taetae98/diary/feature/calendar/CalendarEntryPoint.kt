@@ -13,6 +13,7 @@ public fun CalendarEntryPoint(
     CalendarRoute(
         modifier = modifier,
         viewModel = entry.koinInject(),
-        navigateToMemoDetail = entry.navigateToMemoAdd,
+        navigateToMemoAdd = entry.navigateToMemoAdd,
+        navigateToMemoDetail = entry.navigateToMemoDetail,
     )
 }

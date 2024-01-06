@@ -17,6 +17,7 @@ import com.taetae98.diary.navigation.core.more.MoreEntry
 import com.taetae98.diary.navigation.core.route.AccountRoute
 import com.taetae98.diary.navigation.core.route.CalendarRoute
 import com.taetae98.diary.navigation.core.route.MemoAddRoute
+import com.taetae98.diary.navigation.core.route.MemoDetailRoute
 import com.taetae98.diary.navigation.core.route.MemoRoute
 import com.taetae98.diary.navigation.core.route.MoreRoute
 import com.taetae98.diary.navigation.core.route.Route
@@ -42,6 +43,7 @@ public class AppEntry(
                 CalendarRoute -> CalendarEntry(
                     context = context,
                     navigateToMemoAdd = ::navigateToMemoAdd,
+                    navigateToMemoDetail = ::navigateToMemoDetail,
                 )
 
                 MoreRoute -> MoreEntry(
@@ -73,6 +75,10 @@ public class AppEntry(
 
     private fun navigateToMemoAdd(dateRange: ClosedRange<Long>) {
         navigation.push(MemoRoute(MemoAddRoute(dateRange)))
+    }
+
+    private fun navigateToMemoDetail(memoId: String) {
+        navigation.push(MemoRoute(MemoDetailRoute(memoId)))
     }
 
     private fun navigateToAccount() {

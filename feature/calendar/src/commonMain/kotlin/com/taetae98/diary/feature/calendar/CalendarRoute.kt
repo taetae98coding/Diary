@@ -12,14 +12,15 @@ import com.taetae98.diary.library.compose.calendar.model.DateRange
 import com.taetae98.diary.library.compose.calendar.runtime.rememberCalendarState
 import com.taetae98.diary.library.compose.runtime.collectAsStateOnLifecycle
 import com.taetae98.diary.library.kotlin.ext.toEpochMilliseconds
-import kotlinx.datetime.LocalDate
+import kotlinx.coroutines.selects.whileSelect
 import kotlinx.datetime.Month
 
 @Composable
 internal fun CalendarRoute(
     modifier: Modifier = Modifier,
     viewModel: CalendarViewModel,
-    navigateToMemoDetail: (dateRange: ClosedRange<Long>) -> Unit,
+    navigateToMemoAdd: (dateRange: ClosedRange<Long>) -> Unit,
+    navigateToMemoDetail: (memoId: String) -> Unit,
 ) {
     val state = rememberCalendarState()
 
@@ -27,13 +28,18 @@ internal fun CalendarRoute(
         modifier = modifier,
         state = state,
         schedule = viewModel.schedule.collectAsStateOnLifecycle(),
-        holiday = viewModel.holiday.collectAsState()
+        holiday = viewModel.holiday.collectAsState(),
+        onHoliday = {
+            when (it) {
+                is MemoCalendarItemKey -> navigateToMemoDetail(it.key)
+            }
+        },
     )
 
     ObserveCalendarState(
         state = state,
         onYearAndMonthChanged = viewModel::setYearAndMonth,
-        onDateSelectFinished = navigateToMemoDetail
+        onDateSelectFinished = navigateToMemoAdd
     )
 }
 

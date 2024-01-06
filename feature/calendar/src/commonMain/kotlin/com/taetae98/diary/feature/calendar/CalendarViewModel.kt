@@ -62,7 +62,7 @@ internal class CalendarViewModel(
     }.mapLatest { list ->
         list.mapNotNull {
             CalendarItem.Schedule(
-                key = it.id,
+                key = MemoCalendarItemKey(it.id),
                 name = it.title,
                 color = it.dateRangeColor ?: return@mapNotNull null,
                 start = it.dateRange?.start ?: return@mapNotNull null,
