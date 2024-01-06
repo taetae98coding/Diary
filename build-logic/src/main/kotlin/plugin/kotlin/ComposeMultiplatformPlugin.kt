@@ -5,11 +5,13 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.PluginManager
 import org.gradle.kotlin.dsl.getByType
+import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
 
 internal class ComposeMultiplatformPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         applyPlugin(target.pluginManager)
         applyAndroid(target.extensions.getByType(CommonExtension::class))
+        applyTasks(target)
     }
 
     private fun applyPlugin(manager: PluginManager) = with(manager) {
@@ -22,7 +24,19 @@ internal class ComposeMultiplatformPlugin : Plugin<Project> {
         }
 
         composeOptions {
-            kotlinCompilerExtensionVersion = "1.5.6"
+            kotlinCompilerExtensionVersion = "1.5.7"
+        }
+    }
+
+    private fun applyTasks(target: Project) = with(target) {
+        val rootPath = target.rootProject.file(".").absolutePath
+
+        tasks.withType(KotlinCompile::class.java).all {
+            kotlinOptions.freeCompilerArgs = buildList {
+                addAll(kotlinOptions.freeCompilerArgs)
+                addAll(listOf("-P", "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=$rootPath/build/compose/metrics"))
+                addAll(listOf("-P", "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=$rootPath/build/compose/reports"))
+            }
         }
     }
 }
