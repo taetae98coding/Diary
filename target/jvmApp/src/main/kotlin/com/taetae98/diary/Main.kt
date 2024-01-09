@@ -19,7 +19,9 @@ public fun main() {
         modules(AppModule().module)
     }
 
-    singleWindowApplication {
+    singleWindowApplication(
+        title = "Diary"
+    ) {
         App(entry = appEntry)
     }
 }
