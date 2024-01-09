@@ -5,6 +5,8 @@ import com.taetae98.diary.library.firestore.api.FireStore
 import com.taetae98.diary.library.firestore.api.FireStoreData
 import com.taetae98.diary.library.firestore.api.ext.toFireStoreTimestamp
 import com.taetae98.diary.library.firestore.api.model.Order
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import org.koin.core.annotation.Factory
@@ -16,9 +18,13 @@ internal class MemoFireStore(
     suspend fun upsert(memo: MemoDto) {
         if (memo.ownerId == null) return
 
-        fireStore.collection(COLLECTION)
-            .document(memo.id)
-            .upsert(memo.toFireStore())
+        coroutineScope {
+            launch {
+                fireStore.collection(COLLECTION)
+                    .document(memo.id)
+                    .upsert(memo.toFireStore())
+            }
+        }
     }
 
     suspend fun complete(id: String) {
@@ -52,14 +58,18 @@ internal class MemoFireStore(
         id: String,
         stateEntity: MemoFireStoreStateEntity
     ) {
-        fireStore.collection(COLLECTION)
-            .document(id)
-            .update(
-                mapOf(
-                    STATE to stateEntity.value,
-                    UPDATE_AT to Clock.System.now().toFireStoreTimestamp(),
-                )
-            )
+        coroutineScope {
+            launch {
+                fireStore.collection(COLLECTION)
+                    .document(id)
+                    .update(
+                        mapOf(
+                            STATE to stateEntity.value,
+                            UPDATE_AT to Clock.System.now().toFireStoreTimestamp(),
+                        )
+                    )
+            }
+        }
     }
 
     companion object {

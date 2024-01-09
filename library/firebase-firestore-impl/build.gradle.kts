@@ -32,6 +32,7 @@ kotlin {
 
         nonAndroidMain.dependencies {
             implementation(libs.firebase.multiplatform.firestore)
+            implementation(libs.kotlinx.coroutines.core)
         }
     }
 }
