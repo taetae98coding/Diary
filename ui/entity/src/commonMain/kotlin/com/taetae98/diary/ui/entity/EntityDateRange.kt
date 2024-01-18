@@ -11,14 +11,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
@@ -34,10 +32,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.taetae98.diary.library.compose.color.ColorPickerDialog
 import com.taetae98.diary.library.kotlin.ext.toLocalDate
+import com.taetae98.diary.ui.compose.switch.TextSwitch
 
 @Composable
 public fun EntityDateRange(
@@ -57,34 +55,14 @@ private fun Content(
     uiState: State<DateRangeUiState>,
 ) {
     Column(modifier = modifier) {
-        SwitchLayout(
+        TextSwitch(
             modifier = Modifier.fillMaxWidth(),
-            uiState = uiState,
+            text = "캘린더",
+            value = uiState.value.hasDate,
+            onValueChange = uiState.value.onHasDateChange,
         )
 
         InformationLayout(uiState = uiState)
-    }
-}
-
-@Composable
-private fun SwitchLayout(
-    modifier: Modifier = Modifier,
-    uiState: State<DateRangeUiState>,
-) {
-    Row(
-        modifier = modifier.toggleable(
-            value = uiState.value.hasDate,
-            role = Role.Switch,
-            onValueChange = uiState.value.onHasDateChange,
-        ).padding(horizontal = 12.dp, vertical = 4.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Text(text = "캘린더")
-        Switch(
-            checked = uiState.value.hasDate,
-            onCheckedChange = null,
-        )
     }
 }
 

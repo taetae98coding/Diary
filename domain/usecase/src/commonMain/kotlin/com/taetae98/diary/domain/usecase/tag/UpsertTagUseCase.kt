@@ -4,7 +4,9 @@ import com.taetae98.diary.domain.entity.tag.Tag
 import com.taetae98.diary.domain.exception.TitleEmptyException
 import com.taetae98.diary.domain.repository.TagRepository
 import com.taetae98.diary.domain.usecase.core.UseCase
+import org.koin.core.annotation.Factory
 
+@Factory
 public class UpsertTagUseCase internal constructor(
     private val tagRepository: TagRepository,
 ) : UseCase<Tag, Unit>() {

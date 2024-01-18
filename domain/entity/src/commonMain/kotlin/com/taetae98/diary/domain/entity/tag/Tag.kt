@@ -6,4 +6,5 @@ public data class Tag(
     val description: String,
     val isVisibleOnMemo: Boolean,
     val isVisibleOnCalendar: Boolean,
+    val ownerId: String?,
 )
