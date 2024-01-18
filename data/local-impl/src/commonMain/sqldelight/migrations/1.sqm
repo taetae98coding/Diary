@@ -10,3 +10,12 @@ CREATE TABLE TagEntity(
     ownerId TEXT,
     updateAt TEXT AS Instant NOT NULL
 );
+
+CREATE TABLE MemoTagEntity(
+    memoId TEXT NOT NULL,
+    tagId TEXT NOT NULL,
+
+    FOREIGN KEY (memoId) REFERENCES MemoEntity(id),
+    FOREIGN KEY (tagId) REFERENCES TagEntity(id),
+    PRIMARY KEY (memoId, tagId)
+);
