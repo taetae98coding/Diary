@@ -21,6 +21,8 @@ import com.taetae98.diary.navigation.core.route.MemoDetailRoute
 import com.taetae98.diary.navigation.core.route.MemoRoute
 import com.taetae98.diary.navigation.core.route.MoreRoute
 import com.taetae98.diary.navigation.core.route.Route
+import com.taetae98.diary.navigation.core.route.TagRoute
+import com.taetae98.diary.navigation.core.tag.TagEntry
 
 public class AppEntry(
     context: ComponentContext,
@@ -46,6 +48,10 @@ public class AppEntry(
                     navigateToMemoDetail = ::navigateToMemoDetail,
                 )
 
+                TagRoute -> TagEntry(
+                    context = context,
+                )
+
                 MoreRoute -> MoreEntry(
                     context = context,
                     navigateToAccount = ::navigateToAccount,
@@ -67,6 +73,10 @@ public class AppEntry(
 
     public fun navigateToCalendar() {
         navigateToAppBottomBar(CalendarRoute)
+    }
+
+    public fun navigateToTag() {
+        navigateToAppBottomBar(TagRoute)
     }
 
     public fun navigateToMore() {

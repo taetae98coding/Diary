@@ -20,9 +20,11 @@ import com.taetae98.diary.navigation.core.calendar.CalendarEntry
 import com.taetae98.diary.navigation.core.memo.MemoEntry
 import com.taetae98.diary.navigation.core.memo.MemoListEntry
 import com.taetae98.diary.navigation.core.more.MoreEntry
+import com.taetae98.diary.navigation.core.tag.TagEntry
 import com.taetae98.diary.ui.compose.icon.CalendarIcon
 import com.taetae98.diary.ui.compose.icon.MemoIcon
 import com.taetae98.diary.ui.compose.icon.MoreIcon
+import com.taetae98.diary.ui.compose.icon.TagIcon
 
 @Composable
 internal fun AppBottomBar(
@@ -69,6 +71,14 @@ private fun Content(
         )
 
         NavigationBarItem(
+            selected = instance is TagEntry,
+            onClick = entry::navigateToTag,
+            icon = { TagIcon() },
+            label = { Text(text = "태그") },
+            alwaysShowLabel = false,
+        )
+
+        NavigationBarItem(
             selected = instance is MoreEntry,
             onClick = entry::navigateToMore,
             icon = { MoreIcon() },
@@ -89,5 +99,5 @@ private fun Value<ChildStack<*, ComponentContext>>.getCurrentInstance(): Compone
 }
 
 private fun ComponentContext.isAppBottomBarEntry(): Boolean {
-    return this is MemoListEntry || this is CalendarEntry || this is MoreEntry
+    return this is MemoListEntry || this is CalendarEntry || this is MoreEntry || this is TagEntry
 }

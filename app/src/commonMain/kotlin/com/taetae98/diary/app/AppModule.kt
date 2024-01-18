@@ -11,6 +11,7 @@ import com.taetae98.diary.domain.usecase.UseCaseModule
 import com.taetae98.diary.feature.account.AccountModule
 import com.taetae98.diary.feature.calendar.CalendarModule
 import com.taetae98.diary.feature.memo.MemoModule
+import com.taetae98.diary.feature.tag.TagModule
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
 
@@ -27,6 +28,7 @@ import org.koin.core.annotation.Module
         AccountModule::class,
         MemoModule::class,
         CalendarModule::class,
+        TagModule::class,
     ]
 )
 @ComponentScan
