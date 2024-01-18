@@ -21,6 +21,7 @@ import com.taetae98.diary.navigation.core.memo.MemoEntry
 import com.taetae98.diary.navigation.core.memo.MemoListEntry
 import com.taetae98.diary.navigation.core.more.MoreEntry
 import com.taetae98.diary.navigation.core.tag.TagEntry
+import com.taetae98.diary.navigation.core.tag.TagListEntry
 import com.taetae98.diary.ui.compose.icon.CalendarIcon
 import com.taetae98.diary.ui.compose.icon.MemoIcon
 import com.taetae98.diary.ui.compose.icon.MoreIcon
@@ -94,10 +95,11 @@ private fun Value<ChildStack<*, ComponentContext>>.getCurrentInstance(): Compone
 
     return when (val instance = child.active.instance) {
         is MemoEntry -> instance.stack.getCurrentInstance()
+        is TagEntry -> instance.stack.getCurrentInstance()
         else -> instance
     }
 }
 
 private fun ComponentContext.isAppBottomBarEntry(): Boolean {
-    return this is MemoListEntry || this is CalendarEntry || this is MoreEntry || this is TagEntry
+    return this is MemoListEntry || this is CalendarEntry || this is MoreEntry || this is TagListEntry
 }
