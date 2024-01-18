@@ -7,6 +7,7 @@ import com.taetae98.diary.domain.usecase.memo.CompleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.DeleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.FindByIdMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.IncompleteMemoUseCase
+import com.taetae98.diary.domain.usecase.memo.SwitchMemoCompleteUseCase
 import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
 import com.taetae98.diary.library.kotlin.ext.localDateNow
 import com.taetae98.diary.library.kotlin.ext.randomRgbColor
@@ -30,8 +31,7 @@ import org.koin.core.annotation.Factory
 internal class MemoDetailViewModel(
     savedStateHandle: SavedStateHandle,
     private val findByIdMemoUseCase: FindByIdMemoUseCase,
-    private val completeMemoUseCase: CompleteMemoUseCase,
-    private val incompleteMemoUseCase: IncompleteMemoUseCase,
+    private val switchMemoCompleteUseCase: SwitchMemoCompleteUseCase,
     private val deleteMemoUseCase: DeleteMemoUseCase,
     private val upsertMemoUseCase: UpsertMemoUseCase,
 ) : ViewModel() {
@@ -113,29 +113,7 @@ internal class MemoDetailViewModel(
         dateRangeUiStateHolder.setEndInclusive(memo?.dateRange?.endInclusive?.toEpochMilliseconds() ?: localDateNow().toEpochMilliseconds())
     }
 
-    private fun toggleComplete() {
-        val memo = memo.value ?: return
-
-        viewModelScope.launch {
-            when (memo.state) {
-                MemoState.INCOMPLETE -> completeMemoUseCase(memo.id)
-                MemoState.COMPLETE -> incompleteMemoUseCase(memo.id)
-                else -> Unit
-            }
-        }
-    }
-
-    private fun delete() {
-        val id = id.value ?: return
-
-        viewModelScope.launch {
-            deleteMemoUseCase(id).onSuccess {
-                _message.emit(MemoDetailMessage.Delete)
-            }
-        }
-    }
-
-    private fun upsert() {
+    private fun createMemoFromState(): Memo? {
         val dateRangeColor = dateRangeUiStateHolder.getValue().color.takeIf { dateRangeUiStateHolder.getValue().hasDate }
         val start = dateRangeUiStateHolder.getValue().start
             .takeIf { dateRangeUiStateHolder.getValue().hasDate }
@@ -149,15 +127,39 @@ internal class MemoDetailViewModel(
             null
         }
 
-        val memo = Memo(
-            id = id.value ?: return,
+        return Memo(
+            id = id.value ?: return null,
             title = titleUiStateHolder.getValue().value,
             description = descriptionUiStateHolder.getValue().value,
             dateRangeColor = dateRangeColor,
             dateRange = dateRange,
             ownerId = memo.value?.ownerId,
-            state = memo.value?.state ?: return
+            state = memo.value?.state ?: return null
         )
+    }
+
+    private fun toggleComplete() {
+        val memo = createMemoFromState() ?: return
+
+        viewModelScope.launch {
+            upsertMemoUseCase(memo)
+            switchMemoCompleteUseCase(memo.id)
+        }
+    }
+
+    private fun delete() {
+        val memo = createMemoFromState() ?: return
+
+        viewModelScope.launch {
+            upsertMemoUseCase(memo)
+            deleteMemoUseCase(memo.id).onSuccess {
+                _message.emit(MemoDetailMessage.Delete)
+            }
+        }
+    }
+
+    private fun upsert() {
+        val memo = createMemoFromState() ?: return
 
         viewModelScope.launch {
             upsertMemoUseCase(memo).onSuccess {

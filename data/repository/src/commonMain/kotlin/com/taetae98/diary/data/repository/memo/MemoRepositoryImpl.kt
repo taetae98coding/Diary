@@ -25,23 +25,37 @@ internal class MemoRepositoryImpl(
     override suspend fun upsert(memo: Memo) {
         val dto = memo.toDto()
 
-        fireStore.upsert(dto)
         localDataSource.upsert(dto)
+        if (memo.ownerId != null) {
+            fireStore.upsert(dto)
+        }
     }
 
     override suspend fun complete(id: String) {
-        fireStore.complete(id)
+        val memo = localDataSource.find(id).firstOrNull()
+
         localDataSource.complete(id)
+        if (memo?.ownerId != null) {
+            fireStore.complete(id)
+        }
     }
 
     override suspend fun incomplete(id: String) {
-        fireStore.incomplete(id)
+        val memo = localDataSource.find(id).firstOrNull()
+
         localDataSource.incomplete(id)
+        if (memo?.ownerId != null) {
+            fireStore.incomplete(id)
+        }
     }
 
     override suspend fun delete(id: String) {
-        fireStore.delete(id)
+        val memo = localDataSource.find(id).firstOrNull()
+
         localDataSource.delete(id)
+        if (memo?.ownerId != null) {
+            fireStore.delete(id)
+        }
     }
 
     override suspend fun fetch(uid: String) {
