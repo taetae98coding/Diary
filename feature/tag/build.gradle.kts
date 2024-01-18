@@ -8,6 +8,9 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation(project(":library:viewmodel"))
+                implementation(project(":library:compose-runtime"))
+                implementation(project(":library:koin-navigation-compose"))
                 implementation(project(":navigation:core"))
                 implementation(project(":ui:compose"))
                 implementation(project(":ui:entity"))

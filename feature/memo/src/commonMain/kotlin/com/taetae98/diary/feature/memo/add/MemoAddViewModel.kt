@@ -9,7 +9,6 @@ import com.taetae98.diary.feature.memo.detail.DateRangeUiStateHolder
 import com.taetae98.diary.feature.memo.detail.MemoDetailMessage
 import com.taetae98.diary.feature.memo.detail.MemoDetailToolbarUiState
 import com.taetae98.diary.feature.memo.detail.MemoDetailUiState
-import com.taetae98.diary.feature.memo.detail.TextFieldUiStateHolder
 import com.taetae98.diary.library.kotlin.ext.localDateNow
 import com.taetae98.diary.library.kotlin.ext.toEpochMilliseconds
 import com.taetae98.diary.library.kotlin.ext.toLocalDate
@@ -17,8 +16,7 @@ import com.taetae98.diary.library.uuid.getUuid
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
 import com.taetae98.diary.library.viewmodel.ViewModel
 import com.taetae98.diary.navigation.core.memo.MemoAddEntry
-import kotlin.random.Random
-import kotlin.random.nextLong
+import com.taetae98.diary.ui.compose.text.TextFieldUiStateHolder
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted

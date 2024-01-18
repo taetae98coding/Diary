@@ -1,7 +1,6 @@
-package com.taetae98.diary.feature.memo.detail
+package com.taetae98.diary.ui.compose.text
 
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
-import com.taetae98.diary.ui.compose.text.TextFieldUiState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.SharingStarted

@@ -3,10 +3,8 @@ package com.taetae98.diary.feature.memo.detail
 import com.taetae98.diary.domain.entity.memo.Memo
 import com.taetae98.diary.domain.entity.memo.MemoState
 import com.taetae98.diary.domain.exception.TitleEmptyException
-import com.taetae98.diary.domain.usecase.memo.CompleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.DeleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.FindByIdMemoUseCase
-import com.taetae98.diary.domain.usecase.memo.IncompleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.SwitchMemoCompleteUseCase
 import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
 import com.taetae98.diary.library.kotlin.ext.localDateNow
@@ -16,7 +14,7 @@ import com.taetae98.diary.library.kotlin.ext.toLocalDate
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
 import com.taetae98.diary.library.viewmodel.ViewModel
 import com.taetae98.diary.navigation.core.memo.MemoDetailEntry
-import kotlinx.coroutines.Dispatchers
+import com.taetae98.diary.ui.compose.text.TextFieldUiStateHolder
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
