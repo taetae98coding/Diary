@@ -49,8 +49,8 @@ internal class TagAddViewModel(
                 id = getUuid(),
                 title = titleUiStateHolder.getValue().value,
                 description = descriptionUiStateHolder.getValue().value,
-                isVisibleOnMemo = memoVisibleUiStateHolder.getValue().value,
-                isVisibleOnCalendar = calendarVisibleUiStateHolder.getValue().value,
+                isMemoTag = memoVisibleUiStateHolder.getValue().value,
+                isCalendarTag = calendarVisibleUiStateHolder.getValue().value,
                 ownerId = getAccountUseCase(Unit).firstOrNull()?.getOrNull()?.uid,
             )
 

@@ -1,10 +1,13 @@
-package com.taetae98.diary.domain.entity.tag
+package com.taetae98.diary.data.dto.tag
 
-public data class Tag(
+import kotlinx.datetime.Instant
+
+public data class TagDto(
     val id: String,
     val title: String,
     val description: String,
     val isMemoTag: Boolean,
     val isCalendarTag: Boolean,
     val ownerId: String?,
+    val updateAt: Instant,
 )
