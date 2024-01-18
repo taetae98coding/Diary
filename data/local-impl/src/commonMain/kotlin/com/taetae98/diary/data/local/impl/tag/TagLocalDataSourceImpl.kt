@@ -15,6 +15,6 @@ internal class TagLocalDataSourceImpl(
     private val dispatcher: CoroutineDispatcher,
 ) : TagLocalDataSource {
     override suspend fun upsert(tag: TagDto) {
-
+        database.tagEntityQueries.upsert(tag.toEntity())
     }
 }

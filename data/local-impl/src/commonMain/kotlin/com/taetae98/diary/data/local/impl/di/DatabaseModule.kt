@@ -4,6 +4,7 @@ import app.cash.sqldelight.db.SqlDriver
 import com.taetae98.diary.core.coroutines.CoroutinesModule
 import com.taetae98.diary.data.local.impl.DiaryDatabase
 import com.taetae98.diary.data.local.impl.MemoEntity
+import com.taetae98.diary.data.local.impl.TagEntity
 import com.taetae98.diary.data.local.impl.adapter.InstantAdapter
 import com.taetae98.diary.data.local.impl.adapter.LocalDateAdapter
 import com.taetae98.diary.data.local.impl.adapter.MemoStateAdapter
@@ -24,6 +25,9 @@ internal class DatabaseModule {
                 dateRangeStartAdapter = LocalDateAdapter,
                 dateRangeEndAdapter = LocalDateAdapter,
                 stateAdapter = MemoStateAdapter,
+                updateAtAdapter = InstantAdapter,
+            ),
+            TagEntityAdapter = TagEntity.Adapter(
                 updateAtAdapter = InstantAdapter,
             )
         )

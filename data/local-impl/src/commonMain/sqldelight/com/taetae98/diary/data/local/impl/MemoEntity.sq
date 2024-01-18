@@ -25,6 +25,7 @@ dateRangeColor = excluded.dateRangeColor,
 dateRangeStart = excluded.dateRangeStart,
 dateRangeEnd = excluded.dateRangeEnd,
 state = excluded.state,
+ownerId = excluded.ownerId,
 updateAt = excluded.updateAt;
 
 count:
