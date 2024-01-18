@@ -39,11 +39,14 @@ public fun TextSwitch(
             value = value,
             role = Role.Switch,
             onValueChange = onValueChange,
-        ).padding(horizontal = 12.dp, vertical = 4.dp),
+        ).padding(horizontal = 12.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(text = text)
+        Text(
+            modifier = Modifier.padding(vertical = 12.dp),
+            text = text
+        )
         Switch(
             checked = value,
             onCheckedChange = null,

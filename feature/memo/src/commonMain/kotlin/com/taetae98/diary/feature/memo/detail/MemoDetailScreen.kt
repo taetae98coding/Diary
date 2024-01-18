@@ -2,30 +2,41 @@ package com.taetae98.diary.feature.memo.detail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Card
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.taetae98.diary.ui.compose.button.AddFloatingButton
 import com.taetae98.diary.ui.compose.button.CheckFloatingButton
+import com.taetae98.diary.ui.compose.icon.AddIcon
 import com.taetae98.diary.ui.compose.icon.DeleteIcon
 import com.taetae98.diary.ui.compose.icon.FinishIcon
+import com.taetae98.diary.ui.compose.icon.TagIcon
 import com.taetae98.diary.ui.compose.scaffold.DiaryScaffold
 import com.taetae98.diary.ui.compose.text.TextFieldUiState
 import com.taetae98.diary.ui.compose.topbar.NavigateUpTopBar
-import com.taetae98.diary.ui.entity.EntityDateRange
 import com.taetae98.diary.ui.entity.DateRangeUiState
+import com.taetae98.diary.ui.entity.EntityDateRange
 import com.taetae98.diary.ui.entity.EntityDescription
 import com.taetae98.diary.ui.entity.EntityTitle
 
@@ -171,5 +182,70 @@ private fun Content(
             modifier = Modifier.fillMaxWidth(),
             uiState = dateRangeUiState,
         )
+        TagLayout()
+    }
+}
+
+@Composable
+private fun TagLayout(
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier
+    ) {
+        Column {
+            val isVisible = remember { mutableStateOf(false) }
+
+            TagLayoutTitle(
+                modifier = Modifier.fillMaxWidth(),
+                isVisible = isVisible,
+            )
+
+            if (isVisible.value) {
+                TagAllLayout(
+                    modifier = Modifier.fillMaxWidth()
+                        .heightIn(max = 300.dp),
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun TagLayoutTitle(
+    modifier: Modifier = Modifier,
+    isVisible: MutableState<Boolean>
+) {
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Text(
+            modifier = Modifier.padding(12.dp),
+            text = "태그"
+        )
+
+        IconButton(onClick = { isVisible.value = !isVisible.value }) {
+            if (isVisible.value) {
+                TagIcon(tint = MaterialTheme.colorScheme.primary)
+            } else {
+                AddIcon()
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun TagAllLayout(
+    modifier: Modifier = Modifier,
+) {
+    FlowRow(
+        modifier = modifier.verticalScroll(rememberScrollState()),
+    ) {
+        repeat(30) {
+            Text(text = "Text : $it")
+        }
     }
 }
