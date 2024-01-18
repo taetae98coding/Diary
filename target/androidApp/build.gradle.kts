@@ -13,8 +13,8 @@ android {
 
     defaultConfig {
         applicationId = "com.taetae98.diary"
-        versionCode = 2
-        versionName = "1.0.1"
+        versionCode = 5
+        versionName = "1.0.5"
     }
 
     signingConfigs {
