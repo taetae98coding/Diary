@@ -22,11 +22,12 @@ public fun TagEntryPoint(
         when (val instance = it.instance) {
             is TagListEntry -> TagListRoute(
                 onNavigateToTagAdd = instance.navigateToTagAdd,
+                viewModel = instance.koinInject(),
             )
 
             is TagAddEntry -> TagAddRoute(
                 onNavigateUp = instance.navigateUp,
-                viewModel = instance.koinInject()
+                viewModel = instance.koinInject(),
             )
         }
     }

@@ -27,7 +27,7 @@ internal class MemoListViewModel(
             id = it.id,
             title = it.title,
         )
-    }
+    }.cachedIn(viewModelScope)
 
     fun complete(id: String) {
         viewModelScope.launch {

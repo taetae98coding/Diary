@@ -22,3 +22,16 @@ isMemoTag = excluded.isMemoTag,
 isCalendarTag = excluded.isCalendarTag,
 ownerId = excluded.ownerId,
 updateAt = excluded.updateAt;
+
+count:
+SELECT COUNT(*)
+FROM TagEntity
+WHERE
+ownerId = :ownerId;
+
+page:
+SELECT *
+FROM TagEntity
+WHERE
+ownerId = :ownerId
+LIMIT :limit OFFSET :offset;

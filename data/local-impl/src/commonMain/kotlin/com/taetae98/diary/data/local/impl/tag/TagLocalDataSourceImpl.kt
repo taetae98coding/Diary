@@ -1,5 +1,7 @@
 package com.taetae98.diary.data.local.impl.tag
 
+import app.cash.paging.PagingSource
+import app.cash.sqldelight.paging3.QueryPagingSource
 import com.taetae98.diary.data.dto.tag.TagDto
 import com.taetae98.diary.data.local.api.TagLocalDataSource
 import com.taetae98.diary.data.local.impl.DiaryDatabase
@@ -16,5 +18,23 @@ internal class TagLocalDataSourceImpl(
 ) : TagLocalDataSource {
     override suspend fun upsert(tag: TagDto) {
         database.tagEntityQueries.upsert(tag.toEntity())
+    }
+
+    override fun page(ownerId: String?): PagingSource<Int, TagDto> {
+        val queries = database.tagEntityQueries
+
+        return QueryPagingSource(
+            countQuery = queries.count(ownerId = ownerId),
+            transacter = queries,
+            context = dispatcher,
+            queryProvider = { limit, offset ->
+                queries.page(
+                    ownerId = ownerId,
+                    limit = limit,
+                    offset = offset,
+                    mapper = ::mapToTagDto,
+                )
+            }
+        )
     }
 }
