@@ -9,8 +9,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
@@ -21,11 +24,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import app.cash.paging.compose.LazyPagingItems
+import com.taetae98.diary.feature.memo.tag.TagUiState
 import com.taetae98.diary.ui.compose.button.AddFloatingButton
 import com.taetae98.diary.ui.compose.button.CheckFloatingButton
 import com.taetae98.diary.ui.compose.icon.AddIcon
@@ -49,6 +55,7 @@ internal fun MemoDetailScreen(
     titleUiState: State<TextFieldUiState>,
     descriptionUiState: State<TextFieldUiState>,
     dateRangeUiState: State<DateRangeUiState>,
+    tagUiState: LazyPagingItems<TagUiState>
 ) {
     val hostState = remember { SnackbarHostState() }
 
@@ -72,6 +79,7 @@ internal fun MemoDetailScreen(
             titleUiState = titleUiState,
             descriptionUiState = descriptionUiState,
             dateRangeUiState = dateRangeUiState,
+            tagUiState = tagUiState,
         )
     }
 
@@ -163,6 +171,7 @@ private fun Content(
     titleUiState: State<TextFieldUiState>,
     descriptionUiState: State<TextFieldUiState>,
     dateRangeUiState: State<DateRangeUiState>,
+    tagUiState: LazyPagingItems<TagUiState>
 ) {
     Column(
         modifier = modifier
@@ -182,13 +191,14 @@ private fun Content(
             modifier = Modifier.fillMaxWidth(),
             uiState = dateRangeUiState,
         )
-        TagLayout()
+        TagLayout(tagUiState = tagUiState)
     }
 }
 
 @Composable
 private fun TagLayout(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    tagUiState: LazyPagingItems<TagUiState>,
 ) {
     Card(
         modifier = modifier
@@ -205,6 +215,7 @@ private fun TagLayout(
                 TagAllLayout(
                     modifier = Modifier.fillMaxWidth()
                         .heightIn(max = 300.dp),
+                    tagUiState = tagUiState,
                 )
             }
         }
@@ -236,16 +247,28 @@ private fun TagLayoutTitle(
     }
 }
 
-@OptIn(ExperimentalLayoutApi::class)
+@OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
 private fun TagAllLayout(
     modifier: Modifier = Modifier,
+    tagUiState: LazyPagingItems<TagUiState>,
 ) {
     FlowRow(
         modifier = modifier.verticalScroll(rememberScrollState()),
+        horizontalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterHorizontally),
     ) {
-        repeat(30) {
-            Text(text = "Text : $it")
+        repeat(tagUiState.itemCount) {
+            val item = tagUiState[it]
+
+            key(item?.id ?: it) {
+                FilterChip(
+                    selected = false,
+                    onClick = {},
+                    label = { Text(text = item?.title.orEmpty()) },
+                    leadingIcon = { TagIcon() },
+                    shape = CircleShape,
+                )
+            }
         }
     }
 }

@@ -36,6 +36,7 @@ public fun MemoEntryPoint(
             is MemoDetailEntry -> MemoDetailRoute(
                 onNavigateUp = instance.navigateUp,
                 memoDetailViewModel = instance.koinInject(instance.savedState),
+                memoDetailTagViewModel = instance.koinInject(),
             )
         }
     }

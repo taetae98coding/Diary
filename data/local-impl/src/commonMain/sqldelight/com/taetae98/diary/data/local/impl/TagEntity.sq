@@ -34,4 +34,5 @@ SELECT *
 FROM TagEntity
 WHERE
 ownerId = :ownerId
+ORDER BY title
 LIMIT :limit OFFSET :offset;
