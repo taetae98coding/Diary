@@ -89,7 +89,7 @@ internal class MemoDetailViewModel(
     val toolbarUiState = memo.mapLatest {
         MemoDetailToolbarUiState.Detail(
             isComplete = it?.state == MemoState.COMPLETE,
-            onComplete = ::toggleComplete,
+            onComplete = ::switchComplete,
             onDelete = ::delete,
         )
     }.stateIn(
@@ -97,7 +97,7 @@ internal class MemoDetailViewModel(
         started = SharingStarted.Eagerly,
         initialValue = MemoDetailToolbarUiState.Detail(
             isComplete = memo.value?.state == MemoState.COMPLETE,
-            onComplete = ::toggleComplete,
+            onComplete = ::switchComplete,
             onDelete = ::delete,
         )
     )
@@ -136,7 +136,7 @@ internal class MemoDetailViewModel(
         )
     }
 
-    private fun toggleComplete() {
+    private fun switchComplete() {
         val memo = createMemoFromState() ?: return
 
         viewModelScope.launch {
