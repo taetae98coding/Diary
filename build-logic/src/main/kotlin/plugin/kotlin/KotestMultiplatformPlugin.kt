@@ -34,7 +34,7 @@ internal class KotestMultiplatformPlugin : Plugin<Project> {
                 dependencies {
                     implementation(libs.findLibrary("mockk").get())
                     implementation(libs.findLibrary("kotlin-reflect").get())
-                    runtimeOnly(libs.findLibrary("kotest-junit5").get())
+                    implementation(libs.findLibrary("kotest-junit5").get())
                 }
             }
         }
