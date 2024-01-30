@@ -1,6 +1,7 @@
 package com.taetae98.diary.core.coroutines
 
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Named
@@ -26,9 +27,16 @@ public class CoroutinesModule {
         return getIoDispatcher()
     }
 
+    @Named(PROCESS)
+    @Singleton
+    internal fun providesProcessCoroutineScope(): CoroutineScope {
+        return getProcessScope()
+    }
+
     public companion object {
         public const val MAIN: String = "main"
         public const val MAIN_IMMEDIATE: String = "mainImmediate"
         public const val IO: String = "io"
+        public const val PROCESS: String = "process"
     }
 }

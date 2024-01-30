@@ -9,6 +9,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":core:auth-api"))
+                implementation(project(":core:coroutines"))
 
                 implementation(project(":data:dto"))
                 implementation(project(":data:pref-api"))
