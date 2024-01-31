@@ -6,7 +6,6 @@ import com.taetae98.diary.domain.usecase.tag.UpsertTagUseCase
 import com.taetae98.diary.library.uuid.getUuid
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
 import com.taetae98.diary.library.viewmodel.ViewModel
-import com.taetae98.diary.ui.compose.switch.SwitchUiStateHolder
 import com.taetae98.diary.ui.compose.text.TextFieldUiStateHolder
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
@@ -30,18 +29,6 @@ internal class TagAddViewModel(
         initialValue = "",
         savedStateHandle = savedStateHandle,
     )
-    val memoVisibleUiStateHolder = SwitchUiStateHolder(
-        scope = viewModelScope,
-        key = IS_VISIBLE_ON_MEMO,
-        initialValue = true,
-        savedStateHandle = savedStateHandle,
-    )
-    val calendarVisibleUiStateHolder = SwitchUiStateHolder(
-        scope = viewModelScope,
-        key = IS_VISIBLE_ON_CALENDAR,
-        initialValue = true,
-        savedStateHandle = savedStateHandle,
-    )
 
     fun upsert() {
         viewModelScope.launch {
@@ -49,8 +36,6 @@ internal class TagAddViewModel(
                 id = getUuid(),
                 title = titleUiStateHolder.getValue().value,
                 description = descriptionUiStateHolder.getValue().value,
-                isMemoTag = memoVisibleUiStateHolder.getValue().value,
-                isCalendarTag = calendarVisibleUiStateHolder.getValue().value,
                 ownerId = getAccountUseCase(Unit).firstOrNull()?.getOrNull()?.uid,
             )
 

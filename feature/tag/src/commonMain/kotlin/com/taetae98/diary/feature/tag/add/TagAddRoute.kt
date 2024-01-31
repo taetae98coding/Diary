@@ -16,7 +16,5 @@ internal fun TagAddRoute(
         onAdd = viewModel::upsert,
         titleUiState = viewModel.titleUiStateHolder.uiState.collectAsStateOnLifecycle(),
         descriptionUiState = viewModel.descriptionUiStateHolder.uiState.collectAsStateOnLifecycle(),
-        memoVisibleUiState = viewModel.memoVisibleUiStateHolder.uiState.collectAsStateOnLifecycle(),
-        calendarVisibleUiState = viewModel.calendarVisibleUiStateHolder.uiState.collectAsStateOnLifecycle(),
     )
 }

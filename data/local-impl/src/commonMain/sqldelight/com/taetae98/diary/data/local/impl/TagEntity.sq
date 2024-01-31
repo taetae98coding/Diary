@@ -5,8 +5,6 @@ CREATE TABLE TagEntity(
     id TEXT NOT NULL PRIMARY KEY,
     title TEXT NOT NULL,
     description TEXT NOT NULL,
-    isMemoTag INTEGER AS Boolean NOT NULL ,
-    isCalendarTag INTEGER AS Boolean NOT NULL ,
     ownerId TEXT,
     updateAt TEXT AS Instant NOT NULL
 );
@@ -18,8 +16,6 @@ ON CONFLICT (id) DO
 UPDATE SET
 title = excluded.title,
 description = excluded.description,
-isMemoTag = excluded.isMemoTag,
-isCalendarTag = excluded.isCalendarTag,
 ownerId = excluded.ownerId,
 updateAt = excluded.updateAt;
 

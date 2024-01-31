@@ -9,8 +9,6 @@ internal fun TagDto.toEntity(): TagEntity {
         id = id,
         title = title,
         description = description,
-        isMemoTag = isMemoTag,
-        isCalendarTag = isCalendarTag,
         ownerId = ownerId,
         updateAt = updateAt,
     )
@@ -20,8 +18,6 @@ internal fun mapToTagDto(
     id: String,
     title: String,
     description: String,
-    isMemoTag: Boolean,
-    isCalendarTag: Boolean,
     ownerId: String?,
     updateAt: Instant,
 ): TagDto {
@@ -29,8 +25,6 @@ internal fun mapToTagDto(
         id = id,
         title = title,
         description = description,
-        isMemoTag = isMemoTag,
-        isCalendarTag = isCalendarTag,
         ownerId = ownerId,
         updateAt = updateAt,
     )

@@ -9,8 +9,6 @@ internal fun Tag.toDto(): TagDto {
         id = id,
         title = title,
         description = description,
-        isMemoTag = isMemoTag,
-        isCalendarTag = isCalendarTag,
         ownerId = ownerId,
         updateAt = Clock.System.now(),
     )
@@ -21,8 +19,6 @@ internal fun TagDto.toDomain(): Tag {
         id = id,
         title = title,
         description = description,
-        isMemoTag = isMemoTag,
-        isCalendarTag = isCalendarTag,
         ownerId = ownerId,
     )
 }

@@ -4,7 +4,5 @@ public data class Tag(
     val id: String,
     val title: String,
     val description: String,
-    val isMemoTag: Boolean,
-    val isCalendarTag: Boolean,
     val ownerId: String?,
 )
