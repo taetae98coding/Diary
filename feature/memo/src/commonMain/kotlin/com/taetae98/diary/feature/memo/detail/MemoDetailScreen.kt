@@ -127,7 +127,7 @@ private fun Message(
     uiState: State<MemoDetailUiState>,
     hostState: SnackbarHostState,
 ) {
-    LaunchedEffect(uiState.value) {
+    LaunchedEffect(uiState.value.message) {
         when (uiState.value.message) {
             MemoDetailMessage.Add -> {
                 hostState.showSnackbar("메모 추가")
