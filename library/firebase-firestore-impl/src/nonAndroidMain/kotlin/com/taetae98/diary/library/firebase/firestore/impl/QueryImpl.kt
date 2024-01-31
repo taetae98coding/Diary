@@ -10,11 +10,11 @@ import dev.gitlive.firebase.firestore.where
 
 internal open class QueryImpl(private val query: FirebaseQuery) : Query {
     override fun equalTo(field: String, value: Any?): Query {
-        return QueryImpl(query.where(field = field, equalTo = value))
+        return QueryImpl(query.where { field equalTo value })
     }
 
     override fun greaterThan(field: String, value: Any): Query {
-        return QueryImpl(query.where(field = field, greaterThan = value))
+        return QueryImpl(query.where { field greaterThan value })
     }
 
     override fun orderBy(field: String, order: Order): Query {

@@ -25,7 +25,7 @@ internal class MemoRepositoryImpl(
     private val prefDataSource: MemoPrefDataSource,
     private val localDataSource: MemoLocalDataSource,
     @Named(CoroutinesModule.PROCESS)
-    private val coroutineScope: CoroutineScope,
+    private val processScope: CoroutineScope,
 ) : MemoRepository {
     override suspend fun upsert(memo: Memo) {
         val dto = memo.toDto()
@@ -58,7 +58,7 @@ internal class MemoRepositoryImpl(
     private fun runOnProcessScopeIfOwnerIdNotNull(memo: MemoDto, run: suspend () -> Unit) {
         if (memo.ownerId == null) return
 
-        coroutineScope.launch {
+        processScope.launch {
             runCatching { run() }
         }
     }

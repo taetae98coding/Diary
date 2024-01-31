@@ -1,20 +1,40 @@
 plugins {
-    id("diary.module")
+    id("diary.multiplatform")
     id("diary.koin.multiplatform")
 }
 
 kotlin {
     sourceSets {
-        val supportMain = maybeCreate("supportMain")
+        val nonAndroidMain = maybeCreate("nonAndroidMain")
+        val nonJsMain = maybeCreate("nonJsMain")
 
-        supportMain.dependsOn(commonMain.get())
-        iosMain.get().dependsOn(supportMain)
-        jvmMain.get().dependsOn(supportMain)
+        nonAndroidMain.dependsOn(commonMain.get())
+        nonJsMain.dependsOn(commonMain.get())
+
+        androidMain.get().dependsOn(nonJsMain)
+
+        iosMain.get().dependsOn(nonJsMain)
+        iosMain.get().dependsOn(nonAndroidMain)
+
+        jvmMain.get().dependsOn(nonJsMain)
+        jvmMain.get().dependsOn(nonAndroidMain)
+
+        jsMain.get().dependsOn(nonAndroidMain)
 
         commonMain {
             dependencies {
                 implementation(libs.kotlinx.coroutines.core)
             }
         }
+
+        androidMain {
+            dependencies {
+                implementation(libs.androidx.lifecycle.process)
+            }
+        }
     }
+}
+
+android {
+    namespace = "${Build.NAMESPACE}.core.coroutines"
 }
