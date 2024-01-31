@@ -55,7 +55,7 @@ internal class MemoLocalDataSourceImpl(
             .mapToOneOrNull(dispatcher)
     }
 
-    override fun find(ownerId: String?, dateRange: ClosedRange<LocalDate>, ): Flow<List<MemoDto>> {
+    override fun find(ownerId: String?, dateRange: ClosedRange<LocalDate>): Flow<List<MemoDto>> {
         return database.memoEntityQueries.findByYearAndMonth(
             start = dateRange.start,
             end = dateRange.endInclusive,
@@ -74,6 +74,25 @@ internal class MemoLocalDataSourceImpl(
             queryProvider = { limit, offset ->
                 queries.page(
                     ownerId = ownerId,
+                    limit = limit,
+                    offset = offset,
+                    mapper = ::mapToMemoDto
+                )
+            },
+        )
+    }
+
+    override fun page(ownerId: String?, tagId: String): PagingSource<Int, MemoDto> {
+        val queries = database.memoEntityQueries
+
+        return QueryPagingSource(
+            countQuery = queries.countByTagId(ownerId = ownerId, tagId = tagId),
+            transacter = queries,
+            context = dispatcher,
+            queryProvider = { limit, offset ->
+                queries.pageByTagId(
+                    ownerId = ownerId,
+                    tagId = tagId,
                     limit = limit,
                     offset = offset,
                     mapper = ::mapToMemoDto

@@ -20,7 +20,6 @@ kotlin {
                 implementation(project(":library:kotlin-ext"))
 
                 implementation(libs.kotlinx.datetime)
-                implementation(libs.kotlinx.immutable)
 
                 implementation(compose.material3)
             }

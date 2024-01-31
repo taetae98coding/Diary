@@ -35,12 +35,29 @@ WHERE
 state = 0 AND
 ownerId = :ownerId;
 
+countByTagId:
+SELECT COUNT(*)
+FROM MemoEntity
+WHERE
+state = 0 AND
+ownerId = :ownerId AND
+id IN (SELECT memoId FROM MemoTagEntity WHERE tagId = :tagId);
+
 page:
 SELECT *
 FROM MemoEntity
 WHERE
 state = 0 AND
 ownerId = :ownerId
+LIMIT :limit OFFSET :offset;
+
+pageByTagId:
+SELECT *
+FROM MemoEntity
+WHERE
+state = 0 AND
+ownerId = :ownerId AND
+id IN (SELECT memoId FROM MemoTagEntity WHERE tagId = :tagId)
 LIMIT :limit OFFSET :offset;
 
 complete:

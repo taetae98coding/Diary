@@ -22,7 +22,6 @@ kotlin {
                 implementation(project(":library:kotlin-ext"))
                 implementation(project(":library:paging"))
 
-                implementation(libs.kotlinx.immutable)
                 implementation(libs.kotlinx.datetime)
 
                 implementation(compose.material3)

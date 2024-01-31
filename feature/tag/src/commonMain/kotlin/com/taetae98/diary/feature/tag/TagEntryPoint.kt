@@ -33,7 +33,10 @@ public fun TagEntryPoint(
                 viewModel = instance.koinInject(),
             )
 
-            is TagMemoEntry -> TagMemoRoute()
+            is TagMemoEntry -> TagMemoRoute(
+                onNavigateUp = instance.navigateUp,
+                tagMemoViewModel = instance.koinInject(instance.savedState)
+            )
         }
     }
 }
