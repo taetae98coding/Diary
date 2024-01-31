@@ -8,11 +8,13 @@ import app.cash.paging.compose.collectAsLazyPagingItems
 internal fun TagListRoute(
     modifier: Modifier = Modifier,
     onNavigateToTagAdd: () -> Unit,
+    onNavigateToTagMemo: (String) -> Unit,
     viewModel: TagListViewModel,
 ) {
     TagListScreen(
         modifier = modifier,
         onAdd = onNavigateToTagAdd,
+        onTagClick = onNavigateToTagMemo,
         tagLazyPagingItems = viewModel.tagPagingData.collectAsLazyPagingItems(),
     )
 }

@@ -11,6 +11,7 @@ import com.taetae98.diary.navigation.core.ext.illegalRoute
 import com.taetae98.diary.navigation.core.route.Route
 import com.taetae98.diary.navigation.core.route.TagAddRoute
 import com.taetae98.diary.navigation.core.route.TagListRoute
+import com.taetae98.diary.navigation.core.route.TagMemoRoute
 
 public class TagEntry(
     context: ComponentContext,
@@ -27,11 +28,18 @@ public class TagEntry(
                 TagListRoute -> TagListEntry(
                     context = context,
                     navigateToTagAdd = ::navigateToTagAdd,
+                    navigateToTagMemo = ::navigateToTagMemo,
                 )
 
                 TagAddRoute -> TagAddEntry(
                     context = context,
                     navigateUp = ::navigateUp,
+                )
+
+                is TagMemoRoute -> TagMemoEntry(
+                    context = context,
+                    navigateUp = ::navigateUp,
+                    tagId = route.tagId,
                 )
 
                 else -> illegalRoute(route)
@@ -41,6 +49,10 @@ public class TagEntry(
 
     private fun navigateToTagAdd() {
         navigation.push(TagAddRoute)
+    }
+
+    private fun navigateToTagMemo(tagId: String) {
+        navigation.push(TagMemoRoute(tagId))
     }
 
     private fun navigateUp() {

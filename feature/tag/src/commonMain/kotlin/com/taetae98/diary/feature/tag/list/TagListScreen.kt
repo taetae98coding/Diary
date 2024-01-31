@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -20,6 +21,7 @@ import com.taetae98.diary.ui.compose.topbar.TitleTopBar
 internal fun TagListScreen(
     modifier: Modifier = Modifier,
     onAdd: () -> Unit,
+    onTagClick: (String) -> Unit,
     tagLazyPagingItems: LazyPagingItems<TagUiState>
 ) {
     DiaryScaffold(
@@ -29,6 +31,7 @@ internal fun TagListScreen(
     ) {
         Content(
             modifier = Modifier.padding(it),
+            onTagClick = onTagClick,
             tagLazyPagingItems = tagLazyPagingItems,
         )
     }
@@ -47,6 +50,7 @@ private fun TopBar(
 @Composable
 private fun Content(
     modifier: Modifier = Modifier,
+    onTagClick: (String) -> Unit,
     tagLazyPagingItems: LazyPagingItems<TagUiState>
 ) {
     LazyColumn(
@@ -61,19 +65,23 @@ private fun Content(
         ) {
             Tag(
                 modifier = Modifier.fillParentMaxWidth(),
-                uiState = tagLazyPagingItems[it]
+                uiState = tagLazyPagingItems[it],
+                onTagClick = onTagClick,
             )
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun Tag(
     modifier: Modifier = Modifier,
     uiState: TagUiState?,
+    onTagClick: (String) -> Unit,
 ) {
     Card(
         modifier = modifier,
+        onClick = { uiState?.id?.let(onTagClick) }
     ) {
         Text(
             modifier = Modifier.padding(12.dp),

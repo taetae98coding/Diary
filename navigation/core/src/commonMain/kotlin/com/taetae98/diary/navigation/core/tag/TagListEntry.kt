@@ -5,5 +5,5 @@ import com.arkivanov.decompose.ComponentContext
 public class TagListEntry(
     context: ComponentContext,
     public val navigateToTagAdd: () -> Unit,
-) : ComponentContext by context {
-}
+    public val navigateToTagMemo: (String) -> Unit,
+) : ComponentContext by context
