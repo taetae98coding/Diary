@@ -46,6 +46,10 @@ internal class MemoTagLocalDataSourceImpl(
         database.memoTagEntityQueries.upsert(entity)
     }
 
+    override suspend fun upsert(memoTag: List<MemoTagDto>) {
+        database.transaction { memoTag.forEach { upsert(it) } }
+    }
+
     override fun findByMemoId(memoId: String): Flow<List<MemoTagDto>> {
         return database.memoTagEntityQueries.findByMemoId(memoId)
             .asFlow()

@@ -47,7 +47,7 @@ internal class MemoDetailTagViewModel(
                 onClick = ::switchTagSelected,
             )
         }
-    }
+    }.cachedIn(viewModelScope)
 
     private fun switchTagSelected(tagId: String) {
         val memoTag = MemoTag(

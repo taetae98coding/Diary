@@ -24,6 +24,10 @@ internal class MemoTagRepositoryImpl(
         localDataSource.upsert(memoTag.toDto())
     }
 
+    override suspend fun upsert(memoTag: List<MemoTag>) {
+        localDataSource.upsert(memoTag.map(MemoTag::toDto))
+    }
+
     override fun findByMemoId(memoId: String): Flow<List<MemoTag>> {
         return localDataSource.findByMemoId(memoId)
             .mapCollectionLatest(MemoTagDto::toDomain)

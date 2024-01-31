@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.flowOf
 import org.koin.core.annotation.Factory
 
 @Factory
-public class FindMemoTagByMemoIdUseCase(
+public class FindMemoTagByMemoIdUseCase internal constructor(
     private val memoTagRepository: MemoTagRepository,
 ) : FlowUseCase<String?, List<MemoTag>>() {
     override fun execute(params: String?): Flow<List<MemoTag>> {

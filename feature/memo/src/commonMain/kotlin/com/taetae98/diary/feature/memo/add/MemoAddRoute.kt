@@ -1,14 +1,10 @@
 package com.taetae98.diary.feature.memo.add
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import app.cash.paging.PagingData
 import app.cash.paging.compose.collectAsLazyPagingItems
 import com.taetae98.diary.feature.memo.detail.MemoDetailScreen
-import com.taetae98.diary.feature.memo.tag.TagUiState
 import com.taetae98.diary.library.compose.runtime.collectAsStateOnLifecycle
-import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
 internal fun MemoAddRoute(
@@ -24,6 +20,6 @@ internal fun MemoAddRoute(
         titleUiState = viewModel.titleUiStateHolder.uiState.collectAsStateOnLifecycle(),
         descriptionUiState = viewModel.descriptionUiStateHolder.uiState.collectAsStateOnLifecycle(),
         dateRangeUiState = viewModel.dateRangeUiStateHolder.uiState.collectAsStateOnLifecycle(),
-        tagUiState = remember { emptyFlow<PagingData<TagUiState>>() }.collectAsLazyPagingItems(),
+        tagUiState = viewModel.tagUiState.collectAsLazyPagingItems(),
     )
 }

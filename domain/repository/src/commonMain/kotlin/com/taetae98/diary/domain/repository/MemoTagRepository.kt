@@ -7,6 +7,7 @@ public interface MemoTagRepository {
     public suspend fun exists(memoTag: MemoTag): Boolean
     public suspend fun delete(memoTag: MemoTag)
     public suspend fun upsert(memoTag: MemoTag)
+    public suspend fun upsert(memoTag: List<MemoTag>)
 
     public fun findByMemoId(memoId: String): Flow<List<MemoTag>>
 }

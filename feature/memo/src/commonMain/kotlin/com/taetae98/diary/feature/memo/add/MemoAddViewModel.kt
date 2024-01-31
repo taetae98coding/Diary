@@ -2,16 +2,20 @@ package com.taetae98.diary.feature.memo.add
 
 import app.cash.paging.PagingData
 import app.cash.paging.cachedIn
+import app.cash.paging.map
 import com.taetae98.diary.domain.entity.memo.Memo
 import com.taetae98.diary.domain.entity.memo.MemoState
+import com.taetae98.diary.domain.entity.memo.MemoTag
 import com.taetae98.diary.domain.exception.TitleEmptyException
 import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
 import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
+import com.taetae98.diary.domain.usecase.memo.tag.UpsertMemoTagListUseCase
 import com.taetae98.diary.domain.usecase.tag.PageTagUseCase
 import com.taetae98.diary.feature.memo.detail.DateRangeUiStateHolder
 import com.taetae98.diary.feature.memo.detail.MemoDetailMessage
 import com.taetae98.diary.feature.memo.detail.MemoDetailToolbarUiState
 import com.taetae98.diary.feature.memo.detail.MemoDetailUiState
+import com.taetae98.diary.feature.memo.tag.TagUiState
 import com.taetae98.diary.library.kotlin.ext.localDateNow
 import com.taetae98.diary.library.kotlin.ext.toEpochMilliseconds
 import com.taetae98.diary.library.kotlin.ext.toLocalDate
@@ -24,6 +28,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
@@ -32,16 +37,20 @@ import org.koin.core.annotation.Factory
 
 @Factory
 internal class MemoAddViewModel(
-    savedStateHandle: SavedStateHandle,
+    private val savedStateHandle: SavedStateHandle,
     pageTagUseCase: PageTagUseCase,
     private val getAccountUseCase: GetAccountUseCase,
     private val upsertMemoUseCase: UpsertMemoUseCase,
+    private val upsertMemoTagListUseCase: UpsertMemoTagListUseCase,
 ) : ViewModel() {
     private val message = MutableStateFlow<MemoDetailMessage?>(null)
     private val _toolbarUiState = MutableStateFlow(MemoDetailToolbarUiState.Add)
-    private val tagPage = pageTagUseCase(Unit).mapLatest { it.getOrNull() ?: PagingData.empty() }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    private val tagPagingData = pageTagUseCase(Unit).mapLatest { it.getOrNull() ?: PagingData.empty() }
         .cachedIn(viewModelScope)
-    private val tagIdSet = savedStateHandle.getStateFlow(TAG_ID_SET, setOf("1"))
+
+    private val tagIdSet = savedStateHandle.getStateFlow(TAG_ID_SET, emptySet<String>())
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val uiState = message.mapLatest {
@@ -83,6 +92,17 @@ internal class MemoAddViewModel(
         savedStateHandle = savedStateHandle,
     )
 
+    val tagUiState = combine(tagIdSet, tagPagingData) { tagIdSet, pagingData ->
+        pagingData.map {
+            TagUiState(
+                id = it.id,
+                isSelected = it.id in tagIdSet,
+                title = it.title,
+                onClick = ::switchTagSelected,
+            )
+        }
+    }.cachedIn(viewModelScope)
+
     private fun add() {
         viewModelScope.launch {
             val ownerId = getAccountUseCase(Unit).firstOrNull()?.getOrNull()?.uid
@@ -109,11 +129,26 @@ internal class MemoAddViewModel(
                 state = MemoState.NONE,
             )
 
-            upsertMemoUseCase(memo).onSuccess {
-                showAddMessage()
-                clearInput()
-            }.onFailure {
-                handleThrowable(it)
+            add(memo)
+        }
+    }
+
+    private suspend fun add(memo: Memo) {
+        val tagIdList = tagIdSet.value.map { tagId ->
+            MemoTag(
+                memoId = memo.id,
+                tagId = tagId
+            )
+        }
+
+        val resultList = listOf(upsertMemoUseCase(memo), upsertMemoTagListUseCase(tagIdList))
+
+        if (resultList.all { it.isSuccess }) {
+            showAddMessage()
+            clearInput()
+        } else {
+            resultList.forEach { result ->
+                result.exceptionOrNull()?.let { handleThrowable(it) }
             }
         }
     }
@@ -132,6 +167,7 @@ internal class MemoAddViewModel(
         dateRangeUiStateHolder.setHasDate(false)
         dateRangeUiStateHolder.setStart(now)
         dateRangeUiStateHolder.setEndInclusive(now)
+        savedStateHandle[TAG_ID_SET] = emptySet<String>()
     }
 
     private suspend fun showAddMessage() {
@@ -141,6 +177,19 @@ internal class MemoAddViewModel(
     private fun messageShown() {
         viewModelScope.launch {
             message.emit(null)
+        }
+    }
+
+    private fun switchTagSelected(tagId: String) {
+        viewModelScope.launch {
+            savedStateHandle[TAG_ID_SET] = buildSet {
+                addAll(tagIdSet.value)
+                if (contains(tagId)) {
+                    remove(tagId)
+                } else {
+                    add(tagId)
+                }
+            }
         }
     }
 
