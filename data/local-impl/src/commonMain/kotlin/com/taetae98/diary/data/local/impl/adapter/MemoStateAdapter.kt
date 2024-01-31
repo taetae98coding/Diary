@@ -5,7 +5,7 @@ import com.taetae98.diary.data.local.impl.memo.MemoStateEntity
 
 internal object MemoStateAdapter : ColumnAdapter<MemoStateEntity, Long> {
     override fun decode(databaseValue: Long): MemoStateEntity {
-        return MemoStateEntity.entries.find { it.value == databaseValue } ?: MemoStateEntity.INCOMPLETE
+        return MemoStateEntity.entries.find { it.value == databaseValue } ?: MemoStateEntity.NONE
     }
 
     override fun encode(value: MemoStateEntity): Long {

@@ -99,7 +99,7 @@ internal class MemoAddViewModel(
                 dateRangeColor = dateRangeColor,
                 dateRange = dateRange,
                 ownerId = ownerId,
-                state = MemoState.INCOMPLETE,
+                state = MemoState.NONE,
             )
 
             upsertMemoUseCase(memo).onSuccess {

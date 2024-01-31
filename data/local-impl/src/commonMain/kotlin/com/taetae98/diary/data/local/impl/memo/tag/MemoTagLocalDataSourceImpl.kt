@@ -1,14 +1,24 @@
 package com.taetae98.diary.data.local.impl.memo.tag
 
 import app.cash.sqldelight.async.coroutines.awaitAsOneOrNull
+import app.cash.sqldelight.coroutines.asFlow
+import app.cash.sqldelight.coroutines.mapToList
 import com.taetae98.diary.data.dto.memo.MemoTagDto
 import com.taetae98.diary.data.local.api.MemoTagLocalDataSource
 import com.taetae98.diary.data.local.impl.DiaryDatabase
+import com.taetae98.diary.data.local.impl.MemoTagEntity
+import com.taetae98.diary.data.local.impl.di.DatabaseModule
+import com.taetae98.diary.library.kotlin.ext.mapCollectionLatest
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Named
 
 @Factory
 internal class MemoTagLocalDataSourceImpl(
     private val database: DiaryDatabase,
+    @Named(DatabaseModule.DATABASE_DISPATCHER)
+    private val dispatcher: CoroutineDispatcher,
 ) : MemoTagLocalDataSource {
     override suspend fun exists(memoTag: MemoTagDto): Boolean {
         val query = database.memoTagEntityQueries.exists(
@@ -27,6 +37,19 @@ internal class MemoTagLocalDataSourceImpl(
     }
 
     override suspend fun upsert(memoTag: MemoTagDto) {
-        database.memoTagEntityQueries.upsert(memoTag.toEntity())
+        val entity = MemoTagEntity(
+            memoId = memoTag.memoId,
+            tagId = memoTag.tagId,
+            state = MemoTagStateEntity.NONE,
+        )
+
+        database.memoTagEntityQueries.upsert(entity)
+    }
+
+    override fun findByMemoId(memoId: String): Flow<List<MemoTagDto>> {
+        return database.memoTagEntityQueries.findByMemoId(memoId)
+            .asFlow()
+            .mapToList(dispatcher)
+            .mapCollectionLatest(MemoTagEntity::toDto)
     }
 }

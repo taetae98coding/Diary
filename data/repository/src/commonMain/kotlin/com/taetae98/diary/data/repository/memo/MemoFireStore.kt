@@ -26,7 +26,7 @@ internal class MemoFireStore(
     }
 
     suspend fun incomplete(id: String) {
-        updateState(id, MemoFireStoreStateEntity.INCOMPLETE)
+        updateState(id, MemoFireStoreStateEntity.NONE)
     }
 
     suspend fun delete(id: String) {

@@ -9,3 +9,10 @@ internal fun MemoTag.toDto(): MemoTagDto {
         tagId = tagId,
     )
 }
+
+internal fun MemoTagDto.toDomain(): MemoTag {
+    return MemoTag(
+        memoId = memoId,
+        tagId = tagId,
+    )
+}

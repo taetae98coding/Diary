@@ -12,7 +12,7 @@ import kotlinx.datetime.toLocalDateTime
 
 internal fun MemoState.toDto(): MemoStateDto {
     return when (this) {
-        MemoState.INCOMPLETE -> MemoStateDto.INCOMPLETE
+        MemoState.NONE -> MemoStateDto.NONE
         MemoState.COMPLETE -> MemoStateDto.COMPLETE
         MemoState.DELETE -> MemoStateDto.DELETE
     }
@@ -33,7 +33,7 @@ internal fun Memo.toDto(): MemoDto {
 
 internal fun MemoStateDto.toDomain(): MemoState {
     return when (this) {
-        MemoStateDto.INCOMPLETE -> MemoState.INCOMPLETE
+        MemoStateDto.NONE -> MemoState.NONE
         MemoStateDto.COMPLETE -> MemoState.COMPLETE
         MemoStateDto.DELETE -> MemoState.DELETE
     }
@@ -53,7 +53,7 @@ internal fun MemoDto.toDomain(): Memo {
 
 internal fun MemoStateDto.toFireStore(): MemoFireStoreStateEntity {
     return when (this) {
-        MemoStateDto.INCOMPLETE -> MemoFireStoreStateEntity.INCOMPLETE
+        MemoStateDto.NONE -> MemoFireStoreStateEntity.NONE
         MemoStateDto.COMPLETE -> MemoFireStoreStateEntity.COMPLETE
         MemoStateDto.DELETE -> MemoFireStoreStateEntity.DELETE
     }
@@ -61,7 +61,7 @@ internal fun MemoStateDto.toFireStore(): MemoFireStoreStateEntity {
 
 internal fun MemoFireStoreStateEntity.toDto(): MemoStateDto {
     return when (this) {
-        MemoFireStoreStateEntity.INCOMPLETE -> MemoStateDto.INCOMPLETE
+        MemoFireStoreStateEntity.NONE -> MemoStateDto.NONE
         MemoFireStoreStateEntity.COMPLETE -> MemoStateDto.COMPLETE
         MemoFireStoreStateEntity.DELETE -> MemoStateDto.DELETE
     }

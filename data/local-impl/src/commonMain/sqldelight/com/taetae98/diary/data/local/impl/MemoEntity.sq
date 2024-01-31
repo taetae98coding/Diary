@@ -54,7 +54,8 @@ SET state = 0
 WHERE id = :id;
 
 delete:
-DELETE FROM MemoEntity
+UPDATE MemoEntity
+SET state = 2
 WHERE id = :id;
 
 findById:

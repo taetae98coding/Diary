@@ -4,10 +4,12 @@ import app.cash.sqldelight.db.SqlDriver
 import com.taetae98.diary.core.coroutines.CoroutinesModule
 import com.taetae98.diary.data.local.impl.DiaryDatabase
 import com.taetae98.diary.data.local.impl.MemoEntity
+import com.taetae98.diary.data.local.impl.MemoTagEntity
 import com.taetae98.diary.data.local.impl.TagEntity
 import com.taetae98.diary.data.local.impl.adapter.InstantAdapter
 import com.taetae98.diary.data.local.impl.adapter.LocalDateAdapter
 import com.taetae98.diary.data.local.impl.adapter.MemoStateAdapter
+import com.taetae98.diary.data.local.impl.adapter.MemoTagStateAdapter
 import kotlinx.coroutines.CoroutineDispatcher
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Named
@@ -29,6 +31,9 @@ internal class DatabaseModule {
             ),
             TagEntityAdapter = TagEntity.Adapter(
                 updateAtAdapter = InstantAdapter,
+            ),
+            MemoTagEntityAdapter = MemoTagEntity.Adapter(
+                stateAdapter = MemoTagStateAdapter,
             )
         )
     }

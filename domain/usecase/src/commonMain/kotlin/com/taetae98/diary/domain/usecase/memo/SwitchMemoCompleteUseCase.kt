@@ -16,7 +16,7 @@ public class SwitchMemoCompleteUseCase internal constructor(
 
         when (memo.state) {
             MemoState.COMPLETE -> incompleteMemoUseCase(memo.id)
-            MemoState.INCOMPLETE -> completeMemoUseCase(memo.id)
+            MemoState.NONE -> completeMemoUseCase(memo.id)
             else -> Unit
         }
     }

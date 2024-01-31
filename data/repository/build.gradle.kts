@@ -19,6 +19,7 @@ kotlin {
 
                 implementation(project(":library:paging"))
                 implementation(project(":library:firebase-firestore-api"))
+                implementation(project(":library:kotlin-ext"))
 
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kotlinx.datetime)

@@ -1,6 +1,9 @@
+import com.taetae98.diary.data.local.impl.memo.tag.MemoTagStateEntity;
+
 CREATE TABLE MemoTagEntity(
     memoId TEXT NOT NULL,
     tagId TEXT NOT NULL,
+    state INTEGER AS MemoTagStateEntity NOT NULL,
 
     FOREIGN KEY (memoId) REFERENCES MemoEntity(id) ON DELETE CASCADE,
     FOREIGN KEY (tagId) REFERENCES TagEntity(id) ON DELETE CASCADE,
@@ -15,8 +18,19 @@ SELECT EXISTS (
 );
 
 delete:
-DELETE FROM MemoTagEntity
+UPDATE MemoTagEntity
+SET state = 1
 WHERE memoId = :memoId AND tagId = :tagId;
 
 upsert:
-INSERT OR IGNORE INTO MemoTagEntity VALUES ?;
+INSERT INTO MemoTagEntity
+VALUES ?
+ON CONFLICT (memoId, tagId) DO
+UPDATE SET
+state = excluded.state
+;
+
+findByMemoId:
+SELECT *
+FROM MemoTagEntity
+WHERE memoId = :memoId AND state = 0;

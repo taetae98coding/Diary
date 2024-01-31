@@ -265,7 +265,7 @@ private fun TagAllLayout(
 
             key(item?.id ?: it) {
                 FilterChip(
-                    selected = false,
+                    selected = item?.isSelected ?: false,
                     onClick = { item?.onClick() },
                     label = { Text(text = item?.title.orEmpty()) },
                     leadingIcon = { TagIcon() },

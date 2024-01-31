@@ -8,7 +8,7 @@ import kotlinx.datetime.LocalDate
 
 internal fun MemoStateDto.toEntity(): MemoStateEntity {
     return when (this) {
-        MemoStateDto.INCOMPLETE -> MemoStateEntity.INCOMPLETE
+        MemoStateDto.NONE -> MemoStateEntity.NONE
         MemoStateDto.COMPLETE -> MemoStateEntity.COMPLETE
         MemoStateDto.DELETE -> MemoStateEntity.DELETE
     }
@@ -30,7 +30,7 @@ internal fun MemoDto.toEntity(): MemoEntity {
 
 internal fun MemoStateEntity.toDto(): MemoStateDto {
     return when (this) {
-        MemoStateEntity.INCOMPLETE -> MemoStateDto.INCOMPLETE
+        MemoStateEntity.NONE -> MemoStateDto.NONE
         MemoStateEntity.COMPLETE -> MemoStateDto.COMPLETE
         MemoStateEntity.DELETE -> MemoStateDto.DELETE
     }

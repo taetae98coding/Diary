@@ -9,8 +9,12 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":core:coroutines"))
+
                 implementation(project(":data:dto"))
                 implementation(project(":data:local-api"))
+
+                implementation(project(":library:kotlin-ext"))
+
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.sqldelight.adapter)
