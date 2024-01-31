@@ -33,9 +33,9 @@ internal class MemoDetailViewModel(
     private val deleteMemoUseCase: DeleteMemoUseCase,
     private val upsertMemoUseCase: UpsertMemoUseCase,
 ) : ViewModel() {
-    private val id = savedStateHandle.getStateFlow<String?>(
+    private val id = savedStateHandle.getStateFlow(
         key = MemoDetailEntry.ID,
-        initialValue = null
+        initialValue = ""
     )
     private val _message = MutableStateFlow<MemoDetailMessage?>(null)
 
@@ -126,7 +126,7 @@ internal class MemoDetailViewModel(
         }
 
         return Memo(
-            id = id.value ?: return null,
+            id = id.value,
             title = titleUiStateHolder.getValue().value,
             description = descriptionUiStateHolder.getValue().value,
             dateRangeColor = dateRangeColor,

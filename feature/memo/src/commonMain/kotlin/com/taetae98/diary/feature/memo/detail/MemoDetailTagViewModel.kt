@@ -25,7 +25,10 @@ internal class MemoDetailTagViewModel(
     findMemoTagByMemoIdUseCase: FindMemoTagByMemoIdUseCase,
     private val switchMemoTagUseCase: SwitchMemoTagUseCase,
 ) : ViewModel() {
-    private val memoId = savedStateHandle.getStateFlow<String?>(MemoDetailEntry.ID, null)
+    private val memoId = savedStateHandle.getStateFlow(
+        key = MemoDetailEntry.ID,
+        initialValue = "",
+    )
 
     @OptIn(ExperimentalCoroutinesApi::class)
     private val memoTag = memoId.flatMapLatest { findMemoTagByMemoIdUseCase(it) }
@@ -48,7 +51,7 @@ internal class MemoDetailTagViewModel(
 
     private fun switchTagSelected(tagId: String) {
         val memoTag = MemoTag(
-            memoId = memoId.value ?: return,
+            memoId = memoId.value,
             tagId = tagId,
         )
 

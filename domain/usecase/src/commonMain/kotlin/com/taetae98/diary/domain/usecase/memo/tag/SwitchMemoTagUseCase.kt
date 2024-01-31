@@ -10,6 +10,9 @@ public class SwitchMemoTagUseCase internal constructor(
     private val memoTagRepository: MemoTagRepository,
 ) : UseCase<MemoTag, Unit>() {
     override suspend fun execute(params: MemoTag) {
+        if (params.memoId.isEmpty()) return
+        if (params.tagId.isEmpty()) return
+
         if (memoTagRepository.exists(params)) {
             memoTagRepository.delete(params)
         } else {

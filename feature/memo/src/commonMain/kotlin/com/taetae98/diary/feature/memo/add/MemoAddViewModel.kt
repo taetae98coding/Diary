@@ -1,10 +1,13 @@
 package com.taetae98.diary.feature.memo.add
 
+import app.cash.paging.PagingData
+import app.cash.paging.cachedIn
 import com.taetae98.diary.domain.entity.memo.Memo
 import com.taetae98.diary.domain.entity.memo.MemoState
 import com.taetae98.diary.domain.exception.TitleEmptyException
 import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
 import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
+import com.taetae98.diary.domain.usecase.tag.PageTagUseCase
 import com.taetae98.diary.feature.memo.detail.DateRangeUiStateHolder
 import com.taetae98.diary.feature.memo.detail.MemoDetailMessage
 import com.taetae98.diary.feature.memo.detail.MemoDetailToolbarUiState
@@ -30,11 +33,15 @@ import org.koin.core.annotation.Factory
 @Factory
 internal class MemoAddViewModel(
     savedStateHandle: SavedStateHandle,
+    pageTagUseCase: PageTagUseCase,
     private val getAccountUseCase: GetAccountUseCase,
     private val upsertMemoUseCase: UpsertMemoUseCase,
 ) : ViewModel() {
     private val message = MutableStateFlow<MemoDetailMessage?>(null)
     private val _toolbarUiState = MutableStateFlow(MemoDetailToolbarUiState.Add)
+    private val tagPage = pageTagUseCase(Unit).mapLatest { it.getOrNull() ?: PagingData.empty() }
+        .cachedIn(viewModelScope)
+    private val tagIdSet = savedStateHandle.getStateFlow(TAG_ID_SET, setOf("1"))
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val uiState = message.mapLatest {
@@ -140,5 +147,6 @@ internal class MemoAddViewModel(
     companion object {
         private const val TITLE = "title"
         private const val DESCRIPTION = "description"
+        private const val TAG_ID_SET = "tagIdSet"
     }
 }
