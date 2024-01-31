@@ -1,5 +1,6 @@
 package com.taetae98.diary.feature.memo.detail
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -211,10 +212,12 @@ private fun TagLayout(
                 isVisible = isVisible,
             )
 
-            if (isVisible.value) {
+            AnimatedVisibility(
+                modifier = Modifier.fillMaxWidth()
+                    .heightIn(max = 300.dp),
+                visible = isVisible.value,
+            ) {
                 TagAllLayout(
-                    modifier = Modifier.fillMaxWidth()
-                        .heightIn(max = 300.dp),
                     tagUiState = tagUiState,
                 )
             }
@@ -263,7 +266,7 @@ private fun TagAllLayout(
             key(item?.id ?: it) {
                 FilterChip(
                     selected = false,
-                    onClick = {},
+                    onClick = { item?.onClick() },
                     label = { Text(text = item?.title.orEmpty()) },
                     leadingIcon = { TagIcon() },
                     shape = CircleShape,

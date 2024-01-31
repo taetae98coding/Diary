@@ -71,8 +71,11 @@ private fun ColumnScope.InformationLayout(
     modifier: Modifier = Modifier,
     uiState: State<DateRangeUiState>,
 ) {
-    AnimatedVisibility(uiState.value.hasDate) {
-        Column(modifier = modifier) {
+    AnimatedVisibility(
+        modifier = modifier,
+        visible = uiState.value.hasDate
+    ) {
+        Column {
             ColorLayout(
                 modifier = Modifier.fillMaxWidth(),
                 uiState = uiState,

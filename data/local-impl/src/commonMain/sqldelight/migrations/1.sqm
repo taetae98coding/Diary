@@ -12,7 +12,7 @@ CREATE TABLE MemoTagEntity(
     memoId TEXT NOT NULL,
     tagId TEXT NOT NULL,
 
-    FOREIGN KEY (memoId) REFERENCES MemoEntity(id),
-    FOREIGN KEY (tagId) REFERENCES TagEntity(id),
+    FOREIGN KEY (memoId) REFERENCES MemoEntity(id) ON DELETE CASCADE,
+    FOREIGN KEY (tagId) REFERENCES TagEntity(id) ON DELETE CASCADE,
     PRIMARY KEY (memoId, tagId)
 );
