@@ -1,10 +1,14 @@
 package com.taetae98.diary.feature.tag.list
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import app.cash.paging.compose.LazyPagingItems
 import app.cash.paging.compose.itemContentType
 import app.cash.paging.compose.itemKey
@@ -16,7 +20,7 @@ import com.taetae98.diary.ui.compose.topbar.TitleTopBar
 internal fun TagListScreen(
     modifier: Modifier = Modifier,
     onAdd: () -> Unit,
-    tagLazyPagingItems: LazyPagingItems<String>
+    tagLazyPagingItems: LazyPagingItems<TagUiState>
 ) {
     DiaryScaffold(
         modifier = modifier,
@@ -43,17 +47,37 @@ private fun TopBar(
 @Composable
 private fun Content(
     modifier: Modifier = Modifier,
-    tagLazyPagingItems: LazyPagingItems<String>
+    tagLazyPagingItems: LazyPagingItems<TagUiState>
 ) {
     LazyColumn(
         modifier = modifier,
+        contentPadding = PaddingValues(4.dp),
+        verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
         items(
             count = tagLazyPagingItems.itemCount,
-            key = tagLazyPagingItems.itemKey { it },
+            key = tagLazyPagingItems.itemKey { it.id },
             contentType = tagLazyPagingItems.itemContentType { "tag" }
         ) {
-            Text(text = tagLazyPagingItems[it].orEmpty())
+            Tag(
+                modifier = Modifier.fillParentMaxWidth(),
+                uiState = tagLazyPagingItems[it]
+            )
         }
+    }
+}
+
+@Composable
+private fun Tag(
+    modifier: Modifier = Modifier,
+    uiState: TagUiState?,
+) {
+    Card(
+        modifier = modifier,
+    ) {
+        Text(
+            modifier = Modifier.padding(12.dp),
+            text = uiState?.title.orEmpty()
+        )
     }
 }

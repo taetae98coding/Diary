@@ -18,6 +18,9 @@ internal class TagListViewModel(
         .cachedIn(viewModelScope)
 
     val tagPagingData = pagingData.mapPagingLatest {
-        it.id
+        TagUiState(
+            id = it.id,
+            title = it.title,
+        )
     }.cachedIn(viewModelScope)
 }
