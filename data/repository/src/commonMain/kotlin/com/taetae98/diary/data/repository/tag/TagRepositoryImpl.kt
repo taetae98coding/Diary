@@ -11,6 +11,7 @@ import com.taetae98.diary.domain.repository.TagRepository
 import com.taetae98.diary.library.paging.mapPaging
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.koin.core.annotation.Factory
@@ -19,7 +20,7 @@ import org.koin.core.annotation.Named
 @Factory
 internal class TagRepositoryImpl(
     private val localDataSource: TagLocalDataSource,
-    private val tagFireStore: TagFireStore,
+    private val fireStore: TagFireStore,
     @Named(CoroutinesModule.PROCESS)
     private val processScope: CoroutineScope,
 ) : TagRepository {
@@ -27,7 +28,7 @@ internal class TagRepositoryImpl(
         val dto = tag.toDto()
 
         localDataSource.upsert(dto)
-        runOnProcessScopeIfOwnerIdNotNull(dto) { tagFireStore.upsert(dto) }
+        runOnProcessScopeIfOwnerIdNotNull(dto) { fireStore.upsert(dto) }
     }
 
     override fun page(ownerId: String?): Flow<PagingData<Tag>> {
@@ -46,8 +47,15 @@ internal class TagRepositoryImpl(
             .map { it?.toDomain() }
     }
 
-    private fun runOnProcessScopeIfOwnerIdNotNull(tag: TagDto, run: suspend () -> Unit) {
-        if (tag.ownerId == null) return
+    override suspend fun delete(tagId: String) {
+        val dto = localDataSource.find(tagId).firstOrNull()
+
+        localDataSource.delete(tagId)
+        runOnProcessScopeIfOwnerIdNotNull(dto) { fireStore.delete(tagId) }
+    }
+
+    private fun runOnProcessScopeIfOwnerIdNotNull(tag: TagDto?, run: suspend () -> Unit) {
+        if (tag?.ownerId == null) return
 
         processScope.launch {
             runCatching { run() }

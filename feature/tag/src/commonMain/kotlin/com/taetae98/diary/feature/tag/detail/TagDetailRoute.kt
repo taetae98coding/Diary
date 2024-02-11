@@ -10,6 +10,7 @@ import com.taetae98.diary.library.compose.runtime.collectAsStateOnLifecycle
 internal fun TagDetailRoute(
     modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit,
+    onNavigateUpToTagList: () -> Unit,
     viewModel: TagDetailViewModel,
 ) {
     val message by viewModel.message.collectAsStateOnLifecycle()
@@ -17,13 +18,16 @@ internal fun TagDetailRoute(
     TagDetailScreen(
         modifier = modifier,
         onNavigateUp = viewModel::upsert,
+        onDelete = viewModel::delete,
         titleUiState = viewModel.titleUiStateHolder.uiState.collectAsStateOnLifecycle(),
         descriptionUiState = viewModel.descriptionUiStateHolder.uiState.collectAsStateOnLifecycle(),
     )
 
     LaunchedEffect(message) {
-        if (message == TagDetailMessage.Upsert) {
-            onNavigateUp()
+        when (message) {
+            TagDetailMessage.Upsert -> onNavigateUp()
+            TagDetailMessage.Delete -> onNavigateUpToTagList()
+            else -> Unit
         }
     }
 }

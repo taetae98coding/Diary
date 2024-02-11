@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 public interface TagRepository {
     public suspend fun upsert(tag: Tag)
+    public suspend fun delete(tagId: String)
     public fun page(ownerId: String?): Flow<PagingData<Tag>>
     public fun find(tagId: String): Flow<Tag?>
 }

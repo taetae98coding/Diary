@@ -30,7 +30,7 @@ page:
 SELECT *
 FROM TagEntity
 WHERE
-ownerId = :ownerId
+ownerId = :ownerId AND state = 0
 ORDER BY title
 LIMIT :limit OFFSET :offset;
 
@@ -39,3 +39,7 @@ SELECT *
 FROM TagEntity
 WHERE
 id = :id;
+
+delete:
+DELETE FROM TagEntity
+WHERE id = :id;

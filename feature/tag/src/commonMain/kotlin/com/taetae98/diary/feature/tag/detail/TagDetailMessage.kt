@@ -4,4 +4,6 @@ internal sealed class TagDetailMessage {
     data object Add : TagDetailMessage()
 
     data object Upsert : TagDetailMessage()
+
+    data object Delete : TagDetailMessage()
 }

@@ -18,8 +18,7 @@ SELECT EXISTS (
 );
 
 delete:
-UPDATE MemoTagEntity
-SET state = 1
+DELETE FROM MemoTagEntity
 WHERE memoId = :memoId AND tagId = :tagId;
 
 upsert:

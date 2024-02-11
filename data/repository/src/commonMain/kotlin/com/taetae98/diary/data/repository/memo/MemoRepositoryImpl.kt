@@ -35,28 +35,28 @@ internal class MemoRepositoryImpl(
     }
 
     override suspend fun complete(id: String) {
+        val memo = localDataSource.find(id).firstOrNull()
+
         localDataSource.complete(id)
-        runOnProcessScopeIfOwnerIdNotNull(id) { fireStore.complete(id) }
+        runOnProcessScopeIfOwnerIdNotNull(memo) { fireStore.complete(id) }
     }
 
     override suspend fun incomplete(id: String) {
+        val memo = localDataSource.find(id).firstOrNull()
+
         localDataSource.incomplete(id)
-        runOnProcessScopeIfOwnerIdNotNull(id) { fireStore.incomplete(id) }
+        runOnProcessScopeIfOwnerIdNotNull(memo) { fireStore.incomplete(id) }
     }
 
     override suspend fun delete(id: String) {
+        val memo = localDataSource.find(id).firstOrNull()
+
         localDataSource.delete(id)
-        runOnProcessScopeIfOwnerIdNotNull(id) { fireStore.delete(id) }
+        runOnProcessScopeIfOwnerIdNotNull(memo) { fireStore.delete(id) }
     }
 
-    private suspend fun runOnProcessScopeIfOwnerIdNotNull(id: String, run: suspend () -> Unit) {
-        val memo = localDataSource.find(id).firstOrNull() ?: return
-
-        runOnProcessScopeIfOwnerIdNotNull(memo, run)
-    }
-
-    private fun runOnProcessScopeIfOwnerIdNotNull(memo: MemoDto, run: suspend () -> Unit) {
-        if (memo.ownerId == null) return
+    private fun runOnProcessScopeIfOwnerIdNotNull(memo: MemoDto?, run: suspend () -> Unit) {
+        if (memo?.ownerId == null) return
 
         processScope.launch {
             runCatching { run() }

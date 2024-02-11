@@ -43,6 +43,7 @@ public fun TagEntryPoint(
 
             is TagDetailEntry -> TagDetailRoute(
                 onNavigateUp = instance.navigateUp,
+                onNavigateUpToTagList = instance.navigateUpToTagList,
                 viewModel = instance.koinInject(instance.savedState),
             )
         }

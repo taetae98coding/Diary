@@ -23,6 +23,10 @@ internal class TagLocalDataSourceImpl(
         database.tagEntityQueries.upsert(tag.toEntity())
     }
 
+    override suspend fun delete(id: String) {
+        database.tagEntityQueries.delete(id)
+    }
+
     override fun page(ownerId: String?): PagingSource<Int, TagDto> {
         val queries = database.tagEntityQueries
 

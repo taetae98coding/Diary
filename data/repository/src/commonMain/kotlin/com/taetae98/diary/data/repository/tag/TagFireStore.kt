@@ -2,6 +2,8 @@ package com.taetae98.diary.data.repository.tag
 
 import com.taetae98.diary.data.dto.tag.TagDto
 import com.taetae98.diary.library.firestore.api.FireStore
+import com.taetae98.diary.library.firestore.api.ext.toFireStoreTimestamp
+import kotlinx.datetime.Clock
 import org.koin.core.annotation.Factory
 
 @Factory
@@ -12,6 +14,17 @@ internal class TagFireStore(
         fireStore.collection(COLLECTION)
             .document(tag.id)
             .upsert(tag.toFireStore())
+    }
+
+    suspend fun delete(id: String) {
+        fireStore.collection(COLLECTION)
+            .document(id)
+            .update(
+                mapOf(
+                    STATE to TagFireStoreStateEntity.DELETE.value,
+                    UPDATE_AT to Clock.System.now().toFireStoreTimestamp(),
+                )
+            )
     }
 
     companion object {

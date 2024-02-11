@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 public interface TagLocalDataSource {
     public suspend fun upsert(tag: TagDto)
+    public suspend fun delete(id: String)
     public fun page(ownerId: String?): PagingSource<Int, TagDto>
     public fun find(id: String): Flow<TagDto?>
 }
