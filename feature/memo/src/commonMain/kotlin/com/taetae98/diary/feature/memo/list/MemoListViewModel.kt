@@ -7,6 +7,8 @@ import com.taetae98.diary.domain.usecase.memo.DeleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.PageMemoUseCase
 import com.taetae98.diary.library.paging.mapPagingLatest
 import com.taetae98.diary.library.viewmodel.ViewModel
+import com.taetae98.diary.ui.memo.compose.MemoUiState
+import com.taetae98.diary.ui.memo.compose.SwipeMemoUiState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.launch
@@ -23,19 +25,23 @@ internal class MemoListViewModel(
         .cachedIn(viewModelScope)
 
     val memoPagingData = pagingData.mapPagingLatest {
-        MemoListUiState(
-            id = it.id,
-            title = it.title,
+        SwipeMemoUiState(
+            memo = MemoUiState(
+                id = it.id,
+                title = it.title,
+            ),
+            complete = ::complete,
+            delete = ::delete,
         )
     }.cachedIn(viewModelScope)
 
-    fun complete(id: String) {
+    private fun complete(id: String) {
         viewModelScope.launch {
             completeMemoUseCase(id)
         }
     }
 
-    fun delete(id: String) {
+    private fun delete(id: String) {
         viewModelScope.launch {
             deleteMemoUseCase(id)
         }

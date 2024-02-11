@@ -68,6 +68,7 @@ include(":navigation:core")
 
 include(":ui:compose")
 include(":ui:entity")
+include(":ui:memo-compose")
 
 include(":library:compose-calendar")
 include(":library:compose-color")

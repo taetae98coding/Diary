@@ -15,6 +15,7 @@ kotlin {
 
                 implementation(project(":ui:compose"))
                 implementation(project(":ui:entity"))
+                implementation(project(":ui:memo-compose"))
 
                 implementation(project(":library:koin-navigation-compose"))
                 implementation(project(":library:compose-runtime"))

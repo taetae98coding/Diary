@@ -1,11 +1,11 @@
-package com.taetae98.diary.feature.memo
+package com.taetae98.diary.ui.memo.compose
 
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Shape
 
-internal object MemoDefaults {
-    val shape: Shape
+public object MemoDefaults {
+    public val shape: Shape
         @Composable
         get() = CardDefaults.shape
 }

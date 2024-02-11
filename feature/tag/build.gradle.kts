@@ -19,6 +19,7 @@ kotlin {
 
                 implementation(project(":ui:compose"))
                 implementation(project(":ui:entity"))
+                implementation(project(":ui:memo-compose"))
 
                 implementation(compose.material3)
                 implementation(libs.decompose.compose)
