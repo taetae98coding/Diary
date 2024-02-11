@@ -37,7 +37,7 @@ internal fun TagDto.toFireStore(): Map<String, Any?> {
     )
 }
 
-internal fun FireStoreData.toTagDto(): TagDto {
+internal fun FireStoreData.toTag(): TagDto {
     return TagDto(
         id = requireNotNull(getString(TagFireStore.ID)),
         title = requireNotNull(getString(TagFireStore.TITLE)),

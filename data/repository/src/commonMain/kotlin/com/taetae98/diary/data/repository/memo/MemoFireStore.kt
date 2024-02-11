@@ -45,7 +45,7 @@ internal class MemoFireStore(
         uid: String,
         updateAt: Instant?
     ): List<MemoDto> {
-        val startAfterInstant = updateAt ?: Instant.fromEpochSeconds(0L)
+        val startAfterInstant = updateAt ?: Instant.fromEpochMilliseconds(0L)
 
         return fireStore.collection(COLLECTION)
             .equalTo(OWNER_ID, uid)
@@ -53,7 +53,7 @@ internal class MemoFireStore(
             .greaterThan(UPDATE_AT, startAfterInstant.toFireStoreTimestamp())
             .limit(200L)
             .getData()
-            .map(FireStoreData::toMemoDto)
+            .map(FireStoreData::toMemo)
     }
 
     companion object {

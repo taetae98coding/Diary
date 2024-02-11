@@ -7,5 +7,14 @@ internal fun MemoTagEntity.toDto(): MemoTagDto {
     return MemoTagDto(
         memoId = memoId,
         tagId = tagId,
+        isDeleted = false,
+    )
+}
+
+
+internal fun MemoTagDto.toEntity(): MemoTagEntity {
+    return MemoTagEntity(
+        memoId = memoId,
+        tagId = tagId,
     )
 }

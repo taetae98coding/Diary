@@ -18,7 +18,7 @@ internal fun Memo.toDto(): MemoDto {
         ownerId = ownerId,
         isFinished = isFinished,
         isDeleted = false,
-        updateAt = Clock.System.now()
+        updateAt = Clock.System.now(),
     )
 }
 
@@ -49,7 +49,7 @@ internal fun MemoDto.toFireStore(): Map<String, Any?> {
     )
 }
 
-internal fun FireStoreData.toMemoDto(): MemoDto {
+internal fun FireStoreData.toMemo(): MemoDto {
     val dateRangeStart = getInstant(MemoFireStore.DATE_RANGE_START)?.toLocalDateTime(TimeZone.UTC)?.date
     val dateRangeEnd = getInstant(MemoFireStore.DATE_RANGE_END)?.toLocalDateTime(TimeZone.UTC)?.date
     val dateRange = if (dateRangeStart != null && dateRangeEnd != null) {

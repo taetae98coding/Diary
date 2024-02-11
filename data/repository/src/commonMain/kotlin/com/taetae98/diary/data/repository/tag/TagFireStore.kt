@@ -34,7 +34,7 @@ internal class TagFireStore(
         uid: String,
         updateAt: Instant?
     ): List<TagDto> {
-        val startAfterInstant = updateAt ?: Instant.fromEpochSeconds(0L)
+        val startAfterInstant = updateAt ?: Instant.fromEpochMilliseconds(0L)
 
         return fireStore.collection(COLLECTION)
             .equalTo(OWNER_ID, uid)
@@ -42,7 +42,7 @@ internal class TagFireStore(
             .greaterThan(UPDATE_AT, startAfterInstant.toFireStoreTimestamp())
             .limit(200L)
             .getData()
-            .map(FireStoreData::toTagDto)
+            .map(FireStoreData::toTag)
     }
 
     companion object {

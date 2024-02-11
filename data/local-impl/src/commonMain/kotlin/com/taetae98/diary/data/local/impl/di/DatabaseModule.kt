@@ -27,7 +27,7 @@ internal class DatabaseModule {
             ),
             TagEntityAdapter = TagEntity.Adapter(
                 updateAtAdapter = InstantAdapter,
-            )
+            ),
         )
     }
 

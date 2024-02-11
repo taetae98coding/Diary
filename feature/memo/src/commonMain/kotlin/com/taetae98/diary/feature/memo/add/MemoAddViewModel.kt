@@ -136,7 +136,7 @@ internal class MemoAddViewModel(
         val tagIdList = tagIdSet.value.map { tagId ->
             MemoTag(
                 memoId = memo.id,
-                tagId = tagId
+                tagId = tagId,
             )
         }
 
