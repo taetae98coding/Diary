@@ -12,7 +12,7 @@ kotlin {
 
         iosMain.get().dependsOn(nonAndroidMain)
         jvmMain.get().dependsOn(nonSupportMain)
-        jsMain.get().dependsOn(nonAndroidMain)
+        jsMain.get().dependsOn(nonSupportMain)
 
         commonMain {
             dependencies {
