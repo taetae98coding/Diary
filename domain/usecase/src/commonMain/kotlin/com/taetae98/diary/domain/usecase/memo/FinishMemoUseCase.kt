@@ -5,10 +5,10 @@ import com.taetae98.diary.domain.usecase.core.UseCase
 import org.koin.core.annotation.Factory
 
 @Factory
-public class IncompleteMemoUseCase(
-    private val memoRepository: MemoRepository
+public class FinishMemoUseCase internal constructor(
+    private val memoRepository: MemoRepository,
 ) : UseCase<String, Unit>() {
     override suspend fun execute(params: String) {
-        memoRepository.incomplete(params)
+        memoRepository.updateFinish(params, true)
     }
 }

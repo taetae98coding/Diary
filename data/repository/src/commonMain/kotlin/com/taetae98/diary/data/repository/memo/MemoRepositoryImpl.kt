@@ -34,18 +34,11 @@ internal class MemoRepositoryImpl(
         runOnProcessScopeIfOwnerIdNotNull(dto) { fireStore.upsert(dto) }
     }
 
-    override suspend fun complete(id: String) {
+    override suspend fun updateFinish(id: String, isFinished: Boolean) {
         val memo = localDataSource.find(id).firstOrNull()
 
-        localDataSource.complete(id)
-        runOnProcessScopeIfOwnerIdNotNull(memo) { fireStore.complete(id) }
-    }
-
-    override suspend fun incomplete(id: String) {
-        val memo = localDataSource.find(id).firstOrNull()
-
-        localDataSource.incomplete(id)
-        runOnProcessScopeIfOwnerIdNotNull(memo) { fireStore.incomplete(id) }
+        localDataSource.updateFinish(id, isFinished)
+        runOnProcessScopeIfOwnerIdNotNull(memo) { fireStore.updateFinished(id, isFinished) }
     }
 
     override suspend fun delete(id: String) {
@@ -69,7 +62,13 @@ internal class MemoRepositoryImpl(
             val data = fireStore.pageByUpdateAt(uid, updateAt).takeIf { it.isNotEmpty() } ?: break
 
             prefDataSource.setFetchedUpdateAt(uid, data.last().updateAt)
-            localDataSource.fetch(data)
+            data.forEach {
+                if (it.isDeleted) {
+                    localDataSource.delete(it.id)
+                } else {
+                    localDataSource.upsert(it)
+                }
+            }
         }
     }
 

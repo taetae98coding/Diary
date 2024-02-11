@@ -36,18 +36,17 @@ internal class MemoTagLocalDataSourceImpl(
         )
     }
 
-    override suspend fun upsert(memoTag: MemoTagDto) {
+    override suspend fun insert(memoTag: MemoTagDto) {
         val entity = MemoTagEntity(
             memoId = memoTag.memoId,
             tagId = memoTag.tagId,
-            state = MemoTagStateEntity.NONE,
         )
 
-        database.memoTagEntityQueries.upsert(entity)
+        database.memoTagEntityQueries.insert(entity)
     }
 
-    override suspend fun upsert(memoTag: List<MemoTagDto>) {
-        database.transaction { memoTag.forEach { upsert(it) } }
+    override suspend fun insert(memoTag: List<MemoTagDto>) {
+        database.transaction { memoTag.forEach { insert(it) } }
     }
 
     override fun findByMemoId(memoId: String): Flow<List<MemoTagDto>> {

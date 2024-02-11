@@ -7,8 +7,7 @@ import kotlinx.datetime.LocalDate
 
 public interface MemoRepository {
     public suspend fun upsert(memo: Memo)
-    public suspend fun complete(id: String)
-    public suspend fun incomplete(id: String)
+    public suspend fun updateFinish(id: String, isFinished: Boolean)
     public suspend fun delete(id: String)
     public suspend fun fetch(uid: String)
     public fun find(id: String): Flow<Memo?>

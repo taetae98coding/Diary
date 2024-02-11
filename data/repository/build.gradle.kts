@@ -1,7 +1,6 @@
 plugins {
     id("diary.multiplatform")
     id("diary.koin.multiplatform")
-    id("diary.kotest.multiplatform")
 }
 
 kotlin {

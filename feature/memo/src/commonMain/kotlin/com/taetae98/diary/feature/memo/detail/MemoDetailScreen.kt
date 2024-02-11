@@ -102,8 +102,8 @@ internal fun TopBar(
         actions = {
             when (val value = toolbarUiState.value) {
                 is MemoDetailToolbarUiState.Detail -> {
-                    IconButton(onClick = value.onComplete) {
-                        val tint = if (value.isComplete) {
+                    IconButton(onClick = value.onFinish) {
+                        val tint = if (value.isFinished) {
                             MaterialTheme.colorScheme.primary
                         } else {
                             LocalContentColor.current

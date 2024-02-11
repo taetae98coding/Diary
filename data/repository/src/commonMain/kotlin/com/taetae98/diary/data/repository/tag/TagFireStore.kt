@@ -21,7 +21,7 @@ internal class TagFireStore(
             .document(id)
             .update(
                 mapOf(
-                    STATE to TagFireStoreStateEntity.DELETE.value,
+                    IS_DELETE to true,
                     UPDATE_AT to Clock.System.now().toFireStoreTimestamp(),
                 )
             )
@@ -33,7 +33,7 @@ internal class TagFireStore(
         const val ID = "id"
         const val TITLE = "title"
         const val DESCRIPTION = "description"
-        const val STATE = "state"
+        const val IS_DELETE = "isDelete"
         const val OWNER_ID = "ownerId"
         const val UPDATE_AT = "updateAt"
     }

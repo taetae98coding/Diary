@@ -1,23 +1,22 @@
 package com.taetae98.diary.domain.usecase.memo
 
-import com.taetae98.diary.domain.entity.memo.MemoState
 import com.taetae98.diary.domain.usecase.core.UseCase
 import kotlinx.coroutines.flow.first
 import org.koin.core.annotation.Factory
 
 @Factory
-public class SwitchMemoCompleteUseCase internal constructor(
+public class SwitchMemoFinishUseCase internal constructor(
     private val findMemoByIdUseCase: FindMemoByIdUseCase,
-    private val completeMemoUseCase: CompleteMemoUseCase,
-    private val incompleteMemoUseCase: IncompleteMemoUseCase,
+    private val finishMemoUseCase: FinishMemoUseCase,
+    private val beginMemoUseCase: BeginMemoUseCase,
 ) : UseCase<String, Unit>() {
     override suspend fun execute(params: String) {
         val memo = findMemoByIdUseCase(params).first().getOrThrow() ?: return
 
-        when (memo.state) {
-            MemoState.COMPLETE -> incompleteMemoUseCase(memo.id)
-            MemoState.NONE -> completeMemoUseCase(memo.id)
-            else -> Unit
+        if (memo.isFinished) {
+            beginMemoUseCase(memo.id)
+        } else {
+            finishMemoUseCase(memo.id)
         }
     }
 }

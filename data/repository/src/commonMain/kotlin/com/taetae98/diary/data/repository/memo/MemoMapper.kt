@@ -1,22 +1,12 @@
 package com.taetae98.diary.data.repository.memo
 
 import com.taetae98.diary.data.dto.memo.MemoDto
-import com.taetae98.diary.data.dto.memo.MemoStateDto
 import com.taetae98.diary.domain.entity.memo.Memo
-import com.taetae98.diary.domain.entity.memo.MemoState
 import com.taetae98.diary.library.firestore.api.FireStoreData
 import com.taetae98.diary.library.firestore.api.ext.toFireStoreTimestamp
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
-
-internal fun MemoState.toDto(): MemoStateDto {
-    return when (this) {
-        MemoState.NONE -> MemoStateDto.NONE
-        MemoState.COMPLETE -> MemoStateDto.COMPLETE
-        MemoState.DELETE -> MemoStateDto.DELETE
-    }
-}
 
 internal fun Memo.toDto(): MemoDto {
     return MemoDto(
@@ -26,17 +16,10 @@ internal fun Memo.toDto(): MemoDto {
         dateRangeColor = dateRangeColor,
         dateRange = dateRange,
         ownerId = ownerId,
-        state = state.toDto(),
+        isFinished = isFinished,
+        isDeleted = false,
         updateAt = Clock.System.now()
     )
-}
-
-internal fun MemoStateDto.toDomain(): MemoState {
-    return when (this) {
-        MemoStateDto.NONE -> MemoState.NONE
-        MemoStateDto.COMPLETE -> MemoState.COMPLETE
-        MemoStateDto.DELETE -> MemoState.DELETE
-    }
 }
 
 internal fun MemoDto.toDomain(): Memo {
@@ -46,25 +29,9 @@ internal fun MemoDto.toDomain(): Memo {
         description = description,
         dateRangeColor = dateRangeColor,
         dateRange = dateRange,
+        isFinished = isFinished,
         ownerId = ownerId,
-        state = state.toDomain(),
     )
-}
-
-internal fun MemoStateDto.toFireStore(): MemoFireStoreStateEntity {
-    return when (this) {
-        MemoStateDto.NONE -> MemoFireStoreStateEntity.NONE
-        MemoStateDto.COMPLETE -> MemoFireStoreStateEntity.COMPLETE
-        MemoStateDto.DELETE -> MemoFireStoreStateEntity.DELETE
-    }
-}
-
-internal fun MemoFireStoreStateEntity.toDto(): MemoStateDto {
-    return when (this) {
-        MemoFireStoreStateEntity.NONE -> MemoStateDto.NONE
-        MemoFireStoreStateEntity.COMPLETE -> MemoStateDto.COMPLETE
-        MemoFireStoreStateEntity.DELETE -> MemoStateDto.DELETE
-    }
 }
 
 internal fun MemoDto.toFireStore(): Map<String, Any?> {
@@ -75,7 +42,6 @@ internal fun MemoDto.toFireStore(): Map<String, Any?> {
         MemoFireStore.DATE_RANGE_COLOR to dateRangeColor,
         MemoFireStore.DATE_RANGE_START to dateRange?.start?.toFireStoreTimestamp(),
         MemoFireStore.DATE_RANGE_END to dateRange?.endInclusive?.toFireStoreTimestamp(),
-        MemoFireStore.STATE to state.toFireStore().value,
         MemoFireStore.OWNER_ID to ownerId,
         MemoFireStore.UPDATE_AT to updateAt.toFireStoreTimestamp(),
     )
@@ -89,13 +55,15 @@ internal fun FireStoreData.toMemoDto(): MemoDto {
     } else {
         null
     }
+
     return MemoDto(
         id = requireNotNull(getString(MemoFireStore.ID)),
         title = getString(MemoFireStore.TITLE).orEmpty(),
         description = getString(MemoFireStore.DESCRIPTION).orEmpty(),
         dateRangeColor = getLong(MemoFireStore.DATE_RANGE_COLOR),
         dateRange = dateRange,
-        state = MemoFireStoreStateEntity.valueOf(requireNotNull(getLong(MemoFireStore.STATE))).toDto(),
+        isFinished = getBoolean(MemoFireStore.IS_FINISHED) ?: false,
+        isDeleted = getBoolean(MemoFireStore.IS_DELETED) ?: false,
         ownerId = getString(MemoFireStore.OWNER_ID),
         updateAt = requireNotNull(getInstant(MemoFireStore.UPDATE_AT)),
     )

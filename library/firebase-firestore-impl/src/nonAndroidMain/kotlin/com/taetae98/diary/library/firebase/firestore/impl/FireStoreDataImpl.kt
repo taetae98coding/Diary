@@ -8,11 +8,15 @@ import kotlinx.datetime.Instant
 internal data class FireStoreDataImpl(
     private val documentSnapshot: DocumentSnapshot
 ) : FireStoreData {
-    override fun getString(key: String): String? {
+    override fun getBoolean(key: String): Boolean? {
         return documentSnapshot.get(key)
     }
 
     override fun getLong(key: String): Long? {
+        return documentSnapshot.get(key)
+    }
+
+    override fun getString(key: String): String? {
         return documentSnapshot.get(key)
     }
 

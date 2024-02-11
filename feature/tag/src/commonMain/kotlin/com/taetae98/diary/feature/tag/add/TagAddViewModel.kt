@@ -1,7 +1,6 @@
 package com.taetae98.diary.feature.tag.add
 
 import com.taetae98.diary.domain.entity.tag.Tag
-import com.taetae98.diary.domain.entity.tag.TagState
 import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
 import com.taetae98.diary.domain.usecase.tag.UpsertTagUseCase
 import com.taetae98.diary.feature.tag.detail.TagDetailMessage
@@ -63,7 +62,6 @@ internal class TagAddViewModel(
                 id = getUuid(),
                 title = titleUiStateHolder.getValue().value,
                 description = descriptionUiStateHolder.getValue().value,
-                state = TagState.NONE,
                 ownerId = getAccountUseCase(Unit).firstOrNull()?.getOrNull()?.uid,
             )
 

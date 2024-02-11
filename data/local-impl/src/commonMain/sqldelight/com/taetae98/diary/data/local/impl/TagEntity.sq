@@ -1,11 +1,9 @@
-import com.taetae98.diary.data.local.impl.tag.TagStateEntity;
 import kotlinx.datetime.Instant;
 
 CREATE TABLE TagEntity(
     id TEXT NOT NULL PRIMARY KEY,
     title TEXT NOT NULL,
     description TEXT NOT NULL,
-    state INTEGER AS TagStateEntity NOT NULL,
     ownerId TEXT,
     updateAt TEXT AS Instant NOT NULL
 );
@@ -30,7 +28,7 @@ page:
 SELECT *
 FROM TagEntity
 WHERE
-ownerId = :ownerId AND state = 0
+ownerId = :ownerId
 ORDER BY title
 LIMIT :limit OFFSET :offset;
 

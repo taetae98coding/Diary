@@ -19,16 +19,26 @@ internal class MemoFireStore(
             .upsert(memo.toFireStore())
     }
 
-    suspend fun complete(id: String) {
-        updateState(id, MemoFireStoreStateEntity.COMPLETE)
-    }
-
-    suspend fun incomplete(id: String) {
-        updateState(id, MemoFireStoreStateEntity.NONE)
+    suspend fun updateFinished(id: String, isFinished: Boolean) {
+        fireStore.collection(COLLECTION)
+            .document(id)
+            .update(
+                mapOf(
+                    IS_FINISHED to isFinished,
+                    UPDATE_AT to Clock.System.now().toFireStoreTimestamp(),
+                )
+            )
     }
 
     suspend fun delete(id: String) {
-        updateState(id, MemoFireStoreStateEntity.DELETE)
+        fireStore.collection(COLLECTION)
+            .document(id)
+            .update(
+                mapOf(
+                    IS_DELETED to true,
+                    UPDATE_AT to Clock.System.now().toFireStoreTimestamp(),
+                )
+            )
     }
 
     suspend fun pageByUpdateAt(
@@ -46,20 +56,6 @@ internal class MemoFireStore(
             .map(FireStoreData::toMemoDto)
     }
 
-    private suspend fun updateState(
-        id: String,
-        stateEntity: MemoFireStoreStateEntity
-    ) {
-        fireStore.collection(COLLECTION)
-            .document(id)
-            .update(
-                mapOf(
-                    STATE to stateEntity.value,
-                    UPDATE_AT to Clock.System.now().toFireStoreTimestamp(),
-                )
-            )
-    }
-
     companion object {
         const val COLLECTION = "memo"
 
@@ -69,7 +65,8 @@ internal class MemoFireStore(
         const val DATE_RANGE_COLOR = "dateRangeColor"
         const val DATE_RANGE_START = "dateRangeStart"
         const val DATE_RANGE_END = "dateRangeEnd"
-        const val STATE = "state"
+        const val IS_FINISHED = "isFinished"
+        const val IS_DELETED = "isDeleted"
         const val OWNER_ID = "ownerId"
         const val UPDATE_AT = "updateAt"
     }

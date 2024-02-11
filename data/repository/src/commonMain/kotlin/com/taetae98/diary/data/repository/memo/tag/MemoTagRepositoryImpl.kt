@@ -33,14 +33,14 @@ internal class MemoTagRepositoryImpl(
     override suspend fun upsert(memoTag: MemoTag) {
         val dto = memoTag.toDto()
 
-        localDataSource.upsert(dto)
+        localDataSource.insert(dto)
         processScope.launch { fireStore.upsert(dto) }
     }
 
     override suspend fun upsert(memoTag: List<MemoTag>) {
         val dto = memoTag.map(MemoTag::toDto)
 
-        localDataSource.upsert(dto)
+        localDataSource.insert(dto)
         processScope.launch { dto.forEach { fireStore.upsert(it) } }
     }
 

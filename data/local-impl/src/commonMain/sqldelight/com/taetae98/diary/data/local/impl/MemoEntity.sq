@@ -1,4 +1,4 @@
-import com.taetae98.diary.data.local.impl.memo.MemoStateEntity;
+import kotlin.Boolean;
 import kotlinx.datetime.Instant;
 import kotlinx.datetime.LocalDate;
 
@@ -9,7 +9,7 @@ CREATE TABLE MemoEntity (
     dateRangeColor INTEGER,
     dateRangeStart TEXT AS LocalDate,
     dateRangeEnd TEXT AS LocalDate,
-    state INTEGER AS MemoStateEntity NOT NULL,
+    isFinished INTEGER AS Boolean NOT NULL,
     ownerId TEXT,
     updateAt TEXT AS Instant NOT NULL
 );
@@ -24,7 +24,7 @@ description = excluded.description,
 dateRangeColor = excluded.dateRangeColor,
 dateRangeStart = excluded.dateRangeStart,
 dateRangeEnd = excluded.dateRangeEnd,
-state = excluded.state,
+isFinished = excluded.isFinished,
 ownerId = excluded.ownerId,
 updateAt = excluded.updateAt;
 
@@ -32,14 +32,14 @@ count:
 SELECT COUNT(*)
 FROM MemoEntity
 WHERE
-state = 0 AND
+isFinished = 0 AND
 ownerId = :ownerId;
 
 countByTagId:
 SELECT COUNT(*)
 FROM MemoEntity
 WHERE
-state = 0 AND
+isFinished = 0 AND
 ownerId = :ownerId AND
 id IN (SELECT memoId FROM MemoTagEntity WHERE tagId = :tagId);
 
@@ -47,7 +47,7 @@ page:
 SELECT *
 FROM MemoEntity
 WHERE
-state = 0 AND
+isFinished = 0 AND
 ownerId = :ownerId
 LIMIT :limit OFFSET :offset;
 
@@ -55,19 +55,14 @@ pageByTagId:
 SELECT *
 FROM MemoEntity
 WHERE
-state = 0 AND
+isFinished = 0 AND
 ownerId = :ownerId AND
 id IN (SELECT memoId FROM MemoTagEntity WHERE tagId = :tagId)
 LIMIT :limit OFFSET :offset;
 
-complete:
+updateFinished:
 UPDATE MemoEntity
-SET state = 1
-WHERE id = :id;
-
-incomplete:
-UPDATE MemoEntity
-SET state = 0
+SET isFinished = :isFinished
 WHERE id = :id;
 
 delete:
@@ -83,5 +78,4 @@ findByYearAndMonth:
 SELECT *
 FROM MemoEntity
 WHERE (dateRangeEnd >= :start AND dateRangeStart <= :end)
-AND ownerId =: ownerId
-AND state != 2;
+AND ownerId =: ownerId;

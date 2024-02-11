@@ -41,7 +41,7 @@ public fun SwipeMemo(
 
             when (it) {
                 DismissValue.DismissedToStart -> uiState.onDelete()
-                DismissValue.DismissedToEnd -> uiState.onComplete()
+                DismissValue.DismissedToEnd -> uiState.onFinish()
                 else -> Unit
             }
 

@@ -4,8 +4,8 @@ internal sealed class MemoDetailToolbarUiState {
     data object Add : MemoDetailToolbarUiState()
 
     data class Detail(
-        val isComplete: Boolean,
-        val onComplete: () -> Unit,
+        val isFinished: Boolean,
+        val onFinish: () -> Unit,
         val onDelete: () -> Unit,
     ) : MemoDetailToolbarUiState()
 }

@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.Flow
 public interface MemoTagLocalDataSource {
     public suspend fun exists(memoTag: MemoTagDto): Boolean
     public suspend fun delete(memoTag: MemoTagDto)
-    public suspend fun upsert(memoTag: MemoTagDto)
-    public suspend fun upsert(memoTag: List<MemoTagDto>)
+    public suspend fun insert(memoTag: MemoTagDto)
+    public suspend fun insert(memoTag: List<MemoTagDto>)
 
     public fun findByMemoId(memoId: String): Flow<List<MemoTagDto>>
 }
