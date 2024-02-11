@@ -28,7 +28,7 @@ internal class TagFireStore(
     }
 
     companion object {
-        private const val COLLECTION = "tag"
+        const val COLLECTION = "tag"
 
         const val ID = "id"
         const val TITLE = "title"

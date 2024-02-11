@@ -1,6 +1,7 @@
 package com.taetae98.diary.library.firebase.firestore.impl
 
 import com.google.firebase.firestore.DocumentReference
+import com.taetae98.diary.library.firestore.api.Collection
 import com.taetae98.diary.library.firestore.api.Document
 import kotlinx.coroutines.tasks.await
 
@@ -13,5 +14,9 @@ internal class DocumentImpl(
 
     override suspend fun update(queries: Map<String, Any?>) {
         document.update(queries).await()
+    }
+
+    override fun collection(collection: String): Collection {
+        return CollectionImpl(document.collection(collection))
     }
 }

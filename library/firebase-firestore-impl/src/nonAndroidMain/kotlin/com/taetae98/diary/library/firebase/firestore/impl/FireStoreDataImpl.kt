@@ -5,7 +5,7 @@ import dev.gitlive.firebase.firestore.DocumentSnapshot
 import dev.gitlive.firebase.firestore.Timestamp
 import kotlinx.datetime.Instant
 
-internal class FireStoreDataImpl(
+internal data class FireStoreDataImpl(
     private val documentSnapshot: DocumentSnapshot
 ) : FireStoreData {
     override fun getString(key: String): String? {

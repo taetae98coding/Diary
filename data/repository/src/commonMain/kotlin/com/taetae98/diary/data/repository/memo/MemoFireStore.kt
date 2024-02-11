@@ -61,7 +61,7 @@ internal class MemoFireStore(
     }
 
     companion object {
-        private const val COLLECTION = "memo"
+        const val COLLECTION = "memo"
 
         const val ID = "id"
         const val TITLE = "title"
