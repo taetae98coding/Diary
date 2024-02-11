@@ -1,0 +1,40 @@
+import kotlin.Boolean;
+import kotlinx.datetime.Instant;
+
+CREATE TABLE TagEntity(
+    id TEXT NOT NULL PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    ownerId TEXT,
+    updateAt TEXT AS Instant NOT NULL
+);
+
+upsert:
+INSERT INTO TagEntity
+VALUES ?
+ON CONFLICT (id) DO
+UPDATE SET
+title = excluded.title,
+description = excluded.description,
+ownerId = excluded.ownerId,
+updateAt = excluded.updateAt;
+
+count:
+SELECT COUNT(*)
+FROM TagEntity
+WHERE
+ownerId = :ownerId;
+
+page:
+SELECT *
+FROM TagEntity
+WHERE
+ownerId = :ownerId
+ORDER BY title
+LIMIT :limit OFFSET :offset;
+
+findById:
+SELECT *
+FROM TagEntity
+WHERE
+id = :id;

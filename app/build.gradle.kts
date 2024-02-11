@@ -21,6 +21,7 @@ kotlin {
                 implementation(project(":feature:more"))
                 implementation(project(":feature:account"))
                 implementation(project(":feature:calendar"))
+                implementation(project(":feature:tag"))
 
                 implementation(project(":navigation:core"))
                 implementation(project(":ui:compose"))

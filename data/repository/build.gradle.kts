@@ -9,6 +9,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":core:auth-api"))
+                implementation(project(":core:coroutines"))
 
                 implementation(project(":data:dto"))
                 implementation(project(":data:pref-api"))
@@ -18,6 +19,7 @@ kotlin {
 
                 implementation(project(":library:paging"))
                 implementation(project(":library:firebase-firestore-api"))
+                implementation(project(":library:kotlin-ext"))
 
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kotlinx.datetime)

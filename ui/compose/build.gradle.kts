@@ -14,6 +14,8 @@ kotlin {
 
         commonMain {
             dependencies {
+                implementation(project(":library:viewmodel"))
+
                 implementation(compose.material3)
                 implementation(compose.materialIconsExtended)
             }

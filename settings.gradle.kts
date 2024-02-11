@@ -57,6 +57,7 @@ include(":feature:memo")
 include(":feature:more")
 include(":feature:account")
 include(":feature:calendar")
+include(":feature:tag")
 
 include(":domain:exception")
 include(":domain:entity")
@@ -67,7 +68,9 @@ include(":navigation:core")
 
 include(":ui:compose")
 include(":ui:entity")
+include(":ui:memo-compose")
 
+include(":library:compose-backhandler")
 include(":library:compose-calendar")
 include(":library:compose-color")
 include(":library:compose-runtime")

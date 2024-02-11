@@ -15,6 +15,7 @@ kotlin {
 
                 implementation(project(":ui:compose"))
                 implementation(project(":ui:entity"))
+                implementation(project(":ui:memo-compose"))
 
                 implementation(project(":library:koin-navigation-compose"))
                 implementation(project(":library:compose-runtime"))
@@ -22,7 +23,6 @@ kotlin {
                 implementation(project(":library:kotlin-ext"))
                 implementation(project(":library:paging"))
 
-                implementation(libs.kotlinx.immutable)
                 implementation(libs.kotlinx.datetime)
 
                 implementation(compose.material3)

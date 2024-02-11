@@ -45,7 +45,7 @@ public inline fun <reified T : ViewModel> ComponentContext.koinInject(
         }
     }
 
-    return instanceKeeper.getOrCreate(scope) {
+    return instanceKeeper.getOrCreate(key) {
         scope.get(
             parameters = {
                 ParametersHolder(mutableListOf(SavedStateHandle(map)))

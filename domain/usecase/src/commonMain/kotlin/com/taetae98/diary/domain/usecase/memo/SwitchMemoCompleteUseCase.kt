@@ -7,16 +7,16 @@ import org.koin.core.annotation.Factory
 
 @Factory
 public class SwitchMemoCompleteUseCase internal constructor(
-    private val findByIdMemoUseCase: FindByIdMemoUseCase,
+    private val findMemoByIdUseCase: FindMemoByIdUseCase,
     private val completeMemoUseCase: CompleteMemoUseCase,
     private val incompleteMemoUseCase: IncompleteMemoUseCase,
 ) : UseCase<String, Unit>() {
     override suspend fun execute(params: String) {
-        val memo = findByIdMemoUseCase(params).first().getOrThrow() ?: return
+        val memo = findMemoByIdUseCase(params).first().getOrThrow() ?: return
 
         when (memo.state) {
             MemoState.COMPLETE -> incompleteMemoUseCase(memo.id)
-            MemoState.INCOMPLETE -> completeMemoUseCase(memo.id)
+            MemoState.NONE -> completeMemoUseCase(memo.id)
             else -> Unit
         }
     }

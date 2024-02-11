@@ -3,58 +3,63 @@ package com.taetae98.diary.data.repository.memo
 import app.cash.paging.PagingData
 import app.cash.paging.createPager
 import app.cash.paging.createPagingConfig
+import com.taetae98.diary.core.coroutines.CoroutinesModule
 import com.taetae98.diary.data.dto.memo.MemoDto
 import com.taetae98.diary.data.local.api.MemoLocalDataSource
 import com.taetae98.diary.data.pref.api.MemoPrefDataSource
 import com.taetae98.diary.domain.entity.memo.Memo
 import com.taetae98.diary.domain.repository.MemoRepository
 import com.taetae98.diary.library.paging.mapPaging
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.Month
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Named
 
 @Factory
 internal class MemoRepositoryImpl(
     private val fireStore: MemoFireStore,
     private val prefDataSource: MemoPrefDataSource,
     private val localDataSource: MemoLocalDataSource,
+    @Named(CoroutinesModule.PROCESS)
+    private val processScope: CoroutineScope,
 ) : MemoRepository {
     override suspend fun upsert(memo: Memo) {
         val dto = memo.toDto()
 
         localDataSource.upsert(dto)
-        if (memo.ownerId != null) {
-            fireStore.upsert(dto)
-        }
+        runOnProcessScopeIfOwnerIdNotNull(dto) { fireStore.upsert(dto) }
     }
 
     override suspend fun complete(id: String) {
-        val memo = localDataSource.find(id).firstOrNull()
-
         localDataSource.complete(id)
-        if (memo?.ownerId != null) {
-            fireStore.complete(id)
-        }
+        runOnProcessScopeIfOwnerIdNotNull(id) { fireStore.complete(id) }
     }
 
     override suspend fun incomplete(id: String) {
-        val memo = localDataSource.find(id).firstOrNull()
-
         localDataSource.incomplete(id)
-        if (memo?.ownerId != null) {
-            fireStore.incomplete(id)
-        }
+        runOnProcessScopeIfOwnerIdNotNull(id) { fireStore.incomplete(id) }
     }
 
     override suspend fun delete(id: String) {
-        val memo = localDataSource.find(id).firstOrNull()
-
         localDataSource.delete(id)
-        if (memo?.ownerId != null) {
-            fireStore.delete(id)
+        runOnProcessScopeIfOwnerIdNotNull(id) { fireStore.delete(id) }
+    }
+
+    private suspend fun runOnProcessScopeIfOwnerIdNotNull(id: String, run: suspend () -> Unit) {
+        val memo = localDataSource.find(id).firstOrNull() ?: return
+
+        runOnProcessScopeIfOwnerIdNotNull(memo, run)
+    }
+
+    private fun runOnProcessScopeIfOwnerIdNotNull(memo: MemoDto, run: suspend () -> Unit) {
+        if (memo.ownerId == null) return
+
+        processScope.launch {
+            runCatching { run() }
         }
     }
 
@@ -85,6 +90,17 @@ internal class MemoRepositoryImpl(
             ),
             pagingSourceFactory = {
                 localDataSource.page(ownerId = ownerId)
+            }
+        ).mapPaging(MemoDto::toDomain)
+    }
+
+    override fun page(ownerId: String?, tagId: String): Flow<PagingData<Memo>> {
+        return createPager(
+            config = createPagingConfig(
+                pageSize = 30,
+            ),
+            pagingSourceFactory = {
+                localDataSource.page(ownerId, tagId)
             }
         ).mapPaging(MemoDto::toDomain)
     }

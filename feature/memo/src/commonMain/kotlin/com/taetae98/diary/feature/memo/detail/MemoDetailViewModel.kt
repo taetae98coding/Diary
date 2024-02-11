@@ -3,10 +3,8 @@ package com.taetae98.diary.feature.memo.detail
 import com.taetae98.diary.domain.entity.memo.Memo
 import com.taetae98.diary.domain.entity.memo.MemoState
 import com.taetae98.diary.domain.exception.TitleEmptyException
-import com.taetae98.diary.domain.usecase.memo.CompleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.DeleteMemoUseCase
-import com.taetae98.diary.domain.usecase.memo.FindByIdMemoUseCase
-import com.taetae98.diary.domain.usecase.memo.IncompleteMemoUseCase
+import com.taetae98.diary.domain.usecase.memo.FindMemoByIdUseCase
 import com.taetae98.diary.domain.usecase.memo.SwitchMemoCompleteUseCase
 import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
 import com.taetae98.diary.library.kotlin.ext.localDateNow
@@ -16,7 +14,7 @@ import com.taetae98.diary.library.kotlin.ext.toLocalDate
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
 import com.taetae98.diary.library.viewmodel.ViewModel
 import com.taetae98.diary.navigation.core.memo.MemoDetailEntry
-import kotlinx.coroutines.Dispatchers
+import com.taetae98.diary.ui.compose.text.TextFieldUiStateHolder
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -30,14 +28,14 @@ import org.koin.core.annotation.Factory
 @Factory
 internal class MemoDetailViewModel(
     savedStateHandle: SavedStateHandle,
-    private val findByIdMemoUseCase: FindByIdMemoUseCase,
+    private val findMemoByIdUseCase: FindMemoByIdUseCase,
     private val switchMemoCompleteUseCase: SwitchMemoCompleteUseCase,
     private val deleteMemoUseCase: DeleteMemoUseCase,
     private val upsertMemoUseCase: UpsertMemoUseCase,
 ) : ViewModel() {
-    private val id = savedStateHandle.getStateFlow<String?>(
+    private val id = savedStateHandle.getStateFlow(
         key = MemoDetailEntry.ID,
-        initialValue = null
+        initialValue = ""
     )
     private val _message = MutableStateFlow<MemoDetailMessage?>(null)
 
@@ -78,7 +76,7 @@ internal class MemoDetailViewModel(
     )
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    private val memo = id.flatMapLatest { findByIdMemoUseCase(it) }
+    private val memo = id.flatMapLatest { findMemoByIdUseCase(it) }
         .mapLatest(Result<Memo?>::getOrNull)
         .onEach(::onMemoChanged)
         .stateIn(
@@ -91,7 +89,7 @@ internal class MemoDetailViewModel(
     val toolbarUiState = memo.mapLatest {
         MemoDetailToolbarUiState.Detail(
             isComplete = it?.state == MemoState.COMPLETE,
-            onComplete = ::toggleComplete,
+            onComplete = ::switchComplete,
             onDelete = ::delete,
         )
     }.stateIn(
@@ -99,7 +97,7 @@ internal class MemoDetailViewModel(
         started = SharingStarted.Eagerly,
         initialValue = MemoDetailToolbarUiState.Detail(
             isComplete = memo.value?.state == MemoState.COMPLETE,
-            onComplete = ::toggleComplete,
+            onComplete = ::switchComplete,
             onDelete = ::delete,
         )
     )
@@ -128,7 +126,7 @@ internal class MemoDetailViewModel(
         }
 
         return Memo(
-            id = id.value ?: return null,
+            id = id.value,
             title = titleUiStateHolder.getValue().value,
             description = descriptionUiStateHolder.getValue().value,
             dateRangeColor = dateRangeColor,
@@ -138,7 +136,7 @@ internal class MemoDetailViewModel(
         )
     }
 
-    private fun toggleComplete() {
+    private fun switchComplete() {
         val memo = createMemoFromState() ?: return
 
         viewModelScope.launch {

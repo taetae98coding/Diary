@@ -3,69 +3,41 @@ package com.taetae98.diary.library.viewmodel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.contentOrNull
-import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.decodeFromJsonElement
+import kotlinx.serialization.json.encodeToJsonElement
 
 public class SavedStateHandle(
-    private val savedState: MutableMap<String, JsonElement> = mutableMapOf()
+    public val savedState: MutableMap<String, JsonElement> = mutableMapOf()
 ) {
-    private val stateFlowMap = mutableMapOf<String, MutableStateFlow<*>>()
+    public val stateFlowMap: MutableMap<String, MutableStateFlow<*>> = mutableMapOf()
 
     @Suppress("UNCHECKED_CAST")
-    public fun <T> getStateFlow(key: String, initialValue: T): StateFlow<T> {
-        val stateFlow = when (initialValue) {
-            is String? -> stateFlowMap.getOrPut(key) {
-                val jsonElement = savedState.getOrPut(key) { JsonPrimitive(initialValue) }
-                val value = jsonElement.jsonPrimitive.contentOrNull
+    public inline fun <reified T> getStateFlow(key: String, initialValue: T): StateFlow<T> {
+        val mutableStateFlow = stateFlowMap.getOrPut(key) {
+            val jsonElement = savedState.getOrPut(key) { initialValue.toJsonElement() }
+            val value = jsonElement.toValue<T>()
 
-                MutableStateFlow(value)
-            }
-
-            is Long? -> stateFlowMap.getOrPut(key) {
-                val jsonElement = savedState.getOrPut(key) { JsonPrimitive(initialValue) }
-                val value = jsonElement.jsonPrimitive.contentOrNull?.toLong()
-
-                MutableStateFlow(value)
-            }
-
-            is Boolean? -> stateFlowMap.getOrPut(key) {
-                val jsonElement = savedState.getOrPut(key) { JsonPrimitive(initialValue) }
-                val value = jsonElement.jsonPrimitive.contentOrNull?.toBooleanStrictOrNull()
-
-                MutableStateFlow(value)
-            }
-
-            else -> error("Not Support Type : $initialValue")
+            MutableStateFlow(value)
         }
 
-        return stateFlow.asStateFlow() as StateFlow<T>
+        return mutableStateFlow.asStateFlow() as StateFlow<T>
     }
 
     @Suppress("UNCHECKED_CAST")
-    public operator fun <T> set(key: String, value: T) {
-        when (value) {
-            is String? -> {
-                val flow = stateFlowMap.getOrPut(key) { MutableStateFlow(value) }
+    public inline operator fun <reified T> set(key: String, value: T) {
+        val flow = stateFlowMap.getOrPut(key) { MutableStateFlow(value) }
 
-                savedState[key] = JsonPrimitive(value)
-                (flow as? MutableStateFlow<T>)?.value = value
-            }
+        savedState[key] = value.toJsonElement()
+        (flow as? MutableStateFlow<T>)?.value = value
+    }
 
-            is Long? -> {
-                val flow = stateFlowMap.getOrPut(key) { MutableStateFlow(value) }
+    public inline fun <reified T> T.toJsonElement(): JsonElement {
+        return Json.encodeToJsonElement(this)
+    }
 
-                savedState[key] = JsonPrimitive(value)
-                (flow as? MutableStateFlow<T>)?.value = value
-            }
-
-            is Boolean? -> {
-                val flow = stateFlowMap.getOrPut(key) { MutableStateFlow(value) }
-
-                savedState[key] = JsonPrimitive(value)
-                (flow as? MutableStateFlow<T>)?.value = value
-            }
-        }
+    public inline fun <reified T> JsonElement.toValue(): T {
+        return Json.decodeFromJsonElement<T>(this)
     }
 }

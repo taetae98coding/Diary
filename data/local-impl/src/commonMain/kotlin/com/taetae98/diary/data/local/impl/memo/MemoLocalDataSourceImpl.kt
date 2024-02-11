@@ -12,11 +12,7 @@ import com.taetae98.diary.data.local.impl.DiaryDatabase
 import com.taetae98.diary.data.local.impl.di.DatabaseModule
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
-import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.Month
-import kotlinx.datetime.minus
-import kotlinx.datetime.plus
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Named
 
@@ -59,7 +55,7 @@ internal class MemoLocalDataSourceImpl(
             .mapToOneOrNull(dispatcher)
     }
 
-    override fun find(ownerId: String?, dateRange: ClosedRange<LocalDate>, ): Flow<List<MemoDto>> {
+    override fun find(ownerId: String?, dateRange: ClosedRange<LocalDate>): Flow<List<MemoDto>> {
         return database.memoEntityQueries.findByYearAndMonth(
             start = dateRange.start,
             end = dateRange.endInclusive,
@@ -78,6 +74,25 @@ internal class MemoLocalDataSourceImpl(
             queryProvider = { limit, offset ->
                 queries.page(
                     ownerId = ownerId,
+                    limit = limit,
+                    offset = offset,
+                    mapper = ::mapToMemoDto
+                )
+            },
+        )
+    }
+
+    override fun page(ownerId: String?, tagId: String): PagingSource<Int, MemoDto> {
+        val queries = database.memoEntityQueries
+
+        return QueryPagingSource(
+            countQuery = queries.countByTagId(ownerId = ownerId, tagId = tagId),
+            transacter = queries,
+            context = dispatcher,
+            queryProvider = { limit, offset ->
+                queries.pageByTagId(
+                    ownerId = ownerId,
+                    tagId = tagId,
                     limit = limit,
                     offset = offset,
                     mapper = ::mapToMemoDto
