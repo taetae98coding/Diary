@@ -125,14 +125,12 @@ internal class MemoDetailViewModel(
             null
         }
 
-        return Memo(
+        return memo.value?.copy(
             id = id.value,
             title = titleUiStateHolder.getValue().value,
             description = descriptionUiStateHolder.getValue().value,
             dateRangeColor = dateRangeColor,
             dateRange = dateRange,
-            ownerId = memo.value?.ownerId,
-            state = memo.value?.state ?: return null
         )
     }
 

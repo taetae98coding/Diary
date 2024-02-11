@@ -6,6 +6,7 @@ public data class TagDto(
     val id: String,
     val title: String,
     val description: String,
+    val state: TagStateDto,
     val ownerId: String?,
     val updateAt: Instant,
 )

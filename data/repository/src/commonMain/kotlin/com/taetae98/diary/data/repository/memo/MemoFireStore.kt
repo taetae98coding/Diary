@@ -14,8 +14,6 @@ internal class MemoFireStore(
     private val fireStore: FireStore,
 ) {
     suspend fun upsert(memo: MemoDto) {
-        if (memo.ownerId == null) return
-
         fireStore.collection(COLLECTION)
             .document(memo.id)
             .upsert(memo.toFireStore())

@@ -4,5 +4,6 @@ public data class Tag(
     val id: String,
     val title: String,
     val description: String,
+    val state: TagState,
     val ownerId: String?,
 )
