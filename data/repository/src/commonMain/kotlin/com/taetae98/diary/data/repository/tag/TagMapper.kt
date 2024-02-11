@@ -41,7 +41,7 @@ internal fun FireStoreData.toTag(): TagDto {
     return TagDto(
         id = requireNotNull(getString(TagFireStore.ID)),
         title = requireNotNull(getString(TagFireStore.TITLE)),
-        description = requireNotNull(getString(TagFireStore.DESCRIPTION)),
+        description = getString(TagFireStore.DESCRIPTION).orEmpty(),
         isDeleted = getBoolean(TagFireStore.IS_DELETED) ?: false,
         ownerId = getString(TagFireStore.OWNER_ID),
         updateAt = requireNotNull(getInstant(TagFireStore.UPDATE_AT)),

@@ -61,7 +61,7 @@ internal fun FireStoreData.toMemo(): MemoDto {
     return MemoDto(
         id = requireNotNull(getString(MemoFireStore.ID)),
         title = requireNotNull(getString(MemoFireStore.TITLE)),
-        description = requireNotNull(getString(MemoFireStore.DESCRIPTION)),
+        description = getString(MemoFireStore.DESCRIPTION).orEmpty(),
         dateRangeColor = getLong(MemoFireStore.DATE_RANGE_COLOR),
         dateRange = dateRange,
         isFinished = requireNotNull(getBoolean(MemoFireStore.IS_FINISHED)),
