@@ -3,11 +3,13 @@ package com.taetae98.diary.feature.tag.memo
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import app.cash.paging.compose.LazyPagingItems
 import app.cash.paging.compose.itemContentType
 import app.cash.paging.compose.itemKey
+import com.taetae98.diary.ui.compose.icon.EditIcon
 import com.taetae98.diary.ui.compose.scaffold.DiaryScaffold
 import com.taetae98.diary.ui.compose.topbar.NavigateUpTopBar
 import com.taetae98.diary.ui.memo.compose.SwipeMemo
@@ -17,6 +19,7 @@ import com.taetae98.diary.ui.memo.compose.SwipeMemoUiState
 internal fun TagMemoScreen(
     modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit,
+    onEdit: () -> Unit,
     memoItems: LazyPagingItems<SwipeMemoUiState>
 ) {
     DiaryScaffold(
@@ -24,6 +27,11 @@ internal fun TagMemoScreen(
         topBar = {
             NavigateUpTopBar(
                 onNavigateUp = onNavigateUp,
+                actions = {
+                    IconButton(onClick = onEdit) {
+                        EditIcon()
+                    }
+                }
             )
         }
     ) {

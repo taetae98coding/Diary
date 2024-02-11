@@ -23,7 +23,7 @@ internal class TagMemoViewModel(
     private val completeMemoUseCase: CompleteMemoUseCase,
     private val deleteMemoUseCase: DeleteMemoUseCase,
 ) : ViewModel() {
-    private val tagId = savedStateHandle.getStateFlow<String?>(TagMemoEntry.TAG_ID, null)
+    val tagId = savedStateHandle.getStateFlow<String?>(TagMemoEntry.TAG_ID, null)
 
     val memoPagingData = tagId.flatMapLatest { pageMemoByTagIdUseCase(it) }
         .mapLatest { it.getOrNull() ?: PagingData.empty() }

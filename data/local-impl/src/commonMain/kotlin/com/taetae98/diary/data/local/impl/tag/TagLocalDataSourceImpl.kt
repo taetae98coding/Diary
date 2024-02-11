@@ -1,12 +1,15 @@
 package com.taetae98.diary.data.local.impl.tag
 
 import app.cash.paging.PagingSource
+import app.cash.sqldelight.coroutines.asFlow
+import app.cash.sqldelight.coroutines.mapToOneOrNull
 import app.cash.sqldelight.paging3.QueryPagingSource
 import com.taetae98.diary.data.dto.tag.TagDto
 import com.taetae98.diary.data.local.api.TagLocalDataSource
 import com.taetae98.diary.data.local.impl.DiaryDatabase
 import com.taetae98.diary.data.local.impl.di.DatabaseModule
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Named
 
@@ -36,5 +39,11 @@ internal class TagLocalDataSourceImpl(
                 )
             }
         )
+    }
+
+    override fun find(id: String): Flow<TagDto?> {
+        return database.tagEntityQueries.findById(id, ::mapToTagDto)
+            .asFlow()
+            .mapToOneOrNull(dispatcher)
     }
 }

@@ -2,7 +2,7 @@ package com.taetae98.diary.feature.calendar
 
 import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
 import com.taetae98.diary.domain.usecase.holiday.GetHolidayUseCase
-import com.taetae98.diary.domain.usecase.memo.FindByDateRangeUseCase
+import com.taetae98.diary.domain.usecase.memo.FindMemoByDateRangeUseCase
 import com.taetae98.diary.library.compose.calendar.CalendarItem
 import com.taetae98.diary.library.kotlin.ext.toChristDayNumber
 import com.taetae98.diary.library.viewmodel.ViewModel
@@ -28,7 +28,7 @@ import org.koin.core.annotation.Factory
 internal class CalendarViewModel(
     getHolidayUseCase: GetHolidayUseCase,
     getAccountUseCase: GetAccountUseCase,
-    findByDateRangeUseCase: FindByDateRangeUseCase,
+    findMemoByDateRangeUseCase: FindMemoByDateRangeUseCase,
 ) : ViewModel() {
     @OptIn(ExperimentalCoroutinesApi::class)
     private val ownerId = getAccountUseCase(Unit).mapLatest { it.getOrNull() }
@@ -54,7 +54,7 @@ internal class CalendarViewModel(
             .run { plus(6, DateTimeUnit.WEEK) }
             .run { minus(1, DateTimeUnit.DAY) }
 
-        findByDateRangeUseCase(FindByDateRangeUseCase.Params(ownerId, start..endInclusive))
+        findMemoByDateRangeUseCase(FindMemoByDateRangeUseCase.Params(ownerId, start..endInclusive))
     }.flatMapLatest {
         it
     }.mapLatest {

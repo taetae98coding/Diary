@@ -9,6 +9,7 @@ import com.taetae98.diary.domain.entity.tag.Tag
 import com.taetae98.diary.domain.repository.TagRepository
 import com.taetae98.diary.library.paging.mapPaging
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import org.koin.core.annotation.Factory
 
 @Factory
@@ -28,5 +29,10 @@ internal class TagRepositoryImpl(
                 localDataSource.page(ownerId = ownerId)
             }
         ).mapPaging(TagDto::toDomain)
+    }
+
+    override fun find(tagId: String): Flow<Tag?> {
+        return localDataSource.find(tagId)
+            .map { it?.toDomain() }
     }
 }

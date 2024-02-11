@@ -32,3 +32,9 @@ WHERE
 ownerId = :ownerId
 ORDER BY title
 LIMIT :limit OFFSET :offset;
+
+findById:
+SELECT *
+FROM TagEntity
+WHERE
+id = :id;

@@ -10,6 +10,7 @@ import com.arkivanov.decompose.value.Value
 import com.taetae98.diary.navigation.core.ext.illegalRoute
 import com.taetae98.diary.navigation.core.route.Route
 import com.taetae98.diary.navigation.core.route.TagAddRoute
+import com.taetae98.diary.navigation.core.route.TagDetailRoute
 import com.taetae98.diary.navigation.core.route.TagListRoute
 import com.taetae98.diary.navigation.core.route.TagMemoRoute
 
@@ -39,7 +40,14 @@ public class TagEntry(
                 is TagMemoRoute -> TagMemoEntry(
                     context = context,
                     navigateUp = ::navigateUp,
+                    navigateToTagDetail = ::navigateToTagDetail,
                     tagId = route.tagId,
+                )
+
+                is TagDetailRoute -> TagDetailEntry(
+                    context = context,
+                    navigateUp = ::navigateUp,
+                    tagId = route.id,
                 )
 
                 else -> illegalRoute(route)
@@ -53,6 +61,10 @@ public class TagEntry(
 
     private fun navigateToTagMemo(tagId: String) {
         navigation.push(TagMemoRoute(tagId))
+    }
+
+    private fun navigateToTagDetail(tagId: String) {
+        navigation.push(TagDetailRoute(tagId))
     }
 
     private fun navigateUp() {

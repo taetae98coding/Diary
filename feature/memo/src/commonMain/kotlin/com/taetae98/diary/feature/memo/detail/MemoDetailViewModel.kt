@@ -4,7 +4,7 @@ import com.taetae98.diary.domain.entity.memo.Memo
 import com.taetae98.diary.domain.entity.memo.MemoState
 import com.taetae98.diary.domain.exception.TitleEmptyException
 import com.taetae98.diary.domain.usecase.memo.DeleteMemoUseCase
-import com.taetae98.diary.domain.usecase.memo.FindByIdMemoUseCase
+import com.taetae98.diary.domain.usecase.memo.FindMemoByIdUseCase
 import com.taetae98.diary.domain.usecase.memo.SwitchMemoCompleteUseCase
 import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
 import com.taetae98.diary.library.kotlin.ext.localDateNow
@@ -28,7 +28,7 @@ import org.koin.core.annotation.Factory
 @Factory
 internal class MemoDetailViewModel(
     savedStateHandle: SavedStateHandle,
-    private val findByIdMemoUseCase: FindByIdMemoUseCase,
+    private val findMemoByIdUseCase: FindMemoByIdUseCase,
     private val switchMemoCompleteUseCase: SwitchMemoCompleteUseCase,
     private val deleteMemoUseCase: DeleteMemoUseCase,
     private val upsertMemoUseCase: UpsertMemoUseCase,
@@ -76,7 +76,7 @@ internal class MemoDetailViewModel(
     )
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    private val memo = id.flatMapLatest { findByIdMemoUseCase(it) }
+    private val memo = id.flatMapLatest { findMemoByIdUseCase(it) }
         .mapLatest(Result<Memo?>::getOrNull)
         .onEach(::onMemoChanged)
         .stateIn(

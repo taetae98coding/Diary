@@ -8,9 +8,9 @@ import kotlinx.datetime.LocalDate
 import org.koin.core.annotation.Factory
 
 @Factory
-public class FindByDateRangeUseCase(
+public class FindMemoByDateRangeUseCase(
     private val memoRepository: MemoRepository,
-) : FlowUseCase<FindByDateRangeUseCase.Params, List<Memo>>() {
+) : FlowUseCase<FindMemoByDateRangeUseCase.Params, List<Memo>>() {
     override fun execute(params: Params): Flow<List<Memo>> {
         return memoRepository.find(params.ownerId, params.dateRange)
     }
