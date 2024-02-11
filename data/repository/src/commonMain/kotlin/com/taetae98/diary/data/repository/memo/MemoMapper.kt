@@ -42,6 +42,8 @@ internal fun MemoDto.toFireStore(): Map<String, Any?> {
         MemoFireStore.DATE_RANGE_COLOR to dateRangeColor,
         MemoFireStore.DATE_RANGE_START to dateRange?.start?.toFireStoreTimestamp(),
         MemoFireStore.DATE_RANGE_END to dateRange?.endInclusive?.toFireStoreTimestamp(),
+        MemoFireStore.IS_FINISHED to isFinished,
+        MemoFireStore.IS_DELETED to isDeleted,
         MemoFireStore.OWNER_ID to ownerId,
         MemoFireStore.UPDATE_AT to updateAt.toFireStoreTimestamp(),
     )
@@ -63,7 +65,7 @@ internal fun FireStoreData.toMemoDto(): MemoDto {
         dateRangeColor = getLong(MemoFireStore.DATE_RANGE_COLOR),
         dateRange = dateRange,
         isFinished = requireNotNull(getBoolean(MemoFireStore.IS_FINISHED)),
-        isDeleted = getBoolean(MemoFireStore.IS_DELETED) ?: false,
+        isDeleted = requireNotNull(getBoolean(MemoFireStore.IS_DELETED)),
         ownerId = getString(MemoFireStore.OWNER_ID),
         updateAt = requireNotNull(getInstant(MemoFireStore.UPDATE_AT)),
     )

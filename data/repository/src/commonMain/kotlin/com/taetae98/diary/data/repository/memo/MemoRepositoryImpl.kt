@@ -61,7 +61,6 @@ internal class MemoRepositoryImpl(
             val updateAt = prefDataSource.getFetchedUpdateAt(uid).firstOrNull()
             val data = fireStore.pageByUpdateAt(uid, updateAt).takeIf { it.isNotEmpty() } ?: break
 
-            prefDataSource.setFetchedUpdateAt(uid, data.last().updateAt)
             data.forEach {
                 if (it.isDeleted) {
                     localDataSource.delete(it.id)
@@ -69,6 +68,8 @@ internal class MemoRepositoryImpl(
                     localDataSource.upsert(it)
                 }
             }
+
+            prefDataSource.setFetchedUpdateAt(uid, data.last().updateAt)
         }
     }
 
