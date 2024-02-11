@@ -12,6 +12,7 @@ kotlin {
                 implementation(project(":navigation:core"))
 
                 implementation(project(":library:viewmodel"))
+                implementation(project(":library:compose-backhandler"))
                 implementation(project(":library:compose-runtime"))
                 implementation(project(":library:koin-navigation-compose"))
                 implementation(project(":library:uuid"))

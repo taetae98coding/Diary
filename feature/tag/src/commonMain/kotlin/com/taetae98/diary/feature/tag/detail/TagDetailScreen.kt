@@ -13,6 +13,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.taetae98.diary.library.compose.backhandler.KBackHandler
 import com.taetae98.diary.ui.compose.scaffold.DiaryScaffold
 import com.taetae98.diary.ui.compose.text.TextFieldUiState
 import com.taetae98.diary.ui.compose.topbar.NavigateUpTopBar
@@ -39,6 +40,8 @@ internal fun TagDetailScreen(
             descriptionUiState = descriptionUiState,
         )
     }
+
+    KBackHandler(onBack = onNavigateUp)
 }
 
 @Composable

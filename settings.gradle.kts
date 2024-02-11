@@ -70,6 +70,7 @@ include(":ui:compose")
 include(":ui:entity")
 include(":ui:memo-compose")
 
+include(":library:compose-backhandler")
 include(":library:compose-calendar")
 include(":library:compose-color")
 include(":library:compose-runtime")
