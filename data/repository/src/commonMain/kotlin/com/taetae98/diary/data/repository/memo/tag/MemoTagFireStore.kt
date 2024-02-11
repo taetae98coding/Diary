@@ -12,11 +12,11 @@ internal class MemoTagFireStore(
     private val fireStore: FireStore,
 ) {
     suspend fun upsert(memoTag: MemoTagDto) {
-        document(memoTag).upsert(mapOf(IS_DELETE to false))
+        document(memoTag).upsert(mapOf(IS_DELETED to false))
     }
 
     suspend fun delete(memoTag: MemoTagDto) {
-        document(memoTag).update(mapOf(IS_DELETE to true))
+        document(memoTag).update(mapOf(IS_DELETED to true))
     }
 
     private fun document(memoTag: MemoTagDto): Document {
@@ -27,6 +27,6 @@ internal class MemoTagFireStore(
     }
 
     companion object {
-        private const val IS_DELETE = "isDelete"
+        private const val IS_DELETED = "isDeleted"
     }
 }

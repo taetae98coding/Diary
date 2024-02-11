@@ -6,7 +6,7 @@ public data class TagDto(
     val id: String,
     val title: String,
     val description: String,
-    val isDelete: Boolean,
+    val isDeleted: Boolean,
     val ownerId: String?,
     val updateAt: Instant,
 )

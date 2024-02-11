@@ -25,7 +25,7 @@ internal fun mapToTagDto(
         id = id,
         title = title,
         description = description,
-        isDelete = false,
+        isDeleted = false,
         ownerId = ownerId,
         updateAt = updateAt,
     )

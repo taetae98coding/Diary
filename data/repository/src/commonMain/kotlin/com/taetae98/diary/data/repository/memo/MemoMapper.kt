@@ -58,11 +58,11 @@ internal fun FireStoreData.toMemoDto(): MemoDto {
 
     return MemoDto(
         id = requireNotNull(getString(MemoFireStore.ID)),
-        title = getString(MemoFireStore.TITLE).orEmpty(),
-        description = getString(MemoFireStore.DESCRIPTION).orEmpty(),
+        title = requireNotNull(getString(MemoFireStore.TITLE)),
+        description = requireNotNull(getString(MemoFireStore.DESCRIPTION)),
         dateRangeColor = getLong(MemoFireStore.DATE_RANGE_COLOR),
         dateRange = dateRange,
-        isFinished = getBoolean(MemoFireStore.IS_FINISHED) ?: false,
+        isFinished = requireNotNull(getBoolean(MemoFireStore.IS_FINISHED)),
         isDeleted = getBoolean(MemoFireStore.IS_DELETED) ?: false,
         ownerId = getString(MemoFireStore.OWNER_ID),
         updateAt = requireNotNull(getInstant(MemoFireStore.UPDATE_AT)),
