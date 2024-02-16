@@ -5,12 +5,14 @@ import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.Children
 import com.taetae98.diary.feature.account.AccountEntryPoint
 import com.taetae98.diary.feature.calendar.CalendarEntryPoint
+import com.taetae98.diary.feature.finished.memo.FinishedMemoEntryPoint
 import com.taetae98.diary.feature.memo.MemoEntryPoint
 import com.taetae98.diary.feature.more.MoreEntryPoint
 import com.taetae98.diary.feature.tag.TagEntryPoint
 import com.taetae98.diary.navigation.core.account.AccountEntry
 import com.taetae98.diary.navigation.core.app.AppEntry
 import com.taetae98.diary.navigation.core.calendar.CalendarEntry
+import com.taetae98.diary.navigation.core.finished.memo.FinishedMemoEntry
 import com.taetae98.diary.navigation.core.memo.MemoEntry
 import com.taetae98.diary.navigation.core.more.MoreEntry
 import com.taetae98.diary.navigation.core.tag.TagEntry
@@ -33,6 +35,7 @@ internal fun AppNavHost(
             is AccountEntry -> AccountEntryPoint(entry = instance)
             is CalendarEntry -> CalendarEntryPoint(entry = instance)
             is TagEntry -> TagEntryPoint(entry = instance)
+            is FinishedMemoEntry -> FinishedMemoEntryPoint(entry = instance)
         }
     }
 //    }

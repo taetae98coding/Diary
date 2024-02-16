@@ -15,7 +15,7 @@ import com.taetae98.diary.navigation.core.route.TagDetailRoute
 import com.taetae98.diary.navigation.core.route.TagListRoute
 import com.taetae98.diary.navigation.core.route.TagMemoRoute
 
-public class TagEntry(
+public class TagEntry internal constructor(
     context: ComponentContext,
 ) : ComponentContext by context {
     private val navigation = StackNavigation<Route>()

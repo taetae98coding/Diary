@@ -59,6 +59,7 @@ include(":feature:more")
 include(":feature:account")
 include(":feature:calendar")
 include(":feature:tag")
+include(":feature:finished-memo")
 
 include(":domain:exception")
 include(":domain:entity")

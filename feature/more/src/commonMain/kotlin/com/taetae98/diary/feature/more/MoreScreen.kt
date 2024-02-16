@@ -20,6 +20,7 @@ import com.taetae98.diary.ui.compose.topbar.TitleTopBar
 internal fun MoreScreen(
     modifier: Modifier = Modifier,
     onAccount: () -> Unit,
+    onFinishedMemo:() -> Unit,
 ) {
     DiaryScaffold(
         modifier = modifier,
@@ -28,6 +29,7 @@ internal fun MoreScreen(
         Content(
             modifier = Modifier.padding(it),
             onAccount = onAccount,
+            onFinishedMemo = onFinishedMemo
         )
     }
 }
@@ -36,6 +38,7 @@ internal fun MoreScreen(
 private fun Content(
     modifier: Modifier = Modifier,
     onAccount: () -> Unit,
+    onFinishedMemo: () -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -47,6 +50,12 @@ private fun Content(
             modifier = Modifier.fillMaxWidth(),
             title = "계정",
             onClick = onAccount,
+        )
+
+        TitleItem(
+            modifier = Modifier.fillMaxWidth(),
+            title = "완료된 메모",
+            onClick = onFinishedMemo,
         )
     }
 }
