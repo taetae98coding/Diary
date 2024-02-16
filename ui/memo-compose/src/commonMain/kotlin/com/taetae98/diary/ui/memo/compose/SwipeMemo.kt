@@ -6,13 +6,11 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
 import androidx.compose.material3.DismissDirection
 import androidx.compose.material3.DismissState
 import androidx.compose.material3.DismissValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SwipeToDismiss
-import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDismissState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import com.taetae98.diary.ui.compose.icon.CircleIcon
@@ -154,22 +151,5 @@ private fun BoxScope.SwipeIcon(
         )
 
         else -> Unit
-    }
-}
-
-@Composable
-private fun Memo(
-    modifier: Modifier = Modifier,
-    uiState: MemoUiState?,
-    shape: Shape = MemoDefaults.shape
-) {
-    Card(
-        modifier = modifier,
-        shape = shape,
-    ) {
-        Text(
-            modifier = Modifier.padding(12.dp),
-            text = uiState?.title.orEmpty()
-        )
     }
 }

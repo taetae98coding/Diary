@@ -48,7 +48,7 @@ private fun Content(
 ) {
     LazyColumn(
         modifier = modifier,
-        contentPadding = PaddingValues(4.dp),
+        contentPadding = PaddingValues(horizontal = 4.dp),
         verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
         items(
