@@ -3,6 +3,7 @@ package com.taetae98.diary.app
 import com.taetae98.diary.core.auth.module.AuthModule
 import com.taetae98.diary.core.coroutines.CoroutinesModule
 import com.taetae98.diary.core.firestore.module.FireStoreModule
+import com.taetae98.diary.data.local.holiday.HolidayLocalDataSourceModule
 import com.taetae98.diary.data.local.impl.LocalDataSourceModule
 import com.taetae98.diary.data.pref.impl.PrefDataSourceModule
 import com.taetae98.diary.data.remote.impl.RemoteDataSourceModule
@@ -22,6 +23,7 @@ import org.koin.core.annotation.Module
         AuthModule::class,
         FireStoreModule::class,
         PrefDataSourceModule::class,
+        HolidayLocalDataSourceModule::class,
         LocalDataSourceModule::class,
         RemoteDataSourceModule::class,
         RepositoryModule::class,

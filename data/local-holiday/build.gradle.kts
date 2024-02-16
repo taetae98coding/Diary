@@ -19,7 +19,6 @@ kotlin {
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.sqldelight.adapter)
                 implementation(libs.sqldelight.coroutines)
-                implementation(libs.sqldelight.paging)
             }
         }
 
@@ -56,13 +55,13 @@ kotlin {
 }
 
 android {
-    namespace = "${Build.NAMESPACE}.data.local.impl"
+    namespace = "${Build.NAMESPACE}.data.local.holiday"
 }
 
 sqldelight {
     databases {
         create("DiaryDatabase") {
-            packageName.set("${Build.NAMESPACE}.data.local.impl")
+            packageName.set("${Build.NAMESPACE}.data.local.holiday")
             schemaOutputDirectory.set(file("src/main/sqldelight/databases"))
             generateAsync.set(true)
 
