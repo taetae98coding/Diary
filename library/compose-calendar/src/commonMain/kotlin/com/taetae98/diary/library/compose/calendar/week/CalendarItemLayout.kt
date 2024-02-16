@@ -19,7 +19,6 @@ import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.text.style.TextAlign
 import com.taetae98.diary.library.compose.calendar.CalendarItem
 import com.taetae98.diary.library.compose.calendar.provider.LocalWeekSundayColor
@@ -36,7 +35,7 @@ internal fun CalendarItemLayout(
     state: WeekState,
     schedule: State<ImmutableList<CalendarItem.Schedule>>,
     holiday: State<ImmutableList<CalendarItem>>,
-    onHoliday: (key: Any) -> Unit,
+    onItem: (key: Any) -> Unit,
 ) {
     val weekDayItem = remember {
         derivedStateOf {
@@ -88,7 +87,7 @@ internal fun CalendarItemLayout(
     WeekdayItemLayout(
         modifier = modifier,
         weekDayItem = weekDayItem,
-        onHoliday = onHoliday,
+        onItem = onItem,
     )
 }
 
@@ -96,7 +95,7 @@ internal fun CalendarItemLayout(
 private fun WeekdayItemLayout(
     modifier: Modifier = Modifier,
     weekDayItem: State<ImmutableList<ImmutableList<WeekDayItem>>>,
-    onHoliday: (key: Any) -> Unit,
+    onItem: (key: Any) -> Unit,
 ) {
     Column(
         modifier = modifier.verticalScroll(state = rememberScrollState()),
@@ -104,7 +103,7 @@ private fun WeekdayItemLayout(
         weekDayItem.value.forEach {
             WeekdayItemRow(
                 weekDayItem = it,
-                onHoliday = onHoliday,
+                onItem = onItem,
             )
         }
     }
@@ -115,7 +114,7 @@ private fun WeekdayItemLayout(
 private fun WeekdayItemRow(
     modifier: Modifier = Modifier,
     weekDayItem: ImmutableList<WeekDayItem>,
-    onHoliday: (key: Any) -> Unit,
+    onItem: (key: Any) -> Unit,
 ) {
     Row(
         modifier = modifier,
@@ -128,16 +127,30 @@ private fun WeekdayItemRow(
 
                 is WeekDayItem.Item -> {
                     key(it.key) {
-                        val backgroundColor = it.color.takeOrElse { LocalWeekSundayColor.current }
-
                         Text(
                             modifier = Modifier.weight(it.weight)
                                 .fillMaxHeight()
-                                .background(backgroundColor)
-                                .clickable { onHoliday(it.key) }
+                                .background(it.color)
+                                .clickable { onItem(it.key) }
                                 .basicMarquee(iterations = Int.MAX_VALUE),
                             text = it.name,
-                            color = backgroundColor.toContrastColor(),
+                            color = it.color.toContrastColor(),
+                            textAlign = TextAlign.Center,
+                            maxLines = 1,
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                    }
+                }
+
+                is WeekDayItem.Holiday -> {
+                    key(it.key) {
+                        Text(
+                            modifier = Modifier.weight(it.weight)
+                                .fillMaxHeight()
+                                .background(LocalWeekSundayColor.current)
+                                .basicMarquee(iterations = Int.MAX_VALUE),
+                            text = it.name,
+                            color = LocalWeekSundayColor.current.toContrastColor(),
                             textAlign = TextAlign.Center,
                             maxLines = 1,
                             style = MaterialTheme.typography.bodyMedium
@@ -175,21 +188,23 @@ private fun MutableList<WeekDayItem>.addAll(
             add(WeekDayItem.Space((itemStartCursor - cursor).toFloat()))
         }
         if (cursor <= itemStartCursor) {
-            val color = if (item is CalendarItem.Schedule) {
-                Color(item.color)
-            } else {
-                Color.Unspecified
-            }
-
-            add(
-                WeekDayItem.Item(
+            val weight = itemEndCursor - itemStartCursor + 1F
+            val weekDayItem = when (item) {
+                is CalendarItem.Schedule -> WeekDayItem.Item(
                     key = item.key,
                     name = item.name,
-                    weight = itemEndCursor - itemStartCursor + 1F,
-                    color = color,
+                    weight = weight,
+                    color = Color(item.color),
                 )
-            )
 
+                is CalendarItem.Holiday -> WeekDayItem.Holiday(
+                    key = item.key,
+                    name = item.name,
+                    weight = weight,
+                )
+            }
+
+            add(weekDayItem)
             iterator.remove()
             cursor = itemEndCursor + 1
             if (cursor > saturdayCursor) {

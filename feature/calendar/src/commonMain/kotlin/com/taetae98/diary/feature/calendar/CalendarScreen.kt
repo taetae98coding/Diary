@@ -26,8 +26,8 @@ import com.taetae98.diary.library.compose.calendar.Calendar
 import com.taetae98.diary.library.compose.calendar.CalendarItem
 import com.taetae98.diary.library.compose.calendar.CalendarState
 import com.taetae98.diary.library.compose.calendar.model.DateRange
-import com.taetae98.diary.library.kotlin.ext.localDateNow
 import com.taetae98.diary.library.kotlin.ext.getLocalDateTimeNow
+import com.taetae98.diary.library.kotlin.ext.localDateNow
 import com.taetae98.diary.ui.compose.icon.DropdownDownIcon
 import com.taetae98.diary.ui.compose.icon.DropdownUpIcon
 import com.taetae98.diary.ui.compose.icon.TodayIcon
@@ -48,7 +48,7 @@ internal fun CalendarScreen(
     state: CalendarState,
     schedule: State<ImmutableList<CalendarItem.Schedule>>,
     holiday: State<ImmutableList<CalendarItem.Holiday>>,
-    onHoliday: (key: Any) -> Unit,
+    onItem: (key: Any) -> Unit,
 ) {
     DiaryScaffold(
         modifier = modifier,
@@ -65,7 +65,7 @@ internal fun CalendarScreen(
             },
             schedule = schedule,
             holiday = holiday,
-            onHoliday = onHoliday,
+            onItem = onItem,
         )
     }
 }

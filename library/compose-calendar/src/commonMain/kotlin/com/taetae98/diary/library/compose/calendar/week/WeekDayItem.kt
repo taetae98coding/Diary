@@ -11,6 +11,12 @@ internal sealed class WeekDayItem {
         override val weight: Float
     ) : WeekDayItem()
 
+    data class Holiday(
+        val key: Any,
+        val name: String,
+        override val weight: Float,
+    ) : WeekDayItem()
+
     data class Item(
         val key: Any,
         val name: String,
