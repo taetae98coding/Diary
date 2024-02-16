@@ -13,6 +13,7 @@ public fun FinishedMemoEntryPoint(
     FinishedMemoRoute(
         modifier = modifier,
         onNavigateUp = entry.navigateUp,
+        onMemo = entry.navigateToMemoDetail,
         viewModel = entry.koinInject(),
     )
 }

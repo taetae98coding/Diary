@@ -1,7 +1,8 @@
 package com.taetae98.diary.feature.finished.memo
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
@@ -19,6 +20,7 @@ import com.taetae98.diary.ui.memo.compose.MemoUiState
 internal fun FinishedMemoScreen(
     modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit,
+    onMemo: (String) -> Unit,
     lazyPagingItems: LazyPagingItems<MemoUiState>,
 ) {
     DiaryScaffold(
@@ -29,14 +31,17 @@ internal fun FinishedMemoScreen(
     ) {
         Content(
             modifier = Modifier.padding(it),
+            onMemo = onMemo,
             lazyPagingItems = lazyPagingItems,
         )
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun Content(
     modifier: Modifier = Modifier,
+    onMemo: (String) -> Unit,
     lazyPagingItems: LazyPagingItems<MemoUiState>,
 ) {
     LazyColumn(
@@ -48,9 +53,18 @@ private fun Content(
             key = lazyPagingItems.itemKey { it.id },
             contentType = lazyPagingItems.itemContentType { "Memo" }
         ) {
+            val uiState = lazyPagingItems[it]
+
             Memo(
-                modifier = Modifier.fillMaxWidth(),
-                uiState = lazyPagingItems[it],
+                modifier = Modifier
+                    .fillParentMaxWidth()
+                    .animateItemPlacement()
+                    .clickable(
+                        enabled = uiState != null,
+                        onClickLabel = uiState?.title,
+                        onClick = { uiState?.id?.let(onMemo) }
+                    ),
+                uiState = uiState
             )
         }
     }

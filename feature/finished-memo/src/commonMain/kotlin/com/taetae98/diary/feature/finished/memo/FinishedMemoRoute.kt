@@ -8,11 +8,13 @@ import app.cash.paging.compose.collectAsLazyPagingItems
 internal fun FinishedMemoRoute(
     modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit,
+    onMemo: (String) -> Unit,
     viewModel: FinishedMemoViewModel,
 ) {
     FinishedMemoScreen(
-        modifier=modifier,
+        modifier = modifier,
         onNavigateUp = onNavigateUp,
+        onMemo = onMemo,
         lazyPagingItems = viewModel.memoPaging.collectAsLazyPagingItems()
     )
 }

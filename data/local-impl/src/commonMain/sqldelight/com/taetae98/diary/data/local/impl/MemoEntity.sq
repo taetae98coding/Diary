@@ -73,6 +73,7 @@ FROM MemoEntity
 WHERE
 isFinished = 1 AND
 ownerId = :ownerId
+ORDER BY updateAt DESC
 LIMIT :limit OFFSET :offset;
 
 updateFinished:

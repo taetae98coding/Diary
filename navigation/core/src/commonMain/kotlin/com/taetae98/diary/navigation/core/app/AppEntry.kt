@@ -68,6 +68,7 @@ public class AppEntry(
                 FinishedMemoRoute -> FinishedMemoEntry(
                     context = context,
                     navigateUp = navigation::pop,
+                    navigateToMemoDetail = ::navigateToMemoDetail,
                 )
 
                 else -> illegalRoute(route)
