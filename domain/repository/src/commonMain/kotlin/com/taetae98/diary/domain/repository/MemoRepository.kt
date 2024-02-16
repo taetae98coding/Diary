@@ -14,4 +14,5 @@ public interface MemoRepository {
     public fun find(ownerId: String?, dateRange: ClosedRange<LocalDate>): Flow<List<Memo>>
     public fun page(ownerId: String?): Flow<PagingData<Memo>>
     public fun page(ownerId: String?, tagId: String): Flow<PagingData<Memo>>
+    public fun pageFinished(ownerId: String?): Flow<PagingData<Memo>>
 }

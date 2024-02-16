@@ -13,4 +13,5 @@ public interface MemoLocalDataSource {
     public fun find(ownerId: String?, dateRange: ClosedRange<LocalDate>): Flow<List<MemoDto>>
     public fun page(ownerId: String?): PagingSource<Int, MemoDto>
     public fun page(ownerId: String?, tagId: String): PagingSource<Int, MemoDto>
+    public fun pageFinished(ownerId: String?): PagingSource<Int, MemoDto>
 }

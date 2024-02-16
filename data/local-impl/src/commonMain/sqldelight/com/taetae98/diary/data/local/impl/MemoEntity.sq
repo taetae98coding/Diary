@@ -43,6 +43,13 @@ isFinished = 0 AND
 ownerId = :ownerId AND
 id IN (SELECT memoId FROM MemoTagEntity WHERE tagId = :tagId);
 
+countFinished:
+SELECT COUNT(*)
+FROM MemoEntity
+WHERE
+isFinished = 1 AND
+ownerId = :ownerId;
+
 page:
 SELECT *
 FROM MemoEntity
@@ -58,6 +65,14 @@ WHERE
 isFinished = 0 AND
 ownerId = :ownerId AND
 id IN (SELECT memoId FROM MemoTagEntity WHERE tagId = :tagId)
+LIMIT :limit OFFSET :offset;
+
+pageFinished:
+SELECT *
+FROM MemoEntity
+WHERE
+isFinished = 1 AND
+ownerId = :ownerId
 LIMIT :limit OFFSET :offset;
 
 updateFinished:

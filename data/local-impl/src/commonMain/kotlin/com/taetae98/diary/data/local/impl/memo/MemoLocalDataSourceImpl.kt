@@ -84,4 +84,22 @@ internal class MemoLocalDataSourceImpl(
             },
         )
     }
+
+    override fun pageFinished(ownerId: String?): PagingSource<Int, MemoDto> {
+        val queries = database.memoEntityQueries
+
+        return QueryPagingSource(
+            countQuery = queries.countFinished(ownerId = ownerId),
+            transacter = queries,
+            context = dispatcher,
+            queryProvider = { limit, offset ->
+                queries.pageFinished(
+                    ownerId = ownerId,
+                    limit = limit,
+                    offset = offset,
+                    mapper = ::mapToMemoDto
+                )
+            },
+        )
+    }
 }

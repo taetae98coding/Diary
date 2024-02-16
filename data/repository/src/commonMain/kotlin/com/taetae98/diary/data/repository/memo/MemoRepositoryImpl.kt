@@ -104,4 +104,11 @@ internal class MemoRepositoryImpl(
             }
         ).mapPaging(MemoDto::toDomain)
     }
+
+    override fun pageFinished(ownerId: String?): Flow<PagingData<Memo>> {
+        return createPager(
+            config = createPagingConfig(pageSize = 30),
+            pagingSourceFactory = { localDataSource.pageFinished(ownerId) },
+        ).mapPaging(MemoDto::toDomain)
+    }
 }
