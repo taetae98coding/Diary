@@ -4,10 +4,10 @@ import app.cash.paging.PagingSource
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToOneOrNull
 import app.cash.sqldelight.paging3.QueryPagingSource
+import com.taetae98.diary.core.coroutines.CoroutinesModule
 import com.taetae98.diary.data.dto.tag.TagDto
 import com.taetae98.diary.data.local.api.TagLocalDataSource
 import com.taetae98.diary.data.local.impl.DiaryDatabase
-import com.taetae98.diary.data.local.impl.di.DatabaseModule
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import org.koin.core.annotation.Factory
@@ -16,7 +16,7 @@ import org.koin.core.annotation.Named
 @Factory
 internal class TagLocalDataSourceImpl(
     private val database: DiaryDatabase,
-    @Named(DatabaseModule.DATABASE_DISPATCHER)
+    @Named(CoroutinesModule.DATABASE)
     private val dispatcher: CoroutineDispatcher,
 ) : TagLocalDataSource {
     override suspend fun upsert(tag: TagDto) {

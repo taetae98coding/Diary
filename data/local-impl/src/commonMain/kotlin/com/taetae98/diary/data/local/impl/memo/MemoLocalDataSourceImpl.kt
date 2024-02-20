@@ -5,10 +5,10 @@ import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.coroutines.mapToOneOrNull
 import app.cash.sqldelight.paging3.QueryPagingSource
+import com.taetae98.diary.core.coroutines.CoroutinesModule
 import com.taetae98.diary.data.dto.memo.MemoDto
 import com.taetae98.diary.data.local.api.MemoLocalDataSource
 import com.taetae98.diary.data.local.impl.DiaryDatabase
-import com.taetae98.diary.data.local.impl.di.DatabaseModule
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.LocalDate
@@ -18,7 +18,7 @@ import org.koin.core.annotation.Named
 @Factory
 internal class MemoLocalDataSourceImpl(
     private val database: DiaryDatabase,
-    @Named(DatabaseModule.DATABASE_DISPATCHER)
+    @Named(CoroutinesModule.DATABASE)
     private val dispatcher: CoroutineDispatcher,
 ) : MemoLocalDataSource {
     override suspend fun upsert(memo: MemoDto) {

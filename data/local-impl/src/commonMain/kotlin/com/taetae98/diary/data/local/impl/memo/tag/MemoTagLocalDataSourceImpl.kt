@@ -4,12 +4,12 @@ import app.cash.sqldelight.async.coroutines.awaitAsList
 import app.cash.sqldelight.async.coroutines.awaitAsOneOrNull
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
+import com.taetae98.diary.core.coroutines.CoroutinesModule
 import com.taetae98.diary.data.dto.memo.MemoDto
 import com.taetae98.diary.data.dto.memo.MemoTagDto
 import com.taetae98.diary.data.local.api.MemoTagLocalDataSource
 import com.taetae98.diary.data.local.impl.DiaryDatabase
 import com.taetae98.diary.data.local.impl.MemoTagEntity
-import com.taetae98.diary.data.local.impl.di.DatabaseModule
 import com.taetae98.diary.data.local.impl.memo.mapToMemoDto
 import com.taetae98.diary.library.kotlin.ext.mapCollectionLatest
 import kotlinx.coroutines.CoroutineDispatcher
@@ -21,7 +21,7 @@ import org.koin.core.annotation.Named
 @Factory
 internal class MemoTagLocalDataSourceImpl(
     private val database: DiaryDatabase,
-    @Named(DatabaseModule.DATABASE_DISPATCHER)
+    @Named(CoroutinesModule.DATABASE)
     private val dispatcher: CoroutineDispatcher,
 ) : MemoTagLocalDataSource {
     override suspend fun exists(memoTag: MemoTagDto): Boolean {

@@ -60,7 +60,7 @@ android {
 
 sqldelight {
     databases {
-        create("DiaryDatabase") {
+        create("HolidayDatabase") {
             packageName.set("${Build.NAMESPACE}.data.local.holiday")
             schemaOutputDirectory.set(file("src/main/sqldelight/databases"))
             generateAsync.set(true)
