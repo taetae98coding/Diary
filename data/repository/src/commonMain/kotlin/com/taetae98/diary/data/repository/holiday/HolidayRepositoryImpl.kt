@@ -6,6 +6,7 @@ import com.taetae98.diary.data.local.api.HolidayLocalDataSource
 import com.taetae98.diary.data.remote.api.HolidayRemoteDataSource
 import com.taetae98.diary.domain.entity.holiday.Holiday
 import com.taetae98.diary.domain.repository.HolidayRepository
+import com.taetae98.diary.library.kotlin.ext.mapCollectionLatest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -28,7 +29,7 @@ internal class HolidayRepositoryImpl(
         }
 
         return localDataSource.getHoliday(year, month)
-            .map { it.map(HolidayDto::toDomain) }
+            .mapCollectionLatest(HolidayDto::toDomain)
     }
 
     private suspend fun updateHolidayList(year: Int, month: Month) {
