@@ -1,0 +1,13 @@
+CREATE TABLE TagInMemoEntity (
+    tagId TEXT NOT NULL,
+
+    FOREIGN KEY (tagId) REFERENCES TagEntity(id) ON DELETE CASCADE,
+    PRIMARY KEY (tagId)
+);
+
+find:
+SELECT *
+FROM TagEntity
+WHERE
+ownerId = :ownerId AND
+id IN (SELECT tagId FROM TagInMemoEntity);

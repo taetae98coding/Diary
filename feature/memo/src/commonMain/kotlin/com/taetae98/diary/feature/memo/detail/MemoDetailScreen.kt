@@ -91,7 +91,7 @@ internal fun MemoDetailScreen(
 }
 
 @Composable
-internal fun TopBar(
+private fun TopBar(
     modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit,
     toolbarUiState: State<MemoDetailToolbarUiState>,

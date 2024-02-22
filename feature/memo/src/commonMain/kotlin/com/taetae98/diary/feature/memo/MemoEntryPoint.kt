@@ -24,7 +24,9 @@ public fun MemoEntryPoint(
         when (val instance = it.instance) {
             is MemoListEntry -> MemoListRoute(
                 onNavigateToMemoAdd = instance.navigateToMemoAdd,
+                onNavigateToMemoTag = {},
                 viewModel = instance.koinInject(),
+                tagViewModel = instance.koinInject(),
                 onNavigateToMemoDetail = instance.navigateToMemoDetail,
             )
 
