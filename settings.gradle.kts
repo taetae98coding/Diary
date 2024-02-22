@@ -35,7 +35,6 @@ include(":target:androidApp")
 include(":target:iosApp")
 include(":target:jvmApp")
 include(":target:jsApp")
-include(":target:debugApp")
 
 include(":core:coroutines")
 include(":core:auth-api")
