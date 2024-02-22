@@ -11,7 +11,7 @@ import org.koin.core.annotation.Factory
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
 internal class MemoListTagViewModel(
-    private val findTagInMemoUseCase: FindTagInMemoUseCase,
+    findTagInMemoUseCase: FindTagInMemoUseCase,
 ) : ViewModel() {
     private val tagInMemoList = findTagInMemoUseCase(Unit).mapLatest { it.getOrNull() }
         .mapLatest { it.orEmpty() }
