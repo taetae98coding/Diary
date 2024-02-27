@@ -5,4 +5,6 @@ import kotlinx.coroutines.flow.Flow
 
 public interface TagInMemoRepository {
     public fun find(ownerId: String?): Flow<List<Tag>>
+    public suspend fun upsert(tagId: String)
+    public suspend fun delete(tagId: String)
 }

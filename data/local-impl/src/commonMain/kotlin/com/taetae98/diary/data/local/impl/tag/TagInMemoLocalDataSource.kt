@@ -6,6 +6,7 @@ import com.taetae98.diary.core.coroutines.CoroutinesModule
 import com.taetae98.diary.data.dto.tag.TagDto
 import com.taetae98.diary.data.local.api.TagInMemoLocalDataSource
 import com.taetae98.diary.data.local.impl.DiaryDatabase
+import com.taetae98.diary.data.local.impl.TagInMemoEntity
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import org.koin.core.annotation.Factory
@@ -21,5 +22,13 @@ internal class TagInMemoLocalDataSource(
         return database.tagInMemoEntityQueries.find(ownerId = ownerId, mapper = ::mapToTagDto)
             .asFlow()
             .mapToList(dispatcher)
+    }
+
+    override suspend fun upsert(tagId: String) {
+        database.tagInMemoEntityQueries.upsert(TagInMemoEntity(tagId))
+    }
+
+    override suspend fun delete(tagId: String) {
+        database.tagInMemoEntityQueries.delete(tagId)
     }
 }

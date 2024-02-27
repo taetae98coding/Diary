@@ -16,4 +16,12 @@ internal class TagInMemoRepositoryImpl(
         return localDataSource.find(ownerId)
             .mapCollectionLatest(TagDto::toDomain)
     }
+
+    override suspend fun upsert(tagId: String) {
+        localDataSource.upsert(tagId)
+    }
+
+    override suspend fun delete(tagId: String) {
+        localDataSource.delete(tagId)
+    }
 }

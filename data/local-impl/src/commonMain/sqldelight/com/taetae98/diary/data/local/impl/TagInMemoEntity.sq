@@ -11,3 +11,9 @@ FROM TagEntity
 WHERE
 ownerId = :ownerId AND
 id IN (SELECT tagId FROM TagInMemoEntity);
+
+upsert:
+INSERT OR IGNORE INTO TagInMemoEntity VALUES ?;
+
+delete:
+DELETE FROM TagInMemoEntity WHERE tagId = :tagId;
