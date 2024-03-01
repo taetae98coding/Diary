@@ -12,12 +12,12 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapLatest
 import org.koin.core.annotation.Factory
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @Factory
 public class PageMemoUseCase internal constructor(
     private val getAccountUseCase: GetAccountUseCase,
     private val memoRepository: MemoRepository,
 ) : FlowUseCase<Unit, PagingData<Memo>>() {
-    @OptIn(ExperimentalCoroutinesApi::class)
     override fun execute(params: Unit): Flow<PagingData<Memo>> {
         return getAccountUseCase(Unit).mapLatest(Result<Account>::getOrThrow)
             .mapLatest { it.uid }
