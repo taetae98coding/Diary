@@ -4,6 +4,7 @@ import app.cash.paging.PagingData
 import com.taetae98.diary.domain.entity.account.Account
 import com.taetae98.diary.domain.entity.memo.Memo
 import com.taetae98.diary.domain.repository.MemoRepository
+import com.taetae98.diary.domain.repository.SelectTagByMemoRepository
 import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
 import com.taetae98.diary.domain.usecase.core.FlowUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -17,10 +18,22 @@ import org.koin.core.annotation.Factory
 public class PageMemoUseCase internal constructor(
     private val getAccountUseCase: GetAccountUseCase,
     private val memoRepository: MemoRepository,
+    private val selectTagByMemoRepository: SelectTagByMemoRepository,
 ) : FlowUseCase<Unit, PagingData<Memo>>() {
     override fun execute(params: Unit): Flow<PagingData<Memo>> {
         return getAccountUseCase(Unit).mapLatest(Result<Account>::getOrThrow)
             .mapLatest { it.uid }
-            .flatMapLatest(memoRepository::page)
+            .flatMapLatest(::page)
+    }
+
+    private fun page(uid: String?): Flow<PagingData<Memo>> {
+        return selectTagByMemoRepository.find(uid)
+            .flatMapLatest {
+                if (it.isEmpty()) {
+                    memoRepository.page(uid)
+                } else {
+                    selectTagByMemoRepository.page(uid)
+                }
+            }
     }
 }

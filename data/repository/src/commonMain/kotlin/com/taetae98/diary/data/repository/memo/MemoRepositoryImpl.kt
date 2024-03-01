@@ -85,30 +85,26 @@ internal class MemoRepositoryImpl(
 
     override fun page(ownerId: String?): Flow<PagingData<Memo>> {
         return createPager(
-            config = createPagingConfig(
-                pageSize = 30,
-            ),
-            pagingSourceFactory = {
-                localDataSource.page(ownerId = ownerId)
-            }
+            config = createPagingConfig(pageSize = PAGE_SIZE,),
+            pagingSourceFactory = { localDataSource.page(ownerId = ownerId) }
         ).mapPaging(MemoDto::toDomain)
     }
 
     override fun page(ownerId: String?, tagId: String): Flow<PagingData<Memo>> {
         return createPager(
-            config = createPagingConfig(
-                pageSize = 30,
-            ),
-            pagingSourceFactory = {
-                localDataSource.page(ownerId, tagId)
-            }
+            config = createPagingConfig(pageSize = PAGE_SIZE),
+            pagingSourceFactory = { localDataSource.page(ownerId, tagId) }
         ).mapPaging(MemoDto::toDomain)
     }
 
     override fun pageFinished(ownerId: String?): Flow<PagingData<Memo>> {
         return createPager(
-            config = createPagingConfig(pageSize = 30),
+            config = createPagingConfig(pageSize = PAGE_SIZE),
             pagingSourceFactory = { localDataSource.pageFinished(ownerId) },
         ).mapPaging(MemoDto::toDomain)
+    }
+
+    companion object {
+        private const val PAGE_SIZE = 30
     }
 }

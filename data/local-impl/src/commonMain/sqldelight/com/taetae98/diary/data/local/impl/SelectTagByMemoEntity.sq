@@ -12,6 +12,27 @@ WHERE
 ownerId = :ownerId AND
 id IN (SELECT tagId FROM SelectTagByMemoEntity);
 
+count:
+SELECT COUNT(*)
+FROM MemoEntity
+WHERE
+isFinished = 0 AND
+ownerId = :ownerId AND (
+    id NOT IN (SELECT DISTINCT memoId FROM MemoTagEntity) OR
+    id IN (SELECT DISTINCT memoId FROM MemoTagEntity WHERE tagId IN (SELECT tagId FROM SelectTagByMemoEntity))
+);
+
+page:
+SELECT *
+FROM MemoEntity
+WHERE
+isFinished = 0 AND
+ownerId = :ownerId AND (
+    id NOT IN (SELECT DISTINCT memoId FROM MemoTagEntity) OR
+    id IN (SELECT DISTINCT memoId FROM MemoTagEntity WHERE tagId IN (SELECT tagId FROM SelectTagByMemoEntity))
+)
+LIMIT :limit OFFSET :offset;
+
 upsert:
 INSERT OR IGNORE INTO SelectTagByMemoEntity VALUES ?;
 
