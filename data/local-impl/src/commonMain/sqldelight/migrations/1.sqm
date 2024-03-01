@@ -1,4 +1,4 @@
-CREATE TABLE TagInMemoEntity (
+CREATE TABLE SelectTagByMemoEntity (
     tagId TEXT NOT NULL,
 
     FOREIGN KEY (tagId) REFERENCES TagEntity(id) ON DELETE CASCADE,

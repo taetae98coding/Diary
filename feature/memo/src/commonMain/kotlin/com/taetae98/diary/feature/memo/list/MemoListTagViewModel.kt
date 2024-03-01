@@ -1,6 +1,6 @@
 package com.taetae98.diary.feature.memo.list
 
-import com.taetae98.diary.domain.usecase.tag.FindTagInMemoUseCase
+import com.taetae98.diary.domain.usecase.tag.select.FindTagInMemoUseCase
 import com.taetae98.diary.library.viewmodel.ViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.SharingStarted

@@ -1,7 +1,7 @@
-package com.taetae98.diary.domain.usecase.tag
+package com.taetae98.diary.domain.usecase.tag.select
 
 import com.taetae98.diary.domain.entity.tag.Tag
-import com.taetae98.diary.domain.repository.TagInMemoRepository
+import com.taetae98.diary.domain.repository.SelectTagByMemoRepository
 import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
 import com.taetae98.diary.domain.usecase.core.FlowUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -13,11 +13,11 @@ import org.koin.core.annotation.Factory
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
 public class FindTagInMemoUseCase internal constructor(
-    private val tagInMemoRepository: TagInMemoRepository,
+    private val selectTagByMemoRepository: SelectTagByMemoRepository,
     private val getAccountUseCase: GetAccountUseCase,
 ) : FlowUseCase<Unit, List<Tag>>() {
     override fun execute(params: Unit): Flow<List<Tag>> {
         return getAccountUseCase(Unit).map { it.getOrThrow() }
-            .flatMapLatest { tagInMemoRepository.find(it.uid) }
+            .flatMapLatest { selectTagByMemoRepository.find(it.uid) }
     }
 }

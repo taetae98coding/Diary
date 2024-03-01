@@ -1,4 +1,4 @@
-CREATE TABLE TagInMemoEntity (
+CREATE TABLE SelectTagByMemoEntity (
     tagId TEXT NOT NULL,
 
     FOREIGN KEY (tagId) REFERENCES TagEntity(id) ON DELETE CASCADE,
@@ -10,10 +10,10 @@ SELECT *
 FROM TagEntity
 WHERE
 ownerId = :ownerId AND
-id IN (SELECT tagId FROM TagInMemoEntity);
+id IN (SELECT tagId FROM SelectTagByMemoEntity);
 
 upsert:
-INSERT OR IGNORE INTO TagInMemoEntity VALUES ?;
+INSERT OR IGNORE INTO SelectTagByMemoEntity VALUES ?;
 
 delete:
-DELETE FROM TagInMemoEntity WHERE tagId = :tagId;
+DELETE FROM SelectTagByMemoEntity WHERE tagId = :tagId;

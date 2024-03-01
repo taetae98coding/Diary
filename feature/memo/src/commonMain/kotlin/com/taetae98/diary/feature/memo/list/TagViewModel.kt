@@ -3,10 +3,10 @@ package com.taetae98.diary.feature.memo.list
 import app.cash.paging.PagingData
 import app.cash.paging.cachedIn
 import app.cash.paging.filter
-import com.taetae98.diary.domain.usecase.tag.DeleteTagInMemoUseCase
-import com.taetae98.diary.domain.usecase.tag.FindTagInMemoUseCase
 import com.taetae98.diary.domain.usecase.tag.PageTagUseCase
-import com.taetae98.diary.domain.usecase.tag.UpsertTagInMemoUseCase
+import com.taetae98.diary.domain.usecase.tag.select.UnSelectTagByMemoUseCase
+import com.taetae98.diary.domain.usecase.tag.select.FindTagInMemoUseCase
+import com.taetae98.diary.domain.usecase.tag.select.SelectTagByMemoUseCase
 import com.taetae98.diary.feature.memo.tag.TagUiState
 import com.taetae98.diary.library.kotlin.ext.mapCollectionLatest
 import com.taetae98.diary.library.paging.mapPaging
@@ -26,8 +26,8 @@ import org.koin.core.annotation.Factory
 internal class TagViewModel(
     findTagInMemoUseCase: FindTagInMemoUseCase,
     pageTagUseCase: PageTagUseCase,
-    private val upsertTagInMemoUseCase: UpsertTagInMemoUseCase,
-    private val deleteTagInMemoUseCase: DeleteTagInMemoUseCase,
+    private val selectTagByMemoUseCase: SelectTagByMemoUseCase,
+    private val unSelectTagByMemoUseCase: UnSelectTagByMemoUseCase,
 ) : ViewModel() {
     private val tagInMemoList = findTagInMemoUseCase(Unit).mapLatest { it.getOrNull() }
         .mapLatest { it.orEmpty() }
@@ -67,13 +67,13 @@ internal class TagViewModel(
 
     private fun unselectTag(id: String) {
         viewModelScope.launch {
-            deleteTagInMemoUseCase(id)
+            unSelectTagByMemoUseCase(id)
         }
     }
 
     private fun selectTag(id: String) {
         viewModelScope.launch {
-            upsertTagInMemoUseCase(id)
+            selectTagByMemoUseCase(id)
         }
     }
 }
