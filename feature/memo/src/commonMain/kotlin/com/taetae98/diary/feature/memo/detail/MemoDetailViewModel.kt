@@ -1,11 +1,10 @@
 package com.taetae98.diary.feature.memo.detail
 
 import com.taetae98.diary.domain.entity.memo.Memo
-import com.taetae98.diary.domain.entity.memo.MemoState
 import com.taetae98.diary.domain.exception.TitleEmptyException
 import com.taetae98.diary.domain.usecase.memo.DeleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.FindMemoByIdUseCase
-import com.taetae98.diary.domain.usecase.memo.SwitchMemoCompleteUseCase
+import com.taetae98.diary.domain.usecase.memo.SwitchMemoFinishUseCase
 import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
 import com.taetae98.diary.library.kotlin.ext.localDateNow
 import com.taetae98.diary.library.kotlin.ext.randomRgbColor
@@ -29,7 +28,7 @@ import org.koin.core.annotation.Factory
 internal class MemoDetailViewModel(
     savedStateHandle: SavedStateHandle,
     private val findMemoByIdUseCase: FindMemoByIdUseCase,
-    private val switchMemoCompleteUseCase: SwitchMemoCompleteUseCase,
+    private val switchMemoFinishUseCase: SwitchMemoFinishUseCase,
     private val deleteMemoUseCase: DeleteMemoUseCase,
     private val upsertMemoUseCase: UpsertMemoUseCase,
 ) : ViewModel() {
@@ -88,16 +87,16 @@ internal class MemoDetailViewModel(
     @OptIn(ExperimentalCoroutinesApi::class)
     val toolbarUiState = memo.mapLatest {
         MemoDetailToolbarUiState.Detail(
-            isComplete = it?.state == MemoState.COMPLETE,
-            onComplete = ::switchComplete,
+            isFinished = it?.isFinished ?: false,
+            onFinish = ::switchFinish,
             onDelete = ::delete,
         )
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Eagerly,
         initialValue = MemoDetailToolbarUiState.Detail(
-            isComplete = memo.value?.state == MemoState.COMPLETE,
-            onComplete = ::switchComplete,
+            isFinished = memo.value?.isFinished ?: false,
+            onFinish = ::switchFinish,
             onDelete = ::delete,
         )
     )
@@ -125,23 +124,21 @@ internal class MemoDetailViewModel(
             null
         }
 
-        return Memo(
+        return memo.value?.copy(
             id = id.value,
             title = titleUiStateHolder.getValue().value,
             description = descriptionUiStateHolder.getValue().value,
             dateRangeColor = dateRangeColor,
             dateRange = dateRange,
-            ownerId = memo.value?.ownerId,
-            state = memo.value?.state ?: return null
         )
     }
 
-    private fun switchComplete() {
+    private fun switchFinish() {
         val memo = createMemoFromState() ?: return
 
         viewModelScope.launch {
             upsertMemoUseCase(memo)
-            switchMemoCompleteUseCase(memo.id)
+            switchMemoFinishUseCase(memo.id)
         }
     }
 

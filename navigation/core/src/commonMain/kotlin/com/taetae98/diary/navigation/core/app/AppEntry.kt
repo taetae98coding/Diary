@@ -12,10 +12,12 @@ import com.arkivanov.decompose.value.Value
 import com.taetae98.diary.navigation.core.account.AccountEntry
 import com.taetae98.diary.navigation.core.calendar.CalendarEntry
 import com.taetae98.diary.navigation.core.ext.illegalRoute
+import com.taetae98.diary.navigation.core.finished.memo.FinishedMemoEntry
 import com.taetae98.diary.navigation.core.memo.MemoEntry
 import com.taetae98.diary.navigation.core.more.MoreEntry
 import com.taetae98.diary.navigation.core.route.AccountRoute
 import com.taetae98.diary.navigation.core.route.CalendarRoute
+import com.taetae98.diary.navigation.core.route.FinishedMemoRoute
 import com.taetae98.diary.navigation.core.route.MemoAddRoute
 import com.taetae98.diary.navigation.core.route.MemoDetailRoute
 import com.taetae98.diary.navigation.core.route.MemoRoute
@@ -55,11 +57,18 @@ public class AppEntry(
                 MoreRoute -> MoreEntry(
                     context = context,
                     navigateToAccount = ::navigateToAccount,
+                    navigateToFinishedMemo = ::navigateToFinishedMemo,
                 )
 
                 AccountRoute -> AccountEntry(
                     context = context,
                     navigateUp = navigation::pop,
+                )
+
+                FinishedMemoRoute -> FinishedMemoEntry(
+                    context = context,
+                    navigateUp = navigation::pop,
+                    navigateToMemoDetail = ::navigateToMemoDetail,
                 )
 
                 else -> illegalRoute(route)
@@ -93,6 +102,10 @@ public class AppEntry(
 
     private fun navigateToAccount() {
         navigation.push(AccountRoute)
+    }
+
+    private fun navigateToFinishedMemo() {
+        navigation.push(FinishedMemoRoute)
     }
 
     private fun navigateToAppBottomBar(route: Route) {

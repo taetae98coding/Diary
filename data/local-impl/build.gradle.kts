@@ -44,7 +44,12 @@ kotlin {
 
         jsMain {
             dependencies {
+                implementation(libs.sqldelight.web.driver)
                 implementation(libs.stately.collections)
+
+                implementation(devNpm("copy-webpack-plugin", "9.1.0"))
+                implementation(npm("@cashapp/sqldelight-sqljs-worker", "2.0.1"))
+                implementation(npm("sql.js", "1.8.0"))
             }
         }
     }
@@ -60,7 +65,6 @@ sqldelight {
             packageName.set("${Build.NAMESPACE}.data.local.impl")
             schemaOutputDirectory.set(file("src/main/sqldelight/databases"))
             generateAsync.set(true)
-//            verifyMigrations.set(true)
 
             dialect(libs.sqldelight.dialect)
         }

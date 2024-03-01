@@ -14,30 +14,38 @@ internal class MemoFireStore(
     private val fireStore: FireStore,
 ) {
     suspend fun upsert(memo: MemoDto) {
-        if (memo.ownerId == null) return
-
         fireStore.collection(COLLECTION)
             .document(memo.id)
             .upsert(memo.toFireStore())
     }
 
-    suspend fun complete(id: String) {
-        updateState(id, MemoFireStoreStateEntity.COMPLETE)
-    }
-
-    suspend fun incomplete(id: String) {
-        updateState(id, MemoFireStoreStateEntity.NONE)
+    suspend fun updateFinished(id: String, isFinished: Boolean) {
+        fireStore.collection(COLLECTION)
+            .document(id)
+            .update(
+                mapOf(
+                    IS_FINISHED to isFinished,
+                    UPDATE_AT to Clock.System.now().toFireStoreTimestamp(),
+                )
+            )
     }
 
     suspend fun delete(id: String) {
-        updateState(id, MemoFireStoreStateEntity.DELETE)
+        fireStore.collection(COLLECTION)
+            .document(id)
+            .update(
+                mapOf(
+                    IS_DELETED to true,
+                    UPDATE_AT to Clock.System.now().toFireStoreTimestamp(),
+                )
+            )
     }
 
     suspend fun pageByUpdateAt(
         uid: String,
         updateAt: Instant?
     ): List<MemoDto> {
-        val startAfterInstant = updateAt ?: Instant.fromEpochSeconds(0L)
+        val startAfterInstant = updateAt ?: Instant.fromEpochMilliseconds(0L)
 
         return fireStore.collection(COLLECTION)
             .equalTo(OWNER_ID, uid)
@@ -45,25 +53,11 @@ internal class MemoFireStore(
             .greaterThan(UPDATE_AT, startAfterInstant.toFireStoreTimestamp())
             .limit(200L)
             .getData()
-            .map(FireStoreData::toMemoDto)
-    }
-
-    private suspend fun updateState(
-        id: String,
-        stateEntity: MemoFireStoreStateEntity
-    ) {
-        fireStore.collection(COLLECTION)
-            .document(id)
-            .update(
-                mapOf(
-                    STATE to stateEntity.value,
-                    UPDATE_AT to Clock.System.now().toFireStoreTimestamp(),
-                )
-            )
+            .map(FireStoreData::toMemo)
     }
 
     companion object {
-        private const val COLLECTION = "memo"
+        const val COLLECTION = "memo"
 
         const val ID = "id"
         const val TITLE = "title"
@@ -71,7 +65,8 @@ internal class MemoFireStore(
         const val DATE_RANGE_COLOR = "dateRangeColor"
         const val DATE_RANGE_START = "dateRangeStart"
         const val DATE_RANGE_END = "dateRangeEnd"
-        const val STATE = "state"
+        const val IS_FINISHED = "isFinished"
+        const val IS_DELETED = "isDeleted"
         const val OWNER_ID = "ownerId"
         const val UPDATE_AT = "updateAt"
     }

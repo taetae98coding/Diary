@@ -1,6 +1,7 @@
 package com.taetae98.diary.feature.tag.detail
 
 import com.taetae98.diary.domain.entity.tag.Tag
+import com.taetae98.diary.domain.usecase.tag.DeleteTagUseCase
 import com.taetae98.diary.domain.usecase.tag.FindTagByIdUseCase
 import com.taetae98.diary.domain.usecase.tag.UpsertTagUseCase
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
@@ -23,6 +24,7 @@ internal class TagDetailViewModel(
     savedStateHandle: SavedStateHandle,
     private val findTagByIdUseCase: FindTagByIdUseCase,
     private val upsertTagUseCase: UpsertTagUseCase,
+    private val deleteTagUseCase: DeleteTagUseCase,
 ) : ViewModel() {
     private val tagId = savedStateHandle.getStateFlow(
         key = TagDetailEntry.ID,
@@ -69,6 +71,14 @@ internal class TagDetailViewModel(
         viewModelScope.launch {
             upsertTagUseCase(tag).onSuccess {
                 _message.emit(TagDetailMessage.Upsert)
+            }
+        }
+    }
+
+    fun delete() {
+        viewModelScope.launch {
+            deleteTagUseCase(tagId.value).onSuccess {
+                _message.emit(TagDetailMessage.Delete)
             }
         }
     }

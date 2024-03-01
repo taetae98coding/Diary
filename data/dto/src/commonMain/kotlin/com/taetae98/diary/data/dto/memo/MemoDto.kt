@@ -9,7 +9,8 @@ public data class MemoDto(
     val description: String,
     val dateRangeColor: Long?,
     val dateRange: ClosedRange<LocalDate>?,
-    val state: MemoStateDto,
+    val isFinished: Boolean,
+    val isDeleted: Boolean,
     val ownerId: String?,
     val updateAt: Instant,
 )

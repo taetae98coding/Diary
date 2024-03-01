@@ -6,7 +6,7 @@ import kotlinx.collections.immutable.persistentMapOf
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 
-public class TagMemoEntry(
+public class TagMemoEntry internal constructor(
     context: ComponentContext,
     public val navigateUp: () -> Unit,
     public val navigateToTagDetail: (String) -> Unit,

@@ -1,9 +1,8 @@
-import com.taetae98.diary.data.local.impl.memo.tag.MemoTagStateEntity;
+import kotlinx.datetime.Instant;
 
 CREATE TABLE MemoTagEntity(
     memoId TEXT NOT NULL,
     tagId TEXT NOT NULL,
-    state INTEGER AS MemoTagStateEntity NOT NULL,
 
     FOREIGN KEY (memoId) REFERENCES MemoEntity(id) ON DELETE CASCADE,
     FOREIGN KEY (tagId) REFERENCES TagEntity(id) ON DELETE CASCADE,
@@ -18,19 +17,22 @@ SELECT EXISTS (
 );
 
 delete:
-UPDATE MemoTagEntity
-SET state = 1
+DELETE FROM MemoTagEntity
 WHERE memoId = :memoId AND tagId = :tagId;
 
 upsert:
 INSERT INTO MemoTagEntity
-VALUES ?
-ON CONFLICT (memoId, tagId) DO
-UPDATE SET
-state = excluded.state
-;
+VALUES ?;
 
 findByMemoId:
 SELECT *
 FROM MemoTagEntity
-WHERE memoId = :memoId AND state = 0;
+WHERE memoId = :memoId;
+
+afterAt:
+SELECT *
+FROM MemoEntity
+WHERE
+ownerId = :ownerId AND
+updateAt > :updateAt
+LIMIT :limit;

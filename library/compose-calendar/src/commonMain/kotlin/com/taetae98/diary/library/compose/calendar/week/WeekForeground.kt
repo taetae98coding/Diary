@@ -2,7 +2,6 @@ package com.taetae98.diary.library.compose.calendar.week
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
@@ -17,7 +16,7 @@ internal fun WeekForeground(
     primaryDate: State<ImmutableList<DateRange>>,
     schedule: State<ImmutableList<CalendarItem.Schedule>>,
     holiday: State<ImmutableList<CalendarItem.Holiday>>,
-    onHoliday: (key: Any) -> Unit,
+    onItem: (key: Any) -> Unit,
 ) {
     Column(
         modifier = modifier,
@@ -33,7 +32,7 @@ internal fun WeekForeground(
             state = state,
             schedule = schedule,
             holiday = holiday,
-            onHoliday = onHoliday,
+            onItem = onItem,
         )
     }
 }

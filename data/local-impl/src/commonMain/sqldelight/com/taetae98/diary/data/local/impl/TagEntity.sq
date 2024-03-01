@@ -1,4 +1,3 @@
-import kotlin.Boolean;
 import kotlinx.datetime.Instant;
 
 CREATE TABLE TagEntity(
@@ -38,3 +37,7 @@ SELECT *
 FROM TagEntity
 WHERE
 id = :id;
+
+delete:
+DELETE FROM TagEntity
+WHERE id = :id;

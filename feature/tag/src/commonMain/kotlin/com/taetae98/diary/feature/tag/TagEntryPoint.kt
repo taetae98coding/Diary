@@ -2,7 +2,7 @@ package com.taetae98.diary.feature.tag
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.arkivanov.decompose.extensions.compose.jetbrains.stack.Children
+import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.taetae98.diary.feature.tag.add.TagAddRoute
 import com.taetae98.diary.feature.tag.detail.TagDetailRoute
 import com.taetae98.diary.feature.tag.list.TagListRoute
@@ -43,6 +43,7 @@ public fun TagEntryPoint(
 
             is TagDetailEntry -> TagDetailRoute(
                 onNavigateUp = instance.navigateUp,
+                onNavigateUpToTagList = instance.navigateUpToTagList,
                 viewModel = instance.koinInject(instance.savedState),
             )
         }

@@ -33,10 +33,21 @@ public class CoroutinesModule {
         return getProcessScope()
     }
 
+    @Named(DATABASE)
+    @Singleton
+    internal fun providesDatabaseDispatcher(
+        @Named(IO)
+        coroutineDispatcher: CoroutineDispatcher
+    ): CoroutineDispatcher {
+        return coroutineDispatcher
+    }
+
     public companion object {
         public const val MAIN: String = "main"
         public const val MAIN_IMMEDIATE: String = "mainImmediate"
         public const val IO: String = "io"
         public const val PROCESS: String = "process"
+
+        public const val DATABASE: String = "databaseDispatcher"
     }
 }

@@ -1,4 +1,4 @@
-import com.taetae98.diary.data.local.impl.memo.MemoStateEntity;
+import kotlin.Boolean;
 import kotlinx.datetime.Instant;
 import kotlinx.datetime.LocalDate;
 
@@ -9,7 +9,7 @@ CREATE TABLE MemoEntity (
     dateRangeColor INTEGER,
     dateRangeStart TEXT AS LocalDate,
     dateRangeEnd TEXT AS LocalDate,
-    state INTEGER AS MemoStateEntity NOT NULL,
+    isFinished INTEGER AS Boolean NOT NULL,
     ownerId TEXT,
     updateAt TEXT AS Instant NOT NULL
 );
@@ -24,7 +24,7 @@ description = excluded.description,
 dateRangeColor = excluded.dateRangeColor,
 dateRangeStart = excluded.dateRangeStart,
 dateRangeEnd = excluded.dateRangeEnd,
-state = excluded.state,
+isFinished = excluded.isFinished,
 ownerId = excluded.ownerId,
 updateAt = excluded.updateAt;
 
@@ -32,22 +32,29 @@ count:
 SELECT COUNT(*)
 FROM MemoEntity
 WHERE
-state = 0 AND
+isFinished = 0 AND
 ownerId = :ownerId;
 
 countByTagId:
 SELECT COUNT(*)
 FROM MemoEntity
 WHERE
-state = 0 AND
+isFinished = 0 AND
 ownerId = :ownerId AND
 id IN (SELECT memoId FROM MemoTagEntity WHERE tagId = :tagId);
+
+countFinished:
+SELECT COUNT(*)
+FROM MemoEntity
+WHERE
+isFinished = 1 AND
+ownerId = :ownerId;
 
 page:
 SELECT *
 FROM MemoEntity
 WHERE
-state = 0 AND
+isFinished = 0 AND
 ownerId = :ownerId
 LIMIT :limit OFFSET :offset;
 
@@ -55,24 +62,27 @@ pageByTagId:
 SELECT *
 FROM MemoEntity
 WHERE
-state = 0 AND
+isFinished = 0 AND
 ownerId = :ownerId AND
 id IN (SELECT memoId FROM MemoTagEntity WHERE tagId = :tagId)
 LIMIT :limit OFFSET :offset;
 
-complete:
-UPDATE MemoEntity
-SET state = 1
-WHERE id = :id;
+pageFinished:
+SELECT *
+FROM MemoEntity
+WHERE
+isFinished = 1 AND
+ownerId = :ownerId
+ORDER BY updateAt DESC
+LIMIT :limit OFFSET :offset;
 
-incomplete:
+updateFinished:
 UPDATE MemoEntity
-SET state = 0
+SET isFinished = :isFinished
 WHERE id = :id;
 
 delete:
-UPDATE MemoEntity
-SET state = 2
+DELETE FROM MemoEntity
 WHERE id = :id;
 
 findById:
@@ -84,5 +94,4 @@ findByYearAndMonth:
 SELECT *
 FROM MemoEntity
 WHERE (dateRangeEnd >= :start AND dateRangeStart <= :end)
-AND ownerId =: ownerId
-AND state != 2;
+AND ownerId =: ownerId;

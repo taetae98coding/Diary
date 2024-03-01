@@ -12,7 +12,6 @@ import com.taetae98.diary.library.compose.calendar.model.DateRange
 import com.taetae98.diary.library.compose.calendar.runtime.rememberCalendarState
 import com.taetae98.diary.library.compose.runtime.collectAsStateOnLifecycle
 import com.taetae98.diary.library.kotlin.ext.toEpochMilliseconds
-import kotlinx.coroutines.selects.whileSelect
 import kotlinx.datetime.Month
 
 @Composable
@@ -29,7 +28,7 @@ internal fun CalendarRoute(
         state = state,
         schedule = viewModel.schedule.collectAsStateOnLifecycle(),
         holiday = viewModel.holiday.collectAsState(),
-        onHoliday = {
+        onItem = {
             when (it) {
                 is MemoCalendarItemKey -> navigateToMemoDetail(it.key)
             }

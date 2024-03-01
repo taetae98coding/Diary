@@ -10,12 +10,13 @@ import org.koin.core.component.inject
 
 internal actual fun SqldelightModule.getSqlDriver(): SqlDriver {
     val context by inject<Context>()
+    val scheme = DiaryDatabase.Schema.synchronous()
 
     return AndroidSqliteDriver(
-        schema = DiaryDatabase.Schema.synchronous(),
+        schema = scheme,
         context = context,
         name = DIARY_DB_NAME,
-        callback = object : AndroidSqliteDriver.Callback(DiaryDatabase.Schema.synchronous()) {
+        callback = object : AndroidSqliteDriver.Callback(scheme) {
             override fun onOpen(db: SupportSQLiteDatabase) {
                 super.onOpen(db)
                 db.setForeignKeyConstraintsEnabled(true)

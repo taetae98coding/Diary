@@ -6,11 +6,9 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.datetime.Instant
 
 internal class MemoPrefDataSourceImpl : MemoPrefDataSource {
-    override suspend fun setFetchedUpdateAt(uid: String, updateAt: Instant) {
-
-    }
+    override suspend fun setFetchedUpdateAt(uid: String, updateAt: Instant) = Unit
 
     override fun getFetchedUpdateAt(uid: String): Flow<Instant?> {
-        return flowOf(null)
+        return flowOf(Instant.DISTANT_FUTURE)
     }
 }

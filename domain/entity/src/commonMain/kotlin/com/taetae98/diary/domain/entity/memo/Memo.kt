@@ -8,6 +8,6 @@ public data class Memo(
     val description: String,
     val dateRangeColor: Long?,
     val dateRange: ClosedRange<LocalDate>?,
+    val isFinished: Boolean,
     val ownerId: String?,
-    val state: MemoState,
 )

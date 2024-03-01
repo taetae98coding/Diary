@@ -6,10 +6,12 @@ import androidx.compose.ui.Modifier
 @Composable
 internal fun MoreRoute(
     modifier: Modifier = Modifier,
-    onAccount: () -> Unit
+    onAccount: () -> Unit,
+    onFinishedMemo: () -> Unit,
 ) {
     MoreScreen(
         modifier = modifier,
         onAccount = onAccount,
+        onFinishedMemo = onFinishedMemo,
     )
 }

@@ -2,8 +2,8 @@ package com.taetae98.diary.feature.tag.memo
 
 import app.cash.paging.PagingData
 import app.cash.paging.cachedIn
-import com.taetae98.diary.domain.usecase.memo.CompleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.DeleteMemoUseCase
+import com.taetae98.diary.domain.usecase.memo.FinishMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.PageMemoByTagIdUseCase
 import com.taetae98.diary.library.paging.mapPagingLatest
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
@@ -11,16 +11,18 @@ import com.taetae98.diary.library.viewmodel.ViewModel
 import com.taetae98.diary.navigation.core.tag.TagMemoEntry
 import com.taetae98.diary.ui.memo.compose.MemoUiState
 import com.taetae98.diary.ui.memo.compose.SwipeMemoUiState
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.launch
 import org.koin.core.annotation.Factory
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @Factory
 internal class TagMemoViewModel(
     savedStateHandle: SavedStateHandle,
     private val pageMemoByTagIdUseCase: PageMemoByTagIdUseCase,
-    private val completeMemoUseCase: CompleteMemoUseCase,
+    private val finishMemoUseCase: FinishMemoUseCase,
     private val deleteMemoUseCase: DeleteMemoUseCase,
 ) : ViewModel() {
     val tagId = savedStateHandle.getStateFlow<String?>(TagMemoEntry.TAG_ID, null)
@@ -33,14 +35,14 @@ internal class TagMemoViewModel(
                     id = it.id,
                     title = it.title,
                 ),
-                complete = ::complete,
+                finish = ::finish,
                 delete = ::delete,
             )
         }.cachedIn(viewModelScope)
 
-    private fun complete(id: String) {
+    private fun finish(id: String) {
         viewModelScope.launch {
-            completeMemoUseCase(id)
+            finishMemoUseCase(id)
         }
     }
 

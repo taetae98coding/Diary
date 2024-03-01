@@ -8,6 +8,7 @@ public interface MemoTagRepository {
     public suspend fun delete(memoTag: MemoTag)
     public suspend fun upsert(memoTag: MemoTag)
     public suspend fun upsert(memoTag: List<MemoTag>)
+    public suspend fun fetch(uid: String)
 
     public fun findByMemoId(memoId: String): Flow<List<MemoTag>>
 }

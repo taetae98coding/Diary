@@ -13,6 +13,7 @@ kotlin {
                 implementation(project(":core:firestore-module"))
                 implementation(project(":data:pref-impl"))
                 implementation(project(":data:local-impl"))
+                implementation(project(":data:local-holiday"))
                 implementation(project(":data:remote-impl"))
                 implementation(project(":data:repository"))
                 implementation(project(":domain:usecase"))
@@ -22,6 +23,7 @@ kotlin {
                 implementation(project(":feature:account"))
                 implementation(project(":feature:calendar"))
                 implementation(project(":feature:tag"))
+                implementation(project(":feature:finished-memo"))
 
                 implementation(project(":navigation:core"))
                 implementation(project(":ui:compose"))

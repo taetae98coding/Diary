@@ -34,29 +34,22 @@ internal class MemoRepositoryImpl(
         runOnProcessScopeIfOwnerIdNotNull(dto) { fireStore.upsert(dto) }
     }
 
-    override suspend fun complete(id: String) {
-        localDataSource.complete(id)
-        runOnProcessScopeIfOwnerIdNotNull(id) { fireStore.complete(id) }
-    }
+    override suspend fun updateFinish(id: String, isFinished: Boolean) {
+        val memo = localDataSource.find(id).firstOrNull()
 
-    override suspend fun incomplete(id: String) {
-        localDataSource.incomplete(id)
-        runOnProcessScopeIfOwnerIdNotNull(id) { fireStore.incomplete(id) }
+        localDataSource.updateFinish(id, isFinished)
+        runOnProcessScopeIfOwnerIdNotNull(memo) { fireStore.updateFinished(id, isFinished) }
     }
 
     override suspend fun delete(id: String) {
+        val memo = localDataSource.find(id).firstOrNull()
+
         localDataSource.delete(id)
-        runOnProcessScopeIfOwnerIdNotNull(id) { fireStore.delete(id) }
+        runOnProcessScopeIfOwnerIdNotNull(memo) { fireStore.delete(id) }
     }
 
-    private suspend fun runOnProcessScopeIfOwnerIdNotNull(id: String, run: suspend () -> Unit) {
-        val memo = localDataSource.find(id).firstOrNull() ?: return
-
-        runOnProcessScopeIfOwnerIdNotNull(memo, run)
-    }
-
-    private fun runOnProcessScopeIfOwnerIdNotNull(memo: MemoDto, run: suspend () -> Unit) {
-        if (memo.ownerId == null) return
+    private fun runOnProcessScopeIfOwnerIdNotNull(memo: MemoDto?, run: suspend () -> Unit) {
+        if (memo?.ownerId == null) return
 
         processScope.launch {
             runCatching { run() }
@@ -68,8 +61,15 @@ internal class MemoRepositoryImpl(
             val updateAt = prefDataSource.getFetchedUpdateAt(uid).firstOrNull()
             val data = fireStore.pageByUpdateAt(uid, updateAt).takeIf { it.isNotEmpty() } ?: break
 
+            data.forEach {
+                if (it.isDeleted) {
+                    localDataSource.delete(it.id)
+                } else {
+                    localDataSource.upsert(it)
+                }
+            }
+
             prefDataSource.setFetchedUpdateAt(uid, data.last().updateAt)
-            localDataSource.fetch(data)
         }
     }
 
@@ -85,23 +85,26 @@ internal class MemoRepositoryImpl(
 
     override fun page(ownerId: String?): Flow<PagingData<Memo>> {
         return createPager(
-            config = createPagingConfig(
-                pageSize = 30,
-            ),
-            pagingSourceFactory = {
-                localDataSource.page(ownerId = ownerId)
-            }
+            config = createPagingConfig(pageSize = PAGE_SIZE,),
+            pagingSourceFactory = { localDataSource.page(ownerId = ownerId) }
         ).mapPaging(MemoDto::toDomain)
     }
 
     override fun page(ownerId: String?, tagId: String): Flow<PagingData<Memo>> {
         return createPager(
-            config = createPagingConfig(
-                pageSize = 30,
-            ),
-            pagingSourceFactory = {
-                localDataSource.page(ownerId, tagId)
-            }
+            config = createPagingConfig(pageSize = PAGE_SIZE),
+            pagingSourceFactory = { localDataSource.page(ownerId, tagId) }
         ).mapPaging(MemoDto::toDomain)
+    }
+
+    override fun pageFinished(ownerId: String?): Flow<PagingData<Memo>> {
+        return createPager(
+            config = createPagingConfig(pageSize = PAGE_SIZE),
+            pagingSourceFactory = { localDataSource.pageFinished(ownerId) },
+        ).mapPaging(MemoDto::toDomain)
+    }
+
+    companion object {
+        private const val PAGE_SIZE = 30
     }
 }

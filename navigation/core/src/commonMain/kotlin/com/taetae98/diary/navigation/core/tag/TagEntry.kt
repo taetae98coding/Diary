@@ -5,6 +5,7 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
+import com.arkivanov.decompose.router.stack.popWhile
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.taetae98.diary.navigation.core.ext.illegalRoute
@@ -14,7 +15,7 @@ import com.taetae98.diary.navigation.core.route.TagDetailRoute
 import com.taetae98.diary.navigation.core.route.TagListRoute
 import com.taetae98.diary.navigation.core.route.TagMemoRoute
 
-public class TagEntry(
+public class TagEntry internal constructor(
     context: ComponentContext,
 ) : ComponentContext by context {
     private val navigation = StackNavigation<Route>()
@@ -47,6 +48,7 @@ public class TagEntry(
                 is TagDetailRoute -> TagDetailEntry(
                     context = context,
                     navigateUp = ::navigateUp,
+                    navigateUpToTagList = ::navigateUpToTagList,
                     tagId = route.id,
                 )
 
@@ -69,5 +71,9 @@ public class TagEntry(
 
     private fun navigateUp() {
         navigation.pop()
+    }
+
+    private fun navigateUpToTagList() {
+        navigation.popWhile { it != TagListRoute }
     }
 }

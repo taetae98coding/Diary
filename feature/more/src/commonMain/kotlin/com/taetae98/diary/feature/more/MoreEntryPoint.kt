@@ -12,5 +12,6 @@ public fun MoreEntryPoint(
     MoreRoute(
         modifier = modifier,
         onAccount = entry.navigateToAccount,
+        onFinishedMemo = entry.navigateToFinishedMemo
     )
 }

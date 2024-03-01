@@ -7,12 +7,11 @@ import kotlinx.datetime.LocalDate
 
 public interface MemoLocalDataSource {
     public suspend fun upsert(memo: MemoDto)
-    public suspend fun fetch(memo: List<MemoDto>)
-    public suspend fun complete(id: String)
-    public suspend fun incomplete(id: String)
+    public suspend fun updateFinish(id: String, isFinished: Boolean)
     public suspend fun delete(id: String)
     public fun find(id: String): Flow<MemoDto?>
     public fun find(ownerId: String?, dateRange: ClosedRange<LocalDate>): Flow<List<MemoDto>>
     public fun page(ownerId: String?): PagingSource<Int, MemoDto>
     public fun page(ownerId: String?, tagId: String): PagingSource<Int, MemoDto>
+    public fun pageFinished(ownerId: String?): PagingSource<Int, MemoDto>
 }

@@ -91,7 +91,7 @@ internal fun MemoDetailScreen(
 }
 
 @Composable
-internal fun TopBar(
+private fun TopBar(
     modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit,
     toolbarUiState: State<MemoDetailToolbarUiState>,
@@ -102,8 +102,8 @@ internal fun TopBar(
         actions = {
             when (val value = toolbarUiState.value) {
                 is MemoDetailToolbarUiState.Detail -> {
-                    IconButton(onClick = value.onComplete) {
-                        val tint = if (value.isComplete) {
+                    IconButton(onClick = value.onFinish) {
+                        val tint = if (value.isFinished) {
                             MaterialTheme.colorScheme.primary
                         } else {
                             LocalContentColor.current

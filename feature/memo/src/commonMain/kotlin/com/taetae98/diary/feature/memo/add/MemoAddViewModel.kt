@@ -4,7 +4,6 @@ import app.cash.paging.PagingData
 import app.cash.paging.cachedIn
 import app.cash.paging.map
 import com.taetae98.diary.domain.entity.memo.Memo
-import com.taetae98.diary.domain.entity.memo.MemoState
 import com.taetae98.diary.domain.entity.memo.MemoTag
 import com.taetae98.diary.domain.exception.TitleEmptyException
 import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
@@ -125,8 +124,8 @@ internal class MemoAddViewModel(
                 description = descriptionUiStateHolder.getValue().value,
                 dateRangeColor = dateRangeColor,
                 dateRange = dateRange,
+                isFinished = false,
                 ownerId = ownerId,
-                state = MemoState.NONE,
             )
 
             add(memo)
@@ -137,7 +136,7 @@ internal class MemoAddViewModel(
         val tagIdList = tagIdSet.value.map { tagId ->
             MemoTag(
                 memoId = memo.id,
-                tagId = tagId
+                tagId = tagId,
             )
         }
 

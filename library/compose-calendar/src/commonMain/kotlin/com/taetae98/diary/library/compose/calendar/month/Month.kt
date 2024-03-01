@@ -19,7 +19,7 @@ public fun Month(
     primaryDate: State<ImmutableList<DateRange>>,
     schedule: State<ImmutableList<CalendarItem.Schedule>>,
     holiday: State<ImmutableList<CalendarItem.Holiday>>,
-    onHoliday: (key: Any) -> Unit,
+    onItem: (key: Any) -> Unit,
 ) {
     Column(
         modifier = modifier,
@@ -33,7 +33,7 @@ public fun Month(
                 primaryDate = primaryDate,
                 schedule = schedule,
                 holiday = holiday,
-                onHoliday = onHoliday,
+                onItem = onItem,
             )
         }
     }
