@@ -11,11 +11,13 @@ import com.taetae98.diary.library.viewmodel.ViewModel
 import com.taetae98.diary.navigation.core.tag.TagMemoEntry
 import com.taetae98.diary.ui.memo.compose.MemoUiState
 import com.taetae98.diary.ui.memo.compose.SwipeMemoUiState
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.launch
 import org.koin.core.annotation.Factory
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @Factory
 internal class TagMemoViewModel(
     savedStateHandle: SavedStateHandle,

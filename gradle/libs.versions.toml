@@ -13,18 +13,18 @@ androidx-credentials = "1.2.0"                      # https://developer.android.
 androidx-startup = "1.1.1"                          # https://developer.android.com/jetpack/androidx/releases/startup?hl=en
 androidx-lifecycle = "2.7.0"                        # https://developer.android.com/jetpack/androidx/releases/lifecycle?hl=en
 
-compose-multiplatform = "1.5.12"                    # https://github.com/JetBrains/compose-multiplatform/releases
-paging-multiplatform = "3.3.0-alpha02-0.4.0"        # https://github.com/cashapp/multiplatform-paging/releases
+compose = "1.6.0"                                   # https://github.com/JetBrains/compose-multiplatform/releases
+paging-multiplatform = "3.3.0-alpha02-0.5.1"        # https://github.com/cashapp/multiplatform-paging/releases
 stately = "2.0.6"                                   # https://github.com/touchlab/Stately/releases
 datastore = "1.1.0-beta01"                          # https://developer.android.com/jetpack/androidx/releases/datastore?hl=en
 
-decompose = "2.2.2-compose-experimental"            # https://github.com/arkivanov/Decompose/releases
-decompose-essenty = "1.3.0"                         # https://github.com/arkivanov/Essenty/releases
+decompose = "3.0.0-alpha07"            # https://github.com/arkivanov/Decompose/releases
+decompose-essenty = "2.0.0-alpha07"                         # https://github.com/arkivanov/Essenty/releases
 
 google-services = "4.4.1"                           # https://developers.google.com/android/guides/google-services-plugin?hl=en
 google-id = "1.1.0"                                 # https://developers.google.com/identity/android-credential-manager/releases?hl=en
 
-firebase-android = "32.7.2"                         # https://firebase.google.com/support/release-notes/android?hl=en
+firebase-android = "32.7.3"                         # https://firebase.google.com/support/release-notes/android?hl=en
 firebase-crashlytics = "2.9.9"                      # https://firebase.google.com/support/release-notes/android?hl=en
 firebase-performance = "1.4.2"                      # https://firebase.google.com/support/release-notes/android?hl=en
 firebase-multiplatform = "1.11.1"                   # https://github.com/GitLiveApp/firebase-kotlin-sdk/releases
@@ -36,7 +36,7 @@ sqldelight = "2.0.1"                                # https://github.com/cashapp
 ktor = "2.3.8"                                      # https://github.com/ktorio/ktor/releases
 
 kotest = "5.8.0"                                    # https://github.com/kotest/kotest/releases
-mockk = "1.13.9"                                    # https://github.com/mockk/mockk/releases
+mockk = "1.13.10"                                    # https://github.com/mockk/mockk/releases
 
 buildkonfig = "0.15.1"                              # https://github.com/yshrsmz/BuildKonfig/releases
 ksp = "1.9.22-1.0.17"                               # https://github.com/google/ksp/releases
@@ -64,7 +64,7 @@ androidx-credentials = { group = "androidx.credentials", name = "credentials", v
 androidx-credentials-play-services-auth = { group = "androidx.credentials", name = "credentials-play-services-auth", version.ref = "androidx-credentials" }
 
 decompose = { group = "com.arkivanov.decompose", name = "decompose", version.ref = "decompose" }
-decompose-compose = { group = "com.arkivanov.decompose", name = "extensions-compose-jetbrains", version.ref = "decompose" }
+decompose-compose = { group = "com.arkivanov.decompose", name = "extensions-compose", version.ref = "decompose" }
 decompose-lifecycle = { group = "com.arkivanov.essenty", name = "lifecycle", version.ref = "decompose-essenty" }
 decompose-state = { group = "com.arkivanov.essenty", name = "state-keeper", version.ref = "decompose-essenty" }
 decompose-instance = { group = "com.arkivanov.essenty", name = "instance-keeper", version.ref = "decompose-essenty" }
@@ -129,7 +129,7 @@ kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", vers
 android-application = { id = "com.android.application", version.ref = "android-gradle" }
 android-library = { id = "com.android.library", version.ref = "android-gradle" }
 
-compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
+compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose" }
 
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 

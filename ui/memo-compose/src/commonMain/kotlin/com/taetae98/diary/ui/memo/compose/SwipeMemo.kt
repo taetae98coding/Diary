@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.taetae98.diary.ui.memo.compose
 
 import androidx.compose.animation.core.animateFloatAsState
@@ -6,12 +8,11 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.DismissDirection
-import androidx.compose.material3.DismissState
-import androidx.compose.material3.DismissValue
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.SwipeToDismiss
-import androidx.compose.material3.rememberDismissState
+import androidx.compose.material3.SwipeToDismissBox
+import androidx.compose.material3.SwipeToDismissBoxState
+import androidx.compose.material3.SwipeToDismissBoxValue
+import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -25,102 +26,98 @@ import com.taetae98.diary.ui.compose.icon.CircleIcon
 import com.taetae98.diary.ui.compose.icon.DeleteIcon
 import com.taetae98.diary.ui.compose.icon.FinishIcon
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 public fun SwipeMemo(
     modifier: Modifier = Modifier,
     uiState: SwipeMemoUiState?,
 ) {
-    val state = rememberDismissState(
-        initialValue = DismissValue.Default,
+    val state = rememberSwipeToDismissBoxState(
+        initialValue = SwipeToDismissBoxValue.Settled,
         confirmValueChange = {
-            if (uiState == null) return@rememberDismissState false
+            if (uiState == null) return@rememberSwipeToDismissBoxState false
 
             when (it) {
-                DismissValue.DismissedToStart -> uiState.onDelete()
-                DismissValue.DismissedToEnd -> uiState.onFinish()
+                SwipeToDismissBoxValue.StartToEnd -> uiState.onFinish()
+                SwipeToDismissBoxValue.EndToStart -> uiState.onDelete()
                 else -> Unit
             }
 
             true
-        }
+        },
     )
 
-    SwipeToDismiss(
+    SwipeToDismissBox(
         modifier = Modifier.clip(MemoDefaults.shape)
             .then(modifier),
         state = state,
-        background = {
+        backgroundContent = {
             Box(
                 modifier = Modifier.fillMaxSize()
                     .drawBehind {
                         val backgroundColor = when (state.dismissDirection) {
-                            DismissDirection.EndToStart -> Color.Red
-                            DismissDirection.StartToEnd -> Color.Green
+                            SwipeToDismissBoxValue.EndToStart -> Color.Red
+                            SwipeToDismissBoxValue.StartToEnd -> Color.Green
                             else -> null
                         }?.copy(alpha = 0.5F)
 
                         backgroundColor?.let(::drawRect)
                     }
-                    .padding(horizontal = 8.dp)
+                    .padding(horizontal = 8.dp),
             ) {
                 when (state.dismissDirection) {
-                    DismissDirection.EndToStart -> SwipeDeleteButton(state = state)
-                    DismissDirection.StartToEnd -> SwipeFinishButton(state = state)
+                    SwipeToDismissBoxValue.EndToStart -> SwipeDeleteButton(state = state)
+                    SwipeToDismissBoxValue.StartToEnd -> SwipeFinishButton(state = state)
                     else -> Unit
                 }
             }
         },
-        dismissContent = {
+        content = {
             Memo(
                 modifier = Modifier.fillMaxWidth(),
-                uiState = uiState?.memo
+                uiState = uiState?.memo,
             )
         }
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun BoxScope.SwipeDeleteButton(
     modifier: Modifier = Modifier,
-    state: DismissState,
+    state: SwipeToDismissBoxState,
 ) {
     SwipeIcon(
         modifier = modifier,
         state = state,
-        dismissValue = DismissValue.DismissedToStart,
+        dismissValue = SwipeToDismissBoxValue.EndToStart,
     ) {
         DeleteIcon()
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun BoxScope.SwipeFinishButton(
     modifier: Modifier = Modifier,
-    state: DismissState,
+    state: SwipeToDismissBoxState,
 ) {
     SwipeIcon(
         modifier = modifier,
         state = state,
-        dismissValue = DismissValue.DismissedToEnd,
+        dismissValue = SwipeToDismissBoxValue.StartToEnd,
     ) {
         FinishIcon()
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun BoxScope.SwipeIcon(
     modifier: Modifier = Modifier,
-    state: DismissState,
-    dismissValue: DismissValue,
+    state: SwipeToDismissBoxState,
+    dismissValue: SwipeToDismissBoxValue,
     content: @Composable () -> Unit,
 ) {
     val alignment = when (dismissValue) {
-        DismissValue.DismissedToEnd -> Alignment.CenterStart
-        DismissValue.DismissedToStart -> Alignment.CenterEnd
+        SwipeToDismissBoxValue.StartToEnd -> Alignment.CenterStart
+        SwipeToDismissBoxValue.EndToStart -> Alignment.CenterEnd
         else -> Alignment.Center
     }
 
@@ -128,7 +125,7 @@ private fun BoxScope.SwipeIcon(
         when (state.targetValue) {
             dismissValue -> 1.33F
             else -> 0.66F
-        }
+        },
     )
 
     when (state.targetValue) {
@@ -137,17 +134,17 @@ private fun BoxScope.SwipeIcon(
                 .graphicsLayer {
                     scaleX = scale
                     scaleY = scale
-                }
+                },
         ) {
             content()
         }
 
-        DismissValue.Default -> CircleIcon(
+        SwipeToDismissBoxValue.Settled -> CircleIcon(
             modifier = modifier.align(alignment)
                 .graphicsLayer {
                     scaleX = scale
                     scaleY = scale
-                }
+                },
         )
 
         else -> Unit
