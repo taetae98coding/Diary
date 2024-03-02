@@ -2,6 +2,7 @@ package com.taetae98.diary.feature.memo.list
 
 import app.cash.paging.PagingData
 import app.cash.paging.cachedIn
+import com.taetae98.diary.domain.usecase.memo.BeginMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.DeleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.FinishMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.PageMemoUseCase
@@ -23,11 +24,12 @@ import org.koin.core.annotation.Factory
 internal class MemoListViewModel(
     pageMemoUseCase: PageMemoUseCase,
     private val finishMemoUseCase: FinishMemoUseCase,
+    private val beginMemoUseCase: BeginMemoUseCase,
     private val deleteMemoUseCase: DeleteMemoUseCase,
 ) : ViewModel() {
-    private val message = MutableStateFlow<MemoListMessage?>(null)
+    private val messageFlow = MutableStateFlow<MemoListMessage?>(null)
 
-    val messageUiState = message.map {
+    val messageUiState = messageFlow.map {
         MemoListMessageUiState(
             message = it,
             messageShow = ::messageShow,
@@ -36,7 +38,7 @@ internal class MemoListViewModel(
         scope = viewModelScope,
         started = SharingStarted.Eagerly,
         initialValue = MemoListMessageUiState(
-            message = message.value,
+            message = messageFlow.value,
             messageShow = ::messageShow,
         ),
     )
@@ -57,22 +59,29 @@ internal class MemoListViewModel(
     private fun finish(id: String) {
         viewModelScope.launch {
             finishMemoUseCase(id).onSuccess {
-                message.emit(MemoListMessage.Finish)
+                val message = MemoListMessage.Finish(cancel = { begin(id) })
+                messageFlow.emit(message)
             }
+        }
+    }
+
+    private fun begin(id: String) {
+        viewModelScope.launch {
+            beginMemoUseCase(id)
         }
     }
 
     private fun delete(id: String) {
         viewModelScope.launch {
             deleteMemoUseCase(id).onSuccess {
-                message.emit(MemoListMessage.Delete)
+                messageFlow.emit(MemoListMessage.Delete)
             }
         }
     }
 
     private fun messageShow() {
         viewModelScope.launch {
-            message.emit(null)
+            messageFlow.emit(null)
         }
     }
 }

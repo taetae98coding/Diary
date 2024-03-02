@@ -16,6 +16,7 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -101,9 +102,13 @@ private fun Message(
     uiState: State<MemoListMessageUiState>,
 ) {
     LaunchedEffect(uiState.value) {
-        when (uiState.value.message) {
-            MemoListMessage.Finish -> {
-                hostState.showSnackbar(message = "완료", actionLabel = "취소")
+        when (val message = uiState.value.message) {
+            is MemoListMessage.Finish -> {
+                val result = hostState.showSnackbar(message = "완료", actionLabel = "취소")
+                if (result == SnackbarResult.ActionPerformed) {
+                    message.cancel()
+                }
+
                 uiState.value.messageShow()
             }
 
