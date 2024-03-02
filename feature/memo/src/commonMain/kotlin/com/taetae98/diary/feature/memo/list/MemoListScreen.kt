@@ -104,16 +104,17 @@ private fun Message(
     LaunchedEffect(uiState.value) {
         when (val message = uiState.value.message) {
             is MemoListMessage.Finish -> {
-                val result = hostState.showSnackbar(message = "완료", actionLabel = "취소")
-                if (result == SnackbarResult.ActionPerformed) {
+                if (hostState.showSnackbar(message = "완료", actionLabel = "취소") == SnackbarResult.ActionPerformed) {
                     message.cancel()
                 }
 
                 uiState.value.messageShow()
             }
 
-            MemoListMessage.Delete -> {
-                hostState.showSnackbar(message = "삭제", actionLabel = "취소")
+            is MemoListMessage.Delete -> {
+                if (hostState.showSnackbar(message = "삭제", actionLabel = "취소") == SnackbarResult.ActionPerformed) {
+                    message.cancel()
+                }
                 uiState.value.messageShow()
             }
 

@@ -2,10 +2,12 @@ package com.taetae98.diary.feature.memo.list
 
 import app.cash.paging.PagingData
 import app.cash.paging.cachedIn
+import com.taetae98.diary.domain.entity.memo.Memo
 import com.taetae98.diary.domain.usecase.memo.BeginMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.DeleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.FinishMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.PageMemoUseCase
+import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
 import com.taetae98.diary.library.paging.mapPagingLatest
 import com.taetae98.diary.library.viewmodel.ViewModel
 import com.taetae98.diary.ui.memo.compose.MemoUiState
@@ -26,6 +28,7 @@ internal class MemoListViewModel(
     private val finishMemoUseCase: FinishMemoUseCase,
     private val beginMemoUseCase: BeginMemoUseCase,
     private val deleteMemoUseCase: DeleteMemoUseCase,
+    private val upsertMemoUseCase: UpsertMemoUseCase,
 ) : ViewModel() {
     private val messageFlow = MutableStateFlow<MemoListMessage?>(null)
 
@@ -74,8 +77,15 @@ internal class MemoListViewModel(
     private fun delete(id: String) {
         viewModelScope.launch {
             deleteMemoUseCase(id).onSuccess {
-                messageFlow.emit(MemoListMessage.Delete)
+                val message = MemoListMessage.Delete(cancel = { it?.let(::upsert) })
+                messageFlow.emit(message)
             }
+        }
+    }
+
+    private fun upsert(memo: Memo) {
+        viewModelScope.launch {
+            upsertMemoUseCase(memo)
         }
     }
 

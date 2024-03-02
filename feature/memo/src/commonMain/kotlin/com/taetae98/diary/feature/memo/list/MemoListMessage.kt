@@ -5,5 +5,7 @@ internal sealed class MemoListMessage {
         val cancel: () -> Unit,
     ) : MemoListMessage()
 
-    data object Delete : MemoListMessage()
+    data class Delete(
+        val cancel: () -> Unit,
+    ) : MemoListMessage()
 }
