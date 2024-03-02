@@ -19,6 +19,7 @@ kotlin {
 
                 implementation(project(":library:koin-navigation-compose"))
                 implementation(project(":library:compose-runtime"))
+                implementation(project(":library:compose-backhandler"))
                 implementation(project(":library:uuid"))
                 implementation(project(":library:kotlin-ext"))
                 implementation(project(":library:paging"))

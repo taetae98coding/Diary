@@ -33,8 +33,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.cash.paging.compose.LazyPagingItems
 import com.taetae98.diary.feature.memo.tag.TagUiState
+import com.taetae98.diary.library.compose.backhandler.KBackHandler
 import com.taetae98.diary.ui.compose.button.AddFloatingButton
-import com.taetae98.diary.ui.compose.button.CheckFloatingButton
 import com.taetae98.diary.ui.compose.icon.AddIcon
 import com.taetae98.diary.ui.compose.icon.DeleteIcon
 import com.taetae98.diary.ui.compose.icon.FinishIcon
@@ -88,6 +88,8 @@ internal fun MemoDetailScreen(
         uiState = uiState,
         hostState = hostState,
     )
+
+    KBackHandler(onBack = onNavigateUp)
 }
 
 @Composable
@@ -157,12 +159,7 @@ private fun FloatingButton(
             )
         }
 
-        is MemoDetailUiState.Detail -> {
-            CheckFloatingButton(
-                modifier = modifier,
-                onClick = value.onUpdate
-            )
-        }
+        else -> Unit
     }
 }
 
