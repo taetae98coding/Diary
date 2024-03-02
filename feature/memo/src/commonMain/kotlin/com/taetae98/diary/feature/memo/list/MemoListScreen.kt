@@ -4,11 +4,8 @@ package com.taetae98.diary.feature.memo.list
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
@@ -24,12 +21,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import app.cash.paging.compose.LazyPagingItems
 import app.cash.paging.compose.itemKey
 import com.taetae98.diary.ui.compose.button.AddFloatingButton
 import com.taetae98.diary.ui.compose.icon.TagIcon
 import com.taetae98.diary.ui.compose.scaffold.DiaryScaffold
+import com.taetae98.diary.ui.memo.compose.MemoColum
 import com.taetae98.diary.ui.memo.compose.SwipeMemo
 import com.taetae98.diary.ui.memo.compose.SwipeMemoUiState
 
@@ -129,11 +126,7 @@ private fun Content(
     memoItems: LazyPagingItems<SwipeMemoUiState>,
     onNavigateToMemoDetail: (memoId: String) -> Unit,
 ) {
-    LazyColumn(
-        modifier = modifier,
-        contentPadding = PaddingValues(horizontal = 4.dp),
-        verticalArrangement = Arrangement.spacedBy(2.dp),
-    ) {
+    MemoColum(modifier = modifier) {
         items(
             count = memoItems.itemCount,
             key = memoItems.itemKey { it.memo.id },

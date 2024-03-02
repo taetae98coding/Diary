@@ -1,8 +1,9 @@
+@file:OptIn(ExperimentalFoundationApi::class)
+
 package com.taetae98.diary.feature.tag.memo
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -12,6 +13,7 @@ import app.cash.paging.compose.itemKey
 import com.taetae98.diary.ui.compose.icon.EditIcon
 import com.taetae98.diary.ui.compose.scaffold.DiaryScaffold
 import com.taetae98.diary.ui.compose.topbar.NavigateUpTopBar
+import com.taetae98.diary.ui.memo.compose.MemoColum
 import com.taetae98.diary.ui.memo.compose.SwipeMemo
 import com.taetae98.diary.ui.memo.compose.SwipeMemoUiState
 
@@ -20,7 +22,7 @@ internal fun TagMemoScreen(
     modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit,
     onEdit: () -> Unit,
-    memoItems: LazyPagingItems<SwipeMemoUiState>
+    memoItems: LazyPagingItems<SwipeMemoUiState>,
 ) {
     DiaryScaffold(
         modifier = modifier,
@@ -31,9 +33,9 @@ internal fun TagMemoScreen(
                     IconButton(onClick = onEdit) {
                         EditIcon()
                     }
-                }
+                },
             )
-        }
+        },
     ) {
         Content(
             modifier = Modifier.padding(it),
@@ -42,15 +44,12 @@ internal fun TagMemoScreen(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun Content(
     modifier: Modifier = Modifier,
     memoItems: LazyPagingItems<SwipeMemoUiState>,
 ) {
-    LazyColumn(
-        modifier = modifier
-    ) {
+    MemoColum(modifier = modifier) {
         items(
             count = memoItems.itemCount,
             key = memoItems.itemKey { it.memo.id },
