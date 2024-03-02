@@ -10,7 +10,8 @@ SELECT *
 FROM TagEntity
 WHERE
 ownerId = :ownerId AND
-id IN (SELECT tagId FROM SelectTagByMemoEntity);
+id IN (SELECT tagId FROM SelectTagByMemoEntity)
+ORDER BY title;
 
 count:
 SELECT COUNT(*)
