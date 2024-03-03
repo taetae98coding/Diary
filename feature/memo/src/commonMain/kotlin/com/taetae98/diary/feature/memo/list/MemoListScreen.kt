@@ -1,9 +1,7 @@
-@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+@file:OptIn(ExperimentalMaterial3Api::class)
 
 package com.taetae98.diary.feature.memo.list
 
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -22,13 +20,11 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import app.cash.paging.compose.LazyPagingItems
-import app.cash.paging.compose.itemKey
 import com.taetae98.diary.ui.compose.button.AddFloatingButton
 import com.taetae98.diary.ui.compose.icon.TagIcon
 import com.taetae98.diary.ui.compose.scaffold.DiaryScaffold
-import com.taetae98.diary.ui.memo.compose.MemoColum
-import com.taetae98.diary.ui.memo.compose.SwipeMemo
 import com.taetae98.diary.ui.memo.compose.SwipeMemoUiState
+import com.taetae98.diary.ui.memo.compose.column.SwipeMemoColum
 
 @Composable
 internal fun MemoListScreen(
@@ -38,7 +34,7 @@ internal fun MemoListScreen(
     hasTag: State<Boolean>,
     messageUiState: State<MemoListMessageUiState>,
     memoItems: LazyPagingItems<SwipeMemoUiState>,
-    onNavigateToMemoDetail: (memoId: String) -> Unit,
+    onMemo: (memoId: String) -> Unit,
 ) {
     val hostState = remember { SnackbarHostState() }
 
@@ -53,11 +49,11 @@ internal fun MemoListScreen(
         snackbarHost = { SnackbarHost(hostState = hostState) },
         floatingActionButton = { AddFloatingButton(onClick = onAdd) },
     ) {
-        Content(
+        SwipeMemoColum(
             modifier = Modifier.padding(it)
                 .fillMaxSize(),
             memoItems = memoItems,
-            onNavigateToMemoDetail = onNavigateToMemoDetail,
+            onMemo = onMemo,
         )
     }
 
@@ -116,35 +112,6 @@ private fun Message(
             }
 
             else -> Unit
-        }
-    }
-}
-
-@Composable
-private fun Content(
-    modifier: Modifier = Modifier,
-    memoItems: LazyPagingItems<SwipeMemoUiState>,
-    onNavigateToMemoDetail: (memoId: String) -> Unit,
-) {
-    MemoColum(modifier = modifier) {
-        items(
-            count = memoItems.itemCount,
-            key = memoItems.itemKey { it.memo.id },
-            contentType = { "Memo" },
-        ) {
-            val uiState = memoItems[it]
-
-            SwipeMemo(
-                modifier = Modifier
-                    .fillParentMaxWidth()
-                    .animateItemPlacement()
-                    .clickable(
-                        enabled = uiState != null,
-                        onClickLabel = uiState?.memo?.title,
-                        onClick = { uiState?.memo?.id?.let(onNavigateToMemoDetail) },
-                    ),
-                uiState = uiState,
-            )
         }
     }
 }

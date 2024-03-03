@@ -9,7 +9,7 @@ import kotlinx.serialization.json.JsonPrimitive
 public class MemoAddEntry internal constructor(
     context: ComponentContext,
     public val navigateUp: () -> Unit,
-    dateRange: ClosedRange<Long>?
+    dateRange: ClosedRange<Long>?,
 ) : ComponentContext by context {
     public val savedState: ImmutableMap<String, JsonElement> = buildMap {
         put(HAS_DATE, JsonPrimitive(dateRange != null))

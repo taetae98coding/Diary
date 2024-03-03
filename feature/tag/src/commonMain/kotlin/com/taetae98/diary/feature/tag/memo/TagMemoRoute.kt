@@ -10,6 +10,7 @@ internal fun TagMemoRoute(
     modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit,
     onNavigateToTagDetail: (String) -> Unit,
+    onNavigateToMemoDetail: (String) -> Unit,
     tagMemoViewModel: TagMemoViewModel,
 ) {
     val tagId = tagMemoViewModel.tagId.collectAsStateOnLifecycle()
@@ -18,6 +19,7 @@ internal fun TagMemoRoute(
         modifier = modifier,
         onNavigateUp = onNavigateUp,
         onEdit = { tagId.value?.let(onNavigateToTagDetail) },
+        onMemo = onNavigateToMemoDetail,
         memoItems = tagMemoViewModel.memoPagingData.collectAsLazyPagingItems(),
     )
 }

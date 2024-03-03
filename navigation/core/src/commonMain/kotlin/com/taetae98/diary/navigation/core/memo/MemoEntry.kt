@@ -56,7 +56,7 @@ public class MemoEntry internal constructor(
 
                 else -> illegalRoute(route)
             }
-        }
+        },
     )
 
     public val slot: Value<ChildSlot<*, ComponentContext>> = childSlot(
@@ -72,7 +72,7 @@ public class MemoEntry internal constructor(
 
                 else -> illegalRoute(route)
             }
-        }
+        },
     )
 
     private fun navigateToMemoAdd() {

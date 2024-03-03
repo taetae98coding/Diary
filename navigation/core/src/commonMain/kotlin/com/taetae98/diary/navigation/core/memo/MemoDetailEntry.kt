@@ -9,7 +9,7 @@ import kotlinx.serialization.json.JsonPrimitive
 public class MemoDetailEntry internal constructor(
     context: ComponentContext,
     public val navigateUp: () -> Unit,
-    memoId: String
+    memoId: String,
 ) : ComponentContext by context {
     public val savedState: ImmutableMap<String, JsonElement> = persistentMapOf(
         ID to JsonPrimitive(memoId),

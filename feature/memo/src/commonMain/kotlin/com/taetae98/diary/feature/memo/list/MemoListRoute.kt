@@ -21,6 +21,6 @@ internal fun MemoListRoute(
         hasTag = tagViewModel.hasTag.collectAsStateOnLifecycle(),
         messageUiState = viewModel.messageUiState.collectAsStateOnLifecycle(),
         memoItems = viewModel.memoPagingData.collectAsLazyPagingItems(),
-        onNavigateToMemoDetail = onNavigateToMemoDetail,
+        onMemo = onNavigateToMemoDetail,
     )
 }

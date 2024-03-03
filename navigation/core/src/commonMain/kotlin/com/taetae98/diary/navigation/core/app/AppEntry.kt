@@ -52,6 +52,7 @@ public class AppEntry(
 
                 TagRoute -> TagEntry(
                     context = context,
+                    navigateToMemoDetail = ::navigateToMemoDetail,
                 )
 
                 MoreRoute -> MoreEntry(
@@ -73,7 +74,7 @@ public class AppEntry(
 
                 else -> illegalRoute(route)
             }
-        }
+        },
     )
 
     public fun navigateToMemo() {

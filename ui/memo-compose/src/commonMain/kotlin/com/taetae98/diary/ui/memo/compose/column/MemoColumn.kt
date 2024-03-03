@@ -1,4 +1,4 @@
-package com.taetae98.diary.ui.memo.compose
+package com.taetae98.diary.ui.memo.compose.column
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues

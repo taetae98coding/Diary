@@ -13,8 +13,8 @@ import app.cash.paging.compose.itemKey
 import com.taetae98.diary.ui.compose.scaffold.DiaryScaffold
 import com.taetae98.diary.ui.compose.topbar.NavigateUpTopBar
 import com.taetae98.diary.ui.memo.compose.Memo
-import com.taetae98.diary.ui.memo.compose.MemoColum
 import com.taetae98.diary.ui.memo.compose.MemoUiState
+import com.taetae98.diary.ui.memo.compose.column.MemoColum
 
 @Composable
 internal fun FinishedMemoScreen(

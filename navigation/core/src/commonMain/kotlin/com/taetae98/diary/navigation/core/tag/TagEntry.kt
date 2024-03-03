@@ -17,6 +17,7 @@ import com.taetae98.diary.navigation.core.route.TagMemoRoute
 
 public class TagEntry internal constructor(
     context: ComponentContext,
+    private val navigateToMemoDetail: (String) -> Unit,
 ) : ComponentContext by context {
     private val navigation = StackNavigation<Route>()
 
@@ -42,6 +43,7 @@ public class TagEntry internal constructor(
                     context = context,
                     navigateUp = ::navigateUp,
                     navigateToTagDetail = ::navigateToTagDetail,
+                    navigateToMemoDetail = navigateToMemoDetail,
                     tagId = route.tagId,
                 )
 
@@ -54,7 +56,7 @@ public class TagEntry internal constructor(
 
                 else -> illegalRoute(route)
             }
-        }
+        },
     )
 
     private fun navigateToTagAdd() {

@@ -4,5 +4,5 @@ import com.arkivanov.decompose.ComponentContext
 
 public class TagAddEntry internal constructor(
     context: ComponentContext,
-    public val navigateUp: () -> Unit
+    public val navigateUp: () -> Unit,
 ) : ComponentContext by context

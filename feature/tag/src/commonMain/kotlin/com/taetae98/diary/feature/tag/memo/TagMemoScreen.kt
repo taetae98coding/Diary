@@ -1,27 +1,23 @@
-@file:OptIn(ExperimentalFoundationApi::class)
-
 package com.taetae98.diary.feature.tag.memo
 
-import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import app.cash.paging.compose.LazyPagingItems
-import app.cash.paging.compose.itemContentType
-import app.cash.paging.compose.itemKey
 import com.taetae98.diary.ui.compose.icon.EditIcon
 import com.taetae98.diary.ui.compose.scaffold.DiaryScaffold
 import com.taetae98.diary.ui.compose.topbar.NavigateUpTopBar
-import com.taetae98.diary.ui.memo.compose.MemoColum
-import com.taetae98.diary.ui.memo.compose.SwipeMemo
 import com.taetae98.diary.ui.memo.compose.SwipeMemoUiState
+import com.taetae98.diary.ui.memo.compose.column.SwipeMemoColum
 
 @Composable
 internal fun TagMemoScreen(
     modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit,
     onEdit: () -> Unit,
+    onMemo: (memoId: String) -> Unit,
     memoItems: LazyPagingItems<SwipeMemoUiState>,
 ) {
     DiaryScaffold(
@@ -37,32 +33,11 @@ internal fun TagMemoScreen(
             )
         },
     ) {
-        Content(
-            modifier = Modifier.padding(it),
+        SwipeMemoColum(
+            modifier = Modifier.padding(it)
+                .fillMaxSize(),
             memoItems = memoItems,
+            onMemo = onMemo,
         )
-    }
-}
-
-@Composable
-private fun Content(
-    modifier: Modifier = Modifier,
-    memoItems: LazyPagingItems<SwipeMemoUiState>,
-) {
-    MemoColum(modifier = modifier) {
-        items(
-            count = memoItems.itemCount,
-            key = memoItems.itemKey { it.memo.id },
-            contentType = memoItems.itemContentType { "memo" },
-        ) {
-            val uiState = memoItems[it]
-
-            SwipeMemo(
-                modifier = Modifier
-                    .fillParentMaxWidth()
-                    .animateItemPlacement(),
-                uiState = uiState,
-            )
-        }
     }
 }

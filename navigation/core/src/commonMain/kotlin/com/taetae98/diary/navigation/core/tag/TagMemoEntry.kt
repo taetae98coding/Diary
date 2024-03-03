@@ -10,6 +10,7 @@ public class TagMemoEntry internal constructor(
     context: ComponentContext,
     public val navigateUp: () -> Unit,
     public val navigateToTagDetail: (String) -> Unit,
+    public val navigateToMemoDetail: (String) -> Unit,
     tagId: String,
 ) : ComponentContext by context {
     public val savedState: ImmutableMap<String, JsonElement> = persistentMapOf(

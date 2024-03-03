@@ -9,6 +9,7 @@ kotlin {
             dependencies {
                 implementation(project(":ui:compose"))
                 implementation(compose.material3)
+                implementation(libs.paging.compose)
             }
         }
 
