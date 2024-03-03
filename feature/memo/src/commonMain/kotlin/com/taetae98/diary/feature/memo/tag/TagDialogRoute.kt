@@ -1,4 +1,4 @@
-package com.taetae98.diary.feature.memo.list
+package com.taetae98.diary.feature.memo.tag
 
 import androidx.compose.runtime.Composable
 import app.cash.paging.compose.collectAsLazyPagingItems
