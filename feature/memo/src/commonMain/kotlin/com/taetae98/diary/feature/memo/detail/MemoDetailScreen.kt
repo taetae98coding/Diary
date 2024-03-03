@@ -1,6 +1,7 @@
+@file:OptIn(ExperimentalLayoutApi::class)
+
 package com.taetae98.diary.feature.memo.detail
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -13,7 +14,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalContentColor
@@ -23,10 +23,8 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.key
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,7 +33,6 @@ import app.cash.paging.compose.LazyPagingItems
 import com.taetae98.diary.feature.memo.tag.TagUiState
 import com.taetae98.diary.library.compose.backhandler.KBackHandler
 import com.taetae98.diary.ui.compose.button.AddFloatingButton
-import com.taetae98.diary.ui.compose.icon.AddIcon
 import com.taetae98.diary.ui.compose.icon.DeleteIcon
 import com.taetae98.diary.ui.compose.icon.FinishIcon
 import com.taetae98.diary.ui.compose.icon.TagIcon
@@ -56,7 +53,7 @@ internal fun MemoDetailScreen(
     titleUiState: State<TextFieldUiState>,
     descriptionUiState: State<TextFieldUiState>,
     dateRangeUiState: State<DateRangeUiState>,
-    tagUiState: LazyPagingItems<TagUiState>
+    tagUiState: LazyPagingItems<TagUiState>,
 ) {
     val hostState = remember { SnackbarHostState() }
 
@@ -120,7 +117,7 @@ private fun TopBar(
 
                 else -> Unit
             }
-        }
+        },
     )
 }
 
@@ -155,7 +152,7 @@ private fun FloatingButton(
         is MemoDetailUiState.Add -> {
             AddFloatingButton(
                 modifier = modifier,
-                onClick = value.onAdd
+                onClick = value.onAdd,
             )
         }
 
@@ -169,17 +166,17 @@ private fun Content(
     titleUiState: State<TextFieldUiState>,
     descriptionUiState: State<TextFieldUiState>,
     dateRangeUiState: State<DateRangeUiState>,
-    tagUiState: LazyPagingItems<TagUiState>
+    tagUiState: LazyPagingItems<TagUiState>,
 ) {
     Column(
         modifier = modifier
             .padding(horizontal = 8.dp)
             .verticalScroll(state = rememberScrollState()),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         EntityTitle(
             modifier = Modifier.fillMaxWidth(),
-            uiState = titleUiState
+            uiState = titleUiState,
         )
         EntityDescription(
             modifier = Modifier.fillMaxWidth(),
@@ -189,7 +186,10 @@ private fun Content(
             modifier = Modifier.fillMaxWidth(),
             uiState = dateRangeUiState,
         )
-        TagLayout(tagUiState = tagUiState)
+
+        if (tagUiState.itemCount > 0) {
+            TagLayout(tagUiState = tagUiState)
+        }
     }
 }
 
@@ -199,25 +199,17 @@ private fun TagLayout(
     tagUiState: LazyPagingItems<TagUiState>,
 ) {
     Card(
-        modifier = modifier
+        modifier = modifier,
     ) {
         Column {
-            val isVisible = remember { mutableStateOf(false) }
-
             TagLayoutTitle(
                 modifier = Modifier.fillMaxWidth(),
-                isVisible = isVisible,
             )
-
-            AnimatedVisibility(
+            TagAllLayout(
                 modifier = Modifier.fillMaxWidth()
                     .heightIn(max = 300.dp),
-                visible = isVisible.value,
-            ) {
-                TagAllLayout(
-                    tagUiState = tagUiState,
-                )
-            }
+                tagUiState = tagUiState,
+            )
         }
     }
 }
@@ -225,7 +217,6 @@ private fun TagLayout(
 @Composable
 private fun TagLayoutTitle(
     modifier: Modifier = Modifier,
-    isVisible: MutableState<Boolean>
 ) {
     Row(
         modifier = modifier,
@@ -234,20 +225,11 @@ private fun TagLayoutTitle(
     ) {
         Text(
             modifier = Modifier.padding(12.dp),
-            text = "태그"
+            text = "태그",
         )
-
-        IconButton(onClick = { isVisible.value = !isVisible.value }) {
-            if (isVisible.value) {
-                TagIcon(tint = MaterialTheme.colorScheme.primary)
-            } else {
-                AddIcon()
-            }
-        }
     }
 }
 
-@OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
 private fun TagAllLayout(
     modifier: Modifier = Modifier,

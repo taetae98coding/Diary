@@ -52,6 +52,7 @@ public class AppEntry(
 
                 TagRoute -> TagEntry(
                     context = context,
+                    navigateToMemoAdd = ::navigateToMemoAdd,
                     navigateToMemoDetail = ::navigateToMemoDetail,
                 )
 
@@ -93,8 +94,27 @@ public class AppEntry(
         navigateToAppBottomBar(MoreRoute)
     }
 
+    private fun navigateToMemoAdd(tagIdSet: Set<String>) {
+        navigateToMemoAdd(
+            dateRange = null,
+            tagIdSet = tagIdSet,
+        )
+    }
+
     private fun navigateToMemoAdd(dateRange: ClosedRange<Long>) {
-        navigation.push(MemoRoute(MemoAddRoute(dateRange)))
+        navigateToMemoAdd(
+            dateRange = dateRange,
+            tagIdSet = emptySet(),
+        )
+    }
+
+    private fun navigateToMemoAdd(dateRange: ClosedRange<Long>?, tagIdSet: Set<String>) {
+        val route = MemoAddRoute(
+            dateRange = dateRange,
+            tagIdSet = tagIdSet,
+        )
+
+        navigation.push(MemoRoute(route))
     }
 
     private fun navigateToMemoDetail(memoId: String) {

@@ -49,7 +49,7 @@ internal class MemoAddViewModel(
     private val tagPagingData = pageTagUseCase(Unit).mapLatest { it.getOrNull() ?: PagingData.empty() }
         .cachedIn(viewModelScope)
 
-    private val tagIdSet = savedStateHandle.getStateFlow(TAG_ID_SET, emptySet<String>())
+    private val tagIdSet = savedStateHandle.getStateFlow(MemoAddEntry.TAG_ID_SET, emptySet<String>())
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val uiState = message.mapLatest {
@@ -166,7 +166,7 @@ internal class MemoAddViewModel(
         dateRangeUiStateHolder.setHasDate(false)
         dateRangeUiStateHolder.setStart(now)
         dateRangeUiStateHolder.setEndInclusive(now)
-        savedStateHandle[TAG_ID_SET] = emptySet<String>()
+        savedStateHandle[MemoAddEntry.TAG_ID_SET] = emptySet<String>()
     }
 
     private suspend fun showAddMessage() {
@@ -181,7 +181,7 @@ internal class MemoAddViewModel(
 
     private fun switchTagSelected(tagId: String) {
         viewModelScope.launch {
-            savedStateHandle[TAG_ID_SET] = buildSet {
+            savedStateHandle[MemoAddEntry.TAG_ID_SET] = buildSet {
                 addAll(tagIdSet.value)
                 if (contains(tagId)) {
                     remove(tagId)
@@ -195,6 +195,5 @@ internal class MemoAddViewModel(
     companion object {
         private const val TITLE = "title"
         private const val DESCRIPTION = "description"
-        private const val TAG_ID_SET = "tagIdSet"
     }
 }

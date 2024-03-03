@@ -4,6 +4,7 @@ package com.taetae98.diary.feature.finished.memo
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -30,7 +31,8 @@ internal fun FinishedMemoScreen(
         },
     ) {
         Content(
-            modifier = Modifier.padding(it),
+            modifier = Modifier.padding(it)
+                .fillMaxSize(),
             onMemo = onMemo,
             lazyPagingItems = lazyPagingItems,
         )

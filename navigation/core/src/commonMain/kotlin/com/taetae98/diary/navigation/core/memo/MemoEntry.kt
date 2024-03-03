@@ -46,6 +46,7 @@ public class MemoEntry internal constructor(
                     context = context,
                     navigateUp = ::navigateUp,
                     dateRange = route.dateRange,
+                    tagIdSet = route.tagIdSet,
                 )
 
                 is MemoDetailRoute -> MemoDetailEntry(
