@@ -53,6 +53,7 @@ internal class MemoListViewModel(
                 memo = MemoUiState(
                     id = it.id,
                     title = it.title,
+                    dateRange = it.dateRange,
                 ),
                 finish = ::finish,
                 delete = ::delete,

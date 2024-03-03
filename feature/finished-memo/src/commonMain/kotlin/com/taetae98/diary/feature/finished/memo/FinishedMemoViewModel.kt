@@ -23,6 +23,7 @@ internal class FinishedMemoViewModel(
         MemoUiState(
             id = it.id,
             title = it.title,
+            dateRange = it.dateRange,
         )
     }
 }

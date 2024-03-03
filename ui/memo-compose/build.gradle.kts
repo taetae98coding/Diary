@@ -8,6 +8,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":ui:compose"))
+                implementation(libs.kotlinx.datetime)
                 implementation(compose.material3)
                 implementation(libs.paging.compose)
             }
