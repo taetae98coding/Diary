@@ -22,7 +22,12 @@ public fun Memo(
         modifier = modifier,
         shape = shape,
     ) {
-        val verticalPadding = if (uiState?.dateRange == null) {
+        val dateRange = remember {
+            listOfNotNull(uiState?.dateRange?.start, uiState?.dateRange?.endInclusive)
+                .distinct()
+                .joinToString(separator = "~")
+        }
+        val verticalPadding = if (dateRange.isEmpty()) {
             10.dp
         } else {
             8.dp
@@ -34,11 +39,10 @@ public fun Memo(
             text = uiState?.title.orEmpty(),
             style = MaterialTheme.typography.titleMedium,
         )
-        uiState?.dateRange?.let {
-            val displayText = remember { "${it.start} ~ ${it.endInclusive}" }
+        if (dateRange.isNotEmpty()) {
             Text(
                 modifier = Modifier.padding(horizontal = 12.dp),
-                text = displayText,
+                text = dateRange,
                 style = MaterialTheme.typography.labelMedium,
             )
         }
