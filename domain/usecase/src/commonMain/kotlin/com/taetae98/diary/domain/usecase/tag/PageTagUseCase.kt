@@ -9,6 +9,7 @@ import com.taetae98.diary.domain.usecase.core.FlowUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
 import org.koin.core.annotation.Factory
 
@@ -18,9 +19,10 @@ public class PageTagUseCase internal constructor(
     private val tagRepository: TagRepository,
 ) : FlowUseCase<Unit, PagingData<Tag>>() {
     @OptIn(ExperimentalCoroutinesApi::class)
-    override fun execute(params: Unit): Flow<PagingData<Tag>> {
+    override fun execute(params: Unit): Flow<Result<PagingData<Tag>>> {
         return getAccountUseCase(Unit).mapLatest(Result<Account>::getOrThrow)
             .mapLatest { it.uid }
             .flatMapLatest(tagRepository::page)
+            .map { Result.success(it) }
     }
 }

@@ -10,6 +10,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
 import org.koin.core.annotation.Factory
 
@@ -19,11 +20,12 @@ public class PageMemoByTagIdUseCase internal constructor(
     private val getAccountUseCase: GetAccountUseCase,
     private val memoRepository: MemoRepository,
 ) : FlowUseCase<String?, PagingData<Memo>>() {
-    override fun execute(params: String?): Flow<PagingData<Memo>> {
-        if (params == null) return flowOf(PagingData.empty())
+    override fun execute(params: String?): Flow<Result<PagingData<Memo>>> {
+        if (params == null) return flowOf(Result.success(PagingData.empty()))
 
         return getAccountUseCase(Unit).mapLatest(Result<Account>::getOrThrow)
             .mapLatest { it.uid }
             .flatMapLatest { memoRepository.page(it, params) }
+            .map { Result.success(it) }
     }
 }

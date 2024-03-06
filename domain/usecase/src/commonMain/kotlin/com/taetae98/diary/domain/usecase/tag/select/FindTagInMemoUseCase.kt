@@ -16,8 +16,9 @@ public class FindTagInMemoUseCase internal constructor(
     private val selectTagByMemoRepository: SelectTagByMemoRepository,
     private val getAccountUseCase: GetAccountUseCase,
 ) : FlowUseCase<Unit, List<Tag>>() {
-    override fun execute(params: Unit): Flow<List<Tag>> {
+    override fun execute(params: Unit): Flow<Result<List<Tag>>> {
         return getAccountUseCase(Unit).map { it.getOrThrow() }
             .flatMapLatest { selectTagByMemoRepository.find(it.uid) }
+            .map { Result.success(it) }
     }
 }

@@ -8,6 +8,7 @@ import com.taetae98.diary.domain.usecase.core.FlowUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapNotNull
 import org.koin.core.annotation.Factory
 
@@ -17,9 +18,10 @@ public class FindFinishedMemoUseCase internal constructor(
     private val getAccountUseCase: GetAccountUseCase,
 ) : FlowUseCase<Unit, PagingData<Memo>>() {
     @OptIn(ExperimentalCoroutinesApi::class)
-    override fun execute(params: Unit): Flow<PagingData<Memo>> {
+    override fun execute(params: Unit): Flow<Result<PagingData<Memo>>> {
         return getAccountUseCase(Unit)
             .mapNotNull { it.getOrNull() }
             .flatMapLatest { memoRepository.pageFinished(it.uid) }
+            .map { Result.success(it) }
     }
 }
