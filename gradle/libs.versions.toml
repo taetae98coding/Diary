@@ -5,7 +5,7 @@ kotlinx-serialiation = "1.6.3"                      # https://github.com/Kotlin/
 kotlinx-datetime = "0.5.0"                          # https://github.com/Kotlin/kotlinx-datetime/releases
 kotlinx-immutable = "0.3.7"                         # https://github.com/Kotlin/kotlinx.collections.immutable/releases
 
-android-gradle = "8.2.2"                            # https://developer.android.com/build/releases/gradle-plugin?hl=en
+android-gradle = "8.3.0"                            # https://developer.android.com/build/releases/gradle-plugin?hl=en
 android-material = "1.11.0"                         # https://github.com/material-components/material-components-android/releases
 androidx-core = "1.12.0"                            # https://developer.android.com/jetpack/androidx/releases/core?hl=en
 androidx-activity = "1.8.2"                         # https://developer.android.com/jetpack/androidx/releases/activity?hl=en
@@ -18,8 +18,8 @@ paging-multiplatform = "3.3.0-alpha02-0.5.1"        # https://github.com/cashapp
 stately = "2.0.6"                                   # https://github.com/touchlab/Stately/releases
 datastore = "1.1.0-beta01"                          # https://developer.android.com/jetpack/androidx/releases/datastore?hl=en
 
-decompose = "3.0.0-alpha07"            # https://github.com/arkivanov/Decompose/releases
-decompose-essenty = "2.0.0-alpha07"                         # https://github.com/arkivanov/Essenty/releases
+decompose = "3.0.0-alpha08"                         # https://github.com/arkivanov/Decompose/releases
+decompose-essenty = "2.0.0-alpha07"                 # https://github.com/arkivanov/Essenty/releases
 
 google-services = "4.4.1"                           # https://developers.google.com/android/guides/google-services-plugin?hl=en
 google-id = "1.1.0"                                 # https://developers.google.com/identity/android-credential-manager/releases?hl=en
@@ -33,10 +33,10 @@ koin = "3.5.3"                                      # https://github.com/InsertK
 koin-annotations = "1.3.1"                          # https://github.com/InsertKoinIO/koin-annotations/releases
 
 sqldelight = "2.0.1"                                # https://github.com/cashapp/sqldelight/releases
-ktor = "2.3.8"                                      # https://github.com/ktorio/ktor/releases
+ktor = "2.3.9"                                      # https://github.com/ktorio/ktor/releases
 
 kotest = "5.8.0"                                    # https://github.com/kotest/kotest/releases
-mockk = "1.13.10"                                    # https://github.com/mockk/mockk/releases
+mockk = "1.13.10"                                   # https://github.com/mockk/mockk/releases
 
 buildkonfig = "0.15.1"                              # https://github.com/yshrsmz/BuildKonfig/releases
 ksp = "1.9.22-1.0.17"                               # https://github.com/google/ksp/releases

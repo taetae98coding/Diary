@@ -18,7 +18,8 @@ internal class ComposeMultiplatformPlugin : Plugin<Project> {
         apply("org.jetbrains.compose")
     }
 
-    private fun applyAndroid(extension: CommonExtension<*, *, *, *, *>) = with(extension) {
+    private fun applyAndroid(extension: CommonExtension<*, *, *, *, *, *>) = with(extension)
+    {
         buildFeatures {
             compose = true
         }

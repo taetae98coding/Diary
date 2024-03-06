@@ -11,7 +11,7 @@ internal class AndroidPlugin : Plugin<Project> {
         applyAndroid(target.extensions.getByType(CommonExtension::class))
     }
 
-    private fun applyAndroid(extension: CommonExtension<*, *, *, *, *>) = with(extension) {
+    private fun applyAndroid(extension: CommonExtension<*, *, *, *, *, *>) = with(extension) {
         compileSdk = Build.ANDROID_COMPILE_SDK
 
         defaultConfig {
