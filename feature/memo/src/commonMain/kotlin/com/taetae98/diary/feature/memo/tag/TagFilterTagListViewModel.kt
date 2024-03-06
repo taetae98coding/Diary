@@ -1,13 +1,12 @@
-package com.taetae98.diary.feature.memo.list
+package com.taetae98.diary.feature.memo.tag
 
 import app.cash.paging.PagingData
 import app.cash.paging.cachedIn
 import app.cash.paging.filter
 import com.taetae98.diary.domain.usecase.tag.PageTagUseCase
-import com.taetae98.diary.domain.usecase.tag.select.UnSelectTagByMemoUseCase
 import com.taetae98.diary.domain.usecase.tag.select.FindTagInMemoUseCase
 import com.taetae98.diary.domain.usecase.tag.select.SelectTagByMemoUseCase
-import com.taetae98.diary.feature.memo.tag.TagUiState
+import com.taetae98.diary.domain.usecase.tag.select.UnSelectTagByMemoUseCase
 import com.taetae98.diary.library.kotlin.ext.mapCollectionLatest
 import com.taetae98.diary.library.paging.mapPaging
 import com.taetae98.diary.library.viewmodel.ViewModel
@@ -23,7 +22,7 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-internal class TagViewModel(
+internal class TagFilterTagListViewModel(
     findTagInMemoUseCase: FindTagInMemoUseCase,
     pageTagUseCase: PageTagUseCase,
     private val selectTagByMemoUseCase: SelectTagByMemoUseCase,

@@ -7,8 +7,10 @@ import kotlinx.coroutines.flow.Flow
 
 public interface SelectTagByMemoRepository {
     public fun find(ownerId: String?): Flow<List<Tag>>
-    public fun page(ownerId: String?): Flow<PagingData<Memo>>
+    public fun page(ownerId: String?, includeNoTag: Boolean): Flow<PagingData<Memo>>
+    public fun hasToPageNoTagMemo(uid: String?): Flow<Boolean>
 
     public suspend fun upsert(tagId: String)
     public suspend fun delete(tagId: String)
+    public suspend fun setHasToPageNoTagMemo(uid: String?, hasToPage: Boolean)
 }

@@ -26,7 +26,7 @@ public fun EntityDescription(
                 Text(text = "설명")
             },
             singleLine = false,
-            maxLines = 5,
+            maxLines = 10,
             minLines = 1,
         )
     }

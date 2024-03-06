@@ -10,7 +10,7 @@ import com.arkivanov.decompose.router.slot.ChildSlot
 import com.taetae98.diary.feature.memo.add.MemoAddRoute
 import com.taetae98.diary.feature.memo.detail.MemoDetailRoute
 import com.taetae98.diary.feature.memo.list.MemoListRoute
-import com.taetae98.diary.feature.memo.list.TagDialogRoute
+import com.taetae98.diary.feature.memo.tag.TagDialogRoute
 import com.taetae98.diary.library.koin.navigation.compose.koinInject
 import com.taetae98.diary.navigation.core.memo.MemoAddEntry
 import com.taetae98.diary.navigation.core.memo.MemoDetailEntry
@@ -50,18 +50,19 @@ public fun MemoEntryPoint(
     }
 
     Slot(
-        state = entry.slot.subscribeAsState()
+        state = entry.slot.subscribeAsState(),
     )
 }
 
 @Composable
 private fun Slot(
-    state: State<ChildSlot<*, ComponentContext>>
+    state: State<ChildSlot<*, ComponentContext>>,
 ) {
     when (val instance = state.value.child?.instance) {
         is MemoListTagDialogEntry -> TagDialogRoute(
             onDismiss = instance.onDismiss,
-            tagViewModel = instance.koinInject()
+            tagFilterTagListViewModel = instance.koinInject(),
+            tagFilterNoTagMemoViewModel = instance.koinInject(),
         )
     }
 }

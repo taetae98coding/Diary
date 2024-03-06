@@ -46,6 +46,7 @@ public class MemoEntry internal constructor(
                     context = context,
                     navigateUp = ::navigateUp,
                     dateRange = route.dateRange,
+                    tagIdSet = route.tagIdSet,
                 )
 
                 is MemoDetailRoute -> MemoDetailEntry(
@@ -56,7 +57,7 @@ public class MemoEntry internal constructor(
 
                 else -> illegalRoute(route)
             }
-        }
+        },
     )
 
     public val slot: Value<ChildSlot<*, ComponentContext>> = childSlot(
@@ -72,7 +73,7 @@ public class MemoEntry internal constructor(
 
                 else -> illegalRoute(route)
             }
-        }
+        },
     )
 
     private fun navigateToMemoAdd() {

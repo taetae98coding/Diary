@@ -5,9 +5,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -117,7 +119,7 @@ private fun WeekdayItemRow(
     onItem: (key: Any) -> Unit,
 ) {
     Row(
-        modifier = modifier,
+        modifier = modifier.height(intrinsicSize =  IntrinsicSize.Min),
     ) {
         weekDayItem.forEach {
             when (it) {

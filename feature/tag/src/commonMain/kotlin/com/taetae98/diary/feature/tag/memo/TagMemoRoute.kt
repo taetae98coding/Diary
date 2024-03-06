@@ -9,15 +9,18 @@ import com.taetae98.diary.library.compose.runtime.collectAsStateOnLifecycle
 internal fun TagMemoRoute(
     modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit,
-    onNavigateToTagDetail: (String) -> Unit,
+    onNavigateToTagDetail: () -> Unit,
+    onNavigateToMemoAdd: () -> Unit,
+    onNavigateToMemoDetail: (String) -> Unit,
     tagMemoViewModel: TagMemoViewModel,
 ) {
-    val tagId = tagMemoViewModel.tagId.collectAsStateOnLifecycle()
-
     TagMemoScreen(
         modifier = modifier,
+        title = tagMemoViewModel.title.collectAsStateOnLifecycle(),
         onNavigateUp = onNavigateUp,
-        onEdit = { tagId.value?.let(onNavigateToTagDetail) },
+        onEdit = onNavigateToTagDetail,
+        onAdd = onNavigateToMemoAdd,
+        onMemo = onNavigateToMemoDetail,
         memoItems = tagMemoViewModel.memoPagingData.collectAsLazyPagingItems(),
     )
 }
