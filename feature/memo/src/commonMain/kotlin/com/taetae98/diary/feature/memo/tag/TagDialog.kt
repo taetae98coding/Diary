@@ -3,6 +3,7 @@
 package com.taetae98.diary.feature.memo.tag
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -70,6 +71,7 @@ private fun SelectLayout(
         } else {
             LazyRow(
                 modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(2.dp),
             ) {
                 items(
                     items = tagList.value,
@@ -108,6 +110,7 @@ private fun TagLayout(
         } else {
             LazyRow(
                 modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(2.dp),
             ) {
                 items(
                     count = pagingItems.itemCount,

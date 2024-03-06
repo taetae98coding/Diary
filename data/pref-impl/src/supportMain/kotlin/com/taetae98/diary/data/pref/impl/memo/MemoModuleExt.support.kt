@@ -12,6 +12,6 @@ internal actual fun MemoModule.getMemoPrefDataSource(): MemoPrefDataSource {
 
 internal actual fun MemoModule.getMemoTagPrefDataSource(): MemoTagPrefDataSource {
     return MemoTagPrefDataSourceImpl(
-        dataStore = getDataSource("memoTag_datastore.preferences_pb"),
+        dataStore = getDataSource("memo_tag_datastore.preferences_pb"),
     )
 }

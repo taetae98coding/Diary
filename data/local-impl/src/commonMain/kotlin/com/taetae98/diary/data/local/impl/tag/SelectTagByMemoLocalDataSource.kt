@@ -28,7 +28,7 @@ internal class SelectTagByMemoLocalDataSource(
             .mapToList(dispatcher)
     }
 
-    override fun page(ownerId: String?): PagingSource<Int, MemoDto> {
+    override fun page(ownerId: String?, includeNoTag: Boolean): PagingSource<Int, MemoDto> {
         val queries = database.selectTagByMemoEntityQueries
 
         return QueryPagingSource(
@@ -38,9 +38,10 @@ internal class SelectTagByMemoLocalDataSource(
             queryProvider = { limit, offset ->
                 queries.page(
                     ownerId = ownerId,
+                    includeNoTag = if (includeNoTag) 1L else 0L,
                     limit = limit,
                     offset = offset,
-                    mapper = ::mapToMemoDto
+                    mapper = ::mapToMemoDto,
                 )
             },
         )

@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 public interface SelectTagByMemoLocalDataSource {
     public fun find(ownerId: String?): Flow<List<TagDto>>
-    public fun page(ownerId: String?): PagingSource<Int, MemoDto>
+    public fun page(ownerId: String?, includeNoTag: Boolean): PagingSource<Int, MemoDto>
 
     public suspend fun upsert(tagId: String)
     public suspend fun delete(tagId: String)

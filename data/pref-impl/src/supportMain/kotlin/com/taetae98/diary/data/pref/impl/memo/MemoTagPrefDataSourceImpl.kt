@@ -24,6 +24,6 @@ internal class MemoTagPrefDataSourceImpl(
     }
 
     private fun getFetchedUpdateAtKey(uid: String): Preferences.Key<String> {
-        return stringPreferencesKey("${uid}_fetched_update_at")
+        return stringPreferencesKey("fetched_update_at_$uid")
     }
 }

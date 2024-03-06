@@ -9,13 +9,14 @@ import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
 import com.taetae98.diary.domain.usecase.core.FlowUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapLatest
 import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-public class PageMemoUseCase internal constructor(
+public class PageMemoBySelectTagUseCase internal constructor(
     private val getAccountUseCase: GetAccountUseCase,
     private val memoRepository: MemoRepository,
     private val selectTagByMemoRepository: SelectTagByMemoRepository,
@@ -27,13 +28,17 @@ public class PageMemoUseCase internal constructor(
     }
 
     private fun page(uid: String?): Flow<PagingData<Memo>> {
-        return selectTagByMemoRepository.find(uid)
-            .flatMapLatest {
-                if (it.isEmpty()) {
-                    memoRepository.page(uid)
-                } else {
-                    selectTagByMemoRepository.page(uid)
-                }
+        return combine(
+            selectTagByMemoRepository.find(uid),
+            selectTagByMemoRepository.hasToPageNoTagMemo(uid),
+        ) { tagList, hasToPage ->
+            if (tagList.isEmpty()) {
+                memoRepository.page(uid)
+            } else {
+                selectTagByMemoRepository.page(uid, hasToPage)
             }
+        }.flatMapLatest {
+            it
+        }
     }
 }

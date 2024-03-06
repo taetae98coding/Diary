@@ -27,8 +27,10 @@ SELECT *
 FROM MemoEntity
 WHERE
 isFinished = 0 AND
-ownerId = :ownerId AND
-id IN (SELECT DISTINCT memoId FROM MemoTagEntity WHERE tagId IN (SELECT tagId FROM SelectTagByMemoEntity))
+ownerId = :ownerId AND (
+    id IN (SELECT DISTINCT memoId FROM MemoTagEntity WHERE tagId IN (SELECT tagId FROM SelectTagByMemoEntity)) OR
+    (:includeNoTag = TRUE AND id NOT IN (SELECT DISTINCT memoId FROM MemoTagEntity))
+)
 LIMIT :limit OFFSET :offset;
 
 upsert:

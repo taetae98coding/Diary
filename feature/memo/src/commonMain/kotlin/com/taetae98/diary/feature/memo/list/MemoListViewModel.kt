@@ -6,7 +6,7 @@ import com.taetae98.diary.domain.entity.memo.Memo
 import com.taetae98.diary.domain.usecase.memo.BeginMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.DeleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.FinishMemoUseCase
-import com.taetae98.diary.domain.usecase.memo.PageMemoUseCase
+import com.taetae98.diary.domain.usecase.memo.PageMemoBySelectTagUseCase
 import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
 import com.taetae98.diary.library.paging.mapPagingLatest
 import com.taetae98.diary.library.viewmodel.ViewModel
@@ -24,7 +24,7 @@ import org.koin.core.annotation.Factory
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
 internal class MemoListViewModel(
-    pageMemoUseCase: PageMemoUseCase,
+    pageMemoBySelectTagUseCase: PageMemoBySelectTagUseCase,
     private val finishMemoUseCase: FinishMemoUseCase,
     private val beginMemoUseCase: BeginMemoUseCase,
     private val deleteMemoUseCase: DeleteMemoUseCase,
@@ -46,7 +46,7 @@ internal class MemoListViewModel(
         ),
     )
 
-    val memoPagingData = pageMemoUseCase(Unit).mapLatest { it.getOrNull() ?: PagingData.empty() }
+    val memoPagingData = pageMemoBySelectTagUseCase(Unit).mapLatest { it.getOrNull() ?: PagingData.empty() }
         .cachedIn(viewModelScope)
         .mapPagingLatest {
             SwipeMemoUiState(
