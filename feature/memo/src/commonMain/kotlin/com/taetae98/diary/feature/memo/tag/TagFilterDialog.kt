@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.AssistChip
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.InputChip
 import androidx.compose.material3.MaterialTheme
@@ -36,6 +35,7 @@ internal fun TagDialog(
     onDismiss: () -> Unit,
     selectTagList: State<ImmutableList<TagUiState>>,
     nonSelectTagLazyPagingItems: LazyPagingItems<TagUiState>,
+    noTagMemoUiState: State<NoTagMemoUiState>,
 ) {
     AlertDialog(
         modifier = modifier,
@@ -49,7 +49,7 @@ internal fun TagDialog(
             Column {
                 SelectLayout(tagList = selectTagList)
                 TagLayout(pagingItems = nonSelectTagLazyPagingItems)
-                EtcLayout()
+                EtcLayout(noTagMemoUiState = noTagMemoUiState)
             }
         },
     )
@@ -133,19 +133,29 @@ private fun TagLayout(
 }
 
 @Composable
-private fun EtcLayout() {
-    Text(
-        text = "옵션",
-        style = MaterialTheme.typography.titleLarge,
-    )
+private fun EtcLayout(
+    modifier: Modifier = Modifier,
+    noTagMemoUiState: State<NoTagMemoUiState>,
+) {
+    if (noTagMemoUiState.value.isVisible) {
+        Column(
+            modifier = modifier,
+        ) {
+            Text(
+                text = "옵션",
+                style = MaterialTheme.typography.titleLarge,
+            )
 
-    FlowRow(
-        modifier = Modifier.fillMaxWidth(),
-    ) {
-        AssistChip(
-            onClick = {},
-            label = { Text("태그가 없는 메모") },
-        )
+            FlowRow(
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                InputChip(
+                    selected = noTagMemoUiState.value.isSelected,
+                    onClick = noTagMemoUiState.value::onClick,
+                    label = { Text("태그가 없는 메모") },
+                )
+            }
+        }
     }
 }
 

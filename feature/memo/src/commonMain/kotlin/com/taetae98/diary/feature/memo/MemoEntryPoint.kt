@@ -50,18 +50,19 @@ public fun MemoEntryPoint(
     }
 
     Slot(
-        state = entry.slot.subscribeAsState()
+        state = entry.slot.subscribeAsState(),
     )
 }
 
 @Composable
 private fun Slot(
-    state: State<ChildSlot<*, ComponentContext>>
+    state: State<ChildSlot<*, ComponentContext>>,
 ) {
     when (val instance = state.value.child?.instance) {
         is MemoListTagDialogEntry -> TagDialogRoute(
             onDismiss = instance.onDismiss,
-            tagViewModel = instance.koinInject()
+            tagFilterTagListViewModel = instance.koinInject(),
+            tagFilterNoTagMemoViewModel = instance.koinInject(),
         )
     }
 }
