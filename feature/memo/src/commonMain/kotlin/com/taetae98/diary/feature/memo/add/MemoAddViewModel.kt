@@ -40,7 +40,7 @@ internal class MemoAddViewModel(
     private val upsertMemoUseCase: UpsertMemoUseCase,
     private val upsertMemoTagListUseCase: UpsertMemoTagListUseCase,
 ) : ViewModel() {
-    private val message = MutableStateFlow<MemoDetailMessage?>(null)
+    private val _message = MutableStateFlow<MemoDetailMessage?>(null)
     private val _toolbarUiState = MutableStateFlow(MemoDetailToolbarUiState.Add)
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -50,7 +50,7 @@ internal class MemoAddViewModel(
     private val tagIdSet = savedStateHandle.getStateFlow(MemoAddEntry.TAG_ID_SET, emptySet<String>())
 
     val uiState = MemoDetailUiState.Add(onAdd = ::add)
-
+    val message = _message.asStateFlow()
     val toolbarUiState = _toolbarUiState.asStateFlow()
 
     val titleUiStateHolder = TextFieldUiStateHolder(
@@ -138,7 +138,7 @@ internal class MemoAddViewModel(
 
     private suspend fun handleThrowable(throwable: Throwable) {
         when (throwable) {
-            is TitleEmptyException -> message.emit(MemoDetailMessage.TitleEmpty)
+            is TitleEmptyException -> _message.emit(MemoDetailMessage.TitleEmpty(::messageShown))
         }
     }
 
@@ -154,12 +154,12 @@ internal class MemoAddViewModel(
     }
 
     private suspend fun showAddMessage() {
-        message.emit(MemoDetailMessage.Add)
+        _message.emit(MemoDetailMessage.Add(::messageShown))
     }
 
     private fun messageShown() {
         viewModelScope.launch {
-            message.emit(null)
+            _message.emit(null)
         }
     }
 

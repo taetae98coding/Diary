@@ -1,8 +1,21 @@
 package com.taetae98.diary.feature.memo.detail
 
 internal sealed class MemoDetailMessage {
-    data object Add : MemoDetailMessage()
-    data object Delete : MemoDetailMessage()
-    data object TitleEmpty : MemoDetailMessage()
-    data object Update : MemoDetailMessage()
+    abstract val messageShown: () -> Unit
+
+    data class Add(
+        override val messageShown: () -> Unit,
+    ) : MemoDetailMessage()
+
+    data class TitleEmpty(
+        override val messageShown: () -> Unit,
+    ) : MemoDetailMessage()
+
+    data class Update(
+        override val messageShown: () -> Unit,
+    ) : MemoDetailMessage()
+
+    data class UpdateFail(
+        override val messageShown: () -> Unit,
+    ) : MemoDetailMessage()
 }

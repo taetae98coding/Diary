@@ -22,6 +22,7 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
@@ -48,6 +49,8 @@ internal fun MemoDetailScreen(
     modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit,
     uiState: MemoDetailUiState,
+    message: State<MemoDetailMessage?>,
+    toolbarMessage: State<MemoDetailToolbarMessage?>,
     toolbarUiState: State<MemoDetailToolbarUiState>,
     titleUiState: State<TextFieldUiState>,
     descriptionUiState: State<TextFieldUiState>,
@@ -61,6 +64,7 @@ internal fun MemoDetailScreen(
         topBar = {
             TopBar(
                 onNavigateUp = onNavigateUp,
+                uiState = uiState,
                 toolbarUiState = toolbarUiState,
             )
         },
@@ -81,22 +85,36 @@ internal fun MemoDetailScreen(
     }
 
     Message(
-        uiState = uiState,
+        message = message,
+        onNavigateUp = onNavigateUp,
         hostState = hostState,
     )
 
-    KBackHandler(onBack = onNavigateUp)
+    ToolbarMessage(
+        message = toolbarMessage,
+        onNavigateUp = onNavigateUp,
+    )
+
+    BackHandler(
+        onNavigateUp = onNavigateUp,
+        uiState = uiState,
+    )
 }
 
 @Composable
 private fun TopBar(
     modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit,
+    uiState: MemoDetailUiState,
     toolbarUiState: State<MemoDetailToolbarUiState>,
 ) {
     NavigateUpTopBar(
         modifier = modifier,
-        onNavigateUp = onNavigateUp,
+        onNavigateUp = if (uiState is MemoDetailUiState.Detail) {
+            uiState.onUpdate
+        } else {
+            onNavigateUp
+        },
         actions = {
             when (val value = toolbarUiState.value) {
                 is MemoDetailToolbarUiState.Detail -> {
@@ -122,24 +140,58 @@ private fun TopBar(
 
 @Composable
 private fun Message(
-    uiState: MemoDetailUiState,
+    message: State<MemoDetailMessage?>,
+    onNavigateUp: () -> Unit,
     hostState: SnackbarHostState,
 ) {
-//    LaunchedEffect(uiState.value.message) {
-//        when (uiState.value.message) {
-//            MemoDetailMessage.Add -> {
-//                hostState.showSnackbar("메모 추가")
-//                uiState.value.onMessageShown()
-//            }
-//
-//            MemoDetailMessage.TitleEmpty -> {
-//                hostState.showSnackbar("제목을 입력해주세요.")
-//                uiState.value.onMessageShown()
-//            }
-//
-//            else -> Unit
-//        }
-//    }
+    LaunchedEffect(message.value) {
+        when (val value = message.value) {
+            is MemoDetailMessage.Add -> {
+                hostState.showSnackbar("메모 추가")
+                value.messageShown()
+            }
+
+            is MemoDetailMessage.Update, is MemoDetailMessage.UpdateFail -> {
+                onNavigateUp()
+                value.messageShown()
+            }
+
+            is MemoDetailMessage.TitleEmpty -> {
+                hostState.showSnackbar("제목을 입력해주세요.")
+                value.messageShown()
+            }
+
+            else -> Unit
+        }
+    }
+}
+
+@Composable
+private fun ToolbarMessage(
+    message: State<MemoDetailToolbarMessage?>,
+    onNavigateUp: () -> Unit,
+) {
+    LaunchedEffect(message.value) {
+        when (val value = message.value) {
+            is MemoDetailToolbarMessage.Delete -> {
+                onNavigateUp()
+                value.messageShown()
+            }
+
+            else -> Unit
+        }
+    }
+}
+
+@Composable
+private fun BackHandler(
+    onNavigateUp: () -> Unit,
+    uiState: MemoDetailUiState,
+) {
+    when (uiState) {
+        is MemoDetailUiState.Add -> KBackHandler(onBack = onNavigateUp)
+        is MemoDetailUiState.Detail -> KBackHandler(onBack = uiState.onUpdate)
+    }
 }
 
 @Composable

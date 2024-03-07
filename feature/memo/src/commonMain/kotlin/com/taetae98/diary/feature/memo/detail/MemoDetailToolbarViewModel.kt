@@ -7,7 +7,9 @@ import com.taetae98.diary.library.viewmodel.SavedStateHandle
 import com.taetae98.diary.library.viewmodel.ViewModel
 import com.taetae98.diary.navigation.core.memo.MemoDetailEntry
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
@@ -35,6 +37,9 @@ internal class MemoDetailToolbarViewModel(
             initialValue = null,
         )
 
+    private val _message = MutableStateFlow<MemoDetailToolbarMessage?>(null)
+    val message = _message.asStateFlow()
+
     val uiState = memo.mapLatest {
         MemoDetailToolbarUiState.Detail(
             isFinished = it?.isFinished ?: false,
@@ -57,7 +62,7 @@ internal class MemoDetailToolbarViewModel(
         viewModelScope.launch {
             val param = UpdateMemoFinishUseCase.Params(
                 memoId = id.value,
-                isFinish = !memo.isFinished
+                isFinish = !memo.isFinished,
             )
 
             updateMemoFinishUseCase(param)
@@ -66,7 +71,15 @@ internal class MemoDetailToolbarViewModel(
 
     private fun delete() {
         viewModelScope.launch {
-            deleteMemoUseCase(id.value)
+            deleteMemoUseCase(id.value).onSuccess {
+                _message.emit(MemoDetailToolbarMessage.Delete(::clearMessage))
+            }
+        }
+    }
+
+    private fun clearMessage() {
+        viewModelScope.launch {
+            _message.emit(null)
         }
     }
 }
