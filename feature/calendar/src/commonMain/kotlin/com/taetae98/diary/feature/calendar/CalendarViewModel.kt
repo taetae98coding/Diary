@@ -1,6 +1,5 @@
 package com.taetae98.diary.feature.calendar
 
-import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
 import com.taetae98.diary.domain.usecase.holiday.GetHolidayUseCase
 import com.taetae98.diary.domain.usecase.memo.FindMemoByDateRangeUseCase
 import com.taetae98.diary.library.compose.calendar.CalendarItem
@@ -24,15 +23,12 @@ import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 import org.koin.core.annotation.Factory
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @Factory
 internal class CalendarViewModel(
     getHolidayUseCase: GetHolidayUseCase,
-    getAccountUseCase: GetAccountUseCase,
     findMemoByDateRangeUseCase: FindMemoByDateRangeUseCase,
 ) : ViewModel() {
-    @OptIn(ExperimentalCoroutinesApi::class)
-    private val ownerId = getAccountUseCase(Unit).mapLatest { it.getOrNull() }
-        .mapLatest { it?.uid }
     private val _year = MutableStateFlow<Int?>(null)
     private val _month = MutableStateFlow<Month?>(null)
 
@@ -43,18 +39,17 @@ internal class CalendarViewModel(
         year to month
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    val schedule = combine(ownerId, yearAndMonth) { ownerId, yearAndMonth ->
-        val start = LocalDate(yearAndMonth.first, yearAndMonth.second, 1)
+    val schedule = yearAndMonth.mapLatest {
+        val start = LocalDate(it.first, it.second, 1)
             .minus(1, DateTimeUnit.MONTH)
             .run { minus(dayOfWeek.toChristDayNumber(), DateTimeUnit.DAY) }
-        val endInclusive = LocalDate(yearAndMonth.first, yearAndMonth.second, 1)
+        val endInclusive = LocalDate(it.first, it.second, 1)
             .plus(1, DateTimeUnit.MONTH)
             .run { minus(dayOfWeek.toChristDayNumber(), DateTimeUnit.DAY) }
             .run { plus(6, DateTimeUnit.WEEK) }
             .run { minus(1, DateTimeUnit.DAY) }
 
-        findMemoByDateRangeUseCase(FindMemoByDateRangeUseCase.Params(ownerId, start..endInclusive))
+        findMemoByDateRangeUseCase(start..endInclusive)
     }.flatMapLatest {
         it
     }.mapLatest {
@@ -77,7 +72,6 @@ internal class CalendarViewModel(
         initialValue = persistentListOf()
     )
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     val holiday = yearAndMonth.flatMapLatest { yearAndMonth ->
         val list = IntRange(-2, 2).map {
             LocalDate(yearAndMonth.first, yearAndMonth.second, 1).plus(it, DateTimeUnit.MONTH)
