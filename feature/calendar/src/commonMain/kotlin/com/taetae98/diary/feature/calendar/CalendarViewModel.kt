@@ -12,9 +12,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapLatest
-import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.datetime.DateTimeUnit
@@ -37,8 +37,8 @@ internal class CalendarViewModel(
     private val _month = MutableStateFlow<Month?>(null)
 
     private val yearAndMonth = combine(
-        _year.mapNotNull { it },
-        _month.mapNotNull { it },
+        _year.filterNotNull(),
+        _month.filterNotNull(),
     ) { year, month ->
         year to month
     }
