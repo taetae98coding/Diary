@@ -4,12 +4,13 @@ import com.taetae98.diary.domain.entity.memo.MemoTag
 import com.taetae98.diary.domain.repository.MemoTagRepository
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.result.shouldBeSuccess
+import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
 
 class DeleteMemoTagUseCaseBddTest : BehaviorSpec({
-    val memoTagRepository = mockk<MemoTagRepository>(relaxed = true, relaxUnitFun = true)
+    val memoTagRepository = mockk<MemoTagRepository>()
     val useCase = DeleteMemoTagUseCase(memoTagRepository = memoTagRepository)
 
     Given("유효하지 않은 MemoTag가 주어졌을 때") {
@@ -34,6 +35,8 @@ class DeleteMemoTagUseCaseBddTest : BehaviorSpec({
         val memoTag = mockk<MemoTag> {
             every { isValidId() } returns true
         }
+
+        coEvery { memoTagRepository.delete(memoTag) } returns Unit
 
         When("UseCase를 호출하면") {
             val result = useCase(memoTag)

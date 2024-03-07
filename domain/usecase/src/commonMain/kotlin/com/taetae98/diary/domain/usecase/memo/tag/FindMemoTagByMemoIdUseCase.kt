@@ -1,5 +1,6 @@
 package com.taetae98.diary.domain.usecase.memo.tag
 
+import com.taetae98.diary.domain.entity.memo.MemoId
 import com.taetae98.diary.domain.entity.memo.MemoTag
 import com.taetae98.diary.domain.repository.MemoTagRepository
 import com.taetae98.diary.domain.usecase.core.FlowUseCase
@@ -11,12 +12,12 @@ import org.koin.core.annotation.Factory
 @Factory
 public class FindMemoTagByMemoIdUseCase internal constructor(
     private val memoTagRepository: MemoTagRepository,
-) : FlowUseCase<String?, List<MemoTag>>() {
-    override fun execute(params: String?): Flow<Result<List<MemoTag>>> {
-        if (params == null) return flowOf(Result.success(emptyList()))
+) : FlowUseCase<MemoId, List<MemoTag>>() {
+    override fun execute(params: MemoId): Flow<Result<List<MemoTag>>> {
+        if (!params.isValid()) return flowOf(Result.success(emptyList()))
 
         return memoTagRepository
-            .findByMemoId(params)
+            .findByMemoId(params.value)
             .map { Result.success(it) }
     }
 }

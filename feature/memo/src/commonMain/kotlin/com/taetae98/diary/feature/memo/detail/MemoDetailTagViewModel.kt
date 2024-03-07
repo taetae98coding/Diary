@@ -3,6 +3,7 @@ package com.taetae98.diary.feature.memo.detail
 import app.cash.paging.PagingData
 import app.cash.paging.cachedIn
 import app.cash.paging.map
+import com.taetae98.diary.domain.entity.memo.MemoId
 import com.taetae98.diary.domain.entity.memo.MemoTag
 import com.taetae98.diary.domain.usecase.memo.tag.DeleteMemoTagUseCase
 import com.taetae98.diary.domain.usecase.memo.tag.FindMemoTagByMemoIdUseCase
@@ -35,7 +36,7 @@ internal class MemoDetailTagViewModel(
         initialValue = "",
     )
 
-    private val memoTag = memoId.flatMapLatest { findMemoTagByMemoIdUseCase(it) }
+    private val memoTag = memoId.flatMapLatest { findMemoTagByMemoIdUseCase(MemoId(it)) }
         .mapLatest { it.getOrNull().orEmpty() }
         .stateIn(
             scope = viewModelScope,
