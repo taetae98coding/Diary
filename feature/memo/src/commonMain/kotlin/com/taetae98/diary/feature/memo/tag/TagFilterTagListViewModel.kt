@@ -3,6 +3,7 @@ package com.taetae98.diary.feature.memo.tag
 import app.cash.paging.PagingData
 import app.cash.paging.cachedIn
 import app.cash.paging.filter
+import com.taetae98.diary.domain.entity.tag.Tag
 import com.taetae98.diary.domain.usecase.tag.PageTagUseCase
 import com.taetae98.diary.domain.usecase.tag.select.FindTagInMemoUseCase
 import com.taetae98.diary.domain.usecase.tag.select.SelectTagByMemoUseCase
@@ -28,7 +29,8 @@ internal class TagFilterTagListViewModel(
     private val selectTagByMemoUseCase: SelectTagByMemoUseCase,
     private val unSelectTagByMemoUseCase: UnSelectTagByMemoUseCase,
 ) : ViewModel() {
-    private val tagInMemoList = findTagInMemoUseCase(Unit).mapLatest { it.getOrNull() }
+    private val tagInMemoList = findTagInMemoUseCase(Unit)
+        .mapLatest(Result<List<Tag>>::getOrNull)
         .mapLatest { it.orEmpty() }
 
     private val tagPagingData = pageTagUseCase(Unit).mapLatest { it.getOrNull() ?: PagingData.empty() }

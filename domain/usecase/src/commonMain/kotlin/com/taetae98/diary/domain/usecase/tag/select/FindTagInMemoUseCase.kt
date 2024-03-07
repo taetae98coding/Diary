@@ -20,7 +20,7 @@ public class FindTagInMemoUseCase internal constructor(
     private val selectTagByMemoRepository: SelectTagByMemoRepository,
 ) : FlowUseCase<Unit, List<Tag>>() {
     override fun execute(params: Unit): Flow<Result<List<Tag>>> {
-        return getAccountUseCase(Unit).map { it.getOrNull() }
+        return getAccountUseCase(Unit).map(Result<Account>::getOrNull)
             .flatMapLatest(::flatMapAccount)
     }
 

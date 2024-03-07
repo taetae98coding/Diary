@@ -1,5 +1,6 @@
 package com.taetae98.diary.feature.memo.detail
 
+import com.taetae98.diary.domain.entity.memo.Memo
 import com.taetae98.diary.domain.usecase.memo.FindMemoByIdUseCase
 import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
 import com.taetae98.diary.library.kotlin.ext.localDateNow
@@ -35,7 +36,7 @@ internal class MemoDetailViewModel(
     )
 
     private val memo = id.flatMapLatest { findMemoByIdUseCase(it) }
-        .mapLatest { it.getOrNull() }
+        .mapLatest(Result<Memo?>::getOrNull)
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.Eagerly,

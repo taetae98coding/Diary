@@ -1,6 +1,7 @@
 package com.taetae98.diary.app.worker
 
 import com.taetae98.diary.core.coroutines.CoroutinesModule
+import com.taetae98.diary.domain.entity.account.Account
 import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
 import com.taetae98.diary.domain.usecase.app.FetchDataUseCase
 import kotlinx.coroutines.CoroutineDispatcher
@@ -40,7 +41,7 @@ public class FetchDataWorker(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     private suspend fun observeAccount() {
-        getAccountUseCase(Unit).mapLatest { it.getOrNull() }
+        getAccountUseCase(Unit).mapLatest(Result<Account>::getOrNull)
             .mapLatest { it?.uid }
             .filterNotNull()
             .collectLatest(::onUidChanged)
