@@ -3,8 +3,8 @@ package com.taetae98.diary.feature.tag.memo
 import app.cash.paging.PagingData
 import app.cash.paging.cachedIn
 import com.taetae98.diary.domain.usecase.memo.DeleteMemoUseCase
-import com.taetae98.diary.domain.usecase.memo.FinishMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.PageMemoByTagIdUseCase
+import com.taetae98.diary.domain.usecase.memo.UpdateMemoFinishUseCase
 import com.taetae98.diary.domain.usecase.tag.FindTagByIdUseCase
 import com.taetae98.diary.library.paging.mapPagingLatest
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
@@ -26,7 +26,7 @@ internal class TagMemoViewModel(
     savedStateHandle: SavedStateHandle,
     private val findTagByIdUseCase: FindTagByIdUseCase,
     private val pageMemoByTagIdUseCase: PageMemoByTagIdUseCase,
-    private val finishMemoUseCase: FinishMemoUseCase,
+    private val updateMemoFinishUseCase: UpdateMemoFinishUseCase,
     private val deleteMemoUseCase: DeleteMemoUseCase,
 ) : ViewModel() {
     private val tagId = savedStateHandle.getStateFlow<String?>(TagMemoEntry.TAG_ID, null)
@@ -56,7 +56,12 @@ internal class TagMemoViewModel(
 
     private fun finish(id: String) {
         viewModelScope.launch {
-            finishMemoUseCase(id)
+            val params = UpdateMemoFinishUseCase.Params(
+                memoId = id,
+                isFinish = true,
+            )
+
+            updateMemoFinishUseCase(params)
         }
     }
 

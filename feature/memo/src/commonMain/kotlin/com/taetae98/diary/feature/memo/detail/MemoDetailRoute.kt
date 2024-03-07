@@ -11,6 +11,7 @@ internal fun MemoDetailRoute(
     modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit,
     memoDetailViewModel: MemoDetailViewModel,
+    memoDetailToolbarViewModel: MemoDetailToolbarViewModel,
     memoDetailTagViewModel: MemoDetailTagViewModel,
 ) {
     val uiState = memoDetailViewModel.uiState.collectAsStateOnLifecycle()
@@ -19,7 +20,7 @@ internal fun MemoDetailRoute(
         modifier = modifier,
         onNavigateUp = uiState.value.onUpdate,
         uiState = uiState,
-        toolbarUiState = memoDetailViewModel.toolbarUiState.collectAsStateOnLifecycle(),
+        toolbarUiState = memoDetailToolbarViewModel.uiState.collectAsStateOnLifecycle(),
         titleUiState = memoDetailViewModel.titleUiStateHolder.uiState.collectAsStateOnLifecycle(),
         descriptionUiState = memoDetailViewModel.descriptionUiStateHolder.uiState.collectAsStateOnLifecycle(),
         dateRangeUiState = memoDetailViewModel.dateRangeUiStateHolder.uiState.collectAsStateOnLifecycle(),
