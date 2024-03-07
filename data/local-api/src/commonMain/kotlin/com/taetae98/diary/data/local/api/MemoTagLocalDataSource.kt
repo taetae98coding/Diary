@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.Instant
 
 public interface MemoTagLocalDataSource {
-    public suspend fun exists(memoTag: MemoTagDto): Boolean
     public suspend fun delete(memoTag: MemoTagDto)
     public suspend fun upsert(memoTag: MemoTagDto)
     public suspend fun upsert(memoTag: List<MemoTagDto>)

@@ -39,7 +39,8 @@ internal class TagFilterTagListViewModel(
             id = it.id,
             isSelected = true,
             title = it.title,
-            onClick = ::unselectTag,
+            select = ::selectTag,
+            unselect = ::unselectTag,
         )
     }.mapLatest {
         it.toImmutableList()
@@ -60,7 +61,8 @@ internal class TagFilterTagListViewModel(
             id = it.id,
             isSelected = false,
             title = it.title,
-            onClick = ::selectTag
+            select = ::selectTag,
+            unselect = ::unselectTag,
         )
     }.cachedIn(viewModelScope)
 

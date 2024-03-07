@@ -6,17 +6,10 @@ import com.taetae98.diary.domain.usecase.core.UseCase
 import org.koin.core.annotation.Factory
 
 @Factory
-public class SwitchMemoTagUseCase internal constructor(
+public class UpsertMemoTagUseCase internal constructor(
     private val memoTagRepository: MemoTagRepository,
 ) : UseCase<MemoTag, Unit>() {
     override suspend fun execute(params: MemoTag) {
-        if (params.memoId.isEmpty()) return
-        if (params.tagId.isEmpty()) return
-
-        if (memoTagRepository.exists(params)) {
-            memoTagRepository.delete(params)
-        } else {
-            memoTagRepository.upsert(params)
-        }
+        memoTagRepository.upsert(params)
     }
 }

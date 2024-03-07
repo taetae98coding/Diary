@@ -9,13 +9,6 @@ CREATE TABLE MemoTagEntity(
     PRIMARY KEY (memoId, tagId)
 );
 
-exists:
-SELECT EXISTS (
-    SELECT *
-    FROM MemoTagEntity
-    WHERE memoId = :memoId AND tagId = :tagId
-);
-
 delete:
 DELETE FROM MemoTagEntity
 WHERE memoId = :memoId AND tagId = :tagId;

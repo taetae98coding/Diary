@@ -65,7 +65,7 @@ internal class MemoAddViewModel(
             onAdd = ::add,
             message = message.value,
             onMessageShown = ::messageShown,
-        )
+        ),
     )
 
     val toolbarUiState = _toolbarUiState.asStateFlow()
@@ -97,7 +97,8 @@ internal class MemoAddViewModel(
                 id = it.id,
                 isSelected = it.id in tagIdSet,
                 title = it.title,
-                onClick = ::switchTagSelected,
+                select = ::selectTag,
+                unselect = ::unselectTag,
             )
         }
     }.cachedIn(viewModelScope)
@@ -179,15 +180,20 @@ internal class MemoAddViewModel(
         }
     }
 
-    private fun switchTagSelected(tagId: String) {
+    private fun selectTag(tagId: String) {
         viewModelScope.launch {
             savedStateHandle[MemoAddEntry.TAG_ID_SET] = buildSet {
                 addAll(tagIdSet.value)
-                if (contains(tagId)) {
-                    remove(tagId)
-                } else {
-                    add(tagId)
-                }
+                add(tagId)
+            }
+        }
+    }
+
+    private fun unselectTag(tagId: String) {
+        viewModelScope.launch {
+            savedStateHandle[MemoAddEntry.TAG_ID_SET] = buildSet {
+                addAll(tagIdSet.value)
+                remove(tagId)
             }
         }
     }

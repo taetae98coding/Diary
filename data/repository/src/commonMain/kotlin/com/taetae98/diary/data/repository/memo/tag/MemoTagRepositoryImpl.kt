@@ -22,10 +22,6 @@ internal class MemoTagRepositoryImpl(
     @Named(CoroutinesModule.PROCESS)
     private val processScope: CoroutineScope,
 ) : MemoTagRepository {
-    override suspend fun exists(memoTag: MemoTag): Boolean {
-        return localDataSource.exists(memoTag.toDto())
-    }
-
     override suspend fun delete(memoTag: MemoTag) {
         val dto = memoTag.toDto()
 
