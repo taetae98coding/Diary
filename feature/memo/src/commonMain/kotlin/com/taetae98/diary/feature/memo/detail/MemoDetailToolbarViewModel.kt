@@ -1,5 +1,6 @@
 package com.taetae98.diary.feature.memo.detail
 
+import com.taetae98.diary.domain.entity.memo.MemoId
 import com.taetae98.diary.domain.usecase.memo.DeleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.FindMemoByIdUseCase
 import com.taetae98.diary.domain.usecase.memo.UpdateMemoFinishUseCase
@@ -71,7 +72,7 @@ internal class MemoDetailToolbarViewModel(
 
     private fun delete() {
         viewModelScope.launch {
-            deleteMemoUseCase(id.value).onSuccess {
+            deleteMemoUseCase(MemoId(id.value)).onSuccess {
                 _message.emit(MemoDetailToolbarMessage.Delete(::clearMessage))
             }
         }

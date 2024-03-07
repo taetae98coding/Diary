@@ -4,7 +4,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 public value class MemoId(public val value: String) {
-    public fun isValid(): Boolean {
-        return value.isNotEmpty()
+    public fun isInvalid(): Boolean {
+        return value.isEmpty()
     }
 }

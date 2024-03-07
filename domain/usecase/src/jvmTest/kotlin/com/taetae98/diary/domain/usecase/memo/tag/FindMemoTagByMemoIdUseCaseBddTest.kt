@@ -20,7 +20,7 @@ class FindMemoTagByMemoIdUseCaseBddTest : BehaviorSpec({
 
     Given("유효하지 않은 id가 주어졌을 때") {
         val id = MemoId("")
-            .also { it.isValid().shouldBeFalse() }
+            .also { it.isInvalid().shouldBeTrue() }
 
         When("UseCase를 호출하면") {
             val result = useCase(id)
@@ -32,7 +32,7 @@ class FindMemoTagByMemoIdUseCaseBddTest : BehaviorSpec({
     }
 
     Given("유효한 id가 주어졌을 때") {
-        val id = MemoId("valid").also { it.isValid().shouldBeTrue() }
+        val id = MemoId("valid").also { it.isInvalid().shouldBeFalse() }
 
         every { memoTagRepository.findByMemoId(id.value) } returns flowOf(emptyList())
 

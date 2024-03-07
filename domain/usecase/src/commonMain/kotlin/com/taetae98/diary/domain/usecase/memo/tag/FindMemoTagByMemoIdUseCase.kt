@@ -14,7 +14,7 @@ public class FindMemoTagByMemoIdUseCase internal constructor(
     private val memoTagRepository: MemoTagRepository,
 ) : FlowUseCase<MemoId, List<MemoTag>>() {
     override fun execute(params: MemoId): Flow<Result<List<MemoTag>>> {
-        if (!params.isValid()) return flowOf(Result.success(emptyList()))
+        if (params.isInvalid()) return flowOf(Result.success(emptyList()))
 
         return memoTagRepository
             .findByMemoId(params.value)

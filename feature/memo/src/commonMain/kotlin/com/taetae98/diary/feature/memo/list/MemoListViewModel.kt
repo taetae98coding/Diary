@@ -3,6 +3,7 @@ package com.taetae98.diary.feature.memo.list
 import app.cash.paging.PagingData
 import app.cash.paging.cachedIn
 import com.taetae98.diary.domain.entity.memo.Memo
+import com.taetae98.diary.domain.entity.memo.MemoId
 import com.taetae98.diary.domain.usecase.memo.DeleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.PageMemoBySelectTagUseCase
 import com.taetae98.diary.domain.usecase.memo.UpdateMemoFinishUseCase
@@ -85,7 +86,7 @@ internal class MemoListViewModel(
 
     private fun delete(id: String) {
         viewModelScope.launch {
-            deleteMemoUseCase(id).onSuccess {
+            deleteMemoUseCase(MemoId(id)).onSuccess {
                 val message = MemoListMessage.Delete(cancel = { it?.let(::upsert) })
                 messageFlow.emit(message)
             }

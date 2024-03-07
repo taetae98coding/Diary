@@ -1,6 +1,7 @@
 package com.taetae98.diary.data.local.impl.memo
 
 import app.cash.paging.PagingSource
+import app.cash.sqldelight.async.coroutines.awaitAsOneOrNull
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.coroutines.mapToOneOrNull
@@ -29,8 +30,12 @@ internal class MemoLocalDataSourceImpl(
         database.memoEntityQueries.updateFinished(id = id, isFinished = isFinished)
     }
 
-    override suspend fun delete(id: String) {
+    override suspend fun delete(id: String): MemoDto? {
+        val memo = database.memoEntityQueries.findById(id, ::mapToMemoDto)
+            .awaitAsOneOrNull()
+
         database.memoEntityQueries.delete(id)
+        return memo
     }
 
     override fun find(id: String): Flow<MemoDto?> {

@@ -2,6 +2,7 @@ package com.taetae98.diary.feature.tag.memo
 
 import app.cash.paging.PagingData
 import app.cash.paging.cachedIn
+import com.taetae98.diary.domain.entity.memo.MemoId
 import com.taetae98.diary.domain.usecase.memo.DeleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.PageMemoByTagIdUseCase
 import com.taetae98.diary.domain.usecase.memo.UpdateMemoFinishUseCase
@@ -67,7 +68,7 @@ internal class TagMemoViewModel(
 
     private fun delete(id: String) {
         viewModelScope.launch {
-            deleteMemoUseCase(id)
+            deleteMemoUseCase(MemoId(id))
         }
     }
 }

@@ -41,11 +41,11 @@ internal class MemoRepositoryImpl(
         runOnProcessScopeIfOwnerIdNotNull(memo) { fireStore.updateFinished(id, isFinished) }
     }
 
-    override suspend fun delete(id: String) {
-        val memo = localDataSource.find(id).firstOrNull()
-
-        localDataSource.delete(id)
+    override suspend fun delete(id: String): Memo? {
+        val memo = localDataSource.delete(id)
         runOnProcessScopeIfOwnerIdNotNull(memo) { fireStore.delete(id) }
+
+        return memo?.toDomain()
     }
 
     private fun runOnProcessScopeIfOwnerIdNotNull(memo: MemoDto?, run: suspend () -> Unit) {
