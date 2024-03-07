@@ -10,7 +10,7 @@ public class DeleteMemoTagUseCase internal constructor(
     private val memoTagRepository: MemoTagRepository,
 ) : UseCase<MemoTag, Unit>() {
     override suspend fun execute(params: MemoTag) {
-        if (!params.isValidId()) return
+        if (params.isInvalid()) return
 
         memoTagRepository.delete(params)
     }

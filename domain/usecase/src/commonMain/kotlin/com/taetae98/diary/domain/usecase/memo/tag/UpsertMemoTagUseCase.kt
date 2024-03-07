@@ -10,6 +10,8 @@ public class UpsertMemoTagUseCase internal constructor(
     private val memoTagRepository: MemoTagRepository,
 ) : UseCase<MemoTag, Unit>() {
     override suspend fun execute(params: MemoTag) {
+        if (params.isInvalid()) return
+
         memoTagRepository.upsert(params)
     }
 }

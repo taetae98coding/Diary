@@ -4,7 +4,7 @@ public data class MemoTag(
     val memoId: String,
     val tagId: String,
 ) {
-    public fun isValidId(): Boolean {
-        return memoId.isNotEmpty() && tagId.isNotEmpty()
+    public fun isInvalid(): Boolean {
+        return memoId.isEmpty() || tagId.isEmpty()
     }
 }
