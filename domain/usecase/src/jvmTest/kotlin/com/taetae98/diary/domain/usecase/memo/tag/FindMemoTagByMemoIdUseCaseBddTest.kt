@@ -23,10 +23,10 @@ class FindMemoTagByMemoIdUseCaseBddTest : BehaviorSpec({
             .also { it.isInvalid().shouldBeTrue() }
 
         When("UseCase를 호출하면") {
-            val result = useCase(id)
+            val result = useCase(id).first()
 
             Then("emptyList를 리턴한다.") {
-                result.first().shouldBeSuccess()
+                result.shouldBeSuccess()
             }
         }
     }
@@ -37,10 +37,10 @@ class FindMemoTagByMemoIdUseCaseBddTest : BehaviorSpec({
         every { memoTagRepository.findByMemoId(id.value) } returns flowOf(emptyList())
 
         When("UseCase를 호출하면") {
-            val result = useCase(id)
+            val result = useCase(id).first()
 
             Then("성공한다.") {
-                result.first().shouldBeSuccess()
+                result.shouldBeSuccess()
             }
 
             Then("findByMemoId 호출된다.") {
