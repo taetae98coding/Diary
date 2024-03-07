@@ -25,12 +25,10 @@ import com.taetae98.diary.navigation.core.memo.MemoAddEntry
 import com.taetae98.diary.ui.compose.text.TextFieldUiStateHolder
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.mapLatest
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.koin.core.annotation.Factory
 
@@ -51,22 +49,7 @@ internal class MemoAddViewModel(
 
     private val tagIdSet = savedStateHandle.getStateFlow(MemoAddEntry.TAG_ID_SET, emptySet<String>())
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    val uiState = message.mapLatest {
-        MemoDetailUiState.Add(
-            onAdd = ::add,
-            message = it,
-            onMessageShown = ::messageShown,
-        )
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-        initialValue = MemoDetailUiState.Add(
-            onAdd = ::add,
-            message = message.value,
-            onMessageShown = ::messageShown,
-        ),
-    )
+    val uiState = MemoDetailUiState.Add(onAdd = ::add)
 
     val toolbarUiState = _toolbarUiState.asStateFlow()
 

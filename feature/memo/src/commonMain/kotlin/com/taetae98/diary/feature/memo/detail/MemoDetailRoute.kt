@@ -1,7 +1,6 @@
 package com.taetae98.diary.feature.memo.detail
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import app.cash.paging.compose.collectAsLazyPagingItems
 import com.taetae98.diary.library.compose.runtime.collectAsStateOnLifecycle
@@ -14,23 +13,14 @@ internal fun MemoDetailRoute(
     memoDetailToolbarViewModel: MemoDetailToolbarViewModel,
     memoDetailTagViewModel: MemoDetailTagViewModel,
 ) {
-    val uiState = memoDetailViewModel.uiState.collectAsStateOnLifecycle()
-
     MemoDetailScreen(
         modifier = modifier,
-        onNavigateUp = uiState.value.onUpdate,
-        uiState = uiState,
+        onNavigateUp = onNavigateUp,
+        uiState = memoDetailViewModel.uiState,
         toolbarUiState = memoDetailToolbarViewModel.uiState.collectAsStateOnLifecycle(),
         titleUiState = memoDetailViewModel.titleUiStateHolder.uiState.collectAsStateOnLifecycle(),
         descriptionUiState = memoDetailViewModel.descriptionUiStateHolder.uiState.collectAsStateOnLifecycle(),
         dateRangeUiState = memoDetailViewModel.dateRangeUiStateHolder.uiState.collectAsStateOnLifecycle(),
         tagUiState = memoDetailTagViewModel.tagUiState.collectAsLazyPagingItems(),
     )
-
-    LaunchedEffect(uiState.value.message) {
-        when (uiState.value.message) {
-            MemoDetailMessage.Update, MemoDetailMessage.Delete -> onNavigateUp()
-            else -> Unit
-        }
-    }
 }

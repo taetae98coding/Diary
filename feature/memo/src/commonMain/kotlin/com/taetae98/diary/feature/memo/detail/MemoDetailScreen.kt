@@ -22,7 +22,6 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
@@ -48,7 +47,7 @@ import com.taetae98.diary.ui.entity.EntityTitle
 internal fun MemoDetailScreen(
     modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit,
-    uiState: State<MemoDetailUiState>,
+    uiState: MemoDetailUiState,
     toolbarUiState: State<MemoDetailToolbarUiState>,
     titleUiState: State<TextFieldUiState>,
     descriptionUiState: State<TextFieldUiState>,
@@ -123,36 +122,36 @@ private fun TopBar(
 
 @Composable
 private fun Message(
-    uiState: State<MemoDetailUiState>,
+    uiState: MemoDetailUiState,
     hostState: SnackbarHostState,
 ) {
-    LaunchedEffect(uiState.value.message) {
-        when (uiState.value.message) {
-            MemoDetailMessage.Add -> {
-                hostState.showSnackbar("메모 추가")
-                uiState.value.onMessageShown()
-            }
-
-            MemoDetailMessage.TitleEmpty -> {
-                hostState.showSnackbar("제목을 입력해주세요.")
-                uiState.value.onMessageShown()
-            }
-
-            else -> Unit
-        }
-    }
+//    LaunchedEffect(uiState.value.message) {
+//        when (uiState.value.message) {
+//            MemoDetailMessage.Add -> {
+//                hostState.showSnackbar("메모 추가")
+//                uiState.value.onMessageShown()
+//            }
+//
+//            MemoDetailMessage.TitleEmpty -> {
+//                hostState.showSnackbar("제목을 입력해주세요.")
+//                uiState.value.onMessageShown()
+//            }
+//
+//            else -> Unit
+//        }
+//    }
 }
 
 @Composable
 private fun FloatingButton(
     modifier: Modifier = Modifier,
-    uiState: State<MemoDetailUiState>,
+    uiState: MemoDetailUiState,
 ) {
-    when (val value = uiState.value) {
+    when (uiState) {
         is MemoDetailUiState.Add -> {
             AddFloatingButton(
                 modifier = modifier,
-                onClick = value.onAdd,
+                onClick = uiState.onAdd,
             )
         }
 

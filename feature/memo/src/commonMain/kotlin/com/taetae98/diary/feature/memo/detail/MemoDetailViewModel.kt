@@ -11,7 +11,6 @@ import com.taetae98.diary.library.viewmodel.ViewModel
 import com.taetae98.diary.navigation.core.memo.MemoDetailEntry
 import com.taetae98.diary.ui.compose.text.TextFieldUiStateHolder
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
@@ -41,23 +40,7 @@ internal class MemoDetailViewModel(
             initialValue = null,
         )
 
-    private val message = MutableStateFlow<MemoDetailMessage?>(null)
-
-    val uiState = message.mapLatest {
-        MemoDetailUiState.Detail(
-            onUpdate = ::upsert,
-            message = it,
-            onMessageShown = {},
-        )
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-        initialValue = MemoDetailUiState.Detail(
-            onUpdate = ::upsert,
-            message = null,
-            onMessageShown = {},
-        ),
-    )
+    val uiState = MemoDetailUiState.Detail(onUpdate = ::upsert)
 
     val titleUiStateHolder = TextFieldUiStateHolder(
         scope = viewModelScope,

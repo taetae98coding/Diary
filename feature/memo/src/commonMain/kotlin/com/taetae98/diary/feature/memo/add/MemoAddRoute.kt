@@ -15,7 +15,7 @@ internal fun MemoAddRoute(
     MemoDetailScreen(
         modifier = modifier,
         onNavigateUp = onNavigateUp,
-        uiState = viewModel.uiState.collectAsStateOnLifecycle(),
+        uiState = viewModel.uiState,
         toolbarUiState = viewModel.toolbarUiState.collectAsStateOnLifecycle(),
         titleUiState = viewModel.titleUiStateHolder.uiState.collectAsStateOnLifecycle(),
         descriptionUiState = viewModel.descriptionUiStateHolder.uiState.collectAsStateOnLifecycle(),
