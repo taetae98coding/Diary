@@ -1,6 +1,7 @@
 package com.taetae98.diary.feature.tag.detail
 
 import com.taetae98.diary.domain.entity.tag.Tag
+import com.taetae98.diary.domain.entity.tag.TagId
 import com.taetae98.diary.domain.usecase.tag.DeleteTagUseCase
 import com.taetae98.diary.domain.usecase.tag.FindTagByIdUseCase
 import com.taetae98.diary.domain.usecase.tag.UpsertTagUseCase
@@ -77,7 +78,7 @@ internal class TagDetailViewModel(
 
     fun delete() {
         viewModelScope.launch {
-            deleteTagUseCase(tagId.value).onSuccess {
+            deleteTagUseCase(TagId(tagId.value)).onSuccess {
                 _message.emit(TagDetailMessage.Delete)
             }
         }
