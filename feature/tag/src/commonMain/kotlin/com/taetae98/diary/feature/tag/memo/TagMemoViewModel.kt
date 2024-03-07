@@ -30,7 +30,10 @@ internal class TagMemoViewModel(
     private val updateMemoFinishUseCase: UpdateMemoFinishUseCase,
     private val deleteMemoUseCase: DeleteMemoUseCase,
 ) : ViewModel() {
-    private val tagId = savedStateHandle.getStateFlow<String?>(TagMemoEntry.TAG_ID, null)
+    private val tagId = savedStateHandle.getStateFlow<String>(
+        key = TagMemoEntry.TAG_ID,
+        initialValue = "",
+    )
 
     val title = tagId.flatMapLatest { findTagByIdUseCase(it) }
         .mapLatest { it.getOrNull() }

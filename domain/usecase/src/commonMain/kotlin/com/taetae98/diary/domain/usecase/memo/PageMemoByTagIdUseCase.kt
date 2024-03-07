@@ -3,6 +3,8 @@ package com.taetae98.diary.domain.usecase.memo
 import app.cash.paging.PagingData
 import com.taetae98.diary.domain.entity.account.Account
 import com.taetae98.diary.domain.entity.memo.Memo
+import com.taetae98.diary.domain.entity.tag.TagId
+import com.taetae98.diary.domain.exception.NoAccountException
 import com.taetae98.diary.domain.repository.MemoRepository
 import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
 import com.taetae98.diary.domain.usecase.core.FlowUseCase
@@ -19,13 +21,18 @@ import org.koin.core.annotation.Factory
 public class PageMemoByTagIdUseCase internal constructor(
     private val getAccountUseCase: GetAccountUseCase,
     private val memoRepository: MemoRepository,
-) : FlowUseCase<String?, PagingData<Memo>>() {
-    override fun execute(params: String?): Flow<Result<PagingData<Memo>>> {
-        if (params == null) return flowOf(Result.success(PagingData.empty()))
+) : FlowUseCase<TagId, PagingData<Memo>>() {
+    override fun execute(params: TagId): Flow<Result<PagingData<Memo>>> {
+        if (params.isInvalid()) return flowOf(Result.success(PagingData.empty()))
 
-        return getAccountUseCase(Unit).mapLatest(Result<Account>::getOrThrow)
-            .mapLatest { it.uid }
-            .flatMapLatest { memoRepository.page(it, params) }
+        return getAccountUseCase(Unit).mapLatest(Result<Account>::getOrNull)
+            .flatMapLatest { flatMapAccount(it, params) }
+    }
+
+    private fun flatMapAccount(account: Account?, tagId: TagId): Flow<Result<PagingData<Memo>>> {
+        if (account == null) return flowOf(Result.failure(NoAccountException()))
+
+        return memoRepository.page(account.uid, tagId.value)
             .map { Result.success(it) }
     }
 }

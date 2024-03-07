@@ -6,6 +6,7 @@ import com.taetae98.diary.domain.repository.MemoRepository
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.result.shouldBeFailure
 import io.kotest.matchers.result.shouldBeSuccess
+import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
 
@@ -39,6 +40,10 @@ class UpsertMemoUseCaseBddTest : BehaviorSpec({
 
             Then("통과한다.") {
                 result.shouldBeSuccess()
+            }
+
+            Then("upsert 호출한다.") {
+                coVerify(exactly = 1) { memoRepository.upsert(memo) }
             }
         }
     }
