@@ -3,6 +3,7 @@ package com.taetae98.diary.feature.tag.memo
 import app.cash.paging.PagingData
 import app.cash.paging.cachedIn
 import com.taetae98.diary.domain.entity.memo.MemoId
+import com.taetae98.diary.domain.entity.tag.TagId
 import com.taetae98.diary.domain.usecase.memo.DeleteMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.PageMemoByTagIdUseCase
 import com.taetae98.diary.domain.usecase.memo.UpdateMemoFinishUseCase
@@ -35,7 +36,7 @@ internal class TagMemoViewModel(
         initialValue = "",
     )
 
-    val title = tagId.flatMapLatest { findTagByIdUseCase(it) }
+    val title = tagId.flatMapLatest { findTagByIdUseCase(TagId(it)) }
         .mapLatest { it.getOrNull() }
         .mapLatest { it?.title.orEmpty() }
         .stateIn(
@@ -44,7 +45,7 @@ internal class TagMemoViewModel(
             initialValue = "",
         )
 
-    val memoPagingData = tagId.flatMapLatest { pageMemoByTagIdUseCase(it) }
+    val memoPagingData = tagId.flatMapLatest { pageMemoByTagIdUseCase(TagId(it)) }
         .mapLatest { it.getOrNull() ?: PagingData.empty() }
         .mapPagingLatest {
             SwipeMemoUiState(

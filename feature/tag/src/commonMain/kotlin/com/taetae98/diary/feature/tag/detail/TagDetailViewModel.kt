@@ -33,7 +33,7 @@ internal class TagDetailViewModel(
     )
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    private val tag = tagId.flatMapLatest { findTagByIdUseCase(it) }
+    private val tag = tagId.flatMapLatest { findTagByIdUseCase(TagId(it)) }
         .mapLatest(Result<Tag?>::getOrNull)
         .onEach(::onTagChanged)
         .stateIn(
