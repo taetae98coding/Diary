@@ -9,14 +9,14 @@ android-gradle = "8.3.0"                            # https://developer.android.
 android-material = "1.11.0"                         # https://github.com/material-components/material-components-android/releases
 androidx-core = "1.12.0"                            # https://developer.android.com/jetpack/androidx/releases/core?hl=en
 androidx-activity = "1.8.2"                         # https://developer.android.com/jetpack/androidx/releases/activity?hl=en
-androidx-credentials = "1.2.0"                      # https://developer.android.com/jetpack/androidx/releases/credentials?hl=en
+androidx-credentials = "1.2.1"                      # https://developer.android.com/jetpack/androidx/releases/credentials?hl=en
 androidx-startup = "1.1.1"                          # https://developer.android.com/jetpack/androidx/releases/startup?hl=en
 androidx-lifecycle = "2.7.0"                        # https://developer.android.com/jetpack/androidx/releases/lifecycle?hl=en
 
 compose = "1.6.0"                                   # https://github.com/JetBrains/compose-multiplatform/releases
 paging-multiplatform = "3.3.0-alpha02-0.5.1"        # https://github.com/cashapp/multiplatform-paging/releases
 stately = "2.0.6"                                   # https://github.com/touchlab/Stately/releases
-datastore = "1.1.0-beta01"                          # https://developer.android.com/jetpack/androidx/releases/datastore?hl=en
+datastore = "1.1.0-beta02"                          # https://developer.android.com/jetpack/androidx/releases/datastore?hl=en
 
 decompose = "3.0.0-alpha08"                         # https://github.com/arkivanov/Decompose/releases
 decompose-essenty = "2.0.0-alpha07"                 # https://github.com/arkivanov/Essenty/releases
@@ -24,7 +24,7 @@ decompose-essenty = "2.0.0-alpha07"                 # https://github.com/arkivan
 google-services = "4.4.1"                           # https://developers.google.com/android/guides/google-services-plugin?hl=en
 google-id = "1.1.0"                                 # https://developers.google.com/identity/android-credential-manager/releases?hl=en
 
-firebase-android = "32.7.3"                         # https://firebase.google.com/support/release-notes/android?hl=en
+firebase-android = "32.7.4"                         # https://firebase.google.com/support/release-notes/android?hl=en
 firebase-crashlytics = "2.9.9"                      # https://firebase.google.com/support/release-notes/android?hl=en
 firebase-performance = "1.4.2"                      # https://firebase.google.com/support/release-notes/android?hl=en
 firebase-multiplatform = "1.11.1"                   # https://github.com/GitLiveApp/firebase-kotlin-sdk/releases

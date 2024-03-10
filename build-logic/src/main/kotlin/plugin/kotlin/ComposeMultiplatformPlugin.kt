@@ -25,7 +25,7 @@ internal class ComposeMultiplatformPlugin : Plugin<Project> {
         }
 
         composeOptions {
-            kotlinCompilerExtensionVersion = "1.5.7"
+            kotlinCompilerExtensionVersion = "1.5.10"
         }
     }
 
