@@ -25,11 +25,13 @@ class UpsertMemoUseCaseBddTest : BehaviorSpec(
             memoRepository = memoRepository,
             memoFireStoreRepository = memoFioreStoreRepository,
         )
+        val memo = mockk<Memo>()
+        val account = mockk<Account>()
+
+        every { getAccountUseCase(Unit) } returns flowOf(Result.success(account))
 
         Given("Title이 Empty인 Memo가 주어졌을 때") {
-            val memo = mockk<Memo> {
-                every { title } returns ""
-            }
+            every { memo.title } returns ""
 
             When("UseCase를 호출하면") {
                 val result = useCase(memo)
@@ -46,13 +48,10 @@ class UpsertMemoUseCaseBddTest : BehaviorSpec(
         }
 
         Given("Title이 문자로 이루어진 Memo가 주어지고") {
-            val memo = mockk<Memo> {
-                every { title } returns "asdf"
-            }
+            every { memo.title } returns "asdf"
 
             And("isLogin false일 때") {
-                val account = mockk<Account> { every { isLogin } returns false }
-                every { getAccountUseCase(Unit) } returns flowOf(Result.success(account))
+                every { account.isLogin } returns false
 
                 When("UseCase를 호출하면") {
                     val result = useCase(memo)
@@ -74,8 +73,7 @@ class UpsertMemoUseCaseBddTest : BehaviorSpec(
             }
 
             And("isLogin true일 때") {
-                val account = mockk<Account> { every { isLogin } returns true }
-                every { getAccountUseCase(Unit) } returns flowOf(Result.success(account))
+                every { account.isLogin } returns true
 
                 When("UseCase를 호출하면") {
                     val result = useCase(memo)
