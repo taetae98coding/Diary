@@ -13,12 +13,6 @@ import org.koin.core.annotation.Factory
 internal class MemoFireStore(
     private val fireStore: FireStore,
 ) {
-    suspend fun upsert(memo: MemoDto) {
-        fireStore.collection(COLLECTION)
-            .document(memo.id)
-            .upsert(memo.toFireStore())
-    }
-
     suspend fun updateFinished(id: String, isFinished: Boolean) {
         fireStore.collection(COLLECTION)
             .document(id)
@@ -26,7 +20,7 @@ internal class MemoFireStore(
                 mapOf(
                     IS_FINISHED to isFinished,
                     UPDATE_AT to Clock.System.now().toFireStoreTimestamp(),
-                )
+                ),
             )
     }
 
@@ -37,13 +31,13 @@ internal class MemoFireStore(
                 mapOf(
                     IS_DELETED to true,
                     UPDATE_AT to Clock.System.now().toFireStoreTimestamp(),
-                )
+                ),
             )
     }
 
     suspend fun pageByUpdateAt(
         uid: String,
-        updateAt: Instant?
+        updateAt: Instant?,
     ): List<MemoDto> {
         val startAfterInstant = updateAt ?: Instant.fromEpochMilliseconds(0L)
 

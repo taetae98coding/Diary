@@ -3,7 +3,6 @@ package com.taetae98.diary.data.repository.memo
 import com.taetae98.diary.data.dto.memo.MemoDto
 import com.taetae98.diary.domain.entity.memo.Memo
 import com.taetae98.diary.library.firestore.api.FireStoreData
-import com.taetae98.diary.library.firestore.api.ext.toFireStoreTimestamp
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
@@ -34,21 +33,6 @@ internal fun MemoDto.toDomain(): Memo {
     )
 }
 
-internal fun MemoDto.toFireStore(): Map<String, Any?> {
-    return mapOf(
-        MemoFireStore.ID to id,
-        MemoFireStore.TITLE to title,
-        MemoFireStore.DESCRIPTION to description,
-        MemoFireStore.DATE_RANGE_COLOR to dateRangeColor,
-        MemoFireStore.DATE_RANGE_START to dateRange?.start?.toFireStoreTimestamp(),
-        MemoFireStore.DATE_RANGE_END to dateRange?.endInclusive?.toFireStoreTimestamp(),
-        MemoFireStore.IS_FINISHED to isFinished,
-        MemoFireStore.IS_DELETED to isDeleted,
-        MemoFireStore.OWNER_ID to ownerId,
-        MemoFireStore.UPDATE_AT to updateAt.toFireStoreTimestamp(),
-    )
-}
-
 internal fun FireStoreData.toMemo(): MemoDto {
     val dateRangeStart = getInstant(MemoFireStore.DATE_RANGE_START)?.toLocalDateTime(TimeZone.UTC)?.date
     val dateRangeEnd = getInstant(MemoFireStore.DATE_RANGE_END)?.toLocalDateTime(TimeZone.UTC)?.date
@@ -65,7 +49,7 @@ internal fun FireStoreData.toMemo(): MemoDto {
         dateRangeColor = getLong(MemoFireStore.DATE_RANGE_COLOR),
         dateRange = dateRange,
         isFinished = requireNotNull(getBoolean(MemoFireStore.IS_FINISHED)),
-        isDeleted = requireNotNull(getBoolean(MemoFireStore.IS_DELETED)),
+        isDeleted = getBoolean(MemoFireStore.IS_DELETED) ?: false,
         ownerId = getString(MemoFireStore.OWNER_ID),
         updateAt = requireNotNull(getInstant(MemoFireStore.UPDATE_AT)),
     )

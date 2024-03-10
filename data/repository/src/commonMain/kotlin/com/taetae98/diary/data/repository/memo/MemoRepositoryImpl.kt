@@ -28,10 +28,7 @@ internal class MemoRepositoryImpl(
     private val processScope: CoroutineScope,
 ) : MemoRepository {
     override suspend fun upsert(memo: Memo) {
-        val dto = memo.toDto()
-
-        localDataSource.upsert(dto)
-        runOnProcessScopeIfOwnerIdNotNull(dto) { fireStore.upsert(dto) }
+        localDataSource.upsert(memo.toDto())
     }
 
     override suspend fun updateFinish(id: String, isFinished: Boolean) {
