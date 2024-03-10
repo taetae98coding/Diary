@@ -13,16 +13,6 @@ import org.koin.core.annotation.Factory
 internal class MemoFireStore(
     private val fireStore: FireStore,
 ) {
-    suspend fun updateFinished(id: String, isFinished: Boolean) {
-        fireStore.collection(COLLECTION)
-            .document(id)
-            .update(
-                mapOf(
-                    IS_FINISHED to isFinished,
-                    UPDATE_AT to Clock.System.now().toFireStoreTimestamp(),
-                ),
-            )
-    }
 
     suspend fun delete(id: String) {
         fireStore.collection(COLLECTION)

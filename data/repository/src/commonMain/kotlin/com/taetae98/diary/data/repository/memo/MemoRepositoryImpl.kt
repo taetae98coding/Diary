@@ -32,10 +32,7 @@ internal class MemoRepositoryImpl(
     }
 
     override suspend fun updateFinish(id: String, isFinished: Boolean) {
-        val memo = localDataSource.find(id).firstOrNull()
-
         localDataSource.updateFinish(id, isFinished)
-        runOnProcessScopeIfOwnerIdNotNull(memo) { fireStore.updateFinished(id, isFinished) }
     }
 
     override suspend fun delete(id: String): Memo? {
@@ -82,15 +79,15 @@ internal class MemoRepositoryImpl(
 
     override fun page(ownerId: String?): Flow<PagingData<Memo>> {
         return createPager(
-            config = createPagingConfig(pageSize = PAGE_SIZE,),
-            pagingSourceFactory = { localDataSource.page(ownerId = ownerId) }
+            config = createPagingConfig(pageSize = PAGE_SIZE),
+            pagingSourceFactory = { localDataSource.page(ownerId = ownerId) },
         ).mapPaging(MemoDto::toDomain)
     }
 
     override fun page(ownerId: String?, tagId: String): Flow<PagingData<Memo>> {
         return createPager(
             config = createPagingConfig(pageSize = PAGE_SIZE),
-            pagingSourceFactory = { localDataSource.page(ownerId, tagId) }
+            pagingSourceFactory = { localDataSource.page(ownerId, tagId) },
         ).mapPaging(MemoDto::toDomain)
     }
 

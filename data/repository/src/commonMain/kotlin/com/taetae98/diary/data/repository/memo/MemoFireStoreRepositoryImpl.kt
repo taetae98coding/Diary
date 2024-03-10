@@ -26,6 +26,19 @@ internal class MemoFireStoreRepositoryImpl(
         }
     }
 
+    override suspend fun updateFinish(id: String, isFinish: Boolean) {
+        runOnProcessScope {
+            fireStore.collection(COLLECTION)
+                .document(id)
+                .update(
+                    mapOf(
+                        IS_FINISHED to isFinish,
+                        UPDATE_AT to Clock.System.now().toFireStoreTimestamp(),
+                    ),
+                )
+        }
+    }
+
     private fun runOnProcessScope(action: suspend () -> Unit) {
         processScope.launch {
             runCatching { action() }
