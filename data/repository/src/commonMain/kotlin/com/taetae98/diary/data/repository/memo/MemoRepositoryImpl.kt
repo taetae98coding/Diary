@@ -8,6 +8,7 @@ import com.taetae98.diary.data.local.api.MemoLocalDataSource
 import com.taetae98.diary.data.pref.api.MemoPrefDataSource
 import com.taetae98.diary.domain.entity.memo.Memo
 import com.taetae98.diary.domain.repository.MemoRepository
+import com.taetae98.diary.library.kotlin.ext.mapCollectionLatest
 import com.taetae98.diary.library.paging.mapPaging
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
@@ -57,7 +58,7 @@ internal class MemoRepositoryImpl(
 
     override fun find(ownerId: String?, dateRange: ClosedRange<LocalDate>): Flow<List<Memo>> {
         return localDataSource.find(ownerId, dateRange)
-            .map { it.map(MemoDto::toDomain) }
+            .mapCollectionLatest(MemoDto::toDomain)
     }
 
     override fun page(ownerId: String?): Flow<PagingData<Memo>> {
