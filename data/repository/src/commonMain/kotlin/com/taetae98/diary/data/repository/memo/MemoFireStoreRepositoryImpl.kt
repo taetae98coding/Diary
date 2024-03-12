@@ -13,6 +13,7 @@ import com.taetae98.diary.library.firestore.api.model.Order
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.supervisorScope
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
@@ -96,8 +97,7 @@ internal class MemoFireStoreRepositoryImpl(
 
     private fun runOnProcessScope(action: suspend () -> Unit) {
         processScope.launch {
-            runCatching { action() }
-                .onFailure { it.printStackTrace() }
+            supervisorScope { action() }
         }
     }
 

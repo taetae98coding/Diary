@@ -2,7 +2,7 @@ package com.taetae98.diary.data.repository.memo.tag
 
 import com.taetae98.diary.data.dto.memo.MemoTagDto
 import com.taetae98.diary.data.repository.memo.MemoFireStoreRepositoryImpl
-import com.taetae98.diary.data.repository.tag.TagFireStore
+import com.taetae98.diary.data.repository.tag.TagFireStoreRepositoryImpl
 import com.taetae98.diary.library.firestore.api.Document
 import com.taetae98.diary.library.firestore.api.FireStore
 import com.taetae98.diary.library.firestore.api.FireStoreData
@@ -23,7 +23,7 @@ internal class MemoTagFireStore(
     suspend fun getMemoTagList(memoId: String): List<MemoTagDto> {
         return fireStore.collection(MemoFireStoreRepositoryImpl.COLLECTION)
             .document(memoId)
-            .collection(TagFireStore.COLLECTION)
+            .collection(TagFireStoreRepositoryImpl.COLLECTION)
             .getData()
             .map(FireStoreData::toMemoTag)
     }
@@ -31,7 +31,7 @@ internal class MemoTagFireStore(
     private fun document(memoTag: MemoTagDto): Document {
         return fireStore.collection(MemoFireStoreRepositoryImpl.COLLECTION)
             .document(memoTag.memoId)
-            .collection(TagFireStore.COLLECTION)
+            .collection(TagFireStoreRepositoryImpl.COLLECTION)
             .document(memoTag.tagId)
     }
 
