@@ -1,8 +1,6 @@
 package com.taetae98.diary.feature.tag.detail
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.taetae98.diary.library.compose.runtime.collectAsStateOnLifecycle
 
@@ -10,24 +8,17 @@ import com.taetae98.diary.library.compose.runtime.collectAsStateOnLifecycle
 internal fun TagDetailRoute(
     modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit,
-    onNavigateUpToTagList: () -> Unit,
     viewModel: TagDetailViewModel,
+    toolbarViewModel: TagDetailToolbarViewModel,
 ) {
-    val message by viewModel.message.collectAsStateOnLifecycle()
-
     TagDetailScreen(
         modifier = modifier,
-        onNavigateUp = viewModel::upsert,
-        onDelete = viewModel::delete,
+        onNavigateUp = onNavigateUp,
+        uiState = viewModel.uiState,
+        message = viewModel.message.collectAsStateOnLifecycle(),
+        toolbarUiState = toolbarViewModel.uiState,
+        toolbarMessage = toolbarViewModel.message.collectAsStateOnLifecycle(),
         titleUiState = viewModel.titleUiStateHolder.uiState.collectAsStateOnLifecycle(),
         descriptionUiState = viewModel.descriptionUiStateHolder.uiState.collectAsStateOnLifecycle(),
     )
-
-    LaunchedEffect(message) {
-        when (message) {
-            is TagDetailMessage.Upsert -> onNavigateUp()
-            is TagDetailMessage.Delete -> onNavigateUpToTagList()
-            else -> Unit
-        }
-    }
 }

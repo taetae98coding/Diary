@@ -7,7 +7,7 @@ internal sealed class TagDetailMessage {
         override val messageShown: () -> Unit,
     ) : TagDetailMessage()
 
-    data class Delete(
+    data class UpsertFail(
         override val messageShown: () -> Unit,
     ) : TagDetailMessage()
 }

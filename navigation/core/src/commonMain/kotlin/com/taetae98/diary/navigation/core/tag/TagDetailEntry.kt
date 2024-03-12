@@ -9,7 +9,6 @@ import kotlinx.serialization.json.JsonPrimitive
 public class TagDetailEntry internal constructor(
     context: ComponentContext,
     public val navigateUp: () -> Unit,
-    public val navigateUpToTagList: () -> Unit,
     tagId: String,
 ) : ComponentContext by context {
     public val savedState: ImmutableMap<String, JsonElement> = persistentMapOf(

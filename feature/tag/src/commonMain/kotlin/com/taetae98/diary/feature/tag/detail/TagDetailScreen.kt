@@ -10,6 +10,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -26,7 +27,10 @@ import com.taetae98.diary.ui.entity.EntityTitle
 internal fun TagDetailScreen(
     modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit,
-    onDelete: () -> Unit,
+    uiState: TagDetailUiState,
+    message: State<TagDetailMessage?>,
+    toolbarUiState: TagDetailToolbarUiState,
+    toolbarMessage: State<TagDetailToolbarMessage?>,
     titleUiState: State<TextFieldUiState>,
     descriptionUiState: State<TextFieldUiState>,
 ) {
@@ -36,9 +40,9 @@ internal fun TagDetailScreen(
         modifier = modifier,
         topBar = {
             NavigateUpTopBar(
-                onNavigateUp = onNavigateUp,
+                onNavigateUp = uiState.onUpsert,
                 actions = {
-                    IconButton(onClick = onDelete) {
+                    IconButton(onClick = toolbarUiState.onDelete) {
                         DeleteIcon()
                     }
                 },
@@ -53,7 +57,51 @@ internal fun TagDetailScreen(
         )
     }
 
-    KBackHandler(onBack = onNavigateUp)
+    KBackHandler(onBack = uiState.onUpsert)
+
+    Message(
+        onNavigateUp = onNavigateUp,
+        state = message,
+    )
+
+    ToolbarMessage(
+        onNavigateUp = onNavigateUp,
+        state = toolbarMessage,
+    )
+}
+
+@Composable
+private fun Message(
+    onNavigateUp: () -> Unit,
+    state: State<TagDetailMessage?>,
+) {
+    LaunchedEffect(state.value) {
+        when (val message = state.value) {
+            is TagDetailMessage.Upsert, is TagDetailMessage.UpsertFail -> {
+                onNavigateUp()
+                message.messageShown()
+            }
+
+            else -> Unit
+        }
+    }
+}
+
+@Composable
+private fun ToolbarMessage(
+    onNavigateUp: () -> Unit,
+    state: State<TagDetailToolbarMessage?>,
+) {
+    LaunchedEffect(state.value) {
+        when (val message = state.value) {
+            is TagDetailToolbarMessage.Delete -> {
+                onNavigateUp()
+                message.messageShown()
+            }
+
+            else -> Unit
+        }
+    }
 }
 
 @Composable
@@ -66,7 +114,7 @@ private fun Content(
         modifier = modifier
             .padding(horizontal = 8.dp)
             .verticalScroll(state = rememberScrollState()),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         EntityTitle(
             modifier = Modifier.fillMaxWidth(),

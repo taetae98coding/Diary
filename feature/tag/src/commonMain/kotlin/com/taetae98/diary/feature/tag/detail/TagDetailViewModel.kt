@@ -2,7 +2,6 @@ package com.taetae98.diary.feature.tag.detail
 
 import com.taetae98.diary.domain.entity.tag.Tag
 import com.taetae98.diary.domain.entity.tag.TagId
-import com.taetae98.diary.domain.usecase.tag.DeleteTagUseCase
 import com.taetae98.diary.domain.usecase.tag.FindTagByIdUseCase
 import com.taetae98.diary.domain.usecase.tag.UpsertTagUseCase
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
@@ -27,7 +26,6 @@ internal class TagDetailViewModel(
     private val savedStateHandle: SavedStateHandle,
     private val findTagByIdUseCase: FindTagByIdUseCase,
     private val upsertTagUseCase: UpsertTagUseCase,
-    private val deleteTagUseCase: DeleteTagUseCase,
 ) : ViewModel() {
     private val isChanged = savedStateHandle.getStateFlow(
         key = CHANGED,
@@ -49,6 +47,8 @@ internal class TagDetailViewModel(
 
     private val _message = MutableStateFlow<TagDetailMessage?>(null)
     val message = _message.asStateFlow()
+
+    val uiState = TagDetailUiState(onUpsert = ::upsert)
 
     val titleUiStateHolder = TextFieldUiStateHolder(
         scope = viewModelScope,
@@ -79,7 +79,7 @@ internal class TagDetailViewModel(
             }
     }
 
-    fun upsert() {
+    private fun upsert() {
         if (!isChanged.value) {
             viewModelScope.launch {
                 _message.emit(TagDetailMessage.Upsert(::messageShown))
@@ -98,15 +98,7 @@ internal class TagDetailViewModel(
                 savedStateHandle[CHANGED] = false
                 _message.emit(TagDetailMessage.Upsert(::messageShown))
             }.onFailure {
-
-            }
-        }
-    }
-
-    fun delete() {
-        viewModelScope.launch {
-            deleteTagUseCase(TagId(tagId.value)).onSuccess {
-                _message.emit(TagDetailMessage.Delete(::messageShown))
+                _message.emit(TagDetailMessage.UpsertFail(::messageShown))
             }
         }
     }
