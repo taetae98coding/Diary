@@ -5,7 +5,6 @@ import com.taetae98.diary.library.firestore.api.FireStore
 import com.taetae98.diary.library.firestore.api.FireStoreData
 import com.taetae98.diary.library.firestore.api.ext.toFireStoreTimestamp
 import com.taetae98.diary.library.firestore.api.model.Order
-import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import org.koin.core.annotation.Factory
 
@@ -13,18 +12,6 @@ import org.koin.core.annotation.Factory
 internal class MemoFireStore(
     private val fireStore: FireStore,
 ) {
-
-    suspend fun delete(id: String) {
-        fireStore.collection(COLLECTION)
-            .document(id)
-            .update(
-                mapOf(
-                    IS_DELETED to true,
-                    UPDATE_AT to Clock.System.now().toFireStoreTimestamp(),
-                ),
-            )
-    }
-
     suspend fun pageByUpdateAt(
         uid: String,
         updateAt: Instant?,

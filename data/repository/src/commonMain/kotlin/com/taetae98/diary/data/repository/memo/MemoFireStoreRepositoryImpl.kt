@@ -39,6 +39,19 @@ internal class MemoFireStoreRepositoryImpl(
         }
     }
 
+    override suspend fun delete(id: String) {
+        runOnProcessScope {
+            fireStore.collection(COLLECTION)
+                .document(id)
+                .update(
+                    mapOf(
+                        IS_DELETED to true,
+                        UPDATE_AT to Clock.System.now().toFireStoreTimestamp(),
+                    ),
+                )
+        }
+    }
+
     private fun runOnProcessScope(action: suspend () -> Unit) {
         processScope.launch {
             runCatching { action() }
@@ -58,7 +71,7 @@ internal class MemoFireStoreRepositoryImpl(
             DATE_RANGE_END to dateRange?.endInclusive?.toFireStoreTimestamp(),
             IS_FINISHED to isFinished,
             OWNER_ID to ownerId,
-            UPDATE_AT to updateAt.toFireStoreTimestamp()
+            UPDATE_AT to updateAt.toFireStoreTimestamp(),
         )
     }
 

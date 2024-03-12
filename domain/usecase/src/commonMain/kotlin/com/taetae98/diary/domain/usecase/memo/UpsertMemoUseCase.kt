@@ -18,8 +18,8 @@ public class UpsertMemoUseCase internal constructor(
     override suspend fun execute(params: Memo) {
         checkTitle(params.title)
 
-        memoRepository.upsert(params)
         upsertFireStore(params)
+        memoRepository.upsert(params)
     }
 
     private suspend fun upsertFireStore(memo: Memo) {

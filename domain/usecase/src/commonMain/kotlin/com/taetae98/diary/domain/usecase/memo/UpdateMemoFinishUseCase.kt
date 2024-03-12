@@ -16,8 +16,8 @@ public class UpdateMemoFinishUseCase internal constructor(
     override suspend fun execute(params: Params) {
         if (params.isInvalid()) return
 
-        memoRepository.updateFinish(params.memoId, params.isFinish)
         updateFinishFireStore(params)
+        memoRepository.updateFinish(params.memoId, params.isFinish)
     }
 
     private suspend fun updateFinishFireStore(params: Params) {
