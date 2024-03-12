@@ -41,6 +41,7 @@ public fun TagEntryPoint(
                 onNavigateToMemoAdd = instance::onNavigateToMemoAdd,
                 onNavigateToMemoDetail = instance.navigateToMemoDetail,
                 tagMemoViewModel = instance.koinInject(instance.savedState),
+                tagMemoPagingViewModel = instance.koinInject(instance.savedState),
             )
 
             is TagDetailEntry -> TagDetailRoute(

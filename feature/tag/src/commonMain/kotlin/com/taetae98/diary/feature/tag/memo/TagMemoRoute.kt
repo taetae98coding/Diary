@@ -13,14 +13,16 @@ internal fun TagMemoRoute(
     onNavigateToMemoAdd: () -> Unit,
     onNavigateToMemoDetail: (String) -> Unit,
     tagMemoViewModel: TagMemoViewModel,
+    tagMemoPagingViewModel: TagMemoPagingViewModel,
 ) {
     TagMemoScreen(
         modifier = modifier,
         title = tagMemoViewModel.title.collectAsStateOnLifecycle(),
+        message = tagMemoViewModel.message.collectAsStateOnLifecycle(),
         onNavigateUp = onNavigateUp,
         onEdit = onNavigateToTagDetail,
         onAdd = onNavigateToMemoAdd,
         onMemo = onNavigateToMemoDetail,
-        memoItems = tagMemoViewModel.memoPagingData.collectAsLazyPagingItems(),
+        memoItems = tagMemoPagingViewModel.memoPagingData.collectAsLazyPagingItems(),
     )
 }

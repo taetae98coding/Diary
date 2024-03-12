@@ -9,6 +9,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import app.cash.paging.compose.LazyPagingItems
@@ -23,6 +24,7 @@ import com.taetae98.diary.ui.memo.compose.column.SwipeMemoColum
 internal fun TagMemoScreen(
     modifier: Modifier = Modifier,
     title: State<String>,
+    message: State<TagMemoMessage?>,
     onNavigateUp: () -> Unit,
     onEdit: () -> Unit,
     onAdd: () -> Unit,
@@ -48,6 +50,28 @@ internal fun TagMemoScreen(
             memoItems = memoItems,
             onMemo = onMemo,
         )
+    }
+
+    Message(
+        onNavigateUp = onNavigateUp,
+        state = message,
+    )
+}
+
+@Composable
+private fun Message(
+    onNavigateUp: () -> Unit,
+    state: State<TagMemoMessage?>,
+) {
+    LaunchedEffect(state.value) {
+        when (val message = state.value) {
+            is TagMemoMessage.NotFound -> {
+                onNavigateUp()
+                message.onMessageShown()
+            }
+
+            else -> Unit
+        }
     }
 }
 
