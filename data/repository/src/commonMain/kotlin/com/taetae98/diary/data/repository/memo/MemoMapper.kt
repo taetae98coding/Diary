@@ -33,24 +33,3 @@ internal fun MemoDto.toDomain(): Memo {
     )
 }
 
-internal fun FireStoreData.toMemo(): MemoDto {
-    val dateRangeStart = getInstant(MemoFireStore.DATE_RANGE_START)?.toLocalDateTime(TimeZone.UTC)?.date
-    val dateRangeEnd = getInstant(MemoFireStore.DATE_RANGE_END)?.toLocalDateTime(TimeZone.UTC)?.date
-    val dateRange = if (dateRangeStart != null && dateRangeEnd != null) {
-        dateRangeStart..dateRangeEnd
-    } else {
-        null
-    }
-
-    return MemoDto(
-        id = requireNotNull(getString(MemoFireStore.ID)),
-        title = requireNotNull(getString(MemoFireStore.TITLE)),
-        description = getString(MemoFireStore.DESCRIPTION).orEmpty(),
-        dateRangeColor = getLong(MemoFireStore.DATE_RANGE_COLOR),
-        dateRange = dateRange,
-        isFinished = requireNotNull(getBoolean(MemoFireStore.IS_FINISHED)),
-        isDeleted = getBoolean(MemoFireStore.IS_DELETED) ?: false,
-        ownerId = getString(MemoFireStore.OWNER_ID),
-        updateAt = requireNotNull(getInstant(MemoFireStore.UPDATE_AT)),
-    )
-}
