@@ -27,10 +27,7 @@ internal class TagRepositoryImpl(
     private val processScope: CoroutineScope,
 ) : TagRepository {
     override suspend fun upsert(tag: Tag) {
-        val dto = tag.toDto()
-
-        localDataSource.upsert(dto)
-        runOnProcessScopeIfOwnerIdNotNull(dto) { fireStore.upsert(dto) }
+        localDataSource.upsert(tag.toDto())
     }
 
     override fun page(ownerId: String?): Flow<PagingData<Tag>> {
