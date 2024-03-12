@@ -22,14 +22,19 @@ import org.koin.core.annotation.Factory
 
 @Factory
 internal class TagDetailViewModel(
-    savedStateHandle: SavedStateHandle,
+    private val savedStateHandle: SavedStateHandle,
     private val findTagByIdUseCase: FindTagByIdUseCase,
     private val upsertTagUseCase: UpsertTagUseCase,
     private val deleteTagUseCase: DeleteTagUseCase,
 ) : ViewModel() {
+    private val isChanged = savedStateHandle.getStateFlow(
+        key = CHANGED,
+        initialValue = false,
+    )
+
     private val tagId = savedStateHandle.getStateFlow(
         key = TagDetailEntry.ID,
-        initialValue = ""
+        initialValue = "",
     )
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -50,12 +55,14 @@ internal class TagDetailViewModel(
         key = TITLE,
         initialValue = "",
         savedStateHandle = savedStateHandle,
+        onValueChange = { savedStateHandle[CHANGED] = true },
     )
     val descriptionUiStateHolder = TextFieldUiStateHolder(
         scope = viewModelScope,
         key = DESCRIPTION,
         initialValue = "",
         savedStateHandle = savedStateHandle,
+        onValueChange = { savedStateHandle[CHANGED] = true },
     )
 
     private fun onTagChanged(tag: Tag?) {
@@ -64,13 +71,22 @@ internal class TagDetailViewModel(
     }
 
     fun upsert() {
+        if (!isChanged.value) {
+            viewModelScope.launch {
+                _message.emit(TagDetailMessage.Upsert)
+            }
+
+            return
+        }
+
         val tag = tag.value?.copy(
             title = titleUiStateHolder.getValue().value,
-            description = descriptionUiStateHolder.getValue().value
+            description = descriptionUiStateHolder.getValue().value,
         ) ?: return
 
         viewModelScope.launch {
             upsertTagUseCase(tag).onSuccess {
+                savedStateHandle[CHANGED] = false
                 _message.emit(TagDetailMessage.Upsert)
             }
         }
@@ -85,6 +101,7 @@ internal class TagDetailViewModel(
     }
 
     companion object {
+        private const val CHANGED = "changed"
         private const val TITLE = "title"
         private const val DESCRIPTION = "description"
     }

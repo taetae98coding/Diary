@@ -26,10 +26,15 @@ import org.koin.core.annotation.Factory
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
 internal class MemoDetailViewModel(
-    savedStateHandle: SavedStateHandle,
+    private val savedStateHandle: SavedStateHandle,
     private val findMemoByIdUseCase: FindMemoByIdUseCase,
     private val upsertMemoUseCase: UpsertMemoUseCase,
 ) : ViewModel() {
+    private val isChanged = savedStateHandle.getStateFlow(
+        key = CHANGED,
+        initialValue = false,
+    )
+
     private val id = savedStateHandle.getStateFlow(
         key = MemoDetailEntry.ID,
         initialValue = "",
@@ -53,6 +58,7 @@ internal class MemoDetailViewModel(
         key = TITLE,
         initialValue = "",
         savedStateHandle = savedStateHandle,
+        onValueChange = { savedStateHandle[CHANGED] = true },
     )
 
     val descriptionUiStateHolder = TextFieldUiStateHolder(
@@ -60,11 +66,13 @@ internal class MemoDetailViewModel(
         key = DESCRIPTION,
         initialValue = "",
         savedStateHandle = savedStateHandle,
+        onValueChange = { savedStateHandle[CHANGED] = true },
     )
 
     val dateRangeUiStateHolder = DateRangeUiStateHolder(
         scope = viewModelScope,
         savedStateHandle = savedStateHandle,
+        onValueChange = { savedStateHandle[CHANGED] = true },
     )
 
     init {
@@ -86,6 +94,13 @@ internal class MemoDetailViewModel(
     }
 
     private fun upsert() {
+        if (!isChanged.value) {
+            viewModelScope.launch {
+                _message.emit(MemoDetailMessage.Update(::clearMessage))
+            }
+            return
+        }
+
         val dateRangeColor = dateRangeUiStateHolder.getValue().color.takeIf { dateRangeUiStateHolder.getValue().hasDate }
         val start = dateRangeUiStateHolder.getValue().start
             .takeIf { dateRangeUiStateHolder.getValue().hasDate }
@@ -108,6 +123,7 @@ internal class MemoDetailViewModel(
 
         viewModelScope.launch {
             upsertMemoUseCase(memo).onSuccess {
+                savedStateHandle[CHANGED] = false
                 _message.emit(MemoDetailMessage.Update(::clearMessage))
             }.onFailure {
                 _message.emit(MemoDetailMessage.UpdateFail(::clearMessage))
@@ -122,6 +138,7 @@ internal class MemoDetailViewModel(
     }
 
     companion object {
+        private const val CHANGED = "changed"
         private const val TITLE = "title"
         private const val DESCRIPTION = "description"
     }

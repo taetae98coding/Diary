@@ -22,6 +22,7 @@ public class DateRangeUiStateHolder(
     initialStart: Long = localDateNow().toEpochMilliseconds(),
     initialEnd: Long = initialStart,
     private val savedStateHandle: SavedStateHandle,
+    private val onValueChange: () -> Unit = {},
 ) {
     private val hasDate = savedStateHandle.getStateFlow(
         key = hasDateKey,
@@ -47,7 +48,7 @@ public class DateRangeUiStateHolder(
         hasDate,
         color,
         start,
-        endInclusive
+        endInclusive,
     ) { hasDate, color, start, endInclusive ->
         DateRangeUiState(
             hasDate = hasDate,
@@ -71,7 +72,7 @@ public class DateRangeUiStateHolder(
             setStart = ::setStart,
             endInclusive = endInclusive.value,
             setEndInclusive = ::setEndInclusive,
-        )
+        ),
     )
 
     public fun getValue(): DateRangeUiState {
@@ -80,10 +81,12 @@ public class DateRangeUiStateHolder(
 
     public fun setHasDate(hasDate: Boolean) {
         savedStateHandle[hasDateKey] = hasDate
+        onValueChange()
     }
 
     public fun setColor(color: Long) {
         savedStateHandle[COLOR_KEY] = color
+        onValueChange()
     }
 
     public fun setStart(milliSeconds: Long) {
@@ -91,6 +94,7 @@ public class DateRangeUiStateHolder(
         if (endInclusive.value < milliSeconds) {
             savedStateHandle[endInclusiveKey] = milliSeconds
         }
+        onValueChange()
     }
 
     public fun setEndInclusive(milliSeconds: Long) {
@@ -98,6 +102,7 @@ public class DateRangeUiStateHolder(
         if (start.value > milliSeconds) {
             savedStateHandle[startKey] = milliSeconds
         }
+        onValueChange()
     }
 
     public companion object {
