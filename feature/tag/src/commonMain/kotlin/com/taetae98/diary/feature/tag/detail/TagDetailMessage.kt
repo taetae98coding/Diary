@@ -1,9 +1,13 @@
 package com.taetae98.diary.feature.tag.detail
 
 internal sealed class TagDetailMessage {
-    data object Add : TagDetailMessage()
+    abstract val messageShown: () -> Unit
 
-    data object Upsert : TagDetailMessage()
+    data class Upsert(
+        override val messageShown: () -> Unit,
+    ) : TagDetailMessage()
 
-    data object Delete : TagDetailMessage()
+    data class Delete(
+        override val messageShown: () -> Unit,
+    ) : TagDetailMessage()
 }

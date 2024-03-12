@@ -13,7 +13,8 @@ internal fun TagAddRoute(
     TagAddScreen(
         modifier = modifier,
         onNavigateUp = onNavigateUp,
-        uiState = viewModel.uiState.collectAsStateOnLifecycle(),
+        uiState = viewModel.uiState,
+        message = viewModel.message.collectAsStateOnLifecycle(),
         titleUiState = viewModel.titleUiStateHolder.uiState.collectAsStateOnLifecycle(),
         descriptionUiState = viewModel.descriptionUiStateHolder.uiState.collectAsStateOnLifecycle(),
     )

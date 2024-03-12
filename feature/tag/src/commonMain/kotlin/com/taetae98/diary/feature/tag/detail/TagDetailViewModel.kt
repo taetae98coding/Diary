@@ -13,13 +13,15 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapLatest
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.koin.core.annotation.Factory
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @Factory
 internal class TagDetailViewModel(
     private val savedStateHandle: SavedStateHandle,
@@ -37,10 +39,8 @@ internal class TagDetailViewModel(
         initialValue = "",
     )
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     private val tag = tagId.flatMapLatest { findTagByIdUseCase(TagId(it)) }
         .mapLatest(Result<Tag?>::getOrNull)
-        .onEach(::onTagChanged)
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.Eagerly,
@@ -65,15 +65,24 @@ internal class TagDetailViewModel(
         onValueChange = { savedStateHandle[CHANGED] = true },
     )
 
-    private fun onTagChanged(tag: Tag?) {
-        titleUiStateHolder.setValue(tag?.title.orEmpty())
-        descriptionUiStateHolder.setValue(tag?.description.orEmpty())
+    init {
+        viewModelScope.launch {
+            launch { collectTagAndUpdate() }
+        }
+    }
+
+    private suspend fun collectTagAndUpdate() {
+        tag.distinctUntilChangedBy { it?.id }
+            .collectLatest {
+                titleUiStateHolder.setValue(it?.title.orEmpty())
+                descriptionUiStateHolder.setValue(it?.description.orEmpty())
+            }
     }
 
     fun upsert() {
         if (!isChanged.value) {
             viewModelScope.launch {
-                _message.emit(TagDetailMessage.Upsert)
+                _message.emit(TagDetailMessage.Upsert(::messageShown))
             }
 
             return
@@ -87,7 +96,9 @@ internal class TagDetailViewModel(
         viewModelScope.launch {
             upsertTagUseCase(tag).onSuccess {
                 savedStateHandle[CHANGED] = false
-                _message.emit(TagDetailMessage.Upsert)
+                _message.emit(TagDetailMessage.Upsert(::messageShown))
+            }.onFailure {
+
             }
         }
     }
@@ -95,8 +106,14 @@ internal class TagDetailViewModel(
     fun delete() {
         viewModelScope.launch {
             deleteTagUseCase(TagId(tagId.value)).onSuccess {
-                _message.emit(TagDetailMessage.Delete)
+                _message.emit(TagDetailMessage.Delete(::messageShown))
             }
+        }
+    }
+
+    private fun messageShown() {
+        viewModelScope.launch {
+            _message.emit(null)
         }
     }
 

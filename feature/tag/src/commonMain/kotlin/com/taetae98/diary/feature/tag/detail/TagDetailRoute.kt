@@ -25,8 +25,8 @@ internal fun TagDetailRoute(
 
     LaunchedEffect(message) {
         when (message) {
-            TagDetailMessage.Upsert -> onNavigateUp()
-            TagDetailMessage.Delete -> onNavigateUpToTagList()
+            is TagDetailMessage.Upsert -> onNavigateUp()
+            is TagDetailMessage.Delete -> onNavigateUpToTagList()
             else -> Unit
         }
     }
