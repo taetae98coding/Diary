@@ -52,11 +52,11 @@ private fun ObserveCalendarState(
 ) {
     val prevSelectDateRange: MutableState<DateRange?> = remember { mutableStateOf(null) }
 
-    LaunchedEffect(state.currentYear, state.currentMonth) {
+    LaunchedEffect(state.currentYear, state.currentMonth, onYearAndMonthChanged) {
         onYearAndMonthChanged(state.currentYear, state.currentMonth)
     }
 
-    LaunchedEffect(state.selectDateRange) {
+    LaunchedEffect(state.selectDateRange, onDateSelectFinished) {
         val captureDateRange = prevSelectDateRange.value
         if (captureDateRange != null && state.selectDateRange == null) {
             onDateSelectFinished(captureDateRange.start.toEpochMilliseconds()..captureDateRange.endInclusive.toEpochMilliseconds())
