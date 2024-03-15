@@ -82,7 +82,7 @@ internal class TagFireStoreRepositoryImpl(
 
     private fun runOnProcessScope(action: suspend () -> Unit) {
         processScope.launch {
-            supervisorScope { action() }
+            runCatching { action() }
         }
     }
 
