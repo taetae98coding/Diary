@@ -2,6 +2,7 @@ package com.taetae98.diary.feature.tag.list
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Card
@@ -22,15 +23,16 @@ internal fun TagListScreen(
     modifier: Modifier = Modifier,
     onAdd: () -> Unit,
     onTagClick: (String) -> Unit,
-    tagLazyPagingItems: LazyPagingItems<TagUiState>
+    tagLazyPagingItems: LazyPagingItems<TagUiState>,
 ) {
     DiaryScaffold(
         modifier = modifier,
         topBar = { TopBar() },
-        floatingActionButton = { AddFloatingButton(onClick = onAdd) }
+        floatingActionButton = { AddFloatingButton(onClick = onAdd) },
     ) {
         Content(
-            modifier = Modifier.padding(it),
+            modifier = Modifier.padding(it)
+                .fillMaxWidth(),
             onTagClick = onTagClick,
             tagLazyPagingItems = tagLazyPagingItems,
         )
@@ -39,11 +41,11 @@ internal fun TagListScreen(
 
 @Composable
 private fun TopBar(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     TitleTopBar(
         modifier = modifier,
-        title = "태그"
+        title = "태그",
     )
 }
 
@@ -51,17 +53,17 @@ private fun TopBar(
 private fun Content(
     modifier: Modifier = Modifier,
     onTagClick: (String) -> Unit,
-    tagLazyPagingItems: LazyPagingItems<TagUiState>
+    tagLazyPagingItems: LazyPagingItems<TagUiState>,
 ) {
     LazyColumn(
         modifier = modifier,
         contentPadding = PaddingValues(4.dp),
-        verticalArrangement = Arrangement.spacedBy(2.dp)
+        verticalArrangement = Arrangement.spacedBy(2.dp),
     ) {
         items(
             count = tagLazyPagingItems.itemCount,
             key = tagLazyPagingItems.itemKey { it.id },
-            contentType = tagLazyPagingItems.itemContentType { "tag" }
+            contentType = tagLazyPagingItems.itemContentType { "tag" },
         ) {
             Tag(
                 modifier = Modifier.fillParentMaxWidth(),
@@ -81,11 +83,11 @@ private fun Tag(
 ) {
     Card(
         modifier = modifier,
-        onClick = { uiState?.id?.let(onTagClick) }
+        onClick = { uiState?.id?.let(onTagClick) },
     ) {
         Text(
             modifier = Modifier.padding(12.dp),
-            text = uiState?.title.orEmpty()
+            text = uiState?.title.orEmpty(),
         )
     }
 }

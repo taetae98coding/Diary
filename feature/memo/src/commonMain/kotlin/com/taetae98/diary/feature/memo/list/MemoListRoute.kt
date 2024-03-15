@@ -1,11 +1,13 @@
 package com.taetae98.diary.feature.memo.list
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.ui.Modifier
 import app.cash.paging.compose.collectAsLazyPagingItems
 import com.taetae98.diary.library.compose.runtime.collectAsStateOnLifecycle
 
 @Composable
+@NonRestartableComposable
 internal fun MemoListRoute(
     modifier: Modifier = Modifier,
     onNavigateToMemoAdd: () -> Unit,

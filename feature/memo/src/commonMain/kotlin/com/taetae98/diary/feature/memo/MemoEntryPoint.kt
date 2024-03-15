@@ -1,6 +1,7 @@
 package com.taetae98.diary.feature.memo
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
@@ -19,6 +20,7 @@ import com.taetae98.diary.navigation.core.memo.MemoListEntry
 import com.taetae98.diary.navigation.core.memo.MemoListTagDialogEntry
 
 @Composable
+@NonRestartableComposable
 public fun MemoEntryPoint(
     modifier: Modifier = Modifier,
     entry: MemoEntry,
