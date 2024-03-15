@@ -1,20 +1,16 @@
 package com.taetae98.diary.feature.tag.add
 
 import com.taetae98.diary.domain.entity.tag.Tag
+import com.taetae98.diary.domain.exception.TitleEmptyException
 import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
 import com.taetae98.diary.domain.usecase.tag.UpsertTagUseCase
-import com.taetae98.diary.feature.tag.detail.TagDetailMessage
-import com.taetae98.diary.feature.tag.detail.TagDetailUiState
 import com.taetae98.diary.library.uuid.getUuid
 import com.taetae98.diary.library.viewmodel.SavedStateHandle
 import com.taetae98.diary.library.viewmodel.ViewModel
 import com.taetae98.diary.ui.compose.text.TextFieldUiStateHolder
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.flow.mapLatest
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.koin.core.annotation.Factory
 
@@ -24,23 +20,11 @@ internal class TagAddViewModel(
     private val upsertTagUseCase: UpsertTagUseCase,
     private val getAccountUseCase: GetAccountUseCase,
 ) : ViewModel() {
-    private val message = MutableStateFlow<TagDetailMessage?>(null)
+    private val _message = MutableStateFlow<TagAddMessage?>(null)
+    val message = _message.asStateFlow()
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    val uiState = message.mapLatest {
-        TagDetailUiState.Add(
-            onAdd = ::upsert,
-            message = it,
-            onMessageShown = ::messageShown
-        )
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-        initialValue = TagDetailUiState.Add(
-            onAdd = ::upsert,
-            message = message.value,
-            onMessageShown = ::messageShown
-        )
+    val uiState = TagAddUiState(
+        onAdd = ::upsert,
     )
 
     val titleUiStateHolder = TextFieldUiStateHolder(
@@ -67,7 +51,11 @@ internal class TagAddViewModel(
 
             upsertTagUseCase(tag).onSuccess {
                 clearInput()
-                showAddMessage()
+                _message.emit(TagAddMessage.Add(::messageShown))
+            }.onFailure {
+                when (it) {
+                    is TitleEmptyException -> _message.emit(TagAddMessage.TitleEmpty(::messageShown))
+                }
             }
         }
     }
@@ -77,15 +65,9 @@ internal class TagAddViewModel(
         descriptionUiStateHolder.setValue("")
     }
 
-    private fun showAddMessage() {
-        viewModelScope.launch {
-            message.emit(TagDetailMessage.Add)
-        }
-    }
-
     private fun messageShown() {
         viewModelScope.launch {
-            message.emit(null)
+            _message.emit(null)
         }
     }
 

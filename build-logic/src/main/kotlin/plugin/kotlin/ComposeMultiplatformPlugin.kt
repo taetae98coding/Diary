@@ -18,13 +18,13 @@ internal class ComposeMultiplatformPlugin : Plugin<Project> {
         apply("org.jetbrains.compose")
     }
 
-    private fun applyAndroid(extension: CommonExtension<*, *, *, *, *>) = with(extension) {
+    private fun applyAndroid(extension: CommonExtension<*, *, *, *, *, *>) = with(extension) {
         buildFeatures {
             compose = true
         }
 
         composeOptions {
-            kotlinCompilerExtensionVersion = "1.5.7"
+            kotlinCompilerExtensionVersion = "1.5.10"
         }
     }
 

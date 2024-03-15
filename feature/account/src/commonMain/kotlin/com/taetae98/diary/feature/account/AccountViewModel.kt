@@ -21,7 +21,8 @@ internal class AccountViewModel(
 ) : ViewModel() {
     @OptIn(ExperimentalCoroutinesApi::class)
     private val account = getAccountUseCase(Unit)
-        .mapLatest { it.getOrNull() ?: Account.Guest }
+        .mapLatest(Result<Account>::getOrNull)
+        .mapLatest { it ?: Account.Guest }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val uiState = account.mapLatest {

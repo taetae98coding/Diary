@@ -13,6 +13,7 @@ public class TextFieldUiStateHolder(
     private val key: String = "TextFieldUiStateHolder",
     initialValue: String,
     private val savedStateHandle: SavedStateHandle,
+    private val onValueChange: () -> Unit = {},
 ) {
     private val value = savedStateHandle.getStateFlow(
         key = key,
@@ -31,7 +32,7 @@ public class TextFieldUiStateHolder(
         initialValue = TextFieldUiState(
             value = value.value,
             onValueChange = ::setValue,
-        )
+        ),
     )
 
     public fun getValue(): TextFieldUiState {
@@ -40,5 +41,6 @@ public class TextFieldUiStateHolder(
 
     public fun setValue(value: String) {
         savedStateHandle[key] = value
+        onValueChange()
     }
 }

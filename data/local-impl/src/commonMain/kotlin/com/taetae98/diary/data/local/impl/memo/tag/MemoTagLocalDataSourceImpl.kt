@@ -1,7 +1,6 @@
 package com.taetae98.diary.data.local.impl.memo.tag
 
 import app.cash.sqldelight.async.coroutines.awaitAsList
-import app.cash.sqldelight.async.coroutines.awaitAsOneOrNull
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import com.taetae98.diary.core.coroutines.CoroutinesModule
@@ -24,15 +23,6 @@ internal class MemoTagLocalDataSourceImpl(
     @Named(CoroutinesModule.DATABASE)
     private val dispatcher: CoroutineDispatcher,
 ) : MemoTagLocalDataSource {
-    override suspend fun exists(memoTag: MemoTagDto): Boolean {
-        val query = database.memoTagEntityQueries.exists(
-            memoId = memoTag.memoId,
-            tagId = memoTag.tagId,
-        )
-
-        return query.awaitAsOneOrNull() ?: false
-    }
-
     override suspend fun delete(memoTag: MemoTagDto) {
         database.memoTagEntityQueries.delete(
             memoId = memoTag.memoId,

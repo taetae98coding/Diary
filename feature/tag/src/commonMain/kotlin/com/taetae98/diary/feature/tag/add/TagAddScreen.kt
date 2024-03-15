@@ -14,8 +14,6 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.taetae98.diary.feature.tag.detail.TagDetailMessage
-import com.taetae98.diary.feature.tag.detail.TagDetailUiState
 import com.taetae98.diary.ui.compose.button.AddFloatingButton
 import com.taetae98.diary.ui.compose.scaffold.DiaryScaffold
 import com.taetae98.diary.ui.compose.text.TextFieldUiState
@@ -27,7 +25,8 @@ import com.taetae98.diary.ui.entity.EntityTitle
 internal fun TagAddScreen(
     modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit,
-    uiState: State<TagDetailUiState>,
+    uiState: TagAddUiState,
+    message: State<TagAddMessage?>,
     titleUiState: State<TextFieldUiState>,
     descriptionUiState: State<TextFieldUiState>,
 ) {
@@ -36,7 +35,12 @@ internal fun TagAddScreen(
     DiaryScaffold(
         modifier = modifier,
         topBar = { NavigateUpTopBar(onNavigateUp = onNavigateUp) },
-        floatingActionButton = { FloatingButton(uiState = uiState) },
+        floatingActionButton = {
+            AddFloatingButton(
+                modifier = modifier,
+                onClick = uiState.onAdd,
+            )
+        },
         snackbarHost = { SnackbarHost(hostState = hostState) },
     ) {
         Content(
@@ -47,36 +51,26 @@ internal fun TagAddScreen(
     }
 
     Message(
-        uiState = uiState,
+        uiState = message,
         hostState = hostState,
     )
 }
 
 @Composable
-private fun FloatingButton(
-    modifier: Modifier = Modifier,
-    uiState: State<TagDetailUiState>,
-) {
-    when (val state = uiState.value) {
-        is TagDetailUiState.Add -> {
-            AddFloatingButton(
-                modifier = modifier,
-                onClick = state.onAdd
-            )
-        }
-    }
-}
-
-@Composable
 private fun Message(
-    uiState: State<TagDetailUiState>,
+    uiState: State<TagAddMessage?>,
     hostState: SnackbarHostState,
 ) {
-    LaunchedEffect(uiState.value.message) {
-        when (uiState.value.message) {
-            TagDetailMessage.Add -> {
+    LaunchedEffect(uiState.value) {
+        when (val message = uiState.value) {
+            is TagAddMessage.Add -> {
                 hostState.showSnackbar("태그 추가")
-                uiState.value.onMessageShown()
+                message.onMessageShown()
+            }
+
+            is TagAddMessage.TitleEmpty -> {
+                hostState.showSnackbar("제목을 입력해주세요.")
+                message.onMessageShown()
             }
 
             else -> Unit
@@ -94,7 +88,7 @@ private fun Content(
         modifier = modifier
             .padding(horizontal = 8.dp)
             .verticalScroll(state = rememberScrollState()),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         EntityTitle(
             modifier = Modifier.fillMaxWidth(),

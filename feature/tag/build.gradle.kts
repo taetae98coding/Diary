@@ -8,6 +8,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation(project(":domain:exception"))
                 implementation(project(":domain:usecase"))
                 implementation(project(":navigation:core"))
 

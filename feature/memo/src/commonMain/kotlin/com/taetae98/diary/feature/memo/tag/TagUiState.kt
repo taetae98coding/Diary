@@ -4,9 +4,14 @@ internal data class TagUiState(
     val id: String,
     val isSelected: Boolean,
     val title: String,
-    private val onClick: (id: String) -> Unit,
+    private val select: (id: String) -> Unit,
+    private val unselect: (id: String) -> Unit,
 ) {
     fun onClick() {
-        onClick(id)
+        if (isSelected) {
+            unselect(id)
+        } else {
+            select(id)
+        }
     }
 }

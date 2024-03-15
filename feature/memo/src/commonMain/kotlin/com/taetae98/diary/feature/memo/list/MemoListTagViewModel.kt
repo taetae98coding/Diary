@@ -1,5 +1,6 @@
 package com.taetae98.diary.feature.memo.list
 
+import com.taetae98.diary.domain.entity.tag.Tag
 import com.taetae98.diary.domain.usecase.tag.select.FindTagInMemoUseCase
 import com.taetae98.diary.library.viewmodel.ViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -13,7 +14,8 @@ import org.koin.core.annotation.Factory
 internal class MemoListTagViewModel(
     findTagInMemoUseCase: FindTagInMemoUseCase,
 ) : ViewModel() {
-    private val tagInMemoList = findTagInMemoUseCase(Unit).mapLatest { it.getOrNull() }
+    private val tagInMemoList = findTagInMemoUseCase(Unit)
+        .mapLatest(Result<List<Tag>>::getOrNull)
         .mapLatest { it.orEmpty() }
 
     val hasTag = tagInMemoList.mapLatest { it.isNotEmpty() }

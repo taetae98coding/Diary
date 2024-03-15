@@ -12,8 +12,8 @@ public class SetHasToPageNoTagMemoUseCase internal constructor(
     private val selectTagByMemoRepository: SelectTagByMemoRepository,
 ) : UseCase<Boolean, Unit>() {
     override suspend fun execute(params: Boolean) {
-        val uid = getAccountUseCase(Unit).first().getOrNull()?.uid
+        val account = getAccountUseCase(Unit).first().getOrThrow()
 
-        selectTagByMemoRepository.setHasToPageNoTagMemo(uid, params)
+        selectTagByMemoRepository.setHasToPageNoTagMemo(account.uid, params)
     }
 }

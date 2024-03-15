@@ -3,10 +3,10 @@ package com.taetae98.diary.feature.memo.list
 import app.cash.paging.PagingData
 import app.cash.paging.cachedIn
 import com.taetae98.diary.domain.entity.memo.Memo
-import com.taetae98.diary.domain.usecase.memo.BeginMemoUseCase
+import com.taetae98.diary.domain.entity.memo.MemoId
 import com.taetae98.diary.domain.usecase.memo.DeleteMemoUseCase
-import com.taetae98.diary.domain.usecase.memo.FinishMemoUseCase
 import com.taetae98.diary.domain.usecase.memo.PageMemoBySelectTagUseCase
+import com.taetae98.diary.domain.usecase.memo.UpdateMemoFinishUseCase
 import com.taetae98.diary.domain.usecase.memo.UpsertMemoUseCase
 import com.taetae98.diary.library.paging.mapPagingLatest
 import com.taetae98.diary.library.viewmodel.ViewModel
@@ -25,8 +25,7 @@ import org.koin.core.annotation.Factory
 @Factory
 internal class MemoListViewModel(
     pageMemoBySelectTagUseCase: PageMemoBySelectTagUseCase,
-    private val finishMemoUseCase: FinishMemoUseCase,
-    private val beginMemoUseCase: BeginMemoUseCase,
+    private val updateMemoFinishUseCase: UpdateMemoFinishUseCase,
     private val deleteMemoUseCase: DeleteMemoUseCase,
     private val upsertMemoUseCase: UpsertMemoUseCase,
 ) : ViewModel() {
@@ -62,22 +61,32 @@ internal class MemoListViewModel(
 
     private fun finish(id: String) {
         viewModelScope.launch {
-            finishMemoUseCase(id).onSuccess {
-                val message = MemoListMessage.Finish(cancel = { begin(id) })
+            val param = UpdateMemoFinishUseCase.Params(
+                memoId = id,
+                isFinish = true,
+            )
+
+            updateMemoFinishUseCase(param).onSuccess {
+                val message = MemoListMessage.Finish(cancel = { notFinish(id) })
                 messageFlow.emit(message)
             }
         }
     }
 
-    private fun begin(id: String) {
+    private fun notFinish(id: String) {
         viewModelScope.launch {
-            beginMemoUseCase(id)
+            val param = UpdateMemoFinishUseCase.Params(
+                memoId = id,
+                isFinish = false,
+            )
+
+            updateMemoFinishUseCase(param)
         }
     }
 
     private fun delete(id: String) {
         viewModelScope.launch {
-            deleteMemoUseCase(id).onSuccess {
+            deleteMemoUseCase(MemoId(id)).onSuccess {
                 val message = MemoListMessage.Delete(cancel = { it?.let(::upsert) })
                 messageFlow.emit(message)
             }

@@ -5,7 +5,6 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
-import com.arkivanov.decompose.router.stack.popWhile
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.taetae98.diary.navigation.core.ext.illegalRoute
@@ -52,7 +51,6 @@ public class TagEntry internal constructor(
                 is TagDetailRoute -> TagDetailEntry(
                     context = context,
                     navigateUp = ::navigateUp,
-                    navigateUpToTagList = ::navigateUpToTagList,
                     tagId = route.id,
                 )
 
@@ -75,9 +73,5 @@ public class TagEntry internal constructor(
 
     private fun navigateUp() {
         navigation.pop()
-    }
-
-    private fun navigateUpToTagList() {
-        navigation.popWhile { it != TagListRoute }
     }
 }

@@ -3,6 +3,7 @@ package com.taetae98.diary.domain.usecase.memo
 import app.cash.paging.PagingData
 import com.taetae98.diary.domain.entity.account.Account
 import com.taetae98.diary.domain.entity.memo.Memo
+import com.taetae98.diary.domain.exception.NoAccountException
 import com.taetae98.diary.domain.repository.MemoRepository
 import com.taetae98.diary.domain.repository.SelectTagByMemoRepository
 import com.taetae98.diary.domain.usecase.account.GetAccountUseCase
@@ -13,36 +14,50 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
 public class PageMemoBySelectTagUseCase internal constructor(
     private val getAccountUseCase: GetAccountUseCase,
-    private val memoRepository: MemoRepository,
     private val findTagInMemoUseCase: FindTagInMemoUseCase,
-    private val selectTagByMemoRepository: SelectTagByMemoRepository,
     private val getHasToPageNoTagMemoUseCase: GetHasToPageNoTagMemoUseCase,
+    private val memoRepository: MemoRepository,
+    private val selectTagByMemoRepository: SelectTagByMemoRepository,
 ) : FlowUseCase<Unit, PagingData<Memo>>() {
-    override fun execute(params: Unit): Flow<PagingData<Memo>> {
-        return getAccountUseCase(Unit).mapLatest(Result<Account>::getOrThrow)
-            .mapLatest { it.uid }
+    override fun execute(params: Unit): Flow<Result<PagingData<Memo>>> {
+        return getAccountUseCase(Unit)
+            .map(Result<Account>::getOrNull)
             .flatMapLatest(::page)
     }
 
-    private fun page(uid: String?): Flow<PagingData<Memo>> {
-        return combine(
-            findTagInMemoUseCase(Unit).mapLatest { it.getOrNull().orEmpty() },
-            getHasToPageNoTagMemoUseCase(Unit).mapLatest { it.getOrNull() ?: false },
-        ) { tagList, hasToPage ->
-            if (tagList.isEmpty()) {
-                memoRepository.page(uid)
+    private fun page(account: Account?): Flow<Result<PagingData<Memo>>> {
+        if (account == null) return flowOf(Result.failure(NoAccountException()))
+
+        return combine(findTagInMemoUseCase(Unit), getHasToPageNoTagMemoUseCase(Unit)) { tagList, hasToPageNoTag ->
+            tagList to hasToPageNoTag
+        }.flatMapLatest { pair ->
+            if (pair.first.isFailure || pair.second.isFailure) {
+                flowOf(Result.failure(IllegalStateException()))
             } else {
-                selectTagByMemoRepository.page(uid, hasToPage)
+                page(
+                    account = account,
+                    isTagEmpty = pair.first.getOrNull().orEmpty().isEmpty(),
+                    hasToPageNoTag = pair.second.getOrNull() ?: false,
+                ).map {
+                    Result.success(it)
+                }
             }
-        }.flatMapLatest {
-            it
+        }
+    }
+
+    private fun page(account: Account, isTagEmpty: Boolean, hasToPageNoTag: Boolean): Flow<PagingData<Memo>> {
+        return if (isTagEmpty) {
+            memoRepository.page(account.uid)
+        } else {
+            selectTagByMemoRepository.page(account.uid, hasToPageNoTag)
         }
     }
 }

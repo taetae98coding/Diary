@@ -25,12 +25,10 @@ import com.taetae98.diary.navigation.core.memo.MemoAddEntry
 import com.taetae98.diary.ui.compose.text.TextFieldUiStateHolder
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.mapLatest
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.koin.core.annotation.Factory
 
@@ -42,7 +40,7 @@ internal class MemoAddViewModel(
     private val upsertMemoUseCase: UpsertMemoUseCase,
     private val upsertMemoTagListUseCase: UpsertMemoTagListUseCase,
 ) : ViewModel() {
-    private val message = MutableStateFlow<MemoDetailMessage?>(null)
+    private val _message = MutableStateFlow<MemoDetailMessage?>(null)
     private val _toolbarUiState = MutableStateFlow(MemoDetailToolbarUiState.Add)
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -51,23 +49,8 @@ internal class MemoAddViewModel(
 
     private val tagIdSet = savedStateHandle.getStateFlow(MemoAddEntry.TAG_ID_SET, emptySet<String>())
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    val uiState = message.mapLatest {
-        MemoDetailUiState.Add(
-            onAdd = ::add,
-            message = it,
-            onMessageShown = ::messageShown,
-        )
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-        initialValue = MemoDetailUiState.Add(
-            onAdd = ::add,
-            message = message.value,
-            onMessageShown = ::messageShown,
-        )
-    )
-
+    val uiState = MemoDetailUiState.Add(onAdd = ::add)
+    val message = _message.asStateFlow()
     val toolbarUiState = _toolbarUiState.asStateFlow()
 
     val titleUiStateHolder = TextFieldUiStateHolder(
@@ -97,7 +80,8 @@ internal class MemoAddViewModel(
                 id = it.id,
                 isSelected = it.id in tagIdSet,
                 title = it.title,
-                onClick = ::switchTagSelected,
+                select = ::selectTag,
+                unselect = ::unselectTag,
             )
         }
     }.cachedIn(viewModelScope)
@@ -154,7 +138,7 @@ internal class MemoAddViewModel(
 
     private suspend fun handleThrowable(throwable: Throwable) {
         when (throwable) {
-            is TitleEmptyException -> message.emit(MemoDetailMessage.TitleEmpty)
+            is TitleEmptyException -> _message.emit(MemoDetailMessage.TitleEmpty(::messageShown))
         }
     }
 
@@ -170,24 +154,29 @@ internal class MemoAddViewModel(
     }
 
     private suspend fun showAddMessage() {
-        message.emit(MemoDetailMessage.Add)
+        _message.emit(MemoDetailMessage.Add(::messageShown))
     }
 
     private fun messageShown() {
         viewModelScope.launch {
-            message.emit(null)
+            _message.emit(null)
         }
     }
 
-    private fun switchTagSelected(tagId: String) {
+    private fun selectTag(tagId: String) {
         viewModelScope.launch {
             savedStateHandle[MemoAddEntry.TAG_ID_SET] = buildSet {
                 addAll(tagIdSet.value)
-                if (contains(tagId)) {
-                    remove(tagId)
-                } else {
-                    add(tagId)
-                }
+                add(tagId)
+            }
+        }
+    }
+
+    private fun unselectTag(tagId: String) {
+        viewModelScope.launch {
+            savedStateHandle[MemoAddEntry.TAG_ID_SET] = buildSet {
+                addAll(tagIdSet.value)
+                remove(tagId)
             }
         }
     }
