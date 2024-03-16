@@ -55,20 +55,22 @@ kotlin {
 android {
     namespace = "${Build.NAMESPACE}.library.google.sign.impl"
 
-    buildTypes {
-        debug {
+    productFlavors {
+        maybeCreate("dev")
+        getByName("dev") {
             buildConfigField(
                 type = "String",
                 name = "GOOGLE_SERVER_CLIENT_ID",
-                value = "\"${getLocalProperty("google.debug.server.client.id")}\""
+                value = "\"${getLocalProperty("google.dev.server.client.id")}\""
             )
         }
 
-        release {
+        maybeCreate("real")
+        getByName("real") {
             buildConfigField(
                 type = "String",
                 name = "GOOGLE_SERVER_CLIENT_ID",
-                value = "\"${getLocalProperty("google.release.server.client.id")}\""
+                value = "\"${getLocalProperty("google.real.server.client.id")}\""
             )
         }
     }
@@ -85,37 +87,37 @@ buildkonfig {
 
     }
 
-    targetConfigs("debug") {
+    targetConfigs("dev") {
         create("ios") {
             buildConfigField(
                 type = FieldSpec.Type.STRING,
                 name = "GOOGLE_SERVER_CLIENT_ID",
-                value = getLocalProperty("google.debug.server.client.id"),
+                value = getLocalProperty("google.dev.server.client.id"),
                 const = true
             )
 
             buildConfigField(
                 type = FieldSpec.Type.STRING,
                 name = "GOOGLE_CLIENT_ID",
-                value = getLocalProperty("google.debug.ios.client.id"),
+                value = getLocalProperty("google.dev.ios.client.id"),
                 const = true
             )
         }
     }
 
-    targetConfigs("release") {
+    targetConfigs("real") {
         create("ios") {
             buildConfigField(
                 type = FieldSpec.Type.STRING,
                 name = "GOOGLE_SERVER_CLIENT_ID",
-                value = getLocalProperty("google.release.server.client.id"),
+                value = getLocalProperty("google.real.server.client.id"),
                 const = true
             )
 
             buildConfigField(
                 type = FieldSpec.Type.STRING,
                 name = "GOOGLE_CLIENT_ID",
-                value = getLocalProperty("google.release.ios.client.id"),
+                value = getLocalProperty("google.real.ios.client.id"),
                 const = true
             )
         }

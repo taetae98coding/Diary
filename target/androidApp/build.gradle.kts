@@ -34,14 +34,21 @@ android {
     }
 
     buildTypes {
-        debug {
+        release {
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+    }
+
+    productFlavors {
+        maybeCreate("dev")
+        getByName("dev") {
             applicationIdSuffix = ".debug"
             signingConfig = signingConfigs.getByName("debugSigning")
         }
 
-        release {
+        maybeCreate("real")
+        getByName("real") {
             signingConfig = signingConfigs.getByName("releaseSigning")
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
 }

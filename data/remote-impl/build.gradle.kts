@@ -52,32 +52,34 @@ kotlin {
 android {
     namespace = "${Build.NAMESPACE}.data.remote.impl"
 
-    buildTypes {
-        debug {
+    productFlavors {
+        maybeCreate("dev")
+        getByName("dev") {
             buildConfigField(
                 type = "String",
                 name = "OPEN_API_HOLIDAY_URL",
-                value = "\"${getLocalProperty("open.api.debug.holiday.url")}\""
+                value = "\"${getLocalProperty("open.api.dev.holiday.url")}\""
             )
 
             buildConfigField(
                 type = "String",
                 name = "OPEN_API_HOLIDAY_KEY",
-                value = "\"${getLocalProperty("open.api.debug.holiday.key")}\""
+                value = "\"${getLocalProperty("open.api.dev.holiday.key")}\""
             )
         }
 
-        release {
+        maybeCreate("real")
+        getByName("real") {
             buildConfigField(
                 type = "String",
                 name = "OPEN_API_HOLIDAY_URL",
-                value = "\"${getLocalProperty("open.api.release.holiday.url")}\""
+                value = "\"${getLocalProperty("open.api.real.holiday.url")}\""
             )
 
             buildConfigField(
                 type = "String",
                 name = "OPEN_API_HOLIDAY_KEY",
-                value = "\"${getLocalProperty("open.api.release.holiday.key")}\""
+                value = "\"${getLocalProperty("open.api.real.holiday.key")}\""
             )
         }
     }
@@ -94,37 +96,37 @@ buildkonfig {
 
     }
 
-    targetConfigs("debug") {
+    targetConfigs("dev") {
         create("nonAndroid") {
             buildConfigField(
                 type = FieldSpec.Type.STRING,
                 name = "OPEN_API_HOLIDAY_URL",
-                value = getLocalProperty("open.api.debug.holiday.url"),
+                value = getLocalProperty("open.api.dev.holiday.url"),
                 const = true
             )
 
             buildConfigField(
                 type = FieldSpec.Type.STRING,
                 name = "OPEN_API_HOLIDAY_KEY",
-                value = getLocalProperty("open.api.debug.holiday.key"),
+                value = getLocalProperty("open.api.dev.holiday.key"),
                 const = true
             )
         }
     }
 
-    targetConfigs("release") {
+    targetConfigs("real") {
         create("nonAndroid") {
             buildConfigField(
                 type = FieldSpec.Type.STRING,
                 name = "OPEN_API_HOLIDAY_URL",
-                value = getLocalProperty("open.api.release.holiday.url"),
+                value = getLocalProperty("open.api.real.holiday.url"),
                 const = true
             )
 
             buildConfigField(
                 type = FieldSpec.Type.STRING,
                 name = "OPEN_API_HOLIDAY_KEY",
-                value = getLocalProperty("open.api.release.holiday.key"),
+                value = getLocalProperty("open.api.real.holiday.key"),
                 const = true
             )
         }

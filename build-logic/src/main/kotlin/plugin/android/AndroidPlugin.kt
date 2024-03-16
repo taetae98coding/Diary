@@ -24,5 +24,19 @@ internal class AndroidPlugin : Plugin<Project> {
                 proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
             }
         }
+
+        flavorDimensions.add("diary")
+
+        productFlavors {
+            maybeCreate("dev")
+            getByName("dev") {
+                dimension = "diary"
+            }
+
+            maybeCreate("real")
+            getByName("dev") {
+                dimension = "diary"
+            }
+        }
     }
 }

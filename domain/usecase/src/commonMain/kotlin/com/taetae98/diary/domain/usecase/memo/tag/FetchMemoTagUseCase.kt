@@ -6,7 +6,7 @@ import org.koin.core.annotation.Factory
 
 @Factory
 public class FetchMemoTagUseCase internal constructor(
-    private val memoTagFireStoreRepository: MemoTagFireStoreRepository
+    private val memoTagFireStoreRepository: MemoTagFireStoreRepository,
 ) : UseCase<String, Unit>() {
     override suspend fun execute(params: String) {
         memoTagFireStoreRepository.fetch(params)
