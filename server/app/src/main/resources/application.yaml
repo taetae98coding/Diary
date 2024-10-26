@@ -1,0 +1,11 @@
+ktor:
+  deployment:
+    port: 8081
+  application:
+    modules:
+      - io.github.taetae98coding.diary.ApplicationKt.module
+
+database:
+  url: $DIARY_DATABASE_URL
+  user: $DIARY_DATABASE_USER
+  password: $DIARY_DATABASE_PASSWORD

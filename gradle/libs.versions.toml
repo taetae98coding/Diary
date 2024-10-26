@@ -1,0 +1,64 @@
+[versions]
+### core
+kotlin = "2.1.0-Beta2"                      # https://github.com/jetbrains/kotlin/releases
+agp = "8.6.1"                               # https://developer.android.com/build/releases/gradle-plugin?hl=en
+ktor = "3.0.0"                              # https://github.com/ktorio/ktor/releases
+
+### multiplatform
+compose = "1.7.0"                           # https://github.com/JetBrains/compose-multiplatform/releases
+
+### android
+android-material = "1.12.0"                 # https://github.com/material-components/material-components-android/releases
+androidx-activity = "1.9.3"                 # https://developer.android.com/jetpack/androidx/releases/activity?hl=en
+
+leakcanary = "2.14"                         # https://github.com/square/leakcanary/releases
+
+### server
+logback = "1.5.12"                          # https://github.com/qos-ch/logback/tags
+
+### plugin
+dependency-guard = "0.5.0"                  # https://github.com/dropbox/dependency-guard/releases
+spotless = "7.0.0.BETA4"                    # https://github.com/diffplug/spotless/blob/main/plugin-gradle/CHANGES.md
+module-graph = "2.7.1"                      # https://github.com/jraska/modules-graph-assert/releases
+
+[libraries]
+### android
+android-material = { group = "com.google.android.material", name = "material", version.ref = "android-material" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity" }
+
+leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakcanary" }
+
+### server
+ktor-server-core = { group = "io.ktor", name = "ktor-server-core", version.ref = "ktor" }
+ktor-server-netty = { group = "io.ktor", name = "ktor-server-netty", version.ref = "ktor" }
+ktor-server-config-yaml = { group = "io.ktor", name = "ktor-server-config-yaml", version.ref = "ktor" }
+
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+
+[plugins]
+### core
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+
+### multiplatform
+compose = { id = "org.jetbrains.compose", version.ref = "compose" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
+### android
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+
+### server
+ktor-server = { id = "io.ktor.plugin", version.ref = "ktor" }
+
+### plugin
+dependency-guard = { id = "com.dropbox.dependency-guard", version.ref = "dependency-guard" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+module-graph = { id = "com.jraska.module.graph.assertion", version.ref = "module-graph" }
+
+[bundles]
+ktor-server = [
+    "ktor-server-netty",
+    "ktor-server-config-yaml"
+]
