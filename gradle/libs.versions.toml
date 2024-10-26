@@ -1,0 +1,43 @@
+[versions]
+### core
+kotlin = "2.1.0-Beta2"                      # https://github.com/jetbrains/kotlin/releases
+agp = "8.6.1"                               # https://developer.android.com/build/releases/gradle-plugin?hl=en
+
+### compose multiplatform
+compose = "1.7.0"                           # https://github.com/JetBrains/compose-multiplatform/releases
+
+
+### android
+android-material = "1.12.0"                 # https://github.com/material-components/material-components-android/releases
+androidx-activity = "1.9.3"                 # https://developer.android.com/jetpack/androidx/releases/activity?hl=en
+
+leakcanary = "2.14"                         # https://github.com/square/leakcanary/releases
+
+### plugin
+dependency-guard = "0.5.0"                  # https://github.com/dropbox/dependency-guard/releases
+
+
+[libraries]
+### android
+android-material = { group = "com.google.android.material", name = "material", version.ref = "android-material" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity" }
+
+leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakcanary" }
+
+[plugins]
+### core
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+
+### compose multiplatform
+compose = { id = "org.jetbrains.compose", version.ref = "compose" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
+### android
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+
+### plugin
+dependency-guard = { id = "com.dropbox.dependency-guard", version.ref = "dependency-guard" }
+
