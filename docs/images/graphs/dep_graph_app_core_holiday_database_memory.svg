@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="298pt" height="188pt" viewBox="0 0 298.02 188">
+    <g class="graph">
+        <path fill="#fff" d="M0 188V0h298.02v188z"/>
+        <g class="node" transform="translate(4 184)">
+            <ellipse cx="145.01" cy="-162" fill="none" stroke="#000" rx="145.01" ry="18"/>
+            <text x="145.01" y="-156.95" font-family="Times,serif" font-size="14" text-anchor="middle">:app:core:holiday-database-memory</text>
+        </g>
+        <g class="node" transform="translate(4 184)">
+            <ellipse cx="145.01" cy="-90" fill="none" stroke="#000" rx="110.21" ry="18"/>
+            <text x="145.01" y="-84.95" font-family="Times,serif" font-size="14" text-anchor="middle">:app:core:holiday-database</text>
+        </g>
+        <g stroke="red" stroke-width="2" class="edge">
+            <path fill="none" d="M149.01 40.3v24.16"/>
+            <path fill="red" d="m152.51 62.87-3.5 10-3.5-10z"/>
+        </g>
+        <g class="node" transform="translate(4 184)">
+            <ellipse cx="145.01" cy="-18" fill="none" stroke="#000" rx="71.31" ry="18"/>
+            <text x="145.01" y="-12.95" font-family="Times,serif" font-size="14" text-anchor="middle">:app:core:model</text>
+        </g>
+        <g stroke="red" stroke-width="2" class="edge">
+            <path fill="none" d="M149.01 112.3v24.16"/>
+            <path fill="red" d="m152.51 134.87-3.5 10-3.5-10z"/>
+        </g>
+    </g>
+</svg>

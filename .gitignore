@@ -1,0 +1,14 @@
+**/.gradle
+**/.idea
+**/.kotlin
+
+**/local.properties
+
+**/build
+
+**/google-services.json
+**/GoogleService-Info.plist
+
+**/xcuserdata
+**/dev.xcconfig
+**/real.xcconfig

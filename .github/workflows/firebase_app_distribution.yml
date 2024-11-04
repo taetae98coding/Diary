@@ -1,0 +1,190 @@
+name: Firebase App Distribution
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  Android-Distribution:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: CI setup
+        uses: './.github/actions/ci-setup'
+
+      - name: Set local.properties
+        run: |
+          echo diary.dev.api.base.url=${{ secrets.DIARY_DEV_API_BASE_URL }} >> local.properties
+          echo diary.real.api.base.url=${{ secrets.DIARY_REAL_API_BASE_URL }} >> local.properties
+          echo holiday.dev.api.url=${{ secrets.HOLIDAY_DEV_API_URL }} >> local.properties
+          echo holiday.dev.api.key=${{ secrets.HOLIDAY_DEV_API_KEY }} >> local.properties
+          echo holiday.real.api.url=${{ secrets.HOLIDAY_REAL_API_URL }} >> local.properties
+          echo holiday.real.api.key=${{ secrets.HOLIDAY_REAL_API_KEY }} >> local.properties
+          echo android.dev.store.password=${{ secrets.ANDROID_DEV_STORE_PASSWORD }} >> local.properties
+          echo android.dev.key.alias=${{ secrets.ANDROID_DEV_KEY_ALIAS }} >> local.properties
+          echo android.dev.key.password=${{ secrets.ANDROID_DEV_KEY_PASSWORD }} >> local.properties
+          echo android.real.store.password=${{ secrets.ANDROID_REAL_STORE_PASSWORD }} >> local.properties
+          echo android.real.key.alias=${{ secrets.ANDROID_REAL_KEY_ALIAS }} >> local.properties
+          echo android.real.key.password=${{ secrets.ANDROID_REAL_KEY_PASSWORD }} >> local.properties
+
+      - name: Set Android google-services.json
+        run: |
+          echo '${{ secrets.ANDROID_DEV_GOOGLE_SERVICES_JSON }}' >> app/platform/android/src/dev/google-services.json
+          echo '${{ secrets.ANDROID_REAL_GOOGLE_SERVICES_JSON }}' >> app/platform/android/src/real/google-services.json
+
+      - name: Set Apple GoogleService-Info.plist
+        run: |
+          echo '${{ secrets.APPLE_DEV_DEBUG_GOOGLE_SERVICE_INFO_PLIST }}' >> Diary/Secret/DevDebug/GoogleService-Info.plist
+          echo '${{ secrets.APPLE_DEV_RELEASE_GOOGLE_SERVICE_INFO_PLIST }}' >> Diary/Secret/DevRelease/GoogleService-Info.plist
+          echo '${{ secrets.APPLE_REAL_DEBUG_GOOGLE_SERVICE_INFO_PLIST }}' >> Diary/Secret/RealDebug/GoogleService-Info.plist
+          echo '${{ secrets.APPLE_REAL_RELEASE_GOOGLE_SERVICE_INFO_PLIST }}' >> Diary/Secret/RealRelease/GoogleService-Info.plist
+
+      - name: Build APK
+        run: ./gradlew :app:platform:android:assembleRealRelease
+
+      - name: Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{ secrets.FIREBASE_ANDROID_REAL_RELEASE_APP_ID }}
+          serviceCredentialsFileContent: ${{ secrets.FIREBASE_APP_DISTRIBUTION_KEY }}
+          groups: Developer,Android
+          file: app/platform/android/build/outputs/apk/real/release/android-real-release.apk
+          releaseNotesFile: CHANGELOG.md
+
+  iOS-Build:
+    runs-on: macos-15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: CI setup
+        uses: './.github/actions/ci-setup'
+
+      - name: Set local.properties
+        run: |
+          echo diary.dev.api.base.url=${{ secrets.DIARY_DEV_API_BASE_URL }} >> local.properties
+          echo diary.real.api.base.url=${{ secrets.DIARY_REAL_API_BASE_URL }} >> local.properties
+          echo holiday.dev.api.url=${{ secrets.HOLIDAY_DEV_API_URL }} >> local.properties
+          echo holiday.dev.api.key=${{ secrets.HOLIDAY_DEV_API_KEY }} >> local.properties
+          echo holiday.real.api.url=${{ secrets.HOLIDAY_REAL_API_URL }} >> local.properties
+          echo holiday.real.api.key=${{ secrets.HOLIDAY_REAL_API_KEY }} >> local.properties
+          echo android.dev.store.password=${{ secrets.ANDROID_DEV_STORE_PASSWORD }} >> local.properties
+          echo android.dev.key.alias=${{ secrets.ANDROID_DEV_KEY_ALIAS }} >> local.properties
+          echo android.dev.key.password=${{ secrets.ANDROID_DEV_KEY_PASSWORD }} >> local.properties
+          echo android.real.store.password=${{ secrets.ANDROID_REAL_STORE_PASSWORD }} >> local.properties
+          echo android.real.key.alias=${{ secrets.ANDROID_REAL_KEY_ALIAS }} >> local.properties
+          echo android.real.key.password=${{ secrets.ANDROID_REAL_KEY_PASSWORD }} >> local.properties
+
+      - name: Set Android google-services.json
+        run: |
+          echo '${{ secrets.ANDROID_DEV_GOOGLE_SERVICES_JSON }}' >> app/platform/android/src/dev/google-services.json
+          echo '${{ secrets.ANDROID_REAL_GOOGLE_SERVICES_JSON }}' >> app/platform/android/src/real/google-services.json
+
+      - name: Set Apple GoogleService-Info.plist
+        run: |
+          echo '${{ secrets.APPLE_DEV_DEBUG_GOOGLE_SERVICE_INFO_PLIST }}' >> Diary/Secret/DevDebug/GoogleService-Info.plist
+          echo '${{ secrets.APPLE_DEV_RELEASE_GOOGLE_SERVICE_INFO_PLIST }}' >> Diary/Secret/DevRelease/GoogleService-Info.plist
+          echo '${{ secrets.APPLE_REAL_DEBUG_GOOGLE_SERVICE_INFO_PLIST }}' >> Diary/Secret/RealDebug/GoogleService-Info.plist
+          echo '${{ secrets.APPLE_REAL_RELEASE_GOOGLE_SERVICE_INFO_PLIST }}' >> Diary/Secret/RealRelease/GoogleService-Info.plist
+
+      - name: Install the Apple certificate and provisioning profile
+        env:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.APPLE_DISTRIBUTION_CERTIFICATE }}
+          P12_PASSWORD: ${{ secrets.APPLE_DISTRIBUTION_CERTIFICATE_PASSWORD }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.APPLE_DISTRIBUTION_PROFILE }}
+          KEYCHAIN_PASSWORD: ${{ secrets.APPLE_DISTRIBUTION_TEMPORARY_KEYCHAIN_PASSWORD }}
+        run: |
+          # create variables
+          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+          PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+
+          # import certificate and provisioning profile from secrets
+          echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+          echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode -o $PP_PATH
+
+          # create temporary keychain
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+
+          # import certificate to keychain
+          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security list-keychain -d user -s $KEYCHAIN_PATH
+
+          # apply provisioning profile
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+
+      - name: Archive xcarchive
+        run: xcodebuild -project Diary/Diary.xcodeproj -scheme CI archive -archivePath Diary/build/Diary.xcarchive -allowProvisioningUpdates
+
+      - name: Export ipa
+        run: xcodebuild -exportArchive -archivePath Diary/build/Diary.xcarchive -exportPath Diary/build -exportOptionsPlist Diary/ExportOptions.plist -allowProvisioningUpdates
+
+      - name: Upload ipa
+        uses: actions/upload-artifact@v4
+        with:
+          name: Diary.ipa
+          path: Diary/build/Apps/Diary.ipa
+
+  iOS-Distribution:
+    needs: [iOS-Build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: CI setup
+        uses: './.github/actions/ci-setup'
+
+      - name: Set local.properties
+        run: |
+          echo diary.dev.api.base.url=${{ secrets.DIARY_DEV_API_BASE_URL }} >> local.properties
+          echo diary.real.api.base.url=${{ secrets.DIARY_REAL_API_BASE_URL }} >> local.properties
+          echo holiday.dev.api.url=${{ secrets.HOLIDAY_DEV_API_URL }} >> local.properties
+          echo holiday.dev.api.key=${{ secrets.HOLIDAY_DEV_API_KEY }} >> local.properties
+          echo holiday.real.api.url=${{ secrets.HOLIDAY_REAL_API_URL }} >> local.properties
+          echo holiday.real.api.key=${{ secrets.HOLIDAY_REAL_API_KEY }} >> local.properties
+          echo android.dev.store.password=${{ secrets.ANDROID_DEV_STORE_PASSWORD }} >> local.properties
+          echo android.dev.key.alias=${{ secrets.ANDROID_DEV_KEY_ALIAS }} >> local.properties
+          echo android.dev.key.password=${{ secrets.ANDROID_DEV_KEY_PASSWORD }} >> local.properties
+          echo android.real.store.password=${{ secrets.ANDROID_REAL_STORE_PASSWORD }} >> local.properties
+          echo android.real.key.alias=${{ secrets.ANDROID_REAL_KEY_ALIAS }} >> local.properties
+          echo android.real.key.password=${{ secrets.ANDROID_REAL_KEY_PASSWORD }} >> local.properties
+
+      - name: Set Android google-services.json
+        run: |
+          echo '${{ secrets.ANDROID_DEV_GOOGLE_SERVICES_JSON }}' >> app/platform/android/src/dev/google-services.json
+          echo '${{ secrets.ANDROID_REAL_GOOGLE_SERVICES_JSON }}' >> app/platform/android/src/real/google-services.json
+
+      - name: Set Apple GoogleService-Info.plist
+        run: |
+          echo '${{ secrets.APPLE_DEV_DEBUG_GOOGLE_SERVICE_INFO_PLIST }}' >> Diary/Secret/DevDebug/GoogleService-Info.plist
+          echo '${{ secrets.APPLE_DEV_RELEASE_GOOGLE_SERVICE_INFO_PLIST }}' >> Diary/Secret/DevRelease/GoogleService-Info.plist
+          echo '${{ secrets.APPLE_REAL_DEBUG_GOOGLE_SERVICE_INFO_PLIST }}' >> Diary/Secret/RealDebug/GoogleService-Info.plist
+          echo '${{ secrets.APPLE_REAL_RELEASE_GOOGLE_SERVICE_INFO_PLIST }}' >> Diary/Secret/RealRelease/GoogleService-Info.plist
+
+      - name: Download ipa
+        uses: actions/download-artifact@v4
+        with:
+          name: Diary.ipa
+
+      - name: Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{ secrets.FIREBASE_IOS_REAL_RELEASE_APP_ID }}
+          serviceCredentialsFileContent: ${{ secrets.FIREBASE_APP_DISTRIBUTION_KEY }}
+          groups: Developer,Apple
+          file: Diary.ipa
+          releaseNotesFile: CHANGELOG.md
+
+      - name: Delete temp ipa
+        uses: geekyeggo/delete-artifact@v5
+        with:
+          name: Diary.ipa

@@ -1,0 +1,13 @@
+root = true
+
+[{*.kt,*.kts}]
+max_line_length = 300
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+ij_kotlin_imports_layout = unset
+ij_kotlin_allow_trailing_comma = true
+ij_kotlin_allow_trailing_comma_on_call_site = true
+
+ktlint_experimental = disabled
+ktlint_standard_function-signature = disabled

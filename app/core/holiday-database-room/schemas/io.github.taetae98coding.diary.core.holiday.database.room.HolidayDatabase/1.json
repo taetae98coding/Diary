@@ -1,0 +1,48 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "744af569b9a8a02218a9a3d1ebfee7c8",
+    "entities": [
+      {
+        "tableName": "HolidayEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL DEFAULT '', `start` TEXT NOT NULL DEFAULT '1900-01-01', `endInclusive` TEXT NOT NULL DEFAULT '1900-01-01', PRIMARY KEY(`name`, `start`, `endInclusive`))",
+        "fields": [
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "start",
+            "columnName": "start",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'1900-01-01'"
+          },
+          {
+            "fieldPath": "endInclusive",
+            "columnName": "endInclusive",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'1900-01-01'"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "name",
+            "start",
+            "endInclusive"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '744af569b9a8a02218a9a3d1ebfee7c8')"
+    ]
+  }
+}

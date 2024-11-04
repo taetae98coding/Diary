@@ -1,0 +1,18 @@
+package io.github.taetae98coding.diary.core.resources.icon
+
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Verified
+import androidx.compose.material3.Icon
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+
+@Composable
+public fun FinishIcon(
+    modifier: Modifier = Modifier,
+) {
+    Icon(
+        modifier = modifier,
+        imageVector = Icons.Rounded.Verified,
+        contentDescription = null,
+    )
+}

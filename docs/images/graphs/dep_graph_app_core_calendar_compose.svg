@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="473pt" height="188pt" viewBox="0 0 473.42 188">
+    <g class="graph">
+        <path fill="#fff" d="M0 188V0h473.42v188z"/>
+        <g class="node" transform="translate(4 184)">
+            <ellipse cx="285.57" cy="-162" fill="none" stroke="#000" rx="115.33" ry="18"/>
+            <text x="285.57" y="-156.95" font-family="Times,serif" font-size="14" text-anchor="middle">:app:core:calendar-compose</text>
+        </g>
+        <g class="node" transform="translate(4 184)">
+            <ellipse cx="82.57" cy="-18" fill="none" stroke="#000" rx="82.57" ry="18"/>
+            <text x="82.57" y="-12.95" font-family="Times,serif" font-size="14" text-anchor="middle">:app:core:resources</text>
+        </g>
+        <g stroke="#000" class="edge">
+            <path fill="none" d="M199.14 33.54C169.28 41.09 138 54 115.57 76c-16.24 15.93-23.39 41.04-26.53 60.53"/>
+            <path d="m92.52 136.86-4.77 9.45-2.17-10.37z"/>
+        </g>
+        <g class="node" transform="translate(4 184)">
+            <ellipse cx="221.57" cy="-90" fill="none" stroke="#000" rx="101" ry="18"/>
+            <text x="221.57" y="-84.95" font-family="Times,serif" font-size="14" text-anchor="middle">:app:core:design-system</text>
+        </g>
+        <g stroke="red" stroke-width="2" class="edge">
+            <path fill="none" d="M273.75 40.3c-7.52 8.23-16.65 18.22-24.94 27.28"/>
+            <path fill="red" d="m252.58 68.64-9.33 5.02 4.17-9.74z"/>
+        </g>
+        <g class="node" transform="translate(4 184)">
+            <ellipse cx="242.57" cy="-18" fill="none" stroke="#000" rx="59.54" ry="18"/>
+            <text x="242.57" y="-12.95" font-family="Times,serif" font-size="14" text-anchor="middle">:library:color</text>
+        </g>
+        <g stroke="#000" class="edge">
+            <path fill="none" d="M309.91 39.92c9.77 9.47 20.46 22.16 25.66 36.08 5.6 14.99 7.91 22.09 0 36-8.82 15.52-24.18 26.97-39.68 35.18"/>
+            <path d="m297.63 150.22-10.52 1.23 7.46-7.52z"/>
+        </g>
+        <g class="node" transform="translate(4 184)">
+            <ellipse cx="392.57" cy="-18" fill="none" stroke="#000" rx="72.85" ry="18"/>
+            <text x="392.57" y="-12.95" font-family="Times,serif" font-size="14" text-anchor="middle">:library:datetime</text>
+        </g>
+        <g stroke="#000" class="edge">
+            <path fill="none" d="M314.13 39.85c12.62 9.54 27.59 22.32 38.44 36.15 14.54 18.53 26.09 42.63 33.71 61.08"/>
+            <path d="m389.51 135.75.43 10.58-6.94-8z"/>
+        </g>
+        <g stroke="red" stroke-width="2" class="edge">
+            <path fill="none" d="m192.98 111.41-64.41 32.44"/>
+            <path fill="red" d="m131.69 146.2-10.51 1.37 7.36-7.62z"/>
+        </g>
+        <g stroke="#000" class="edge">
+            <path fill="none" d="M230.76 112.3c2.24 7.46 4.92 16.38 7.42 24.73"/>
+            <path d="m241.48 135.86-.47 10.59-6.23-8.58z"/>
+        </g>
+        <g stroke="#000" class="edge">
+            <path fill="none" d="M264.8 111.06c25.22 10.32 58.13 23.79 84.74 34.69"/>
+            <path d="m350.82 142.49 7.93 7.03-10.58-.55z"/>
+        </g>
+    </g>
+</svg>

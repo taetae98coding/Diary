@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="336" height="44pt" viewBox="0 0 251.96 44">
+    <g class="graph">
+        <path fill="#fff" d="M0 44V0h251.96v44z"/>
+        <g class="node" transform="translate(4 40)">
+            <ellipse cx="121.98" cy="-18" fill="none" stroke="#000" rx="121.98" ry="18"/>
+            <text x="121.98" y="-12.95" font-family="Times,serif" font-size="14" text-anchor="middle">:app:core:account-preferences</text>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="44pt" viewBox="0 0 180.31 44">
+    <g class="graph">
+        <path fill="#fff" d="M0 44V0h180.31v44z"/>
+        <g class="node" transform="translate(4 40)">
+            <ellipse cx="86.15" cy="-18" fill="none" stroke="#000" rx="86.15" ry="18"/>
+            <text x="86.15" y="-12.95" font-family="Times,serif" font-size="14" text-anchor="middle">:app:core:coroutines</text>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,184 @@
+[versions]
+### core
+kotlin = "2.0.21"                           # https://github.com/jetbrains/kotlin/releases
+agp = "8.6.1"                               # https://developer.android.com/build/releases/gradle-plugin?hl=en
+ktor = "3.0.1"                              # https://github.com/ktorio/ktor/releases
+ksp = "2.0.21-1.0.26"                       # https://github.com/google/ksp/releases
+
+kotlinx-serialization = "1.7.3"             # https://github.com/Kotlin/kotlinx.serialization/releases
+kotlinx-coroutines = "1.9.0"                # https://github.com/Kotlin/kotlinx.coroutines/releases
+kotlinx-datetime = "0.6.1"                  # https://github.com/Kotlin/kotlinx-datetime/releases
+
+### multiplatform
+compose = "1.7.0"                           # https://github.com/JetBrains/compose-multiplatform/releases
+compose-material3-adaptive = "1.0.0"
+navigation = "2.8.0-alpha10"
+lifecycle = "2.8.3"
+androidx-lifecycle = "2.8.5"
+
+compose-markdown = "0.27.0"                 # https://github.com/mikepenz/multiplatform-markdown-renderer/releases
+
+koin = "4.0.0"                              # https://github.com/InsertKoinIO/koin/releases
+koin-annotations = "2.0.0-Beta1"            # https://github.com/InsertKoinIO/koin-annotations/releases
+datastore = "1.1.1"                         # https://developer.android.com/jetpack/androidx/releases/datastore?hl=en
+room = "2.7.0-alpha11"                      # https://developer.android.com/jetpack/androidx/releases/room?hl=en
+sqlite = "2.5.0-alpha11"                    # https://developer.android.com/jetpack/androidx/releases/sqlite?hl=en
+
+### android
+android-material = "1.12.0"                 # https://github.com/material-components/material-components-android/releases
+androidx-activity = "1.9.3"                 # https://developer.android.com/jetpack/androidx/releases/activity?hl=en
+androidx-startup = "1.2.0"                  # https://developer.android.com/jetpack/androidx/releases/startup?hl=en
+
+android-firebase-bom = "33.5.1"             # https://firebase.google.com/support/release-notes/android
+android-firebase-crashlytics-plugin = "3.0.2"
+android-firebase-perf-plugin = "1.4.2"
+google-services = "4.4.2"
+
+leakcanary = "2.14"                         # https://github.com/square/leakcanary/releases
+
+### server
+exposed = "0.56.0"                          # https://github.com/JetBrains/Exposed/releases
+mysql = "8.0.33"
+
+logback = "1.5.12"                          # https://github.com/qos-ch/logback/tags
+
+### plugin
+dependency-guard = "0.5.0"                  # https://github.com/dropbox/dependency-guard/releases
+spotless = "7.0.0.BETA4"                    # https://github.com/diffplug/spotless/blob/main/plugin-gradle/CHANGES.md
+module-graph = "2.7.1"                      # https://github.com/jraska/modules-graph-assert/releases
+buildkonfig = "0.15.2"                      # https://github.com/yshrsmz/BuildKonfig/releases
+
+[libraries]
+### gradle
+gradle-kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+gradle-ksp = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+gradle-android = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+gradle-compose = { group = "org.jetbrains.compose", name = "compose-gradle-plugin", version.ref = "compose" }
+gradle-compose-compiler = { group = "org.jetbrains.kotlin", name = "compose-compiler-gradle-plugin", version.ref = "kotlin" }
+gradle-room = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "room" }
+
+### core
+kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
+
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
+
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
+
+### multiplatform
+compose-material3-adaptive = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive", version.ref = "compose-material3-adaptive" }
+compose-material3-adaptive-navigation = { group = "org.jetbrains.compose.material3.adaptive", name = "adaptive-navigation", version.ref = "compose-material3-adaptive" }
+compose-markdown = { group = "com.mikepenz", name = "multiplatform-markdown-renderer-m3", version.ref = "compose-markdown" }
+
+navigation-common = { group = "org.jetbrains.androidx.navigation", name = "navigation-common", version.ref = "navigation" }
+navigation-compose = { group = "org.jetbrains.androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
+
+lifecycle-common = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-common", version.ref = "lifecycle" }
+lifecycle-runtime = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime", version.ref = "lifecycle" }
+lifecycle-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
+
+datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+sqlite-bundled = { group = "androidx.sqlite", name = "sqlite-bundled", version.ref = "sqlite" }
+
+koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin" }
+koin-core = { group = "io.insert-koin", name = "koin-core" }
+koin-android = { group = "io.insert-koin", name = "koin-android" }
+koin-ktor = { group = "io.insert-koin", name = "koin-ktor" }
+koin-compose-viewmodel-navigation = { group = "io.insert-koin", name = "koin-compose-viewmodel-navigation" }
+
+koin-annotations-bom = { group = "io.insert-koin", name = "koin-annotations-bom", version.ref = "koin-annotations" }
+koin-annotations = { group = "io.insert-koin", name = "koin-annotations" }
+koin-compiler = { group = "io.insert-koin", name = "koin-ksp-compiler" }
+
+### android
+android-material = { group = "com.google.android.material", name = "material", version.ref = "android-material" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity" }
+androidx-startup = { group = "androidx.startup", name = "startup-runtime", version.ref = "androidx-startup" }
+androidx-lifecycle-process = { group = "androidx.lifecycle", name = "lifecycle-process", version.ref = "androidx-lifecycle" }
+
+android-firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "android-firebase-bom" }
+android-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
+android-firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
+android-firebase-perf = { group = "com.google.firebase", name = "firebase-perf" }
+
+leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakcanary" }
+
+### ktor
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-client-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-js = { group = "io.ktor", name = "ktor-client-js", version.ref = "ktor" }
+ktor-client-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor" }
+ktor-server-core = { group = "io.ktor", name = "ktor-server-core", version.ref = "ktor" }
+ktor-server-netty = { group = "io.ktor", name = "ktor-server-netty", version.ref = "ktor" }
+ktor-server-config-yaml = { group = "io.ktor", name = "ktor-server-config-yaml", version.ref = "ktor" }
+ktor-server-content-negotiation = { group = "io.ktor", name = "ktor-server-content-negotiation", version.ref = "ktor" }
+ktor-server-cors = { group = "io.ktor", name = "ktor-server-cors", version.ref = "ktor" }
+ktor-server-auth = { group = "io.ktor", name = "ktor-server-auth", version.ref = "ktor" }
+ktor-server-auth-jwt = { group = "io.ktor", name = "ktor-server-auth-jwt", version.ref = "ktor" }
+ktor-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+
+### server
+exposed-bom = { group = "org.jetbrains.exposed", name = "exposed-bom", version.ref = "exposed" }
+exposed-core = { group = "org.jetbrains.exposed", name = "exposed-core" }
+exposed-datetime = { group = "org.jetbrains.exposed", name = "exposed-kotlin-datetime" }
+exposed-jdbc = { group = "org.jetbrains.exposed", name = "exposed-jdbc" }
+mysql-connector = { group = "mysql", name = "mysql-connector-java", version.ref = "mysql" }
+
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+
+[plugins]
+### core
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+### multiplatform
+compose = { id = "org.jetbrains.compose", version.ref = "compose" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
+room = { id = "androidx.room", version.ref = "room" }
+
+### android
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+
+android-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "android-firebase-crashlytics-plugin" }
+android-firebase-perf = { id = "com.google.firebase.firebase-perf", version.ref = "android-firebase-perf-plugin" }
+google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
+
+### server
+ktor-server = { id = "io.ktor.plugin", version.ref = "ktor" }
+
+### plugin
+dependency-guard = { id = "com.dropbox.dependency-guard", version.ref = "dependency-guard" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+module-graph = { id = "com.jraska.module.graph.assertion", version.ref = "module-graph" }
+buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
+
+[bundles]
+ktor-client = [
+    "ktor-client-core",
+    "ktor-client-negotiation",
+    "ktor-kotlinx-json"
+]
+
+room = [
+    "room-runtime",
+    "sqlite-bundled"
+]
+
+ktor-server = [
+    "ktor-server-netty",
+    "ktor-server-config-yaml",
+    "ktor-server-content-negotiation",
+    "ktor-server-cors",
+    "ktor-kotlinx-json",
+    "ktor-server-auth-jwt"
+]

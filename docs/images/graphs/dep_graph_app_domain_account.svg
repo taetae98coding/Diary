@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820pt" height="116pt" viewBox="0 0 820.41 116">
+    <g class="graph">
+        <path fill="#fff" d="M0 116V0h820.41v116z"/>
+        <g class="node" transform="translate(4 112)">
+            <ellipse cx="427.31" cy="-90" fill="none" stroke="#000" rx="88.71" ry="18"/>
+            <text x="427.31" y="-84.95" font-family="Times,serif" font-size="14" text-anchor="middle">:app:domain:account</text>
+        </g>
+        <g class="node" transform="translate(4 112)">
+            <ellipse cx="71.31" cy="-18" fill="none" stroke="#000" rx="71.31" ry="18"/>
+            <text x="71.31" y="-12.95" font-family="Times,serif" font-size="14" text-anchor="middle">:app:core:model</text>
+        </g>
+        <g stroke="red" stroke-width="2" class="edge">
+            <path fill="none" d="M367.66 34.86C311.68 45.37 228 61.3 155.31 76c-5.2 1.05-10.6 2.16-16.01 3.29"/>
+            <path fill="red" d="m141.68 82.36-10.51-1.37 9.08-5.48z"/>
+        </g>
+        <g class="node" transform="translate(4 112)">
+            <ellipse cx="245.31" cy="-18" fill="none" stroke="#000" rx="85.13" ry="18"/>
+            <text x="245.31" y="-12.95" font-family="Times,serif" font-size="14" text-anchor="middle">:common:exception</text>
+        </g>
+        <g stroke="#000" class="edge">
+            <path fill="none" d="M391.37 38.36c-26.91 10.35-62.62 24.09-91.51 35.2"/>
+            <path d="m301.16 76.81-10.59.32 8.08-6.86z"/>
+        </g>
+        <g class="node" transform="translate(4 112)">
+            <ellipse cx="427.31" cy="-18" fill="none" stroke="#000" rx="78.99" ry="18"/>
+            <text x="427.31" y="-12.95" font-family="Times,serif" font-size="14" text-anchor="middle">:library:coroutines</text>
+        </g>
+        <g stroke="#000" class="edge">
+            <path fill="none" d="M431.31 40.3v24.16"/>
+            <path d="m434.81 64.38-3.5 10-3.5-10z"/>
+        </g>
+        <g class="node" transform="translate(4 112)">
+            <ellipse cx="597.31" cy="-18" fill="none" stroke="#000" rx="72.85" ry="18"/>
+            <text x="597.31" y="-12.95" font-family="Times,serif" font-size="14" text-anchor="middle">:library:datetime</text>
+        </g>
+        <g stroke="#000" class="edge">
+            <path fill="none" d="M469.46 38.71c25.24 10.39 58.49 24.08 85.28 35.11"/>
+            <path d="m555.72 70.44 7.92 7.05-10.58-.58z"/>
+        </g>
+        <g class="node" transform="translate(4 112)">
+            <ellipse cx="750.31" cy="-18" fill="none" stroke="#000" rx="62.1" ry="18"/>
+            <text x="750.31" y="-12.95" font-family="Times,serif" font-size="14" text-anchor="middle">:library:kotlin</text>
+        </g>
+        <g stroke="#000" class="edge">
+            <path fill="none" d="M492.52 35.38c51.1 10.45 125.8 26.01 190.79 40.62 4.33.97 8.8 2 13.3 3.04"/>
+            <path d="m697.35 75.62 8.94 5.69-10.54 1.13z"/>
+        </g>
+    </g>
+</svg>
