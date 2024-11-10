@@ -4,6 +4,7 @@ import io.github.taetae98coding.diary.plugin.installAuth
 import io.github.taetae98coding.diary.plugin.installCORS
 import io.github.taetae98coding.diary.plugin.installContentNegotiation
 import io.github.taetae98coding.diary.plugin.installDatabase
+import io.github.taetae98coding.diary.plugin.installFirebase
 import io.github.taetae98coding.diary.plugin.installKoin
 import io.github.taetae98coding.diary.plugin.installRouting
 import io.ktor.server.application.Application
@@ -19,5 +20,6 @@ public fun Application.module() {
 	installKoin()
 	installAuth()
 	installContentNegotiation()
+	installFirebase()
 	installRouting()
 }

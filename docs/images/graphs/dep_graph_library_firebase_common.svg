@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220pt" height="44pt" viewBox="0 0 220.23 44">
+    <g class="graph">
+        <path fill="#fff" d="M0 44V0h220.23v44z"/>
+        <g class="node" transform="translate(4 40)">
+            <ellipse cx="106.11" cy="-18" fill="none" stroke="#000" rx="106.11" ry="18"/>
+            <text x="106.11" y="-12.95" font-family="Times,serif" font-size="14" text-anchor="middle">:library:firebase-common</text>
+        </g>
+    </g>
+</svg>

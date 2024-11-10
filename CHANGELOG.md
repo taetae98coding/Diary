@@ -2,7 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.0] - 2024-11-09
+## [1.1.0] - 2024-11-17
+
+### 🚀 Features
+
+- Server - FCM
+- App - FCM
+
+### 🚜 Refactor
+
+- App - compose
+
+## [1.0.0] - 2024-11-10
 
 ### 🚀 Features
 

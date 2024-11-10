@@ -5,10 +5,8 @@ import kotlinx.coroutines.flow.Flow
 
 public interface MemoBackupDao {
     public suspend fun upsert(uid: String, memoId: String)
-    public suspend fun delete(uid: String, memoId: String)
     public suspend fun deleteByMemoIds(memoIds: List<String>)
 
-    public fun getUpdateFlow(uid: String): Flow<Int>
     public fun countByUid(uid: String): Flow<Int>
     public fun findByUid(uid: String): Flow<List<MemoDto>>
 }

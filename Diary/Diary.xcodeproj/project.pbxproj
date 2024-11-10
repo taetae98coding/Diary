@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3DD9A74F2CDFBAC60023C4EE /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 3DD9A74E2CDFBAC60023C4EE /* FirebaseAnalyticsWithoutAdIdSupport */; };
-		3DD9A7512CDFBAC60023C4EE /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3DD9A7502CDFBAC60023C4EE /* FirebaseCrashlytics */; };
-		3DD9A7532CDFBAC60023C4EE /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 3DD9A7522CDFBAC60023C4EE /* FirebasePerformance */; };
+		3DF5DACD2CE8FF3000E490F3 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 3DF5DACC2CE8FF3000E490F3 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		3DF5DACF2CE8FF3000E490F3 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3DF5DACE2CE8FF3000E490F3 /* FirebaseCore */; };
+		3DF5DAD12CE8FF3000E490F3 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3DF5DAD02CE8FF3000E490F3 /* FirebaseCrashlytics */; };
+		3DF5DAD32CE8FF3000E490F3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 3DF5DAD22CE8FF3000E490F3 /* FirebaseMessaging */; };
+		3DF5DAD52CE8FF3000E490F3 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 3DF5DAD42CE8FF3000E490F3 /* FirebasePerformance */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,9 +44,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DD9A74F2CDFBAC60023C4EE /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
-				3DD9A7512CDFBAC60023C4EE /* FirebaseCrashlytics in Frameworks */,
-				3DD9A7532CDFBAC60023C4EE /* FirebasePerformance in Frameworks */,
+				3DF5DAD32CE8FF3000E490F3 /* FirebaseMessaging in Frameworks */,
+				3DF5DAD12CE8FF3000E490F3 /* FirebaseCrashlytics in Frameworks */,
+				3DF5DAD52CE8FF3000E490F3 /* FirebasePerformance in Frameworks */,
+				3DF5DACF2CE8FF3000E490F3 /* FirebaseCore in Frameworks */,
+				3DF5DACD2CE8FF3000E490F3 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,7 +83,6 @@
 				3DDC71F22CCD5903001193A2 /* Sources */,
 				3DDC71F32CCD5903001193A2 /* Frameworks */,
 				3DDC71F42CCD5903001193A2 /* Resources */,
-				3DD9A7552CDFC3240023C4EE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -90,9 +93,11 @@
 			);
 			name = Diary;
 			packageProductDependencies = (
-				3DD9A74E2CDFBAC60023C4EE /* FirebaseAnalyticsWithoutAdIdSupport */,
-				3DD9A7502CDFBAC60023C4EE /* FirebaseCrashlytics */,
-				3DD9A7522CDFBAC60023C4EE /* FirebasePerformance */,
+				3DF5DACC2CE8FF3000E490F3 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				3DF5DACE2CE8FF3000E490F3 /* FirebaseCore */,
+				3DF5DAD02CE8FF3000E490F3 /* FirebaseCrashlytics */,
+				3DF5DAD22CE8FF3000E490F3 /* FirebaseMessaging */,
+				3DF5DAD42CE8FF3000E490F3 /* FirebasePerformance */,
 			);
 			productName = Diary;
 			productReference = 3DDC71F62CCD5903001193A2 /* Diary.app */;
@@ -124,7 +129,7 @@
 			mainGroup = 3DDC71ED2CCD5903001193A2;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				3DD9A74D2CDFBAC60023C4EE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				3DF5DACB2CE8FF3000E490F3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3DDC71F72CCD5903001193A2 /* Products */;
@@ -163,29 +168,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT/..\"\n\n\ncase \"${CONFIGURATION}\" in\n  \"DevDebug\" )\ncp -r \"$SRCROOT/Secret/DevDebug/GoogleService-Info.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\" ;;\n  \"DevRelease\" )\ncp -r \"$SRCROOT/Secret/DevRelease/GoogleService-Info.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\" ;;\n  \"RealDebug\" )\ncp -r \"$SRCROOT/Secret/RealDebug/GoogleService-Info.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\" ;;\n  \"RealRelease\" )\ncp -r \"$SRCROOT/Secret/RealRelease/GoogleService-Info.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\" ;;\n*)\n;;\nesac\n";
-		};
-		3DD9A7552CDFC3240023C4EE /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
-				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
-				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
-				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+			shellScript = "cd \"$SRCROOT/..\"\n\ncase \"${CONFIGURATION}\" in\n  \"DevDebug\" )\ncp -r \"$SRCROOT/Secret/DevDebug/GoogleService-Info.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\" ;;\n  \"DevRelease\" )\ncp -r \"$SRCROOT/Secret/DevRelease/GoogleService-Info.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\" ;;\n  \"RealDebug\" )\ncp -r \"$SRCROOT/Secret/RealDebug/GoogleService-Info.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\" ;;\n  \"RealRelease\" )\ncp -r \"$SRCROOT/Secret/RealRelease/GoogleService-Info.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\" ;;\n*)\n;;\nesac\n";
 		};
 		3DDC72072CCD5943001193A2 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -203,7 +186,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT/..\"\n\n\ncase \"${CONFIGURATION}\" in\n  \"DevDebug\" )\n./gradlew :app:platform:ios:embedAndSignAppleFrameworkForXcode -Pbuildkonfig.flavor=dev ;;\n  \"DevRelease\" )\n./gradlew :app:platform:ios:embedAndSignAppleFrameworkForXcode -Pbuildkonfig.flavor=dev ;;\n  \"RealDebug\" )\n./gradlew :app:platform:ios:embedAndSignAppleFrameworkForXcode -Pbuildkonfig.flavor=real ;;\n  \"RealRelease\" )\n./gradlew :app:platform:ios:embedAndSignAppleFrameworkForXcode -Pbuildkonfig.flavor=real ;;\n*)\n;;\nesac\n";
+			shellScript = "cd \"$SRCROOT/..\"\n\n./gradlew buildCocoapods\n\ncase \"${CONFIGURATION}\" in\n  \"DevDebug\" )\n./gradlew :app:platform:ios:embedAndSignAppleFrameworkForXcode -Pbuildkonfig.flavor=dev ;;\n  \"DevRelease\" )\n./gradlew :app:platform:ios:embedAndSignAppleFrameworkForXcode -Pbuildkonfig.flavor=dev ;;\n  \"RealDebug\" )\n./gradlew :app:platform:ios:embedAndSignAppleFrameworkForXcode -Pbuildkonfig.flavor=real ;;\n  \"RealRelease\" )\n./gradlew :app:platform:ios:embedAndSignAppleFrameworkForXcode -Pbuildkonfig.flavor=real ;;\n*)\n;;\nesac\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -251,6 +234,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development: taejong kang (32WGJ7LQRX)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -286,10 +270,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_ENTITLEMENTS = Diary/Diary.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Diary/Preview Content\"";
-				DEVELOPMENT_TEAM = 4TV6L66XZ8;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 4TV6L66XZ8;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -306,9 +294,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.taetae98coding.diary.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DiaryRealDebug;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -348,6 +338,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development: taejong kang (32WGJ7LQRX)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -376,10 +367,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Diary/Diary.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Diary/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 4TV6L66XZ8;
@@ -399,11 +391,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.taetae98coding.diary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = adhoc;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DiaryRealRelease;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -443,6 +435,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development: taejong kang (32WGJ7LQRX)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -478,10 +471,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_ENTITLEMENTS = Diary/Diary.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Diary/Preview Content\"";
-				DEVELOPMENT_TEAM = 4TV6L66XZ8;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 4TV6L66XZ8;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -498,9 +495,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.taetae98coding.diary.dev.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DiaryDevDebug;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -540,6 +539,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development: taejong kang (32WGJ7LQRX)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -568,10 +568,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_ENTITLEMENTS = Diary/Diary.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Diary/Preview Content\"";
-				DEVELOPMENT_TEAM = 4TV6L66XZ8;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 4TV6L66XZ8;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -588,9 +592,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.taetae98coding.diary.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DiaryDevRelease;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -625,30 +631,40 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3DD9A74D2CDFBAC60023C4EE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		3DF5DACB2CE8FF3000E490F3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = exactVersion;
-				version = 11.4.0;
+				version = 11.5.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3DD9A74E2CDFBAC60023C4EE /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+		3DF5DACC2CE8FF3000E490F3 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3DD9A74D2CDFBAC60023C4EE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 3DF5DACB2CE8FF3000E490F3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalyticsWithoutAdIdSupport;
 		};
-		3DD9A7502CDFBAC60023C4EE /* FirebaseCrashlytics */ = {
+		3DF5DACE2CE8FF3000E490F3 /* FirebaseCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3DD9A74D2CDFBAC60023C4EE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 3DF5DACB2CE8FF3000E490F3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		3DF5DAD02CE8FF3000E490F3 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3DF5DACB2CE8FF3000E490F3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
 		};
-		3DD9A7522CDFBAC60023C4EE /* FirebasePerformance */ = {
+		3DF5DAD22CE8FF3000E490F3 /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3DD9A74D2CDFBAC60023C4EE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 3DF5DACB2CE8FF3000E490F3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		3DF5DAD42CE8FF3000E490F3 /* FirebasePerformance */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3DF5DACB2CE8FF3000E490F3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebasePerformance;
 		};
 /* End XCSwiftPackageProductDependency section */

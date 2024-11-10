@@ -3,6 +3,7 @@ package io.github.taetae98coding.diary.initializer
 import android.content.Context
 import androidx.startup.Initializer
 import io.github.taetae98coding.diary.BuildConfig
+import io.github.taetae98coding.diary.KoinAndroidModule
 import io.github.taetae98coding.diary.app.AppModule
 import io.github.taetae98coding.diary.core.account.preferences.datastore.AccountDataStorePreferencesModule
 import io.github.taetae98coding.diary.core.diary.database.room.DiaryRoomDatabaseModule
@@ -24,6 +25,7 @@ public class KoinInitializer : Initializer<KoinApplication> {
             androidContext(context)
 
             modules(
+                KoinAndroidModule().module,
                 AppModule().module,
                 diaryServiceModule(),
                 AccountDataStorePreferencesModule().module,

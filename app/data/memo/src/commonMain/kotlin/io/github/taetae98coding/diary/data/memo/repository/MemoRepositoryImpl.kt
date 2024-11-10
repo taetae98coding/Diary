@@ -20,7 +20,7 @@ internal class MemoRepositoryImpl(
     private val localDataSource: MemoDao,
     private val backupDataSource: MemoBackupDao,
 ) : MemoRepository {
-    override suspend fun upsert(uid: String?, memo: Memo) {
+    override suspend fun upsert(memo: Memo) {
         val dto = MemoDto(
             id = memo.id,
             detail = memo.detail,
@@ -32,30 +32,18 @@ internal class MemoRepositoryImpl(
         )
 
         localDataSource.upsert(dto)
-        if (!uid.isNullOrBlank()) {
-            backupDataSource.upsert(uid, memo.id)
-        }
     }
 
-    override suspend fun update(uid: String?, memoId: String, detail: MemoDetail) {
+    override suspend fun update(memoId: String, detail: MemoDetail) {
         localDataSource.update(memoId, detail)
-        if (!uid.isNullOrBlank()) {
-            backupDataSource.upsert(uid, memoId)
-        }
     }
 
-    override suspend fun updateFinish(uid: String?, memoId: String, isFinish: Boolean) {
+    override suspend fun updateFinish(memoId: String, isFinish: Boolean) {
         localDataSource.updateFinish(memoId, isFinish)
-        if (!uid.isNullOrBlank()) {
-            backupDataSource.upsert(uid, memoId)
-        }
     }
 
-    override suspend fun updateDelete(uid: String?, memoId: String, isDelete: Boolean) {
+    override suspend fun updateDelete(memoId: String, isDelete: Boolean) {
         localDataSource.updateDelete(memoId, isDelete)
-        if (!uid.isNullOrBlank()) {
-            backupDataSource.upsert(uid, memoId)
-        }
     }
 
     override fun find(memoId: String): Flow<Memo?> {

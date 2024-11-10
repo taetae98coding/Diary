@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android).apply(false)
     alias(libs.plugins.kotlin.jvm).apply(false)
 
+    alias(libs.plugins.kotlin.cocoapods).apply(false)
     alias(libs.plugins.kotlin.serialization).apply(false)
     alias(libs.plugins.ksp).apply(false)
 
@@ -49,6 +50,16 @@ subprojects {
 
         moduleGraphAssert {
             configurations += setOf("commonMainImplementation", "commonMainApi", "implementation", "api")
+        }
+    }
+}
+
+subprojects {
+    afterEvaluate {
+        if (pluginManager.findPlugin("org.jetbrains.kotlin.native.cocoapods") != null) {
+            tasks.register("buildCocoapods") {
+                dependsOn(tasks.getByName("build"))
+            }
         }
     }
 }
