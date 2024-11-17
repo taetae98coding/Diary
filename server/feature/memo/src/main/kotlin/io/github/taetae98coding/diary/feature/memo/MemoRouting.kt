@@ -3,6 +3,7 @@ package io.github.taetae98coding.diary.feature.memo
 import io.github.taetae98coding.diary.common.model.memo.MemoEntity
 import io.github.taetae98coding.diary.common.model.response.DiaryResponse
 import io.github.taetae98coding.diary.core.model.Memo
+import io.github.taetae98coding.diary.core.model.MemoAndTagIds
 import io.github.taetae98coding.diary.domain.memo.usecase.FetchMemoUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.UpsertMemoUseCase
 import io.ktor.http.HttpStatusCode
@@ -29,7 +30,13 @@ public fun Route.memoRouting() {
 				}
 
 				val useCase = call.scope.get<UpsertMemoUseCase>()
-				val memoList = request.map(MemoEntity::toMemo)
+				val memoList =
+					request.map {
+						MemoAndTagIds(
+							memo = it.toMemo(),
+							tagIds = it.tagIds,
+						)
+					}
 
 				useCase(memoList).onSuccess { call.respond(DiaryResponse.Success) }
 			}
@@ -47,7 +54,7 @@ public fun Route.memoRouting() {
 
 				useCase(uid, updateAt)
 					.first()
-					.onSuccess { call.respond(DiaryResponse.success(it.map(Memo::toEntity))) }
+					.onSuccess { call.respond(DiaryResponse.success(it.map(MemoAndTagIds::toEntity))) }
 			}
 		}
 	}
@@ -62,21 +69,24 @@ private fun MemoEntity.toMemo(): Memo =
 		endInclusive = endInclusive,
 		color = color,
 		owner = owner,
+		primaryTag = primaryTag,
 		isFinish = isFinish,
 		isDelete = isDelete,
 		updateAt = updateAt,
 	)
 
-private fun Memo.toEntity(): MemoEntity =
+private fun MemoAndTagIds.toEntity(): MemoEntity =
 	MemoEntity(
-		id = id,
-		title = title,
-		description = description,
-		start = start,
-		endInclusive = endInclusive,
-		color = color,
-		owner = owner,
-		isFinish = isFinish,
-		isDelete = isDelete,
-		updateAt = updateAt,
+		id = memo.id,
+		title = memo.title,
+		description = memo.description,
+		start = memo.start,
+		endInclusive = memo.endInclusive,
+		color = memo.color,
+		owner = memo.owner,
+		primaryTag = memo.primaryTag,
+		tagIds = tagIds,
+		isFinish = memo.isFinish,
+		isDelete = memo.isDelete,
+		updateAt = memo.updateAt,
 	)

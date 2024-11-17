@@ -12,6 +12,7 @@ public class DiaryRoomDatabaseModule : KoinComponent {
     @Singleton
     internal fun providesDiaryDatabase(): DiaryDatabase {
         return getDatabaseBuilder<DiaryDatabase>("diary.db")
+            .addMigrations()
             .build()
     }
 }

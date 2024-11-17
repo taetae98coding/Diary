@@ -9,7 +9,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import io.github.taetae98coding.diary.app.App
 
 public class DiaryActivity : ComponentActivity() {
-    private val notificationPermissionLauncer = registerForActivityResult(
+    private val notificationPermissionLauncher = registerForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
         callback = {}
     )
@@ -21,6 +21,6 @@ public class DiaryActivity : ComponentActivity() {
             App()
         }
 
-        notificationPermissionLauncer.launch(Manifest.permission.POST_NOTIFICATIONS)
+        notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
     }
 }

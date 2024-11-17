@@ -22,17 +22,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
+import io.github.taetae98coding.diary.core.design.system.emoji.Emoji
+import io.github.taetae98coding.diary.core.design.system.icon.NavigateUpIcon
 import io.github.taetae98coding.diary.core.design.system.theme.DiaryTheme
-import io.github.taetae98coding.diary.core.resources.Res
-import io.github.taetae98coding.diary.core.resources.account_not_found_error
-import io.github.taetae98coding.diary.core.resources.bottom_button_email_blank
-import io.github.taetae98coding.diary.core.resources.bottom_button_password_blank
-import io.github.taetae98coding.diary.core.resources.check_password
-import io.github.taetae98coding.diary.core.resources.icon.NavigateUpIcon
-import io.github.taetae98coding.diary.core.resources.login
-import io.github.taetae98coding.diary.core.resources.login_button_message
-import io.github.taetae98coding.diary.core.resources.network_error
-import io.github.taetae98coding.diary.core.resources.unknown_error
 import io.github.taetae98coding.diary.feature.account.common.BasePasswordTextField
 import io.github.taetae98coding.diary.feature.account.common.BottomBarButton
 import io.github.taetae98coding.diary.feature.account.common.BottomBarButtonContent
@@ -40,7 +32,6 @@ import io.github.taetae98coding.diary.feature.account.common.EmailTextField
 import io.github.taetae98coding.diary.feature.account.login.state.LoginScreenButtonUiState
 import io.github.taetae98coding.diary.feature.account.login.state.LoginScreenState
 import io.github.taetae98coding.diary.feature.account.login.state.LoginUiState
-import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -56,7 +47,7 @@ internal fun LoginScreen(
         modifier = modifier,
         topBar = {
             TopAppBar(
-                title = { Text(text = stringResource(Res.string.login)) },
+                title = { Text(text = "로그인") },
                 navigationIcon = {
                     IconButton(onClick = onNavigateUp) {
                         NavigateUpIcon()
@@ -110,9 +101,6 @@ private fun Message(
     onLoginFinish: () -> Unit,
 ) {
     val uiState = uiStateProvider()
-    val accountNotFoundErrorMessage = stringResource(Res.string.account_not_found_error)
-    val networkErrorMessage = stringResource(Res.string.network_error)
-    val unknownErrorMessage = stringResource(Res.string.unknown_error)
 
     LaunchedEffect(
         uiState.isLoginFinish,
@@ -124,9 +112,9 @@ private fun Message(
 
         when {
             uiState.isLoginFinish -> onLoginFinish()
-            uiState.isAccountNotFound -> state.showMessage(accountNotFoundErrorMessage)
-            uiState.isNetworkError -> state.showMessage(networkErrorMessage)
-            uiState.isUnknownError -> state.showMessage(unknownErrorMessage)
+            uiState.isAccountNotFound -> state.showMessage("계정을 찾을 수 없어요 ${Emoji.fail.random()}")
+            uiState.isNetworkError -> state.showMessage("네트워크 연결 상태를 확인해 주세요 ${Emoji.fail.random()}")
+            uiState.isUnknownError -> state.showMessage("알 수 없는 에러가 발생했어요 잠시 후 다시 시도해 주세요 ${Emoji.error.random()}")
         }
 
         uiState.onMessageShow()
@@ -141,15 +129,15 @@ private fun LoginButtonContent(
     BottomBarButtonContent(modifier = modifier) {
         when (uiState) {
             LoginScreenButtonUiState.LoginEnable -> {
-                Text(text = stringResource(Res.string.login_button_message))
+                Text(text = "로그인")
             }
 
             LoginScreenButtonUiState.EmailBlank -> {
-                Text(text = stringResource(Res.string.bottom_button_email_blank))
+                Text(text = "이메일을 입력해 주세요 🐸")
             }
 
             LoginScreenButtonUiState.PasswordBlank -> {
-                Text(text = stringResource(Res.string.bottom_button_password_blank))
+                Text(text = "비밀번호를 입력해 주세요 🐷")
             }
 
             LoginScreenButtonUiState.Progress -> {
@@ -178,7 +166,7 @@ private fun Content(
             valueProvider = { state.password },
             onValueChange = state::onPasswordChange,
             modifier = textFieldModifier,
-            placeholder = { Text(text = stringResource(Res.string.check_password)) },
+            placeholder = { Text(text = "비밀번호 확인") },
             passwordVisibleProvider = { state.isPasswordVisible },
             onPasswordVisibleChange = state::onPasswordVisibleChange,
             keyboardOptions = KeyboardOptions(

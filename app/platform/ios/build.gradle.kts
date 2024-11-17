@@ -31,11 +31,7 @@ kotlin {
             dependencies {
                 implementation(project(":app:platform:common"))
                 implementation(project(":app:core:coroutines"))
-                implementation(project(":app:core:diary-database-room"))
                 implementation(project(":app:core:diary-service"))
-                implementation(project(":app:core:account-preferences-datastore"))
-                implementation(project(":app:core:holiday-preferences-datastore"))
-                implementation(project(":app:core:holiday-database-room"))
                 implementation(project(":app:core:holiday-service"))
 
                 implementation(compose.ui)

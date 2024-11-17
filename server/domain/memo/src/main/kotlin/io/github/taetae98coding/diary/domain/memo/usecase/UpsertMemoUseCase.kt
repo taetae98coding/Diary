@@ -1,7 +1,7 @@
 package io.github.taetae98coding.diary.domain.memo.usecase
 
-import io.github.taetae98coding.diary.common.exception.memo.MemoTitleBlankException
-import io.github.taetae98coding.diary.core.model.Memo
+import io.github.taetae98coding.diary.common.exception.tag.TagTitleBlankException
+import io.github.taetae98coding.diary.core.model.MemoAndTagIds
 import io.github.taetae98coding.diary.domain.memo.repository.MemoRepository
 import kotlinx.coroutines.flow.first
 import org.koin.core.annotation.Factory
@@ -10,28 +10,31 @@ import org.koin.core.annotation.Factory
 public class UpsertMemoUseCase internal constructor(
 	private val repository: MemoRepository,
 ) {
-	public suspend operator fun invoke(list: List<Memo>): Result<Unit> {
+	public suspend operator fun invoke(list: List<MemoAndTagIds>): Result<Unit> {
 		return runCatching {
-			// TODO permission check
-
-			val originMemoMap =
+			// TODO Permission Check
+			val ids = list.map { it.memo.id }.toSet()
+			val originMap =
 				repository
-					.findByIds(list.map { it.id })
+					.findByIds(ids)
 					.first()
 					.associateBy { it.id }
 
 			val validList =
 				list
 					.filter {
-						val originMemo = originMemoMap[it.id] ?: return@filter true
-						it.updateAt >= originMemo.updateAt
+						val origin = originMap[it.memo.id] ?: return@filter true
+						it.memo.updateAt >= origin.updateAt
 					}.map {
 						it.copy(
-							title =
-								it.title.ifBlank {
-									val originMemo = originMemoMap[it.id] ?: throw MemoTitleBlankException()
-									originMemo.title
-								},
+							memo =
+								it.memo.copy(
+									title =
+										it.memo.title.ifBlank {
+											val origin = originMap[it.memo.id] ?: throw TagTitleBlankException()
+											origin.title
+										},
+								),
 						)
 					}
 

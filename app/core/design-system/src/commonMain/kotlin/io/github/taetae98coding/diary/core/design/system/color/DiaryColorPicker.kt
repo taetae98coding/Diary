@@ -21,8 +21,8 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
+import io.github.taetae98coding.diary.core.design.system.icon.RefreshIcon
 import io.github.taetae98coding.diary.core.design.system.theme.DiaryTheme
-import io.github.taetae98coding.diary.core.resources.icon.RefreshIcon
 import io.github.taetae98coding.diary.library.color.toContrastColor
 import io.github.taetae98coding.diary.library.color.toRgbString
 

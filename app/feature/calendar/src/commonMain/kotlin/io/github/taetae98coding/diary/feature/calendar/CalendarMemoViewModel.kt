@@ -3,7 +3,7 @@ package io.github.taetae98coding.diary.feature.calendar
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.github.taetae98coding.diary.core.calendar.compose.item.CalendarItemUiState
-import io.github.taetae98coding.diary.domain.memo.usecase.FindCalendarMemoUseCase
+import io.github.taetae98coding.diary.domain.calendar.usecase.FindCalendarMemoUseCase
 import io.github.taetae98coding.diary.library.coroutines.mapCollectionLatest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow

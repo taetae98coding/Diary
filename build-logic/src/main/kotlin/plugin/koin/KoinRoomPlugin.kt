@@ -1,6 +1,6 @@
 package plugin.koin
 
-import ext.kspRoom
+import ext.kspAll
 import ext.library
 import ext.libs
 import ext.sourceSets
@@ -40,8 +40,8 @@ internal class KoinRoomPlugin : Plugin<Project>{
         }
 
         target.withDependency {
-            kspRoom(platform(libs.library("koin-annotations-bom")))
-            kspRoom(libs.library("koin-compiler"))
+            kspAll(platform(libs.library("koin-annotations-bom")))
+            kspAll(libs.library("koin-compiler"))
         }
     }
 }

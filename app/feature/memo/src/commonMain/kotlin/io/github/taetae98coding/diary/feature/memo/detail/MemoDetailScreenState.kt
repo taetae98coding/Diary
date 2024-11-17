@@ -11,7 +11,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 internal sealed class MemoDetailScreenState {
-    abstract val coroutineScope: CoroutineScope
+    protected abstract val coroutineScope: CoroutineScope
+
     abstract val componentState: DiaryComponentState
     abstract val dateState: DiaryDateState
     abstract val colorState: DiaryColorState

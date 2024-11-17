@@ -27,7 +27,6 @@ kotlin {
 
         nonAndroidMain.dependsOn(commonMain.get())
         jvmMain.get().dependsOn(nonAndroidMain)
-        wasmJsMain.get().dependsOn(nonAndroidMain)
         iosMain.get().dependsOn(nonAndroidMain)
     }
 }

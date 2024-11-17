@@ -3,7 +3,7 @@ package io.github.taetae98coding.diary.core.diary.service.memo
 import io.github.taetae98coding.diary.common.model.memo.MemoEntity
 import io.github.taetae98coding.diary.core.diary.service.DiaryServiceModule
 import io.github.taetae98coding.diary.core.diary.service.ext.getOrThrow
-import io.github.taetae98coding.diary.core.model.memo.Memo
+import io.github.taetae98coding.diary.core.model.memo.MemoAndTagIds
 import io.github.taetae98coding.diary.core.model.memo.MemoDetail
 import io.github.taetae98coding.diary.core.model.memo.MemoDto
 import io.ktor.client.HttpClient
@@ -22,20 +22,22 @@ public class MemoService internal constructor(
     @Named(DiaryServiceModule.DIARY_CLIENT)
     private val client: HttpClient,
 ) {
-    public suspend fun upsert(list: List<Memo>) {
+    public suspend fun upsert(list: List<MemoAndTagIds>) {
         return client.post("/memo/upsert") {
             val body = list.map {
                 MemoEntity(
-                    id = it.id,
-                    title = it.detail.title,
-                    description = it.detail.description,
-                    start = it.detail.start,
-                    endInclusive = it.detail.endInclusive,
-                    color = it.detail.color,
-                    owner = requireNotNull(it.owner),
-                    isFinish = it.isFinish,
-                    isDelete = it.isDelete,
-                    updateAt = it.updateAt,
+                    id = it.memo.id,
+                    title = it.memo.detail.title,
+                    description = it.memo.detail.description,
+                    start = it.memo.detail.start,
+                    endInclusive = it.memo.detail.endInclusive,
+                    color = it.memo.detail.color,
+                    owner = requireNotNull(it.memo.owner),
+                    primaryTag = it.memo.primaryTag,
+                    tagIds = it.tagIds,
+                    isFinish = it.memo.isFinish,
+                    isDelete = it.memo.isDelete,
+                    updateAt = it.memo.updateAt,
                 )
             }
 
@@ -44,13 +46,13 @@ public class MemoService internal constructor(
         }.getOrThrow()
     }
 
-    public suspend fun fetch(updateAt: Instant): List<MemoDto> {
+    public suspend fun fetch(updateAt: Instant): List<MemoAndTagIds> {
         val response = client.get("/memo/fetch") {
             parameter("updateAt", updateAt)
         }.getOrThrow<List<MemoEntity>>()
 
         return response.map {
-            MemoDto(
+            val dto = MemoDto(
                 id = it.id,
                 detail = MemoDetail(
                     title = it.title,
@@ -60,11 +62,14 @@ public class MemoService internal constructor(
                     color = it.color,
                 ),
                 owner = it.owner,
+                primaryTag = it.primaryTag,
                 isFinish = it.isFinish,
                 isDelete = it.isDelete,
                 updateAt = it.updateAt,
                 serverUpdateAt = it.updateAt,
             )
+
+            MemoAndTagIds(dto, it.tagIds)
         }
     }
 }

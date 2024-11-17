@@ -11,7 +11,6 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(project(":app:core:resources"))
                 implementation(project(":app:core:design-system"))
                 implementation(project(":library:color"))
                 implementation(project(":library:datetime"))

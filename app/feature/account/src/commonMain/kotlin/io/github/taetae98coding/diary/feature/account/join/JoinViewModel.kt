@@ -43,7 +43,7 @@ internal class JoinViewModel(
         when (throwable) {
             is ExistEmailException -> _uiState.update { it.copy(isProgress = false, isExistEmail = true) }
             is NetworkException -> _uiState.update { it.copy(isProgress = false, isNetworkError = true) }
-            else -> _uiState.update { it.copy(isProgress = false, isUnknownError = true, message = it.toString()) }
+            else -> _uiState.update { it.copy(isProgress = false, isUnknownError = true) }
         }
     }
 

@@ -2,11 +2,7 @@ package io.github.taetae98coding.diary.initializer
 
 import io.github.taetae98coding.diary.BuildKonfig
 import io.github.taetae98coding.diary.app.AppModule
-import io.github.taetae98coding.diary.core.account.preferences.datastore.AccountDataStorePreferencesModule
-import io.github.taetae98coding.diary.core.diary.database.room.DiaryRoomDatabaseModule
 import io.github.taetae98coding.diary.core.diary.service.DiaryServiceModule
-import io.github.taetae98coding.diary.core.holiday.database.room.HolidayRoomDatabaseModule
-import io.github.taetae98coding.diary.core.holiday.preferences.datastore.HolidayDataStorePreferencesModule
 import io.github.taetae98coding.diary.core.holiday.service.HolidayServiceModule
 import io.github.taetae98coding.diary.library.koin.datastore.koinDataStoreDefaultPath
 import io.github.taetae98coding.diary.library.koin.room.koinRoomDefaultPath
@@ -25,11 +21,7 @@ internal fun initKoin(): KoinApplication {
         modules(
             AppModule().module,
             diaryServiceModule(),
-            AccountDataStorePreferencesModule().module,
-            HolidayDataStorePreferencesModule().module,
-            HolidayRoomDatabaseModule().module,
             holidayServiceModule(),
-            DiaryRoomDatabaseModule().module,
         )
     }
 }

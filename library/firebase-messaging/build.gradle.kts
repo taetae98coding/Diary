@@ -39,7 +39,6 @@ kotlin {
 
         nonSupportMain.dependsOn(commonMain.get())
         jvmMain.get().dependsOn(nonSupportMain)
-        wasmJsMain.get().dependsOn(nonSupportMain)
     }
 }
 

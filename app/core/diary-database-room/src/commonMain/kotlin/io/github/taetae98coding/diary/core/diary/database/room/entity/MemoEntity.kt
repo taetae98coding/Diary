@@ -2,11 +2,26 @@ package io.github.taetae98coding.diary.core.diary.database.room.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 
-@Entity
+@Entity(
+    indices = [
+        Index("primaryTag"),
+    ],
+    foreignKeys = [
+        ForeignKey(
+            entity = TagEntity::class,
+            parentColumns = ["id"],
+            childColumns = ["primaryTag"],
+            onDelete = ForeignKey.CASCADE,
+            onUpdate = ForeignKey.CASCADE,
+        ),
+    ],
+)
 internal data class MemoEntity(
     @PrimaryKey
     @ColumnInfo(defaultValue = "")
@@ -27,6 +42,8 @@ internal data class MemoEntity(
     val isDelete: Boolean,
     @ColumnInfo(defaultValue = "null")
     val owner: String?,
+    @ColumnInfo(defaultValue = "null")
+    val primaryTag: String?,
     @ColumnInfo(defaultValue = "0")
     val updateAt: Instant,
     @ColumnInfo(defaultValue = "null")

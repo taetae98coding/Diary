@@ -18,15 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.unit.dp
 import com.mikepenz.markdown.m3.Markdown
+import io.github.taetae98coding.diary.core.design.system.icon.MarkdownIcon
+import io.github.taetae98coding.diary.core.design.system.icon.TextFieldIcon
 import io.github.taetae98coding.diary.core.design.system.text.ClearTextField
 import io.github.taetae98coding.diary.core.design.system.theme.DiaryTheme
-import io.github.taetae98coding.diary.core.resources.Res
-import io.github.taetae98coding.diary.core.resources.description
-import io.github.taetae98coding.diary.core.resources.icon.MarkdownIcon
-import io.github.taetae98coding.diary.core.resources.icon.TextFieldIcon
-import io.github.taetae98coding.diary.core.resources.title
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.stringResource
 
 @Composable
 public fun DiaryComponent(
@@ -39,7 +35,7 @@ public fun DiaryComponent(
             onValueChange = state::onTitleChange,
             modifier = Modifier.fillMaxWidth()
                 .focusRequester(state.titleFocusRequester),
-            label = { Text(text = stringResource(Res.string.title)) },
+            label = { Text(text = "제목") },
             errorProvider = { state.isTitleError },
             singleLine = true
         )
@@ -93,7 +89,7 @@ private fun DescriptionPager(
                     valueProvider = { state.description },
                     onValueChange = state::onDescriptionChange,
                     modifier = Modifier.fillMaxSize(),
-                    label = { Text(text = stringResource(Res.string.description)) },
+                    label = { Text(text = "설명") },
                 )
             }
 

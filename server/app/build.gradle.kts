@@ -13,15 +13,18 @@ dependencies {
 
     implementation(project(":server:data:account"))
     implementation(project(":server:data:memo"))
+    implementation(project(":server:data:tag"))
     implementation(project(":server:data:fcm"))
 
     implementation(project(":server:domain:account"))
     implementation(project(":server:domain:memo"))
+    implementation(project(":server:domain:tag"))
     implementation(project(":server:domain:fcm"))
 
     implementation(project(":server:feature:home"))
     implementation(project(":server:feature:account"))
     implementation(project(":server:feature:memo"))
+    implementation(project(":server:feature:tag"))
     implementation(project(":server:feature:fcm"))
 
     implementation(project(":common:model"))

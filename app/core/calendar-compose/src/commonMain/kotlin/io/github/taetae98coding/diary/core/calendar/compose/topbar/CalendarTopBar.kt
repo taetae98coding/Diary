@@ -28,17 +28,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.LifecycleStartEffect
+import androidx.lifecycle.compose.LifecycleResumeEffect
 import io.github.taetae98coding.diary.core.calendar.compose.state.CalendarState
 import io.github.taetae98coding.diary.core.design.system.date.DiaryDatePickerDialog
-import io.github.taetae98coding.diary.core.resources.Res
-import io.github.taetae98coding.diary.core.resources.icon.DropDownIcon
-import io.github.taetae98coding.diary.core.resources.icon.DropUpIcon
-import io.github.taetae98coding.diary.core.resources.year_and_month
+import io.github.taetae98coding.diary.core.design.system.icon.DropDownIcon
+import io.github.taetae98coding.diary.core.design.system.icon.DropUpIcon
 import io.github.taetae98coding.diary.library.datetime.todayIn
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
-import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -59,7 +56,7 @@ public fun CalendarTopBar(
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Text(text = stringResource(Res.string.year_and_month, state.localDate.year, state.localDate.monthNumber))
+                Text(text = "${state.localDate.year}년 ${state.localDate.monthNumber}월")
                 DropIcon(dropUpProvider = { isDialogVisible })
             }
 
@@ -80,9 +77,9 @@ public fun CalendarTopBar(
                 TodayIcon(text = today.dayOfMonth.toString())
             }
 
-            LifecycleStartEffect(Unit) {
+            LifecycleResumeEffect(Unit) {
                 today = LocalDate.todayIn()
-                onStopOrDispose { }
+                onPauseOrDispose { }
             }
         },
     )
