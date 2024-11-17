@@ -1,6 +1,6 @@
 package plugin.koin
 
-import ext.kspDataStore
+import ext.kspAll
 import ext.library
 import ext.libs
 import ext.sourceSets
@@ -34,8 +34,8 @@ internal class KoinDataStorePlugin : Plugin<Project>{
         }
 
         target.withDependency {
-            kspDataStore(platform(libs.library("koin-annotations-bom")))
-            kspDataStore(libs.library("koin-compiler"))
+            kspAll(platform(libs.library("koin-annotations-bom")))
+            kspAll(libs.library("koin-compiler"))
         }
     }
 }

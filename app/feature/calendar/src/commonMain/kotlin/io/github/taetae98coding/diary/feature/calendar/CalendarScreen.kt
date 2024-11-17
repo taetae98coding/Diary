@@ -9,7 +9,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.compose.LifecycleStartEffect
+import androidx.lifecycle.compose.LifecycleResumeEffect
 import io.github.taetae98coding.diary.core.calendar.compose.Calendar
 import io.github.taetae98coding.diary.core.calendar.compose.item.CalendarItemUiState
 import io.github.taetae98coding.diary.core.calendar.compose.modifier.calendarDateRangeSelectable
@@ -46,9 +46,9 @@ internal fun CalendarScreen(
                 ),
         )
 
-        LifecycleStartEffect(Unit) {
+        LifecycleResumeEffect(Unit) {
             today = LocalDate.todayIn()
-            onStopOrDispose { }
+            onPauseOrDispose { }
         }
     }
 }

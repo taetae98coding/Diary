@@ -2,7 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.1.0] - 2024-11-17
+## [1.2.0] - 2024-11-24
+
+### 🚀 Features
+
+- App - Tag
+- Server - Tag
+
+### 🐛 Bug Fixes
+
+- App - Change the date update time in CalendarScreen(Background/Foreground -> Focus Change)
+
+## [1.1.0] - 2024-11-19
 
 ### 🚀 Features
 

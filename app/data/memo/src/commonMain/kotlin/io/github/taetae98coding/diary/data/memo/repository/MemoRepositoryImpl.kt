@@ -1,9 +1,10 @@
 package io.github.taetae98coding.diary.data.memo.repository
 
-import io.github.taetae98coding.diary.core.diary.database.MemoBackupDao
 import io.github.taetae98coding.diary.core.diary.database.MemoDao
+import io.github.taetae98coding.diary.core.model.mapper.toDto
 import io.github.taetae98coding.diary.core.model.mapper.toMemo
 import io.github.taetae98coding.diary.core.model.memo.Memo
+import io.github.taetae98coding.diary.core.model.memo.MemoAndTagIds
 import io.github.taetae98coding.diary.core.model.memo.MemoDetail
 import io.github.taetae98coding.diary.core.model.memo.MemoDto
 import io.github.taetae98coding.diary.domain.memo.repository.MemoRepository
@@ -18,24 +19,17 @@ import org.koin.core.annotation.Factory
 @Factory
 internal class MemoRepositoryImpl(
     private val localDataSource: MemoDao,
-    private val backupDataSource: MemoBackupDao,
 ) : MemoRepository {
-    override suspend fun upsert(memo: Memo) {
-        val dto = MemoDto(
-            id = memo.id,
-            detail = memo.detail,
-            owner = memo.owner,
-            isFinish = memo.isFinish,
-            isDelete = memo.isDelete,
-            updateAt = memo.updateAt,
-            serverUpdateAt = null,
-        )
-
-        localDataSource.upsert(dto)
+    override suspend fun upsert(memo: Memo, tagIds: Set<String>) {
+        localDataSource.upsert(MemoAndTagIds(memo.toDto(), tagIds))
     }
 
     override suspend fun update(memoId: String, detail: MemoDetail) {
         localDataSource.update(memoId, detail)
+    }
+
+    override suspend fun updatePrimaryTag(memoId: String, tagId: String?) {
+        localDataSource.updatePrimaryTag(memoId, tagId)
     }
 
     override suspend fun updateFinish(memoId: String, isFinish: Boolean) {

@@ -10,11 +10,10 @@ import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.kotlin.datetime.date
 import org.jetbrains.exposed.sql.kotlin.datetime.timestamp
 import org.jetbrains.exposed.sql.selectAll
-import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.jetbrains.exposed.sql.upsert
 
 public data object MemoTable : Table(name = "Memo") {
-	private val ID = varchar("id", 255).default("")
+	internal val ID = varchar("id", 255).default("")
 	private val TITLE = varchar("title", 255).default("")
 	private val DESCRIPTION = text("description")
 	private val START = date("start").nullable().default(null)
@@ -27,45 +26,45 @@ public data object MemoTable : Table(name = "Memo") {
 			onDelete = ReferenceOption.CASCADE,
 			onUpdate = ReferenceOption.CASCADE,
 		)
+	private val PRIMARY_TAG =
+		reference(
+			name = "primaryTag",
+			refColumn = TagTable.ID,
+			onDelete = ReferenceOption.CASCADE,
+			onUpdate = ReferenceOption.CASCADE,
+		).nullable()
 	private val IS_FINISH = bool("isFinish").default(false)
 	private val IS_DELETE = bool("isDelete").default(false)
 	private val UPDATE_AT = timestamp("updateAt").default(Clock.System.now())
 
 	override val primaryKey: PrimaryKey = PrimaryKey(ID)
 
-	public suspend fun upsert(list: List<Memo>) {
-		newSuspendedTransaction {
-			list.forEach { memo ->
-				upsert {
-					it[ID] = memo.id
-					it[TITLE] = memo.title
-					it[DESCRIPTION] = memo.description
-					it[START] = memo.start
-					it[END_INCLUSIVE] = memo.endInclusive
-					it[COLOR] = memo.color
-					it[OWNER] = memo.owner
-					it[IS_FINISH] = memo.isFinish
-					it[IS_DELETE] = memo.isDelete
-					it[UPDATE_AT] = memo.updateAt
-				}
-			}
+	public fun upsert(memo: Memo) {
+		upsert {
+			it[ID] = memo.id
+			it[TITLE] = memo.title
+			it[DESCRIPTION] = memo.description
+			it[START] = memo.start
+			it[END_INCLUSIVE] = memo.endInclusive
+			it[COLOR] = memo.color
+			it[OWNER] = memo.owner
+			it[PRIMARY_TAG] = memo.primaryTag
+			it[IS_FINISH] = memo.isFinish
+			it[IS_DELETE] = memo.isDelete
+			it[UPDATE_AT] = memo.updateAt
 		}
 	}
 
-	public suspend fun findByIds(list: List<String>): List<Memo> =
-		newSuspendedTransaction {
-			selectAll()
-				.where { ID.inList(list) }
-				.map { it.toMemo() }
-		}
+	public fun findByIds(ids: Set<String>): List<Memo> =
+		selectAll()
+			.where { ID.inList(ids) }
+			.map { it.toMemo() }
 
-	public suspend fun findByUpdateAt(uid: String, updateAt: Instant): List<Memo> =
-		newSuspendedTransaction {
-			selectAll()
-				.where { (OWNER eq uid) and (UPDATE_AT greater updateAt) }
-				.limit(50)
-				.map { it.toMemo() }
-		}
+	public fun findByUpdateAt(uid: String, updateAt: Instant): List<Memo> =
+		selectAll()
+			.where { (OWNER eq uid) and (UPDATE_AT greater updateAt) }
+			.limit(50)
+			.map { it.toMemo() }
 
 	private fun ResultRow.toMemo(): Memo =
 		Memo(
@@ -76,6 +75,7 @@ public data object MemoTable : Table(name = "Memo") {
 			endInclusive = get(END_INCLUSIVE),
 			color = get(COLOR),
 			owner = get(OWNER),
+			primaryTag = get(PRIMARY_TAG),
 			isFinish = get(IS_FINISH),
 			isDelete = get(IS_DELETE),
 			updateAt = get(UPDATE_AT),

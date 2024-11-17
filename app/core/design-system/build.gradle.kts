@@ -17,11 +17,11 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(project(":app:core:resources"))
                 implementation(project(":library:color"))
                 implementation(project(":library:datetime"))
 
                 implementation(compose.material3)
+                implementation(compose.materialIconsExtended)
                 implementation(libs.compose.markdown)
             }
         }
@@ -43,7 +43,6 @@ kotlin {
 
         nonAndroidMain.dependsOn(commonMain.get())
         jvmMain.get().dependsOn(nonAndroidMain)
-        wasmJsMain.get().dependsOn(nonAndroidMain)
         iosMain.get().dependsOn(nonAndroidMain)
     }
 }

@@ -29,12 +29,6 @@ internal fun DependencyHandler.kspJvm(
     add("kspJvm", dependencyNotation)
 }
 
-internal fun DependencyHandler.kspWasmJs(
-    dependencyNotation: Provider<MinimalExternalModuleDependency>,
-) {
-    add("kspWasmJs", dependencyNotation)
-}
-
 internal fun DependencyHandler.kspAndroid(
     dependencyNotation: Provider<MinimalExternalModuleDependency>,
 ) {
@@ -53,28 +47,10 @@ public fun DependencyHandler.kspCommon(
     dependencyNotation: Provider<MinimalExternalModuleDependency>,
 ) {
     kspJvm(dependencyNotation)
-    kspWasmJs(dependencyNotation)
     kspIos(dependencyNotation)
 }
 
 public fun DependencyHandler.kspAll(
-    dependencyNotation: Provider<MinimalExternalModuleDependency>,
-) {
-    kspJvm(dependencyNotation)
-    kspWasmJs(dependencyNotation)
-    kspAndroid(dependencyNotation)
-    kspIos(dependencyNotation)
-}
-
-public fun DependencyHandler.kspDataStore(
-    dependencyNotation: Provider<MinimalExternalModuleDependency>,
-) {
-    kspJvm(dependencyNotation)
-    kspAndroid(dependencyNotation)
-    kspIos(dependencyNotation)
-}
-
-public fun DependencyHandler.kspRoom(
     dependencyNotation: Provider<MinimalExternalModuleDependency>,
 ) {
     kspJvm(dependencyNotation)

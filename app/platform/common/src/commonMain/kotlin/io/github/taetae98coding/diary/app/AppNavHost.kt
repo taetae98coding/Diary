@@ -9,6 +9,7 @@ import io.github.taetae98coding.diary.feature.account.accountNavigation
 import io.github.taetae98coding.diary.feature.calendar.calendarNavigation
 import io.github.taetae98coding.diary.feature.memo.memoNavigation
 import io.github.taetae98coding.diary.feature.more.moreNavigation
+import io.github.taetae98coding.diary.feature.tag.tagNavigation
 
 @Composable
 internal fun AppNavHost(
@@ -21,6 +22,7 @@ internal fun AppNavHost(
         modifier = modifier,
     ) {
         memoNavigation(navController = state.navController)
+        tagNavigation(navController = state.navController)
         calendarNavigation(navController = state.navController)
         moreNavigation(navController = state.navController)
         accountNavigation(navController = state.navController)

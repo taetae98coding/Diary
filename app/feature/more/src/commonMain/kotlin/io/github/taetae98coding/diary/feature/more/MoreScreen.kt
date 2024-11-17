@@ -13,11 +13,8 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import io.github.taetae98coding.diary.core.design.system.theme.DiaryTheme
-import io.github.taetae98coding.diary.core.resources.Res
-import io.github.taetae98coding.diary.core.resources.more
 import io.github.taetae98coding.diary.feature.more.account.MoreAccount
 import io.github.taetae98coding.diary.feature.more.account.state.MoreAccountUiState
-import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,7 +27,7 @@ internal fun MoreScreen(
     Scaffold(
         modifier = modifier,
         topBar = {
-            TopAppBar(title = { Text(text = stringResource(Res.string.more)) })
+            TopAppBar(title = { Text(text = "더보기") })
         },
     ) {
         Content(

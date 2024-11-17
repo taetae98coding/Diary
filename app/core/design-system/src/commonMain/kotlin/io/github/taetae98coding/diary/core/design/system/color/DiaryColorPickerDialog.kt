@@ -16,10 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import io.github.taetae98coding.diary.core.resources.Res
-import io.github.taetae98coding.diary.core.resources.dismiss
-import io.github.taetae98coding.diary.core.resources.select
-import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,7 +44,7 @@ public fun DiaryColorPickerDialog(
                 horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.End),
             ) {
                 TextButton(onClick = onDismissRequest) {
-                    Text(text = stringResource(Res.string.dismiss))
+                    Text(text = "닫기")
                 }
                 TextButton(
                     onClick = {
@@ -56,7 +52,7 @@ public fun DiaryColorPickerDialog(
                         onDismissRequest()
                     },
                 ) {
-                    Text(text = stringResource(Res.string.select))
+                    Text(text = "선택")
                 }
             }
         }

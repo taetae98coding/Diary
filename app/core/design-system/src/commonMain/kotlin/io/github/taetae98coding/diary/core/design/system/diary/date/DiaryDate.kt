@@ -27,11 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import io.github.taetae98coding.diary.core.design.system.date.DiaryDatePickerDialog
 import io.github.taetae98coding.diary.core.design.system.theme.DiaryTheme
-import io.github.taetae98coding.diary.core.resources.Res
-import io.github.taetae98coding.diary.core.resources.date
-import io.github.taetae98coding.diary.core.resources.month_and_day
 import kotlinx.datetime.LocalDate
-import org.jetbrains.compose.resources.stringResource
 
 @Composable
 public fun DiaryDate(
@@ -65,7 +61,7 @@ private fun Title(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(text = stringResource(Res.string.date))
+        Text(text = "날짜")
         Switch(
             checked = state.hasDate,
             onCheckedChange = null,
@@ -127,7 +123,7 @@ private fun DateButton(
                     style = DiaryTheme.typography.labelSmall,
                 )
                 Text(
-                    text = stringResource(Res.string.month_and_day, target.monthNumber, target.dayOfMonth),
+                    text = "${target.monthNumber}월 ${target.dayOfMonth}일",
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center,
                     style = DiaryTheme.typography.labelLarge,

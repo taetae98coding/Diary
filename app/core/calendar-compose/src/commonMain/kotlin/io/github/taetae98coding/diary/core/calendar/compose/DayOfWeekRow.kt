@@ -9,15 +9,6 @@ import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.text.style.TextAlign
 import io.github.taetae98coding.diary.core.calendar.compose.color.CalendarColors
 import io.github.taetae98coding.diary.core.design.system.theme.DiaryTheme
-import io.github.taetae98coding.diary.core.resources.Res
-import io.github.taetae98coding.diary.core.resources.fri
-import io.github.taetae98coding.diary.core.resources.mon
-import io.github.taetae98coding.diary.core.resources.sat
-import io.github.taetae98coding.diary.core.resources.sun
-import io.github.taetae98coding.diary.core.resources.thu
-import io.github.taetae98coding.diary.core.resources.tue
-import io.github.taetae98coding.diary.core.resources.wed
-import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun DayOfWeekRow(
@@ -28,49 +19,49 @@ internal fun DayOfWeekRow(
         val dayOfWeekModifier = Modifier.weight(1F)
 
         Text(
-            text = stringResource(Res.string.sun),
+            text = "일",
             modifier = dayOfWeekModifier,
             color = colors.sundayColor,
             textAlign = TextAlign.Center,
             style = DiaryTheme.typography.bodySmall,
         )
         Text(
-            text = stringResource(Res.string.mon),
+            text = "월",
             modifier = dayOfWeekModifier,
             color = colors.dayColor.takeOrElse { LocalContentColor.current },
             textAlign = TextAlign.Center,
             style = DiaryTheme.typography.bodySmall,
         )
         Text(
-            text = stringResource(Res.string.tue),
+            text = "화",
             modifier = dayOfWeekModifier,
             color = colors.dayColor.takeOrElse { LocalContentColor.current },
             textAlign = TextAlign.Center,
             style = DiaryTheme.typography.bodySmall,
         )
         Text(
-            text = stringResource(Res.string.wed),
+            text = "수",
             modifier = dayOfWeekModifier,
             color = colors.dayColor.takeOrElse { LocalContentColor.current },
             textAlign = TextAlign.Center,
             style = DiaryTheme.typography.bodySmall,
         )
         Text(
-            text = stringResource(Res.string.thu),
+            text = "목",
             modifier = dayOfWeekModifier,
             color = colors.dayColor.takeOrElse { LocalContentColor.current },
             textAlign = TextAlign.Center,
             style = DiaryTheme.typography.bodySmall,
         )
         Text(
-            text = stringResource(Res.string.fri),
+            text = "금",
             modifier = dayOfWeekModifier,
             color = colors.dayColor.takeOrElse { LocalContentColor.current },
             textAlign = TextAlign.Center,
             style = DiaryTheme.typography.bodySmall,
         )
         Text(
-            text = stringResource(Res.string.sat),
+            text = "토",
             modifier = dayOfWeekModifier,
             color = colors.saturdayColor,
             textAlign = TextAlign.Center,

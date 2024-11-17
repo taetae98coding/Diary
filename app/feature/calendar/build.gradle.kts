@@ -8,7 +8,7 @@ kotlin {
             dependencies {
                 implementation(project(":app:core:calendar-compose"))
 
-                implementation(project(":app:domain:memo"))
+                implementation(project(":app:domain:calendar"))
                 implementation(project(":app:domain:holiday"))
             }
         }

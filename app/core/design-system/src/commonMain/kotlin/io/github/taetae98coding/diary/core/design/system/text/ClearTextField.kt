@@ -11,7 +11,7 @@ import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.VisualTransformation
-import io.github.taetae98coding.diary.core.resources.icon.ClearIcon
+import io.github.taetae98coding.diary.core.design.system.icon.ClearIcon
 
 @Composable
 @NonRestartableComposable
