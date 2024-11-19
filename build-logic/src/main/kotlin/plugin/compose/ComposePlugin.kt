@@ -5,6 +5,7 @@ import ext.withComposeCompiler
 import ext.withPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.file.RegularFile
 import org.gradle.kotlin.dsl.assign
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
 
@@ -25,6 +26,7 @@ internal class ComposePlugin : Plugin<Project> {
             featureFlags.add(ComposeFeatureFlag.OptimizeNonSkippingGroups)
 //            featureFlags.add(ComposeFeatureFlag.PausableComposition)
 
+            stabilityConfigurationFile.set(RegularFile { target.rootProject.file("compose-stability-configuration-file.txt") })
 //            stabilityConfigurationFiles.add(RegularFile { target.rootProject.file("compose-stability-configuration-file.txt") })
 
             metricsDestination.assign(target.rootProject.file("build/compose/metrics"))

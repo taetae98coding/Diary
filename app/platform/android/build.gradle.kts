@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.android.firebase.perf)
     alias(libs.plugins.google.services)
     alias(libs.plugins.dependency.guard)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -34,8 +35,8 @@ android {
     defaultConfig {
         applicationId = "io.github.taetae98coding.diary"
 
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.1.0"
     }
 
     buildTypes {
@@ -92,6 +93,7 @@ dependencies {
     implementation(project(":app:core:holiday-preferences-datastore"))
     implementation(project(":app:core:holiday-database-room"))
     implementation(project(":app:core:holiday-service"))
+    implementation(project(":app:domain:fcm"))
 
     implementation(libs.android.material)
     implementation(libs.androidx.activity.compose)
@@ -101,9 +103,14 @@ dependencies {
     implementation(libs.android.firebase.analytics)
     implementation(libs.android.firebase.crashlytics)
     implementation(libs.android.firebase.perf)
+    implementation(libs.android.firebase.messaging)
 
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
+    implementation(platform(libs.koin.annotations.bom))
+    implementation(libs.koin.annotations)
+    ksp(platform(libs.koin.annotations.bom))
+    ksp(libs.koin.compiler)
 
     runtimeOnly(libs.ktor.client.okhttp)
 

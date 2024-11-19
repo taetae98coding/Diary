@@ -7,6 +7,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":app:domain:account"))
+                implementation(project(":app:domain:backup"))
             }
         }
     }

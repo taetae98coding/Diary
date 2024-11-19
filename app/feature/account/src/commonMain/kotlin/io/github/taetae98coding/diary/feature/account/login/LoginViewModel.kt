@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.github.taetae98coding.diary.common.exception.NetworkException
 import io.github.taetae98coding.diary.common.exception.account.AccountNotFoundException
-import io.github.taetae98coding.diary.domain.account.usecase.LoginUseCase
+import io.github.taetae98coding.diary.domain.credential.usecase.LoginUseCase
 import io.github.taetae98coding.diary.feature.account.login.state.LoginUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

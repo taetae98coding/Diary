@@ -88,6 +88,11 @@ gradlePlugin {
             implementationClass = "plugin.compose.ComposePlugin"
         }
 
+        register("diary.cocoapods") {
+            id = "diary.cocoapods"
+            implementationClass = "plugin.cocoapods.CocoapodsPlugin"
+        }
+
         register("diary.app.data") {
             id = "diary.app.data"
             implementationClass = "plugin.convention.AppDataPlugin"

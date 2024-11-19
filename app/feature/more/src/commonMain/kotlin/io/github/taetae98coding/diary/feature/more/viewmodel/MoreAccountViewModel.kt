@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.github.taetae98coding.diary.core.model.account.Account
 import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
-import io.github.taetae98coding.diary.domain.account.usecase.LogoutUseCase
+import io.github.taetae98coding.diary.domain.credential.usecase.LogoutUseCase
 import io.github.taetae98coding.diary.feature.more.account.state.MoreAccountUiState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow

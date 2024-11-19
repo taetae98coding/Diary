@@ -50,15 +50,6 @@ public fun Route.memoRouting() {
 					.onSuccess { call.respond(DiaryResponse.success(it.map(Memo::toEntity))) }
 			}
 		}
-
-		post<List<MemoEntity>>("/migrate") { request ->
-			val useCase = call.scope.get<UpsertMemoUseCase>()
-			val memoList = request.map(MemoEntity::toMemo)
-
-			useCase(memoList)
-				.onSuccess { call.respond(DiaryResponse.Success) }
-				.onFailure { call.respond(HttpStatusCode.InternalServerError, it.toString()) }
-		}
 	}
 }
 

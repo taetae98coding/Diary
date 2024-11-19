@@ -1,6 +1,7 @@
 package io.github.taetae98coding.diary.plugin
 
 import io.github.taetae98coding.diary.core.database.AccountTable
+import io.github.taetae98coding.diary.core.database.FCMTokenTable
 import io.github.taetae98coding.diary.core.database.MemoTable
 import io.ktor.server.application.Application
 import org.jetbrains.exposed.sql.Database
@@ -17,6 +18,6 @@ internal fun Application.installDatabase() {
 		)
 
 	transaction(database) {
-		SchemaUtils.createMissingTablesAndColumns(AccountTable, MemoTable)
+		SchemaUtils.createMissingTablesAndColumns(AccountTable, MemoTable, FCMTokenTable)
 	}
 }

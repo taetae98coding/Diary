@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_channel_name">다이어리</string>
+    <string name="default_channel_description">다이어리 알림.</string>
+</resources>

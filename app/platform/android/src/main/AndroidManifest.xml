@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:name=".DiaryApplication"
         android:enableOnBackInvokedCallback="true"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
         android:theme="@style/Theme.Material3.DayNight.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
@@ -21,12 +22,31 @@
             </intent-filter>
         </activity>
 
+        <service
+            android:name=".service.DiaryFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
             android:exported="false"
             tools:node="merge">
-            <!-- This entry makes ExampleLoggerInitializer discoverable. -->
+            <meta-data
+                android:name="io.github.taetae98coding.diary.initializer.BackupManagerInitializer"
+                android:value="androidx.startup" />
+
+            <meta-data
+                android:name="io.github.taetae98coding.diary.initializer.FCMManagerInitializer"
+                android:value="androidx.startup" />
+
+            <meta-data
+                android:name="io.github.taetae98coding.diary.initializer.FetchManagerInitializer"
+                android:value="androidx.startup" />
+
             <meta-data
                 android:name="io.github.taetae98coding.diary.initializer.KoinInitializer"
                 android:value="androidx.startup" />

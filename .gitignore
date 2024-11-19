@@ -12,3 +12,4 @@
 **/xcuserdata
 **/dev.xcconfig
 **/real.xcconfig
+**/*.podspec

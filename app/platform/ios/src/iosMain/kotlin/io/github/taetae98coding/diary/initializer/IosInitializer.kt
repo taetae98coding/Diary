@@ -6,4 +6,5 @@ public fun init() {
 
     initBackupManager(koinApplication)
     initFetchManager(koinApplication)
+    initFirebaseMessagingManager(koinApplication)
 }

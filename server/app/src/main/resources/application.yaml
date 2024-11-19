@@ -9,3 +9,6 @@ database:
   url: $DIARY_DATABASE_URL
   user: $DIARY_DATABASE_USER
   password: $DIARY_DATABASE_PASSWORD
+
+firebase:
+  key: $DIARY_FIREBASE_ADMIN_KEY

@@ -3,17 +3,17 @@
 kotlin = "2.0.21"                           # https://github.com/jetbrains/kotlin/releases
 agp = "8.6.1"                               # https://developer.android.com/build/releases/gradle-plugin?hl=en
 ktor = "3.0.1"                              # https://github.com/ktorio/ktor/releases
-ksp = "2.0.21-1.0.26"                       # https://github.com/google/ksp/releases
+ksp = "2.0.21-1.0.28"                       # https://github.com/google/ksp/releases
 
 kotlinx-serialization = "1.7.3"             # https://github.com/Kotlin/kotlinx.serialization/releases
 kotlinx-coroutines = "1.9.0"                # https://github.com/Kotlin/kotlinx.coroutines/releases
 kotlinx-datetime = "0.6.1"                  # https://github.com/Kotlin/kotlinx-datetime/releases
 
 ### multiplatform
-compose = "1.7.0"                           # https://github.com/JetBrains/compose-multiplatform/releases
-compose-material3-adaptive = "1.0.0"
+compose = "1.7.1"                           # https://github.com/JetBrains/compose-multiplatform/releases
+compose-material3-adaptive = "1.0.1"
 navigation = "2.8.0-alpha10"
-lifecycle = "2.8.3"
+lifecycle = "2.8.4"
 androidx-lifecycle = "2.8.5"
 
 compose-markdown = "0.27.0"                 # https://github.com/mikepenz/multiplatform-markdown-renderer/releases
@@ -29,7 +29,7 @@ android-material = "1.12.0"                 # https://github.com/material-compon
 androidx-activity = "1.9.3"                 # https://developer.android.com/jetpack/androidx/releases/activity?hl=en
 androidx-startup = "1.2.0"                  # https://developer.android.com/jetpack/androidx/releases/startup?hl=en
 
-android-firebase-bom = "33.5.1"             # https://firebase.google.com/support/release-notes/android
+android-firebase-bom = "33.6.0"             # https://firebase.google.com/support/release-notes/android
 android-firebase-crashlytics-plugin = "3.0.2"
 android-firebase-perf-plugin = "1.4.2"
 google-services = "4.4.2"
@@ -39,6 +39,7 @@ leakcanary = "2.14"                         # https://github.com/square/leakcana
 ### server
 exposed = "0.56.0"                          # https://github.com/JetBrains/Exposed/releases
 mysql = "8.0.33"
+server-firebase-admin = "9.4.1"             # https://github.com/firebase/firebase-admin-java/releases
 
 logback = "1.5.12"                          # https://github.com/qos-ch/logback/tags
 
@@ -103,6 +104,7 @@ android-firebase-bom = { group = "com.google.firebase", name = "firebase-bom", v
 android-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 android-firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
 android-firebase-perf = { group = "com.google.firebase", name = "firebase-perf" }
+android-firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging" }
 
 leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakcanary" }
 
@@ -128,6 +130,8 @@ exposed-datetime = { group = "org.jetbrains.exposed", name = "exposed-kotlin-dat
 exposed-jdbc = { group = "org.jetbrains.exposed", name = "exposed-jdbc" }
 mysql-connector = { group = "mysql", name = "mysql-connector-java", version.ref = "mysql" }
 
+server-firebase-admin = { group = "com.google.firebase", name = "firebase-admin", version.ref = "server-firebase-admin" }
+
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 
 [plugins]
@@ -136,6 +140,7 @@ kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref 
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 
+kotlin-cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
