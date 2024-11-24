@@ -9,15 +9,14 @@ import kotlinx.datetime.number
 import org.koin.core.annotation.Factory
 
 @Factory
-internal class HolidayRoomDao(
-    private val database: HolidayDatabase,
-) : HolidayDao {
-    override fun findHoliday(year: Int, month: Month): Flow<List<Holiday>> {
-        return database.holidayDao().findHoliday(year, month.number)
-            .mapCollectionLatest(HolidayEntity::toHoliday)
-    }
+internal class HolidayRoomDao(private val database: HolidayDatabase) : HolidayDao {
+	override fun findHoliday(year: Int, month: Month): Flow<List<Holiday>> =
+		database
+			.holidayDao()
+			.findHoliday(year, month.number)
+			.mapCollectionLatest(HolidayEntity::toHoliday)
 
-    override suspend fun upsert(year: Int, month: Month, holidayList: List<Holiday>) {
-        database.holidayDao().upsert(year, month.number, holidayList.map(Holiday::toEntity))
-    }
+	override suspend fun upsert(year: Int, month: Month, holidayList: List<Holiday>) {
+		database.holidayDao().upsert(year, month.number, holidayList.map(Holiday::toEntity))
+	}
 }

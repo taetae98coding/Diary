@@ -6,10 +6,9 @@ import androidx.datastore.preferences.core.Preferences
 import okio.Path.Companion.toPath
 import org.koin.core.component.KoinComponent
 
-public fun KoinComponent.getDataStore(name: String): DataStore<Preferences> {
-    return PreferenceDataStoreFactory.createWithPath(
-        produceFile = { getDataStoreAbsolutePath(name).toPath() },
-    )
-}
+public fun KoinComponent.getDataStore(name: String): DataStore<Preferences> =
+	PreferenceDataStoreFactory.createWithPath(
+		produceFile = { getDataStoreAbsolutePath(name).toPath() },
+	)
 
 internal expect fun KoinComponent.getDataStoreAbsolutePath(name: String): String

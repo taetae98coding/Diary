@@ -24,86 +24,92 @@ import org.koin.android.annotation.KoinViewModel
 @OptIn(ExperimentalCoroutinesApi::class)
 @KoinViewModel
 internal class MemoDetailViewModel(
-    savedStateHandle: SavedStateHandle,
-    findMemoUseCase: FindMemoUseCase,
-    private val updateMemoUseCase: UpdateMemoUseCase,
-    private val finishMemoUseCase: FinishMemoUseCase,
-    private val restartMemoUseCase: RestartMemoUseCase,
-    private val deleteMemoUseCase: DeleteMemoUseCase,
+	savedStateHandle: SavedStateHandle,
+	findMemoUseCase: FindMemoUseCase,
+	private val updateMemoUseCase: UpdateMemoUseCase,
+	private val finishMemoUseCase: FinishMemoUseCase,
+	private val restartMemoUseCase: RestartMemoUseCase,
+	private val deleteMemoUseCase: DeleteMemoUseCase,
 ) : ViewModel() {
-    private val route = savedStateHandle.toRoute<MemoDetailDestination>()
+	private val route = savedStateHandle.toRoute<MemoDetailDestination>()
 
-    private val _uiState = MutableStateFlow(MemoDetailScreenUiState(onMessageShow = ::clearMessage))
-    val uiState = _uiState.asStateFlow()
+	private val _uiState = MutableStateFlow(MemoDetailScreenUiState(onMessageShow = ::clearMessage))
+	val uiState = _uiState.asStateFlow()
 
-    private val memo = findMemoUseCase(route.memoId)
-        .mapLatest { it.getOrNull() }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = null,
-        )
+	private val memo =
+		findMemoUseCase(route.memoId)
+			.mapLatest { it.getOrNull() }
+			.stateIn(
+				scope = viewModelScope,
+				started = SharingStarted.WhileSubscribed(5_000),
+				initialValue = null,
+			)
 
-    val detail = memo.mapLatest { it?.detail }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = null,
-        )
+	val detail =
+		memo
+			.mapLatest { it?.detail }
+			.stateIn(
+				scope = viewModelScope,
+				started = SharingStarted.WhileSubscribed(5_000),
+				initialValue = null,
+			)
 
-    val actionButton = memo.mapLatest {
-        MemoDetailActionButton.FinishAndDetail(
-            isFinish = it?.isFinish ?: false,
-            onFinishChange = ::onFinishChange,
-            delete = ::delete,
-        )
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = MemoDetailActionButton.FinishAndDetail(
-            isFinish = false,
-            onFinishChange = ::onFinishChange,
-            delete = ::delete,
-        ),
-    )
+	val actionButton =
+		memo
+			.mapLatest {
+				MemoDetailActionButton.FinishAndDetail(
+					isFinish = it?.isFinish ?: false,
+					onFinishChange = ::onFinishChange,
+					delete = ::delete,
+				)
+			}.stateIn(
+				scope = viewModelScope,
+				started = SharingStarted.WhileSubscribed(5_000),
+				initialValue =
+				MemoDetailActionButton.FinishAndDetail(
+					isFinish = false,
+					onFinishChange = ::onFinishChange,
+					delete = ::delete,
+				),
+			)
 
-    private fun onFinishChange(isFinish: Boolean) {
-        viewModelScope.launch {
-            if (isFinish) {
-                finishMemoUseCase(route.memoId).onFailure { handleThrowable() }
-            } else {
-                restartMemoUseCase(route.memoId).onFailure { handleThrowable() }
-            }
-        }
-    }
+	private fun onFinishChange(isFinish: Boolean) {
+		viewModelScope.launch {
+			if (isFinish) {
+				finishMemoUseCase(route.memoId).onFailure { handleThrowable() }
+			} else {
+				restartMemoUseCase(route.memoId).onFailure { handleThrowable() }
+			}
+		}
+	}
 
-    private fun delete() {
-        viewModelScope.launch {
-            deleteMemoUseCase(route.memoId)
-                .onSuccess { _uiState.update { it.copy(isDelete = true) } }
-                .onFailure { handleThrowable() }
-        }
-    }
+	private fun delete() {
+		viewModelScope.launch {
+			deleteMemoUseCase(route.memoId)
+				.onSuccess { _uiState.update { it.copy(isDelete = true) } }
+				.onFailure { handleThrowable() }
+		}
+	}
 
-    private fun handleThrowable() {
-        _uiState.update { it.copy(isUnknownError = true) }
-    }
+	private fun handleThrowable() {
+		_uiState.update { it.copy(isUnknownError = true) }
+	}
 
-    private fun clearMessage() {
-        _uiState.update {
-            it.copy(
-                isDelete = false,
-                isUpdate = false,
-                isUnknownError = false,
-            )
-        }
-    }
+	private fun clearMessage() {
+		_uiState.update {
+			it.copy(
+				isDelete = false,
+				isUpdate = false,
+				isUnknownError = false,
+			)
+		}
+	}
 
-    fun update(detail: MemoDetail) {
-        viewModelScope.launch {
-            updateMemoUseCase(route.memoId, detail)
-                .onSuccess { _uiState.update { it.copy(isUpdate = true) } }
-                .onFailure { handleThrowable() }
-        }
-    }
+	fun update(detail: MemoDetail) {
+		viewModelScope.launch {
+			updateMemoUseCase(route.memoId, detail)
+				.onSuccess { _uiState.update { it.copy(isUpdate = true) } }
+				.onFailure { handleThrowable() }
+		}
+	}
 }

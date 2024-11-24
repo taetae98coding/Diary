@@ -16,35 +16,40 @@ import org.koin.core.annotation.Named
 
 @Factory
 public class AccountService internal constructor(
-    @Named(DiaryServiceModule.DIARY_CLIENT)
-    private val client: HttpClient,
+	@Named(DiaryServiceModule.DIARY_CLIENT)
+	private val client: HttpClient,
 ) {
-    public suspend fun join(email: String, password: String) {
-        return client.post("/account/join") {
-            val body = JoinRequest(
-                email = email,
-                password = password,
-            )
+	public suspend fun join(email: String, password: String) {
+		client
+			.post("/account/join") {
+				val body =
+					JoinRequest(
+						email = email,
+						password = password,
+					)
 
-            contentType(ContentType.Application.Json)
-            setBody(body)
-        }.getOrThrow()
-    }
+				contentType(ContentType.Application.Json)
+				setBody(body)
+			}.getOrThrow<Unit>()
+	}
 
-    public suspend fun login(email: String, password: String): AccountToken {
-        val response = client.post("/account/login") {
-            val body = LoginRequest(
-                email = email,
-                password = password,
-            )
+	public suspend fun login(email: String, password: String): AccountToken {
+		val response =
+			client
+				.post("/account/login") {
+					val body =
+						LoginRequest(
+							email = email,
+							password = password,
+						)
 
-            contentType(ContentType.Application.Json)
-            setBody(body)
-        }.getOrThrow<LoginResponse>()
+					contentType(ContentType.Application.Json)
+					setBody(body)
+				}.getOrThrow<LoginResponse>()
 
-        return AccountToken(
-            uid = response.uid,
-            token = response.token,
-        )
-    }
+		return AccountToken(
+			uid = response.uid,
+			token = response.token,
+		)
+	}
 }

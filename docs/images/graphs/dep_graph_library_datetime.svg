@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="154pt" height="44pt" viewBox="0 0 153.69 44">
+    <g class="graph">
+        <path fill="#fff" d="M0 44V0h153.69v44z"/>
+        <g class="node" transform="translate(4 40)">
+            <ellipse cx="72.85" cy="-18" fill="none" stroke="#000" rx="72.85" ry="18"/>
+            <text x="72.85" y="-12.95" font-family="Times,serif" font-size="14" text-anchor="middle">:library:datetime</text>
+        </g>
+    </g>
+</svg>

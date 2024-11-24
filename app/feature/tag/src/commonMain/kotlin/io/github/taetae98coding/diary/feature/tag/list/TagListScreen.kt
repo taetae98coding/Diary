@@ -17,6 +17,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -28,165 +31,164 @@ import io.github.taetae98coding.diary.core.design.system.theme.DiaryTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun TagListScreen(
-    state: TagListScreenState,
-    floatingButtonProvider: () -> TagListFloatingButton,
-    listProvider: () -> List<TagListItemUiState>?,
-    onTag: (String) -> Unit,
-    uiStateProvider: () -> TagListScreenUiState,
-    modifier: Modifier = Modifier,
+	state: TagListScreenState,
+	floatingButtonProvider: () -> TagListFloatingButton,
+	listProvider: () -> List<TagListItemUiState>?,
+	onTag: (String) -> Unit,
+	uiStateProvider: () -> TagListScreenUiState,
+	modifier: Modifier = Modifier,
 ) {
-    Scaffold(
-        modifier = modifier,
-        topBar = {
-            TopAppBar(
-                title = { Text(text = "태그") },
-            )
-        },
-        snackbarHost = { SnackbarHost(hostState = state.hostState) },
-        floatingActionButton = {
-            val button = floatingButtonProvider()
+	Scaffold(
+		modifier = modifier,
+		topBar = {
+			TopAppBar(
+				title = { Text(text = "태그") },
+			)
+		},
+		snackbarHost = { SnackbarHost(hostState = state.hostState) },
+		floatingActionButton = {
+			val button = floatingButtonProvider()
 
-            AnimatedVisibility(
-                visible = button is TagListFloatingButton.Add,
-                enter = scaleIn(),
-                exit = scaleOut(),
-            ) {
-                FloatingAddButton(
-                    onClick = {
-                        if (button is TagListFloatingButton.Add) {
-                            button.onAdd()
-                        }
-                    },
-                )
-            }
-        },
-    ) {
-        Content(
-            listProvider = listProvider,
-            onTag = onTag,
-            modifier = Modifier.fillMaxSize()
-                .padding(it),
-        )
-    }
+			AnimatedVisibility(
+				visible = button is TagListFloatingButton.Add,
+				enter = scaleIn(),
+				exit = scaleOut(),
+			) {
+				FloatingAddButton(
+					onClick = {
+						if (button is TagListFloatingButton.Add) {
+							button.onAdd()
+						}
+					},
+				)
+			}
+		},
+	) {
+		Content(
+			listProvider = listProvider,
+			onTag = onTag,
+			modifier = Modifier.fillMaxSize()
+				.padding(it),
+		)
+	}
 
-    Message(
-        state = state,
-        uiStateProvider = uiStateProvider,
-    )
+	Message(
+		state = state,
+		uiStateProvider = uiStateProvider,
+	)
 }
 
 @Composable
 private fun Message(
-    state: TagListScreenState,
-    uiStateProvider: () -> TagListScreenUiState,
+	state: TagListScreenState,
+	uiStateProvider: () -> TagListScreenUiState,
 ) {
-    val uiState = uiStateProvider()
+	val uiState = uiStateProvider()
 
-    LaunchedEffect(
-        uiState.finishTagId,
-        uiState.deleteTagId,
-        uiState.isUnknownError,
-    ) {
-        if (!uiState.hasMessage) return@LaunchedEffect
+	LaunchedEffect(
+		uiState.finishTagId,
+		uiState.deleteTagId,
+		uiState.isUnknownError,
+	) {
+		if (!uiState.hasMessage) return@LaunchedEffect
 
-        when {
-            !uiState.finishTagId.isNullOrBlank() -> {
-                state.showMessage(
-                    message = "태그 완료 ${Emoji.congratulate.random()}",
-                    actionLabel = "취소",
-                ) {
-                    uiState.restartTag(uiState.finishTagId)
-                }
-            }
+		when {
+			!uiState.finishTagId.isNullOrBlank() -> {
+				state.showMessage(
+					message = "태그 완료 ${Emoji.congratulate.random()}",
+					actionLabel = "취소",
+				) {
+					uiState.restartTag(uiState.finishTagId)
+				}
+			}
 
-            !uiState.deleteTagId.isNullOrBlank() -> {
-                state.showMessage(
-                    message = "태그 삭제 ${Emoji.congratulate.random()}",
-                    actionLabel = "취소",
-                ) {
-                    uiState.restoreTag(uiState.deleteTagId)
-                }
-            }
+			!uiState.deleteTagId.isNullOrBlank() -> {
+				state.showMessage(
+					message = "태그 삭제 ${Emoji.congratulate.random()}",
+					actionLabel = "취소",
+				) {
+					uiState.restoreTag(uiState.deleteTagId)
+				}
+			}
 
-            uiState.isUnknownError -> state.showMessage("알 수 없는 에러가 발생했어요 잠시 후 다시 시도해 주세요 ${Emoji.error.random()}")
-        }
+			uiState.isUnknownError -> state.showMessage("알 수 없는 에러가 발생했어요 잠시 후 다시 시도해 주세요 ${Emoji.error.random()}")
+		}
 
-        uiState.onMessageShow()
-    }
+		uiState.onMessageShow()
+	}
 }
 
 @Composable
 private fun Content(
-    listProvider: () -> List<TagListItemUiState>?,
-    onTag: (String) -> Unit,
-    modifier: Modifier = Modifier,
+	listProvider: () -> List<TagListItemUiState>?,
+	onTag: (String) -> Unit,
+	modifier: Modifier = Modifier,
 ) {
-    LazyColumn(
-        modifier = modifier,
-        contentPadding = DiaryTheme.dimen.screenPaddingValues,
-        verticalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace),
-    ) {
-        val list = listProvider()
+	val isLoading by remember { derivedStateOf { listProvider() == null } }
+	val isEmpty by remember { derivedStateOf { !isLoading && listProvider().isNullOrEmpty() } }
 
-        if (list == null) {
-            items(
-                count = 5,
-                contentType = { "Tag" },
-            ) {
-                TagItem(
-                    uiState = null,
-                    onClick = {},
-                )
-            }
-        } else {
-            if (list.isEmpty()) {
-                item {
-                    Box(
-                        modifier = Modifier.fillParentMaxSize(),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Text(
-                            text = "태그가 없어요 🐼",
-                            style = DiaryTheme.typography.headlineMedium,
-                        )
-                    }
-                }
-            } else {
-                items(
-                    items = list,
-                    key = { it.id },
-                    contentType = { "Tag" },
-                ) {
-                    TagItem(
-                        uiState = it,
-                        onClick = { onTag(it.id) },
-                        modifier = Modifier.animateItem(),
-                    )
-                }
-            }
-        }
-    }
+	if (isEmpty) {
+		Box(
+			modifier = modifier,
+			contentAlignment = Alignment.Center,
+		) {
+			Text(
+				text = "태그가 없어요 🐼",
+				style = DiaryTheme.typography.headlineMedium,
+			)
+		}
+	} else {
+		LazyColumn(
+			modifier = modifier,
+			contentPadding = DiaryTheme.dimen.screenPaddingValues,
+			verticalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace),
+		) {
+			if (isLoading) {
+				items(
+					count = 5,
+					contentType = { "Tag" },
+				) {
+					TagItem(
+						uiState = null,
+						onClick = {},
+					)
+				}
+			} else {
+				items(
+					items = listProvider().orEmpty(),
+					key = { it.id },
+					contentType = { "Tag" },
+				) {
+					TagItem(
+						uiState = it,
+						onClick = { onTag(it.id) },
+						modifier = Modifier.animateItem(),
+					)
+				}
+			}
+		}
+	}
 }
 
 @Composable
 private fun TagItem(
-    uiState: TagListItemUiState?,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
+	uiState: TagListItemUiState?,
+	onClick: () -> Unit,
+	modifier: Modifier = Modifier,
 ) {
-    FinishAndDeleteSwipeBox(
-        modifier = modifier,
-        onFinish = { uiState?.finish?.value?.invoke() },
-        onDelete = { uiState?.delete?.value?.invoke() },
-    ) {
-        Card(onClick = onClick) {
-            Box(
-                modifier = Modifier.fillMaxSize()
-                    .padding(16.dp),
-                contentAlignment = Alignment.Center,
-            ) {
-                Text(text = uiState?.title.orEmpty())
-            }
-        }
-    }
+	FinishAndDeleteSwipeBox(
+		modifier = modifier,
+		onFinish = { uiState?.finish?.value?.invoke() },
+		onDelete = { uiState?.delete?.value?.invoke() },
+	) {
+		Card(onClick = onClick) {
+			Box(
+				modifier = Modifier.fillMaxSize()
+					.padding(16.dp),
+				contentAlignment = Alignment.Center,
+			) {
+				Text(text = uiState?.title.orEmpty())
+			}
+		}
+	}
 }

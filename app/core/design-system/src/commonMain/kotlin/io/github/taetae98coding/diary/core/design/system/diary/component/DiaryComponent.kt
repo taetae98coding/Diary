@@ -26,85 +26,85 @@ import kotlinx.coroutines.launch
 
 @Composable
 public fun DiaryComponent(
-    state: DiaryComponentState,
-    modifier: Modifier = Modifier,
+	state: DiaryComponentState,
+	modifier: Modifier = Modifier,
 ) {
-    Card(modifier = modifier) {
-        ClearTextField(
-            valueProvider = { state.title },
-            onValueChange = state::onTitleChange,
-            modifier = Modifier.fillMaxWidth()
-                .focusRequester(state.titleFocusRequester),
-            label = { Text(text = "제목") },
-            errorProvider = { state.isTitleError },
-            singleLine = true
-        )
-        DescriptionTabRow(state = state)
-        DescriptionPager(
-            state = state,
-            modifier = Modifier.height(200.dp),
-        )
-    }
+	Card(modifier = modifier) {
+		ClearTextField(
+			valueProvider = { state.title },
+			onValueChange = state::onTitleChange,
+			modifier = Modifier.fillMaxWidth()
+				.focusRequester(state.titleFocusRequester),
+			label = { Text(text = "제목") },
+			errorProvider = { state.isTitleError },
+			singleLine = true,
+		)
+		DescriptionTabRow(state = state)
+		DescriptionPager(
+			state = state,
+			modifier = Modifier.height(200.dp),
+		)
+	}
 }
 
 @Composable
 private fun DescriptionTabRow(
-    state: DiaryComponentState,
-    modifier: Modifier = Modifier,
+	state: DiaryComponentState,
+	modifier: Modifier = Modifier,
 ) {
-    TabRow(
-        selectedTabIndex = state.pagerState.currentPage,
-        modifier = modifier,
-    ) {
-        val coroutineScope = rememberCoroutineScope()
+	TabRow(
+		selectedTabIndex = state.pagerState.currentPage,
+		modifier = modifier,
+	) {
+		val coroutineScope = rememberCoroutineScope()
 
-        repeat(2) { page ->
-            Tab(
-                selected = state.pagerState.currentPage == page,
-                onClick = { coroutineScope.launch { state.pagerState.animateScrollToPage(page) } },
-                icon = {
-                    when (page) {
-                        0 -> TextFieldIcon()
-                        1 -> MarkdownIcon()
-                    }
-                },
-            )
-        }
-    }
+		repeat(2) { page ->
+			Tab(
+				selected = state.pagerState.currentPage == page,
+				onClick = { coroutineScope.launch { state.pagerState.animateScrollToPage(page) } },
+				icon = {
+					when (page) {
+						0 -> TextFieldIcon()
+						1 -> MarkdownIcon()
+					}
+				},
+			)
+		}
+	}
 }
 
 @Composable
 private fun DescriptionPager(
-    state: DiaryComponentState,
-    modifier: Modifier = Modifier,
+	state: DiaryComponentState,
+	modifier: Modifier = Modifier,
 ) {
-    HorizontalPager(
-        state = state.pagerState,
-        modifier = modifier,
-        key = { it },
-    ) { page ->
-        when (page) {
-            0 -> {
-                ClearTextField(
-                    valueProvider = { state.description },
-                    onValueChange = state::onDescriptionChange,
-                    modifier = Modifier.fillMaxSize(),
-                    label = { Text(text = "설명") },
-                )
-            }
+	HorizontalPager(
+		state = state.pagerState,
+		modifier = modifier,
+		key = { it },
+	) { page ->
+		when (page) {
+			0 -> {
+				ClearTextField(
+					valueProvider = { state.description },
+					onValueChange = state::onDescriptionChange,
+					modifier = Modifier.fillMaxSize(),
+					label = { Text(text = "설명") },
+				)
+			}
 
-            1 -> {
-                Column(
-                    modifier = Modifier.fillMaxSize()
-                        .verticalScroll(rememberScrollState())
-                        .padding(DiaryTheme.dimen.diaryPaddingValues),
-                ) {
-                    Markdown(
-                        content = state.description,
-                        modifier = Modifier.fillMaxSize(),
-                    )
-                }
-            }
-        }
-    }
+			1 -> {
+				Column(
+					modifier = Modifier.fillMaxSize()
+						.verticalScroll(rememberScrollState())
+						.padding(DiaryTheme.dimen.diaryPaddingValues),
+				) {
+					Markdown(
+						content = state.description,
+						modifier = Modifier.fillMaxSize(),
+					)
+				}
+			}
+		}
+	}
 }

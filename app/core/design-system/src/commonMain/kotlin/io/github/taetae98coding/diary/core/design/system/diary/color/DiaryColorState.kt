@@ -8,24 +8,21 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 
-public class DiaryColorState(
-    initialColor: Color,
-) {
-    public var color: Color by mutableStateOf(initialColor)
-        private set
+public class DiaryColorState(initialColor: Color) {
+	public var color: Color by mutableStateOf(initialColor)
+		private set
 
-    internal fun onColorChange(value: Color) {
-        color = value
-    }
+	internal fun onColorChange(value: Color) {
+		color = value
+	}
 
-    public companion object {
-        internal fun saver(): Saver<DiaryColorState, Any> {
-            return listSaver(
-                save = { listOf(it.color.toArgb()) },
-                restore = {
-                    DiaryColorState(initialColor = Color(it[0]))
-                },
-            )
-        }
-    }
+	public companion object {
+		internal fun saver(): Saver<DiaryColorState, Any> =
+			listSaver(
+				save = { listOf(it.color.toArgb()) },
+				restore = {
+					DiaryColorState(initialColor = Color(it[0]))
+				},
+			)
+	}
 }

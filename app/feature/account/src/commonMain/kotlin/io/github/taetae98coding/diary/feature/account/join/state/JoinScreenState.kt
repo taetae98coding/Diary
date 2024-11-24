@@ -12,77 +12,74 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-internal class JoinScreenState(
-    val coroutineScope: CoroutineScope,
-) {
-    private var messageJob: Job? = null
-    val hostState: SnackbarHostState = SnackbarHostState()
+internal class JoinScreenState(val coroutineScope: CoroutineScope) {
+	private var messageJob: Job? = null
+	val hostState: SnackbarHostState = SnackbarHostState()
 
-    var email by mutableStateOf("")
-        private set
+	var email by mutableStateOf("")
+		private set
 
-    var isPasswordVisible by mutableStateOf(false)
-        private set
+	var isPasswordVisible by mutableStateOf(false)
+		private set
 
-    var password by mutableStateOf("")
-        private set
+	var password by mutableStateOf("")
+		private set
 
-    var isCheckPasswordVisible by mutableStateOf(false)
+	var isCheckPasswordVisible by mutableStateOf(false)
 
-    var checkPassword by mutableStateOf("")
-        private set
+	var checkPassword by mutableStateOf("")
+		private set
 
-    val buttonState by derivedStateOf {
-        if (email.isBlank()) {
-            JoinScreenButtonUiState.EmailBlank
-        } else if (password.isBlank()) {
-            JoinScreenButtonUiState.PasswordBlank
-        } else if (!email.contains(Regex.email())) {
-            JoinScreenButtonUiState.InvalidEmail
-        } else if (password != checkPassword) {
-            JoinScreenButtonUiState.PasswordDifferent
-        } else {
-            JoinScreenButtonUiState.JoinEnable
-        }
-    }
+	val buttonState by derivedStateOf {
+		if (email.isBlank()) {
+			JoinScreenButtonUiState.EmailBlank
+		} else if (password.isBlank()) {
+			JoinScreenButtonUiState.PasswordBlank
+		} else if (!email.contains(Regex.email())) {
+			JoinScreenButtonUiState.InvalidEmail
+		} else if (password != checkPassword) {
+			JoinScreenButtonUiState.PasswordDifferent
+		} else {
+			JoinScreenButtonUiState.JoinEnable
+		}
+	}
 
-    fun onEmailChange(value: String) {
-        email = value
-    }
+	fun onEmailChange(value: String) {
+		email = value
+	}
 
-    fun onPasswordVisibleChange(value: Boolean) {
-        isPasswordVisible = value
-    }
+	fun onPasswordVisibleChange(value: Boolean) {
+		isPasswordVisible = value
+	}
 
-    fun onPasswordChange(value: String) {
-        password = value
-    }
+	fun onPasswordChange(value: String) {
+		password = value
+	}
 
-    fun onCheckPasswordVisibleChange(value: Boolean) {
-        isCheckPasswordVisible = value
-    }
+	fun onCheckPasswordVisibleChange(value: Boolean) {
+		isCheckPasswordVisible = value
+	}
 
-    fun onCheckPasswordChange(value: String) {
-        checkPassword = value
-    }
+	fun onCheckPasswordChange(value: String) {
+		checkPassword = value
+	}
 
-    fun showMessage(message: String) {
-        messageJob?.cancel()
-        messageJob = coroutineScope.launch { hostState.showSnackbar(message) }
-    }
+	fun showMessage(message: String) {
+		messageJob?.cancel()
+		messageJob = coroutineScope.launch { hostState.showSnackbar(message) }
+	}
 
-    companion object {
-        fun saver(coroutineScope: CoroutineScope): Saver<JoinScreenState, Any> {
-            return listSaver(
-                save = { listOf(it.email, it.password, it.checkPassword) },
-                restore = {
-                    JoinScreenState(coroutineScope).apply {
-                        email = it[0]
-                        password = it[1]
-                        checkPassword = it[2]
-                    }
-                },
-            )
-        }
-    }
+	companion object {
+		fun saver(coroutineScope: CoroutineScope): Saver<JoinScreenState, Any> =
+			listSaver(
+				save = { listOf(it.email, it.password, it.checkPassword) },
+				restore = {
+					JoinScreenState(coroutineScope).apply {
+						email = it[0]
+						password = it[1]
+						checkPassword = it[2]
+					}
+				},
+			)
+	}
 }

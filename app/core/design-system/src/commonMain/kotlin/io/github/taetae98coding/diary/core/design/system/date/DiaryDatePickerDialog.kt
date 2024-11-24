@@ -18,37 +18,37 @@ import kotlinx.datetime.LocalDate
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 public fun DiaryDatePickerDialog(
-    localDate: LocalDate?,
-    onConfirm: (LocalDate) -> Unit,
-    onDismissRequest: () -> Unit,
-    modifier: Modifier = Modifier,
+	localDate: LocalDate?,
+	onConfirm: (LocalDate) -> Unit,
+	onDismissRequest: () -> Unit,
+	modifier: Modifier = Modifier,
 ) {
-    val state = rememberDatePickerState(initialSelectedDateMillis = localDate?.toTimeInMillis())
+	val state = rememberDatePickerState(initialSelectedDateMillis = localDate?.toTimeInMillis())
 
-    DatePickerDialog(
-        onDismissRequest = onDismissRequest,
-        confirmButton = {
-            val isConfirmButtonEnable by remember { derivedStateOf { state.selectedDateMillis != null } }
+	DatePickerDialog(
+		onDismissRequest = onDismissRequest,
+		confirmButton = {
+			val isConfirmButtonEnable by remember { derivedStateOf { state.selectedDateMillis != null } }
 
-            TextButton(
-                onClick = {
-                    state.selectedDateMillis?.toLocalDate()?.let { date ->
-                        onConfirm(date)
-                        onDismissRequest()
-                    }
-                },
-                enabled = isConfirmButtonEnable,
-            ) {
-                Text(text = "선택")
-            }
-        },
-        modifier = modifier,
-        dismissButton = {
-            TextButton(onClick = onDismissRequest) {
-                Text(text = "닫기")
-            }
-        },
-    ) {
-        DatePicker(state = state)
-    }
+			TextButton(
+				onClick = {
+					state.selectedDateMillis?.toLocalDate()?.let { date ->
+						onConfirm(date)
+						onDismissRequest()
+					}
+				},
+				enabled = isConfirmButtonEnable,
+			) {
+				Text(text = "선택")
+			}
+		},
+		modifier = modifier,
+		dismissButton = {
+			TextButton(onClick = onDismissRequest) {
+				Text(text = "닫기")
+			}
+		},
+	) {
+		DatePicker(state = state)
+	}
 }

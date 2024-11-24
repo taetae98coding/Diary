@@ -31,169 +31,169 @@ import io.github.taetae98coding.diary.library.shimmer.m3.shimmer
 
 @Composable
 internal fun MoreAccount(
-    uiStateProvider: () -> MoreAccountUiState,
-    onLogin: () -> Unit,
-    onJoin: () -> Unit,
-    modifier: Modifier = Modifier,
+	uiStateProvider: () -> MoreAccountUiState,
+	onLogin: () -> Unit,
+	onJoin: () -> Unit,
+	modifier: Modifier = Modifier,
 ) {
-    Card(
-        modifier = modifier,
-    ) {
-        Column(
-            modifier = Modifier.padding(vertical = 8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            ProfileRow(
-                uiStateProvider = uiStateProvider,
-                modifier = Modifier.padding(horizontal = 8.dp),
-            )
+	Card(
+		modifier = modifier,
+	) {
+		Column(
+			modifier = Modifier.padding(vertical = 8.dp),
+			verticalArrangement = Arrangement.spacedBy(8.dp),
+		) {
+			ProfileRow(
+				uiStateProvider = uiStateProvider,
+				modifier = Modifier.padding(horizontal = 8.dp),
+			)
 
-            ButtonRow(
-                uiStateProvider = uiStateProvider,
-                onLogin = onLogin,
-                onJoin = onJoin,
-            )
-        }
-    }
+			ButtonRow(
+				uiStateProvider = uiStateProvider,
+				onLogin = onLogin,
+				onJoin = onJoin,
+			)
+		}
+	}
 }
 
 @Composable
 private fun ProfileRow(
-    uiStateProvider: () -> MoreAccountUiState,
-    modifier: Modifier = Modifier,
+	uiStateProvider: () -> MoreAccountUiState,
+	modifier: Modifier = Modifier,
 ) {
-    Row(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        ProfileImage()
-        Email(uiStateProvider = uiStateProvider)
-    }
+	Row(
+		modifier = modifier,
+		horizontalArrangement = Arrangement.spacedBy(8.dp),
+		verticalAlignment = Alignment.CenterVertically,
+	) {
+		ProfileImage()
+		Email(uiStateProvider = uiStateProvider)
+	}
 }
 
 @Composable
 private fun ProfileImage(
-    modifier: Modifier = Modifier,
+	modifier: Modifier = Modifier,
 ) {
-    Box(
-        modifier = modifier.size(54.dp)
-            .background(
-                color = LocalContentColor.current.multiplyAlpha(value = 0.38F),
-                shape = CircleShape,
-            ),
-        contentAlignment = Alignment.Center,
-    ) {
-        AccountIcon(modifier = Modifier.size(40.dp))
-    }
+	Box(
+		modifier = modifier.size(54.dp)
+			.background(
+				color = LocalContentColor.current.multiplyAlpha(value = 0.38F),
+				shape = CircleShape,
+			),
+		contentAlignment = Alignment.Center,
+	) {
+		AccountIcon(modifier = Modifier.size(40.dp))
+	}
 }
 
 @Composable
 private fun Email(
-    uiStateProvider: () -> MoreAccountUiState,
-    modifier: Modifier = Modifier,
+	uiStateProvider: () -> MoreAccountUiState,
+	modifier: Modifier = Modifier,
 ) {
-    Crossfade(targetState = uiStateProvider()) { uiState ->
-        when (uiState) {
-            is MoreAccountUiState.Loading -> {
-                Text(
-                    text = "",
-                    modifier = modifier.width(100.dp)
-                        .shimmer(),
-                )
-            }
+	Crossfade(targetState = uiStateProvider()) { uiState ->
+		when (uiState) {
+			is MoreAccountUiState.Loading -> {
+				Text(
+					text = "",
+					modifier = modifier.width(100.dp)
+						.shimmer(),
+				)
+			}
 
-            is MoreAccountUiState.Guest -> {
-                Text(
-                    text = "게스트",
-                    modifier = modifier,
-                )
-            }
+			is MoreAccountUiState.Guest -> {
+				Text(
+					text = "게스트",
+					modifier = modifier,
+				)
+			}
 
-            is MoreAccountUiState.Member -> {
-                Text(
-                    text = uiState.email,
-                    modifier = modifier,
-                )
-            }
-        }
-    }
+			is MoreAccountUiState.Member -> {
+				Text(
+					text = uiState.email,
+					modifier = modifier,
+				)
+			}
+		}
+	}
 }
 
 @Composable
 private fun ButtonRow(
-    uiStateProvider: () -> MoreAccountUiState,
-    onLogin: () -> Unit,
-    onJoin: () -> Unit,
-    modifier: Modifier = Modifier,
+	uiStateProvider: () -> MoreAccountUiState,
+	onLogin: () -> Unit,
+	onJoin: () -> Unit,
+	modifier: Modifier = Modifier,
 ) {
-    LazyRow(
-        modifier = modifier.fillMaxWidth(),
-        contentPadding = PaddingValues(horizontal = 8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-    ) {
-        when (val uiState = uiStateProvider()) {
-            is MoreAccountUiState.Loading -> {
-                items(
-                    count = 1,
-                    key = { it },
-                    contentType = { "placeHolder" },
-                ) {
-                    DiaryAssistChip(
-                        onClick = {},
-                        label = { Text(text = "") },
-                        modifier = Modifier.width(80.dp).animateItem(),
-                        shape = CircleShape,
-                        colors = AssistChipDefaults.assistChipColors(
-                            containerColor = LocalContentColor.current.multiplyAlpha(0.38F),
-                        ),
-                        border = null,
-                    )
-                }
-            }
+	LazyRow(
+		modifier = modifier.fillMaxWidth(),
+		contentPadding = PaddingValues(horizontal = 8.dp),
+		horizontalArrangement = Arrangement.spacedBy(8.dp),
+	) {
+		when (val uiState = uiStateProvider()) {
+			is MoreAccountUiState.Loading -> {
+				items(
+					count = 1,
+					key = { it },
+					contentType = { "placeHolder" },
+				) {
+					DiaryAssistChip(
+						onClick = {},
+						label = { Text(text = "") },
+						modifier = Modifier.width(80.dp).animateItem(),
+						shape = CircleShape,
+						colors = AssistChipDefaults.assistChipColors(
+							containerColor = LocalContentColor.current.multiplyAlpha(0.38F),
+						),
+						border = null,
+					)
+				}
+			}
 
-            is MoreAccountUiState.Guest -> {
-                item(
-                    key = "login",
-                    contentType = "Chip",
-                ) {
-                    DiaryAssistChip(
-                        onClick = onLogin,
-                        label = { Text(text = "로그인") },
-                        modifier = Modifier.animateItem(),
-                        leadingIcon = { LoginIcon() },
-                        shape = CircleShape,
-                    )
-                }
+			is MoreAccountUiState.Guest -> {
+				item(
+					key = "login",
+					contentType = "Chip",
+				) {
+					DiaryAssistChip(
+						onClick = onLogin,
+						label = { Text(text = "로그인") },
+						modifier = Modifier.animateItem(),
+						leadingIcon = { LoginIcon() },
+						shape = CircleShape,
+					)
+				}
 
-                item(
-                    key = "join",
-                    contentType = "Chip",
-                ) {
-                    DiaryAssistChip(
-                        onClick = onJoin,
-                        label = { Text(text = "회원가입") },
-                        modifier = Modifier.animateItem(),
-                        leadingIcon = { AccountIcon() },
-                        shape = CircleShape,
-                    )
-                }
-            }
+				item(
+					key = "join",
+					contentType = "Chip",
+				) {
+					DiaryAssistChip(
+						onClick = onJoin,
+						label = { Text(text = "회원가입") },
+						modifier = Modifier.animateItem(),
+						leadingIcon = { AccountIcon() },
+						shape = CircleShape,
+					)
+				}
+			}
 
-            is MoreAccountUiState.Member -> {
-                item(
-                    key = "logout",
-                    contentType = "Chip",
-                ) {
-                    DiaryAssistChip(
-                        onClick = uiState.logout,
-                        label = { Text(text = "로그아웃") },
-                        modifier = Modifier.animateItem(),
-                        leadingIcon = { LogoutIcon() },
-                        shape = CircleShape,
-                    )
-                }
-            }
-        }
-    }
+			is MoreAccountUiState.Member -> {
+				item(
+					key = "logout",
+					contentType = "Chip",
+				) {
+					DiaryAssistChip(
+						onClick = uiState.logout,
+						label = { Text(text = "로그아웃") },
+						modifier = Modifier.animateItem(),
+						leadingIcon = { LogoutIcon() },
+						shape = CircleShape,
+					)
+				}
+			}
+		}
+	}
 }

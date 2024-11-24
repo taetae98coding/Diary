@@ -16,30 +16,26 @@ import kotlinx.datetime.number
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromJsonElement
 
-public class HolidayService internal constructor(
-    private val client: HttpClient,
-    private val json: Json,
-) {
-    public suspend fun findHoliday(year: Int, month: Month): List<Holiday> {
-        val response = client.get("getRestDeInfo") {
-            parameter("solYear", year)
-            parameter("solMonth", month.number.toString().padStart(2, '0'))
-        }
+public class HolidayService internal constructor(private val client: HttpClient, private val json: Json) {
+	public suspend fun findHoliday(year: Int, month: Month): List<Holiday> {
+		val response =
+			client.get("getRestDeInfo") {
+				parameter("solYear", year)
+				parameter("solMonth", month.number.toString().padStart(2, '0'))
+			}
 
-        return response.body<ApiResultEntity>()
-            .parseHolidayEntity(json)
-            .map(HolidayEntity::toHoliday)
-    }
+		return response
+			.body<ApiResultEntity>()
+			.parseHolidayEntity(json)
+			.map(HolidayEntity::toHoliday)
+	}
 
-    private fun ApiResultEntity.parseHolidayEntity(json: Json): List<HolidayEntity> {
-        return response.body.parseHolidayEntity(json)
-    }
+	private fun ApiResultEntity.parseHolidayEntity(json: Json): List<HolidayEntity> = response.body.parseHolidayEntity(json)
 
-    private fun BodyEntity.parseHolidayEntity(json: Json): List<HolidayEntity> {
-        return when (count) {
-            0 -> emptyList()
-            1 -> listOf(json.decodeFromJsonElement<HolidayItemEntity>(items).item)
-            else -> json.decodeFromJsonElement<HolidayItemsEntity>(items).items
-        }
-    }
+	private fun BodyEntity.parseHolidayEntity(json: Json): List<HolidayEntity> =
+		when (count) {
+			0 -> emptyList()
+			1 -> listOf(json.decodeFromJsonElement<HolidayItemEntity>(items).item)
+			else -> json.decodeFromJsonElement<HolidayItemsEntity>(items).items
+		}
 }

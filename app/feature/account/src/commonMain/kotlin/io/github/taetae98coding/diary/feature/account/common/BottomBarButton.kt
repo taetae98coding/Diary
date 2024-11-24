@@ -20,42 +20,42 @@ import io.github.taetae98coding.diary.core.design.system.theme.DiaryTheme
 
 @Composable
 internal fun BottomBarButton(
-    onClick: () -> Unit,
-    enableProvider: () -> Boolean,
-    modifier: Modifier = Modifier,
-    content: @Composable RowScope.() -> Unit,
+	onClick: () -> Unit,
+	enableProvider: () -> Boolean,
+	modifier: Modifier = Modifier,
+	content: @Composable RowScope.() -> Unit,
 ) {
-    val animatedButtonColor by animateColorAsState(
-        targetValue = if (enableProvider()) {
-            DiaryTheme.color.primary
-        } else {
-            DiaryTheme.color.onSurface.copy(alpha = 0.12F)
-        },
-    )
+	val animatedButtonColor by animateColorAsState(
+		targetValue = if (enableProvider()) {
+			DiaryTheme.color.primary
+		} else {
+			DiaryTheme.color.onSurface.copy(alpha = 0.12F)
+		},
+	)
 
-    Button(
-        onClick = onClick,
-        modifier = modifier,
-        enabled = enableProvider(),
-        shape = RectangleShape,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = animatedButtonColor,
-            disabledContainerColor = animatedButtonColor,
-        ),
-        content = content,
-    )
+	Button(
+		onClick = onClick,
+		modifier = modifier,
+		enabled = enableProvider(),
+		shape = RectangleShape,
+		colors = ButtonDefaults.buttonColors(
+			containerColor = animatedButtonColor,
+			disabledContainerColor = animatedButtonColor,
+		),
+		content = content,
+	)
 }
 
 @Composable
 internal fun BottomBarButtonContent(
-    modifier: Modifier = Modifier,
-    content: @Composable BoxScope.() -> Unit,
+	modifier: Modifier = Modifier,
+	content: @Composable BoxScope.() -> Unit,
 ) {
-    Box(
-        modifier = modifier.fillMaxWidth()
-            .height(50.dp)
-            .windowInsetsPadding(NavigationBarDefaults.windowInsets),
-        contentAlignment = Alignment.Center,
-        content = content,
-    )
+	Box(
+		modifier = modifier.fillMaxWidth()
+			.height(50.dp)
+			.windowInsetsPadding(NavigationBarDefaults.windowInsets),
+		contentAlignment = Alignment.Center,
+		content = content,
+	)
 }

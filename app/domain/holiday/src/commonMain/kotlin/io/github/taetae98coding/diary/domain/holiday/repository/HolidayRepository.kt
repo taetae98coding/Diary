@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.Month
 
 public interface HolidayRepository {
-    public fun findHoliday(year: Int, month: Month): Flow<List<Holiday>>
+	public fun findHoliday(year: Int, month: Month): Flow<List<Holiday>>
 }

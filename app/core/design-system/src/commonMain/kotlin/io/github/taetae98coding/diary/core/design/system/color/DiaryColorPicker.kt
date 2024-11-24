@@ -28,87 +28,87 @@ import io.github.taetae98coding.diary.library.color.toRgbString
 
 @Composable
 public fun DiaryColorPicker(
-    state: DiaryColorPickerState,
-    modifier: Modifier = Modifier,
+	state: DiaryColorPickerState,
+	modifier: Modifier = Modifier,
 ) {
-    Column(modifier = modifier) {
-        val sliderModifier = Modifier.padding(horizontal = DiaryTheme.dimen.diaryHorizontalPadding)
+	Column(modifier = modifier) {
+		val sliderModifier = Modifier.padding(horizontal = DiaryTheme.dimen.diaryHorizontalPadding)
 
-        ColorBox(
-            state = state,
-            modifier = Modifier.fillMaxWidth()
-                .height(200.dp),
-        )
+		ColorBox(
+			state = state,
+			modifier = Modifier.fillMaxWidth()
+				.height(200.dp),
+		)
 
-        Spacer(modifier = Modifier.height(DiaryTheme.dimen.diaryVerticalPadding))
+		Spacer(modifier = Modifier.height(DiaryTheme.dimen.diaryVerticalPadding))
 
-        ColorSlider(
-            color = Color.Red,
-            valueProvider = { state.red },
-            onValueChange = state::onRedChange,
-            modifier = sliderModifier,
-        )
+		ColorSlider(
+			color = Color.Red,
+			valueProvider = { state.red },
+			onValueChange = state::onRedChange,
+			modifier = sliderModifier,
+		)
 
-        ColorSlider(
-            color = Color.Green,
-            valueProvider = { state.green },
-            onValueChange = state::onGreenChange,
-            modifier = sliderModifier,
-        )
+		ColorSlider(
+			color = Color.Green,
+			valueProvider = { state.green },
+			onValueChange = state::onGreenChange,
+			modifier = sliderModifier,
+		)
 
-        ColorSlider(
-            color = Color.Blue,
-            valueProvider = { state.blue },
-            onValueChange = state::onBlueChange,
-            modifier = sliderModifier,
-        )
-    }
+		ColorSlider(
+			color = Color.Blue,
+			valueProvider = { state.blue },
+			onValueChange = state::onBlueChange,
+			modifier = sliderModifier,
+		)
+	}
 }
 
 @Composable
 private fun ColorBox(
-    state: DiaryColorPickerState,
-    modifier: Modifier = Modifier,
+	state: DiaryColorPickerState,
+	modifier: Modifier = Modifier,
 ) {
-    val animateColor by animateColorAsState(state.color)
+	val animateColor by animateColorAsState(state.color)
 
-    Box(
-        modifier = modifier.drawBehind {
-            drawRect(color = animateColor)
-        },
-    ) {
-        Text(
-            modifier = Modifier.align(Alignment.Center),
-            text = "#${state.color.toArgb().toRgbString()}",
-            color = state.color.toContrastColor(),
-        )
+	Box(
+		modifier = modifier.drawBehind {
+			drawRect(color = animateColor)
+		},
+	) {
+		Text(
+			modifier = Modifier.align(Alignment.Center),
+			text = "#${state.color.toArgb().toRgbString()}",
+			color = state.color.toContrastColor(),
+		)
 
-        IconButton(
-            modifier = Modifier.align(Alignment.TopEnd),
-            onClick = state::refresh,
-            colors = IconButtonDefaults.iconButtonColors(contentColor = state.color.toContrastColor()),
-        ) {
-            RefreshIcon()
-        }
-    }
+		IconButton(
+			modifier = Modifier.align(Alignment.TopEnd),
+			onClick = state::refresh,
+			colors = IconButtonDefaults.iconButtonColors(contentColor = state.color.toContrastColor()),
+		) {
+			RefreshIcon()
+		}
+	}
 }
 
 @Composable
 private fun ColorSlider(
-    color: Color,
-    valueProvider: () -> Float,
-    onValueChange: (Float) -> Unit,
-    modifier: Modifier = Modifier,
+	color: Color,
+	valueProvider: () -> Float,
+	onValueChange: (Float) -> Unit,
+	modifier: Modifier = Modifier,
 ) {
-    val animateValue by animateFloatAsState(valueProvider())
+	val animateValue by animateFloatAsState(valueProvider())
 
-    Slider(
-        modifier = modifier,
-        value = animateValue,
-        onValueChange = onValueChange,
-        colors = SliderDefaults.colors(
-            thumbColor = color,
-            activeTrackColor = color,
-        ),
-    )
+	Slider(
+		modifier = modifier,
+		value = animateValue,
+		onValueChange = onValueChange,
+		colors = SliderDefaults.colors(
+			thumbColor = color,
+			activeTrackColor = color,
+		),
+	)
 }

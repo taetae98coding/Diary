@@ -8,13 +8,12 @@ import io.github.taetae98coding.diary.library.color.randomArgb
 
 @Composable
 public fun rememberDiaryColorState(
-    vararg inputs: Any?,
-    initialColor: Color = Color.Unspecified,
-): DiaryColorState {
-    return rememberSaveable(
-        inputs = inputs,
-        saver = DiaryColorState.saver(),
-    ) {
-        DiaryColorState(initialColor = initialColor.takeOrElse { Color(randomArgb()) })
-    }
-}
+	vararg inputs: Any?,
+	initialColor: Color = Color.Unspecified,
+): DiaryColorState =
+	rememberSaveable(
+		inputs = inputs,
+		saver = DiaryColorState.saver(),
+	) {
+		DiaryColorState(initialColor = initialColor.takeOrElse { Color(randomArgb()) })
+	}

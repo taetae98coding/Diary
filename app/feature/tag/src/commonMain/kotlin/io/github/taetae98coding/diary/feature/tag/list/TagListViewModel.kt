@@ -21,72 +21,68 @@ import org.koin.android.annotation.KoinViewModel
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @KoinViewModel
-internal class TagListViewModel(
-    pageTagUseCase: PageTagUseCase,
-    private val finishTagUseCase: FinishTagUseCase,
-    private val deleteTagUseCase: DeleteTagUseCase,
-    private val restartTagUseCase: RestartTagUseCase,
-    private val restoreTagUseCase: RestoreTagUseCase,
-) : ViewModel() {
-    private val _uiState = MutableStateFlow(
-        TagListScreenUiState(
-            restartTag = ::restart,
-            restoreTag = ::restore,
-            onMessageShow = ::clearMessage,
-        ),
-    )
-    val uiState = _uiState.asStateFlow()
+internal class TagListViewModel(pageTagUseCase: PageTagUseCase, private val finishTagUseCase: FinishTagUseCase, private val deleteTagUseCase: DeleteTagUseCase, private val restartTagUseCase: RestartTagUseCase, private val restoreTagUseCase: RestoreTagUseCase) : ViewModel() {
+	private val _uiState =
+		MutableStateFlow(
+			TagListScreenUiState(
+				restartTag = ::restart,
+				restoreTag = ::restore,
+				onMessageShow = ::clearMessage,
+			),
+		)
+	val uiState = _uiState.asStateFlow()
 
-    val list = pageTagUseCase().mapLatest { it.getOrNull() }
-        .mapCollectionLatest {
-            TagListItemUiState(
-                id = it.id,
-                title = it.detail.title,
-                finish = SkipProperty { finish(it.id) },
-                delete = SkipProperty { delete(it.id) },
-            )
-        }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = null,
-        )
+	val list =
+		pageTagUseCase()
+			.mapLatest { it.getOrNull() }
+			.mapCollectionLatest {
+				TagListItemUiState(
+					id = it.id,
+					title = it.detail.title,
+					finish = SkipProperty { finish(it.id) },
+					delete = SkipProperty { delete(it.id) },
+				)
+			}.stateIn(
+				scope = viewModelScope,
+				started = SharingStarted.WhileSubscribed(5_000),
+				initialValue = null,
+			)
 
-    private fun finish(id: String) {
-        viewModelScope.launch {
-            finishTagUseCase(id)
-                .onSuccess { _uiState.update { it.copy(finishTagId = id) } }
-                .onFailure { _uiState.update { it.copy(isUnknownError = true) } }
-        }
-    }
+	private fun finish(id: String) {
+		viewModelScope.launch {
+			finishTagUseCase(id)
+				.onSuccess { _uiState.update { it.copy(finishTagId = id) } }
+				.onFailure { _uiState.update { it.copy(isUnknownError = true) } }
+		}
+	}
 
-    private fun delete(id: String) {
-        viewModelScope.launch {
-            deleteTagUseCase(id)
-                .onSuccess { _uiState.update { it.copy(deleteTagId = id) } }
-                .onFailure { _uiState.update { it.copy(isUnknownError = true) } }
-        }
-    }
+	private fun delete(id: String) {
+		viewModelScope.launch {
+			deleteTagUseCase(id)
+				.onSuccess { _uiState.update { it.copy(deleteTagId = id) } }
+				.onFailure { _uiState.update { it.copy(isUnknownError = true) } }
+		}
+	}
 
-    private fun restart(id: String) {
-        viewModelScope.launch {
-            restartTagUseCase(id)
-        }
-    }
+	private fun restart(id: String) {
+		viewModelScope.launch {
+			restartTagUseCase(id)
+		}
+	}
 
-    private fun restore(id: String) {
-        viewModelScope.launch {
-            restoreTagUseCase(id)
-        }
-    }
+	private fun restore(id: String) {
+		viewModelScope.launch {
+			restoreTagUseCase(id)
+		}
+	}
 
-    private fun clearMessage() {
-        _uiState.update {
-            it.copy(
-                finishTagId = null,
-                deleteTagId = null,
-                isUnknownError = false,
-            )
-        }
-    }
+	private fun clearMessage() {
+		_uiState.update {
+			it.copy(
+				finishTagId = null,
+				deleteTagId = null,
+				isUnknownError = false,
+			)
+		}
+	}
 }

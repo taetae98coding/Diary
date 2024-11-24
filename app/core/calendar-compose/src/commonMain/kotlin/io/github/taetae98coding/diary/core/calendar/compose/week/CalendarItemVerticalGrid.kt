@@ -19,93 +19,89 @@ import io.github.taetae98coding.diary.library.datetime.isOverlap
 
 @Composable
 internal fun CalendarItemVerticalGrid(
-    state: CalendarWeekState,
-    textItemListProvider: () -> List<CalendarItemUiState.Text>,
-    holidayListProvider: () -> List<CalendarItemUiState.Holiday>,
-    onCalendarItemClick: (Any) -> Unit,
-    modifier: Modifier = Modifier,
-    colors: CalendarColors = CalendarDefaults.colors(),
+	state: CalendarWeekState,
+	textItemListProvider: () -> List<CalendarItemUiState.Text>,
+	holidayListProvider: () -> List<CalendarItemUiState.Holiday>,
+	onCalendarItemClick: (Any) -> Unit,
+	modifier: Modifier = Modifier,
+	colors: CalendarColors = CalendarDefaults.colors(),
 ) {
-    val items by remember {
-        derivedStateOf {
-            val itemList = buildList {
-                addAll(holidayListProvider())
-                addAll(textItemListProvider())
-            }.filter {
-                it.isOverlap(state.dateRange)
-            }.sorted().toMutableList()
+	val items by remember {
+		derivedStateOf {
+			val itemList = buildList {
+				addAll(holidayListProvider())
+				addAll(textItemListProvider())
+			}.filter {
+				it.isOverlap(state.dateRange)
+			}.sorted().toMutableList()
 
-            buildList {
-                while (itemList.isNotEmpty()) {
-                    var dayOfWeek = 0
+			buildList {
+				while (itemList.isNotEmpty()) {
+					var dayOfWeek = 0
 
-                    buildList {
-                        while (true) {
-                            val item = itemList.find { dayOfWeek <= it.startChrist(state) } ?: break
-                            val start = item.startChrist(state)
-                            val endInclusive = item.endInclusiveChrist(state)
+					buildList {
+						while (true) {
+							val item = itemList.find { dayOfWeek <= it.startChrist(state) } ?: break
+							val start = item.startChrist(state)
+							val endInclusive = item.endInclusiveChrist(state)
 
-                            val spaceWeight = start - dayOfWeek
-                            if (spaceWeight > 0) {
-                                add(WeekItem.Space(spaceWeight.toFloat()))
-                            }
+							val spaceWeight = start - dayOfWeek
+							if (spaceWeight > 0) {
+								add(WeekItem.Space(spaceWeight.toFloat()))
+							}
 
-                            val weight = endInclusive - start + 1F
-                            val weekTextItem = when (item) {
-                                is CalendarItemUiState.Holiday -> {
-                                    WeekItem.Holiday(
-                                        key = item.key,
-                                        name = item.text,
-                                        weight = weight,
-                                    )
-                                }
+							val weight = endInclusive - start + 1F
+							val weekTextItem = when (item) {
+								is CalendarItemUiState.Holiday -> {
+									WeekItem.Holiday(
+										key = item.key,
+										name = item.text,
+										weight = weight,
+									)
+								}
 
-                                is CalendarItemUiState.Text -> {
-                                    WeekItem.Text(
-                                        key = item.key,
-                                        name = item.text,
-                                        weight = weight,
-                                        color = Color(item.color),
-                                    )
-                                }
-                            }
+								is CalendarItemUiState.Text -> {
+									WeekItem.Text(
+										key = item.key,
+										name = item.text,
+										weight = weight,
+										color = Color(item.color),
+									)
+								}
+							}
 
-                            add(weekTextItem)
-                            itemList.remove(item)
-                            dayOfWeek = endInclusive + 1
-                        }
+							add(weekTextItem)
+							itemList.remove(item)
+							dayOfWeek = endInclusive + 1
+						}
 
-                        if (dayOfWeek <= kotlinx.datetime.DayOfWeek.SATURDAY.christ) {
-                            val weight = kotlinx.datetime.DayOfWeek.SATURDAY.christ - dayOfWeek + 1F
-                            add(WeekItem.Space(weight))
-                        }
-                    }.also {
-                        add(it)
-                    }
-                }
-            }
-        }
-    }
+						if (dayOfWeek <= kotlinx.datetime.DayOfWeek.SATURDAY.christ) {
+							val weight = kotlinx.datetime.DayOfWeek.SATURDAY.christ - dayOfWeek + 1F
+							add(WeekItem.Space(weight))
+						}
+					}.also {
+						add(it)
+					}
+				}
+			}
+		}
+	}
 
-    LazyColumn(
-        modifier = modifier,
-        contentPadding = PaddingValues(2.dp),
-        verticalArrangement = Arrangement.spacedBy(2.dp),
-    ) {
-        items(items = items) {
-            WeekItemRow(
-                items = it,
-                onWeekItemClick = onCalendarItemClick,
-                colors = colors,
-            )
-        }
-    }
+	LazyColumn(
+		modifier = modifier,
+		contentPadding = PaddingValues(2.dp),
+		verticalArrangement = Arrangement.spacedBy(2.dp),
+	) {
+		items(items = items) {
+			WeekItemRow(
+				items = it,
+				onWeekItemClick = onCalendarItemClick,
+				colors = colors,
+			)
+		}
+	}
 }
 
-private fun CalendarItemUiState.startChrist(state: CalendarWeekState): Int {
-    return start.coerceAtLeast(state.dateRange.start).dayOfWeek.christ
-}
+private fun CalendarItemUiState.startChrist(state: CalendarWeekState): Int = start.coerceAtLeast(state.dateRange.start).dayOfWeek.christ
 
-private fun CalendarItemUiState.endInclusiveChrist(state: CalendarWeekState): Int {
-    return endInclusive.coerceAtMost(state.dateRange.endInclusive).dayOfWeek.christ
-}
+private fun CalendarItemUiState.endInclusiveChrist(state: CalendarWeekState): Int = endInclusive.coerceAtMost(state.dateRange.endInclusive).dayOfWeek.christ

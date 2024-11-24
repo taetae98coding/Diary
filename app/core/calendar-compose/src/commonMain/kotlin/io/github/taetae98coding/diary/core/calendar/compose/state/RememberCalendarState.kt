@@ -8,13 +8,13 @@ import kotlinx.datetime.LocalDate
 
 @Composable
 public fun rememberCalendarState(
-    initialLocalDate: LocalDate = LocalDate.todayIn(),
+	initialLocalDate: LocalDate = LocalDate.todayIn(),
 ): CalendarState {
-    val pagerState = rememberPagerState(CalendarState.page(initialLocalDate)) { Int.MAX_VALUE }
+	val pagerState = rememberPagerState(CalendarState.page(initialLocalDate)) { Int.MAX_VALUE }
 
-    return remember {
-        CalendarState(
-            pagerState = pagerState,
-        )
-    }
+	return remember {
+		CalendarState(
+			pagerState = pagerState,
+		)
+	}
 }

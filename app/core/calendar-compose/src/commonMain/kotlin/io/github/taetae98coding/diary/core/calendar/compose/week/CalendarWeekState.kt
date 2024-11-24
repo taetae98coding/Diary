@@ -9,26 +9,22 @@ import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month
 
-internal class CalendarWeekState(
-    val year: Int,
-    val month: Month,
-    val weekOfMonth: Int,
-) {
-    val dateRange = LocalDate(year, month, weekOfMonth, DayOfWeek.SUNDAY)..LocalDate(year, month, weekOfMonth, DayOfWeek.SATURDAY)
+internal class CalendarWeekState(val year: Int, val month: Month, val weekOfMonth: Int) {
+	val dateRange = LocalDate(year, month, weekOfMonth, DayOfWeek.SUNDAY)..LocalDate(year, month, weekOfMonth, DayOfWeek.SATURDAY)
 
-    var selectedDateRange: ClosedRange<LocalDate>? by mutableStateOf(null)
-        private set
+	var selectedDateRange: ClosedRange<LocalDate>? by mutableStateOf(null)
+		private set
 
-    fun drag(range: ClosedRange<LocalDate>) {
-        if (!dateRange.isOverlap(range)) {
-            selectedDateRange = null
-            return
-        }
+	fun drag(range: ClosedRange<LocalDate>) {
+		if (!dateRange.isOverlap(range)) {
+			selectedDateRange = null
+			return
+		}
 
-        selectedDateRange = range.start.coerceIn(dateRange)..range.endInclusive.coerceIn(dateRange)
-    }
+		selectedDateRange = range.start.coerceIn(dateRange)..range.endInclusive.coerceIn(dateRange)
+	}
 
-    fun finishDrag() {
-        selectedDateRange = null
-    }
+	fun finishDrag() {
+		selectedDateRange = null
+	}
 }

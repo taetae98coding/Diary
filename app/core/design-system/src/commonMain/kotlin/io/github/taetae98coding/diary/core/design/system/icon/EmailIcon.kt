@@ -8,11 +8,11 @@ import androidx.compose.ui.Modifier
 
 @Composable
 public fun EmailIcon(
-    modifier: Modifier = Modifier,
+	modifier: Modifier = Modifier,
 ) {
-    Icon(
-        imageVector = Icons.Rounded.AlternateEmail,
-        contentDescription = null,
-        modifier = modifier,
-    )
+	Icon(
+		imageVector = Icons.Rounded.AlternateEmail,
+		contentDescription = null,
+		modifier = modifier,
+	)
 }

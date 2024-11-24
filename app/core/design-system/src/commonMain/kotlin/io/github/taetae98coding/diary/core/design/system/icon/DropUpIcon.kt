@@ -8,11 +8,11 @@ import androidx.compose.ui.Modifier
 
 @Composable
 public fun DropUpIcon(
-    modifier: Modifier = Modifier,
+	modifier: Modifier = Modifier,
 ) {
-    Icon(
-        modifier = modifier,
-        imageVector = Icons.Rounded.ArrowDropUp,
-        contentDescription = null,
-    )
+	Icon(
+		modifier = modifier,
+		imageVector = Icons.Rounded.ArrowDropUp,
+		contentDescription = null,
+	)
 }

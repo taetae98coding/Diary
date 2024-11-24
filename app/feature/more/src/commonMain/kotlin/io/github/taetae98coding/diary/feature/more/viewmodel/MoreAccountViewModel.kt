@@ -17,43 +17,44 @@ import org.koin.android.annotation.KoinViewModel
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @KoinViewModel
-internal class MoreAccountViewModel(
-    getAccountUseCase: GetAccountUseCase,
-    private val logoutUseCase: LogoutUseCase,
-) : ViewModel() {
-    private val isProgress = MutableStateFlow(false)
-    private val account = getAccountUseCase().mapLatest { it.getOrNull() }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = null,
-        )
+internal class MoreAccountViewModel(getAccountUseCase: GetAccountUseCase, private val logoutUseCase: LogoutUseCase) : ViewModel() {
+	private val isProgress = MutableStateFlow(false)
+	private val account =
+		getAccountUseCase()
+			.mapLatest { it.getOrNull() }
+			.stateIn(
+				scope = viewModelScope,
+				started = SharingStarted.WhileSubscribed(5_000),
+				initialValue = null,
+			)
 
-    val uiState = combine(isProgress, account) { isProgress, account ->
-        if (isProgress) {
-            MoreAccountUiState.Loading
-        } else if (account == null) {
-            MoreAccountUiState.Loading
-        } else {
-            when (account) {
-                is Account.Guest -> MoreAccountUiState.Guest
-                is Account.Member -> MoreAccountUiState.Member(
-                    email = account.email,
-                    logout = ::logout,
-                )
-            }
-        }
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = MoreAccountUiState.Loading,
-    )
+	val uiState =
+		combine(isProgress, account) { isProgress, account ->
+			if (isProgress) {
+				MoreAccountUiState.Loading
+			} else if (account == null) {
+				MoreAccountUiState.Loading
+			} else {
+				when (account) {
+					is Account.Guest -> MoreAccountUiState.Guest
+					is Account.Member ->
+						MoreAccountUiState.Member(
+							email = account.email,
+							logout = ::logout,
+						)
+				}
+			}
+		}.stateIn(
+			scope = viewModelScope,
+			started = SharingStarted.WhileSubscribed(5_000),
+			initialValue = MoreAccountUiState.Loading,
+		)
 
-    private fun logout() {
-        viewModelScope.launch {
-            isProgress.emit(true)
-            logoutUseCase()
-            isProgress.emit(false)
-        }
-    }
+	private fun logout() {
+		viewModelScope.launch {
+			isProgress.emit(true)
+			logoutUseCase()
+			isProgress.emit(false)
+		}
+	}
 }

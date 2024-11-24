@@ -14,27 +14,25 @@ import org.koin.dsl.module
 import org.koin.ksp.generated.module
 
 internal fun initKoin(): KoinApplication {
-    koinRoomDefaultPath += "/diary/${BuildKonfig.FLAVOR}"
-    koinDataStoreDefaultPath += "/diary/${BuildKonfig.FLAVOR}"
+	koinRoomDefaultPath += "/diary/${BuildKonfig.FLAVOR}"
+	koinDataStoreDefaultPath += "/diary/${BuildKonfig.FLAVOR}"
 
-    return startKoin {
-        modules(
-            AppModule().module,
-            diaryServiceModule(),
-            holidayServiceModule(),
-        )
-    }
+	return startKoin {
+		modules(
+			AppModule().module,
+			diaryServiceModule(),
+			holidayServiceModule(),
+		)
+	}
 }
 
-private fun diaryServiceModule(): Module {
-    return module {
-        single(qualifier = StringQualifier(DiaryServiceModule.DIARY_API_URL)) { BuildKonfig.DIARY_API_URL }
-    }
-}
+private fun diaryServiceModule(): Module =
+	module {
+		single(qualifier = StringQualifier(DiaryServiceModule.DIARY_API_URL)) { BuildKonfig.DIARY_API_URL }
+	}
 
-private fun holidayServiceModule(): Module {
-    return module {
-        single(qualifier = StringQualifier(HolidayServiceModule.HOLIDAY_API_URL)) { BuildKonfig.HOLIDAY_API_URL }
-        single(qualifier = StringQualifier(HolidayServiceModule.HOLIDAY_API_KEY)) { BuildKonfig.HOLIDAY_API_KEY }
-    }
-}
+private fun holidayServiceModule(): Module =
+	module {
+		single(qualifier = StringQualifier(HolidayServiceModule.HOLIDAY_API_URL)) { BuildKonfig.HOLIDAY_API_URL }
+		single(qualifier = StringQualifier(HolidayServiceModule.HOLIDAY_API_KEY)) { BuildKonfig.HOLIDAY_API_KEY }
+	}

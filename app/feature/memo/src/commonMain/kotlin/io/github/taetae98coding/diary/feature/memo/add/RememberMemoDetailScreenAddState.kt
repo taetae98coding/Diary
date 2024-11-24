@@ -11,23 +11,24 @@ import kotlinx.datetime.LocalDate
 
 @Composable
 internal fun rememberMemoDetailScreenAddState(
-    initialStart: LocalDate?,
-    initialEndInclusive: LocalDate?,
+	initialStart: LocalDate?,
+	initialEndInclusive: LocalDate?,
 ): MemoDetailScreenState.Add {
-    val coroutineScope = rememberCoroutineScope()
-    val componentState = rememberDiaryComponentState()
-    val dateState = rememberDiaryDateState(
-        initialStart = initialStart,
-        initialEndInclusive = initialEndInclusive,
-    )
-    val colorState = rememberDiaryColorState()
+	val coroutineScope = rememberCoroutineScope()
+	val componentState = rememberDiaryComponentState()
+	val dateState =
+		rememberDiaryDateState(
+			initialStart = initialStart,
+			initialEndInclusive = initialEndInclusive,
+		)
+	val colorState = rememberDiaryColorState()
 
-    return remember {
-        MemoDetailScreenState.Add(
-            coroutineScope = coroutineScope,
-            componentState = componentState,
-            dateState = dateState,
-            colorState = colorState,
-        )
-    }
+	return remember {
+		MemoDetailScreenState.Add(
+			coroutineScope = coroutineScope,
+			componentState = componentState,
+			dateState = dateState,
+			colorState = colorState,
+		)
+	}
 }

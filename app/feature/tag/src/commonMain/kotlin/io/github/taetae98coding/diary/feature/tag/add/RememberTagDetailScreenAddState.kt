@@ -9,15 +9,15 @@ import io.github.taetae98coding.diary.feature.tag.detail.TagDetailScreenState
 
 @Composable
 internal fun rememberTagDetailScreenAddState(): TagDetailScreenState.Add {
-    val coroutineScope = rememberCoroutineScope()
-    val componentState = rememberDiaryComponentState()
-    val colorState = rememberDiaryColorState()
+	val coroutineScope = rememberCoroutineScope()
+	val componentState = rememberDiaryComponentState()
+	val colorState = rememberDiaryColorState()
 
-    return remember {
-        TagDetailScreenState.Add(
-            coroutineScope = coroutineScope,
-            componentState = componentState,
-            colorState = colorState,
-        )
-    }
+	return remember {
+		TagDetailScreenState.Add(
+			coroutineScope = coroutineScope,
+			componentState = componentState,
+			colorState = colorState,
+		)
+	}
 }

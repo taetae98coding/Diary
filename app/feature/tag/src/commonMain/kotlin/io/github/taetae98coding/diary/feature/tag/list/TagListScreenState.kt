@@ -8,36 +8,36 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
-internal class TagListScreenState(
-    private val coroutineScope: CoroutineScope,
-) {
-    private var messageJob: Job? = null
+internal class TagListScreenState(private val coroutineScope: CoroutineScope) {
+	private var messageJob: Job? = null
 
-    val hostState: SnackbarHostState = SnackbarHostState()
+	val hostState: SnackbarHostState = SnackbarHostState()
 
-    fun showMessage(
-        message: String,
-        actionLabel: String,
-        onResult: (SnackbarResult) -> Unit,
-    ) {
-        messageJob?.cancel()
-        messageJob = coroutineScope.launch {
-            val result = hostState.showSnackbar(
-                message = message,
-                actionLabel = actionLabel,
-                duration = SnackbarDuration.Long,
-            )
+	fun showMessage(
+		message: String,
+		actionLabel: String,
+		onResult: (SnackbarResult) -> Unit,
+	) {
+		messageJob?.cancel()
+		messageJob =
+			coroutineScope.launch {
+				val result =
+					hostState.showSnackbar(
+						message = message,
+						actionLabel = actionLabel,
+						duration = SnackbarDuration.Long,
+					)
 
-            if (isActive) {
-                onResult(result)
-            }
-        }
-    }
+				if (isActive) {
+					onResult(result)
+				}
+			}
+	}
 
-    fun showMessage(
-        message: String,
-    ) {
-        messageJob?.cancel()
-        messageJob = coroutineScope.launch { hostState.showSnackbar(message = message) }
-    }
+	fun showMessage(
+		message: String,
+	) {
+		messageJob?.cancel()
+		messageJob = coroutineScope.launch { hostState.showSnackbar(message = message) }
+	}
 }

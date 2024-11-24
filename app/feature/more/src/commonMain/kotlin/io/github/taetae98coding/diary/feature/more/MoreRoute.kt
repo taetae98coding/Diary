@@ -9,17 +9,17 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 internal fun MoreRoute(
-    navigateToLogin: () -> Unit,
-    navigateToJoin: () -> Unit,
-    modifier: Modifier = Modifier,
-    accountViewModel: MoreAccountViewModel = koinViewModel(),
+	navigateToLogin: () -> Unit,
+	navigateToJoin: () -> Unit,
+	modifier: Modifier = Modifier,
+	accountViewModel: MoreAccountViewModel = koinViewModel(),
 ) {
-    val accountUiState by accountViewModel.uiState.collectAsStateWithLifecycle()
+	val accountUiState by accountViewModel.uiState.collectAsStateWithLifecycle()
 
-    MoreScreen(
-        accountUiStateProvider = { accountUiState },
-        onLogin = navigateToLogin,
-        onJoin = navigateToJoin,
-        modifier = modifier,
-    )
+	MoreScreen(
+		accountUiStateProvider = { accountUiState },
+		onLogin = navigateToLogin,
+		onJoin = navigateToJoin,
+		modifier = modifier,
+	)
 }

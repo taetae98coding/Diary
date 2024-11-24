@@ -5,11 +5,11 @@ import androidx.compose.runtime.Composable
 
 @Composable
 public actual fun KBackHandler(
-    isEnabled: Boolean,
-    onBack: () -> Unit,
+	isEnabled: Boolean,
+	onBack: () -> Unit,
 ) {
-    BackHandler(
-        enabled = isEnabled,
-        onBack = onBack,
-    )
+	BackHandler(
+		enabled = isEnabled,
+		onBack = onBack,
+	)
 }

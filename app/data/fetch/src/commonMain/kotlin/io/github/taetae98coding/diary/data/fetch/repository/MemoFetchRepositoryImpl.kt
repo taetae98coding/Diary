@@ -10,26 +10,23 @@ import kotlinx.datetime.Instant
 import org.koin.core.annotation.Factory
 
 @Factory
-internal class MemoFetchRepositoryImpl(
-    private val localDataSource: MemoDao,
-    private val remoteDataSource: MemoService,
-) : MemoFetchRepository {
-    override suspend fun fetch(uid: String) {
-        mutex.withLock {
-            while (true) {
-                val updateAt = localDataSource.getLastServerUpdateAt(uid).first() ?: Instant.fromEpochMilliseconds(0L)
-                val list = remoteDataSource.fetch(updateAt)
+internal class MemoFetchRepositoryImpl(private val localDataSource: MemoDao, private val remoteDataSource: MemoService) : MemoFetchRepository {
+	override suspend fun fetch(uid: String) {
+		mutex.withLock {
+			while (true) {
+				val updateAt = localDataSource.getLastServerUpdateAt(uid).first() ?: Instant.fromEpochMilliseconds(0L)
+				val list = remoteDataSource.fetch(updateAt)
 
-                if (list.isEmpty()) {
-                    break
-                }
+				if (list.isEmpty()) {
+					break
+				}
 
-                localDataSource.upsert(list)
-            }
-        }
-    }
+				localDataSource.upsert(list)
+			}
+		}
+	}
 
-    companion object {
-        private val mutex = Mutex()
-    }
+	companion object {
+		private val mutex = Mutex()
+	}
 }

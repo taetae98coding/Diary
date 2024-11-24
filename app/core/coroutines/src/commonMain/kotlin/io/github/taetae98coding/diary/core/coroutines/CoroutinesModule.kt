@@ -10,13 +10,9 @@ import org.koin.core.annotation.Singleton
 @Module
 @ComponentScan
 public class CoroutinesModule {
-    @Singleton
-    internal fun providesAppLifecycleOwner(): LifecycleOwner {
-        return getAppLifecycleOwner()
-    }
+	@Singleton
+	internal fun providesAppLifecycleOwner(): LifecycleOwner = getAppLifecycleOwner()
 
-    @Singleton
-    internal fun providesAppCoroutineScope(lifecycleOwner: LifecycleOwner): CoroutineScope {
-        return lifecycleOwner.lifecycleScope
-    }
+	@Singleton
+	internal fun providesAppCoroutineScope(lifecycleOwner: LifecycleOwner): CoroutineScope = lifecycleOwner.lifecycleScope
 }

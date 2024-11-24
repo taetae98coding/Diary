@@ -7,12 +7,12 @@ import kotlinx.coroutines.launch
 import org.koin.core.KoinApplication
 
 internal fun initFirebaseMessagingManager(
-    koinApplication: KoinApplication,
+	koinApplication: KoinApplication,
 ) {
-    val appLifecycleOwner = koinApplication.koin.get<LifecycleOwner>()
-    val fcmManager = koinApplication.koin.get<FCMManager>()
+	val appLifecycleOwner = koinApplication.koin.get<LifecycleOwner>()
+	val fcmManager = koinApplication.koin.get<FCMManager>()
 
-    appLifecycleOwner.lifecycleScope.launch {
-        fcmManager.attach(appLifecycleOwner)
-    }
+	appLifecycleOwner.lifecycleScope.launch {
+		fcmManager.attach(appLifecycleOwner)
+	}
 }

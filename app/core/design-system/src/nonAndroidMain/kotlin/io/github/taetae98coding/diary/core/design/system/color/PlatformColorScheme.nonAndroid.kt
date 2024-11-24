@@ -6,11 +6,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
 @Composable
-internal actual fun platformDarkColorScheme(): ColorScheme {
-    return darkColorScheme()
-}
+internal actual fun platformDarkColorScheme(): ColorScheme = darkColorScheme()
 
 @Composable
-internal actual fun platformLightColorScheme(): ColorScheme {
-    return lightColorScheme()
-}
+internal actual fun platformLightColorScheme(): ColorScheme = lightColorScheme()

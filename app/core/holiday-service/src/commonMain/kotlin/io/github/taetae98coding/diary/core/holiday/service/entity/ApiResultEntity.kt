@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class ApiResultEntity(
-    @SerialName("response")
-    val response: ResponseEntity,
+	@SerialName("response")
+	val response: ResponseEntity,
 )

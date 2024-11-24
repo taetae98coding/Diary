@@ -22,44 +22,44 @@ import kotlinx.datetime.daysUntil
 
 @Composable
 internal fun CalendarWeek(
-    state: CalendarWeekState,
-    primaryDateListProvider: () -> List<LocalDate>,
-    textItemListProvider: () -> List<CalendarItemUiState.Text>,
-    holidayListProvider: () -> List<CalendarItemUiState.Holiday>,
-    onCalendarItemClick: (Any) -> Unit,
-    modifier: Modifier = Modifier,
-    colors: CalendarColors = CalendarDefaults.colors(),
+	state: CalendarWeekState,
+	primaryDateListProvider: () -> List<LocalDate>,
+	textItemListProvider: () -> List<CalendarItemUiState.Text>,
+	holidayListProvider: () -> List<CalendarItemUiState.Holiday>,
+	onCalendarItemClick: (Any) -> Unit,
+	modifier: Modifier = Modifier,
+	colors: CalendarColors = CalendarDefaults.colors(),
 ) {
-    val selectColor = colors.selectColor.takeOrElse { LocalContentColor.current.multiplyAlpha(0.2F) }
+	val selectColor = colors.selectColor.takeOrElse { LocalContentColor.current.multiplyAlpha(0.2F) }
 
-    Column(
-        modifier = modifier.drawBehind {
-            val dateRange = state.selectedDateRange ?: return@drawBehind
-            val startWeight = state.dateRange.start.daysUntil(dateRange.start)
-            val endWeight = dateRange.endInclusive.daysUntil(state.dateRange.endInclusive)
+	Column(
+		modifier = modifier.drawBehind {
+			val dateRange = state.selectedDateRange ?: return@drawBehind
+			val startWeight = state.dateRange.start.daysUntil(dateRange.start)
+			val endWeight = dateRange.endInclusive.daysUntil(state.dateRange.endInclusive)
 
-            drawRect(
-                color = selectColor,
-                topLeft = Offset(size.width / 7 * startWeight, 0F),
-                size = Size(size.width * (1F - (1F / 7F * (startWeight + endWeight))), size.height),
-            )
-        },
-    ) {
-        HorizontalDivider(thickness = 0.5.dp)
-        Spacer(modifier = Modifier.height(2.dp))
-        CalendarDayOfMonthRow(
-            state = state,
-            primaryDateListProvider = primaryDateListProvider,
-            holidayListProvider = holidayListProvider,
-            colors = colors,
-        )
-        CalendarItemVerticalGrid(
-            state = state,
-            textItemListProvider = textItemListProvider,
-            holidayListProvider = holidayListProvider,
-            onCalendarItemClick = onCalendarItemClick,
-            modifier = Modifier.fillMaxSize(),
-            colors = colors,
-        )
-    }
+			drawRect(
+				color = selectColor,
+				topLeft = Offset(size.width / 7 * startWeight, 0F),
+				size = Size(size.width * (1F - (1F / 7F * (startWeight + endWeight))), size.height),
+			)
+		},
+	) {
+		HorizontalDivider(thickness = 0.5.dp)
+		Spacer(modifier = Modifier.height(2.dp))
+		CalendarDayOfMonthRow(
+			state = state,
+			primaryDateListProvider = primaryDateListProvider,
+			holidayListProvider = holidayListProvider,
+			colors = colors,
+		)
+		CalendarItemVerticalGrid(
+			state = state,
+			textItemListProvider = textItemListProvider,
+			holidayListProvider = holidayListProvider,
+			onCalendarItemClick = onCalendarItemClick,
+			modifier = Modifier.fillMaxSize(),
+			colors = colors,
+		)
+	}
 }

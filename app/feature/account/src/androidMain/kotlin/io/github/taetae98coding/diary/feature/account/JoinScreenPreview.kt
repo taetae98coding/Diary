@@ -10,13 +10,13 @@ import io.github.taetae98coding.diary.feature.account.join.state.rememberJoinScr
 @Composable
 @DiaryPreview
 private fun JoinScreenPreview() {
-    DiaryTheme {
-        JoinScreen(
-            state = rememberJoinScreenState(),
-            onNavigateUp = {},
-            onJoin = {},
-            uiStateProvider = { JoinUiState() },
-            onLoginFinish = {}
-        )
-    }
+	DiaryTheme {
+		JoinScreen(
+			state = rememberJoinScreenState(),
+			onNavigateUp = {},
+			onJoin = {},
+			uiStateProvider = { JoinUiState() },
+			onLoginFinish = {},
+		)
+	}
 }

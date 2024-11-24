@@ -10,13 +10,13 @@ import io.github.taetae98coding.diary.feature.account.login.state.rememberLoginS
 @Composable
 @DiaryPreview
 private fun LoginScreenPreview() {
-    DiaryTheme {
-        LoginScreen(
-            state = rememberLoginScreenState(),
-            onNavigateUp = {},
-            onLogin = {},
-            uiStateProvider = { LoginUiState() },
-            onLoginFinish = {},
-        )
-    }
+	DiaryTheme {
+		LoginScreen(
+			state = rememberLoginScreenState(),
+			onNavigateUp = {},
+			onLogin = {},
+			uiStateProvider = { LoginUiState() },
+			onLoginFinish = {},
+		)
+	}
 }

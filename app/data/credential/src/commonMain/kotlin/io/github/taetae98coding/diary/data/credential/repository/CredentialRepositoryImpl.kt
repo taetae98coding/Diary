@@ -9,23 +9,18 @@ import kotlinx.coroutines.flow.flow
 import org.koin.core.annotation.Factory
 
 @Factory
-internal class CredentialRepositoryImpl(
-    private val preferencesDataSource: AccountPreferences,
-    private val remoteDataSource: AccountService,
-) : CredentialRepository {
-    override suspend fun join(email: String, password: String) {
-        remoteDataSource.join(email, password)
-    }
+internal class CredentialRepositoryImpl(private val preferencesDataSource: AccountPreferences, private val remoteDataSource: AccountService) : CredentialRepository {
+	override suspend fun join(email: String, password: String) {
+		remoteDataSource.join(email, password)
+	}
 
-    override suspend fun save(email: String, token: AccountToken) {
-        preferencesDataSource.save(email, token.uid, token.token)
-    }
+	override suspend fun save(email: String, token: AccountToken) {
+		preferencesDataSource.save(email, token.uid, token.token)
+	}
 
-    override suspend fun clear() {
-        preferencesDataSource.clear()
-    }
+	override suspend fun clear() {
+		preferencesDataSource.clear()
+	}
 
-    override fun fetchToken(email: String, password: String): Flow<AccountToken> {
-        return flow { emit(remoteDataSource.login(email, password)) }
-    }
+	override fun fetchToken(email: String, password: String): Flow<AccountToken> = flow { emit(remoteDataSource.login(email, password)) }
 }

@@ -9,19 +9,19 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 internal fun JoinRoute(
-    navigateUp: () -> Unit,
-    modifier: Modifier = Modifier,
-    joinViewModel: JoinViewModel = koinViewModel(),
+	navigateUp: () -> Unit,
+	modifier: Modifier = Modifier,
+	joinViewModel: JoinViewModel = koinViewModel(),
 ) {
-    val state = rememberJoinScreenState()
-    val uiState by joinViewModel.uiState.collectAsStateWithLifecycle()
+	val state = rememberJoinScreenState()
+	val uiState by joinViewModel.uiState.collectAsStateWithLifecycle()
 
-    JoinScreen(
-        state = state,
-        onNavigateUp = navigateUp,
-        onJoin = { joinViewModel.join(state.email, state.password) },
-        uiStateProvider = { uiState },
-        onLoginFinish = navigateUp,
-        modifier = modifier,
-    )
+	JoinScreen(
+		state = state,
+		onNavigateUp = navigateUp,
+		onJoin = { joinViewModel.join(state.email, state.password) },
+		uiStateProvider = { uiState },
+		onLoginFinish = navigateUp,
+		modifier = modifier,
+	)
 }

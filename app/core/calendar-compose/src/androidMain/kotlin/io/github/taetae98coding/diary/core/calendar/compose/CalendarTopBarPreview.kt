@@ -9,7 +9,7 @@ import io.github.taetae98coding.diary.core.design.system.theme.DiaryTheme
 @DiaryPreview
 @Composable
 private fun CalendarTopBarPreview() {
-    DiaryTheme {
-        CalendarTopBar(state = rememberCalendarState())
-    }
+	DiaryTheme {
+		CalendarTopBar(state = rememberCalendarState())
+	}
 }

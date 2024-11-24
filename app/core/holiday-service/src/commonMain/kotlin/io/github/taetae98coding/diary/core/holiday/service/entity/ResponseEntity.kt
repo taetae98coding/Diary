@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class ResponseEntity(
-    @SerialName("body")
-    val body: BodyEntity,
+	@SerialName("body")
+	val body: BodyEntity,
 )

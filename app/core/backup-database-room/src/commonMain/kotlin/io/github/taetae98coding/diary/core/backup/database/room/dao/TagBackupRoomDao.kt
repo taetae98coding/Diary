@@ -7,18 +7,14 @@ import kotlinx.coroutines.flow.Flow
 import org.koin.core.annotation.Factory
 
 @Factory
-internal class TagBackupRoomDao(
-    private val database: BackupDatabase,
-) : TagBackupDao {
-    override suspend fun upsert(uid: String, id: String) {
-        database.tag().upsert(TagBackupEntity(tagId = id, uid = uid))
-    }
+internal class TagBackupRoomDao(private val database: BackupDatabase) : TagBackupDao {
+	override suspend fun upsert(uid: String, id: String) {
+		database.tag().upsert(TagBackupEntity(tagId = id, uid = uid))
+	}
 
-    override suspend fun delete(ids: Set<String>) {
-        database.tag().delete(ids)
-    }
+	override suspend fun delete(ids: Set<String>) {
+		database.tag().delete(ids)
+	}
 
-    override fun findByUid(uid: String): Flow<List<String>> {
-        return database.tag().findByUid(uid)
-    }
+	override fun findByUid(uid: String): Flow<List<String>> = database.tag().findByUid(uid)
 }

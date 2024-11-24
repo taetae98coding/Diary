@@ -14,47 +14,44 @@ import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
-internal class JoinViewModel(
-    private val joinUseCase: JoinUseCase,
-    private val loginUseCase: LoginUseCase,
-) : ViewModel() {
-    private val _uiState = MutableStateFlow(JoinUiState(onMessageShow = ::clearMessage))
-    val uiState = _uiState.asStateFlow()
+internal class JoinViewModel(private val joinUseCase: JoinUseCase, private val loginUseCase: LoginUseCase) : ViewModel() {
+	private val _uiState = MutableStateFlow(JoinUiState(onMessageShow = ::clearMessage))
+	val uiState = _uiState.asStateFlow()
 
-    fun join(email: String, password: String) {
-        if (uiState.value.isProgress) return
+	fun join(email: String, password: String) {
+		if (uiState.value.isProgress) return
 
-        viewModelScope.launch {
-            _uiState.update { it.copy(isProgress = true) }
-            joinUseCase(email, password)
-                .onSuccess { login(email, password) }
-                .onFailure { handleThrowable(it) }
-        }
-    }
+		viewModelScope.launch {
+			_uiState.update { it.copy(isProgress = true) }
+			joinUseCase(email, password)
+				.onSuccess { login(email, password) }
+				.onFailure { handleThrowable(it) }
+		}
+	}
 
-    private fun login(email: String, password: String) {
-        viewModelScope.launch {
-            loginUseCase(email, password)
-            _uiState.update { it.copy(isProgress = false, isLoginFinish = true) }
-        }
-    }
+	private fun login(email: String, password: String) {
+		viewModelScope.launch {
+			loginUseCase(email, password)
+			_uiState.update { it.copy(isProgress = false, isLoginFinish = true) }
+		}
+	}
 
-    private fun handleThrowable(throwable: Throwable) {
-        when (throwable) {
-            is ExistEmailException -> _uiState.update { it.copy(isProgress = false, isExistEmail = true) }
-            is NetworkException -> _uiState.update { it.copy(isProgress = false, isNetworkError = true) }
-            else -> _uiState.update { it.copy(isProgress = false, isUnknownError = true) }
-        }
-    }
+	private fun handleThrowable(throwable: Throwable) {
+		when (throwable) {
+			is ExistEmailException -> _uiState.update { it.copy(isProgress = false, isExistEmail = true) }
+			is NetworkException -> _uiState.update { it.copy(isProgress = false, isNetworkError = true) }
+			else -> _uiState.update { it.copy(isProgress = false, isUnknownError = true) }
+		}
+	}
 
-    private fun clearMessage() {
-        _uiState.update {
-            it.copy(
-                isLoginFinish = false,
-                isExistEmail = false,
-                isNetworkError = false,
-                isUnknownError = false,
-            )
-        }
-    }
+	private fun clearMessage() {
+		_uiState.update {
+			it.copy(
+				isLoginFinish = false,
+				isExistEmail = false,
+				isNetworkError = false,
+				isUnknownError = false,
+			)
+		}
+	}
 }

@@ -31,112 +31,112 @@ import kotlinx.datetime.LocalDate
 
 @Composable
 public fun DiaryDate(
-    state: DiaryDateState,
-    modifier: Modifier = Modifier,
+	state: DiaryDateState,
+	modifier: Modifier = Modifier,
 ) {
-    Card(modifier = modifier) {
-        val itemModifier = Modifier.fillMaxWidth()
+	Card(modifier = modifier) {
+		val itemModifier = Modifier.fillMaxWidth()
 
-        Title(
-            state = state,
-            modifier = itemModifier.padding(DiaryTheme.dimen.diaryPaddingValues),
-        )
-        AnimatedVisibility(
-            visible = state.hasDate,
-            modifier = itemModifier,
-        ) {
-            Date(state = state)
-        }
-    }
+		Title(
+			state = state,
+			modifier = itemModifier.padding(DiaryTheme.dimen.diaryPaddingValues),
+		)
+		AnimatedVisibility(
+			visible = state.hasDate,
+			modifier = itemModifier,
+		) {
+			Date(state = state)
+		}
+	}
 }
 
 @Composable
 private fun Title(
-    state: DiaryDateState,
-    modifier: Modifier = Modifier,
+	state: DiaryDateState,
+	modifier: Modifier = Modifier,
 ) {
-    Row(
-        modifier = Modifier.toggleable(value = state.hasDate, onValueChange = state::onHasDateChange)
-            .then(modifier),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Text(text = "날짜")
-        Switch(
-            checked = state.hasDate,
-            onCheckedChange = null,
-        )
-    }
+	Row(
+		modifier = Modifier.toggleable(value = state.hasDate, onValueChange = state::onHasDateChange)
+			.then(modifier),
+		horizontalArrangement = Arrangement.SpaceBetween,
+		verticalAlignment = Alignment.CenterVertically,
+	) {
+		Text(text = "날짜")
+		Switch(
+			checked = state.hasDate,
+			onCheckedChange = null,
+		)
+	}
 }
 
 @Composable
 private fun Date(
-    state: DiaryDateState,
-    modifier: Modifier = Modifier,
+	state: DiaryDateState,
+	modifier: Modifier = Modifier,
 ) {
-    Row(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        DateButton(
-            dateProvider = { state.start },
-            onSelectDate = state::onStartChange,
-            modifier = Modifier.weight(1F),
-        )
-        Text(text = " ~ ")
-        DateButton(
-            dateProvider = { state.endInclusive },
-            onSelectDate = state::onEndInclusiveChange,
-            modifier = Modifier.weight(1F),
-        )
-    }
+	Row(
+		modifier = modifier,
+		horizontalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace),
+		verticalAlignment = Alignment.CenterVertically,
+	) {
+		DateButton(
+			dateProvider = { state.start },
+			onSelectDate = state::onStartChange,
+			modifier = Modifier.weight(1F),
+		)
+		Text(text = " ~ ")
+		DateButton(
+			dateProvider = { state.endInclusive },
+			onSelectDate = state::onEndInclusiveChange,
+			modifier = Modifier.weight(1F),
+		)
+	}
 }
 
 @Composable
 private fun DateButton(
-    dateProvider: () -> LocalDate,
-    onSelectDate: (LocalDate) -> Unit,
-    modifier: Modifier = Modifier,
+	dateProvider: () -> LocalDate,
+	onSelectDate: (LocalDate) -> Unit,
+	modifier: Modifier = Modifier,
 ) {
-    var isPickerVisible by rememberSaveable { mutableStateOf(false) }
+	var isPickerVisible by rememberSaveable { mutableStateOf(false) }
 
-    TextButton(
-        onClick = { isPickerVisible = true },
-        modifier = modifier,
-    ) {
-        AnimatedContent(
-            targetState = dateProvider(),
-            transitionSpec = {
-                if (targetState > initialState) {
-                    (slideInVertically { it } + fadeIn()) togetherWith (slideOutVertically { -it } + fadeOut())
-                } else {
-                    (slideInVertically { -it } + fadeIn()) togetherWith (slideOutVertically { it } + fadeOut())
-                }
-            },
-        ) { target ->
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(
-                    text = target.year.toString(),
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center,
-                    style = DiaryTheme.typography.labelSmall,
-                )
-                Text(
-                    text = "${target.monthNumber}월 ${target.dayOfMonth}일",
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center,
-                    style = DiaryTheme.typography.labelLarge,
-                )
-            }
-        }
-    }
+	TextButton(
+		onClick = { isPickerVisible = true },
+		modifier = modifier,
+	) {
+		AnimatedContent(
+			targetState = dateProvider(),
+			transitionSpec = {
+				if (targetState > initialState) {
+					(slideInVertically { it } + fadeIn()) togetherWith (slideOutVertically { -it } + fadeOut())
+				} else {
+					(slideInVertically { -it } + fadeIn()) togetherWith (slideOutVertically { it } + fadeOut())
+				}
+			},
+		) { target ->
+			Column(horizontalAlignment = Alignment.CenterHorizontally) {
+				Text(
+					text = target.year.toString(),
+					modifier = Modifier.fillMaxWidth(),
+					textAlign = TextAlign.Center,
+					style = DiaryTheme.typography.labelSmall,
+				)
+				Text(
+					text = "${target.monthNumber}월 ${target.dayOfMonth}일",
+					modifier = Modifier.fillMaxWidth(),
+					textAlign = TextAlign.Center,
+					style = DiaryTheme.typography.labelLarge,
+				)
+			}
+		}
+	}
 
-    if (isPickerVisible) {
-        DiaryDatePickerDialog(
-            localDate = dateProvider(),
-            onConfirm = onSelectDate,
-            onDismissRequest = { isPickerVisible = false },
-        )
-    }
+	if (isPickerVisible) {
+		DiaryDatePickerDialog(
+			localDate = dateProvider(),
+			onConfirm = onSelectDate,
+			onDismissRequest = { isPickerVisible = false },
+		)
+	}
 }

@@ -45,223 +45,223 @@ import io.github.taetae98coding.diary.feature.memo.tag.TagUiState
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun MemoDetailScreen(
-    state: MemoDetailScreenState,
-    titleProvider: () -> String?,
-    navigateButtonProvider: () -> MemoDetailNavigationButton,
-    actionButtonProvider: () -> MemoDetailActionButton,
-    floatingButtonProvider: () -> MemoDetailFloatingButton,
-    uiStateProvider: () -> MemoDetailScreenUiState,
-    onTagTitle: () -> Unit,
-    onTag: (String) -> Unit,
-    tagListProvider: () -> List<TagUiState>?,
-    modifier: Modifier = Modifier,
+	state: MemoDetailScreenState,
+	titleProvider: () -> String?,
+	navigateButtonProvider: () -> MemoDetailNavigationButton,
+	actionButtonProvider: () -> MemoDetailActionButton,
+	floatingButtonProvider: () -> MemoDetailFloatingButton,
+	uiStateProvider: () -> MemoDetailScreenUiState,
+	onTagTitle: () -> Unit,
+	onTag: (String) -> Unit,
+	tagListProvider: () -> List<TagUiState>?,
+	modifier: Modifier = Modifier,
 ) {
-    Scaffold(
-        modifier = modifier,
-        topBar = {
-            TopAppBar(
-                title = {
-                    titleProvider()?.let {
-                        Text(
-                            text = it,
-                            modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE),
-                            maxLines = 1,
-                        )
-                    }
-                },
-                navigationIcon = {
-                    when (val button = navigateButtonProvider()) {
-                        is MemoDetailNavigationButton.NavigateUp -> {
-                            IconButton(onClick = button.onNavigateUp) {
-                                NavigateUpIcon()
-                            }
-                        }
+	Scaffold(
+		modifier = modifier,
+		topBar = {
+			TopAppBar(
+				title = {
+					titleProvider()?.let {
+						Text(
+							text = it,
+							modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE),
+							maxLines = 1,
+						)
+					}
+				},
+				navigationIcon = {
+					when (val button = navigateButtonProvider()) {
+						is MemoDetailNavigationButton.NavigateUp -> {
+							IconButton(onClick = button.onNavigateUp) {
+								NavigateUpIcon()
+							}
+						}
 
-                        is MemoDetailNavigationButton.None -> Unit
-                    }
-                },
-                actions = {
-                    when (val button = actionButtonProvider()) {
-                        is MemoDetailActionButton.FinishAndDetail -> {
-                            IconToggleButton(
-                                checked = button.isFinish,
-                                onCheckedChange = button.onFinishChange,
-                            ) {
-                                FinishIcon()
-                            }
+						is MemoDetailNavigationButton.None -> Unit
+					}
+				},
+				actions = {
+					when (val button = actionButtonProvider()) {
+						is MemoDetailActionButton.FinishAndDetail -> {
+							IconToggleButton(
+								checked = button.isFinish,
+								onCheckedChange = button.onFinishChange,
+							) {
+								FinishIcon()
+							}
 
-                            IconButton(onClick = button.delete) {
-                                DeleteIcon()
-                            }
-                        }
+							IconButton(onClick = button.delete) {
+								DeleteIcon()
+							}
+						}
 
-                        else -> Unit
-                    }
-                },
-            )
-        },
-        snackbarHost = { SnackbarHost(hostState = state.hostState) },
-        floatingActionButton = {
-            when (val button = floatingButtonProvider()) {
-                is MemoDetailFloatingButton.Add -> {
-                    val isProgress by remember { derivedStateOf { uiStateProvider().isProgress } }
+						else -> Unit
+					}
+				},
+			)
+		},
+		snackbarHost = { SnackbarHost(hostState = state.hostState) },
+		floatingActionButton = {
+			when (val button = floatingButtonProvider()) {
+				is MemoDetailFloatingButton.Add -> {
+					val isProgress by remember { derivedStateOf { uiStateProvider().isProgress } }
 
-                    FloatingAddButton(
-                        onClick = button.onAdd,
-                        progressProvider = { isProgress },
-                    )
-                }
+					FloatingAddButton(
+						onClick = button.onAdd,
+						progressProvider = { isProgress },
+					)
+				}
 
-                is MemoDetailFloatingButton.None -> Unit
-            }
-        },
-    ) {
-        Content(
-            state = state,
-            onTagTitle = onTagTitle,
-            onTag = onTag,
-            tagListProvider = tagListProvider,
-            modifier = Modifier.fillMaxSize()
-                .padding(it)
-                .padding(DiaryTheme.dimen.screenPaddingValues),
-        )
-    }
+				is MemoDetailFloatingButton.None -> Unit
+			}
+		},
+	) {
+		Content(
+			state = state,
+			onTagTitle = onTagTitle,
+			onTag = onTag,
+			tagListProvider = tagListProvider,
+			modifier = Modifier.fillMaxSize()
+				.padding(it)
+				.padding(DiaryTheme.dimen.screenPaddingValues),
+		)
+	}
 
-    Message(
-        state = state,
-        uiStateProvider = uiStateProvider,
-    )
+	Message(
+		state = state,
+		uiStateProvider = uiStateProvider,
+	)
 
-    LaunchedFocus(state = state)
+	LaunchedFocus(state = state)
 }
 
 @Composable
 private fun Message(
-    state: MemoDetailScreenState,
-    uiStateProvider: () -> MemoDetailScreenUiState,
+	state: MemoDetailScreenState,
+	uiStateProvider: () -> MemoDetailScreenUiState,
 ) {
-    val uiState = uiStateProvider()
+	val uiState = uiStateProvider()
 
-    LaunchedEffect(
-        uiState.isAdd,
-        uiState.isDelete,
-        uiState.isUpdate,
-        uiState.isTitleBlankError,
-        uiState.isUnknownError,
-    ) {
-        if (!uiState.hasMessage) return@LaunchedEffect
+	LaunchedEffect(
+		uiState.isAdd,
+		uiState.isDelete,
+		uiState.isUpdate,
+		uiState.isTitleBlankError,
+		uiState.isUnknownError,
+	) {
+		if (!uiState.hasMessage) return@LaunchedEffect
 
-        when {
-            uiState.isAdd -> {
-                state.showMessage("메모 추가 ${Emoji.congratulate.random()}")
-                state.clearInput()
-                state.requestTitleFocus()
-            }
+		when {
+			uiState.isAdd -> {
+				state.showMessage("메모 추가 ${Emoji.congratulate.random()}")
+				state.clearInput()
+				state.requestTitleFocus()
+			}
 
-            uiState.isDelete -> {
-                if (state is MemoDetailScreenState.Detail) {
-                    state.onDelete()
-                }
-            }
+			uiState.isDelete -> {
+				if (state is MemoDetailScreenState.Detail) {
+					state.onDelete()
+				}
+			}
 
-            uiState.isUpdate -> {
-                if (state is MemoDetailScreenState.Detail) {
-                    state.onUpdate()
-                }
-            }
+			uiState.isUpdate -> {
+				if (state is MemoDetailScreenState.Detail) {
+					state.onUpdate()
+				}
+			}
 
-            uiState.isTitleBlankError -> {
-                state.showMessage("제목을 입력해 주세요 ${Emoji.check.random()}")
-                state.titleError()
-            }
+			uiState.isTitleBlankError -> {
+				state.showMessage("제목을 입력해 주세요 ${Emoji.check.random()}")
+				state.titleError()
+			}
 
-            uiState.isUnknownError -> state.showMessage("알 수 없는 에러가 발생했어요 잠시 후 다시 시도해 주세요 ${Emoji.error.random()}")
-        }
+			uiState.isUnknownError -> state.showMessage("알 수 없는 에러가 발생했어요 잠시 후 다시 시도해 주세요 ${Emoji.error.random()}")
+		}
 
-        uiState.onMessageShow()
-    }
+		uiState.onMessageShow()
+	}
 }
 
 @Composable
 private fun LaunchedFocus(
-    state: MemoDetailScreenState,
+	state: MemoDetailScreenState,
 ) {
-    LaunchedEffect(state) {
-        if (state is MemoDetailScreenState.Add) {
-            state.requestTitleFocus()
-        }
-    }
+	LaunchedEffect(state) {
+		if (state is MemoDetailScreenState.Add) {
+			state.requestTitleFocus()
+		}
+	}
 }
 
 @Composable
 private fun Content(
-    state: MemoDetailScreenState,
-    onTagTitle: () -> Unit,
-    onTag: (String) -> Unit,
-    tagListProvider: () -> List<TagUiState>?,
-    modifier: Modifier = Modifier,
+	state: MemoDetailScreenState,
+	onTagTitle: () -> Unit,
+	onTag: (String) -> Unit,
+	tagListProvider: () -> List<TagUiState>?,
+	modifier: Modifier = Modifier,
 ) {
-    Column(
-        modifier = Modifier.verticalScroll(state = rememberScrollState())
-            .then(modifier),
-        verticalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace),
-    ) {
-        DiaryComponent(state = state.componentState)
-        DiaryDate(state = state.dateState)
-        InternalDiaryTag(
-            onTitle = onTagTitle,
-            onTag = onTag,
-            listProvider = tagListProvider,
-        )
-        InternalDiaryColor(state = state)
-    }
+	Column(
+		modifier = Modifier.verticalScroll(state = rememberScrollState())
+			.then(modifier),
+		verticalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace),
+	) {
+		DiaryComponent(state = state.componentState)
+		DiaryDate(state = state.dateState)
+		InternalDiaryTag(
+			onTitle = onTagTitle,
+			onTag = onTag,
+			listProvider = tagListProvider,
+		)
+		InternalDiaryColor(state = state)
+	}
 }
 
 @Composable
 private fun InternalDiaryTag(
-    onTitle: () -> Unit,
-    onTag: (String) -> Unit,
-    listProvider: () -> List<TagUiState>?,
-    modifier: Modifier = Modifier,
+	onTitle: () -> Unit,
+	onTag: (String) -> Unit,
+	listProvider: () -> List<TagUiState>?,
+	modifier: Modifier = Modifier,
 ) {
-    TagFlow(
-        title = {
-            Row(
-                modifier = Modifier.fillMaxWidth()
-                    .clickable(onClick = onTitle)
-                    .minimumInteractiveComponentSize()
-                    .padding(horizontal = DiaryTheme.dimen.diaryHorizontalPadding),
-                horizontalArrangement = Arrangement.SpaceBetween,
-            ) {
-                Text(text = "태그")
-                ChevronRightIcon()
-            }
-        },
-        listProvider = listProvider,
-        empty = { Text(text = "태그가 없어요 🐻‍❄️") },
-        tag = {
-            PrimaryMemoTag(
-                uiState = it,
-                onClick = { onTag(it.id) },
-            )
-        },
-        modifier = modifier.fillMaxWidth()
-            .heightIn(min = 150.dp, max = 200.dp),
-    )
+	TagFlow(
+		title = {
+			Row(
+				modifier = Modifier.fillMaxWidth()
+					.clickable(onClick = onTitle)
+					.minimumInteractiveComponentSize()
+					.padding(horizontal = DiaryTheme.dimen.diaryHorizontalPadding),
+				horizontalArrangement = Arrangement.SpaceBetween,
+			) {
+				Text(text = "태그")
+				ChevronRightIcon()
+			}
+		},
+		listProvider = listProvider,
+		empty = { Text(text = "태그가 없어요 🐻‍❄️") },
+		tag = {
+			PrimaryMemoTag(
+				uiState = it,
+				onClick = { onTag(it.id) },
+			)
+		},
+		modifier = modifier.fillMaxWidth()
+			.heightIn(min = 150.dp, max = 200.dp),
+	)
 }
 
 @Composable
 private fun InternalDiaryColor(
-    state: MemoDetailScreenState,
-    modifier: Modifier = Modifier,
+	state: MemoDetailScreenState,
+	modifier: Modifier = Modifier,
 ) {
-    Row(modifier = modifier) {
-        DiaryColor(
-            state = state.colorState,
-            modifier = Modifier.weight(1F)
-                .height(100.dp),
-        )
+	Row(modifier = modifier) {
+		DiaryColor(
+			state = state.colorState,
+			modifier = Modifier.weight(1F)
+				.height(100.dp),
+		)
 
-        Spacer(modifier = Modifier.weight(1F))
-    }
+		Spacer(modifier = Modifier.weight(1F))
+	}
 }

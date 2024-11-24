@@ -15,35 +15,35 @@ import androidx.compose.ui.unit.Dp
 
 @Composable
 public fun DiaryFilterChip(
-    selected: Boolean,
-    onClick: () -> Unit,
-    label: @Composable () -> Unit,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null,
-    shape: Shape = FilterChipDefaults.shape,
-    colors: SelectableChipColors = FilterChipDefaults.filterChipColors(),
-    elevation: SelectableChipElevation? = FilterChipDefaults.filterChipElevation(),
-    border: BorderStroke? = FilterChipDefaults.filterChipBorder(enabled, selected),
-    interactionSource: MutableInteractionSource? = null,
+	selected: Boolean,
+	onClick: () -> Unit,
+	label: @Composable () -> Unit,
+	modifier: Modifier = Modifier,
+	enabled: Boolean = true,
+	leadingIcon: @Composable (() -> Unit)? = null,
+	trailingIcon: @Composable (() -> Unit)? = null,
+	shape: Shape = FilterChipDefaults.shape,
+	colors: SelectableChipColors = FilterChipDefaults.filterChipColors(),
+	elevation: SelectableChipElevation? = FilterChipDefaults.filterChipElevation(),
+	border: BorderStroke? = FilterChipDefaults.filterChipBorder(enabled, selected),
+	interactionSource: MutableInteractionSource? = null,
 ) {
-    CompositionLocalProvider(
-        LocalMinimumInteractiveComponentSize provides Dp.Unspecified,
-    ) {
-        FilterChip(
-            selected = selected,
-            onClick = onClick,
-            label = label,
-            modifier = modifier,
-            enabled = enabled,
-            leadingIcon = leadingIcon,
-            trailingIcon = trailingIcon,
-            shape = shape,
-            colors = colors,
-            elevation = elevation,
-            border = border,
-            interactionSource = interactionSource,
-        )
-    }
+	CompositionLocalProvider(
+		LocalMinimumInteractiveComponentSize provides Dp.Unspecified,
+	) {
+		FilterChip(
+			selected = selected,
+			onClick = onClick,
+			label = label,
+			modifier = modifier,
+			enabled = enabled,
+			leadingIcon = leadingIcon,
+			trailingIcon = trailingIcon,
+			shape = shape,
+			colors = colors,
+			elevation = elevation,
+			border = border,
+			interactionSource = interactionSource,
+		)
+	}
 }

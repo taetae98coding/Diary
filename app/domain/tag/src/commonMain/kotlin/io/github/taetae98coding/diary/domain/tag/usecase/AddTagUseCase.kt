@@ -14,30 +14,25 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalUuidApi::class)
 @Factory
-public class AddTagUseCase internal constructor(
-    private val getAccountUseCase: GetAccountUseCase,
-    private val pushTagBackupQueueUseCase: PushTagBackupQueueUseCase,
-    private val clock: Clock,
-    private val repository: TagRepository,
-) {
-    public suspend operator fun invoke(detail: TagDetail): Result<Unit> {
-        return runCatching {
-            if (detail.title.isBlank()) throw TagTitleBlankException()
+public class AddTagUseCase internal constructor(private val getAccountUseCase: GetAccountUseCase, private val pushTagBackupQueueUseCase: PushTagBackupQueueUseCase, private val clock: Clock, private val repository: TagRepository) {
+	public suspend operator fun invoke(detail: TagDetail): Result<Unit> =
+		runCatching {
+			if (detail.title.isBlank()) throw TagTitleBlankException()
 
-            val account = getAccountUseCase().first().getOrThrow()
-            val tagId = Uuid.random().toString()
+			val account = getAccountUseCase().first().getOrThrow()
+			val tagId = Uuid.random().toString()
 
-            val tag = Tag(
-                id = tagId,
-                detail = detail,
-                owner = account.uid,
-                isFinish = false,
-                isDelete = false,
-                updateAt = clock.now(),
-            )
+			val tag =
+				Tag(
+					id = tagId,
+					detail = detail,
+					owner = account.uid,
+					isFinish = false,
+					isDelete = false,
+					updateAt = clock.now(),
+				)
 
-            repository.upsert(tag)
-            pushTagBackupQueueUseCase(tagId)
-        }
-    }
+			repository.upsert(tag)
+			pushTagBackupQueueUseCase(tagId)
+		}
 }

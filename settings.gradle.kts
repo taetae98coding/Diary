@@ -50,6 +50,9 @@ include(":app:core:holiday-preferences-datastore")
 include(":app:core:backup-database")
 include(":app:core:backup-database-room")
 
+include(":app:core:filter-database")
+include(":app:core:filter-database-room")
+
 include(":app:core:compose")
 include(":app:core:calendar-compose")
 include(":app:core:design-system")
@@ -66,6 +69,7 @@ include(":app:data:backup")
 include(":app:data:fetch")
 include(":app:data:fcm")
 include(":app:data:credential")
+include(":app:data:calendar")
 
 include(":app:domain:memo")
 include(":app:domain:tag")

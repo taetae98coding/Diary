@@ -14,6 +14,7 @@ kotlin {
                 implementation(project(":app:data:backup"))
                 implementation(project(":app:data:fetch"))
                 implementation(project(":app:data:fcm"))
+                implementation(project(":app:data:calendar"))
 
                 implementation(project(":app:domain:memo"))
                 implementation(project(":app:domain:tag"))
@@ -27,6 +28,7 @@ kotlin {
 
                 implementation(project(":app:core:coroutines"))
 
+                implementation(project(":app:core:filter-database-room"))
                 implementation(project(":app:core:backup-database-room"))
 
                 implementation(project(":app:core:account-preferences-datastore"))

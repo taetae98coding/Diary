@@ -4,53 +4,52 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.focus.FocusRequester
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month
 import kotlinx.datetime.plus
 
-public class CalendarState internal constructor(
-    internal val pagerState: PagerState,
-) {
-    internal val localDate: LocalDate
-        get() = LocalDate(1, 1, 1).plus(pagerState.currentPage, DateTimeUnit.MONTH)
+public class CalendarState internal constructor(internal val pagerState: PagerState) {
+	internal val focusRequester = FocusRequester()
 
-    internal var selectedDateRange: ClosedRange<LocalDate>? by mutableStateOf(null)
-        private set
+	internal val localDate: LocalDate
+		get() = LocalDate(1, 1, 1).plus(pagerState.currentPage, DateTimeUnit.MONTH)
 
-    public val year: Int
-        get() = localDate.year
+	internal var selectedDateRange: ClosedRange<LocalDate>? by mutableStateOf(null)
+		private set
 
-    public val month: Month
-        get() = localDate.month
+	public val year: Int
+		get() = localDate.year
 
-    internal suspend fun animateScrollTo(localDate: LocalDate) {
-        pagerState.animateScrollToPage(page(localDate))
-    }
+	public val month: Month
+		get() = localDate.month
 
-    internal suspend fun animateScrollToBackward() {
-        if (pagerState.canScrollBackward) {
-            pagerState.animateScrollToPage(pagerState.currentPage - 1)
-        }
-    }
+	public suspend fun animateScrollTo(localDate: LocalDate) {
+		pagerState.animateScrollToPage(page(localDate))
+	}
 
-    internal suspend fun animateScrollToForward() {
-        if (pagerState.canScrollForward) {
-            pagerState.animateScrollToPage(pagerState.currentPage + 1)
-        }
-    }
+	internal suspend fun animateScrollToBackward() {
+		if (pagerState.canScrollBackward) {
+			pagerState.animateScrollToPage(pagerState.currentPage - 1)
+		}
+	}
 
-    internal fun drag(dateRange: ClosedRange<LocalDate>) {
-        selectedDateRange = dateRange
-    }
+	internal suspend fun animateScrollToForward() {
+		if (pagerState.canScrollForward) {
+			pagerState.animateScrollToPage(pagerState.currentPage + 1)
+		}
+	}
 
-    internal fun finishDrag() {
-        selectedDateRange = null
-    }
+	internal fun drag(dateRange: ClosedRange<LocalDate>) {
+		selectedDateRange = dateRange
+	}
 
-    public companion object {
-        public fun page(localDate: LocalDate): Int {
-            return (localDate.year - 1) * 12 + (localDate.monthNumber - 1)
-        }
-    }
+	internal fun finishDrag() {
+		selectedDateRange = null
+	}
+
+	public companion object {
+		public fun page(localDate: LocalDate): Int = (localDate.year - 1) * 12 + (localDate.monthNumber - 1)
+	}
 }

@@ -6,12 +6,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class MemoTagEntity(
-    @SerialName("memoId")
-    val memoId: String,
-    @SerialName("tagId")
-    val tagId: String,
-    @SerialName("isSelected")
-    val isSelected: Boolean,
-    @SerialName("updateAt")
-    val updateAt: Instant
+	@SerialName("memoId")
+	val memoId: String,
+	@SerialName("tagId")
+	val tagId: String,
+	@SerialName("isSelected")
+	val isSelected: Boolean,
+	@SerialName("updateAt")
+	val updateAt: Instant,
 )

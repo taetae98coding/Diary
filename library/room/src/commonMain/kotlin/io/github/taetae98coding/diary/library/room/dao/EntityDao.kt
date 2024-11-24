@@ -7,13 +7,13 @@ import androidx.room.Upsert
 
 @Dao
 public abstract class EntityDao<T> {
-    @Upsert
-    public abstract suspend fun upsert(entity: T)
+	@Upsert
+	public abstract suspend fun upsert(entity: T)
 
-    @Transaction
-    @Upsert
-    public abstract suspend fun upsert(entityList: List<T>)
+	@Transaction
+	@Upsert
+	public abstract suspend fun upsert(entityList: List<T>)
 
-    @Delete
-    public abstract suspend fun delete(entity: T)
+	@Delete
+	public abstract suspend fun delete(entity: T)
 }

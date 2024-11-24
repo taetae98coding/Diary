@@ -10,13 +10,13 @@ import androidx.compose.ui.graphics.Color
 
 @Composable
 public fun FinishIcon(
-    modifier: Modifier = Modifier,
-    tint: Color = LocalContentColor.current,
+	modifier: Modifier = Modifier,
+	tint: Color = LocalContentColor.current,
 ) {
-    Icon(
-        modifier = modifier,
-        imageVector = Icons.Rounded.Verified,
-        contentDescription = null,
-        tint = tint,
-    )
+	Icon(
+		modifier = modifier,
+		imageVector = Icons.Rounded.Verified,
+		contentDescription = null,
+		tint = tint,
+	)
 }

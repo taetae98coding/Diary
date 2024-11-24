@@ -4,16 +4,18 @@ import io.ktor.client.plugins.api.createClientPlugin
 import io.ktor.client.request.header
 import kotlinx.coroutines.flow.first
 
-internal val DiaryClientTokenPlugin = createClientPlugin(
-    name = "DiaryClientTokenPlugin",
-    createConfiguration = { AccountPreferencesOwner() },
-    body = {
-        val owner = pluginConfig
+internal val DiaryClientTokenPlugin =
+	createClientPlugin(
+		name = "DiaryClientTokenPlugin",
+		createConfiguration = { AccountPreferencesOwner() },
+		body = {
+			val owner = pluginConfig
 
-        onRequest { request, _ ->
-            owner.preferences?.getToken()
-                ?.first()
-                ?.let { request.header("Authorization", "Bearer $it") }
-        }
-    },
-)
+			onRequest { request, _ ->
+				owner.preferences
+					?.getToken()
+					?.first()
+					?.let { request.header("Authorization", "Bearer $it") }
+			}
+		},
+	)

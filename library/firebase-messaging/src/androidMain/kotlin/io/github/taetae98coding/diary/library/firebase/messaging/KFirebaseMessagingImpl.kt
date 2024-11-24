@@ -5,7 +5,5 @@ import com.google.firebase.messaging.messaging
 import kotlinx.coroutines.tasks.await
 
 internal class KFirebaseMessagingImpl : KFirebaseMessaging {
-    override suspend fun getToken(): String {
-        return Firebase.messaging.token.await()
-    }
+	override suspend fun getToken(): String = Firebase.messaging.token.await()
 }

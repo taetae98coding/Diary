@@ -4,13 +4,9 @@ import androidx.room.TypeConverter
 import kotlinx.datetime.LocalDate
 
 public data object LocalDataConverter {
-    @TypeConverter
-    public fun stringToLocalDate(value: String?): LocalDate? {
-        return value?.let { LocalDate.parse(it) }
-    }
+	@TypeConverter
+	public fun stringToLocalDate(value: String?): LocalDate? = value?.let { LocalDate.parse(it) }
 
-    @TypeConverter
-    public fun localDateToString(value: LocalDate?): String? {
-        return value?.toString()
-    }
+	@TypeConverter
+	public fun localDateToString(value: LocalDate?): String? = value?.toString()
 }

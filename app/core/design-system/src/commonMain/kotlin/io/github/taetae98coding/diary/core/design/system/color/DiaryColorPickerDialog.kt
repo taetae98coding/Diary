@@ -20,41 +20,41 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 public fun DiaryColorPickerDialog(
-    initialColor: Color,
-    onDismissRequest: () -> Unit,
-    onConfirm: (Color) -> Unit,
-    modifier: Modifier = Modifier,
+	initialColor: Color,
+	onDismissRequest: () -> Unit,
+	onConfirm: (Color) -> Unit,
+	modifier: Modifier = Modifier,
 ) {
-    BasicAlertDialog(
-        onDismissRequest = onDismissRequest,
-        modifier = modifier,
-    ) {
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = AlertDialogDefaults.containerColor,
-            ),
-        ) {
-            val state = rememberDiaryColorPickerState(initialColor = initialColor)
+	BasicAlertDialog(
+		onDismissRequest = onDismissRequest,
+		modifier = modifier,
+	) {
+		Card(
+			colors = CardDefaults.cardColors(
+				containerColor = AlertDialogDefaults.containerColor,
+			),
+		) {
+			val state = rememberDiaryColorPickerState(initialColor = initialColor)
 
-            DiaryColorPicker(state = state)
+			DiaryColorPicker(state = state)
 
-            Row(
-                modifier = Modifier.fillMaxWidth()
-                    .padding(horizontal = 6.dp),
-                horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.End),
-            ) {
-                TextButton(onClick = onDismissRequest) {
-                    Text(text = "닫기")
-                }
-                TextButton(
-                    onClick = {
-                        onConfirm(state.color)
-                        onDismissRequest()
-                    },
-                ) {
-                    Text(text = "선택")
-                }
-            }
-        }
-    }
+			Row(
+				modifier = Modifier.fillMaxWidth()
+					.padding(horizontal = 6.dp),
+				horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.End),
+			) {
+				TextButton(onClick = onDismissRequest) {
+					Text(text = "닫기")
+				}
+				TextButton(
+					onClick = {
+						onConfirm(state.color)
+						onDismissRequest()
+					},
+				) {
+					Text(text = "선택")
+				}
+			}
+		}
+	}
 }

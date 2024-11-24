@@ -15,29 +15,26 @@ internal expect val holidayDataStoreModule: Module
 internal expect val holidayRoomModule: Module
 internal expect val diaryRoomModule: Module
 
-public fun initKoin(): KoinApplication {
-    return startKoin {
-        modules(
-            appModule,
-            diaryServiceModule(),
-            accountDataStoreModule,
-            holidayDataStoreModule,
-            holidayRoomModule,
-            holidayServiceModule(),
-            diaryRoomModule,
-        )
-    }
-}
+public fun initKoin(): KoinApplication =
+	startKoin {
+		modules(
+			appModule,
+			diaryServiceModule(),
+			accountDataStoreModule,
+			holidayDataStoreModule,
+			holidayRoomModule,
+			holidayServiceModule(),
+			diaryRoomModule,
+		)
+	}
 
-private fun diaryServiceModule(): Module {
-    return module {
-        single(qualifier = StringQualifier(DiaryServiceModule.DIARY_API_URL)) { BuildKonfig.DIARY_API_URL }
-    }
-}
+private fun diaryServiceModule(): Module =
+	module {
+		single(qualifier = StringQualifier(DiaryServiceModule.DIARY_API_URL)) { BuildKonfig.DIARY_API_URL }
+	}
 
-private fun holidayServiceModule(): Module {
-    return module {
-        single(qualifier = StringQualifier(HolidayServiceModule.HOLIDAY_API_URL)) { BuildKonfig.HOLIDAY_API_URL }
-        single(qualifier = StringQualifier(HolidayServiceModule.HOLIDAY_API_KEY)) { BuildKonfig.HOLIDAY_API_KEY }
-    }
-}
+private fun holidayServiceModule(): Module =
+	module {
+		single(qualifier = StringQualifier(HolidayServiceModule.HOLIDAY_API_URL)) { BuildKonfig.HOLIDAY_API_URL }
+		single(qualifier = StringQualifier(HolidayServiceModule.HOLIDAY_API_KEY)) { BuildKonfig.HOLIDAY_API_KEY }
+	}

@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class HolidayItemsEntity(
-    @SerialName("item")
-    val items: List<HolidayEntity>
+	@SerialName("item")
+	val items: List<HolidayEntity>,
 )

@@ -30,102 +30,98 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-internal class HolidayRepositoryImpl(
-    private val preferencesDataSource: HolidayPreferences,
-    private val localDataSource: HolidayDao,
-    private val remoteDataSource: HolidayService,
-) : HolidayRepository {
-    override fun findHoliday(year: Int, month: Month): Flow<List<Holiday>> {
-        val localDate = LocalDate(year, month, 1)
-        val list = IntRange(-1, 1).map { localDate.plus(it, DateTimeUnit.MONTH) }
+internal class HolidayRepositoryImpl(private val preferencesDataSource: HolidayPreferences, private val localDataSource: HolidayDao, private val remoteDataSource: HolidayService) : HolidayRepository {
+	override fun findHoliday(year: Int, month: Month): Flow<List<Holiday>> {
+		val localDate = LocalDate(year, month, 1)
+		val list = IntRange(-1, 1).map { localDate.plus(it, DateTimeUnit.MONTH) }
 
-        return channelFlow {
-            launch { fetch(list) }
+		return channelFlow {
+			launch { fetch(list) }
 
-            list.map { localDataSource.findHoliday(it.year, it.month) }
-                .combine { array -> array.flatMap { it } }
-                .mapLatest { it.zipHoliday() }
-                .mapLatest { it.filter(year, month) }
-                .mapCollectionLatest { it.prettyName() }
-                .collectLatest { send(it) }
-        }
-    }
+			list
+				.map { localDataSource.findHoliday(it.year, it.month) }
+				.combine { array -> array.flatMap { it } }
+				.mapLatest { it.zipHoliday() }
+				.mapLatest { it.filter(year, month) }
+				.mapCollectionLatest { it.prettyName() }
+				.collectLatest { send(it) }
+		}
+	}
 
-    private fun List<Holiday>.zipHoliday(): List<Holiday> {
-        val comparator = Comparator<Holiday> { a, b ->
-            when {
-                a.start != b.start -> compareValues(a.start, b.start)
-                a.endInclusive != b.endInclusive -> compareValues(a.endInclusive, b.endInclusive)
-                else -> compareValues(a.name, b.name)
-            }
-        }
-        val sorted = distinct().sortedWith(comparator).toMutableList()
+	private fun List<Holiday>.zipHoliday(): List<Holiday> {
+		val comparator =
+			Comparator<Holiday> { a, b ->
+				when {
+					a.start != b.start -> compareValues(a.start, b.start)
+					a.endInclusive != b.endInclusive -> compareValues(a.endInclusive, b.endInclusive)
+					else -> compareValues(a.name, b.name)
+				}
+			}
+		val sorted = distinct().sortedWith(comparator).toMutableList()
 
-        return buildList {
-            while (sorted.isNotEmpty()) {
-                if (isEmpty()) {
-                    add(sorted.removeFirst())
-                    continue
-                }
+		return buildList {
+			while (sorted.isNotEmpty()) {
+				if (isEmpty()) {
+					add(sorted.removeFirst())
+					continue
+				}
 
-                val isNameSame = last().name == sorted.first().name
-                val isUntilOneDay = last().endInclusive.daysUntil(sorted.first().start) <= 1
+				val isNameSame = last().name == sorted.first().name
+				val isUntilOneDay = last().endInclusive.daysUntil(sorted.first().start) <= 1
 
-                if (isNameSame && isUntilOneDay) {
-                    val origin = removeLast()
-                    val target = sorted.removeFirst()
-                    val result = origin.copy(
-                        start = minOf(origin.start, target.start),
-                        endInclusive = maxOf(origin.endInclusive, target.endInclusive),
-                    )
+				if (isNameSame && isUntilOneDay) {
+					val origin = removeLast()
+					val target = sorted.removeFirst()
+					val result =
+						origin.copy(
+							start = minOf(origin.start, target.start),
+							endInclusive = maxOf(origin.endInclusive, target.endInclusive),
+						)
 
-                    add(result)
-                } else {
-                    add(sorted.removeFirst())
-                }
-            }
-        }
-    }
+					add(result)
+				} else {
+					add(sorted.removeFirst())
+				}
+			}
+		}
+	}
 
-    private fun List<Holiday>.filter(year: Int, month: Month): List<Holiday> {
-        return filter {
-            val start = LocalDate(year, month, 1)
-            val endInclusive = start.plus(1, DateTimeUnit.MONTH).minus(1, DateTimeUnit.DAY)
+	private fun List<Holiday>.filter(year: Int, month: Month): List<Holiday> =
+		filter {
+			val start = LocalDate(year, month, 1)
+			val endInclusive = start.plus(1, DateTimeUnit.MONTH).minus(1, DateTimeUnit.DAY)
 
-            it.isOverlap(start..endInclusive)
-        }
-    }
+			it.isOverlap(start..endInclusive)
+		}
 
-    private fun Holiday.prettyName(): Holiday {
-        return copy(name = name.toPrettyName())
-    }
+	private fun Holiday.prettyName(): Holiday = copy(name = name.toPrettyName())
 
-    private fun String.toPrettyName(): String {
-        return when (this) {
-            "1월1일" -> "새해"
-            "기독탄신일" -> "크리스마스"
-            else -> this
-        }
-    }
+	private fun String.toPrettyName(): String =
+		when (this) {
+			"1월1일" -> "새해"
+			"기독탄신일" -> "크리스마스"
+			else -> this
+		}
 
-    private suspend fun fetch(list: List<LocalDate>) {
-        mutex.withLock {
-            coroutineScope {
-                list.map {
-                    async {
-                        runCatching {
-                            if (!preferencesDataSource.isDirty(it.year, it.month).first()) {
-                                localDataSource.upsert(it.year, it.month, remoteDataSource.findHoliday(it.year, it.month))
-                                preferencesDataSource.setDirty(it.year, it.month)
-                            }
-                        }
-                    }
-                }.awaitAll()
-            }
-        }
-    }
+	private suspend fun fetch(list: List<LocalDate>) {
+		mutex.withLock {
+			coroutineScope {
+				list
+					.map {
+						async {
+							runCatching {
+								if (!preferencesDataSource.isDirty(it.year, it.month).first()) {
+									localDataSource.upsert(it.year, it.month, remoteDataSource.findHoliday(it.year, it.month))
+									preferencesDataSource.setDirty(it.year, it.month)
+								}
+							}
+						}
+					}.awaitAll()
+			}
+		}
+	}
 
-    companion object {
-        private val mutex = Mutex()
-    }
+	companion object {
+		private val mutex = Mutex()
+	}
 }

@@ -11,19 +11,19 @@ import io.github.taetae98coding.diary.core.backup.database.room.entity.TagBackup
 import io.github.taetae98coding.diary.core.backup.database.room.internal.BackupDatabaseConstructor
 import io.github.taetae98coding.diary.library.room.InstantConverter
 
-
 @Database(
-    entities = [
-        MemoBackupEntity::class,
-        TagBackupEntity::class,
-    ],
-    version = 1,
+	entities = [
+		MemoBackupEntity::class,
+		TagBackupEntity::class,
+	],
+	version = 1,
 )
 @ConstructedBy(BackupDatabaseConstructor::class)
 @TypeConverters(
-    InstantConverter::class,
+	InstantConverter::class,
 )
 internal abstract class BackupDatabase : RoomDatabase() {
-    abstract fun memo(): MemoBackupEntityDao
-    abstract fun tag(): TagBackupEntityDao
+	abstract fun memo(): MemoBackupEntityDao
+
+	abstract fun tag(): TagBackupEntityDao
 }

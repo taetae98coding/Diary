@@ -36,198 +36,196 @@ import io.github.taetae98coding.diary.feature.account.join.state.JoinUiState
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun JoinScreen(
-    state: JoinScreenState,
-    onNavigateUp: () -> Unit,
-    onJoin: () -> Unit,
-    uiStateProvider: () -> JoinUiState,
-    onLoginFinish: () -> Unit,
-    modifier: Modifier = Modifier,
+	state: JoinScreenState,
+	onNavigateUp: () -> Unit,
+	onJoin: () -> Unit,
+	uiStateProvider: () -> JoinUiState,
+	onLoginFinish: () -> Unit,
+	modifier: Modifier = Modifier,
 ) {
-    Scaffold(
-        modifier = modifier,
-        topBar = {
-            TopAppBar(
-                title = { Text(text = "회원가입") },
-                navigationIcon = {
-                    IconButton(onClick = onNavigateUp) {
-                        NavigateUpIcon()
-                    }
-                },
-            )
-        },
-        bottomBar = {
-            val isEnable by remember {
-                derivedStateOf { state.buttonState == JoinScreenButtonUiState.JoinEnable }
-            }
-            val isProgress by remember {
-                derivedStateOf { uiStateProvider().isProgress }
-            }
+	Scaffold(
+		modifier = modifier,
+		topBar = {
+			TopAppBar(
+				title = { Text(text = "회원가입") },
+				navigationIcon = {
+					IconButton(onClick = onNavigateUp) {
+						NavigateUpIcon()
+					}
+				},
+			)
+		},
+		bottomBar = {
+			val isEnable by remember {
+				derivedStateOf { state.buttonState == JoinScreenButtonUiState.JoinEnable }
+			}
+			val isProgress by remember {
+				derivedStateOf { uiStateProvider().isProgress }
+			}
 
-            BottomBarButton(
-                onClick = onJoin,
-                enableProvider = { isEnable },
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                JoinButtonContent(
-                    uiState = if (isProgress) {
-                        JoinScreenButtonUiState.Progress
-                    } else {
-                        state.buttonState
-                    },
-                )
-            }
-        },
-        snackbarHost = { SnackbarHost(hostState = state.hostState) },
-    ) {
-        Content(
-            state = state,
-            onJoin = onJoin,
-            modifier = Modifier.padding(it)
-                .padding(DiaryTheme.dimen.screenPaddingValues),
-        )
-    }
+			BottomBarButton(
+				onClick = onJoin,
+				enableProvider = { isEnable },
+				modifier = Modifier.fillMaxWidth(),
+			) {
+				JoinButtonContent(
+					uiState = if (isProgress) {
+						JoinScreenButtonUiState.Progress
+					} else {
+						state.buttonState
+					},
+				)
+			}
+		},
+		snackbarHost = { SnackbarHost(hostState = state.hostState) },
+	) {
+		Content(
+			state = state,
+			onJoin = onJoin,
+			modifier = Modifier.padding(it)
+				.padding(DiaryTheme.dimen.screenPaddingValues),
+		)
+	}
 
-    Message(
-        state = state,
-        uiStateProvider = uiStateProvider,
-        onLoginFinish = onLoginFinish,
-    )
+	Message(
+		state = state,
+		uiStateProvider = uiStateProvider,
+		onLoginFinish = onLoginFinish,
+	)
 }
 
 @Composable
 private fun JoinButtonContent(
-    uiState: JoinScreenButtonUiState,
-    modifier: Modifier = Modifier,
+	uiState: JoinScreenButtonUiState,
+	modifier: Modifier = Modifier,
 ) {
-    BottomBarButtonContent(modifier = modifier) {
-        when (uiState) {
-            JoinScreenButtonUiState.JoinEnable -> {
-                Text(text = "회원가입")
-            }
+	BottomBarButtonContent(modifier = modifier) {
+		when (uiState) {
+			JoinScreenButtonUiState.JoinEnable -> {
+				Text(text = "회원가입")
+			}
 
-            JoinScreenButtonUiState.EmailBlank -> {
-                Text(text = "이메일을 입력해 주세요 🐮")
-            }
+			JoinScreenButtonUiState.EmailBlank -> {
+				Text(text = "이메일을 입력해 주세요 🐮")
+			}
 
-            JoinScreenButtonUiState.PasswordBlank -> {
-                Text(text = "비밀번호를 입력해 주세요 🦁")
-            }
+			JoinScreenButtonUiState.PasswordBlank -> {
+				Text(text = "비밀번호를 입력해 주세요 🦁")
+			}
 
-            JoinScreenButtonUiState.InvalidEmail -> {
-                Text(text = "이메일 형식을 지켜주세요 🐯")
-            }
+			JoinScreenButtonUiState.InvalidEmail -> {
+				Text(text = "이메일 형식을 지켜주세요 🐯")
+			}
 
-            JoinScreenButtonUiState.PasswordDifferent -> {
-                Text(text = "입력된 패스워드가 달라요 🐨")
-            }
+			JoinScreenButtonUiState.PasswordDifferent -> {
+				Text(text = "입력된 패스워드가 달라요 🐨")
+			}
 
-            JoinScreenButtonUiState.Progress -> {
-                CircularProgressIndicator(color = LocalContentColor.current)
-            }
-        }
-    }
+			JoinScreenButtonUiState.Progress -> {
+				CircularProgressIndicator(color = LocalContentColor.current)
+			}
+		}
+	}
 }
 
 @Composable
 private fun Content(
-    state: JoinScreenState,
-    onJoin: () -> Unit,
-    modifier: Modifier = Modifier,
+	state: JoinScreenState,
+	onJoin: () -> Unit,
+	modifier: Modifier = Modifier,
 ) {
-    Card(modifier = modifier) {
-        val textFieldModifier = Modifier.fillMaxWidth()
+	Card(modifier = modifier) {
+		val textFieldModifier = Modifier.fillMaxWidth()
 
-        EmailTextField(
-            valueProvider = { state.email },
-            onValueChange = state::onEmailChange,
-            modifier = textFieldModifier,
-        )
+		EmailTextField(
+			valueProvider = { state.email },
+			onValueChange = state::onEmailChange,
+			modifier = textFieldModifier,
+		)
 
-        PasswordTextField(
-            state = state,
-            modifier = textFieldModifier,
-        )
-        CheckPasswordTextField(
-            state = state,
-            onJoin = onJoin,
-            modifier = textFieldModifier,
-        )
-    }
+		PasswordTextField(
+			state = state,
+			modifier = textFieldModifier,
+		)
+		CheckPasswordTextField(
+			state = state,
+			onJoin = onJoin,
+			modifier = textFieldModifier,
+		)
+	}
 }
-
 
 @Composable
 private fun PasswordTextField(
-    state: JoinScreenState,
-    modifier: Modifier = Modifier,
+	state: JoinScreenState,
+	modifier: Modifier = Modifier,
 ) {
-    BasePasswordTextField(
-        valueProvider = { state.password },
-        onValueChange = state::onPasswordChange,
-        modifier = modifier,
-        placeholder = { Text(text = "패스워드") },
-        passwordVisibleProvider = { state.isPasswordVisible },
-        onPasswordVisibleChange = state::onPasswordVisibleChange,
-        keyboardOptions = KeyboardOptions(
-            capitalization = KeyboardCapitalization.None,
-            keyboardType = KeyboardType.Password,
-            imeAction = ImeAction.Next,
-        ),
-    )
+	BasePasswordTextField(
+		valueProvider = { state.password },
+		onValueChange = state::onPasswordChange,
+		modifier = modifier,
+		placeholder = { Text(text = "패스워드") },
+		passwordVisibleProvider = { state.isPasswordVisible },
+		onPasswordVisibleChange = state::onPasswordVisibleChange,
+		keyboardOptions = KeyboardOptions(
+			capitalization = KeyboardCapitalization.None,
+			keyboardType = KeyboardType.Password,
+			imeAction = ImeAction.Next,
+		),
+	)
 }
 
 @Composable
 private fun CheckPasswordTextField(
-    state: JoinScreenState,
-    onJoin: () -> Unit,
-    modifier: Modifier = Modifier,
+	state: JoinScreenState,
+	onJoin: () -> Unit,
+	modifier: Modifier = Modifier,
 ) {
-    BasePasswordTextField(
-        valueProvider = { state.checkPassword },
-        onValueChange = state::onCheckPasswordChange,
-        modifier = modifier,
-        placeholder = { Text(text = "비밀번호 확인") },
-        passwordVisibleProvider = { state.isCheckPasswordVisible },
-        onPasswordVisibleChange = state::onCheckPasswordVisibleChange,
-        keyboardOptions = KeyboardOptions(
-            capitalization = KeyboardCapitalization.None,
-            keyboardType = KeyboardType.Password,
-            imeAction = ImeAction.Done,
-        ),
-        keyboardActions = KeyboardActions(
-            onAny = {
-                if (state.buttonState == JoinScreenButtonUiState.JoinEnable) {
-                    onJoin()
-                }
-            },
-        ),
-    )
+	BasePasswordTextField(
+		valueProvider = { state.checkPassword },
+		onValueChange = state::onCheckPasswordChange,
+		modifier = modifier,
+		placeholder = { Text(text = "비밀번호 확인") },
+		passwordVisibleProvider = { state.isCheckPasswordVisible },
+		onPasswordVisibleChange = state::onCheckPasswordVisibleChange,
+		keyboardOptions = KeyboardOptions(
+			capitalization = KeyboardCapitalization.None,
+			keyboardType = KeyboardType.Password,
+			imeAction = ImeAction.Done,
+		),
+		keyboardActions = KeyboardActions(
+			onAny = {
+				if (state.buttonState == JoinScreenButtonUiState.JoinEnable) {
+					onJoin()
+				}
+			},
+		),
+	)
 }
-
 
 @Composable
 private fun Message(
-    state: JoinScreenState,
-    uiStateProvider: () -> JoinUiState,
-    onLoginFinish: () -> Unit,
+	state: JoinScreenState,
+	uiStateProvider: () -> JoinUiState,
+	onLoginFinish: () -> Unit,
 ) {
-    val uiState = uiStateProvider()
+	val uiState = uiStateProvider()
 
-    LaunchedEffect(
-        uiState.isLoginFinish,
-        uiState.isExistEmail,
-        uiState.isNetworkError,
-        uiState.isUnknownError,
-    ) {
-        if (!uiState.hasMessage) return@LaunchedEffect
+	LaunchedEffect(
+		uiState.isLoginFinish,
+		uiState.isExistEmail,
+		uiState.isNetworkError,
+		uiState.isUnknownError,
+	) {
+		if (!uiState.hasMessage) return@LaunchedEffect
 
-        when {
-            uiState.isLoginFinish -> onLoginFinish()
-            uiState.isExistEmail -> state.showMessage("이미 사용되는 이메일이에요 ${Emoji.invalid.random()}")
-            uiState.isNetworkError -> state.showMessage("네트워크 연결 상태를 확인해 주세요 ${Emoji.fail.random()}")
-            uiState.isUnknownError -> state.showMessage("알 수 없는 에러가 발생했어요 잠시 후 다시 시도해 주세요 ${Emoji.error.random()}")
-        }
+		when {
+			uiState.isLoginFinish -> onLoginFinish()
+			uiState.isExistEmail -> state.showMessage("이미 사용되는 이메일이에요 ${Emoji.invalid.random()}")
+			uiState.isNetworkError -> state.showMessage("네트워크 연결 상태를 확인해 주세요 ${Emoji.fail.random()}")
+			uiState.isUnknownError -> state.showMessage("알 수 없는 에러가 발생했어요 잠시 후 다시 시도해 주세요 ${Emoji.error.random()}")
+		}
 
-        uiState.onMessageShow()
-    }
+		uiState.onMessageShow()
+	}
 }

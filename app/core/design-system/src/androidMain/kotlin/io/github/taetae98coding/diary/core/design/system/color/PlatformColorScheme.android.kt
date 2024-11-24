@@ -7,11 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 @Composable
-internal actual fun platformDarkColorScheme(): ColorScheme {
-    return dynamicDarkColorScheme(LocalContext.current)
-}
+internal actual fun platformDarkColorScheme(): ColorScheme = dynamicDarkColorScheme(LocalContext.current)
 
 @Composable
-internal actual fun platformLightColorScheme(): ColorScheme {
-    return dynamicLightColorScheme(LocalContext.current)
-}
+internal actual fun platformLightColorScheme(): ColorScheme = dynamicLightColorScheme(LocalContext.current)

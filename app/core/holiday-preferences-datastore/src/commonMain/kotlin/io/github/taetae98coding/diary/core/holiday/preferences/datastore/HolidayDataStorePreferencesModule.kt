@@ -11,13 +11,12 @@ import org.koin.core.component.KoinComponent
 @Module
 @ComponentScan
 public class HolidayDataStorePreferencesModule : KoinComponent {
-    @Singleton
-    internal fun providesHolidayPreferences(
-        clock: Clock,
-    ): HolidayPreferences {
-        return HolidayDataStorePreferences(
-            clock = clock,
-            dataStore = getDataStore("holiday.preferences_pb"),
-        )
-    }
+	@Singleton
+	internal fun providesHolidayPreferences(
+		clock: Clock,
+	): HolidayPreferences =
+		HolidayDataStorePreferences(
+			clock = clock,
+			dataStore = getDataStore("holiday.preferences_pb"),
+		)
 }

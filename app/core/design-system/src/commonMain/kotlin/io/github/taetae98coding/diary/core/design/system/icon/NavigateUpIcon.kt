@@ -8,11 +8,11 @@ import androidx.compose.ui.Modifier
 
 @Composable
 public fun NavigateUpIcon(
-    modifier: Modifier = Modifier,
+	modifier: Modifier = Modifier,
 ) {
-    Icon(
-        imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-        contentDescription = null,
-        modifier = modifier,
-    )
+	Icon(
+		imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
+		contentDescription = null,
+		modifier = modifier,
+	)
 }

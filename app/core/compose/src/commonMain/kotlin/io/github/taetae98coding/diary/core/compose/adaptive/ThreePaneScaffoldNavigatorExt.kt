@@ -6,31 +6,19 @@ import androidx.compose.material3.adaptive.layout.ThreePaneScaffoldValue
 import androidx.compose.material3.adaptive.navigation.ThreePaneScaffoldNavigator
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
-public fun ThreePaneScaffoldNavigator<*>.isListVisible(): Boolean {
-    return scaffoldValue.isListVisible()
-}
+public fun ThreePaneScaffoldNavigator<*>.isListVisible(): Boolean = scaffoldValue.isListVisible()
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
-public fun ThreePaneScaffoldNavigator<*>.isDetailVisible(): Boolean {
-    return scaffoldValue.isDetailVisible()
-}
+public fun ThreePaneScaffoldNavigator<*>.isDetailVisible(): Boolean = scaffoldValue.isDetailVisible()
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
-public fun ThreePaneScaffoldNavigator<*>.isTertiaryVisible(): Boolean {
-    return scaffoldValue.isTertiaryVisible()
-}
+public fun ThreePaneScaffoldNavigator<*>.isTertiaryVisible(): Boolean = scaffoldValue.isTertiaryVisible()
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
-public fun ThreePaneScaffoldValue.isListVisible(): Boolean {
-    return secondary == PaneAdaptedValue.Expanded
-}
+public fun ThreePaneScaffoldValue.isListVisible(): Boolean = secondary == PaneAdaptedValue.Expanded
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
-public fun ThreePaneScaffoldValue.isDetailVisible(): Boolean {
-    return primary == PaneAdaptedValue.Expanded
-}
+public fun ThreePaneScaffoldValue.isDetailVisible(): Boolean = primary == PaneAdaptedValue.Expanded
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
-public fun ThreePaneScaffoldValue.isTertiaryVisible(): Boolean {
-    return tertiary == PaneAdaptedValue.Expanded
-}
+public fun ThreePaneScaffoldValue.isTertiaryVisible(): Boolean = tertiary == PaneAdaptedValue.Expanded

@@ -5,11 +5,13 @@ import io.github.taetae98coding.diary.core.backup.database.room.BackupRoomDataba
 import io.github.taetae98coding.diary.core.coroutines.CoroutinesModule
 import io.github.taetae98coding.diary.core.diary.database.room.DiaryRoomDatabaseModule
 import io.github.taetae98coding.diary.core.diary.service.DiaryServiceModule
+import io.github.taetae98coding.diary.core.filter.database.room.FilterRoomDatabaseModule
 import io.github.taetae98coding.diary.core.holiday.database.room.HolidayRoomDatabaseModule
 import io.github.taetae98coding.diary.core.holiday.preferences.datastore.HolidayDataStorePreferencesModule
 import io.github.taetae98coding.diary.core.holiday.service.HolidayServiceModule
 import io.github.taetae98coding.diary.data.account.AccountDataModule
 import io.github.taetae98coding.diary.data.backup.BackupDataModule
+import io.github.taetae98coding.diary.data.calendar.CalendarDataModule
 import io.github.taetae98coding.diary.data.credential.CredentialDataModule
 import io.github.taetae98coding.diary.data.fcm.FCMDataModule
 import io.github.taetae98coding.diary.data.fetch.FetchDataModule
@@ -39,53 +41,53 @@ import org.koin.core.annotation.Module
 import org.koin.core.annotation.Singleton
 
 @Module(
-    includes = [
-        CoroutinesModule::class,
+	includes = [
+		CoroutinesModule::class,
 
-        BackupRoomDatabaseModule::class,
+		FilterRoomDatabaseModule::class,
+		BackupRoomDatabaseModule::class,
 
-        AccountDataStorePreferencesModule::class,
+		AccountDataStorePreferencesModule::class,
 
-        DiaryServiceModule::class,
-        DiaryRoomDatabaseModule::class,
+		DiaryServiceModule::class,
+		DiaryRoomDatabaseModule::class,
 
-        HolidayDataStorePreferencesModule::class,
-        HolidayRoomDatabaseModule::class,
-        HolidayServiceModule::class,
+		HolidayDataStorePreferencesModule::class,
+		HolidayRoomDatabaseModule::class,
+		HolidayServiceModule::class,
 
-        MemoDataModule::class,
-        TagDataModule::class,
-        AccountDataModule::class,
-        HolidayDataModule::class,
-        BackupDataModule::class,
-        FetchDataModule::class,
-        FCMDataModule::class,
-        CredentialDataModule::class,
-        MemoDomainModule::class,
-        TagDomainModule::class,
-        AccountDomainModule::class,
-        HolidayDomainModule::class,
-        BackupDomainModule::class,
-        FetchDomainModule::class,
-        FCMDomainModule::class,
-        CredentialDomainModule::class,
-        CalendarDomainModule::class,
-        MemoFeatureModule::class,
-        TagFeatureModule::class,
-        CalendarFeatureModule::class,
-        MoreFeatureModule::class,
-        AccountFeatureModule::class,
-    ],
+		MemoDataModule::class,
+		TagDataModule::class,
+		AccountDataModule::class,
+		HolidayDataModule::class,
+		BackupDataModule::class,
+		FetchDataModule::class,
+		FCMDataModule::class,
+		CredentialDataModule::class,
+		CalendarDataModule::class,
+
+		MemoDomainModule::class,
+		TagDomainModule::class,
+		AccountDomainModule::class,
+		HolidayDomainModule::class,
+		BackupDomainModule::class,
+		FetchDomainModule::class,
+		FCMDomainModule::class,
+		CredentialDomainModule::class,
+		CalendarDomainModule::class,
+
+		MemoFeatureModule::class,
+		TagFeatureModule::class,
+		CalendarFeatureModule::class,
+		MoreFeatureModule::class,
+		AccountFeatureModule::class,
+	],
 )
 @ComponentScan
 public class AppModule {
-    @Singleton
-    internal fun providesClock(): Clock {
-        return Clock.System
-    }
+	@Singleton
+	internal fun providesClock(): Clock = Clock.System
 
-    @Singleton
-    internal fun providesFirebaseMessaging(): KFirebaseMessaging {
-        return KFirebase.messaging
-    }
+	@Singleton
+	internal fun providesFirebaseMessaging(): KFirebaseMessaging = KFirebase.messaging
 }

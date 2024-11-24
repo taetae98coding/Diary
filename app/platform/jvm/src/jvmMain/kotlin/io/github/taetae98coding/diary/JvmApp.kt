@@ -9,29 +9,34 @@ import io.github.taetae98coding.diary.initializer.intiJvm
 import kotlinx.coroutines.runBlocking
 
 public fun main() {
-    runBlocking {
-        intiJvm()
-    }
+	runBlocking {
+		intiJvm()
+	}
 
-    singleWindowApplication(
-        title = "Diary",
-    ) {
-        App()
+	val title =
+		if (BuildKonfig.FLAVOR == "real") {
+			"Diary"
+		} else {
+			"Diary-${BuildKonfig.FLAVOR}"
+		}
 
-        LifecycleStartEffect(keys = arrayOf(AppLifecycleOwner)) {
-            AppLifecycleOwner.start()
-            onStopOrDispose { AppLifecycleOwner.stop() }
-        }
+	singleWindowApplication(title = title) {
+		App()
 
-        LifecycleResumeEffect(keys = arrayOf(AppLifecycleOwner)) {
-            AppLifecycleOwner.resume()
-            onPauseOrDispose { AppLifecycleOwner.pause() }
-        }
-    }
+		LifecycleStartEffect(keys = arrayOf(AppLifecycleOwner)) {
+			AppLifecycleOwner.start()
+			onStopOrDispose { AppLifecycleOwner.stop() }
+		}
 
-    destroyJvm()
+		LifecycleResumeEffect(keys = arrayOf(AppLifecycleOwner)) {
+			AppLifecycleOwner.resume()
+			onPauseOrDispose { AppLifecycleOwner.pause() }
+		}
+	}
+
+	destroyJvm()
 }
 
 private fun destroyJvm() {
-    AppLifecycleOwner.destroy()
+	AppLifecycleOwner.destroy()
 }

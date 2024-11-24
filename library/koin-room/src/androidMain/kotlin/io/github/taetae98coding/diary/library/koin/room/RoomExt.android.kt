@@ -7,10 +7,10 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 public actual inline fun <reified T : RoomDatabase> KoinComponent.platformDatabaseBuilder(
-    name: String,
+	name: String,
 ): RoomDatabase.Builder<T> {
-    val context by inject<Context>()
-    val file = context.getDatabasePath(name)
+	val context by inject<Context>()
+	val file = context.getDatabasePath(name)
 
-    return Room.databaseBuilder(context, file.absolutePath)
+	return Room.databaseBuilder(context, file.absolutePath)
 }

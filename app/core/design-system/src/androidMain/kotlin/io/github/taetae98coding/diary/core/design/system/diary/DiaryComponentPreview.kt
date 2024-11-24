@@ -9,9 +9,9 @@ import io.github.taetae98coding.diary.core.design.system.theme.DiaryTheme
 @Composable
 @DiaryPreview
 private fun PreviewDiaryComponent() {
-    DiaryTheme {
-        DiaryComponent(
-            state = rememberDiaryComponentState(),
-        )
-    }
+	DiaryTheme {
+		DiaryComponent(
+			state = rememberDiaryComponentState(),
+		)
+	}
 }

@@ -8,11 +8,11 @@ import androidx.compose.ui.Modifier
 
 @Composable
 public fun AddIcon(
-    modifier: Modifier = Modifier,
+	modifier: Modifier = Modifier,
 ) {
-    Icon(
-        imageVector = Icons.Rounded.Add,
-        contentDescription = null,
-        modifier = modifier,
-    )
+	Icon(
+		imageVector = Icons.Rounded.Add,
+		contentDescription = null,
+		modifier = modifier,
+	)
 }

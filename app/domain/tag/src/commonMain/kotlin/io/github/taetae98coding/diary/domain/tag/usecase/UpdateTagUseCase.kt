@@ -7,21 +7,18 @@ import kotlinx.coroutines.flow.first
 import org.koin.core.annotation.Factory
 
 @Factory
-public class UpdateTagUseCase internal constructor(
-    private val pushTagBackupQueueUseCase: PushTagBackupQueueUseCase,
-    private val repository: TagRepository,
-) {
-    public suspend operator fun invoke(tagId: String?, detail: TagDetail): Result<Unit> {
-        return runCatching {
-            if (tagId.isNullOrBlank()) return@runCatching
+public class UpdateTagUseCase internal constructor(private val pushTagBackupQueueUseCase: PushTagBackupQueueUseCase, private val repository: TagRepository) {
+	public suspend operator fun invoke(tagId: String?, detail: TagDetail): Result<Unit> {
+		return runCatching {
+			if (tagId.isNullOrBlank()) return@runCatching
 
-            val tag = repository.find(tagId).first() ?: return@runCatching
-            val validDetail = detail.copy(title = detail.title.ifBlank { tag.detail.title })
+			val tag = repository.find(tagId).first() ?: return@runCatching
+			val validDetail = detail.copy(title = detail.title.ifBlank { tag.detail.title })
 
-            if (tag.detail == validDetail) return@runCatching
+			if (tag.detail == validDetail) return@runCatching
 
-            repository.update(tagId, validDetail)
-            pushTagBackupQueueUseCase(tagId)
-        }
-    }
+			repository.update(tagId, validDetail)
+			pushTagBackupQueueUseCase(tagId)
+		}
+	}
 }

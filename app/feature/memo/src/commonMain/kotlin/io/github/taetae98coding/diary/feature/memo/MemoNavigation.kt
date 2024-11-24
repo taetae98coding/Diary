@@ -16,27 +16,27 @@ import kotlin.reflect.typeOf
 import kotlinx.datetime.LocalDate
 
 public fun NavGraphBuilder.memoNavigation(
-    navController: NavController,
+	navController: NavController,
 ) {
-    navigation<MemoDestination>(
-        startDestination = MemoAddDestination(),
-    ) {
-        composable<MemoAddDestination>(
-            typeMap = mapOf(typeOf<LocalDate?>() to LocalDateNavType),
-        ) {
-            MemoAddRoute(
-                navigateUp = navController::popBackStack,
-                navigateToTagAdd = { navController.navigate(TagAddDestination) },
-                navigateToTagDetail = { navController.navigate(TagDetailDestination(it)) },
-            )
-        }
+	navigation<MemoDestination>(
+		startDestination = MemoAddDestination(),
+	) {
+		composable<MemoAddDestination>(
+			typeMap = mapOf(typeOf<LocalDate?>() to LocalDateNavType),
+		) {
+			MemoAddRoute(
+				navigateUp = navController::popBackStack,
+				navigateToTagAdd = { navController.navigate(TagAddDestination) },
+				navigateToTagDetail = { navController.navigate(TagDetailDestination(it)) },
+			)
+		}
 
-        composable<MemoDetailDestination> {
-            MemoDetailRoute(
-                navigateUp = navController::popBackStack,
-                navigateToTagAdd = { navController.navigate(TagAddDestination) },
-                navigateToTagDetail = { navController.navigate(TagDetailDestination(it)) },
-            )
-        }
-    }
+		composable<MemoDetailDestination> {
+			MemoDetailRoute(
+				navigateUp = navController::popBackStack,
+				navigateToTagAdd = { navController.navigate(TagAddDestination) },
+				navigateToTagDetail = { navController.navigate(TagDetailDestination(it)) },
+			)
+		}
+	}
 }

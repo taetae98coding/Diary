@@ -9,14 +9,12 @@ import kotlinx.coroutines.launch
 import org.koin.core.annotation.Singleton
 
 @Singleton
-public class BackupManager(
-    private val backupUseCase: BackupUseCase,
-) {
-    public fun attach(lifecycleOwner: LifecycleOwner) {
-        lifecycleOwner.lifecycleScope.launch {
-            lifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                backupUseCase()
-            }
-        }
-    }
+public class BackupManager(private val backupUseCase: BackupUseCase) {
+	public fun attach(lifecycleOwner: LifecycleOwner) {
+		lifecycleOwner.lifecycleScope.launch {
+			lifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+				backupUseCase()
+			}
+		}
+	}
 }

@@ -15,39 +15,39 @@ import io.github.taetae98coding.diary.core.design.system.text.ClearTextField
 
 @Composable
 internal fun BasePasswordTextField(
-    valueProvider: () -> String,
-    onValueChange: (String) -> Unit,
-    placeholder: @Composable () -> Unit,
-    passwordVisibleProvider: () -> Boolean,
-    onPasswordVisibleChange: (Boolean) -> Unit,
-    keyboardOptions: KeyboardOptions,
-    modifier: Modifier = Modifier,
-    keyboardActions: KeyboardActions = KeyboardActions.Default,
+	valueProvider: () -> String,
+	onValueChange: (String) -> Unit,
+	placeholder: @Composable () -> Unit,
+	passwordVisibleProvider: () -> Boolean,
+	onPasswordVisibleChange: (Boolean) -> Unit,
+	keyboardOptions: KeyboardOptions,
+	modifier: Modifier = Modifier,
+	keyboardActions: KeyboardActions = KeyboardActions.Default,
 ) {
-    ClearTextField(
-        valueProvider = valueProvider,
-        onValueChange = onValueChange,
-        modifier = modifier,
-        placeholder = placeholder,
-        leadingIcon = { KeyIcon() },
-        trailingIcon = {
-            IconButton(onClick = { onPasswordVisibleChange(!passwordVisibleProvider()) }) {
-                Crossfade(passwordVisibleProvider()) { isVisible ->
-                    if (isVisible) {
-                        VisibilityOnIcon()
-                    } else {
-                        VisibilityOffIcon()
-                    }
-                }
-            }
-        },
-        visualTransformation = if (passwordVisibleProvider()) {
-            VisualTransformation.None
-        } else {
-            PasswordVisualTransformation()
-        },
-        keyboardOptions = keyboardOptions,
-        keyboardActions = keyboardActions,
-        singleLine = true,
-    )
+	ClearTextField(
+		valueProvider = valueProvider,
+		onValueChange = onValueChange,
+		modifier = modifier,
+		placeholder = placeholder,
+		leadingIcon = { KeyIcon() },
+		trailingIcon = {
+			IconButton(onClick = { onPasswordVisibleChange(!passwordVisibleProvider()) }) {
+				Crossfade(passwordVisibleProvider()) { isVisible ->
+					if (isVisible) {
+						VisibilityOnIcon()
+					} else {
+						VisibilityOffIcon()
+					}
+				}
+			}
+		},
+		visualTransformation = if (passwordVisibleProvider()) {
+			VisualTransformation.None
+		} else {
+			PasswordVisualTransformation()
+		},
+		keyboardOptions = keyboardOptions,
+		keyboardActions = keyboardActions,
+		singleLine = true,
+	)
 }

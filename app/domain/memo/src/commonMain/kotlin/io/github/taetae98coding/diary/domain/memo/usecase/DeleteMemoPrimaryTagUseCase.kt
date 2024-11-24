@@ -5,16 +5,13 @@ import io.github.taetae98coding.diary.domain.memo.repository.MemoRepository
 import org.koin.core.annotation.Factory
 
 @Factory
-public class DeleteMemoPrimaryTagUseCase internal constructor(
-    private val pushMemoBackupQueueUseCase: PushMemoBackupQueueUseCase,
-    private val repository: MemoRepository,
-) {
-    public suspend operator fun invoke(memoId: String?): Result<Unit> {
-        return runCatching {
-            if (memoId.isNullOrBlank()) return@runCatching
+public class DeleteMemoPrimaryTagUseCase internal constructor(private val pushMemoBackupQueueUseCase: PushMemoBackupQueueUseCase, private val repository: MemoRepository) {
+	public suspend operator fun invoke(memoId: String?): Result<Unit> {
+		return runCatching {
+			if (memoId.isNullOrBlank()) return@runCatching
 
-            repository.updatePrimaryTag(memoId, null)
-            pushMemoBackupQueueUseCase(memoId)
-        }
-    }
+			repository.updatePrimaryTag(memoId, null)
+			pushMemoBackupQueueUseCase(memoId)
+		}
+	}
 }

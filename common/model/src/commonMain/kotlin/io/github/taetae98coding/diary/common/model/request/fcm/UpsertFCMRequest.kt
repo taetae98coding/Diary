@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class UpsertFCMRequest(
-    @SerialName("token")
-    val token: String,
+	@SerialName("token")
+	val token: String,
 )

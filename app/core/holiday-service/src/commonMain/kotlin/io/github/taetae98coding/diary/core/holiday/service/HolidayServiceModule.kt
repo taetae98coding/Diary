@@ -15,41 +15,43 @@ import org.koin.core.annotation.Singleton
 @Module
 @ComponentScan
 public class HolidayServiceModule {
-    @Singleton
-    internal fun providesHolidayService(
-        @Named(HOLIDAY_API_URL)
-        apiUrl: String,
-        @Named(HOLIDAY_API_KEY)
-        apiKey: String,
-    ): HolidayService {
-        val json = Json(DefaultJson) {
-            ignoreUnknownKeys = true
-        }
+	@Singleton
+	internal fun providesHolidayService(
+		@Named(HOLIDAY_API_URL)
+		apiUrl: String,
+		@Named(HOLIDAY_API_KEY)
+		apiKey: String,
+	): HolidayService {
+		val json =
+			Json(DefaultJson) {
+				ignoreUnknownKeys = true
+			}
 
-        val client = HttpClient {
-            expectSuccess = true
+		val client =
+			HttpClient {
+				expectSuccess = true
 
-            defaultRequest {
-                url(apiUrl)
-                url.parameters.append("serviceKey", apiKey)
-                url.parameters.append("_type", "json")
-            }
+				defaultRequest {
+					url(apiUrl)
+					url.parameters.append("serviceKey", apiKey)
+					url.parameters.append("_type", "json")
+				}
 
-            install(ContentNegotiation) {
-                json(json)
-            }
+				install(ContentNegotiation) {
+					json(json)
+				}
 
-            install(HttpRequestRetry) {
-                maxRetries = Int.MAX_VALUE
-                exponentialDelay()
-            }
-        }
+				install(HttpRequestRetry) {
+					maxRetries = Int.MAX_VALUE
+					exponentialDelay()
+				}
+			}
 
-        return HolidayService(client, json)
-    }
+		return HolidayService(client, json)
+	}
 
-    public companion object {
-        public const val HOLIDAY_API_URL: String = "HOLIDAY_API_URL"
-        public const val HOLIDAY_API_KEY: String = "HOLIDAY_API_KEY"
-    }
+	public companion object {
+		public const val HOLIDAY_API_URL: String = "HOLIDAY_API_URL"
+		public const val HOLIDAY_API_KEY: String = "HOLIDAY_API_KEY"
+	}
 }

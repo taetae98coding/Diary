@@ -11,59 +11,56 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-internal class LoginScreenState(
-    private val coroutineScope: CoroutineScope,
-) {
-    private var messageJob: Job? = null
-    val hostState: SnackbarHostState = SnackbarHostState()
+internal class LoginScreenState(private val coroutineScope: CoroutineScope) {
+	private var messageJob: Job? = null
+	val hostState: SnackbarHostState = SnackbarHostState()
 
-    var email by mutableStateOf("")
-        private set
-    var isPasswordVisible by mutableStateOf(false)
-        private set
-    var password by mutableStateOf("")
-        private set
+	var email by mutableStateOf("")
+		private set
+	var isPasswordVisible by mutableStateOf(false)
+		private set
+	var password by mutableStateOf("")
+		private set
 
-    val buttonState by derivedStateOf {
-        if (email.isBlank()) {
-            LoginScreenButtonUiState.EmailBlank
-        } else if (password.isBlank()) {
-            LoginScreenButtonUiState.PasswordBlank
-        } else {
-            LoginScreenButtonUiState.LoginEnable
-        }
-    }
+	val buttonState by derivedStateOf {
+		if (email.isBlank()) {
+			LoginScreenButtonUiState.EmailBlank
+		} else if (password.isBlank()) {
+			LoginScreenButtonUiState.PasswordBlank
+		} else {
+			LoginScreenButtonUiState.LoginEnable
+		}
+	}
 
-    fun onEmailChange(value: String) {
-        email = value
-    }
+	fun onEmailChange(value: String) {
+		email = value
+	}
 
-    fun onPasswordVisibleChange(value: Boolean) {
-        isPasswordVisible = value
-    }
+	fun onPasswordVisibleChange(value: Boolean) {
+		isPasswordVisible = value
+	}
 
-    fun onPasswordChange(value: String) {
-        password = value
-    }
+	fun onPasswordChange(value: String) {
+		password = value
+	}
 
-    fun showMessage(message: String) {
-        messageJob?.cancel()
-        messageJob = coroutineScope.launch { hostState.showSnackbar(message) }
-    }
+	fun showMessage(message: String) {
+		messageJob?.cancel()
+		messageJob = coroutineScope.launch { hostState.showSnackbar(message) }
+	}
 
-    companion object {
-        fun saver(
-            coroutineScope: CoroutineScope,
-        ): Saver<LoginScreenState, Any> {
-            return listSaver(
-                save = { listOf(it.email, it.password) },
-                restore = {
-                    LoginScreenState(coroutineScope = coroutineScope).apply {
-                        email = it[0]
-                        password = it[1]
-                    }
-                },
-            )
-        }
-    }
+	companion object {
+		fun saver(
+			coroutineScope: CoroutineScope,
+		): Saver<LoginScreenState, Any> =
+			listSaver(
+				save = { listOf(it.email, it.password) },
+				restore = {
+					LoginScreenState(coroutineScope = coroutineScope).apply {
+						email = it[0]
+						password = it[1]
+					}
+				},
+			)
+	}
 }

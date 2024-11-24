@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class DeleteFCMRequest(
-    @SerialName("token")
-    val token: String,
+	@SerialName("token")
+	val token: String,
 )

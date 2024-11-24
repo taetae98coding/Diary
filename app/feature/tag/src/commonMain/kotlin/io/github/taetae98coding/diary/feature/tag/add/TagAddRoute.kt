@@ -17,35 +17,34 @@ import org.koin.compose.viewmodel.koinViewModel
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 internal fun TagAddRoute(
-    navigateUp: () -> Unit,
-    modifier: Modifier = Modifier,
-    addViewModel: TagAddViewModel = koinViewModel(),
+	navigateUp: () -> Unit,
+	modifier: Modifier = Modifier,
+	addViewModel: TagAddViewModel = koinViewModel(),
 ) {
-    val navigator = rememberListDetailPaneScaffoldNavigator()
+	val navigator = rememberListDetailPaneScaffoldNavigator()
 
-    ListDetailPaneScaffold(
-        directive = navigator.scaffoldDirective,
-        value = navigator.scaffoldValue,
-        listPane = {
-            AnimatedPane {
-                val state = rememberTagDetailScreenAddState()
-                val uiState by addViewModel.uiState.collectAsStateWithLifecycle()
+	ListDetailPaneScaffold(
+		directive = navigator.scaffoldDirective,
+		value = navigator.scaffoldValue,
+		listPane = {
+			AnimatedPane {
+				val state = rememberTagDetailScreenAddState()
+				val uiState by addViewModel.uiState.collectAsStateWithLifecycle()
 
-                TagDetailScreen(
-                    state = state,
-                    titleProvider = { "태그 추가" },
-                    navigateButtonProvider = {
-                        TagDetailNavigationButton.NavigateUp(onNavigateUp = navigateUp)
-                    },
-                    actionButtonProvider = { TagDetailActionButton.None },
-                    floatingButtonProvider = { TagDetailFloatingButton.Add(onAdd = { addViewModel.add(state.tagDetail) }) },
-                    uiStateProvider = { uiState },
-                )
-            }
-        },
-        detailPane = {
-
-        },
-        modifier = modifier,
-    )
+				TagDetailScreen(
+					state = state,
+					titleProvider = { "태그 추가" },
+					navigateButtonProvider = {
+						TagDetailNavigationButton.NavigateUp(onNavigateUp = navigateUp)
+					},
+					actionButtonProvider = { TagDetailActionButton.None },
+					floatingButtonProvider = { TagDetailFloatingButton.Add(onAdd = { addViewModel.add(state.tagDetail) }) },
+					uiStateProvider = { uiState },
+				)
+			}
+		},
+		detailPane = {
+		},
+		modifier = modifier,
+	)
 }

@@ -11,20 +11,20 @@ import io.github.taetae98coding.diary.core.design.system.icon.AddIcon
 
 @Composable
 public fun FloatingAddButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    progressProvider: () -> Boolean = { false },
+	onClick: () -> Unit,
+	modifier: Modifier = Modifier,
+	progressProvider: () -> Boolean = { false },
 ) {
-    FloatingActionButton(
-        onClick = onClick,
-        modifier = modifier,
-    ) {
-        Crossfade(progressProvider()) {
-            if (it) {
-                CircularProgressIndicator(modifier = Modifier.size(24.dp))
-            } else {
-                AddIcon()
-            }
-        }
-    }
+	FloatingActionButton(
+		onClick = onClick,
+		modifier = modifier,
+	) {
+		Crossfade(progressProvider()) {
+			if (it) {
+				CircularProgressIndicator(modifier = Modifier.size(24.dp))
+			} else {
+				AddIcon()
+			}
+		}
+	}
 }

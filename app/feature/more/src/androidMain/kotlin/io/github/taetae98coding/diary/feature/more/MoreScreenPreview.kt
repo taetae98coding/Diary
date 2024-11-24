@@ -8,11 +8,11 @@ import io.github.taetae98coding.diary.feature.more.account.state.MoreAccountUiSt
 @Composable
 @DiaryPreview
 private fun MoreScreenPreview() {
-    DiaryTheme {
-        MoreScreen(
-            accountUiStateProvider = { MoreAccountUiState.Loading },
-            onLogin = {},
-            onJoin = {},
-        )
-    }
+	DiaryTheme {
+		MoreScreen(
+			accountUiStateProvider = { MoreAccountUiState.Loading },
+			onLogin = {},
+			onJoin = {},
+		)
+	}
 }

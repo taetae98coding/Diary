@@ -5,8 +5,8 @@ import io.github.taetae98coding.diary.core.design.system.color.DiaryColor
 import io.github.taetae98coding.diary.core.design.system.dimen.DiaryDimen
 import io.github.taetae98coding.diary.core.design.system.typography.DiaryTypography
 
-private const val Message = "DiaryTheme not found."
+private const val MESSAGE = "DiaryTheme not found."
 
-internal val LocalDiaryColor = staticCompositionLocalOf<DiaryColor> { error(Message) }
-internal val LocalDiaryTypography = staticCompositionLocalOf<DiaryTypography> { error(Message) }
-internal val LocalDiaryDimen = staticCompositionLocalOf<DiaryDimen> { error(Message) }
+internal val LocalDiaryColor = staticCompositionLocalOf<DiaryColor> { error(MESSAGE) }
+internal val LocalDiaryTypography = staticCompositionLocalOf<DiaryTypography> { error(MESSAGE) }
+internal val LocalDiaryDimen = staticCompositionLocalOf<DiaryDimen> { error(MESSAGE) }

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="185pt" height="116pt" viewBox="0 0 185.43 116">
+    <g class="graph">
+        <path fill="#fff" d="M0 116V0h185.43v116z"/>
+        <g class="node" transform="translate(4 112)">
+            <ellipse cx="88.71" cy="-90" fill="none" stroke="#000" rx="88.71" ry="18"/>
+            <text x="88.71" y="-84.95" font-family="Times,serif" font-size="14" text-anchor="middle">:server:core:database</text>
+        </g>
+        <g class="node" transform="translate(4 112)">
+            <ellipse cx="88.71" cy="-18" fill="none" stroke="#000" rx="80.52" ry="18"/>
+            <text x="88.71" y="-12.95" font-family="Times,serif" font-size="14" text-anchor="middle">:server:core:model</text>
+        </g>
+        <g stroke="red" stroke-width="2" class="edge">
+            <path fill="none" d="M92.71 40.3v24.16"/>
+            <path fill="red" d="m96.21 62.87-3.5 10-3.5-10z"/>
+        </g>
+    </g>
+</svg>

@@ -5,10 +5,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class MemoDetailDestination(
-    @SerialName(MEMO_ID)
-    val memoId: String,
+	@SerialName(MEMO_ID)
+	val memoId: String,
 ) {
-    public companion object {
-        public const val MEMO_ID: String = "memoId"
-    }
+	public companion object {
+		public const val MEMO_ID: String = "memoId"
+	}
 }

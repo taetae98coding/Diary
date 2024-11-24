@@ -14,32 +14,32 @@ import kotlinx.datetime.LocalDate
 
 @Composable
 internal fun CalendarDayOfMonthRow(
-    state: CalendarWeekState,
-    primaryDateListProvider: () -> List<LocalDate>,
-    holidayListProvider: () -> List<CalendarItemUiState.Holiday>,
-    modifier: Modifier = Modifier,
-    colors: CalendarColors = CalendarDefaults.colors(),
+	state: CalendarWeekState,
+	primaryDateListProvider: () -> List<LocalDate>,
+	holidayListProvider: () -> List<CalendarItemUiState.Holiday>,
+	modifier: Modifier = Modifier,
+	colors: CalendarColors = CalendarDefaults.colors(),
 ) {
-    Row(modifier = modifier) {
-        val dayOfMonthModifier = Modifier.weight(1F)
+	Row(modifier = modifier) {
+		val dayOfMonthModifier = Modifier.weight(1F)
 
-        repeat(7) { dayOfWeek ->
-            val dayOfMonthState = remember {
-                CalendarDayOfMonthState(
-                    year = state.year,
-                    month = state.month,
-                    weekOfMonth = state.weekOfMonth,
-                    dayOfWeek = dayOfWeek.toChristDayOfWeek(),
-                )
-            }
+		repeat(7) { dayOfWeek ->
+			val dayOfMonthState = remember {
+				CalendarDayOfMonthState(
+					year = state.year,
+					month = state.month,
+					weekOfMonth = state.weekOfMonth,
+					dayOfWeek = dayOfWeek.toChristDayOfWeek(),
+				)
+			}
 
-            CalendarDayOfMonth(
-                state = dayOfMonthState,
-                primaryDateListProvider = primaryDateListProvider,
-                holidayListProvider = holidayListProvider,
-                modifier = dayOfMonthModifier,
-                colors = colors,
-            )
-        }
-    }
+			CalendarDayOfMonth(
+				state = dayOfMonthState,
+				primaryDateListProvider = primaryDateListProvider,
+				holidayListProvider = holidayListProvider,
+				modifier = dayOfMonthModifier,
+				colors = colors,
+			)
+		}
+	}
 }

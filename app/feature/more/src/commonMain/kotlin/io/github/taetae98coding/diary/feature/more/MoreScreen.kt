@@ -19,44 +19,44 @@ import io.github.taetae98coding.diary.feature.more.account.state.MoreAccountUiSt
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun MoreScreen(
-    accountUiStateProvider: () -> MoreAccountUiState,
-    onLogin: () -> Unit,
-    onJoin: () -> Unit,
-    modifier: Modifier = Modifier,
+	accountUiStateProvider: () -> MoreAccountUiState,
+	onLogin: () -> Unit,
+	onJoin: () -> Unit,
+	modifier: Modifier = Modifier,
 ) {
-    Scaffold(
-        modifier = modifier,
-        topBar = {
-            TopAppBar(title = { Text(text = "더보기") })
-        },
-    ) {
-        Content(
-            accountUiStateProvider = accountUiStateProvider,
-            onLogin = onLogin,
-            onJoin = onJoin,
-            modifier = Modifier.fillMaxSize()
-                .padding(it)
-                .padding(DiaryTheme.dimen.screenPaddingValues),
-        )
-    }
+	Scaffold(
+		modifier = modifier,
+		topBar = {
+			TopAppBar(title = { Text(text = "더보기") })
+		},
+	) {
+		Content(
+			accountUiStateProvider = accountUiStateProvider,
+			onLogin = onLogin,
+			onJoin = onJoin,
+			modifier = Modifier.fillMaxSize()
+				.padding(it)
+				.padding(DiaryTheme.dimen.screenPaddingValues),
+		)
+	}
 }
 
 @Composable
 private fun Content(
-    accountUiStateProvider: () -> MoreAccountUiState,
-    onLogin: () -> Unit,
-    onJoin: () -> Unit,
-    modifier: Modifier = Modifier,
+	accountUiStateProvider: () -> MoreAccountUiState,
+	onLogin: () -> Unit,
+	onJoin: () -> Unit,
+	modifier: Modifier = Modifier,
 ) {
-    Column(
-        modifier = Modifier.verticalScroll(rememberScrollState())
-            .then(modifier),
-    ) {
-        MoreAccount(
-            uiStateProvider = accountUiStateProvider,
-            onLogin = onLogin,
-            onJoin = onJoin,
-            modifier = Modifier.fillMaxWidth(),
-        )
-    }
+	Column(
+		modifier = Modifier.verticalScroll(rememberScrollState())
+			.then(modifier),
+	) {
+		MoreAccount(
+			uiStateProvider = accountUiStateProvider,
+			onLogin = onLogin,
+			onJoin = onJoin,
+			modifier = Modifier.fillMaxWidth(),
+		)
+	}
 }

@@ -11,34 +11,34 @@ import kotlinx.datetime.LocalDate
 @DiaryPreview
 @Composable
 private fun CalendarPreview() {
-    DiaryTheme {
-        val state = rememberCalendarState(
-            initialLocalDate = LocalDate(2000, 1, 1),
-        )
+	DiaryTheme {
+		val state = rememberCalendarState(
+			initialLocalDate = LocalDate(2000, 1, 1),
+		)
 
-        Calendar(
-            state = state,
-            primaryDateListProvider = {
-                listOf(
-                    LocalDate(2000, 1, 1),
-                    LocalDate(2000, 1, 31),
-                )
-            },
-            textItemListProvider = {
-                listOf(
-                    CalendarItemUiState.Text("2-5", "2-5", (0xFFFFFFFF).toInt(), LocalDate(2000, 1, 2), LocalDate(2000, 1, 5)),
-                )
-            },
-            holidayListProvider = {
-                listOf(
-                    CalendarItemUiState.Holiday("새해", LocalDate(2000, 1, 1), LocalDate(2000, 1, 1)),
-                )
-            },
-            onCalendarItemClick = {}
-        )
+		Calendar(
+			state = state,
+			primaryDateListProvider = {
+				listOf(
+					LocalDate(2000, 1, 1),
+					LocalDate(2000, 1, 31),
+				)
+			},
+			textItemListProvider = {
+				listOf(
+					CalendarItemUiState.Text("2-5", "2-5", (0xFFFFFFFF).toInt(), LocalDate(2000, 1, 2), LocalDate(2000, 1, 5)),
+				)
+			},
+			holidayListProvider = {
+				listOf(
+					CalendarItemUiState.Holiday("새해", LocalDate(2000, 1, 1), LocalDate(2000, 1, 1)),
+				)
+			},
+			onCalendarItemClick = {},
+		)
 
-        LaunchedEffect(state) {
-            state.drag(LocalDate(2000, 1, 7)..LocalDate(2000, 1, 17))
-        }
-    }
+		LaunchedEffect(state) {
+			state.drag(LocalDate(2000, 1, 7)..LocalDate(2000, 1, 17))
+		}
+	}
 }

@@ -8,11 +8,11 @@ import androidx.compose.ui.Modifier
 
 @Composable
 public fun MarkdownIcon(
-    modifier: Modifier = Modifier,
+	modifier: Modifier = Modifier,
 ) {
-    Icon(
-        imageVector = Icons.Rounded.Code,
-        contentDescription = null,
-        modifier = modifier,
-    )
+	Icon(
+		imageVector = Icons.Rounded.Code,
+		contentDescription = null,
+		modifier = modifier,
+	)
 }

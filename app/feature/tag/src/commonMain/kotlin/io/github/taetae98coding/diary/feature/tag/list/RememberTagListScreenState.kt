@@ -6,9 +6,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 
 @Composable
 internal fun rememberTagListScreenState(): TagListScreenState {
-    val coroutineScope = rememberCoroutineScope()
+	val coroutineScope = rememberCoroutineScope()
 
-    return remember {
-        TagListScreenState(coroutineScope = coroutineScope)
-    }
+	return remember {
+		TagListScreenState(coroutineScope = coroutineScope)
+	}
 }

@@ -9,12 +9,12 @@ import org.koin.core.module.Module
 import org.koin.ksp.generated.module
 
 internal actual val appModule: Module
-    get() = AppModule().module
+	get() = AppModule().module
 internal actual val accountDataStoreModule: Module
-    get() = AccountDataStorePreferencesModule().module
+	get() = AccountDataStorePreferencesModule().module
 internal actual val holidayDataStoreModule: Module
-    get() = HolidayDataStorePreferencesModule().module
+	get() = HolidayDataStorePreferencesModule().module
 internal actual val holidayRoomModule: Module
-    get() = HolidayRoomDatabaseModule().module
+	get() = HolidayRoomDatabaseModule().module
 internal actual val diaryRoomModule: Module
-    get() = DiaryRoomDatabaseModule().module
+	get() = DiaryRoomDatabaseModule().module

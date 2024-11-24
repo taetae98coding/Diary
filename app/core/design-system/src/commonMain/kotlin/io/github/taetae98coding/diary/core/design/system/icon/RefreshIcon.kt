@@ -8,11 +8,11 @@ import androidx.compose.ui.Modifier
 
 @Composable
 public fun RefreshIcon(
-    modifier: Modifier = Modifier,
+	modifier: Modifier = Modifier,
 ) {
-    Icon(
-        imageVector = Icons.Rounded.Refresh,
-        contentDescription = null,
-        modifier = modifier,
-    )
+	Icon(
+		imageVector = Icons.Rounded.Refresh,
+		contentDescription = null,
+		modifier = modifier,
+	)
 }
