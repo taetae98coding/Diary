@@ -3,9 +3,7 @@ package plugin.kotlin
 import ext.withKotlinMultiplatform
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
-@OptIn(ExperimentalWasmDsl::class)
 internal class KotlinMultiplatformCommonPlugin : Plugin<Project>{
     private val kotlinMultiplatformPlugin = KotlinMultiplatformPlugin()
 
@@ -14,10 +12,6 @@ internal class KotlinMultiplatformCommonPlugin : Plugin<Project>{
 
         target.withKotlinMultiplatform {
             jvm()
-
-            wasmJs {
-                browser()
-            }
 
             iosX64()
             iosArm64()

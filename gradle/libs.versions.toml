@@ -18,8 +18,8 @@ androidx-lifecycle = "2.8.5"
 
 compose-markdown = "0.27.0"                 # https://github.com/mikepenz/multiplatform-markdown-renderer/releases
 
-koin = "4.0.0"                              # https://github.com/InsertKoinIO/koin/releases
-koin-annotations = "2.0.0-Beta1"            # https://github.com/InsertKoinIO/koin-annotations/releases
+koin = "4.1.0-Beta1"                        # https://github.com/InsertKoinIO/koin/releases
+koin-annotations = "2.0.0-Beta2"            # https://github.com/InsertKoinIO/koin-annotations/releases
 datastore = "1.1.1"                         # https://developer.android.com/jetpack/androidx/releases/datastore?hl=en
 room = "2.7.0-alpha11"                      # https://developer.android.com/jetpack/androidx/releases/room?hl=en
 sqlite = "2.5.0-alpha11"                    # https://developer.android.com/jetpack/androidx/releases/sqlite?hl=en

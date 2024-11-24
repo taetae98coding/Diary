@@ -11,6 +11,7 @@ public data class Memo(
 	val endInclusive: LocalDate?,
 	val color: Int,
 	val owner: String,
+	val primaryTag: String?,
 	val isFinish: Boolean,
 	val isDelete: Boolean,
 	val updateAt: Instant,

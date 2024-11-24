@@ -22,18 +22,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.github.taetae98coding.diary.core.design.system.chip.DiaryAssistChip
-import io.github.taetae98coding.diary.core.resources.Res
-import io.github.taetae98coding.diary.core.resources.guest
-import io.github.taetae98coding.diary.core.resources.icon.AccountIcon
-import io.github.taetae98coding.diary.core.resources.icon.LoginIcon
-import io.github.taetae98coding.diary.core.resources.icon.LogoutIcon
-import io.github.taetae98coding.diary.core.resources.join
-import io.github.taetae98coding.diary.core.resources.login
-import io.github.taetae98coding.diary.core.resources.logout
+import io.github.taetae98coding.diary.core.design.system.icon.AccountIcon
+import io.github.taetae98coding.diary.core.design.system.icon.LoginIcon
+import io.github.taetae98coding.diary.core.design.system.icon.LogoutIcon
 import io.github.taetae98coding.diary.feature.more.account.state.MoreAccountUiState
 import io.github.taetae98coding.diary.library.color.multiplyAlpha
 import io.github.taetae98coding.diary.library.shimmer.m3.shimmer
-import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun MoreAccount(
@@ -111,7 +105,7 @@ private fun Email(
 
             is MoreAccountUiState.Guest -> {
                 Text(
-                    text = stringResource(Res.string.guest),
+                    text = "게스트",
                     modifier = modifier,
                 )
             }
@@ -165,7 +159,7 @@ private fun ButtonRow(
                 ) {
                     DiaryAssistChip(
                         onClick = onLogin,
-                        label = { Text(text = stringResource(Res.string.login)) },
+                        label = { Text(text = "로그인") },
                         modifier = Modifier.animateItem(),
                         leadingIcon = { LoginIcon() },
                         shape = CircleShape,
@@ -178,7 +172,7 @@ private fun ButtonRow(
                 ) {
                     DiaryAssistChip(
                         onClick = onJoin,
-                        label = { Text(text = stringResource(Res.string.join)) },
+                        label = { Text(text = "회원가입") },
                         modifier = Modifier.animateItem(),
                         leadingIcon = { AccountIcon() },
                         shape = CircleShape,
@@ -193,7 +187,7 @@ private fun ButtonRow(
                 ) {
                     DiaryAssistChip(
                         onClick = uiState.logout,
-                        label = { Text(text = stringResource(Res.string.logout)) },
+                        label = { Text(text = "로그아웃") },
                         modifier = Modifier.animateItem(),
                         leadingIcon = { LogoutIcon() },
                         shape = CircleShape,

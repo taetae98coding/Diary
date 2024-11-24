@@ -4,13 +4,10 @@ import ext.compose
 import ext.library
 import ext.libs
 import ext.sourceSets
-import ext.withCompose
 import ext.withKotlinMultiplatform
 import ext.withKsp
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.getByType
-import org.jetbrains.compose.resources.ResourcesExtension
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import plugin.android.AndroidLibraryPlugin
 import plugin.compose.ComposePlugin
@@ -36,9 +33,9 @@ internal class AppFeaturePlugin : Plugin<Project> {
             sourceSets {
                 commonMain {
                     dependencies {
+                        implementation(project(":app:core:compose"))
                         implementation(project(":app:core:design-system"))
                         implementation(project(":app:core:navigation"))
-                        implementation(project(":app:core:resources"))
 
                         implementation(project(":library:color"))
                         implementation(project(":library:kotlin"))
@@ -48,7 +45,6 @@ internal class AppFeaturePlugin : Plugin<Project> {
                         implementation(project(":library:shimmer-m3"))
 
                         implementation(compose.material3)
-                        implementation(compose.components.resources)
                         implementation(libs.library("compose-material3-adaptive-navigation"))
 
                         implementation(libs.library("navigation-compose"))
@@ -69,12 +65,6 @@ internal class AppFeaturePlugin : Plugin<Project> {
                         implementation(compose.uiTooling)
                     }
                 }
-            }
-        }
-
-        target.withCompose {
-            with(extensions.getByType<ResourcesExtension>()) {
-                generateResClass = ResourcesExtension.ResourceClassGeneration.Never
             }
         }
 

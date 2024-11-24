@@ -1,6 +1,6 @@
 package io.github.taetae98coding.diary.domain.memo.usecase
 
-import io.github.taetae98coding.diary.core.model.Memo
+import io.github.taetae98coding.diary.core.model.MemoAndTagIds
 import io.github.taetae98coding.diary.domain.memo.repository.MemoRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -16,8 +16,8 @@ import org.koin.core.annotation.Factory
 public class FetchMemoUseCase internal constructor(
 	private val repository: MemoRepository,
 ) {
-	public operator fun invoke(uid: String, updateAt: Instant): Flow<Result<List<Memo>>> =
-		flow { emitAll(repository.findByUpdateAt(uid, updateAt)) }
+	public operator fun invoke(uid: String, updateAt: Instant): Flow<Result<List<MemoAndTagIds>>> =
+		flow { emitAll(repository.findMemoAndTagIdsByUpdateAt(uid, updateAt)) }
 			.mapLatest { Result.success(it) }
 			.catch { emit(Result.failure(it)) }
 }

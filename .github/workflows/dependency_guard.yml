@@ -1,6 +1,6 @@
 name: Dependency Guard
 
-on: [ push, pull_request ]
+on: [ pull_request ]
 
 jobs:
   Dependency-Guard:

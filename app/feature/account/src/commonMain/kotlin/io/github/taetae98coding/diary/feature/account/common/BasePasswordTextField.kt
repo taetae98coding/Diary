@@ -8,10 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import io.github.taetae98coding.diary.core.design.system.icon.KeyIcon
 import io.github.taetae98coding.diary.core.design.system.icon.VisibilityOffIcon
 import io.github.taetae98coding.diary.core.design.system.icon.VisibilityOnIcon
 import io.github.taetae98coding.diary.core.design.system.text.ClearTextField
-import io.github.taetae98coding.diary.core.resources.icon.KeyIcon
 
 @Composable
 internal fun BasePasswordTextField(

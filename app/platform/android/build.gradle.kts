@@ -35,8 +35,8 @@ android {
     defaultConfig {
         applicationId = "io.github.taetae98coding.diary"
 
-        versionCode = 2
-        versionName = "1.1.0"
+        versionCode = 3
+        versionName = "1.2.0"
     }
 
     buildTypes {
@@ -87,11 +87,7 @@ android {
 
 dependencies {
     implementation(project(":app:platform:common"))
-    implementation(project(":app:core:diary-database-room"))
     implementation(project(":app:core:diary-service"))
-    implementation(project(":app:core:account-preferences-datastore"))
-    implementation(project(":app:core:holiday-preferences-datastore"))
-    implementation(project(":app:core:holiday-database-room"))
     implementation(project(":app:core:holiday-service"))
     implementation(project(":app:domain:fcm"))
 

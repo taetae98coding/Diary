@@ -6,7 +6,6 @@ internal data class JoinUiState(
     val isExistEmail: Boolean = false,
     val isNetworkError: Boolean = false,
     val isUnknownError: Boolean = false,
-    val message: String = "",
     val onMessageShow: () -> Unit = {},
 ) {
     val hasMessage = isLoginFinish || isExistEmail || isNetworkError || isUnknownError

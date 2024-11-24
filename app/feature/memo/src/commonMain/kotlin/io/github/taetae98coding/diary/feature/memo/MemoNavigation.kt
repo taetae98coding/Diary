@@ -7,6 +7,8 @@ import androidx.navigation.navigation
 import io.github.taetae98coding.diary.core.navigation.memo.MemoAddDestination
 import io.github.taetae98coding.diary.core.navigation.memo.MemoDestination
 import io.github.taetae98coding.diary.core.navigation.memo.MemoDetailDestination
+import io.github.taetae98coding.diary.core.navigation.tag.TagAddDestination
+import io.github.taetae98coding.diary.core.navigation.tag.TagDetailDestination
 import io.github.taetae98coding.diary.feature.memo.add.MemoAddRoute
 import io.github.taetae98coding.diary.feature.memo.detail.MemoDetailRoute
 import io.github.taetae98coding.diary.library.navigation.LocalDateNavType
@@ -24,12 +26,16 @@ public fun NavGraphBuilder.memoNavigation(
         ) {
             MemoAddRoute(
                 navigateUp = navController::popBackStack,
+                navigateToTagAdd = { navController.navigate(TagAddDestination) },
+                navigateToTagDetail = { navController.navigate(TagDetailDestination(it)) },
             )
         }
 
         composable<MemoDetailDestination> {
             MemoDetailRoute(
                 navigateUp = navController::popBackStack,
+                navigateToTagAdd = { navController.navigate(TagAddDestination) },
+                navigateToTagDetail = { navController.navigate(TagDetailDestination(it)) },
             )
         }
     }

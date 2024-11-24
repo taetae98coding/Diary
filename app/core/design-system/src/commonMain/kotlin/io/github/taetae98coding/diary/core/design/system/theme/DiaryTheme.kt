@@ -37,11 +37,13 @@ public fun DiaryTheme(
     CompositionLocalProvider(
         LocalDiaryColor provides DiaryColor(
             primary = colorScheme.primary,
+            secondary = colorScheme.secondary,
             onPrimary = colorScheme.onPrimary,
             background = colorScheme.background,
             onSurface = colorScheme.onSurface,
         ),
         LocalDiaryTypography provides DiaryTypography(
+            headlineMedium = MaterialTheme.typography.headlineMedium,
             labelSmall = MaterialTheme.typography.labelSmall,
             labelMedium = MaterialTheme.typography.labelMedium,
             labelLarge = MaterialTheme.typography.labelLarge,

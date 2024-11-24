@@ -11,11 +11,8 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
+import io.github.taetae98coding.diary.core.design.system.icon.EmailIcon
 import io.github.taetae98coding.diary.core.design.system.text.ClearTextField
-import io.github.taetae98coding.diary.core.resources.Res
-import io.github.taetae98coding.diary.core.resources.email
-import io.github.taetae98coding.diary.core.resources.icon.EmailIcon
-import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun EmailTextField(
@@ -29,7 +26,7 @@ internal fun EmailTextField(
         valueProvider = valueProvider,
         onValueChange = onValueChange,
         modifier = modifier.focusRequester(focusRequester),
-        placeholder = { Text(text = stringResource(Res.string.email)) },
+        placeholder = { Text(text = "이메일") },
         leadingIcon = { EmailIcon() },
         keyboardOptions = KeyboardOptions(
             capitalization = KeyboardCapitalization.None,

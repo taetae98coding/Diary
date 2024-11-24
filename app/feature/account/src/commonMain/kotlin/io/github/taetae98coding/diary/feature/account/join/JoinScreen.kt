@@ -22,20 +22,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
+import io.github.taetae98coding.diary.core.design.system.emoji.Emoji
+import io.github.taetae98coding.diary.core.design.system.icon.NavigateUpIcon
 import io.github.taetae98coding.diary.core.design.system.theme.DiaryTheme
-import io.github.taetae98coding.diary.core.resources.Res
-import io.github.taetae98coding.diary.core.resources.bottom_button_email_blank
-import io.github.taetae98coding.diary.core.resources.bottom_button_password_blank
-import io.github.taetae98coding.diary.core.resources.check_password
-import io.github.taetae98coding.diary.core.resources.icon.NavigateUpIcon
-import io.github.taetae98coding.diary.core.resources.join
-import io.github.taetae98coding.diary.core.resources.join_button_invalid_email_message
-import io.github.taetae98coding.diary.core.resources.join_button_message
-import io.github.taetae98coding.diary.core.resources.join_button_password_different_message
-import io.github.taetae98coding.diary.core.resources.join_exist_email_message
-import io.github.taetae98coding.diary.core.resources.network_error
-import io.github.taetae98coding.diary.core.resources.password
-import io.github.taetae98coding.diary.core.resources.unknown_error
 import io.github.taetae98coding.diary.feature.account.common.BasePasswordTextField
 import io.github.taetae98coding.diary.feature.account.common.BottomBarButton
 import io.github.taetae98coding.diary.feature.account.common.BottomBarButtonContent
@@ -43,7 +32,6 @@ import io.github.taetae98coding.diary.feature.account.common.EmailTextField
 import io.github.taetae98coding.diary.feature.account.join.state.JoinScreenButtonUiState
 import io.github.taetae98coding.diary.feature.account.join.state.JoinScreenState
 import io.github.taetae98coding.diary.feature.account.join.state.JoinUiState
-import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -59,7 +47,7 @@ internal fun JoinScreen(
         modifier = modifier,
         topBar = {
             TopAppBar(
-                title = { Text(text = stringResource(Res.string.join)) },
+                title = { Text(text = "회원가입") },
                 navigationIcon = {
                     IconButton(onClick = onNavigateUp) {
                         NavigateUpIcon()
@@ -114,23 +102,23 @@ private fun JoinButtonContent(
     BottomBarButtonContent(modifier = modifier) {
         when (uiState) {
             JoinScreenButtonUiState.JoinEnable -> {
-                Text(text = stringResource(Res.string.join_button_message))
+                Text(text = "회원가입")
             }
 
             JoinScreenButtonUiState.EmailBlank -> {
-                Text(text = stringResource(Res.string.bottom_button_email_blank))
+                Text(text = "이메일을 입력해 주세요 🐮")
             }
 
             JoinScreenButtonUiState.PasswordBlank -> {
-                Text(text = stringResource(Res.string.bottom_button_password_blank))
+                Text(text = "비밀번호를 입력해 주세요 🦁")
             }
 
             JoinScreenButtonUiState.InvalidEmail -> {
-                Text(text = stringResource(Res.string.join_button_invalid_email_message))
+                Text(text = "이메일 형식을 지켜주세요 🐯")
             }
 
             JoinScreenButtonUiState.PasswordDifferent -> {
-                Text(text = stringResource(Res.string.join_button_password_different_message))
+                Text(text = "입력된 패스워드가 달라요 🐨")
             }
 
             JoinScreenButtonUiState.Progress -> {
@@ -177,7 +165,7 @@ private fun PasswordTextField(
         valueProvider = { state.password },
         onValueChange = state::onPasswordChange,
         modifier = modifier,
-        placeholder = { Text(text = stringResource(Res.string.password)) },
+        placeholder = { Text(text = "패스워드") },
         passwordVisibleProvider = { state.isPasswordVisible },
         onPasswordVisibleChange = state::onPasswordVisibleChange,
         keyboardOptions = KeyboardOptions(
@@ -198,7 +186,7 @@ private fun CheckPasswordTextField(
         valueProvider = { state.checkPassword },
         onValueChange = state::onCheckPasswordChange,
         modifier = modifier,
-        placeholder = { Text(text = stringResource(Res.string.check_password)) },
+        placeholder = { Text(text = "비밀번호 확인") },
         passwordVisibleProvider = { state.isCheckPasswordVisible },
         onPasswordVisibleChange = state::onCheckPasswordVisibleChange,
         keyboardOptions = KeyboardOptions(
@@ -224,9 +212,6 @@ private fun Message(
     onLoginFinish: () -> Unit,
 ) {
     val uiState = uiStateProvider()
-    val existEmailMessage = stringResource(Res.string.join_exist_email_message)
-    val networkErrorMessage = stringResource(Res.string.network_error)
-    val unknownErrorMessage = stringResource(Res.string.unknown_error)
 
     LaunchedEffect(
         uiState.isLoginFinish,
@@ -238,9 +223,9 @@ private fun Message(
 
         when {
             uiState.isLoginFinish -> onLoginFinish()
-            uiState.isExistEmail -> state.showMessage(existEmailMessage)
-            uiState.isNetworkError -> state.showMessage(networkErrorMessage)
-            uiState.isUnknownError -> state.showMessage(uiState.message)
+            uiState.isExistEmail -> state.showMessage("이미 사용되는 이메일이에요 ${Emoji.invalid.random()}")
+            uiState.isNetworkError -> state.showMessage("네트워크 연결 상태를 확인해 주세요 ${Emoji.fail.random()}")
+            uiState.isUnknownError -> state.showMessage("알 수 없는 에러가 발생했어요 잠시 후 다시 시도해 주세요 ${Emoji.error.random()}")
         }
 
         uiState.onMessageShow()

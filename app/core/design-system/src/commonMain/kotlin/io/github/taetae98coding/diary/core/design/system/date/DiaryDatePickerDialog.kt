@@ -11,13 +11,9 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import io.github.taetae98coding.diary.core.resources.Res
-import io.github.taetae98coding.diary.core.resources.dismiss
-import io.github.taetae98coding.diary.core.resources.select
 import io.github.taetae98coding.diary.library.datetime.toLocalDate
 import io.github.taetae98coding.diary.library.datetime.toTimeInMillis
 import kotlinx.datetime.LocalDate
-import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -43,13 +39,13 @@ public fun DiaryDatePickerDialog(
                 },
                 enabled = isConfirmButtonEnable,
             ) {
-                Text(text = stringResource(Res.string.select))
+                Text(text = "선택")
             }
         },
         modifier = modifier,
         dismissButton = {
             TextButton(onClick = onDismissRequest) {
-                Text(text = stringResource(Res.string.dismiss))
+                Text(text = "닫기")
             }
         },
     ) {

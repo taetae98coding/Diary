@@ -1,7 +1,7 @@
 package plugin.room
 
 import ext.bundle
-import ext.kspRoom
+import ext.kspAll
 import ext.library
 import ext.libs
 import ext.sourceSets
@@ -54,7 +54,7 @@ internal class RoomPlugin : Plugin<Project> {
         }
 
         target.withDependency {
-            kspRoom(libs.library("room-compiler"))
+            kspAll(libs.library("room-compiler"))
         }
     }
 }
