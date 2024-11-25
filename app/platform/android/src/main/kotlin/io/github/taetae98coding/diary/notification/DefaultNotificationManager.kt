@@ -7,11 +7,13 @@ import androidx.core.app.NotificationChannelCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import io.github.taetae98coding.diary.R
-import kotlin.math.abs
 import org.koin.core.annotation.Factory
+import kotlin.math.abs
 
 @Factory
-internal class DefaultNotificationManager(private val context: Context) {
+internal class DefaultNotificationManager(
+	private val context: Context,
+) {
 	fun notify(title: String, description: String?) {
 		if (context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) return
 

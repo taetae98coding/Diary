@@ -67,7 +67,8 @@ internal fun TagListScreen(
 		Content(
 			listProvider = listProvider,
 			onTag = onTag,
-			modifier = Modifier.fillMaxSize()
+			modifier = Modifier
+				.fillMaxSize()
 				.padding(it),
 		)
 	}
@@ -183,11 +184,15 @@ private fun TagItem(
 	) {
 		Card(onClick = onClick) {
 			Box(
-				modifier = Modifier.fillMaxSize()
+				modifier = Modifier
+					.fillMaxSize()
 					.padding(16.dp),
 				contentAlignment = Alignment.Center,
 			) {
-				Text(text = uiState?.title.orEmpty())
+				Text(
+					text = uiState?.title.orEmpty(),
+					style = DiaryTheme.typography.titleLarge,
+				)
 			}
 		}
 	}

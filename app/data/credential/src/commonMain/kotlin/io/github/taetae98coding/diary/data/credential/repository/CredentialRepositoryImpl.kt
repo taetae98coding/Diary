@@ -9,7 +9,10 @@ import kotlinx.coroutines.flow.flow
 import org.koin.core.annotation.Factory
 
 @Factory
-internal class CredentialRepositoryImpl(private val preferencesDataSource: AccountPreferences, private val remoteDataSource: AccountService) : CredentialRepository {
+internal class CredentialRepositoryImpl(
+	private val preferencesDataSource: AccountPreferences,
+	private val remoteDataSource: AccountService,
+) : CredentialRepository {
 	override suspend fun join(email: String, password: String) {
 		remoteDataSource.join(email, password)
 	}

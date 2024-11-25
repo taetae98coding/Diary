@@ -22,7 +22,9 @@ import org.koin.android.annotation.KoinViewModel
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @KoinViewModel
-internal class CalendarHomeHolidayViewModel(findHolidayUseCase: FindHolidayUseCase) : ViewModel() {
+internal class CalendarHomeHolidayViewModel(
+	findHolidayUseCase: FindHolidayUseCase,
+) : ViewModel() {
 	private val yearAndMonth = MutableStateFlow<Pair<Int, Month>?>(null)
 
 	val holidayList =

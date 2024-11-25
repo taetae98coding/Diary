@@ -8,7 +8,11 @@ import kotlinx.coroutines.flow.first
 import org.koin.core.annotation.Factory
 
 @Factory
-public class BackupUseCase internal constructor(private val getAccountUseCase: GetAccountUseCase, private val tagBackupRepository: TagBackupRepository, private val memoBackupRepository: MemoBackupRepository) {
+public class BackupUseCase internal constructor(
+	private val getAccountUseCase: GetAccountUseCase,
+	private val tagBackupRepository: TagBackupRepository,
+	private val memoBackupRepository: MemoBackupRepository,
+) {
 	public suspend operator fun invoke(): Result<Unit> =
 		runCatching {
 			val account = getAccountUseCase().first().getOrThrow()

@@ -24,13 +24,13 @@ internal fun MemoEntity.toDto(): MemoDto =
 	MemoDto(
 		id = id,
 		detail =
-		MemoDetail(
-			title = title,
-			description = description,
-			start = start,
-			endInclusive = endInclusive,
-			color = color,
-		),
+			MemoDetail(
+				title = title,
+				description = description,
+				start = start,
+				endInclusive = endInclusive,
+				color = color,
+			),
 		owner = owner,
 		primaryTag = primaryTag,
 		isFinish = isFinish,

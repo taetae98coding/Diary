@@ -18,7 +18,10 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-internal class MemoRoomDao(private val clock: Clock, private val database: DiaryDatabase) : MemoDao {
+internal class MemoRoomDao(
+	private val clock: Clock,
+	private val database: DiaryDatabase,
+) : MemoDao {
 	override suspend fun upsert(dto: MemoAndTagIds) {
 		database.memo().upsertMemoAndTagIds(dto)
 	}

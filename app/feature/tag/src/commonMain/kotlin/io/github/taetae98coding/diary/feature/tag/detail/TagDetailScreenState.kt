@@ -19,9 +19,20 @@ internal sealed class TagDetailScreenState {
 
 	val hostState: SnackbarHostState = SnackbarHostState()
 
-	data class Add(override val coroutineScope: CoroutineScope, override val componentState: DiaryComponentState, override val colorState: DiaryColorState) : TagDetailScreenState()
+	data class Add(
+		override val coroutineScope: CoroutineScope,
+		override val componentState: DiaryComponentState,
+		override val colorState: DiaryColorState,
+	) : TagDetailScreenState()
 
-	data class Detail(val onUpdate: () -> Unit, val onDelete: () -> Unit, override val coroutineScope: CoroutineScope, override val componentState: DiaryComponentState, override val colorState: DiaryColorState) : TagDetailScreenState()
+	data class Detail(
+		val onUpdate: () -> Unit,
+		val onDelete: () -> Unit,
+		val onMemo: () -> Unit,
+		override val coroutineScope: CoroutineScope,
+		override val componentState: DiaryComponentState,
+		override val colorState: DiaryColorState,
+	) : TagDetailScreenState()
 
 	val tagDetail: TagDetail
 		get() {

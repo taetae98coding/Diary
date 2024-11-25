@@ -8,7 +8,10 @@ import androidx.compose.runtime.setValue
 import io.github.taetae98coding.diary.library.datetime.todayIn
 import kotlinx.datetime.LocalDate
 
-public class DiaryDateState internal constructor(initialStart: LocalDate?, initialEndInclusive: LocalDate?) : ClosedRange<LocalDate> {
+public class DiaryDateState internal constructor(
+	initialStart: LocalDate?,
+	initialEndInclusive: LocalDate?,
+) : ClosedRange<LocalDate> {
 	public var hasDate: Boolean by mutableStateOf(initialStart != null && initialEndInclusive != null)
 		private set
 	override var start: LocalDate by mutableStateOf(initialStart ?: LocalDate.todayIn())

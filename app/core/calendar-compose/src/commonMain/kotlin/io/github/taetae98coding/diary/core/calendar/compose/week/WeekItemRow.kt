@@ -47,7 +47,8 @@ internal fun WeekItemRow(
 						WeekTextItem(
 							text = it.name,
 							color = colors.sundayColor,
-							modifier = Modifier.weight(it.weight)
+							modifier = Modifier
+								.weight(it.weight)
 								.fillMaxHeight()
 								.padding(horizontal = 1.dp)
 								.clip(RoundedCornerShape(4.dp)),
@@ -60,7 +61,8 @@ internal fun WeekItemRow(
 						WeekTextItem(
 							text = it.name,
 							color = it.color,
-							modifier = Modifier.weight(it.weight)
+							modifier = Modifier
+								.weight(it.weight)
 								.fillMaxHeight()
 								.padding(horizontal = 1.dp)
 								.clip(RoundedCornerShape(4.dp))
@@ -85,7 +87,8 @@ private fun WeekTextItem(
 	) {
 		Text(
 			text = text,
-			modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE)
+			modifier = Modifier
+				.basicMarquee(iterations = Int.MAX_VALUE)
 				.padding(2.dp),
 			color = color.toContrastColor(),
 			textAlign = TextAlign.Center,

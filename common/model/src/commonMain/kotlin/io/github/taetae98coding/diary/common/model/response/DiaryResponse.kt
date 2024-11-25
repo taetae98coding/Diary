@@ -3,7 +3,11 @@ package io.github.taetae98coding.diary.common.model.response
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class DiaryResponse<T>(val code: Int = 0, val message: String = "", val body: T? = null) {
+public data class DiaryResponse<T>(
+	val code: Int = 0,
+	val message: String = "",
+	val body: T? = null,
+) {
 	public companion object {
 		public val Success: DiaryResponse<Unit> = DiaryResponse(200, "SUCCESS", Unit)
 		public val Created: DiaryResponse<Unit> = DiaryResponse(201, "CREATED", Unit)

@@ -10,7 +10,10 @@ import kotlinx.datetime.Instant
 import org.koin.core.annotation.Factory
 
 @Factory
-internal class TagFetchRepositoryImpl(private val localDataSource: TagDao, private val remoteDataSource: TagService) : TagFetchRepository {
+internal class TagFetchRepositoryImpl(
+	private val localDataSource: TagDao,
+	private val remoteDataSource: TagService,
+) : TagFetchRepository {
 	override suspend fun fetch(uid: String) {
 		mutex.withLock {
 			while (true) {

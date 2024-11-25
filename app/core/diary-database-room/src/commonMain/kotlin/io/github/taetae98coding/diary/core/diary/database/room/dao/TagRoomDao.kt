@@ -2,9 +2,11 @@ package io.github.taetae98coding.diary.core.diary.database.room.dao
 
 import io.github.taetae98coding.diary.core.diary.database.TagDao
 import io.github.taetae98coding.diary.core.diary.database.room.DiaryDatabase
+import io.github.taetae98coding.diary.core.diary.database.room.entity.MemoEntity
 import io.github.taetae98coding.diary.core.diary.database.room.entity.TagEntity
 import io.github.taetae98coding.diary.core.diary.database.room.mapper.toDto
 import io.github.taetae98coding.diary.core.diary.database.room.mapper.toEntity
+import io.github.taetae98coding.diary.core.model.memo.MemoDto
 import io.github.taetae98coding.diary.core.model.tag.TagDetail
 import io.github.taetae98coding.diary.core.model.tag.TagDto
 import io.github.taetae98coding.diary.library.coroutines.mapCollectionLatest
@@ -17,7 +19,10 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-internal class TagRoomDao(private val clock: Clock, private val database: DiaryDatabase) : TagDao {
+internal class TagRoomDao(
+	private val clock: Clock,
+	private val database: DiaryDatabase,
+) : TagDao {
 	override suspend fun upsert(tag: TagDto) {
 		database.tag().upsert(tag.toEntity())
 	}
@@ -44,6 +49,12 @@ internal class TagRoomDao(private val clock: Clock, private val database: DiaryD
 		database.tag().updateDelete(tagId, isDelete, clock.now())
 	}
 
+	override fun page(owner: String?): Flow<List<TagDto>> =
+		database
+			.tag()
+			.page(owner)
+			.mapCollectionLatest(TagEntity::toDto)
+
 	override fun find(tagId: String, filterNotDelete: Boolean): Flow<TagDto?> = database.tag().find(tagId, filterNotDelete).mapLatest { it?.toDto() }
 
 	override fun findByIds(tagIds: Set<String>, filterNotDelete: Boolean): Flow<List<TagDto>> =
@@ -52,11 +63,10 @@ internal class TagRoomDao(private val clock: Clock, private val database: DiaryD
 			.findByIds(tagIds, filterNotDelete)
 			.mapCollectionLatest(TagEntity::toDto)
 
-	override fun page(owner: String?): Flow<List<TagDto>> =
-		database
-			.tag()
-			.page(owner)
-			.mapCollectionLatest(TagEntity::toDto)
+	override fun findMemoByTagId(tagId: String): Flow<List<MemoDto>> = database
+		.tag()
+		.findMemoByTagId(tagId)
+		.mapCollectionLatest(MemoEntity::toDto)
 
 	override fun getLastServerUpdateAt(owner: String?): Flow<Instant?> = database.tag().getLastUpdateAt(owner)
 }

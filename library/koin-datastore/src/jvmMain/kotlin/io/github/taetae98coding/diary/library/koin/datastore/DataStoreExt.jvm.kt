@@ -1,7 +1,7 @@
 package io.github.taetae98coding.diary.library.koin.datastore
 
-import java.io.File
 import org.koin.core.component.KoinComponent
+import java.io.File
 
 public var koinDataStoreDefaultPath: String = System.getProperty("user.home")
 

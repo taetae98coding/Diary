@@ -1,6 +1,10 @@
 name: Build
 
-on: [ pull_request ]
+on:
+  pull_request:
+  push:
+    branches:
+      - main
 
 jobs:
   Linux-Build:
@@ -8,8 +12,8 @@ jobs:
     strategy:
       matrix:
         command: [
-          './gradlew :app:platform:jvm:assemble',
-          './gradlew :app:platform:android:assembleRealRelease',
+          './gradlew :app:platform:jvm:packageReleaseDistributionForCurrentOS',
+          './gradlew :app:platform:android:bundleRealRelease',
         ]
     steps:
       - name: Checkout repository
@@ -83,35 +87,35 @@ jobs:
           echo '${{ secrets.APPLE_REAL_DEBUG_GOOGLE_SERVICE_INFO_PLIST }}' >> Diary/Secret/RealDebug/GoogleService-Info.plist
           echo '${{ secrets.APPLE_REAL_RELEASE_GOOGLE_SERVICE_INFO_PLIST }}' >> Diary/Secret/RealRelease/GoogleService-Info.plist
 
-      - name: Install the build certificate and provisioning profile
+      - name: Install the build Apple certificate and build provisioning profile
         env:
-          BUILD_CERTIFICATE_BASE64: ${{ secrets.APPLE_BUILD_CERTIFICATE }}
-          BUILD_P12_PASSWORD: ${{ secrets.APPLE_BUILD_CERTIFICATE_PASSWORD }}
-          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.APPLE_BUILD_PROFILE }}
-          KEYCHAIN_PASSWORD: ${{ secrets.APPLE_TEMPORARY_KEYCHAIN_PASSWORD }}
+          CERTIFICATE_BASE64: ${{ secrets.APPLE_BUILD_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.APPLE_BUILD_P12_PASSWORD }}
+          PROVISION_PROFILE_BASE64: ${{ secrets.APPLE_BUILD_PROVISION_PROFILE_BASE64 }}
+          KEYCHAIN_PASSWORD: ${{ secrets.APPLE_BUILD_KEYCHAIN_PASSWORD }}
         run: |
           # create variables
-          BUILD_CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
-          BUILD_PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
+          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+          PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
           KEYCHAIN_PATH=$RUNNER_TEMP/build_app-signing.keychain-db
 
           # import certificate and provisioning profile from secrets
-          echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $BUILD_CERTIFICATE_PATH
-          echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode -o $BUILD_PP_PATH
+          echo -n "$CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+          echo -n "$PROVISION_PROFILE_BASE64" | base64 --decode -o $PP_PATH
 
           # create temporary keychain
           security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
           security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
 
-          # import build certificate to keychain
-          security import $BUILD_CERTIFICATE_PATH -P "$BUILD_P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          # import certificate to keychain
+          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
           security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
           security list-keychain -d user -s $KEYCHAIN_PATH
-          
+
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp $BUILD_PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
       - name: Build Cocoapods
         run: ./gradlew buildCocoapods

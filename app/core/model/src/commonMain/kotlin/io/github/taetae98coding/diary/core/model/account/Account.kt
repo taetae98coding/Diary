@@ -7,5 +7,8 @@ public sealed class Account {
 		override val uid: String? = null
 	}
 
-	public data class Member(val email: String, override val uid: String) : Account()
+	public data class Member(
+		val email: String,
+		override val uid: String,
+	) : Account()
 }

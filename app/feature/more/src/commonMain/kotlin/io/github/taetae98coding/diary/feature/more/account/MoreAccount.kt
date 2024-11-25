@@ -77,7 +77,8 @@ private fun ProfileImage(
 	modifier: Modifier = Modifier,
 ) {
 	Box(
-		modifier = modifier.size(54.dp)
+		modifier = modifier
+			.size(54.dp)
 			.background(
 				color = LocalContentColor.current.multiplyAlpha(value = 0.38F),
 				shape = CircleShape,
@@ -98,7 +99,8 @@ private fun Email(
 			is MoreAccountUiState.Loading -> {
 				Text(
 					text = "",
-					modifier = modifier.width(100.dp)
+					modifier = modifier
+						.width(100.dp)
 						.shimmer(),
 				)
 			}

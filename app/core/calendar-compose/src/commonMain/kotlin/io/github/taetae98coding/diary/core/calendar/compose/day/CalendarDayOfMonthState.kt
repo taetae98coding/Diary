@@ -5,7 +5,12 @@ import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month
 
-internal class CalendarDayOfMonthState(val year: Int, val month: Month, val weekOfMonth: Int, val dayOfWeek: DayOfWeek) {
+internal class CalendarDayOfMonthState(
+	val year: Int,
+	val month: Month,
+	val weekOfMonth: Int,
+	val dayOfWeek: DayOfWeek,
+) {
 	val localDate = LocalDate(year, month, weekOfMonth, dayOfWeek)
 	val isInMonth = year == localDate.year && month == localDate.month
 }

@@ -7,7 +7,9 @@ import kotlinx.coroutines.flow.first
 import org.koin.core.annotation.Factory
 
 @Factory
-public class UpsertTagUseCase internal constructor(private val repository: TagRepository) {
+public class UpsertTagUseCase internal constructor(
+	private val repository: TagRepository,
+) {
 	public suspend operator fun invoke(list: List<Tag>): Result<Unit> {
 		return runCatching {
 			// TODO Permission Check
@@ -26,10 +28,10 @@ public class UpsertTagUseCase internal constructor(private val repository: TagRe
 					}.map {
 						it.copy(
 							title =
-							it.title.ifBlank {
-								val origin = originMap[it.id] ?: throw TagTitleBlankException()
-								origin.title
-							},
+								it.title.ifBlank {
+									val origin = originMap[it.id] ?: throw TagTitleBlankException()
+									origin.title
+								},
 						)
 					}
 

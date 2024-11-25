@@ -6,15 +6,20 @@ import io.github.taetae98coding.diary.core.model.tag.TagDetail
 import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
 import io.github.taetae98coding.diary.domain.backup.usecase.PushTagBackupQueueUseCase
 import io.github.taetae98coding.diary.domain.tag.repository.TagRepository
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 import kotlinx.coroutines.flow.first
 import kotlinx.datetime.Clock
 import org.koin.core.annotation.Factory
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
 @OptIn(ExperimentalUuidApi::class)
 @Factory
-public class AddTagUseCase internal constructor(private val getAccountUseCase: GetAccountUseCase, private val pushTagBackupQueueUseCase: PushTagBackupQueueUseCase, private val clock: Clock, private val repository: TagRepository) {
+public class AddTagUseCase internal constructor(
+	private val getAccountUseCase: GetAccountUseCase,
+	private val pushTagBackupQueueUseCase: PushTagBackupQueueUseCase,
+	private val clock: Clock,
+	private val repository: TagRepository,
+) {
 	public suspend operator fun invoke(detail: TagDetail): Result<Unit> =
 		runCatching {
 			if (detail.title.isBlank()) throw TagTitleBlankException()

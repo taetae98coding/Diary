@@ -5,4 +5,7 @@ import androidx.room.Entity
 @Entity(
 	primaryKeys = ["uid", "tagId"],
 )
-internal data class CalendarFilterEntity(val uid: String, val tagId: String)
+internal data class CalendarFilterEntity(
+	val uid: String,
+	val tagId: String,
+)

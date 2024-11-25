@@ -121,7 +121,8 @@ internal fun MemoDetailScreen(
 			onTagTitle = onTagTitle,
 			onTag = onTag,
 			tagListProvider = tagListProvider,
-			modifier = Modifier.fillMaxSize()
+			modifier = Modifier
+				.fillMaxSize()
 				.padding(it)
 				.padding(DiaryTheme.dimen.screenPaddingValues),
 		)
@@ -202,7 +203,8 @@ private fun Content(
 	modifier: Modifier = Modifier,
 ) {
 	Column(
-		modifier = Modifier.verticalScroll(state = rememberScrollState())
+		modifier = Modifier
+			.verticalScroll(state = rememberScrollState())
 			.then(modifier),
 		verticalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace),
 	) {
@@ -227,7 +229,8 @@ private fun InternalDiaryTag(
 	TagFlow(
 		title = {
 			Row(
-				modifier = Modifier.fillMaxWidth()
+				modifier = Modifier
+					.fillMaxWidth()
 					.clickable(onClick = onTitle)
 					.minimumInteractiveComponentSize()
 					.padding(horizontal = DiaryTheme.dimen.diaryHorizontalPadding),
@@ -245,7 +248,8 @@ private fun InternalDiaryTag(
 				onClick = { onTag(it.id) },
 			)
 		},
-		modifier = modifier.fillMaxWidth()
+		modifier = modifier
+			.fillMaxWidth()
 			.heightIn(min = 150.dp, max = 200.dp),
 	)
 }
@@ -258,7 +262,8 @@ private fun InternalDiaryColor(
 	Row(modifier = modifier) {
 		DiaryColor(
 			state = state.colorState,
-			modifier = Modifier.weight(1F)
+			modifier = Modifier
+				.weight(1F)
 				.height(100.dp),
 		)
 

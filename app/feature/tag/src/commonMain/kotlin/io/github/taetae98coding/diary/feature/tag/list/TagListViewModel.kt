@@ -21,7 +21,13 @@ import org.koin.android.annotation.KoinViewModel
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @KoinViewModel
-internal class TagListViewModel(pageTagUseCase: PageTagUseCase, private val finishTagUseCase: FinishTagUseCase, private val deleteTagUseCase: DeleteTagUseCase, private val restartTagUseCase: RestartTagUseCase, private val restoreTagUseCase: RestoreTagUseCase) : ViewModel() {
+internal class TagListViewModel(
+	pageTagUseCase: PageTagUseCase,
+	private val finishTagUseCase: FinishTagUseCase,
+	private val deleteTagUseCase: DeleteTagUseCase,
+	private val restartTagUseCase: RestartTagUseCase,
+	private val restoreTagUseCase: RestoreTagUseCase,
+) : ViewModel() {
 	private val _uiState =
 		MutableStateFlow(
 			TagListScreenUiState(
@@ -48,18 +54,18 @@ internal class TagListViewModel(pageTagUseCase: PageTagUseCase, private val fini
 				initialValue = null,
 			)
 
-	private fun finish(id: String) {
+	private fun finish(tagId: String) {
 		viewModelScope.launch {
-			finishTagUseCase(id)
-				.onSuccess { _uiState.update { it.copy(finishTagId = id) } }
+			finishTagUseCase(tagId)
+				.onSuccess { _uiState.update { it.copy(finishTagId = tagId) } }
 				.onFailure { _uiState.update { it.copy(isUnknownError = true) } }
 		}
 	}
 
-	private fun delete(id: String) {
+	private fun delete(tagId: String) {
 		viewModelScope.launch {
-			deleteTagUseCase(id)
-				.onSuccess { _uiState.update { it.copy(deleteTagId = id) } }
+			deleteTagUseCase(tagId)
+				.onSuccess { _uiState.update { it.copy(deleteTagId = tagId) } }
 				.onFailure { _uiState.update { it.copy(isUnknownError = true) } }
 		}
 	}

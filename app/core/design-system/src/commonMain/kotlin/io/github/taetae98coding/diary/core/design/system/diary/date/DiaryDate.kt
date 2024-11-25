@@ -56,7 +56,8 @@ private fun Title(
 	modifier: Modifier = Modifier,
 ) {
 	Row(
-		modifier = Modifier.toggleable(value = state.hasDate, onValueChange = state::onHasDateChange)
+		modifier = Modifier
+			.toggleable(value = state.hasDate, onValueChange = state::onHasDateChange)
 			.then(modifier),
 		horizontalArrangement = Arrangement.SpaceBetween,
 		verticalAlignment = Alignment.CenterVertically,

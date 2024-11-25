@@ -23,7 +23,10 @@ import org.koin.android.annotation.KoinViewModel
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @KoinViewModel
-internal class CalendarHomeViewModel(hasCalendarFilterUseCase: HasCalendarFilterUseCase, findCalendarMemoUseCase: FindCalendarMemoUseCase) : ViewModel() {
+internal class CalendarHomeViewModel(
+	hasCalendarFilterUseCase: HasCalendarFilterUseCase,
+	findCalendarMemoUseCase: FindCalendarMemoUseCase,
+) : ViewModel() {
 	private val yearAndMonth = MutableStateFlow<Pair<Int, Month>?>(null)
 
 	val hasFilter =

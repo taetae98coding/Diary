@@ -13,7 +13,9 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-public class FindTagUseCase internal constructor(private val repository: TagRepository) {
+public class FindTagUseCase internal constructor(
+	private val repository: TagRepository,
+) {
 	public operator fun invoke(tagId: String?): Flow<Result<Tag?>> {
 		if (tagId.isNullOrBlank()) return flowOf(Result.success(null))
 

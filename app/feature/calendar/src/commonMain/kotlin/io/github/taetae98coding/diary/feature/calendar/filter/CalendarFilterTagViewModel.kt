@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.github.taetae98coding.diary.core.compose.runtime.SkipProperty
 import io.github.taetae98coding.diary.domain.calendar.usecase.DeleteCalendarTagUseCase
-import io.github.taetae98coding.diary.domain.calendar.usecase.FindCalendarFilterTagUseCase
+import io.github.taetae98coding.diary.domain.calendar.usecase.FindCalendarTagFilterUseCase
 import io.github.taetae98coding.diary.domain.calendar.usecase.UpsertCalendarTagUseCase
 import io.github.taetae98coding.diary.library.coroutines.mapCollectionLatest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -16,9 +16,13 @@ import org.koin.android.annotation.KoinViewModel
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @KoinViewModel
-internal class CalendarFilterTagViewModel(findCalendarFilterTagUseCase: FindCalendarFilterTagUseCase, private val upsertCalendarTagUseCase: UpsertCalendarTagUseCase, private val deleteCalendarTagUseCase: DeleteCalendarTagUseCase) : ViewModel() {
+internal class CalendarFilterTagViewModel(
+	findCalendarTagFilterUseCase: FindCalendarTagFilterUseCase,
+	private val upsertCalendarTagUseCase: UpsertCalendarTagUseCase,
+	private val deleteCalendarTagUseCase: DeleteCalendarTagUseCase,
+) : ViewModel() {
 	val list =
-		findCalendarFilterTagUseCase()
+		findCalendarTagFilterUseCase()
 			.mapLatest { it.getOrNull() }
 			.mapCollectionLatest {
 				TagUiState(

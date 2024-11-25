@@ -2,6 +2,7 @@ package io.github.taetae98coding.diary.core.diary.database.room.dao
 
 import androidx.room.Dao
 import androidx.room.Query
+import io.github.taetae98coding.diary.core.diary.database.room.entity.MemoEntity
 import io.github.taetae98coding.diary.core.diary.database.room.entity.TagEntity
 import io.github.taetae98coding.diary.library.room.dao.EntityDao
 import kotlinx.coroutines.flow.Flow
@@ -54,6 +55,18 @@ internal abstract class TagEntityDao : EntityDao<TagEntity>() {
 		"""
 		SELECT *
 		FROM TagEntity
+		WHERE isDelete = 0
+		AND isFinish = 0
+		AND (owner = :owner OR (owner IS NULL AND :owner IS NULL))
+		ORDER BY title
+	""",
+	)
+	abstract fun page(owner: String?): Flow<List<TagEntity>>
+
+	@Query(
+		"""
+		SELECT *
+		FROM TagEntity
 		WHERE id = :tagId
 		AND (:filterNotDelete = 0 OR isDelete = 0)
 	""",
@@ -73,14 +86,18 @@ internal abstract class TagEntityDao : EntityDao<TagEntity>() {
 	@Query(
 		"""
 		SELECT *
-		FROM TagEntity
+		FROM MemoEntity
 		WHERE isDelete = 0
 		AND isFinish = 0
-		AND (owner = :owner OR (owner IS NULL AND :owner IS NULL))
+		AND id IN (
+			SELECT memoId
+			FROM MemoTagEntity
+			WHERE tagId = :tagId
+		)
 		ORDER BY title
 	""",
 	)
-	abstract fun page(owner: String?): Flow<List<TagEntity>>
+	abstract fun findMemoByTagId(tagId: String): Flow<List<MemoEntity>>
 
 	@Query("SELECT MAX(serverUpdateAt) FROM TagEntity WHERE owner = :owner")
 	abstract fun getLastUpdateAt(owner: String?): Flow<Instant?>

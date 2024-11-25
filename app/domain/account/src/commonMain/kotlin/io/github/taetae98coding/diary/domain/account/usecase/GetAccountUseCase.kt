@@ -13,7 +13,9 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-public class GetAccountUseCase(private val repository: AccountRepository) {
+public class GetAccountUseCase(
+	private val repository: AccountRepository,
+) {
 	public operator fun invoke(): Flow<Result<Account>> =
 		flow {
 			combine(

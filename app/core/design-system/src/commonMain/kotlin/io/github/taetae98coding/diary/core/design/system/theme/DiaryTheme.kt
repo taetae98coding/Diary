@@ -44,9 +44,11 @@ public fun DiaryTheme(
 		),
 		LocalDiaryTypography provides DiaryTypography(
 			headlineMedium = MaterialTheme.typography.headlineMedium,
-			labelSmall = MaterialTheme.typography.labelSmall,
-			labelMedium = MaterialTheme.typography.labelMedium,
+			titleLarge = MaterialTheme.typography.titleLarge,
+			titleMedium = MaterialTheme.typography.titleMedium,
 			labelLarge = MaterialTheme.typography.labelLarge,
+			labelMedium = MaterialTheme.typography.labelMedium,
+			labelSmall = MaterialTheme.typography.labelSmall,
 			bodySmall = MaterialTheme.typography.bodySmall,
 		),
 		LocalDiaryDimen provides DiaryDimen(),

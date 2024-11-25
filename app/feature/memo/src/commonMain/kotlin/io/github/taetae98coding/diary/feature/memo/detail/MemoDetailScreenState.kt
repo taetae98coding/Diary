@@ -21,9 +21,21 @@ internal sealed class MemoDetailScreenState {
 
 	val hostState: SnackbarHostState = SnackbarHostState()
 
-	data class Add(override val coroutineScope: CoroutineScope, override val componentState: DiaryComponentState, override val dateState: DiaryDateState, override val colorState: DiaryColorState) : MemoDetailScreenState()
+	data class Add(
+		override val coroutineScope: CoroutineScope,
+		override val componentState: DiaryComponentState,
+		override val dateState: DiaryDateState,
+		override val colorState: DiaryColorState,
+	) : MemoDetailScreenState()
 
-	data class Detail(val onDelete: () -> Unit, val onUpdate: () -> Unit, override val coroutineScope: CoroutineScope, override val componentState: DiaryComponentState, override val dateState: DiaryDateState, override val colorState: DiaryColorState) : MemoDetailScreenState()
+	data class Detail(
+		val onDelete: () -> Unit,
+		val onUpdate: () -> Unit,
+		override val coroutineScope: CoroutineScope,
+		override val componentState: DiaryComponentState,
+		override val dateState: DiaryDateState,
+		override val colorState: DiaryColorState,
+	) : MemoDetailScreenState()
 
 	val memoDetail: MemoDetail
 		get() {

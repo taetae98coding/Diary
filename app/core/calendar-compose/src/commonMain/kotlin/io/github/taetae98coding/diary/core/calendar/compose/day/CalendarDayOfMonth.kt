@@ -53,11 +53,13 @@ internal fun CalendarDayOfMonth(
 			)
 		}
 		val size = with(LocalDensity.current) {
-			DiaryTheme.typography.labelMedium.fontSize.toDp() + 16.dp
+			DiaryTheme.typography.labelMedium.fontSize
+				.toDp() + 16.dp
 		}
 
 		Box(
-			modifier = Modifier.size(size)
+			modifier = Modifier
+				.size(size)
 				.run {
 					if (isPrimary) {
 						background(color = colors.primaryColor, shape = CircleShape)

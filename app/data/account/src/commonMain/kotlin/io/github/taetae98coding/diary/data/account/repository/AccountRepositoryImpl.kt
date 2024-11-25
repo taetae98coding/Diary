@@ -6,7 +6,9 @@ import kotlinx.coroutines.flow.Flow
 import org.koin.core.annotation.Factory
 
 @Factory
-internal class AccountRepositoryImpl(private val preferencesDataSource: AccountPreferences) : AccountRepository {
+internal class AccountRepositoryImpl(
+	private val preferencesDataSource: AccountPreferences,
+) : AccountRepository {
 	override fun getEmail(): Flow<String?> = preferencesDataSource.getEmail()
 
 	override fun getUid(): Flow<String?> = preferencesDataSource.getUid()

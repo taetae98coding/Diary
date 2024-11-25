@@ -8,7 +8,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 
-public class DiaryColorState(initialColor: Color) {
+public class DiaryColorState(
+	initialColor: Color,
+) {
 	public var color: Color by mutableStateOf(initialColor)
 		private set
 

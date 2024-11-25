@@ -44,7 +44,8 @@ internal fun CalendarFilterDialog(
 			Title()
 			Content(
 				listProvider = listProvider,
-				modifier = Modifier.fillMaxWidth()
+				modifier = Modifier
+					.fillMaxWidth()
 					.heightIn(min = 100.dp),
 			)
 		}
@@ -57,7 +58,8 @@ private fun Title(
 ) {
 	Text(
 		text = "태그",
-		modifier = modifier.minimumInteractiveComponentSize()
+		modifier = modifier
+			.minimumInteractiveComponentSize()
 			.padding(horizontal = DiaryTheme.dimen.diaryHorizontalPadding),
 	)
 }
@@ -87,7 +89,8 @@ private fun Content(
 		}
 	} else {
 		FlowRow(
-			modifier = modifier.verticalScroll(rememberScrollState())
+			modifier = modifier
+				.verticalScroll(rememberScrollState())
 				.padding(DiaryTheme.dimen.itemSpace),
 			horizontalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace, Alignment.CenterHorizontally),
 			verticalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace, Alignment.CenterVertically),

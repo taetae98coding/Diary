@@ -37,7 +37,7 @@ internal fun MemoAddRoute(
 	val navigator = rememberListDetailPaneScaffoldNavigator(scaffoldDirective = calculatePaneScaffoldDirective(windowAdaptiveInfo))
 
 	ListDetailPaneScaffold(
-		directive = navigator.scaffoldDirective.copy(defaultPanePreferredWidth = 450.dp),
+		directive = navigator.scaffoldDirective.copy(defaultPanePreferredWidth = 500.dp),
 		value = navigator.scaffoldValue,
 		listPane = {
 			val state = rememberMemoDetailScreenAddState(

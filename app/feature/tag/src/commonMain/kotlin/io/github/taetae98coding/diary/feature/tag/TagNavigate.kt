@@ -5,5 +5,7 @@ internal sealed class TagNavigate {
 
 	data object Add : TagNavigate()
 
-	data class Tag(val tagId: String) : TagNavigate()
+	data class Tag(
+		val tagId: String,
+	) : TagNavigate()
 }

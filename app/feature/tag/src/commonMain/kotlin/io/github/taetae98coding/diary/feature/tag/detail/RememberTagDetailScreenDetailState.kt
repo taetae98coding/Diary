@@ -12,6 +12,7 @@ import io.github.taetae98coding.diary.core.model.tag.TagDetail
 internal fun rememberTagDetailScreenDetailState(
 	onUpdate: () -> Unit,
 	onDelete: () -> Unit,
+	onMemo: () -> Unit,
 	detailProvider: () -> TagDetail?,
 ): TagDetailScreenState.Detail {
 	val detail = detailProvider()
@@ -32,6 +33,7 @@ internal fun rememberTagDetailScreenDetailState(
 		TagDetailScreenState.Detail(
 			onUpdate = onUpdate,
 			onDelete = onDelete,
+			onMemo = onMemo,
 			coroutineScope = coroutineScope,
 			componentState = componentState,
 			colorState = colorState,

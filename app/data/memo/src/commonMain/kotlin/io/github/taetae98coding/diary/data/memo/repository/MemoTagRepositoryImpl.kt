@@ -6,7 +6,9 @@ import kotlinx.coroutines.flow.Flow
 import org.koin.core.annotation.Factory
 
 @Factory
-internal class MemoTagRepositoryImpl(private val localDataSource: MemoTagDao) : MemoTagRepository {
+internal class MemoTagRepositoryImpl(
+	private val localDataSource: MemoTagDao,
+) : MemoTagRepository {
 	override fun findTagIdsByMemoId(memoId: String): Flow<Set<String>> = localDataSource.findTagIdsByMemoId(memoId)
 
 	override suspend fun upsert(memoId: String, tagId: String) {

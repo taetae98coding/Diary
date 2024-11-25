@@ -12,7 +12,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-internal class JoinScreenState(val coroutineScope: CoroutineScope) {
+internal class JoinScreenState(
+	val coroutineScope: CoroutineScope,
+) {
 	private var messageJob: Job? = null
 	val hostState: SnackbarHostState = SnackbarHostState()
 

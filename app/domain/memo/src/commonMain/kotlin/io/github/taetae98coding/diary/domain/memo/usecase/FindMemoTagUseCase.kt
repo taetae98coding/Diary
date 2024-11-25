@@ -17,7 +17,12 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-public class FindMemoTagUseCase internal constructor(private val findMemoUseCase: FindMemoUseCase, private val pageTagUseCase: PageTagUseCase, private val memoTagRepository: MemoTagRepository, private val tagRepository: TagRepository) {
+public class FindMemoTagUseCase internal constructor(
+	private val findMemoUseCase: FindMemoUseCase,
+	private val pageTagUseCase: PageTagUseCase,
+	private val memoTagRepository: MemoTagRepository,
+	private val tagRepository: TagRepository,
+) {
 	public operator fun invoke(memoId: String?): Flow<Result<List<MemoTag>>> {
 		if (memoId.isNullOrBlank()) return flowOf(Result.success(emptyList()))
 

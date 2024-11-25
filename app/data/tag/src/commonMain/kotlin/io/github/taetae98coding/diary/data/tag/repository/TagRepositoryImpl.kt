@@ -2,7 +2,10 @@ package io.github.taetae98coding.diary.data.tag.repository
 
 import io.github.taetae98coding.diary.core.diary.database.TagDao
 import io.github.taetae98coding.diary.core.model.mapper.toDto
+import io.github.taetae98coding.diary.core.model.mapper.toMemo
 import io.github.taetae98coding.diary.core.model.mapper.toTag
+import io.github.taetae98coding.diary.core.model.memo.Memo
+import io.github.taetae98coding.diary.core.model.memo.MemoDto
 import io.github.taetae98coding.diary.core.model.tag.Tag
 import io.github.taetae98coding.diary.core.model.tag.TagDetail
 import io.github.taetae98coding.diary.core.model.tag.TagDto
@@ -15,7 +18,9 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-internal class TagRepositoryImpl(private val localDataSource: TagDao) : TagRepository {
+internal class TagRepositoryImpl(
+	private val localDataSource: TagDao,
+) : TagRepository {
 	override suspend fun upsert(tag: Tag) {
 		localDataSource.upsert(tag.toDto())
 	}
@@ -32,6 +37,10 @@ internal class TagRepositoryImpl(private val localDataSource: TagDao) : TagRepos
 		localDataSource.updateFinish(tagId, isFinish)
 	}
 
+	override fun page(owner: String?): Flow<List<Tag>> = localDataSource
+		.page(owner)
+		.mapCollectionLatest(TagDto::toTag)
+
 	override fun find(tagId: String): Flow<Tag?> = localDataSource.find(tagId, true).mapLatest { it?.toTag() }
 
 	override fun findByIds(tagIds: Set<String>): Flow<List<Tag>> =
@@ -39,8 +48,7 @@ internal class TagRepositoryImpl(private val localDataSource: TagDao) : TagRepos
 			.findByIds(tagIds, true)
 			.mapCollectionLatest(TagDto::toTag)
 
-	override fun page(owner: String?): Flow<List<Tag>> =
-		localDataSource
-			.page(owner)
-			.mapCollectionLatest(TagDto::toTag)
+	override fun findMemoByTagId(tagId: String): Flow<List<Memo>> = localDataSource
+		.findMemoByTagId(tagId)
+		.mapCollectionLatest(MemoDto::toMemo)
 }

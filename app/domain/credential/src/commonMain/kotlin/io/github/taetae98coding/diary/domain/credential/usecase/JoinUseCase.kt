@@ -6,7 +6,9 @@ import io.github.taetae98coding.diary.library.kotlin.regex.email
 import org.koin.core.annotation.Factory
 
 @Factory
-public class JoinUseCase internal constructor(private val repository: CredentialRepository) {
+public class JoinUseCase internal constructor(
+	private val repository: CredentialRepository,
+) {
 	public suspend operator fun invoke(email: String, password: String): Result<Unit> =
 		runCatching {
 			if (!email.contains(Regex.email())) throw InvalidEmailException()

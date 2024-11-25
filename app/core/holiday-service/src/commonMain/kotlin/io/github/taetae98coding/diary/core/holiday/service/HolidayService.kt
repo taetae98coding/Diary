@@ -16,7 +16,10 @@ import kotlinx.datetime.number
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromJsonElement
 
-public class HolidayService internal constructor(private val client: HttpClient, private val json: Json) {
+public class HolidayService internal constructor(
+	private val client: HttpClient,
+	private val json: Json,
+) {
 	public suspend fun findHoliday(year: Int, month: Month): List<Holiday> {
 		val response =
 			client.get("getRestDeInfo") {

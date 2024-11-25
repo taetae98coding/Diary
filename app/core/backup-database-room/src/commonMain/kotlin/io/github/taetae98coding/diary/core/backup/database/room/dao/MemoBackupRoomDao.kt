@@ -7,7 +7,9 @@ import kotlinx.coroutines.flow.Flow
 import org.koin.core.annotation.Factory
 
 @Factory
-internal class MemoBackupRoomDao(private val database: BackupDatabase) : MemoBackupDao {
+internal class MemoBackupRoomDao(
+	private val database: BackupDatabase,
+) : MemoBackupDao {
 	override suspend fun upsert(uid: String, id: String) {
 		database.memo().upsert(MemoBackupEntity(memoId = id, uid = uid))
 	}

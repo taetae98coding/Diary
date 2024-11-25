@@ -11,7 +11,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-internal class LoginScreenState(private val coroutineScope: CoroutineScope) {
+internal class LoginScreenState(
+	private val coroutineScope: CoroutineScope,
+) {
 	private var messageJob: Job? = null
 	val hostState: SnackbarHostState = SnackbarHostState()
 

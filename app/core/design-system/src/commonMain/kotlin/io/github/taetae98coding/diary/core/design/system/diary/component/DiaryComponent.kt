@@ -33,7 +33,8 @@ public fun DiaryComponent(
 		ClearTextField(
 			valueProvider = { state.title },
 			onValueChange = state::onTitleChange,
-			modifier = Modifier.fillMaxWidth()
+			modifier = Modifier
+				.fillMaxWidth()
 				.focusRequester(state.titleFocusRequester),
 			label = { Text(text = "제목") },
 			errorProvider = { state.isTitleError },
@@ -95,7 +96,8 @@ private fun DescriptionPager(
 
 			1 -> {
 				Column(
-					modifier = Modifier.fillMaxSize()
+					modifier = Modifier
+						.fillMaxSize()
 						.verticalScroll(rememberScrollState())
 						.padding(DiaryTheme.dimen.diaryPaddingValues),
 				) {

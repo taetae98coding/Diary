@@ -2,8 +2,8 @@ package io.github.taetae98coding.diary.library.koin.room
 
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import java.io.File
 import org.koin.core.component.KoinComponent
+import java.io.File
 
 public var koinRoomDefaultPath: String = System.getProperty("user.home")
 

@@ -39,22 +39,22 @@ public fun Calendar(
 	val coroutineScope = rememberCoroutineScope()
 
 	Surface(
-		modifier = modifier.onPreviewKeyEvent {
-			when {
-				!state.pagerState.isScrollInProgress && it.key == Key.DirectionRight -> {
-					coroutineScope.launch { state.animateScrollToForward() }
-					true
-				}
+		modifier = modifier
+			.onPreviewKeyEvent {
+				when {
+					!state.pagerState.isScrollInProgress && it.key == Key.DirectionRight -> {
+						coroutineScope.launch { state.animateScrollToForward() }
+						true
+					}
 
-				!state.pagerState.isScrollInProgress && it.key == Key.DirectionLeft -> {
-					coroutineScope.launch { state.animateScrollToBackward() }
-					true
-				}
+					!state.pagerState.isScrollInProgress && it.key == Key.DirectionLeft -> {
+						coroutineScope.launch { state.animateScrollToBackward() }
+						true
+					}
 
-				else -> false
-			}
-		}
-			.focusRequester(state.focusRequester)
+					else -> false
+				}
+			}.focusRequester(state.focusRequester)
 			.focusable(),
 		color = DiaryTheme.color.background,
 	) {
