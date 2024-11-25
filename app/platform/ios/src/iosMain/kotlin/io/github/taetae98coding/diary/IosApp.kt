@@ -7,18 +7,17 @@ import io.github.taetae98coding.diary.app.App
 import io.github.taetae98coding.diary.core.coroutines.AppLifecycleOwner
 import platform.UIKit.UIViewController
 
-public fun compose(): UIViewController {
-    return ComposeUIViewController {
-        App()
+public fun compose(): UIViewController =
+	ComposeUIViewController {
+		App()
 
-        LifecycleStartEffect(keys = arrayOf(AppLifecycleOwner)) {
-            AppLifecycleOwner.start()
-            onStopOrDispose { AppLifecycleOwner.stop() }
-        }
+		LifecycleStartEffect(keys = arrayOf(AppLifecycleOwner)) {
+			AppLifecycleOwner.start()
+			onStopOrDispose { AppLifecycleOwner.stop() }
+		}
 
-        LifecycleResumeEffect(keys = arrayOf(AppLifecycleOwner)) {
-            AppLifecycleOwner.resume()
-            onPauseOrDispose { AppLifecycleOwner.pause() }
-        }
-    }
-}
+		LifecycleResumeEffect(keys = arrayOf(AppLifecycleOwner)) {
+			AppLifecycleOwner.resume()
+			onPauseOrDispose { AppLifecycleOwner.pause() }
+		}
+	}

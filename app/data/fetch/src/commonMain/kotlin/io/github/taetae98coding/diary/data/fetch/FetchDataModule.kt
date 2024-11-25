@@ -5,5 +5,4 @@ import org.koin.core.annotation.Module
 
 @Module
 @ComponentScan
-public class FetchDataModule {
-}
+public class FetchDataModule

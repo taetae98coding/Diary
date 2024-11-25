@@ -47,12 +47,12 @@ compose {
                 targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
 
                 packageName = "Diary"
-                packageVersion = "1.2.0"
+                packageVersion = "1.2.1"
 
                 macOS {
                     appStore = true
 
-                    bundleID = "io.github.taetae98coding.diary"
+                    bundleID = "io.github.taetae98coding.diary.jvm"
                     iconFile.set(rootProject.file("asset/icon/app_icon_mac.icns"))
                 }
             }

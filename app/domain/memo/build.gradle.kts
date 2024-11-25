@@ -8,6 +8,7 @@ kotlin {
             dependencies {
                 implementation(project(":app:domain:account"))
                 implementation(project(":app:domain:backup"))
+                implementation(project(":app:domain:tag"))
             }
         }
     }

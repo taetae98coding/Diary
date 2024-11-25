@@ -11,31 +11,33 @@ import kotlin.math.abs
 import org.koin.core.annotation.Factory
 
 @Factory
-internal class DefaultNotificationManager(
-    private val context: Context,
-) {
-    fun notify(title: String, description: String?) {
-        if (context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) return
+internal class DefaultNotificationManager(private val context: Context) {
+	fun notify(title: String, description: String?) {
+		if (context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) return
 
-        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_android_black_24dp)
-            .setContentTitle(title)
-            .setContentText(description)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .build()
+		val notification =
+			NotificationCompat
+				.Builder(context, CHANNEL_ID)
+				.setSmallIcon(R.drawable.ic_android_black_24dp)
+				.setContentTitle(title)
+				.setContentText(description)
+				.setPriority(NotificationCompat.PRIORITY_DEFAULT)
+				.build()
 
-        val channel = NotificationChannelCompat.Builder(CHANNEL_ID, NotificationManagerCompat.IMPORTANCE_LOW)
-            .setName(context.getString(R.string.default_channel_name))
-            .setDescription(context.getString(R.string.default_channel_description))
-            .build()
+		val channel =
+			NotificationChannelCompat
+				.Builder(CHANNEL_ID, NotificationManagerCompat.IMPORTANCE_LOW)
+				.setName(context.getString(R.string.default_channel_name))
+				.setDescription(context.getString(R.string.default_channel_description))
+				.build()
 
-        val manager = NotificationManagerCompat.from(context)
+		val manager = NotificationManagerCompat.from(context)
 
-        manager.createNotificationChannel(channel)
-        manager.notify(abs(System.currentTimeMillis().toInt()), notification)
-    }
+		manager.createNotificationChannel(channel)
+		manager.notify(abs(System.currentTimeMillis().toInt()), notification)
+	}
 
-    companion object {
-        const val CHANNEL_ID = "Diary"
-    }
+	companion object {
+		const val CHANNEL_ID = "Diary"
+	}
 }

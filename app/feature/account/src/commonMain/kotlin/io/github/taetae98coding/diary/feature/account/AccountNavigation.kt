@@ -9,17 +9,17 @@ import io.github.taetae98coding.diary.feature.account.join.JoinRoute
 import io.github.taetae98coding.diary.feature.account.login.LoginRoute
 
 public fun NavGraphBuilder.accountNavigation(
-    navController: NavController,
+	navController: NavController,
 ) {
-    composable<JoinDestination> {
-        JoinRoute(
-            navigateUp = navController::popBackStack,
-        )
-    }
+	composable<JoinDestination> {
+		JoinRoute(
+			navigateUp = navController::popBackStack,
+		)
+	}
 
-    composable<LoginDestination> {
-        LoginRoute(
-            navigateUp = navController::popBackStack,
-        )
-    }
+	composable<LoginDestination> {
+		LoginRoute(
+			navigateUp = navController::popBackStack,
+		)
+	}
 }

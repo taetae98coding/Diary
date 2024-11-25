@@ -9,9 +9,8 @@ import org.koin.core.component.KoinComponent
 @Module
 @ComponentScan
 public class HolidayRoomDatabaseModule : KoinComponent {
-    @Singleton
-    internal fun providesHolidayDatabase(): HolidayDatabase {
-        return getDatabaseBuilder<HolidayDatabase>("holiday.db")
-            .build()
-    }
+	@Singleton
+	internal fun providesHolidayDatabase(): HolidayDatabase =
+		getDatabaseBuilder<HolidayDatabase>("holiday.db")
+			.build()
 }

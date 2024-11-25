@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.Month
 
 public interface HolidayDao {
-    public fun findHoliday(year: Int, month: Month): Flow<List<Holiday>>
+	public fun findHoliday(year: Int, month: Month): Flow<List<Holiday>>
 
-    public suspend fun upsert(year: Int, month: Month, holidayList: List<Holiday>)
+	public suspend fun upsert(year: Int, month: Month, holidayList: List<Holiday>)
 }

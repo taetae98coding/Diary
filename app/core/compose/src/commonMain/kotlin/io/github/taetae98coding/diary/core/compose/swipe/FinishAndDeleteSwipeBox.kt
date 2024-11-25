@@ -20,72 +20,72 @@ import io.github.taetae98coding.diary.core.design.system.theme.DiaryTheme
 
 @Composable
 public fun FinishAndDeleteSwipeBox(
-    modifier: Modifier = Modifier,
-    onFinish: () -> Unit,
-    onDelete: () -> Unit,
-    content: @Composable () -> Unit,
+	modifier: Modifier = Modifier,
+	onFinish: () -> Unit,
+	onDelete: () -> Unit,
+	content: @Composable () -> Unit,
 ) {
-    val state = rememberSwipeToDismissBoxState(
-        confirmValueChange = {
-            when(it) {
-                SwipeToDismissBoxValue.StartToEnd -> onFinish()
-                SwipeToDismissBoxValue.EndToStart -> onDelete()
-                else -> Unit
-            }
+	val state = rememberSwipeToDismissBoxState(
+		confirmValueChange = {
+			when (it) {
+				SwipeToDismissBoxValue.StartToEnd -> onFinish()
+				SwipeToDismissBoxValue.EndToStart -> onDelete()
+				else -> Unit
+			}
 
-            true
-        },
-    )
+			true
+		},
+	)
 
-    SwipeToDismissBox(
-        state = state,
-        backgroundContent = {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize(),
-            ) {
-                val scale by animateFloatAsState(
-                    targetValue = if (state.targetValue == SwipeToDismissBoxValue.Settled) {
-                        0.5F
-                    } else {
-                        1.4F
-                    },
-                )
+	SwipeToDismissBox(
+		state = state,
+		backgroundContent = {
+			Box(
+				modifier = Modifier
+					.fillMaxSize(),
+			) {
+				val scale by animateFloatAsState(
+					targetValue = if (state.targetValue == SwipeToDismissBoxValue.Settled) {
+						0.5F
+					} else {
+						1.4F
+					},
+				)
 
-                Box(
-                    modifier = Modifier.align(Alignment.CenterStart)
-                        .padding(horizontal = 4.dp)
-                        .graphicsLayer {
-                            scaleX = scale
-                            scaleY = scale
-                        },
-                ) {
-                    if (state.targetValue == SwipeToDismissBoxValue.Settled) {
-                        CircleIcon()
-                    } else if (state.targetValue == SwipeToDismissBoxValue.StartToEnd) {
-                        FinishIcon(tint = DiaryTheme.color.primary)
-                    }
-                }
+				Box(
+					modifier = Modifier.align(Alignment.CenterStart)
+						.padding(horizontal = 4.dp)
+						.graphicsLayer {
+							scaleX = scale
+							scaleY = scale
+						},
+				) {
+					if (state.targetValue == SwipeToDismissBoxValue.Settled) {
+						CircleIcon()
+					} else if (state.targetValue == SwipeToDismissBoxValue.StartToEnd) {
+						FinishIcon(tint = DiaryTheme.color.primary)
+					}
+				}
 
-                Box(
-                    modifier = Modifier.align(Alignment.CenterEnd)
-                        .padding(horizontal = 4.dp)
-                        .graphicsLayer {
-                            scaleX = scale
-                            scaleY = scale
-                        },
-                ) {
-                    if (state.targetValue == SwipeToDismissBoxValue.Settled) {
-                        CircleIcon()
-                    } else if (state.targetValue == SwipeToDismissBoxValue.EndToStart) {
-                        DeleteIcon(tint = DiaryTheme.color.secondary)
-                    }
-                }
-            }
-        },
-        modifier = modifier,
-        content = {
-            content()
-        },
-    )
+				Box(
+					modifier = Modifier.align(Alignment.CenterEnd)
+						.padding(horizontal = 4.dp)
+						.graphicsLayer {
+							scaleX = scale
+							scaleY = scale
+						},
+				) {
+					if (state.targetValue == SwipeToDismissBoxValue.Settled) {
+						CircleIcon()
+					} else if (state.targetValue == SwipeToDismissBoxValue.EndToStart) {
+						DeleteIcon(tint = DiaryTheme.color.secondary)
+					}
+				}
+			}
+		},
+		modifier = modifier,
+		content = {
+			content()
+		},
+	)
 }

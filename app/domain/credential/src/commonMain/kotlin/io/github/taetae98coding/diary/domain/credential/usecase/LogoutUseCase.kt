@@ -6,16 +6,11 @@ import io.github.taetae98coding.diary.domain.fcm.usecase.UpdateFCMTokenUseCase
 import org.koin.core.annotation.Factory
 
 @Factory
-public class LogoutUseCase internal constructor(
-    private val repository: CredentialRepository,
-    private val backupUseCase: BackupUseCase,
-    private val updateFCMTokenUseCase: UpdateFCMTokenUseCase,
-) {
-    public suspend operator fun invoke(): Result<Unit> {
-        return runCatching {
-            backupUseCase()
-            repository.clear()
-            updateFCMTokenUseCase()
-        }
-    }
+public class LogoutUseCase internal constructor(private val repository: CredentialRepository, private val backupUseCase: BackupUseCase, private val updateFCMTokenUseCase: UpdateFCMTokenUseCase) {
+	public suspend operator fun invoke(): Result<Unit> =
+		runCatching {
+			backupUseCase()
+			repository.clear()
+			updateFCMTokenUseCase()
+		}
 }

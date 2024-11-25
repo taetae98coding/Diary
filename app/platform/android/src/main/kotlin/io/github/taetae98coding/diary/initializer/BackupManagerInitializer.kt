@@ -7,17 +7,17 @@ import io.github.taetae98coding.diary.app.manager.BackupManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-public class BackupManagerInitializer : Initializer<BackupManager>, KoinComponent {
-    private val manager by inject<BackupManager>()
-    private val appLifecycleOwner by inject<LifecycleOwner>()
+public class BackupManagerInitializer :
+	Initializer<BackupManager>,
+	KoinComponent {
+	private val manager by inject<BackupManager>()
+	private val appLifecycleOwner by inject<LifecycleOwner>()
 
-    override fun create(context: Context): BackupManager {
-        manager.attach(appLifecycleOwner)
+	override fun create(context: Context): BackupManager {
+		manager.attach(appLifecycleOwner)
 
-        return manager
-    }
+		return manager
+	}
 
-    override fun dependencies(): MutableList<Class<out Initializer<*>>> {
-        return mutableListOf(KoinInitializer::class.java)
-    }
+	override fun dependencies(): MutableList<Class<out Initializer<*>>> = mutableListOf(KoinInitializer::class.java)
 }

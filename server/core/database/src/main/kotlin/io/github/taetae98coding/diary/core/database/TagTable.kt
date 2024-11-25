@@ -53,6 +53,7 @@ public data object TagTable : Table(name = "Tag") {
 	public fun findByUpdateAt(uid: String, updateAt: Instant): List<Tag> =
 		selectAll()
 			.where { (OWNER eq uid) and (UPDATE_AT greater updateAt) }
+			.orderBy(UPDATE_AT)
 			.limit(50)
 			.map { it.toTag() }
 

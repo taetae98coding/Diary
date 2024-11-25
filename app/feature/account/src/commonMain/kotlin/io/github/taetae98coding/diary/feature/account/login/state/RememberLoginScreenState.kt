@@ -6,9 +6,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 
 @Composable
 internal fun rememberLoginScreenState(): LoginScreenState {
-    val coroutineScope = rememberCoroutineScope()
+	val coroutineScope = rememberCoroutineScope()
 
-    return rememberSaveable(saver = LoginScreenState.saver(coroutineScope = coroutineScope)) {
-        LoginScreenState(coroutineScope = coroutineScope)
-    }
+	return rememberSaveable(saver = LoginScreenState.saver(coroutineScope = coroutineScope)) {
+		LoginScreenState(coroutineScope = coroutineScope)
+	}
 }

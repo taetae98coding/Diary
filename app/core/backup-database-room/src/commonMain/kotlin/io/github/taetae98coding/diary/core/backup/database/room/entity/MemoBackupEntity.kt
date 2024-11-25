@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 internal data class MemoBackupEntity(
-    @PrimaryKey
-    val memoId: String,
-    val uid: String,
+	@PrimaryKey
+	val memoId: String,
+	val uid: String,
 )

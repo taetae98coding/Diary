@@ -8,18 +8,18 @@ import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.isSuccess
 
-internal suspend inline fun <reified T> HttpResponse.getOrThrow(): T {
-    return if (status.isSuccess()) {
-        val body = body<DiaryResponse<T>>()
+internal suspend inline fun <reified T> HttpResponse.getOrThrow(): T =
+	if (status.isSuccess()) {
+		val body = body<DiaryResponse<T>>()
 
-        requireNotNull(body.body)
-    } else {
-        val exception = when (val errorBody = body<DiaryResponse<Unit>>()) {
-            DiaryResponse.AlreadyExistEmail -> ExistEmailException()
-            DiaryResponse.AccountNotFound -> AccountNotFoundException()
-            else -> ApiException(errorBody.message)
-        }
+		requireNotNull(body.body)
+	} else {
+		val exception =
+			when (val errorBody = body<DiaryResponse<Unit>>()) {
+				DiaryResponse.AlreadyExistEmail -> ExistEmailException()
+				DiaryResponse.AccountNotFound -> AccountNotFoundException()
+				else -> ApiException(errorBody.message)
+			}
 
-        throw exception
-    }
-}
+		throw exception
+	}

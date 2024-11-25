@@ -14,20 +14,22 @@ import org.koin.core.annotation.Named
 
 @Factory
 public class FCMService internal constructor(
-    @Named(DiaryServiceModule.DIARY_CLIENT)
-    private val client: HttpClient,
+	@Named(DiaryServiceModule.DIARY_CLIENT)
+	private val client: HttpClient,
 ) {
-    public suspend fun upsert(token: String) {
-        return client.post("/fcm/upsert") {
-            contentType(ContentType.Application.Json)
-            setBody(UpsertFCMRequest(token))
-        }.getOrThrow()
-    }
+	public suspend fun upsert(token: String) {
+		client
+			.post("/fcm/upsert") {
+				contentType(ContentType.Application.Json)
+				setBody(UpsertFCMRequest(token))
+			}.getOrThrow<Unit>()
+	}
 
-    public suspend fun delete(token: String) {
-        return client.post("/fcm/delete") {
-            contentType(ContentType.Application.Json)
-            setBody(DeleteFCMRequest(token))
-        }.getOrThrow()
-    }
+	public suspend fun delete(token: String) {
+		client
+			.post("/fcm/delete") {
+				contentType(ContentType.Application.Json)
+				setBody(DeleteFCMRequest(token))
+			}.getOrThrow<Unit>()
+	}
 }

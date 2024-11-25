@@ -9,19 +9,19 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 internal fun LoginRoute(
-    navigateUp: () -> Unit,
-    modifier: Modifier = Modifier,
-    viewModel: LoginViewModel = koinViewModel(),
+	navigateUp: () -> Unit,
+	modifier: Modifier = Modifier,
+	viewModel: LoginViewModel = koinViewModel(),
 ) {
-    val state = rememberLoginScreenState()
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+	val state = rememberLoginScreenState()
+	val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    LoginScreen(
-        state = state,
-        onNavigateUp = navigateUp,
-        onLogin = { viewModel.login(state.email, state.password) },
-        uiStateProvider = { uiState },
-        onLoginFinish = navigateUp,
-        modifier = modifier,
-    )
+	LoginScreen(
+		state = state,
+		onNavigateUp = navigateUp,
+		onLogin = { viewModel.login(state.email, state.password) },
+		uiStateProvider = { uiState },
+		onLoginFinish = navigateUp,
+		modifier = modifier,
+	)
 }

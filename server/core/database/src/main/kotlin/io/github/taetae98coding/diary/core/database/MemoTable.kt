@@ -63,6 +63,7 @@ public data object MemoTable : Table(name = "Memo") {
 	public fun findByUpdateAt(uid: String, updateAt: Instant): List<Memo> =
 		selectAll()
 			.where { (OWNER eq uid) and (UPDATE_AT greater updateAt) }
+			.orderBy(UPDATE_AT)
 			.limit(50)
 			.map { it.toMemo() }
 

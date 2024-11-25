@@ -6,30 +6,30 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 
 @Entity(
-    indices = [
-        Index("memoId"), Index("tagId"),
-    ],
-    primaryKeys = ["memoId", "tagId"],
-    foreignKeys = [
-        ForeignKey(
-            entity = MemoEntity::class,
-            parentColumns = ["id"],
-            childColumns = ["memoId"],
-            onDelete = ForeignKey.CASCADE,
-            onUpdate = ForeignKey.CASCADE,
-        ),
-        ForeignKey(
-            entity = TagEntity::class,
-            parentColumns = ["id"],
-            childColumns = ["tagId"],
-            onDelete = ForeignKey.CASCADE,
-            onUpdate = ForeignKey.CASCADE,
-        ),
-    ],
+	indices = [
+		Index("memoId"), Index("tagId"),
+	],
+	primaryKeys = ["memoId", "tagId"],
+	foreignKeys = [
+		ForeignKey(
+			entity = MemoEntity::class,
+			parentColumns = ["id"],
+			childColumns = ["memoId"],
+			onDelete = ForeignKey.CASCADE,
+			onUpdate = ForeignKey.CASCADE,
+		),
+		ForeignKey(
+			entity = TagEntity::class,
+			parentColumns = ["id"],
+			childColumns = ["tagId"],
+			onDelete = ForeignKey.CASCADE,
+			onUpdate = ForeignKey.CASCADE,
+		),
+	],
 )
 internal data class MemoTagEntity(
-    @ColumnInfo(defaultValue = "")
-    val memoId: String,
-    @ColumnInfo(defaultValue = "")
-    val tagId: String,
+	@ColumnInfo(defaultValue = "")
+	val memoId: String,
+	@ColumnInfo(defaultValue = "")
+	val tagId: String,
 )

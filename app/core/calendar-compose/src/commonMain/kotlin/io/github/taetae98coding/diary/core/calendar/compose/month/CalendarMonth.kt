@@ -14,56 +14,56 @@ import kotlinx.datetime.LocalDate
 
 @Composable
 internal fun CalendarMonth(
-    state: CalendarMonthState,
-    primaryDateListProvider: () -> List<LocalDate>,
-    textItemListProvider: () -> List<CalendarItemUiState.Text>,
-    holidayListProvider: () -> List<CalendarItemUiState.Holiday>,
-    onCalendarItemClick: (Any) -> Unit,
-    modifier: Modifier = Modifier,
-    colors: CalendarColors = CalendarDefaults.colors(),
+	state: CalendarMonthState,
+	primaryDateListProvider: () -> List<LocalDate>,
+	textItemListProvider: () -> List<CalendarItemUiState.Text>,
+	holidayListProvider: () -> List<CalendarItemUiState.Holiday>,
+	onCalendarItemClick: (Any) -> Unit,
+	modifier: Modifier = Modifier,
+	colors: CalendarColors = CalendarDefaults.colors(),
 ) {
-    Column(modifier = modifier) {
-        val weekModifier = Modifier.weight(1F)
+	Column(modifier = modifier) {
+		val weekModifier = Modifier.weight(1F)
 
-        repeat(6) { weekOfMonth ->
-            val weekState = remember {
-                CalendarWeekState(
-                    year = state.year,
-                    month = state.month,
-                    weekOfMonth = weekOfMonth,
-                )
-            }
+		repeat(6) { weekOfMonth ->
+			val weekState = remember {
+				CalendarWeekState(
+					year = state.year,
+					month = state.month,
+					weekOfMonth = weekOfMonth,
+				)
+			}
 
-            CalendarWeek(
-                state = weekState,
-                primaryDateListProvider = primaryDateListProvider,
-                textItemListProvider = textItemListProvider,
-                holidayListProvider = holidayListProvider,
-                onCalendarItemClick = onCalendarItemClick,
-                modifier = weekModifier,
-                colors = colors,
-            )
+			CalendarWeek(
+				state = weekState,
+				primaryDateListProvider = primaryDateListProvider,
+				textItemListProvider = textItemListProvider,
+				holidayListProvider = holidayListProvider,
+				onCalendarItemClick = onCalendarItemClick,
+				modifier = weekModifier,
+				colors = colors,
+			)
 
-            Drag(
-                state = state,
-                weekState = weekState,
-            )
-        }
-    }
+			Drag(
+				state = state,
+				weekState = weekState,
+			)
+		}
+	}
 }
 
 @Composable
 private fun Drag(
-    state: CalendarMonthState,
-    weekState: CalendarWeekState,
+	state: CalendarMonthState,
+	weekState: CalendarWeekState,
 ) {
-    val currentSelectedDateRange = state.selectedDateRange
+	val currentSelectedDateRange = state.selectedDateRange
 
-    LaunchedEffect(currentSelectedDateRange) {
-        if (currentSelectedDateRange == null) {
-            weekState.finishDrag()
-        } else {
-            weekState.drag(currentSelectedDateRange)
-        }
-    }
+	LaunchedEffect(currentSelectedDateRange) {
+		if (currentSelectedDateRange == null) {
+			weekState.finishDrag()
+		} else {
+			weekState.drag(currentSelectedDateRange)
+		}
+	}
 }

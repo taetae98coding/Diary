@@ -9,9 +9,8 @@ import org.koin.core.component.KoinComponent
 @Module
 @ComponentScan
 public class BackupRoomDatabaseModule : KoinComponent {
-    @Singleton
-    internal fun providesDiaryDatabase(): BackupDatabase {
-        return getDatabaseBuilder<BackupDatabase>("backup.db")
-            .build()
-    }
+	@Singleton
+	internal fun providesDiaryDatabase(): BackupDatabase =
+		getDatabaseBuilder<BackupDatabase>("backup.db")
+			.build()
 }

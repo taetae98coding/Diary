@@ -25,54 +25,54 @@ import kotlinx.datetime.LocalDate
 
 @Composable
 internal fun CalendarDayOfMonth(
-    state: CalendarDayOfMonthState,
-    primaryDateListProvider: () -> List<LocalDate>,
-    holidayListProvider: () -> List<CalendarItemUiState.Holiday>,
-    modifier: Modifier = Modifier,
-    colors: CalendarColors = CalendarDefaults.colors(),
+	state: CalendarDayOfMonthState,
+	primaryDateListProvider: () -> List<LocalDate>,
+	holidayListProvider: () -> List<CalendarItemUiState.Holiday>,
+	modifier: Modifier = Modifier,
+	colors: CalendarColors = CalendarDefaults.colors(),
 ) {
-    val isPrimary by remember { derivedStateOf { state.localDate in primaryDateListProvider() } }
-    val isHoliday by remember { derivedStateOf { holidayListProvider().any { state.localDate in it } } }
+	val isPrimary by remember { derivedStateOf { state.localDate in primaryDateListProvider() } }
+	val isHoliday by remember { derivedStateOf { holidayListProvider().any { state.localDate in it } } }
 
-    Box(
-        modifier = modifier,
-        contentAlignment = Alignment.Center,
-    ) {
-        val color = when {
-            isPrimary -> colors.onPrimaryColor
-            state.dayOfWeek == DayOfWeek.SUNDAY || isHoliday -> colors.sundayColor
-            state.dayOfWeek == DayOfWeek.SATURDAY -> colors.saturdayColor
-            else -> colors.dayColor.takeOrElse { LocalContentColor.current }
-        }.run {
-            copy(
-                alpha = alpha * if (isPrimary || state.isInMonth) {
-                    1F
-                } else {
-                    0.38F
-                },
-            )
-        }
-        val size = with(LocalDensity.current) {
-            DiaryTheme.typography.labelMedium.fontSize.toDp() + 16.dp
-        }
+	Box(
+		modifier = modifier,
+		contentAlignment = Alignment.Center,
+	) {
+		val color = when {
+			isPrimary -> colors.onPrimaryColor
+			state.dayOfWeek == DayOfWeek.SUNDAY || isHoliday -> colors.sundayColor
+			state.dayOfWeek == DayOfWeek.SATURDAY -> colors.saturdayColor
+			else -> colors.dayColor.takeOrElse { LocalContentColor.current }
+		}.run {
+			copy(
+				alpha = alpha * if (isPrimary || state.isInMonth) {
+					1F
+				} else {
+					0.38F
+				},
+			)
+		}
+		val size = with(LocalDensity.current) {
+			DiaryTheme.typography.labelMedium.fontSize.toDp() + 16.dp
+		}
 
-        Box(
-            modifier = Modifier.size(size)
-                .run {
-                    if (isPrimary) {
-                        background(color = colors.primaryColor, shape = CircleShape)
-                    } else {
-                        this
-                    }
-                },
-            contentAlignment = Alignment.Center,
-        ) {
-            Text(
-                text = state.localDate.dayOfMonth.toString(),
-                color = color,
-                textAlign = TextAlign.Center,
-                style = DiaryTheme.typography.labelMedium,
-            )
-        }
-    }
+		Box(
+			modifier = Modifier.size(size)
+				.run {
+					if (isPrimary) {
+						background(color = colors.primaryColor, shape = CircleShape)
+					} else {
+						this
+					}
+				},
+			contentAlignment = Alignment.Center,
+		) {
+			Text(
+				text = state.localDate.dayOfMonth.toString(),
+				color = color,
+				textAlign = TextAlign.Center,
+				style = DiaryTheme.typography.labelMedium,
+			)
+		}
+	}
 }

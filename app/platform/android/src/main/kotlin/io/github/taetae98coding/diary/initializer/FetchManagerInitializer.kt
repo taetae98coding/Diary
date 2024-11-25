@@ -7,17 +7,17 @@ import io.github.taetae98coding.diary.app.manager.FetchManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-public class FetchManagerInitializer : Initializer<FetchManager>, KoinComponent {
-    private val manager by inject<FetchManager>()
-    private val appLifecycleOwner by inject<LifecycleOwner>()
+public class FetchManagerInitializer :
+	Initializer<FetchManager>,
+	KoinComponent {
+	private val manager by inject<FetchManager>()
+	private val appLifecycleOwner by inject<LifecycleOwner>()
 
-    override fun create(context: Context): FetchManager {
-        manager.attach(appLifecycleOwner)
+	override fun create(context: Context): FetchManager {
+		manager.attach(appLifecycleOwner)
 
-        return manager
-    }
+		return manager
+	}
 
-    override fun dependencies(): MutableList<Class<out Initializer<*>>> {
-        return mutableListOf(KoinInitializer::class.java)
-    }
+	override fun dependencies(): MutableList<Class<out Initializer<*>>> = mutableListOf(KoinInitializer::class.java)
 }

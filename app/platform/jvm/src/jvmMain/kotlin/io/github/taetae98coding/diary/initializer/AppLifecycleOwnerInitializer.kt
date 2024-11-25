@@ -5,9 +5,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 internal suspend fun initAppLifecycleOwner(): AppLifecycleOwner {
-    withContext(Dispatchers.Main.immediate) {
-        AppLifecycleOwner.create()
-    }
+	withContext(Dispatchers.Main.immediate) {
+		AppLifecycleOwner.create()
+	}
 
-    return AppLifecycleOwner
+	return AppLifecycleOwner
 }

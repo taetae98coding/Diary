@@ -6,18 +6,15 @@ import androidx.compose.runtime.setValue
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month
 
-internal class CalendarMonthState(
-    val year: Int,
-    val month: Month,
-) {
-    var selectedDateRange: ClosedRange<LocalDate>? by mutableStateOf(null)
-        private set
+internal class CalendarMonthState(val year: Int, val month: Month) {
+	var selectedDateRange: ClosedRange<LocalDate>? by mutableStateOf(null)
+		private set
 
-    fun drag(dateRange: ClosedRange<LocalDate>) {
-        selectedDateRange = dateRange
-    }
+	fun drag(dateRange: ClosedRange<LocalDate>) {
+		selectedDateRange = dateRange
+	}
 
-    fun finishDrag() {
-        selectedDateRange = null
-    }
+	fun finishDrag() {
+		selectedDateRange = null
+	}
 }

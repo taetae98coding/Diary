@@ -6,11 +6,11 @@ import androidx.compose.runtime.saveable.rememberSaveable
 
 @Composable
 internal fun rememberJoinScreenState(): JoinScreenState {
-    val coroutineScope = rememberCoroutineScope()
+	val coroutineScope = rememberCoroutineScope()
 
-    return rememberSaveable(
-        saver = JoinScreenState.saver(coroutineScope),
-    ) {
-        JoinScreenState(coroutineScope)
-    }
+	return rememberSaveable(
+		saver = JoinScreenState.saver(coroutineScope),
+	) {
+		JoinScreenState(coroutineScope)
+	}
 }

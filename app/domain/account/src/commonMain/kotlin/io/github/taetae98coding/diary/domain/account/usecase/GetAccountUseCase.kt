@@ -13,27 +13,24 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-public class GetAccountUseCase(
-    private val repository: AccountRepository
-) {
-    public operator fun invoke(): Flow<Result<Account>> {
-        return flow {
-            combine(
-                repository.getEmail(),
-                repository.getUid()
-            ) { email, uid ->
-                if (email == null || uid == null) {
-                    Account.Guest
-                } else {
-                    Account.Member(email, uid)
-                }
-            }.also {
-                emitAll(it)
-            }
-        }.mapLatest {
-            Result.success(it)
-        }.catch {
-            emit(Result.failure(it))
-        }
-    }
+public class GetAccountUseCase(private val repository: AccountRepository) {
+	public operator fun invoke(): Flow<Result<Account>> =
+		flow {
+			combine(
+				repository.getEmail(),
+				repository.getUid(),
+			) { email, uid ->
+				if (email == null || uid == null) {
+					Account.Guest
+				} else {
+					Account.Member(email, uid)
+				}
+			}.also {
+				emitAll(it)
+			}
+		}.mapLatest {
+			Result.success(it)
+		}.catch {
+			emit(Result.failure(it))
+		}
 }

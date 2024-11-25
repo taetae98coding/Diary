@@ -8,11 +8,11 @@ import io.github.taetae98coding.diary.core.holiday.database.room.internal.Holida
 import io.github.taetae98coding.diary.library.room.LocalDataConverter
 
 @Database(
-    entities = [HolidayEntity::class],
-    version = 1,
+	entities = [HolidayEntity::class],
+	version = 1,
 )
 @ConstructedBy(HolidayDatabaseConstructor::class)
 @TypeConverters(LocalDataConverter::class)
 internal abstract class HolidayDatabase : RoomDatabase() {
-    abstract fun holidayDao(): HolidayEntityDao
+	abstract fun holidayDao(): HolidayEntityDao
 }

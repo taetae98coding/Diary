@@ -9,40 +9,40 @@ import io.github.taetae98coding.diary.feature.more.account.state.MoreAccountUiSt
 @Composable
 @DiaryPreview
 private fun LoadingPreview() {
-    DiaryTheme {
-        MoreAccount(
-            uiStateProvider = { MoreAccountUiState.Loading },
-            onLogin = {},
-            onJoin = {},
-        )
-    }
+	DiaryTheme {
+		MoreAccount(
+			uiStateProvider = { MoreAccountUiState.Loading },
+			onLogin = {},
+			onJoin = {},
+		)
+	}
 }
 
 @Composable
 @DiaryPreview
 private fun GuestPreview() {
-    DiaryTheme {
-        MoreAccount(
-            uiStateProvider = { MoreAccountUiState.Guest },
-            onLogin = {},
-            onJoin = {},
-        )
-    }
+	DiaryTheme {
+		MoreAccount(
+			uiStateProvider = { MoreAccountUiState.Guest },
+			onLogin = {},
+			onJoin = {},
+		)
+	}
 }
 
 @Composable
 @DiaryPreview
 private fun MemberPreview() {
-    DiaryTheme {
-        MoreAccount(
-            uiStateProvider = {
-                MoreAccountUiState.Member(
-                    email = "taetae98coding@gmail.com",
-                    logout = {},
-                )
-            },
-            onLogin = {},
-            onJoin = {},
-        )
-    }
+	DiaryTheme {
+		MoreAccount(
+			uiStateProvider = {
+				MoreAccountUiState.Member(
+					email = "taetae98coding@gmail.com",
+					logout = {},
+				)
+			},
+			onLogin = {},
+			onJoin = {},
+		)
+	}
 }

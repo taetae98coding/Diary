@@ -18,48 +18,53 @@ import org.koin.core.annotation.Named
 
 @Factory
 public class TagService internal constructor(
-    @Named(DiaryServiceModule.DIARY_CLIENT)
-    private val client: HttpClient,
+	@Named(DiaryServiceModule.DIARY_CLIENT)
+	private val client: HttpClient,
 ) {
-    public suspend fun upsert(list: List<TagDto>) {
-        return client.post("/tag/upsert") {
-            val body = list.map {
-                TagEntity(
-                    id = it.id,
-                    title = it.detail.title,
-                    description = it.detail.description,
-                    color = it.detail.color,
-                    owner = requireNotNull(it.owner),
-                    isFinish = it.isFinish,
-                    isDelete = it.isDelete,
-                    updateAt = it.updateAt,
-                )
-            }
+	public suspend fun upsert(list: List<TagDto>) {
+		client
+			.post("/tag/upsert") {
+				val body =
+					list.map {
+						TagEntity(
+							id = it.id,
+							title = it.detail.title,
+							description = it.detail.description,
+							color = it.detail.color,
+							owner = requireNotNull(it.owner),
+							isFinish = it.isFinish,
+							isDelete = it.isDelete,
+							updateAt = it.updateAt,
+						)
+					}
 
-            contentType(ContentType.Application.Json)
-            setBody(body)
-        }.getOrThrow()
-    }
+				contentType(ContentType.Application.Json)
+				setBody(body)
+			}.getOrThrow<Unit>()
+	}
 
-    public suspend fun fetch(updateAt: Instant): List<TagDto> {
-        val response = client.get("/tag/fetch") {
-            parameter("updateAt", updateAt)
-        }.getOrThrow<List<TagEntity>>()
+	public suspend fun fetch(updateAt: Instant): List<TagDto> {
+		val response =
+			client
+				.get("/tag/fetch") {
+					parameter("updateAt", updateAt)
+				}.getOrThrow<List<TagEntity>>()
 
-        return response.map {
-            TagDto(
-                id = it.id,
-                detail = TagDetail(
-                    title = it.title,
-                    description = it.description,
-                    color = it.color,
-                ),
-                owner = it.owner,
-                isFinish = it.isFinish,
-                isDelete = it.isDelete,
-                updateAt = it.updateAt,
-                serverUpdateAt = it.updateAt,
-            )
-        }
-    }
+		return response.map {
+			TagDto(
+				id = it.id,
+				detail =
+					TagDetail(
+						title = it.title,
+						description = it.description,
+						color = it.color,
+					),
+				owner = it.owner,
+				isFinish = it.isFinish,
+				isDelete = it.isDelete,
+				updateAt = it.updateAt,
+				serverUpdateAt = it.updateAt,
+			)
+		}
+	}
 }

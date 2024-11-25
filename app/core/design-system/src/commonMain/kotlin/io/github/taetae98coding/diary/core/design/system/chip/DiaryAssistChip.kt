@@ -15,32 +15,32 @@ import androidx.compose.ui.unit.Dp
 
 @Composable
 public fun DiaryAssistChip(
-    onClick: () -> Unit,
-    label: @Composable () -> Unit,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null,
-    shape: Shape = AssistChipDefaults.shape,
-    colors: ChipColors = AssistChipDefaults.assistChipColors(),
-    elevation: ChipElevation? = AssistChipDefaults.assistChipElevation(),
-    border: BorderStroke? = AssistChipDefaults.assistChipBorder(enabled),
-    interactionSource: MutableInteractionSource? = null,
+	onClick: () -> Unit,
+	label: @Composable () -> Unit,
+	modifier: Modifier = Modifier,
+	enabled: Boolean = true,
+	leadingIcon: @Composable (() -> Unit)? = null,
+	trailingIcon: @Composable (() -> Unit)? = null,
+	shape: Shape = AssistChipDefaults.shape,
+	colors: ChipColors = AssistChipDefaults.assistChipColors(),
+	elevation: ChipElevation? = AssistChipDefaults.assistChipElevation(),
+	border: BorderStroke? = AssistChipDefaults.assistChipBorder(enabled),
+	interactionSource: MutableInteractionSource? = null,
 ) {
-    CompositionLocalProvider(
-        LocalMinimumInteractiveComponentSize provides Dp.Unspecified,
-    ) {
-        AssistChip(
-            onClick = onClick,
-            label = label,
-            modifier = modifier,
-            leadingIcon = leadingIcon,
-            trailingIcon = trailingIcon,
-            shape = shape,
-            colors = colors,
-            elevation = elevation,
-            border = border,
-            interactionSource = interactionSource,
-        )
-    }
+	CompositionLocalProvider(
+		LocalMinimumInteractiveComponentSize provides Dp.Unspecified,
+	) {
+		AssistChip(
+			onClick = onClick,
+			label = label,
+			modifier = modifier,
+			leadingIcon = leadingIcon,
+			trailingIcon = trailingIcon,
+			shape = shape,
+			colors = colors,
+			elevation = elevation,
+			border = border,
+			interactionSource = interactionSource,
+		)
+	}
 }

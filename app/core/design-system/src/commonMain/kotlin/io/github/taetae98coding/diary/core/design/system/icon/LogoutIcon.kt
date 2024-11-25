@@ -8,11 +8,11 @@ import androidx.compose.ui.Modifier
 
 @Composable
 public fun LogoutIcon(
-    modifier: Modifier = Modifier,
+	modifier: Modifier = Modifier,
 ) {
-    Icon(
-        imageVector = Icons.AutoMirrored.Rounded.Logout,
-        contentDescription = null,
-        modifier = modifier,
-    )
+	Icon(
+		imageVector = Icons.AutoMirrored.Rounded.Logout,
+		contentDescription = null,
+		modifier = modifier,
+	)
 }

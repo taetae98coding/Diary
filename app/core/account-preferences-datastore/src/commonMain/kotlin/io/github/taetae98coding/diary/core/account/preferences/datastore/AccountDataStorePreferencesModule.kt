@@ -10,8 +10,6 @@ import org.koin.core.component.KoinComponent
 @Module
 @ComponentScan
 public class AccountDataStorePreferencesModule : KoinComponent {
-    @Singleton
-    internal fun providesAccountPreferences(): AccountPreferences {
-        return AccountDataStorePreferences(getDataStore("account.preferences_pb"))
-    }
+	@Singleton
+	internal fun providesAccountPreferences(): AccountPreferences = AccountDataStorePreferences(getDataStore("account.preferences_pb"))
 }

@@ -10,52 +10,42 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 internal sealed class TagDetailScreenState {
-    protected abstract val coroutineScope: CoroutineScope
+	protected abstract val coroutineScope: CoroutineScope
 
-    abstract val componentState: DiaryComponentState
-    abstract val colorState: DiaryColorState
+	abstract val componentState: DiaryComponentState
+	abstract val colorState: DiaryColorState
 
-    private var messageJob: Job? = null
+	private var messageJob: Job? = null
 
-    val hostState: SnackbarHostState = SnackbarHostState()
+	val hostState: SnackbarHostState = SnackbarHostState()
 
-    data class Add(
-        override val coroutineScope: CoroutineScope,
-        override val componentState: DiaryComponentState,
-        override val colorState: DiaryColorState,
-    ) : TagDetailScreenState()
+	data class Add(override val coroutineScope: CoroutineScope, override val componentState: DiaryComponentState, override val colorState: DiaryColorState) : TagDetailScreenState()
 
-    data class Detail(
-        val onUpdate: () -> Unit,
-        val onDelete: () -> Unit,
-        override val coroutineScope: CoroutineScope,
-        override val componentState: DiaryComponentState,
-        override val colorState: DiaryColorState,
-    ) : TagDetailScreenState()
+	data class Detail(val onUpdate: () -> Unit, val onDelete: () -> Unit, override val coroutineScope: CoroutineScope, override val componentState: DiaryComponentState, override val colorState: DiaryColorState) : TagDetailScreenState()
 
-    val tagDetail: TagDetail
-        get() {
-            return TagDetail(
-                title = componentState.title,
-                description = componentState.description,
-                color = colorState.color.toArgb(),
-            )
-        }
+	val tagDetail: TagDetail
+		get() {
+			return TagDetail(
+				title = componentState.title,
+				description = componentState.description,
+				color = colorState.color.toArgb(),
+			)
+		}
 
-    fun requestTitleFocus() {
-        componentState.requestTitleFocus()
-    }
+	fun requestTitleFocus() {
+		componentState.requestTitleFocus()
+	}
 
-    fun clearInput() {
-        componentState.clearInput()
-    }
+	fun clearInput() {
+		componentState.clearInput()
+	}
 
-    fun titleError() {
-        componentState.titleError()
-    }
+	fun titleError() {
+		componentState.titleError()
+	}
 
-    fun showMessage(message: String) {
-        messageJob?.cancel()
-        messageJob = coroutineScope.launch { hostState.showSnackbar(message) }
-    }
+	fun showMessage(message: String) {
+		messageJob?.cancel()
+		messageJob = coroutineScope.launch { hostState.showSnackbar(message) }
+	}
 }

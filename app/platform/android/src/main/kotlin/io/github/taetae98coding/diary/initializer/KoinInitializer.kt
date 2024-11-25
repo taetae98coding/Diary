@@ -16,34 +16,28 @@ import org.koin.dsl.module
 import org.koin.ksp.generated.module
 
 public class KoinInitializer : Initializer<KoinApplication> {
-    override fun create(context: Context): KoinApplication {
-        return startKoin {
-            androidContext(context)
+	override fun create(context: Context): KoinApplication =
+		startKoin {
+			androidContext(context)
 
-            modules(
-                KoinAndroidModule().module,
-                AppModule().module,
-                diaryServiceModule(),
-                holidayServiceModule(),
-            )
-        }
-    }
+			modules(
+				KoinAndroidModule().module,
+				AppModule().module,
+				diaryServiceModule(),
+				holidayServiceModule(),
+			)
+		}
 
-    private fun diaryServiceModule(): Module {
-        return module {
-            single(qualifier = StringQualifier(DiaryServiceModule.DIARY_API_URL)) { BuildConfig.DIARY_API_URL }
-        }
-    }
+	private fun diaryServiceModule(): Module =
+		module {
+			single(qualifier = StringQualifier(DiaryServiceModule.DIARY_API_URL)) { BuildConfig.DIARY_API_URL }
+		}
 
-    private fun holidayServiceModule(): Module {
-        return module {
-            single(qualifier = StringQualifier(HolidayServiceModule.HOLIDAY_API_URL)) { BuildConfig.HOLIDAY_API_URL }
-            single(qualifier = StringQualifier(HolidayServiceModule.HOLIDAY_API_KEY)) { BuildConfig.HOLIDAY_API_KEY }
-        }
-    }
+	private fun holidayServiceModule(): Module =
+		module {
+			single(qualifier = StringQualifier(HolidayServiceModule.HOLIDAY_API_URL)) { BuildConfig.HOLIDAY_API_URL }
+			single(qualifier = StringQualifier(HolidayServiceModule.HOLIDAY_API_KEY)) { BuildConfig.HOLIDAY_API_KEY }
+		}
 
-
-    override fun dependencies(): MutableList<Class<out Initializer<*>>> {
-        return mutableListOf()
-    }
+	override fun dependencies(): MutableList<Class<out Initializer<*>>> = mutableListOf()
 }

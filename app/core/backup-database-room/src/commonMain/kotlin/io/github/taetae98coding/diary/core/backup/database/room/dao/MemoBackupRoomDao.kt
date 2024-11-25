@@ -7,18 +7,14 @@ import kotlinx.coroutines.flow.Flow
 import org.koin.core.annotation.Factory
 
 @Factory
-internal class MemoBackupRoomDao(
-    private val database: BackupDatabase,
-) : MemoBackupDao {
-    override suspend fun upsert(uid: String, id: String) {
-        database.memo().upsert(MemoBackupEntity(memoId = id, uid = uid))
-    }
+internal class MemoBackupRoomDao(private val database: BackupDatabase) : MemoBackupDao {
+	override suspend fun upsert(uid: String, id: String) {
+		database.memo().upsert(MemoBackupEntity(memoId = id, uid = uid))
+	}
 
-    override suspend fun delete(ids: Set<String>) {
-        database.memo().delete(ids)
-    }
+	override suspend fun delete(ids: Set<String>) {
+		database.memo().delete(ids)
+	}
 
-    override fun findMemoIdByUid(uid: String): Flow<List<String>> {
-        return database.memo().findMemoIdByUid(uid)
-    }
+	override fun findMemoIdByUid(uid: String): Flow<List<String>> = database.memo().findMemoIdByUid(uid)
 }

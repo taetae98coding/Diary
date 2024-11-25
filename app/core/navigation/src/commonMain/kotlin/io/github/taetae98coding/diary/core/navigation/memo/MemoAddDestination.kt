@@ -6,8 +6,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class MemoAddDestination(
-    @SerialName("start")
-    val start: LocalDate? = null,
-    @SerialName("endInclusive")
-    val endInclusive: LocalDate? = null,
+	@SerialName("start")
+	val start: LocalDate? = null,
+	@SerialName("endInclusive")
+	val endInclusive: LocalDate? = null,
 )

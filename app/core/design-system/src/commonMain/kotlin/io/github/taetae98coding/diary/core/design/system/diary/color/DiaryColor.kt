@@ -20,33 +20,33 @@ import io.github.taetae98coding.diary.library.color.toRgbString
 
 @Composable
 public fun DiaryColor(
-    state: DiaryColorState,
-    modifier: Modifier = Modifier,
+	state: DiaryColorState,
+	modifier: Modifier = Modifier,
 ) {
-    val animateColor by animateColorAsState(state.color)
-    var isDialogVisible by rememberSaveable { mutableStateOf(false) }
+	val animateColor by animateColorAsState(state.color)
+	var isDialogVisible by rememberSaveable { mutableStateOf(false) }
 
-    Card(
-        onClick = { isDialogVisible = true },
-        modifier = modifier,
-        colors = CardDefaults.cardColors(
-            containerColor = animateColor,
-            contentColor = state.color.toContrastColor(),
-        ),
-    ) {
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center,
-        ) {
-            Text(text = "#${state.color.toArgb().toRgbString()}")
-        }
-    }
+	Card(
+		onClick = { isDialogVisible = true },
+		modifier = modifier,
+		colors = CardDefaults.cardColors(
+			containerColor = animateColor,
+			contentColor = state.color.toContrastColor(),
+		),
+	) {
+		Box(
+			modifier = Modifier.fillMaxSize(),
+			contentAlignment = Alignment.Center,
+		) {
+			Text(text = "#${state.color.toArgb().toRgbString()}")
+		}
+	}
 
-    if (isDialogVisible) {
-        DiaryColorPickerDialog(
-            initialColor = state.color,
-            onDismissRequest = { isDialogVisible = false },
-            onConfirm = { state.onColorChange(it) },
-        )
-    }
+	if (isDialogVisible) {
+		DiaryColorPickerDialog(
+			initialColor = state.color,
+			onDismissRequest = { isDialogVisible = false },
+			onConfirm = { state.onColorChange(it) },
+		)
+	}
 }

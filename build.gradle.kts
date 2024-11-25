@@ -32,6 +32,7 @@ subprojects {
 
             spotless {
                 kotlin {
+                    target("**/*.kt")
                     targetExclude("**/build/**")
 
                     ktlint()

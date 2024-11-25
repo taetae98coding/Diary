@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 internal data class TagBackupEntity(
-    @PrimaryKey
-    val tagId: String,
-    val uid: String,
+	@PrimaryKey
+	val tagId: String,
+	val uid: String,
 )

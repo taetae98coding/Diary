@@ -16,27 +16,27 @@ import io.github.taetae98coding.diary.core.design.system.text.ClearTextField
 
 @Composable
 internal fun EmailTextField(
-    valueProvider: () -> String,
-    onValueChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
+	valueProvider: () -> String,
+	onValueChange: (String) -> Unit,
+	modifier: Modifier = Modifier,
 ) {
-    val focusRequester = remember { FocusRequester() }
+	val focusRequester = remember { FocusRequester() }
 
-    ClearTextField(
-        valueProvider = valueProvider,
-        onValueChange = onValueChange,
-        modifier = modifier.focusRequester(focusRequester),
-        placeholder = { Text(text = "이메일") },
-        leadingIcon = { EmailIcon() },
-        keyboardOptions = KeyboardOptions(
-            capitalization = KeyboardCapitalization.None,
-            keyboardType = KeyboardType.Email,
-            imeAction = ImeAction.Next,
-        ),
-        singleLine = true,
-    )
+	ClearTextField(
+		valueProvider = valueProvider,
+		onValueChange = onValueChange,
+		modifier = modifier.focusRequester(focusRequester),
+		placeholder = { Text(text = "이메일") },
+		leadingIcon = { EmailIcon() },
+		keyboardOptions = KeyboardOptions(
+			capitalization = KeyboardCapitalization.None,
+			keyboardType = KeyboardType.Email,
+			imeAction = ImeAction.Next,
+		),
+		singleLine = true,
+	)
 
-    LaunchedEffect(focusRequester) {
-        focusRequester.requestFocus()
-    }
+	LaunchedEffect(focusRequester) {
+		focusRequester.requestFocus()
+	}
 }

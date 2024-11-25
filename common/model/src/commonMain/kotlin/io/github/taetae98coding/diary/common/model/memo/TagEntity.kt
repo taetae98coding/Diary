@@ -6,20 +6,20 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class TagEntity(
-    @SerialName("id")
-    val id: String,
-    @SerialName("title")
-    val title: String,
-    @SerialName("description")
-    val description: String,
-    @SerialName("color")
-    val color: Int,
-    @SerialName("owner")
-    val owner: String,
-    @SerialName("isFinish")
-    val isFinish: Boolean,
-    @SerialName("isDelete")
-    val isDelete: Boolean,
-    @SerialName("updateAt")
-    val updateAt: Instant,
+	@SerialName("id")
+	val id: String,
+	@SerialName("title")
+	val title: String,
+	@SerialName("description")
+	val description: String,
+	@SerialName("color")
+	val color: Int,
+	@SerialName("owner")
+	val owner: String,
+	@SerialName("isFinish")
+	val isFinish: Boolean,
+	@SerialName("isDelete")
+	val isDelete: Boolean,
+	@SerialName("updateAt")
+	val updateAt: Instant,
 )

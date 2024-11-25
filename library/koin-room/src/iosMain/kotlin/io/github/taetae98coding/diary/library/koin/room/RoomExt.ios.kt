@@ -10,17 +10,19 @@ import platform.Foundation.NSUserDomainMask
 
 @OptIn(ExperimentalForeignApi::class)
 public actual inline fun <reified T : RoomDatabase> KoinComponent.platformDatabaseBuilder(
-    name: String,
+	name: String,
 ): RoomDatabase.Builder<T> {
-    val documentDirectory = NSFileManager.defaultManager.URLForDirectory(
-        directory = NSDocumentDirectory,
-        inDomain = NSUserDomainMask,
-        appropriateForURL = null,
-        create = false,
-        error = null,
-    )?.also {
+	val documentDirectory =
+		NSFileManager.defaultManager
+			.URLForDirectory(
+				directory = NSDocumentDirectory,
+				inDomain = NSUserDomainMask,
+				appropriateForURL = null,
+				create = false,
+				error = null,
+			)?.also {
 //        NSFileManager.defaultManager.removeItemAtURL(it, null)
-    }
+			}
 
-    return Room.databaseBuilder(name = "${documentDirectory?.path}/$name")
+	return Room.databaseBuilder(name = "${documentDirectory?.path}/$name")
 }

@@ -27,73 +27,73 @@ import org.koin.compose.viewmodel.koinViewModel
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 internal fun MemoAddRoute(
-    navigateUp: () -> Unit,
-    navigateToTagAdd: () -> Unit,
-    navigateToTagDetail: (String) -> Unit,
-    modifier: Modifier = Modifier,
-    addViewModel: MemoAddViewModel = koinViewModel(),
+	navigateUp: () -> Unit,
+	navigateToTagAdd: () -> Unit,
+	navigateToTagDetail: (String) -> Unit,
+	modifier: Modifier = Modifier,
+	addViewModel: MemoAddViewModel = koinViewModel(),
 ) {
-    val windowAdaptiveInfo = currentWindowAdaptiveInfo()
-    val navigator = rememberListDetailPaneScaffoldNavigator(scaffoldDirective = calculatePaneScaffoldDirective(windowAdaptiveInfo))
+	val windowAdaptiveInfo = currentWindowAdaptiveInfo()
+	val navigator = rememberListDetailPaneScaffoldNavigator(scaffoldDirective = calculatePaneScaffoldDirective(windowAdaptiveInfo))
 
-    ListDetailPaneScaffold(
-        directive = navigator.scaffoldDirective.copy(defaultPanePreferredWidth = 450.dp),
-        value = navigator.scaffoldValue,
-        listPane = {
-            val state = rememberMemoDetailScreenAddState(
-                initialStart = addViewModel.route.start,
-                initialEndInclusive = addViewModel.route.endInclusive,
-            )
+	ListDetailPaneScaffold(
+		directive = navigator.scaffoldDirective.copy(defaultPanePreferredWidth = 450.dp),
+		value = navigator.scaffoldValue,
+		listPane = {
+			val state = rememberMemoDetailScreenAddState(
+				initialStart = addViewModel.route.start,
+				initialEndInclusive = addViewModel.route.endInclusive,
+			)
 
-            AnimatedPane {
-                val uiState by addViewModel.uiState.collectAsStateWithLifecycle()
-                val tagList by addViewModel.memoTagList.collectAsStateWithLifecycle()
+			AnimatedPane {
+				val uiState by addViewModel.uiState.collectAsStateWithLifecycle()
+				val tagList by addViewModel.memoTagList.collectAsStateWithLifecycle()
 
-                MemoDetailScreen(
-                    state = state,
-                    titleProvider = { "메모 추가" },
-                    navigateButtonProvider = { MemoDetailNavigationButton.NavigateUp(onNavigateUp = navigateUp) },
-                    actionButtonProvider = { MemoDetailActionButton.None },
-                    floatingButtonProvider = { MemoDetailFloatingButton.Add { addViewModel.add(state.memoDetail) } },
-                    uiStateProvider = { uiState },
-                    onTagTitle = { navigator.navigateTo(ThreePaneScaffoldRole.Primary) },
-                    onTag = navigateToTagDetail,
-                    tagListProvider = { tagList },
-                )
-            }
-        },
-        detailPane = {
-            AnimatedPane {
-                val isNavigateUpVisible = remember(windowAdaptiveInfo) {
-                    if (windowAdaptiveInfo.windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.EXPANDED) {
-                        !navigator.isListVisible()
-                    } else {
-                        true
-                    }
-                }
+				MemoDetailScreen(
+					state = state,
+					titleProvider = { "메모 추가" },
+					navigateButtonProvider = { MemoDetailNavigationButton.NavigateUp(onNavigateUp = navigateUp) },
+					actionButtonProvider = { MemoDetailActionButton.None },
+					floatingButtonProvider = { MemoDetailFloatingButton.Add { addViewModel.add(state.memoDetail) } },
+					uiStateProvider = { uiState },
+					onTagTitle = { navigator.navigateTo(ThreePaneScaffoldRole.Primary) },
+					onTag = navigateToTagDetail,
+					tagListProvider = { tagList },
+				)
+			}
+		},
+		detailPane = {
+			AnimatedPane {
+				val isNavigateUpVisible = remember(windowAdaptiveInfo) {
+					if (windowAdaptiveInfo.windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.EXPANDED) {
+						!navigator.isListVisible()
+					} else {
+						true
+					}
+				}
 
-                val memoTagList by addViewModel.memoTagList.collectAsStateWithLifecycle()
-                val tagList by addViewModel.tagList.collectAsStateWithLifecycle()
+				val memoTagList by addViewModel.memoTagList.collectAsStateWithLifecycle()
+				val tagList by addViewModel.tagList.collectAsStateWithLifecycle()
 
-                MemoTagScreen(
-                    navigateButtonProvider = {
-                        if (isNavigateUpVisible) {
-                            MemoTagNavigationButton.NavigateUp(onNavigateUp = navigator::navigateBack)
-                        } else {
-                            MemoTagNavigationButton.None
-                        }
-                    },
-                    onTagAdd = navigateToTagAdd,
-                    memoTagListProvider = { memoTagList },
-                    tagListProvider = { tagList },
-                )
-            }
-        },
-        modifier = modifier,
-    )
+				MemoTagScreen(
+					navigateButtonProvider = {
+						if (isNavigateUpVisible) {
+							MemoTagNavigationButton.NavigateUp(onNavigateUp = navigator::navigateBack)
+						} else {
+							MemoTagNavigationButton.None
+						}
+					},
+					onTagAdd = navigateToTagAdd,
+					memoTagListProvider = { memoTagList },
+					tagListProvider = { tagList },
+				)
+			}
+		},
+		modifier = modifier,
+	)
 
-    KBackHandler(
-        isEnabled = navigator.canNavigateBack(),
-        onBack = navigator::navigateBack,
-    )
+	KBackHandler(
+		isEnabled = navigator.canNavigateBack(),
+		onBack = navigator::navigateBack,
+	)
 }

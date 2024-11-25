@@ -13,23 +13,23 @@ import io.github.taetae98coding.diary.feature.tag.detail.TagDetailRoute
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 public fun NavGraphBuilder.tagNavigation(
-    navController: NavController,
+	navController: NavController,
 ) {
-    composable<TagDestination> { backStackEntry ->
-        TagRoute(
-            onScaffoldValueChange = { backStackEntry.savedStateHandle["app_navigation_visible"] = it.isListVisible() },
-        )
-    }
+	composable<TagDestination> { backStackEntry ->
+		TagRoute(
+			onScaffoldValueChange = { backStackEntry.savedStateHandle["app_navigation_visible"] = it.isListVisible() },
+		)
+	}
 
-    composable<TagAddDestination> {
-        TagAddRoute(
-            navigateUp = navController::popBackStack,
-        )
-    }
+	composable<TagAddDestination> {
+		TagAddRoute(
+			navigateUp = navController::popBackStack,
+		)
+	}
 
-    composable<TagDetailDestination> {
-        TagDetailRoute(
-            navigateUp = navController::popBackStack,
-        )
-    }
+	composable<TagDetailDestination> {
+		TagDetailRoute(
+			navigateUp = navController::popBackStack,
+		)
+	}
 }

@@ -15,35 +15,32 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-internal class TagRepositoryImpl(
-    private val localDataSource: TagDao,
-) : TagRepository {
-    override suspend fun upsert(tag: Tag) {
-        localDataSource.upsert(tag.toDto())
-    }
+internal class TagRepositoryImpl(private val localDataSource: TagDao) : TagRepository {
+	override suspend fun upsert(tag: Tag) {
+		localDataSource.upsert(tag.toDto())
+	}
 
-    override suspend fun update(tagId: String, detail: TagDetail) {
-        localDataSource.update(tagId, detail)
-    }
+	override suspend fun update(tagId: String, detail: TagDetail) {
+		localDataSource.update(tagId, detail)
+	}
 
-    override suspend fun updateDelete(tagId: String, isDelete: Boolean) {
-        localDataSource.updateDelete(tagId, isDelete)
-    }
+	override suspend fun updateDelete(tagId: String, isDelete: Boolean) {
+		localDataSource.updateDelete(tagId, isDelete)
+	}
 
-    override suspend fun updateFinish(tagId: String, isFinish: Boolean) {
-        localDataSource.updateFinish(tagId, isFinish)
-    }
+	override suspend fun updateFinish(tagId: String, isFinish: Boolean) {
+		localDataSource.updateFinish(tagId, isFinish)
+	}
 
-    override fun find(tagId: String): Flow<Tag?> {
-        return localDataSource.find(tagId).mapLatest { it?.toTag() }
-    }
+	override fun find(tagId: String): Flow<Tag?> = localDataSource.find(tagId, true).mapLatest { it?.toTag() }
 
-    override fun findByIds(tagIds: Set<String>): Flow<List<TagDto>> {
-        return localDataSource.findByIds(tagIds)
-    }
+	override fun findByIds(tagIds: Set<String>): Flow<List<Tag>> =
+		localDataSource
+			.findByIds(tagIds, true)
+			.mapCollectionLatest(TagDto::toTag)
 
-    override fun page(owner: String?): Flow<List<Tag>> {
-        return localDataSource.page(owner)
-            .mapCollectionLatest(TagDto::toTag)
-    }
+	override fun page(owner: String?): Flow<List<Tag>> =
+		localDataSource
+			.page(owner)
+			.mapCollectionLatest(TagDto::toTag)
 }

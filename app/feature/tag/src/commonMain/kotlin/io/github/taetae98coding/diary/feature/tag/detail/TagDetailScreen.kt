@@ -40,189 +40,190 @@ import io.github.taetae98coding.diary.core.design.system.theme.DiaryTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun TagDetailScreen(
-    state: TagDetailScreenState,
-    titleProvider: () -> String?,
-    navigateButtonProvider: () -> TagDetailNavigationButton,
-    actionButtonProvider: () -> TagDetailActionButton,
-    floatingButtonProvider: () -> TagDetailFloatingButton,
-    uiStateProvider: () -> TagDetailScreenUiState,
-    modifier: Modifier = Modifier,
+	state: TagDetailScreenState,
+	titleProvider: () -> String?,
+	navigateButtonProvider: () -> TagDetailNavigationButton,
+	actionButtonProvider: () -> TagDetailActionButton,
+	floatingButtonProvider: () -> TagDetailFloatingButton,
+	uiStateProvider: () -> TagDetailScreenUiState,
+	modifier: Modifier = Modifier,
 ) {
-    Scaffold(
-        modifier = modifier,
-        topBar = {
-            TopAppBar(
-                title = { titleProvider()?.let { Text(text = it) } },
-                navigationIcon = {
-                    when (val button = navigateButtonProvider()) {
-                        is TagDetailNavigationButton.NavigateUp -> {
-                            IconButton(onClick = button.onNavigateUp) {
-                                NavigateUpIcon()
-                            }
-                        }
+	Scaffold(
+		modifier = modifier,
+		topBar = {
+			TopAppBar(
+				title = { titleProvider()?.let { Text(text = it) } },
+				navigationIcon = {
+					when (val button = navigateButtonProvider()) {
+						is TagDetailNavigationButton.NavigateUp -> {
+							IconButton(onClick = button.onNavigateUp) {
+								NavigateUpIcon()
+							}
+						}
 
-                        is TagDetailNavigationButton.None -> Unit
-                    }
-                },
-                actions = {
-                    val button = actionButtonProvider()
+						is TagDetailNavigationButton.None -> Unit
+					}
+				},
+				actions = {
+					val button = actionButtonProvider()
 
-                    AnimatedVisibility(
-                        visible = button is TagDetailActionButton.FinishAndDetail,
-                        enter = fadeIn(),
-                        exit = fadeOut(),
-                    ) {
-                        val isFinish = if (button is TagDetailActionButton.FinishAndDetail) {
-                            button.isFinish
-                        } else {
-                            false
-                        }
+					AnimatedVisibility(
+						visible = button is TagDetailActionButton.FinishAndDetail,
+						enter = fadeIn(),
+						exit = fadeOut(),
+					) {
+						val isFinish = if (button is TagDetailActionButton.FinishAndDetail) {
+							button.isFinish
+						} else {
+							false
+						}
 
-                        IconToggleButton(
-                            checked = isFinish,
-                            onCheckedChange = {
-                                if (button is TagDetailActionButton.FinishAndDetail) {
-                                    button.onFinishChange(it)
-                                }
-                            },
-                        ) {
-                            FinishIcon()
-                        }
-                    }
+						IconToggleButton(
+							checked = isFinish,
+							onCheckedChange = {
+								if (button is TagDetailActionButton.FinishAndDetail) {
+									button.onFinishChange(it)
+								}
+							},
+						) {
+							FinishIcon()
+						}
+					}
 
-                    AnimatedVisibility(
-                        visible = button is TagDetailActionButton.FinishAndDetail,
-                        enter = fadeIn(),
-                        exit = fadeOut(),
-                    ) {
-                        IconButton(
-                            onClick = {
-                                if (button is TagDetailActionButton.FinishAndDetail) {
-                                    button.delete()
-                                }
-                            },
-                        ) {
-                            DeleteIcon()
-                        }
-                    }
-                },
-            )
-        },
-        snackbarHost = { SnackbarHost(hostState = state.hostState) },
-        floatingActionButton = {
-            val button = floatingButtonProvider()
+					AnimatedVisibility(
+						visible = button is TagDetailActionButton.FinishAndDetail,
+						enter = fadeIn(),
+						exit = fadeOut(),
+					) {
+						IconButton(
+							onClick = {
+								if (button is TagDetailActionButton.FinishAndDetail) {
+									button.delete()
+								}
+							},
+						) {
+							DeleteIcon()
+						}
+					}
+				},
+			)
+		},
+		snackbarHost = { SnackbarHost(hostState = state.hostState) },
+		floatingActionButton = {
+			val button = floatingButtonProvider()
 
-            AnimatedVisibility(
-                visible = button is TagDetailFloatingButton.Add,
-                enter = scaleIn(),
-                exit = scaleOut(),
-            ) {
-                val isProgress by remember { derivedStateOf { uiStateProvider().isProgress } }
+			AnimatedVisibility(
+				visible = button is TagDetailFloatingButton.Add,
+				enter = scaleIn(),
+				exit = scaleOut(),
+			) {
+				val isProgress by remember { derivedStateOf { uiStateProvider().isProgress } }
 
-                FloatingAddButton(
-                    onClick = {
-                        if (button is TagDetailFloatingButton.Add) {
-                            button.onAdd()
-                        }
-                    },
-                    progressProvider = { isProgress },
-                )
-            }
-        },
-    ) {
-        Content(
-            state = state,
-            modifier = Modifier.fillMaxSize()
-                .padding(DiaryTheme.dimen.screenPaddingValues)
-                .padding(it),
-        )
-    }
+				FloatingAddButton(
+					onClick = {
+						if (button is TagDetailFloatingButton.Add) {
+							button.onAdd()
+						}
+					},
+					progressProvider = { isProgress },
+				)
+			}
+		},
+	) {
+		Content(
+			state = state,
+			modifier = Modifier.fillMaxSize()
+				.padding(DiaryTheme.dimen.screenPaddingValues)
+				.padding(it),
+		)
+	}
 
-    Message(
-        state = state,
-        uiStateProvider = uiStateProvider,
-    )
+	Message(
+		state = state,
+		uiStateProvider = uiStateProvider,
+	)
 
-    LaunchedFocus(state = state)
+	LaunchedFocus(state = state)
 }
 
 @Composable
 private fun Message(
-    state: TagDetailScreenState,
-    uiStateProvider: () -> TagDetailScreenUiState,
+	state: TagDetailScreenState,
+	uiStateProvider: () -> TagDetailScreenUiState,
 ) {
-    val uiState = uiStateProvider()
+	val uiState = uiStateProvider()
 
-    LaunchedEffect(
-        uiState.isAdd,
-        uiState.isDelete,
-        uiState.isUpdate,
-        uiState.isTitleBlankError,
-        uiState.isUnknownError,
-    ) {
-        if (!uiState.hasMessage) return@LaunchedEffect
+	LaunchedEffect(
+		uiState.isAdd,
+		uiState.isDelete,
+		uiState.isUpdate,
+		uiState.isTitleBlankError,
+		uiState.isUnknownError,
+	) {
+		if (!uiState.hasMessage) return@LaunchedEffect
 
-        when {
-            uiState.isAdd -> {
-                state.showMessage("태그 추가 ${Emoji.congratulate.random()}")
-                state.clearInput()
-                state.requestTitleFocus()
-            }
+		when {
+			uiState.isAdd -> {
+				state.showMessage("태그 추가 ${Emoji.congratulate.random()}")
+				state.clearInput()
+				state.requestTitleFocus()
+			}
 
-            uiState.isDelete -> {
-                if (state is TagDetailScreenState.Detail) {
-                    state.onDelete()
-                }
-            }
+			uiState.isDelete -> {
+				if (state is TagDetailScreenState.Detail) {
+					state.onDelete()
+				}
+			}
 
-            uiState.isUpdate -> {
-                if (state is TagDetailScreenState.Detail) {
-                    state.onUpdate()
-                }
-            }
+			uiState.isUpdate -> {
+				if (state is TagDetailScreenState.Detail) {
+					state.onUpdate()
+				}
+			}
 
-            uiState.isTitleBlankError -> {
-                state.showMessage("제목을 입력해 주세요 ${Emoji.check.random()}")
-                state.titleError()
-            }
+			uiState.isTitleBlankError -> {
+				state.showMessage("제목을 입력해 주세요 ${Emoji.check.random()}")
+				state.requestTitleFocus()
+				state.titleError()
+			}
 
-            uiState.isUnknownError -> state.showMessage("알 수 없는 에러가 발생했어요 잠시 후 다시 시도해 주세요 ${Emoji.error.random()}")
-        }
+			uiState.isUnknownError -> state.showMessage("알 수 없는 에러가 발생했어요 잠시 후 다시 시도해 주세요 ${Emoji.error.random()}")
+		}
 
-        uiState.onMessageShow()
-    }
+		uiState.onMessageShow()
+	}
 }
 
 @Composable
 private fun LaunchedFocus(
-    state: TagDetailScreenState,
+	state: TagDetailScreenState,
 ) {
-    LaunchedEffect(state) {
-        if (state is TagDetailScreenState.Add) {
-            state.requestTitleFocus()
-        }
-    }
+	LaunchedEffect(state) {
+		if (state is TagDetailScreenState.Add) {
+			state.requestTitleFocus()
+		}
+	}
 }
 
 @Composable
 private fun Content(
-    state: TagDetailScreenState,
-    modifier: Modifier = Modifier,
+	state: TagDetailScreenState,
+	modifier: Modifier = Modifier,
 ) {
-    Column(
-        modifier = Modifier.verticalScroll(state = rememberScrollState())
-            .then(modifier),
-        verticalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace),
-    ) {
-        DiaryComponent(state = state.componentState)
-        Row {
-            DiaryColor(
-                state = state.colorState,
-                modifier = Modifier.weight(1F)
-                    .height(100.dp),
-            )
+	Column(
+		modifier = Modifier.verticalScroll(state = rememberScrollState())
+			.then(modifier),
+		verticalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace),
+	) {
+		DiaryComponent(state = state.componentState)
+		Row {
+			DiaryColor(
+				state = state.colorState,
+				modifier = Modifier.weight(1F)
+					.height(100.dp),
+			)
 
-            Spacer(modifier = Modifier.weight(1F))
-        }
-    }
+			Spacer(modifier = Modifier.weight(1F))
+		}
+	}
 }

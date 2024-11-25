@@ -7,23 +7,18 @@ import kotlinx.coroutines.flow.first
 import org.koin.core.annotation.Factory
 
 @Factory
-public class UnselectMemoTagUseCase internal constructor(
-    private val findMemoUseCase: FindMemoUseCase,
-    private val pushMemoBackupQueueUseCase: PushMemoBackupQueueUseCase,
-    private val memoRepository: MemoRepository,
-    private val memoTagRepository: MemoTagRepository,
-) {
-    public suspend operator fun invoke(memoId: String?, tagId: String?): Result<Unit> {
-        return runCatching {
-            if (memoId.isNullOrBlank() || tagId.isNullOrBlank()) return@runCatching
+public class UnselectMemoTagUseCase internal constructor(private val findMemoUseCase: FindMemoUseCase, private val pushMemoBackupQueueUseCase: PushMemoBackupQueueUseCase, private val memoRepository: MemoRepository, private val memoTagRepository: MemoTagRepository) {
+	public suspend operator fun invoke(memoId: String?, tagId: String?): Result<Unit> {
+		return runCatching {
+			if (memoId.isNullOrBlank() || tagId.isNullOrBlank()) return@runCatching
 
-            val memo = findMemoUseCase(memoId).first().getOrThrow() ?: return@runCatching
+			val memo = findMemoUseCase(memoId).first().getOrThrow() ?: return@runCatching
 
-            memoTagRepository.delete(memoId, tagId)
-            if (memo.primaryTag == tagId) {
-                memoRepository.updatePrimaryTag(memoId, null)
-            }
-            pushMemoBackupQueueUseCase(memoId)
-        }
-    }
+			memoTagRepository.delete(memoId, tagId)
+			if (memo.primaryTag == tagId) {
+				memoRepository.updatePrimaryTag(memoId, null)
+			}
+			pushMemoBackupQueueUseCase(memoId)
+		}
+	}
 }

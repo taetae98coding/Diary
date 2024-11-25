@@ -13,43 +13,42 @@ import org.koin.compose.viewmodel.koinViewModel
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 internal fun TagDetailRoute(
-    navigateUp: () -> Unit,
-    modifier: Modifier = Modifier,
-    detailViewModel: TagDetailViewModel = koinViewModel(),
+	navigateUp: () -> Unit,
+	modifier: Modifier = Modifier,
+	detailViewModel: TagDetailViewModel = koinViewModel(),
 ) {
-    val navigator = rememberListDetailPaneScaffoldNavigator()
+	val navigator = rememberListDetailPaneScaffoldNavigator()
 
-    ListDetailPaneScaffold(
-        directive = navigator.scaffoldDirective,
-        value = navigator.scaffoldValue,
-        listPane = {
-            AnimatedPane {
-                val tagDetail by detailViewModel.tagDetail.collectAsStateWithLifecycle()
-                val state = rememberTagDetailScreenDetailState(
-                    onUpdate = navigateUp,
-                    onDelete = navigateUp,
-                    detailProvider = { tagDetail },
-                )
-                val actionButton by detailViewModel.actionButton.collectAsStateWithLifecycle()
-                val uiState by detailViewModel.uiState.collectAsStateWithLifecycle()
+	ListDetailPaneScaffold(
+		directive = navigator.scaffoldDirective,
+		value = navigator.scaffoldValue,
+		listPane = {
+			AnimatedPane {
+				val tagDetail by detailViewModel.tagDetail.collectAsStateWithLifecycle()
+				val state = rememberTagDetailScreenDetailState(
+					onUpdate = navigateUp,
+					onDelete = navigateUp,
+					detailProvider = { tagDetail },
+				)
+				val actionButton by detailViewModel.actionButton.collectAsStateWithLifecycle()
+				val uiState by detailViewModel.uiState.collectAsStateWithLifecycle()
 
-                TagDetailScreen(
-                    state = state,
-                    titleProvider = { tagDetail?.title },
-                    navigateButtonProvider = {
-                        TagDetailNavigationButton.NavigateUp(
-                            onNavigateUp = { detailViewModel.update(state.tagDetail) },
-                        )
-                    },
-                    actionButtonProvider = { actionButton },
-                    floatingButtonProvider = { TagDetailFloatingButton.None },
-                    uiStateProvider = { uiState },
-                )
-            }
-        },
-        detailPane = {
-
-        },
-        modifier = modifier,
-    )
+				TagDetailScreen(
+					state = state,
+					titleProvider = { tagDetail?.title },
+					navigateButtonProvider = {
+						TagDetailNavigationButton.NavigateUp(
+							onNavigateUp = { detailViewModel.update(state.tagDetail) },
+						)
+					},
+					actionButtonProvider = { actionButton },
+					floatingButtonProvider = { TagDetailFloatingButton.None },
+					uiStateProvider = { uiState },
+				)
+			}
+		},
+		detailPane = {
+		},
+		modifier = modifier,
+	)
 }

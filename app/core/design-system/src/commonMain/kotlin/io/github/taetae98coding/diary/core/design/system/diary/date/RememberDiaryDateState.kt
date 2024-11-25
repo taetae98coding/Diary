@@ -6,17 +6,16 @@ import kotlinx.datetime.LocalDate
 
 @Composable
 public fun rememberDiaryDateState(
-    vararg inputs: Any?,
-    initialStart: LocalDate?,
-    initialEndInclusive: LocalDate?,
-): DiaryDateState {
-    return rememberSaveable(
-        inputs = inputs,
-        saver = DiaryDateState.saver(),
-    ) {
-        DiaryDateState(
-            initialStart = initialStart,
-            initialEndInclusive = initialEndInclusive,
-        )
-    }
-}
+	vararg inputs: Any?,
+	initialStart: LocalDate?,
+	initialEndInclusive: LocalDate?,
+): DiaryDateState =
+	rememberSaveable(
+		inputs = inputs,
+		saver = DiaryDateState.saver(),
+	) {
+		DiaryDateState(
+			initialStart = initialStart,
+			initialEndInclusive = initialEndInclusive,
+		)
+	}

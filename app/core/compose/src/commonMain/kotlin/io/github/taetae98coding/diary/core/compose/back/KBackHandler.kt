@@ -4,6 +4,6 @@ import androidx.compose.runtime.Composable
 
 @Composable
 public expect fun KBackHandler(
-    isEnabled: Boolean = true,
-    onBack: () -> Unit
+	isEnabled: Boolean = true,
+	onBack: () -> Unit,
 )

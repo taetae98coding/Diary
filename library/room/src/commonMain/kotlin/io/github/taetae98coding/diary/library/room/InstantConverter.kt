@@ -4,13 +4,9 @@ import androidx.room.TypeConverter
 import kotlinx.datetime.Instant
 
 public data object InstantConverter {
-    @TypeConverter
-    public fun longToInstant(value: Long?): Instant? {
-        return value?.let { Instant.fromEpochMilliseconds(it) }
-    }
+	@TypeConverter
+	public fun longToInstant(value: Long?): Instant? = value?.let { Instant.fromEpochMilliseconds(it) }
 
-    @TypeConverter
-    public fun instantToLong(instant: Instant?): Long? {
-        return instant?.toEpochMilliseconds()
-    }
+	@TypeConverter
+	public fun instantToLong(instant: Instant?): Long? = instant?.toEpochMilliseconds()
 }

@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class JoinRequest(
-    @SerialName("email")
-    val email: String,
-    @SerialName("password")
-    val password: String,
+	@SerialName("email")
+	val email: String,
+	@SerialName("password")
+	val password: String,
 )

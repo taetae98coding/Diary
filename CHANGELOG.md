@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.1] - 2024-11-25
+
+### 🚀 Features
+
+- App - Calendar keyboard shortcut
+- App - Calendar tag filter
+
+### 🐛 Bug Fixes
+
+- App - TagDetail focus title when title empty error
+- App - Backup deleted tag
+- Server - Order Item fetch api
+
 ## [1.2.0] - 2024-11-24
 
 ### 🚀 Features

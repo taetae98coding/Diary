@@ -12,60 +12,60 @@ import io.github.taetae98coding.diary.core.design.system.theme.DiaryTheme
 
 @Composable
 internal fun DayOfWeekRow(
-    modifier: Modifier = Modifier,
-    colors: CalendarColors = CalendarDefaults.colors(),
+	modifier: Modifier = Modifier,
+	colors: CalendarColors = CalendarDefaults.colors(),
 ) {
-    Row(modifier = modifier) {
-        val dayOfWeekModifier = Modifier.weight(1F)
+	Row(modifier = modifier) {
+		val dayOfWeekModifier = Modifier.weight(1F)
 
-        Text(
-            text = "일",
-            modifier = dayOfWeekModifier,
-            color = colors.sundayColor,
-            textAlign = TextAlign.Center,
-            style = DiaryTheme.typography.bodySmall,
-        )
-        Text(
-            text = "월",
-            modifier = dayOfWeekModifier,
-            color = colors.dayColor.takeOrElse { LocalContentColor.current },
-            textAlign = TextAlign.Center,
-            style = DiaryTheme.typography.bodySmall,
-        )
-        Text(
-            text = "화",
-            modifier = dayOfWeekModifier,
-            color = colors.dayColor.takeOrElse { LocalContentColor.current },
-            textAlign = TextAlign.Center,
-            style = DiaryTheme.typography.bodySmall,
-        )
-        Text(
-            text = "수",
-            modifier = dayOfWeekModifier,
-            color = colors.dayColor.takeOrElse { LocalContentColor.current },
-            textAlign = TextAlign.Center,
-            style = DiaryTheme.typography.bodySmall,
-        )
-        Text(
-            text = "목",
-            modifier = dayOfWeekModifier,
-            color = colors.dayColor.takeOrElse { LocalContentColor.current },
-            textAlign = TextAlign.Center,
-            style = DiaryTheme.typography.bodySmall,
-        )
-        Text(
-            text = "금",
-            modifier = dayOfWeekModifier,
-            color = colors.dayColor.takeOrElse { LocalContentColor.current },
-            textAlign = TextAlign.Center,
-            style = DiaryTheme.typography.bodySmall,
-        )
-        Text(
-            text = "토",
-            modifier = dayOfWeekModifier,
-            color = colors.saturdayColor,
-            textAlign = TextAlign.Center,
-            style = DiaryTheme.typography.bodySmall,
-        )
-    }
+		Text(
+			text = "일",
+			modifier = dayOfWeekModifier,
+			color = colors.sundayColor,
+			textAlign = TextAlign.Center,
+			style = DiaryTheme.typography.bodySmall,
+		)
+		Text(
+			text = "월",
+			modifier = dayOfWeekModifier,
+			color = colors.dayColor.takeOrElse { LocalContentColor.current },
+			textAlign = TextAlign.Center,
+			style = DiaryTheme.typography.bodySmall,
+		)
+		Text(
+			text = "화",
+			modifier = dayOfWeekModifier,
+			color = colors.dayColor.takeOrElse { LocalContentColor.current },
+			textAlign = TextAlign.Center,
+			style = DiaryTheme.typography.bodySmall,
+		)
+		Text(
+			text = "수",
+			modifier = dayOfWeekModifier,
+			color = colors.dayColor.takeOrElse { LocalContentColor.current },
+			textAlign = TextAlign.Center,
+			style = DiaryTheme.typography.bodySmall,
+		)
+		Text(
+			text = "목",
+			modifier = dayOfWeekModifier,
+			color = colors.dayColor.takeOrElse { LocalContentColor.current },
+			textAlign = TextAlign.Center,
+			style = DiaryTheme.typography.bodySmall,
+		)
+		Text(
+			text = "금",
+			modifier = dayOfWeekModifier,
+			color = colors.dayColor.takeOrElse { LocalContentColor.current },
+			textAlign = TextAlign.Center,
+			style = DiaryTheme.typography.bodySmall,
+		)
+		Text(
+			text = "토",
+			modifier = dayOfWeekModifier,
+			color = colors.saturdayColor,
+			textAlign = TextAlign.Center,
+			style = DiaryTheme.typography.bodySmall,
+		)
+	}
 }

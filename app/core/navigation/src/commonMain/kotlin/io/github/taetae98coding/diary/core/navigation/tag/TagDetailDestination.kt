@@ -5,10 +5,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class TagDetailDestination(
-    @SerialName(TAG_ID)
-    val tagId: String,
+	@SerialName(TAG_ID)
+	val tagId: String,
 ) {
-    public companion object {
-        public const val TAG_ID: String = "tagId"
-    }
+	public companion object {
+		public const val TAG_ID: String = "tagId"
+	}
 }

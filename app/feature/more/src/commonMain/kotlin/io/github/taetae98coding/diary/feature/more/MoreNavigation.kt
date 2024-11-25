@@ -8,12 +8,12 @@ import io.github.taetae98coding.diary.core.navigation.account.LoginDestination
 import io.github.taetae98coding.diary.core.navigation.more.MoreDestination
 
 public fun NavGraphBuilder.moreNavigation(
-    navController: NavController,
+	navController: NavController,
 ) {
-    composable<MoreDestination> {
-        MoreRoute(
-            navigateToLogin = { navController.navigate(LoginDestination) },
-            navigateToJoin = { navController.navigate(JoinDestination) },
-        )
-    }
+	composable<MoreDestination> {
+		MoreRoute(
+			navigateToLogin = { navController.navigate(LoginDestination) },
+			navigateToJoin = { navController.navigate(JoinDestination) },
+		)
+	}
 }

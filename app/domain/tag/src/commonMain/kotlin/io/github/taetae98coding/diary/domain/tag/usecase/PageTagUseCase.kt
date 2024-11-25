@@ -14,19 +14,16 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-public class PageTagUseCase internal constructor(
-    private val getAccountUseCase: GetAccountUseCase,
-    private val repository: TagRepository,
-) {
-    public operator fun invoke(): Flow<Result<List<Tag>>> {
-        return flow {
-            getAccountUseCase().mapLatest { it.getOrThrow() }
-                .flatMapLatest { repository.page(it.uid) }
-                .also { emitAll(it) }
-        }.mapLatest {
-            Result.success(it)
-        }.catch {
-            emit(Result.failure(it))
-        }
-    }
+public class PageTagUseCase internal constructor(private val getAccountUseCase: GetAccountUseCase, private val repository: TagRepository) {
+	public operator fun invoke(): Flow<Result<List<Tag>>> =
+		flow {
+			getAccountUseCase()
+				.mapLatest { it.getOrThrow() }
+				.flatMapLatest { repository.page(it.uid) }
+				.also { emitAll(it) }
+		}.mapLatest {
+			Result.success(it)
+		}.catch {
+			emit(Result.failure(it))
+		}
 }

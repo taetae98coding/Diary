@@ -13,9 +13,7 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-public class FetchMemoUseCase internal constructor(
-	private val repository: MemoRepository,
-) {
+public class FetchMemoUseCase internal constructor(private val repository: MemoRepository) {
 	public operator fun invoke(uid: String, updateAt: Instant): Flow<Result<List<MemoAndTagIds>>> =
 		flow { emitAll(repository.findMemoAndTagIdsByUpdateAt(uid, updateAt)) }
 			.mapLatest { Result.success(it) }

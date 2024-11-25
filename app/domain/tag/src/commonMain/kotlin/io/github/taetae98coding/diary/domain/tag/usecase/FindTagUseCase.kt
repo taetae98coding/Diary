@@ -13,14 +13,12 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-public class FindTagUseCase internal constructor(
-    private val repository: TagRepository,
-) {
-    public operator fun invoke(tagId: String?): Flow<Result<Tag?>> {
-        if (tagId.isNullOrBlank()) return flowOf(Result.success(null))
+public class FindTagUseCase internal constructor(private val repository: TagRepository) {
+	public operator fun invoke(tagId: String?): Flow<Result<Tag?>> {
+		if (tagId.isNullOrBlank()) return flowOf(Result.success(null))
 
-        return flow { emitAll(repository.find(tagId)) }
-            .mapLatest { Result.success(it) }
-            .catch { emit(Result.failure(it)) }
-    }
+		return flow { emitAll(repository.find(tagId)) }
+			.mapLatest { Result.success(it) }
+			.catch { emit(Result.failure(it)) }
+	}
 }

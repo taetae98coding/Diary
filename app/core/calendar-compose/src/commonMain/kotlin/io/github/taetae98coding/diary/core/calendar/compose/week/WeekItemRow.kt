@@ -30,67 +30,67 @@ import kotlin.jvm.JvmName
 
 @Composable
 internal fun WeekItemRow(
-    items: List<WeekItem>,
-    onWeekItemClick: (Any) -> Unit,
-    modifier: Modifier = Modifier,
-    colors: CalendarColors = CalendarDefaults.colors(),
+	items: List<WeekItem>,
+	onWeekItemClick: (Any) -> Unit,
+	modifier: Modifier = Modifier,
+	colors: CalendarColors = CalendarDefaults.colors(),
 ) {
-    Row(modifier = modifier.height(IntrinsicSize.Min)) {
-        items.forEach {
-            when (it) {
-                is WeekItem.Space -> {
-                    Spacer(modifier = Modifier.weight(it.weight))
-                }
+	Row(modifier = modifier.height(IntrinsicSize.Min)) {
+		items.forEach {
+			when (it) {
+				is WeekItem.Space -> {
+					Spacer(modifier = Modifier.weight(it.weight))
+				}
 
-                is WeekItem.Holiday -> {
-                    key(it.key) {
-                        WeekTextItem(
-                            text = it.name,
-                            color = colors.sundayColor,
-                            modifier = Modifier.weight(it.weight)
-                                .fillMaxHeight()
-                                .padding(horizontal = 1.dp)
-                                .clip(RoundedCornerShape(4.dp)),
-                        )
-                    }
-                }
+				is WeekItem.Holiday -> {
+					key(it.key) {
+						WeekTextItem(
+							text = it.name,
+							color = colors.sundayColor,
+							modifier = Modifier.weight(it.weight)
+								.fillMaxHeight()
+								.padding(horizontal = 1.dp)
+								.clip(RoundedCornerShape(4.dp)),
+						)
+					}
+				}
 
-                is WeekItem.Text -> {
-                    key(it.key) {
-                        WeekTextItem(
-                            text = it.name,
-                            color = it.color,
-                            modifier = Modifier.weight(it.weight)
-                                .fillMaxHeight()
-                                .padding(horizontal = 1.dp)
-                                .clip(RoundedCornerShape(4.dp))
-                                .clickable { onWeekItemClick(it.key) },
-                        )
-                    }
-                }
-            }
-        }
-    }
+				is WeekItem.Text -> {
+					key(it.key) {
+						WeekTextItem(
+							text = it.name,
+							color = it.color,
+							modifier = Modifier.weight(it.weight)
+								.fillMaxHeight()
+								.padding(horizontal = 1.dp)
+								.clip(RoundedCornerShape(4.dp))
+								.clickable { onWeekItemClick(it.key) },
+						)
+					}
+				}
+			}
+		}
+	}
 }
 
 @Composable
 private fun WeekTextItem(
-    text: String,
-    color: Color,
-    modifier: Modifier = Modifier,
+	text: String,
+	color: Color,
+	modifier: Modifier = Modifier,
 ) {
-    Box(
-        modifier = modifier.background(color = color),
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(
-            text = text,
-            modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE)
-                .padding(2.dp),
-            color = color.toContrastColor(),
-            textAlign = TextAlign.Center,
-            maxLines = 1,
-            style = DiaryTheme.typography.labelMedium,
-        )
-    }
+	Box(
+		modifier = modifier.background(color = color),
+		contentAlignment = Alignment.Center,
+	) {
+		Text(
+			text = text,
+			modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE)
+				.padding(2.dp),
+			color = color.toContrastColor(),
+			textAlign = TextAlign.Center,
+			maxLines = 1,
+			style = DiaryTheme.typography.labelMedium,
+		)
+	}
 }

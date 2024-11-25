@@ -9,15 +9,17 @@ import platform.Foundation.NSUserDomainMask
 
 @OptIn(ExperimentalForeignApi::class)
 internal actual fun KoinComponent.getDataStoreAbsolutePath(name: String): String {
-    val documentDirectory: NSURL? = NSFileManager.defaultManager.URLForDirectory(
-        directory = NSDocumentDirectory,
-        inDomain = NSUserDomainMask,
-        appropriateForURL = null,
-        create = false,
-        error = null,
-    )?.also {
+	val documentDirectory: NSURL? =
+		NSFileManager.defaultManager
+			.URLForDirectory(
+				directory = NSDocumentDirectory,
+				inDomain = NSUserDomainMask,
+				appropriateForURL = null,
+				create = false,
+				error = null,
+			)?.also {
 //        NSFileManager.defaultManager.removeItemAtURL(it, null)
-    }
+			}
 
-    return requireNotNull(documentDirectory).path + "/$name"
+	return requireNotNull(documentDirectory).path + "/$name"
 }

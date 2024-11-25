@@ -13,18 +13,18 @@ import io.github.taetae98coding.diary.feature.tag.tagNavigation
 
 @Composable
 internal fun AppNavHost(
-    state: AppState,
-    modifier: Modifier = Modifier,
+	state: AppState,
+	modifier: Modifier = Modifier,
 ) {
-    NavHost(
-        navController = state.navController,
-        startDestination = CalendarDestination,
-        modifier = modifier,
-    ) {
-        memoNavigation(navController = state.navController)
-        tagNavigation(navController = state.navController)
-        calendarNavigation(navController = state.navController)
-        moreNavigation(navController = state.navController)
-        accountNavigation(navController = state.navController)
-    }
+	NavHost(
+		navController = state.navController,
+		startDestination = CalendarDestination,
+		modifier = modifier,
+	) {
+		memoNavigation(navController = state.navController)
+		tagNavigation(navController = state.navController)
+		calendarNavigation(navController = state.navController)
+		moreNavigation(navController = state.navController)
+		accountNavigation(navController = state.navController)
+	}
 }

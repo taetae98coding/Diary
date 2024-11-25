@@ -10,38 +10,32 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.mapLatest
 
 @OptIn(ExperimentalCoroutinesApi::class)
-internal class AccountDataStorePreferences(private val dataStore: DataStore<Preferences>, ) : AccountPreferences {
-    override suspend fun save(email: String, uid: String, token: String) {
-        dataStore.edit {
-            it[stringPreferencesKey(EMAIL)] = email
-            it[stringPreferencesKey(UID)] = uid
-            it[stringPreferencesKey(TOKEN)] = token
-        }
-    }
+internal class AccountDataStorePreferences(private val dataStore: DataStore<Preferences>) : AccountPreferences {
+	override suspend fun save(email: String, uid: String, token: String) {
+		dataStore.edit {
+			it[stringPreferencesKey(EMAIL)] = email
+			it[stringPreferencesKey(UID)] = uid
+			it[stringPreferencesKey(TOKEN)] = token
+		}
+	}
 
-    override suspend fun clear() {
-        dataStore.edit {
-            it.remove(stringPreferencesKey(EMAIL))
-            it.remove(stringPreferencesKey(UID))
-            it.remove(stringPreferencesKey(TOKEN))
-        }
-    }
+	override suspend fun clear() {
+		dataStore.edit {
+			it.remove(stringPreferencesKey(EMAIL))
+			it.remove(stringPreferencesKey(UID))
+			it.remove(stringPreferencesKey(TOKEN))
+		}
+	}
 
-    override fun getEmail(): Flow<String?> {
-        return dataStore.data.mapLatest { it[stringPreferencesKey(EMAIL)] }
-    }
+	override fun getEmail(): Flow<String?> = dataStore.data.mapLatest { it[stringPreferencesKey(EMAIL)] }
 
-    override fun getUid(): Flow<String?> {
-        return dataStore.data.mapLatest { it[stringPreferencesKey(UID)] }
-    }
+	override fun getUid(): Flow<String?> = dataStore.data.mapLatest { it[stringPreferencesKey(UID)] }
 
-    override fun getToken(): Flow<String?> {
-        return dataStore.data.mapLatest { it[stringPreferencesKey(TOKEN)] }
-    }
+	override fun getToken(): Flow<String?> = dataStore.data.mapLatest { it[stringPreferencesKey(TOKEN)] }
 
-    companion object {
-        private const val EMAIL = "EMAIL"
-        private const val UID = "UID"
-        private const val TOKEN = "TOKEN"
-    }
+	companion object {
+		private const val EMAIL = "EMAIL"
+		private const val UID = "UID"
+		private const val TOKEN = "TOKEN"
+	}
 }

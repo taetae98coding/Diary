@@ -9,14 +9,12 @@ import kotlinx.coroutines.launch
 import org.koin.core.annotation.Singleton
 
 @Singleton
-public class FCMManager internal constructor(
-    private val updateFCMTokenUseCase: UpdateFCMTokenUseCase,
-) {
-    public fun attach(lifecycleOwner: LifecycleOwner) {
-        lifecycleOwner.lifecycleScope.launch {
-            lifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                updateFCMTokenUseCase()
-            }
-        }
-    }
+public class FCMManager internal constructor(private val updateFCMTokenUseCase: UpdateFCMTokenUseCase) {
+	public fun attach(lifecycleOwner: LifecycleOwner) {
+		lifecycleOwner.lifecycleScope.launch {
+			lifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+				updateFCMTokenUseCase()
+			}
+		}
+	}
 }
