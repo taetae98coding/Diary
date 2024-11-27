@@ -16,6 +16,7 @@ internal fun rememberMemoDetailScreenDetailState(
 	detailProvider: () -> MemoDetail?,
 ): MemoDetailScreenState.Detail {
 	val detail = detailProvider()
+	println(detail)
 	val coroutineScope = rememberCoroutineScope()
 	val componentState =
 		rememberDiaryComponentState(

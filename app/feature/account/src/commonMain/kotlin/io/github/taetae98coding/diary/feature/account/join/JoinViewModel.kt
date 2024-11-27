@@ -14,7 +14,10 @@ import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
-internal class JoinViewModel(private val joinUseCase: JoinUseCase, private val loginUseCase: LoginUseCase) : ViewModel() {
+internal class JoinViewModel(
+	private val joinUseCase: JoinUseCase,
+	private val loginUseCase: LoginUseCase,
+) : ViewModel() {
 	private val _uiState = MutableStateFlow(JoinUiState(onMessageShow = ::clearMessage))
 	val uiState = _uiState.asStateFlow()
 

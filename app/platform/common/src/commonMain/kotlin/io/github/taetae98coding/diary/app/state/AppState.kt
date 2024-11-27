@@ -8,7 +8,9 @@ import io.github.taetae98coding.diary.app.navigation.AppNavigation
 import io.github.taetae98coding.diary.core.navigation.calendar.CalendarHomeDestination
 
 @Stable
-internal class AppState(val navController: NavHostController) {
+internal class AppState(
+	val navController: NavHostController,
+) {
 	fun navigate(navigation: AppNavigation) {
 		val isSelected =
 			navController.currentBackStackEntry

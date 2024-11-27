@@ -6,15 +6,20 @@ import io.github.taetae98coding.diary.core.model.memo.MemoDetail
 import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
 import io.github.taetae98coding.diary.domain.backup.usecase.PushMemoBackupQueueUseCase
 import io.github.taetae98coding.diary.domain.memo.repository.MemoRepository
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 import kotlinx.coroutines.flow.first
 import kotlinx.datetime.Clock
 import org.koin.core.annotation.Factory
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
 @OptIn(ExperimentalUuidApi::class)
 @Factory
-public class AddMemoUseCase internal constructor(private val getAccountUseCase: GetAccountUseCase, private val pushMemoBackupQueueUseCase: PushMemoBackupQueueUseCase, private val clock: Clock, private val repository: MemoRepository) {
+public class AddMemoUseCase internal constructor(
+	private val getAccountUseCase: GetAccountUseCase,
+	private val pushMemoBackupQueueUseCase: PushMemoBackupQueueUseCase,
+	private val clock: Clock,
+	private val repository: MemoRepository,
+) {
 	public suspend operator fun invoke(
 		detail: MemoDetail,
 		primaryTag: String?,

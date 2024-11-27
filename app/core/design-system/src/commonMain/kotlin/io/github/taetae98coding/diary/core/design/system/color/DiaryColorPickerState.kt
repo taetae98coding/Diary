@@ -10,7 +10,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import io.github.taetae98coding.diary.library.color.randomArgb
 
-public class DiaryColorPickerState internal constructor(initialColor: Color) {
+public class DiaryColorPickerState internal constructor(
+	initialColor: Color,
+) {
 	public var color: Color by mutableStateOf(initialColor)
 		private set
 

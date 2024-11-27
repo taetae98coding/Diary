@@ -53,7 +53,8 @@ public fun FinishAndDeleteSwipeBox(
 				)
 
 				Box(
-					modifier = Modifier.align(Alignment.CenterStart)
+					modifier = Modifier
+						.align(Alignment.CenterStart)
 						.padding(horizontal = 4.dp)
 						.graphicsLayer {
 							scaleX = scale
@@ -68,7 +69,8 @@ public fun FinishAndDeleteSwipeBox(
 				}
 
 				Box(
-					modifier = Modifier.align(Alignment.CenterEnd)
+					modifier = Modifier
+						.align(Alignment.CenterEnd)
 						.padding(horizontal = 4.dp)
 						.graphicsLayer {
 							scaleX = scale

@@ -18,6 +18,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.window.core.layout.WindowWidthSizeClass
 import io.github.taetae98coding.diary.core.compose.adaptive.isDetailVisible
@@ -35,16 +36,23 @@ import io.github.taetae98coding.diary.feature.tag.list.TagListFloatingButton
 import io.github.taetae98coding.diary.feature.tag.list.TagListScreen
 import io.github.taetae98coding.diary.feature.tag.list.TagListViewModel
 import io.github.taetae98coding.diary.feature.tag.list.rememberTagListScreenState
+import io.github.taetae98coding.diary.feature.tag.memo.TagMemoNavigateButton
+import io.github.taetae98coding.diary.feature.tag.memo.TagMemoScreen
+import io.github.taetae98coding.diary.feature.tag.memo.TagMemoViewModel
+import io.github.taetae98coding.diary.feature.tag.memo.rememberTagMemoScreenState
 import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 internal fun TagRoute(
+	navigateToMemoAdd: (String) -> Unit,
+	navigateToMemoDetail: (String) -> Unit,
 	onScaffoldValueChange: (ThreePaneScaffoldValue) -> Unit,
 	modifier: Modifier = Modifier,
 	listViewModel: TagListViewModel = koinViewModel(),
 	addViewModel: TagAddViewModel = koinViewModel(),
 	detailViewModel: TagDetailViewModel = koinViewModel(),
+	memoViewModel: TagMemoViewModel = koinViewModel(),
 ) {
 	val windowAdaptiveInfo = currentWindowAdaptiveInfo()
 	val navigator = rememberListDetailPaneScaffoldNavigator<String?>(scaffoldDirective = calculatePaneScaffoldDirective(windowAdaptiveInfo))
@@ -53,7 +61,7 @@ internal fun TagRoute(
 	var detailPaneRefreshCount by remember { mutableIntStateOf(0) }
 
 	ListDetailPaneScaffold(
-		directive = navigator.scaffoldDirective,
+		directive = navigator.scaffoldDirective.copy(defaultPanePreferredWidth = 500.dp),
 		value = navigator.scaffoldValue,
 		listPane = {
 			AnimatedPane {
@@ -132,14 +140,17 @@ internal fun TagRoute(
 								detailPaneRefreshCount++
 							}
 						},
+						onMemo = { navigator.currentDestination?.content?.let { navigator.navigateTo(ThreePaneScaffoldRole.Tertiary, it) } },
 						detailProvider = { tagDetail },
 					)
 				}
-				val isNavigateUpVisible = remember(windowAdaptiveInfo) {
-					if (windowAdaptiveInfo.windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.EXPANDED) {
-						!navigator.isListVisible()
-					} else {
-						true
+				val isNavigateUpVisible by remember(windowAdaptiveInfo) {
+					derivedStateOf {
+						if (windowAdaptiveInfo.windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.EXPANDED) {
+							!navigator.isListVisible()
+						} else {
+							true
+						}
 					}
 				}
 				val detailActionButton by detailViewModel.actionButton.collectAsStateWithLifecycle()
@@ -206,6 +217,35 @@ internal fun TagRoute(
 			}
 		},
 		modifier = modifier,
+		extraPane = {
+			AnimatedPane {
+				val uiState by memoViewModel.uiState.collectAsStateWithLifecycle()
+				val list by memoViewModel.memoList.collectAsStateWithLifecycle()
+
+				val isNavigateUpVisible = remember(windowAdaptiveInfo) {
+					if (windowAdaptiveInfo.windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.EXPANDED) {
+						!navigator.isDetailVisible()
+					} else {
+						true
+					}
+				}
+
+				TagMemoScreen(
+					state = rememberTagMemoScreenState(),
+					navigateButtonProvider = {
+						if (isNavigateUpVisible) {
+							TagMemoNavigateButton.NavigateUp(onNavigateUp = navigator::navigateBack)
+						} else {
+							TagMemoNavigateButton.None
+						}
+					},
+					uiStateProvider = { uiState },
+					onAdd = { navigator.currentDestination?.content?.let(navigateToMemoAdd) },
+					listProvider = { list },
+					onMemo = navigateToMemoDetail,
+				)
+			}
+		},
 	)
 
 	LaunchedScaffoldValue(
@@ -216,6 +256,7 @@ internal fun TagRoute(
 	LaunchedFetch(
 		navigator = navigator,
 		detailViewModel = detailViewModel,
+		memoViewModel = memoViewModel,
 	)
 
 	KBackHandler(
@@ -229,9 +270,11 @@ internal fun TagRoute(
 private fun LaunchedFetch(
 	navigator: ThreePaneScaffoldNavigator<String?>,
 	detailViewModel: TagDetailViewModel,
+	memoViewModel: TagMemoViewModel,
 ) {
 	LaunchedEffect(navigator.currentDestination?.content, detailViewModel) {
 		detailViewModel.fetch(navigator.currentDestination?.content)
+		memoViewModel.fetch(navigator.currentDestination?.content)
 	}
 }
 

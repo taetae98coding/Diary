@@ -7,7 +7,10 @@ import kotlinx.coroutines.flow.first
 import org.koin.core.annotation.Factory
 
 @Factory
-public class UpdateFCMTokenUseCase internal constructor(private val getAccountUseCase: GetAccountUseCase, private val repository: FCMRepository) {
+public class UpdateFCMTokenUseCase internal constructor(
+	private val getAccountUseCase: GetAccountUseCase,
+	private val repository: FCMRepository,
+) {
 	public suspend operator fun invoke(): Result<Unit> =
 		runCatching {
 			val account = getAccountUseCase().first().getOrThrow()

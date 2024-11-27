@@ -8,11 +8,21 @@ public sealed class CalendarItemUiState :
 	public abstract val key: Any
 	public abstract val text: String
 
-	public data class Holiday(override val text: String, override val start: LocalDate, override val endInclusive: LocalDate) : CalendarItemUiState() {
+	public data class Holiday(
+		override val text: String,
+		override val start: LocalDate,
+		override val endInclusive: LocalDate,
+	) : CalendarItemUiState() {
 		override val key: String = "$text($start~$endInclusive)"
 	}
 
-	public data class Text(override val key: Any, override val text: String, val color: Int, override val start: LocalDate, override val endInclusive: LocalDate) : CalendarItemUiState()
+	public data class Text(
+		override val key: Any,
+		override val text: String,
+		val color: Int,
+		override val start: LocalDate,
+		override val endInclusive: LocalDate,
+	) : CalendarItemUiState()
 
 	override fun compareTo(other: CalendarItemUiState): Int {
 		if (start != other.start) {

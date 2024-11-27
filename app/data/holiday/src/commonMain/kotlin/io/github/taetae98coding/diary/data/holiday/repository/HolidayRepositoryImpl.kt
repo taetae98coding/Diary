@@ -30,7 +30,11 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-internal class HolidayRepositoryImpl(private val preferencesDataSource: HolidayPreferences, private val localDataSource: HolidayDao, private val remoteDataSource: HolidayService) : HolidayRepository {
+internal class HolidayRepositoryImpl(
+	private val preferencesDataSource: HolidayPreferences,
+	private val localDataSource: HolidayDao,
+	private val remoteDataSource: HolidayService,
+) : HolidayRepository {
 	override fun findHoliday(year: Int, month: Month): Flow<List<Holiday>> {
 		val localDate = LocalDate(year, month, 1)
 		val list = IntRange(-1, 1).map { localDate.plus(it, DateTimeUnit.MONTH) }

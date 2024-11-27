@@ -17,7 +17,9 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-internal class MemoRepositoryImpl(private val localDataSource: MemoDao) : MemoRepository {
+internal class MemoRepositoryImpl(
+	private val localDataSource: MemoDao,
+) : MemoRepository {
 	override suspend fun upsert(memo: Memo, tagIds: Set<String>) {
 		localDataSource.upsert(MemoAndTagIds(memo.toDto(), tagIds))
 	}

@@ -69,7 +69,8 @@ internal fun CalendarHomeScreen(
 			textItemListProvider = textItemListProvider,
 			holidayListProvider = holidayListProvider,
 			onCalendarItemClick = onCalendarItemClick,
-			modifier = Modifier.fillMaxSize()
+			modifier = Modifier
+				.fillMaxSize()
 				.padding(it)
 				.calendarDateRangeSelectable(
 					state = state.calendarState,

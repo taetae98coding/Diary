@@ -5,7 +5,10 @@ import io.github.taetae98coding.diary.core.navigation.memo.MemoDestination
 import io.github.taetae98coding.diary.core.navigation.more.MoreDestination
 import io.github.taetae98coding.diary.core.navigation.tag.TagDestination
 
-internal enum class AppNavigation(val title: String, val route: Any) {
+internal enum class AppNavigation(
+	val title: String,
+	val route: Any,
+) {
 	Memo(
 		title = "메모",
 		route = MemoDestination,

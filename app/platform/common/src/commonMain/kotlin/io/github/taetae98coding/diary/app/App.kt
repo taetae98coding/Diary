@@ -38,7 +38,8 @@ import kotlinx.coroutines.flow.flowOf
 public fun App() {
 	DiaryTheme {
 		AppScaffold(
-			modifier = Modifier.fillMaxSize()
+			modifier = Modifier
+				.fillMaxSize()
 				.imePadding(),
 		)
 	}
@@ -62,7 +63,8 @@ private fun AppScaffold(
 			)
 
 			isNavigationVisibleFromBackStackEntry ?: visibleDestination.any {
-				backStackEntry?.destination
+				backStackEntry
+					?.destination
 					?.hasRoute(it)
 					?: false
 			}
@@ -77,7 +79,8 @@ private fun AppScaffold(
 				AppNavigation.Calendar,
 				AppNavigation.More,
 			).forEach { navigation ->
-				val isSelected = backStackEntry?.destination
+				val isSelected = backStackEntry
+					?.destination
 					?.hierarchy
 					?.any { it.hasRoute(navigation.route::class) }
 					?: false

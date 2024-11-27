@@ -13,7 +13,9 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-public class FindHolidayUseCase internal constructor(private val repository: HolidayRepository) {
+public class FindHolidayUseCase internal constructor(
+	private val repository: HolidayRepository,
+) {
 	public operator fun invoke(year: Int, month: Month): Flow<Result<List<Holiday>>> =
 		flow { emitAll(repository.findHoliday(year, month)) }
 			.mapLatest { Result.success(it) }

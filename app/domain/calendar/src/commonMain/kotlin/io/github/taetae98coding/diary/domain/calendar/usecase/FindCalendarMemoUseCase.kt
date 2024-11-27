@@ -2,7 +2,6 @@ package io.github.taetae98coding.diary.domain.calendar.usecase
 
 import io.github.taetae98coding.diary.core.model.memo.Memo
 import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
-import io.github.taetae98coding.diary.domain.calendar.repository.CalendarRepository
 import io.github.taetae98coding.diary.domain.memo.repository.MemoRepository
 import io.github.taetae98coding.diary.domain.tag.repository.TagRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -18,19 +17,22 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-public class FindCalendarMemoUseCase internal constructor(private val getAccountUseCase: GetAccountUseCase, private val calendarRepository: CalendarRepository, private val memoRepository: MemoRepository, private val tagRepository: TagRepository) {
+public class FindCalendarMemoUseCase internal constructor(
+	private val getAccountUseCase: GetAccountUseCase,
+	private val findCalendarSelectedTagFilterUseCase: FindCalendarSelectedTagFilterUseCase,
+	private val memoRepository: MemoRepository,
+	private val tagRepository: TagRepository,
+) {
 	public operator fun invoke(dateRange: ClosedRange<LocalDate>): Flow<Result<List<Memo>>> =
 		flow {
-			val accountFlow = getAccountUseCase().mapLatest { it.getOrThrow() }
-			val calendarTagFilterFlow =
-				accountFlow
-					.flatMapLatest { calendarRepository.findFilter(it.uid) }
-					.flatMapLatest { tagRepository.findByIds(it) }
-					.mapLatest { list -> list.map { it.id }.toSet() }
-
-			combine(accountFlow, calendarTagFilterFlow) { account, tagFilter ->
+			combine(
+				getAccountUseCase().mapLatest { it.getOrThrow() },
+				findCalendarSelectedTagFilterUseCase().mapLatest { it.getOrThrow() },
+			) { account, selectedTagFilter ->
+				account to selectedTagFilter.map { it.id }.toSet()
+			}.flatMapLatest { (account, selectedTagFilterIds) ->
 				memoRepository
-					.findByDateRange(account.uid, dateRange, tagFilter)
+					.findByDateRange(account.uid, dateRange, selectedTagFilterIds)
 					.flatMapLatest { memoList ->
 						val tagIdSet = memoList.mapNotNull { it.primaryTag }.toSet()
 
@@ -48,8 +50,6 @@ public class FindCalendarMemoUseCase internal constructor(private val getAccount
 							}
 						}
 					}
-			}.flatMapLatest {
-				it
 			}.also {
 				emitAll(it)
 			}

@@ -10,4 +10,10 @@ public data class MemoAddDestination(
 	val start: LocalDate? = null,
 	@SerialName("endInclusive")
 	val endInclusive: LocalDate? = null,
-)
+	@SerialName(SELECTED_TAG)
+	val selectedTag: String? = null,
+) {
+	public companion object {
+		public const val SELECTED_TAG: String = "selectedTag"
+	}
+}

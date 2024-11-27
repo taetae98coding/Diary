@@ -10,7 +10,11 @@ import kotlinx.coroutines.sync.withLock
 import org.koin.core.annotation.Factory
 
 @Factory
-internal class MemoBackupRepositoryImpl(private val memoDao: MemoDao, private val memoBackupDao: MemoBackupDao, private val memoService: MemoService) : MemoBackupRepository {
+internal class MemoBackupRepositoryImpl(
+	private val memoDao: MemoDao,
+	private val memoBackupDao: MemoBackupDao,
+	private val memoService: MemoService,
+) : MemoBackupRepository {
 	override suspend fun backup(uid: String) {
 		mutex.withLock {
 			while (true) {

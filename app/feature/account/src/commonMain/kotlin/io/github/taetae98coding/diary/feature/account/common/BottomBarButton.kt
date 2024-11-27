@@ -52,7 +52,8 @@ internal fun BottomBarButtonContent(
 	content: @Composable BoxScope.() -> Unit,
 ) {
 	Box(
-		modifier = modifier.fillMaxWidth()
+		modifier = modifier
+			.fillMaxWidth()
 			.height(50.dp)
 			.windowInsetsPadding(NavigationBarDefaults.windowInsets),
 		contentAlignment = Alignment.Center,

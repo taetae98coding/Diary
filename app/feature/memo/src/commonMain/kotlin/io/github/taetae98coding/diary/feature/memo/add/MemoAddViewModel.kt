@@ -13,7 +13,6 @@ import io.github.taetae98coding.diary.domain.tag.usecase.PageTagUseCase
 import io.github.taetae98coding.diary.feature.memo.detail.MemoDetailScreenUiState
 import io.github.taetae98coding.diary.feature.memo.tag.TagUiState
 import io.github.taetae98coding.diary.library.navigation.LocalDateNavType
-import kotlin.reflect.typeOf
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -25,10 +24,15 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
 import org.koin.android.annotation.KoinViewModel
+import kotlin.reflect.typeOf
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @KoinViewModel
-internal class MemoAddViewModel(savedStateHandle: SavedStateHandle, private val addMemoUseCase: AddMemoUseCase, pageTagUseCase: PageTagUseCase) : ViewModel() {
+internal class MemoAddViewModel(
+	savedStateHandle: SavedStateHandle,
+	private val addMemoUseCase: AddMemoUseCase,
+	pageTagUseCase: PageTagUseCase,
+) : ViewModel() {
 	val route =
 		savedStateHandle.toRoute<MemoAddDestination>(
 			typeMap = mapOf(typeOf<LocalDate?>() to LocalDateNavType),
@@ -45,7 +49,7 @@ internal class MemoAddViewModel(savedStateHandle: SavedStateHandle, private val 
 				started = SharingStarted.WhileSubscribed(5_000),
 				initialValue = null,
 			)
-	private val selectedTag = MutableStateFlow(emptySet<String>())
+	private val selectedTag = MutableStateFlow(setOfNotNull(savedStateHandle.get<String?>(MemoAddDestination.SELECTED_TAG)))
 	private val primaryTag = MutableStateFlow<String?>(null)
 
 	val memoTagList =

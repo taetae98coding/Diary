@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.2] - 2024-11-27
+
+### 🚀 Features
+
+- App - TagDetail TagMemo Tab
+- App - preferred width 500
+
 ## [1.2.1] - 2024-11-25
 
 ### 🚀 Features

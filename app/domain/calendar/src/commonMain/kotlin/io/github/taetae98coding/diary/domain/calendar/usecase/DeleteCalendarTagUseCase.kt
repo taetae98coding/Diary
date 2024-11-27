@@ -6,9 +6,14 @@ import kotlinx.coroutines.flow.first
 import org.koin.core.annotation.Factory
 
 @Factory
-public class DeleteCalendarTagUseCase internal constructor(private val getAccountUseCase: GetAccountUseCase, private val repository: CalendarRepository) {
-	public suspend operator fun invoke(tagId: String): Result<Unit> =
+public class DeleteCalendarTagUseCase internal constructor(
+	private val getAccountUseCase: GetAccountUseCase,
+	private val repository: CalendarRepository,
+) {
+	public suspend operator fun invoke(tagId: String?): Result<Unit> =
 		runCatching {
+			if (tagId.isNullOrBlank()) return@runCatching
+
 			val account = getAccountUseCase().first().getOrThrow()
 			repository.delete(account.uid, tagId)
 		}

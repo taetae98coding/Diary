@@ -8,7 +8,9 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
-internal class TagListScreenState(private val coroutineScope: CoroutineScope) {
+internal class TagListScreenState(
+	private val coroutineScope: CoroutineScope,
+) {
 	private var messageJob: Job? = null
 
 	val hostState: SnackbarHostState = SnackbarHostState()

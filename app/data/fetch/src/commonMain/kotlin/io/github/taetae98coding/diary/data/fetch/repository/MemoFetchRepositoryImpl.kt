@@ -10,7 +10,10 @@ import kotlinx.datetime.Instant
 import org.koin.core.annotation.Factory
 
 @Factory
-internal class MemoFetchRepositoryImpl(private val localDataSource: MemoDao, private val remoteDataSource: MemoService) : MemoFetchRepository {
+internal class MemoFetchRepositoryImpl(
+	private val localDataSource: MemoDao,
+	private val remoteDataSource: MemoService,
+) : MemoFetchRepository {
 	override suspend fun fetch(uid: String) {
 		mutex.withLock {
 			while (true) {

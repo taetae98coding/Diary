@@ -36,7 +36,8 @@ public fun DiaryColorPicker(
 
 		ColorBox(
 			state = state,
-			modifier = Modifier.fillMaxWidth()
+			modifier = Modifier
+				.fillMaxWidth()
 				.height(200.dp),
 		)
 

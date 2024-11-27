@@ -9,7 +9,12 @@ import kotlinx.coroutines.launch
 import org.koin.core.annotation.Factory
 
 @Factory
-public class PushMemoBackupQueueUseCase internal constructor(private val getAccountUseCase: GetAccountUseCase, private val backupUseCase: BackupUseCase, private val coroutineScope: CoroutineScope, private val repository: MemoBackupRepository) {
+public class PushMemoBackupQueueUseCase internal constructor(
+	private val getAccountUseCase: GetAccountUseCase,
+	private val backupUseCase: BackupUseCase,
+	private val coroutineScope: CoroutineScope,
+	private val repository: MemoBackupRepository,
+) {
 	public suspend operator fun invoke(memoId: String?): Result<Unit> {
 		return runCatching {
 			if (memoId.isNullOrBlank()) return@runCatching

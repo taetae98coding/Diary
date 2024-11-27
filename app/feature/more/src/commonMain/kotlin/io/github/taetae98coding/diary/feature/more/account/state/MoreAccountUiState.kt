@@ -5,5 +5,8 @@ internal sealed class MoreAccountUiState {
 
 	data object Guest : MoreAccountUiState()
 
-	data class Member(val email: String, val logout: () -> Unit) : MoreAccountUiState()
+	data class Member(
+		val email: String,
+		val logout: () -> Unit,
+	) : MoreAccountUiState()
 }

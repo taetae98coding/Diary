@@ -10,7 +10,11 @@ import kotlinx.coroutines.sync.withLock
 import org.koin.core.annotation.Factory
 
 @Factory
-internal class TagBackupRepositoryImpl(private val tagDao: TagDao, private val tagBackupDao: TagBackupDao, private val tagService: TagService) : TagBackupRepository {
+internal class TagBackupRepositoryImpl(
+	private val tagDao: TagDao,
+	private val tagBackupDao: TagBackupDao,
+	private val tagService: TagService,
+) : TagBackupRepository {
 	override suspend fun backup(uid: String) {
 		mutex.withLock {
 			while (true) {

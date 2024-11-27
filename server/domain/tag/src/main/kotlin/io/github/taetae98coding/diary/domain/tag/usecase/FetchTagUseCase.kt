@@ -13,7 +13,9 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-public class FetchTagUseCase internal constructor(private val repository: TagRepository) {
+public class FetchTagUseCase internal constructor(
+	private val repository: TagRepository,
+) {
 	public operator fun invoke(uid: String, updateAt: Instant): Flow<Result<List<Tag>>> =
 		flow { emitAll(repository.findByUpdateAt(uid, updateAt)) }
 			.mapLatest { Result.success(it) }

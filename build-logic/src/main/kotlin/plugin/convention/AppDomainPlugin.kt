@@ -9,10 +9,12 @@ import ext.withKotlinMultiplatform
 import ext.withPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import plugin.kotest.KotestJvmPlugin
 import plugin.kotlin.KotlinMultiplatformCommonPlugin
 
 internal class AppDomainPlugin : Plugin<Project> {
     private val kotlinMultiplatformCommonPlugin = KotlinMultiplatformCommonPlugin()
+    private val kotestJvmPlugin = KotestJvmPlugin()
 
     override fun apply(target: Project) {
         val libs = target.libs
@@ -47,5 +49,7 @@ internal class AppDomainPlugin : Plugin<Project> {
             kspCommon(platform(libs.library("koin-annotations-bom")))
             kspCommon(libs.library("koin-compiler"))
         }
+
+        kotestJvmPlugin.apply(target)
     }
 }

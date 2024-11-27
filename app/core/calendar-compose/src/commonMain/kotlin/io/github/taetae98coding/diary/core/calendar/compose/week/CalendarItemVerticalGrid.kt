@@ -33,7 +33,8 @@ internal fun CalendarItemVerticalGrid(
 				addAll(textItemListProvider())
 			}.filter {
 				it.isOverlap(state.dateRange)
-			}.sorted().toMutableList()
+			}.sorted()
+				.toMutableList()
 
 			buildList {
 				while (itemList.isNotEmpty()) {

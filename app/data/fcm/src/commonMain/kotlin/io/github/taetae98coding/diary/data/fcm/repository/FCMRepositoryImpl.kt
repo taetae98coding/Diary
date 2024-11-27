@@ -6,7 +6,10 @@ import io.github.taetae98coding.diary.library.firebase.messaging.KFirebaseMessag
 import org.koin.core.annotation.Factory
 
 @Factory
-internal class FCMRepositoryImpl(private val messaging: KFirebaseMessaging, private val remoteDataSource: FCMService) : FCMRepository {
+internal class FCMRepositoryImpl(
+	private val messaging: KFirebaseMessaging,
+	private val remoteDataSource: FCMService,
+) : FCMRepository {
 	override suspend fun upsert() {
 		remoteDataSource.upsert(messaging.getToken())
 	}

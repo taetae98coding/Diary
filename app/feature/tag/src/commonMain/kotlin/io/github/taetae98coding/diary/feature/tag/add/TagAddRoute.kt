@@ -7,6 +7,7 @@ import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaf
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.taetae98coding.diary.feature.tag.detail.TagDetailActionButton
 import io.github.taetae98coding.diary.feature.tag.detail.TagDetailFloatingButton
@@ -24,7 +25,7 @@ internal fun TagAddRoute(
 	val navigator = rememberListDetailPaneScaffoldNavigator()
 
 	ListDetailPaneScaffold(
-		directive = navigator.scaffoldDirective,
+		directive = navigator.scaffoldDirective.copy(defaultPanePreferredWidth = 500.dp),
 		value = navigator.scaffoldValue,
 		listPane = {
 			AnimatedPane {

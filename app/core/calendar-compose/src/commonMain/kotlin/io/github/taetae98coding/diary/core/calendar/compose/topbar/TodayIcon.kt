@@ -25,7 +25,8 @@ public fun TodayIcon(
 	modifier: Modifier = Modifier,
 ) {
 	Box(
-		modifier = modifier.size(24.dp)
+		modifier = modifier
+			.size(24.dp)
 			.border(
 				width = 1.dp,
 				color = LocalContentColor.current,

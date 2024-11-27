@@ -39,7 +39,8 @@ public fun CalendarTopBar(
 			var isDialogVisible by rememberSaveable { mutableStateOf(false) }
 
 			Row(
-				modifier = Modifier.clip(CircleShape)
+				modifier = Modifier
+					.clip(CircleShape)
 					.clickable { isDialogVisible = true }
 					.padding(horizontal = 8.dp, vertical = 4.dp)
 					.padding(start = 8.dp),

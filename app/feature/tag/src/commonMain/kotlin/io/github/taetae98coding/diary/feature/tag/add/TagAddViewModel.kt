@@ -13,7 +13,9 @@ import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
-internal class TagAddViewModel(private val addTagUseCase: AddTagUseCase) : ViewModel() {
+internal class TagAddViewModel(
+	private val addTagUseCase: AddTagUseCase,
+) : ViewModel() {
 	private val _uiState = MutableStateFlow(TagDetailScreenUiState(onMessageShow = ::clearMessage))
 	val uiState = _uiState.asStateFlow()
 

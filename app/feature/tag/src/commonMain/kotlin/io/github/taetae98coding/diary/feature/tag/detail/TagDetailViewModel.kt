@@ -71,11 +71,11 @@ internal class TagDetailViewModel(
 				scope = viewModelScope,
 				started = SharingStarted.WhileSubscribed(5_000),
 				initialValue =
-				TagDetailActionButton.FinishAndDetail(
-					isFinish = false,
-					onFinishChange = ::onFinishChange,
-					delete = ::delete,
-				),
+					TagDetailActionButton.FinishAndDetail(
+						isFinish = false,
+						onFinishChange = ::onFinishChange,
+						delete = ::delete,
+					),
 			)
 
 	private fun onFinishChange(isFinish: Boolean) {

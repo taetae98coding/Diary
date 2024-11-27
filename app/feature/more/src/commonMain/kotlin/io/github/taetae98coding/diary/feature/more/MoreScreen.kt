@@ -34,7 +34,8 @@ internal fun MoreScreen(
 			accountUiStateProvider = accountUiStateProvider,
 			onLogin = onLogin,
 			onJoin = onJoin,
-			modifier = Modifier.fillMaxSize()
+			modifier = Modifier
+				.fillMaxSize()
 				.padding(it)
 				.padding(DiaryTheme.dimen.screenPaddingValues),
 		)
@@ -49,7 +50,8 @@ private fun Content(
 	modifier: Modifier = Modifier,
 ) {
 	Column(
-		modifier = Modifier.verticalScroll(rememberScrollState())
+		modifier = Modifier
+			.verticalScroll(rememberScrollState())
 			.then(modifier),
 	) {
 		MoreAccount(

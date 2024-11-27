@@ -48,7 +48,8 @@ internal fun MemoTagScreen(
 			onTagAdd = onTagAdd,
 			memoTagListProvider = memoTagListProvider,
 			tagListProvider = tagListProvider,
-			modifier = Modifier.fillMaxWidth()
+			modifier = Modifier
+				.fillMaxWidth()
 				.padding(it)
 				.padding(DiaryTheme.dimen.diaryPaddingValues),
 		)
@@ -67,13 +68,15 @@ private fun Content(
 		verticalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace),
 	) {
 		TagFlow(
-			modifier = Modifier.fillMaxWidth()
+			modifier = Modifier
+				.fillMaxWidth()
 				.weight(3F),
 			listProvider = memoTagListProvider,
 			title = {
 				Text(
 					text = "캘린더 태그",
-					modifier = Modifier.fillMaxWidth()
+					modifier = Modifier
+						.fillMaxWidth()
 						.minimumInteractiveComponentSize()
 						.padding(horizontal = DiaryTheme.dimen.diaryHorizontalPadding),
 				)
@@ -83,13 +86,15 @@ private fun Content(
 		)
 
 		TagFlow(
-			modifier = Modifier.fillMaxWidth()
+			modifier = Modifier
+				.fillMaxWidth()
 				.weight(7F),
 			listProvider = tagListProvider,
 			title = {
 				Text(
 					text = "태그",
-					modifier = Modifier.fillMaxWidth()
+					modifier = Modifier
+						.fillMaxWidth()
 						.minimumInteractiveComponentSize()
 						.padding(horizontal = DiaryTheme.dimen.diaryHorizontalPadding),
 				)

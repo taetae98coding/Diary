@@ -9,7 +9,12 @@ import kotlinx.coroutines.flow.first
 import org.koin.core.annotation.Factory
 
 @Factory
-public class FetchUseCase internal constructor(private val getAccountUseCase: GetAccountUseCase, private val backupUseCase: BackupUseCase, private val memoFetchRepository: MemoFetchRepository, private val tagFetchRepository: TagFetchRepository) {
+public class FetchUseCase internal constructor(
+	private val getAccountUseCase: GetAccountUseCase,
+	private val backupUseCase: BackupUseCase,
+	private val memoFetchRepository: MemoFetchRepository,
+	private val tagFetchRepository: TagFetchRepository,
+) {
 	public suspend operator fun invoke(): Result<Unit> =
 		runCatching {
 			val account = getAccountUseCase().first().getOrThrow()

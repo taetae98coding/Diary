@@ -6,7 +6,9 @@ import kotlinx.coroutines.flow.Flow
 import org.koin.core.annotation.Factory
 
 @Factory
-internal class CalendarRepositoryImpl(private val localDataSource: CalendarFilterDao) : CalendarRepository {
+internal class CalendarRepositoryImpl(
+	private val localDataSource: CalendarFilterDao,
+) : CalendarRepository {
 	override suspend fun upsert(uid: String?, tagId: String) {
 		localDataSource.upsert(uid, tagId)
 	}

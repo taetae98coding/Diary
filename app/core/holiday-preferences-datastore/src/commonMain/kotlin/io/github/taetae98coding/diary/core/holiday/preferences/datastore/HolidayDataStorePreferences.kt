@@ -16,7 +16,10 @@ import kotlinx.datetime.Month
 import kotlinx.datetime.monthsUntil
 import kotlinx.datetime.number
 
-internal class HolidayDataStorePreferences(private val clock: Clock, private val dataStore: DataStore<Preferences>) : HolidayPreferences {
+internal class HolidayDataStorePreferences(
+	private val clock: Clock,
+	private val dataStore: DataStore<Preferences>,
+) : HolidayPreferences {
 	private val memoryDirtyStore = mutableMapOf<Pair<Int, Month>, MutableStateFlow<Boolean>>()
 
 	override fun isDirty(year: Int, month: Month): Flow<Boolean> {

@@ -1,10 +1,10 @@
 package io.github.taetae98coding.diary.library.coroutines
 
-import kotlin.jvm.JvmName
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.mapLatest
+import kotlin.jvm.JvmName
 
 @JvmName("mapCollectionLatest")
 @OptIn(ExperimentalCoroutinesApi::class)

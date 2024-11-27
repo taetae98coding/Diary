@@ -10,7 +10,9 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-internal class CalendarFilterRoomDao(private val database: FilterDatabase) : CalendarFilterDao {
+internal class CalendarFilterRoomDao(
+	private val database: FilterDatabase,
+) : CalendarFilterDao {
 	override suspend fun upsert(uid: String?, tagId: String) {
 		database.calendar().upsert(CalendarFilterEntity(uid.orEmpty(), tagId))
 	}

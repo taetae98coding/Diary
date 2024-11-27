@@ -52,7 +52,8 @@ internal fun TagFlow(
 			}
 		} else {
 			FlowRow(
-				modifier = Modifier.fillMaxSize()
+				modifier = Modifier
+					.fillMaxSize()
 					.verticalScroll(rememberScrollState())
 					.padding(DiaryTheme.dimen.itemSpace),
 				horizontalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace, Alignment.CenterHorizontally),

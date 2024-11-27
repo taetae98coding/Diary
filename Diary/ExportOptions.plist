@@ -9,10 +9,10 @@
 	<key>provisioningProfiles</key>
 	<dict>
 		<key>io.github.taetae98coding.diary</key>
-		<string>DiaryRealReleaseAdHoc</string>
+		<string>DiaryExport</string>
 	</dict>
 	<key>signingCertificate</key>
-	<string>FB549459D90CDC28F248EDA3AE6246EB856E77F9</string>
+	<string>68893A355C74683A1B64C16C2D460AA4AC8C2B94</string>
 	<key>signingStyle</key>
 	<string>manual</string>
 	<key>stripSwiftSymbols</key>

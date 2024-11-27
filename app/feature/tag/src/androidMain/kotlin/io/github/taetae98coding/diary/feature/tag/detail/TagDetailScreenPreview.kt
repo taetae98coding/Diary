@@ -30,6 +30,7 @@ private fun DetailPreview() {
 			state = rememberTagDetailScreenDetailState(
 				onUpdate = {},
 				onDelete = {},
+				onMemo = {},
 				detailProvider = {
 					TagDetail(
 						title = "Title",

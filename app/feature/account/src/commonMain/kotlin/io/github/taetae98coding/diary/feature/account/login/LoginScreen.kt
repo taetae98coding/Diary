@@ -82,7 +82,8 @@ internal fun LoginScreen(
 		Content(
 			state = state,
 			onLogin = onLogin,
-			modifier = Modifier.padding(it)
+			modifier = Modifier
+				.padding(it)
 				.padding(DiaryTheme.dimen.screenPaddingValues),
 		)
 	}

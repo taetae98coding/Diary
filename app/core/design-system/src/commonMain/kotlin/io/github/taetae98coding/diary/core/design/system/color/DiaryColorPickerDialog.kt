@@ -39,7 +39,8 @@ public fun DiaryColorPickerDialog(
 			DiaryColorPicker(state = state)
 
 			Row(
-				modifier = Modifier.fillMaxWidth()
+				modifier = Modifier
+					.fillMaxWidth()
 					.padding(horizontal = 6.dp),
 				horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.End),
 			) {

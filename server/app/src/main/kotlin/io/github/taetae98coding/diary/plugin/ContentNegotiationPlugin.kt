@@ -11,9 +11,9 @@ internal fun Application.installContentNegotiation() {
 	install(ContentNegotiation) {
 		json(
 			json =
-			Json(DefaultJson) {
-				ignoreUnknownKeys = true
-			},
+				Json(DefaultJson) {
+					ignoreUnknownKeys = true
+				},
 		)
 	}
 }

@@ -9,7 +9,9 @@ import kotlinx.datetime.number
 import org.koin.core.annotation.Factory
 
 @Factory
-internal class HolidayRoomDao(private val database: HolidayDatabase) : HolidayDao {
+internal class HolidayRoomDao(
+	private val database: HolidayDatabase,
+) : HolidayDao {
 	override fun findHoliday(year: Int, month: Month): Flow<List<Holiday>> =
 		database
 			.holidayDao()

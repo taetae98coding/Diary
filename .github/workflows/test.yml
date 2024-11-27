@@ -1,0 +1,51 @@
+name: Test
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  Linux-Build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        command: [
+          './gradlew jvmTest',
+        ]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: CI setup
+        uses: './.github/actions/ci-setup'
+
+      - name: Set local.properties
+        run: |
+          echo diary.dev.api.base.url=${{ secrets.DIARY_DEV_API_BASE_URL }} >> local.properties
+          echo diary.real.api.base.url=${{ secrets.DIARY_REAL_API_BASE_URL }} >> local.properties
+          echo holiday.dev.api.url=${{ secrets.HOLIDAY_DEV_API_URL }} >> local.properties
+          echo holiday.dev.api.key=${{ secrets.HOLIDAY_DEV_API_KEY }} >> local.properties
+          echo holiday.real.api.url=${{ secrets.HOLIDAY_REAL_API_URL }} >> local.properties
+          echo holiday.real.api.key=${{ secrets.HOLIDAY_REAL_API_KEY }} >> local.properties
+          echo android.dev.store.password=${{ secrets.ANDROID_DEV_STORE_PASSWORD }} >> local.properties
+          echo android.dev.key.alias=${{ secrets.ANDROID_DEV_KEY_ALIAS }} >> local.properties
+          echo android.dev.key.password=${{ secrets.ANDROID_DEV_KEY_PASSWORD }} >> local.properties
+          echo android.real.store.password=${{ secrets.ANDROID_REAL_STORE_PASSWORD }} >> local.properties
+          echo android.real.key.alias=${{ secrets.ANDROID_REAL_KEY_ALIAS }} >> local.properties
+          echo android.real.key.password=${{ secrets.ANDROID_REAL_KEY_PASSWORD }} >> local.properties
+
+      - name: Set Android google-services.json
+        run: |
+          echo '${{ secrets.ANDROID_DEV_GOOGLE_SERVICES_JSON }}' >> app/platform/android/src/dev/google-services.json
+          echo '${{ secrets.ANDROID_REAL_GOOGLE_SERVICES_JSON }}' >> app/platform/android/src/real/google-services.json
+
+      - name: Set Apple GoogleService-Info.plist
+        run: |
+          echo '${{ secrets.APPLE_DEV_DEBUG_GOOGLE_SERVICE_INFO_PLIST }}' >> Diary/Secret/DevDebug/GoogleService-Info.plist
+          echo '${{ secrets.APPLE_DEV_RELEASE_GOOGLE_SERVICE_INFO_PLIST }}' >> Diary/Secret/DevRelease/GoogleService-Info.plist
+          echo '${{ secrets.APPLE_REAL_DEBUG_GOOGLE_SERVICE_INFO_PLIST }}' >> Diary/Secret/RealDebug/GoogleService-Info.plist
+          echo '${{ secrets.APPLE_REAL_RELEASE_GOOGLE_SERVICE_INFO_PLIST }}' >> Diary/Secret/RealRelease/GoogleService-Info.plist
+      - name: Build ${{ matrix.command }}
+        run: ${{ matrix.command }}

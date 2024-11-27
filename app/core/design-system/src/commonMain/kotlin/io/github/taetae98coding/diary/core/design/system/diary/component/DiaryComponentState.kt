@@ -8,7 +8,10 @@ import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.focus.FocusRequester
 
-public class DiaryComponentState internal constructor(initialTitle: String, initialDescription: String) {
+public class DiaryComponentState internal constructor(
+	initialTitle: String,
+	initialDescription: String,
+) {
 	internal var isTitleError by mutableStateOf(false)
 		private set
 	public var title: String by mutableStateOf(initialTitle)
@@ -19,11 +22,11 @@ public class DiaryComponentState internal constructor(initialTitle: String, init
 	internal val pagerState =
 		PagerState(
 			currentPage =
-			if (initialDescription.isBlank()) {
-				0
-			} else {
-				1
-			},
+				if (initialDescription.isBlank()) {
+					0
+				} else {
+					1
+				},
 		) {
 			2
 		}

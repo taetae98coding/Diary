@@ -10,7 +10,9 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-internal class MemoTagRoomDao(private val database: DiaryDatabase) : MemoTagDao {
+internal class MemoTagRoomDao(
+	private val database: DiaryDatabase,
+) : MemoTagDao {
 	override fun findTagIdsByMemoId(memoId: String): Flow<Set<String>> =
 		database
 			.memoTag()

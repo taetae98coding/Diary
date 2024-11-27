@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.window.core.layout.WindowWidthSizeClass
 import io.github.taetae98coding.diary.core.compose.adaptive.isListVisible
@@ -33,7 +34,7 @@ internal fun MemoDetailRoute(
 	val navigator = rememberListDetailPaneScaffoldNavigator(scaffoldDirective = calculatePaneScaffoldDirective(windowAdaptiveInfo))
 
 	ListDetailPaneScaffold(
-		directive = navigator.scaffoldDirective,
+		directive = navigator.scaffoldDirective.copy(defaultPanePreferredWidth = 500.dp),
 		value = navigator.scaffoldValue,
 		listPane = {
 			val detail by detailViewModel.detail.collectAsStateWithLifecycle()

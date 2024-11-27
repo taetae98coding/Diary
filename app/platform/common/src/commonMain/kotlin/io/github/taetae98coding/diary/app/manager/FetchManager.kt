@@ -9,7 +9,9 @@ import kotlinx.coroutines.launch
 import org.koin.core.annotation.Singleton
 
 @Singleton
-public class FetchManager(private val fetchUseCase: FetchUseCase) {
+public class FetchManager(
+	private val fetchUseCase: FetchUseCase,
+) {
 	public fun attach(lifecycleOwner: LifecycleOwner) {
 		lifecycleOwner.lifecycleScope.launch {
 			lifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {

@@ -66,11 +66,11 @@ internal class MemoDetailViewModel(
 				scope = viewModelScope,
 				started = SharingStarted.WhileSubscribed(5_000),
 				initialValue =
-				MemoDetailActionButton.FinishAndDetail(
-					isFinish = false,
-					onFinishChange = ::onFinishChange,
-					delete = ::delete,
-				),
+					MemoDetailActionButton.FinishAndDetail(
+						isFinish = false,
+						onFinishChange = ::onFinishChange,
+						delete = ::delete,
+					),
 			)
 
 	private fun onFinishChange(isFinish: Boolean) {

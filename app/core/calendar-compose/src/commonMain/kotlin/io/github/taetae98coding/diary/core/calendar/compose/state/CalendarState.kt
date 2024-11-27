@@ -10,7 +10,9 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month
 import kotlinx.datetime.plus
 
-public class CalendarState internal constructor(internal val pagerState: PagerState) {
+public class CalendarState internal constructor(
+	internal val pagerState: PagerState,
+) {
 	internal val focusRequester = FocusRequester()
 
 	internal val localDate: LocalDate

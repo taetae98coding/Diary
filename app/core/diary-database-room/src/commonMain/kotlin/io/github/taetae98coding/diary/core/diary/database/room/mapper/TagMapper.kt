@@ -21,11 +21,11 @@ internal fun TagEntity.toDto(): TagDto =
 	TagDto(
 		id = id,
 		detail =
-		TagDetail(
-			title = title,
-			description = description,
-			color = color,
-		),
+			TagDetail(
+				title = title,
+				description = description,
+				color = color,
+			),
 		owner = owner,
 		isFinish = isFinish,
 		isDelete = isDelete,

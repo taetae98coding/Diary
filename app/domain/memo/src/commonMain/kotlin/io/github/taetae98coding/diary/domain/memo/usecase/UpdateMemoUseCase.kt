@@ -7,7 +7,10 @@ import kotlinx.coroutines.flow.first
 import org.koin.core.annotation.Factory
 
 @Factory
-public class UpdateMemoUseCase internal constructor(private val pushMemoBackupQueueUseCase: PushMemoBackupQueueUseCase, private val repository: MemoRepository) {
+public class UpdateMemoUseCase internal constructor(
+	private val pushMemoBackupQueueUseCase: PushMemoBackupQueueUseCase,
+	private val repository: MemoRepository,
+) {
 	public suspend operator fun invoke(memoId: String?, detail: MemoDetail): Result<Unit> {
 		return runCatching {
 			if (memoId.isNullOrBlank()) return@runCatching

@@ -13,7 +13,9 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-public class FindMemoUseCase internal constructor(private val repository: MemoRepository) {
+public class FindMemoUseCase internal constructor(
+	private val repository: MemoRepository,
+) {
 	public operator fun invoke(memoId: String?): Flow<Result<Memo?>> {
 		if (memoId.isNullOrBlank()) return flowOf(Result.success(null))
 

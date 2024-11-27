@@ -82,7 +82,8 @@ internal fun JoinScreen(
 		Content(
 			state = state,
 			onJoin = onJoin,
-			modifier = Modifier.padding(it)
+			modifier = Modifier
+				.padding(it)
 				.padding(DiaryTheme.dimen.screenPaddingValues),
 		)
 	}

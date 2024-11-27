@@ -17,7 +17,10 @@ import org.koin.android.annotation.KoinViewModel
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @KoinViewModel
-internal class MoreAccountViewModel(getAccountUseCase: GetAccountUseCase, private val logoutUseCase: LogoutUseCase) : ViewModel() {
+internal class MoreAccountViewModel(
+	getAccountUseCase: GetAccountUseCase,
+	private val logoutUseCase: LogoutUseCase,
+) : ViewModel() {
 	private val isProgress = MutableStateFlow(false)
 	private val account =
 		getAccountUseCase()

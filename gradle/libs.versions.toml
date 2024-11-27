@@ -24,6 +24,9 @@ datastore = "1.1.1"                         # https://developer.android.com/jetp
 room = "2.7.0-alpha11"                      # https://developer.android.com/jetpack/androidx/releases/room?hl=en
 sqlite = "2.5.0-alpha11"                    # https://developer.android.com/jetpack/androidx/releases/sqlite?hl=en
 
+kotest = "6.0.0.M1"                         # https://github.com/kotest/kotest/releases
+mockk = "1.13.13"                           # https://github.com/mockk/mockk/releases
+
 ### android
 android-material = "1.12.0"                 # https://github.com/material-components/material-components-android/releases
 androidx-activity = "1.9.3"                 # https://developer.android.com/jetpack/androidx/releases/activity?hl=en
@@ -63,6 +66,7 @@ kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
 
@@ -93,6 +97,12 @@ koin-compose-viewmodel-navigation = { group = "io.insert-koin", name = "koin-com
 koin-annotations-bom = { group = "io.insert-koin", name = "koin-annotations-bom", version.ref = "koin-annotations" }
 koin-annotations = { group = "io.insert-koin", name = "koin-annotations" }
 koin-compiler = { group = "io.insert-koin", name = "koin-ksp-compiler" }
+
+kotest-framework-engin = { group = "io.kotest", name = "kotest-framework-engine", version.ref = "kotest" }
+kotest-assertions = { group = "io.kotest", name = "kotest-assertions-core", version.ref = "kotest" }
+kotest-property = { group = "io.kotest", name = "kotest-property", version.ref = "kotest" }
+kotest-runner-junit5 = { group = "io.kotest", name = "kotest-runner-junit5", version.ref = "kotest" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 
 ### android
 android-material = { group = "com.google.android.material", name = "material", version.ref = "android-material" }
@@ -150,6 +160,8 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 
 room = { id = "androidx.room", version.ref = "room" }
 
+kotest = { id = "io.kotest.multiplatform", version.ref = "kotest" }
+
 ### android
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
@@ -177,6 +189,12 @@ ktor-client = [
 room = [
     "room-runtime",
     "sqlite-bundled"
+]
+
+kotest = [
+    "kotest-framework-engin",
+    "kotest-assertions",
+    "kotest-property"
 ]
 
 ktor-server = [

@@ -9,7 +9,12 @@ import kotlinx.coroutines.launch
 import org.koin.core.annotation.Factory
 
 @Factory
-public class PushTagBackupQueueUseCase internal constructor(private val getAccountUseCase: GetAccountUseCase, private val backupUseCase: BackupUseCase, private val coroutineScope: CoroutineScope, private val repository: TagBackupRepository) {
+public class PushTagBackupQueueUseCase internal constructor(
+	private val getAccountUseCase: GetAccountUseCase,
+	private val backupUseCase: BackupUseCase,
+	private val coroutineScope: CoroutineScope,
+	private val repository: TagBackupRepository,
+) {
 	public suspend operator fun invoke(tagId: String?): Result<Unit> {
 		return runCatching {
 			if (tagId.isNullOrBlank()) return@runCatching

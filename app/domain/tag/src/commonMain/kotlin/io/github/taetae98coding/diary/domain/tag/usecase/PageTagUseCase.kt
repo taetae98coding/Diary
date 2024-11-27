@@ -14,7 +14,10 @@ import org.koin.core.annotation.Factory
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
-public class PageTagUseCase internal constructor(private val getAccountUseCase: GetAccountUseCase, private val repository: TagRepository) {
+public class PageTagUseCase internal constructor(
+	private val getAccountUseCase: GetAccountUseCase,
+	private val repository: TagRepository,
+) {
 	public operator fun invoke(): Flow<Result<List<Tag>>> =
 		flow {
 			getAccountUseCase()

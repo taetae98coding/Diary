@@ -10,7 +10,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.mapLatest
 
 @OptIn(ExperimentalCoroutinesApi::class)
-internal class AccountDataStorePreferences(private val dataStore: DataStore<Preferences>) : AccountPreferences {
+internal class AccountDataStorePreferences(
+	private val dataStore: DataStore<Preferences>,
+) : AccountPreferences {
 	override suspend fun save(email: String, uid: String, token: String) {
 		dataStore.edit {
 			it[stringPreferencesKey(EMAIL)] = email
