@@ -14,8 +14,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.datetime.LocalDate
 import org.koin.core.annotation.Factory
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
-@OptIn(ExperimentalCoroutinesApi::class)
+@OptIn(ExperimentalCoroutinesApi::class, ExperimentalUuidApi::class)
 @Factory
 internal class MemoRepositoryImpl(
 	private val localDataSource: MemoDao,
@@ -40,13 +42,15 @@ internal class MemoRepositoryImpl(
 		localDataSource.updateDelete(memoId, isDelete)
 	}
 
-	override fun find(memoId: String): Flow<Memo?> =
+	override fun getById(memoId: String): Flow<Memo?> =
 		localDataSource
-			.find(memoId, true)
+			.getById(memoId)
 			.mapLatest { it?.toMemo() }
 
 	override fun findByDateRange(owner: String?, dateRange: ClosedRange<LocalDate>, tagFilter: Set<String>): Flow<List<Memo>> =
 		localDataSource
 			.findByDateRange(owner, dateRange, tagFilter)
 			.mapCollectionLatest(MemoDto::toMemo)
+
+	override suspend fun getNextMemoId(): String = Uuid.random().toString()
 }

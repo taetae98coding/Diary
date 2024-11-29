@@ -14,7 +14,7 @@ public class FCMManager internal constructor(
 ) {
 	public fun attach(lifecycleOwner: LifecycleOwner) {
 		lifecycleOwner.lifecycleScope.launch {
-			lifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+			lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
 				updateFCMTokenUseCase()
 			}
 		}

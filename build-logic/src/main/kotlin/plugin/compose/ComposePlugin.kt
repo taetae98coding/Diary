@@ -24,10 +24,9 @@ internal class ComposePlugin : Plugin<Project> {
 
         target.withComposeCompiler {
             featureFlags.add(ComposeFeatureFlag.OptimizeNonSkippingGroups)
-//            featureFlags.add(ComposeFeatureFlag.PausableComposition)
+            featureFlags.add(ComposeFeatureFlag.PausableComposition)
 
-            stabilityConfigurationFile.set(RegularFile { target.rootProject.file("compose-stability-configuration-file.txt") })
-//            stabilityConfigurationFiles.add(RegularFile { target.rootProject.file("compose-stability-configuration-file.txt") })
+            stabilityConfigurationFiles.add(RegularFile { target.rootProject.file("compose-stability-configuration-file.txt") })
 
             metricsDestination.assign(target.rootProject.file("build/compose/metrics"))
             reportsDestination.assign(target.rootProject.file("build/compose/report"))

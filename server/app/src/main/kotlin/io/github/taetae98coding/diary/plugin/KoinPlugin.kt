@@ -1,10 +1,12 @@
 package io.github.taetae98coding.diary.plugin
 
 import io.github.taetae98coding.diary.data.account.AccountDataModule
+import io.github.taetae98coding.diary.data.buddy.BuddyDataModule
 import io.github.taetae98coding.diary.data.fcm.FCMDataModule
 import io.github.taetae98coding.diary.data.memo.MemoDataModule
 import io.github.taetae98coding.diary.data.tag.TagDataModule
 import io.github.taetae98coding.diary.domain.account.AccountDomainModule
+import io.github.taetae98coding.diary.domain.buddy.BuddyDomainModule
 import io.github.taetae98coding.diary.domain.fcm.FCMDomainModule
 import io.github.taetae98coding.diary.domain.memo.MemoDomainModule
 import io.github.taetae98coding.diary.domain.tag.TagDomainModule
@@ -20,10 +22,12 @@ internal fun Application.installKoin() {
 			MemoDataModule().module,
 			TagDataModule().module,
 			FCMDataModule().module,
+			BuddyDataModule().module,
 			AccountDomainModule().module,
 			MemoDomainModule().module,
 			TagDomainModule().module,
 			FCMDomainModule().module,
+			BuddyDomainModule().module,
 		)
 	}
 }

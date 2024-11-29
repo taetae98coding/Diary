@@ -7,5 +7,5 @@ public interface MemoBackupDao {
 
 	public suspend fun delete(ids: Set<String>)
 
-	public fun findMemoIdByUid(uid: String): Flow<List<String>>
+	public fun getMemoIdByUid(uid: String): Flow<List<String>>
 }

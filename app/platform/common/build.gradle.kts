@@ -15,6 +15,7 @@ kotlin {
                 implementation(project(":app:data:fetch"))
                 implementation(project(":app:data:fcm"))
                 implementation(project(":app:data:calendar"))
+                implementation(project(":app:data:buddy"))
 
                 implementation(project(":app:domain:memo"))
                 implementation(project(":app:domain:tag"))
@@ -25,6 +26,7 @@ kotlin {
                 implementation(project(":app:domain:fetch"))
                 implementation(project(":app:domain:fcm"))
                 implementation(project(":app:domain:calendar"))
+                implementation(project(":app:domain:buddy"))
 
                 implementation(project(":app:core:coroutines"))
 
@@ -43,6 +45,7 @@ kotlin {
                 implementation(project(":app:feature:memo"))
                 implementation(project(":app:feature:tag"))
                 implementation(project(":app:feature:calendar"))
+                implementation(project(":app:feature:buddy"))
                 implementation(project(":app:feature:more"))
                 implementation(project(":app:feature:account"))
 

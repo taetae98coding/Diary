@@ -1,6 +1,7 @@
 package io.github.taetae98coding.diary.plugin
 
 import io.github.taetae98coding.diary.feature.account.accountRouting
+import io.github.taetae98coding.diary.feature.buddy.buddyRouting
 import io.github.taetae98coding.diary.feature.fcm.fcmRouting
 import io.github.taetae98coding.diary.feature.home.homeRouting
 import io.github.taetae98coding.diary.feature.memo.memoRouting
@@ -15,5 +16,6 @@ internal fun Application.installRouting() {
 		memoRouting()
 		tagRouting()
 		fcmRouting()
+		buddyRouting()
 	}
 }

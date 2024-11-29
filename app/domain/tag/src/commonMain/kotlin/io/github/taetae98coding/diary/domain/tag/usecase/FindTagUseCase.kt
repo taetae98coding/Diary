@@ -19,7 +19,8 @@ public class FindTagUseCase internal constructor(
 	public operator fun invoke(tagId: String?): Flow<Result<Tag?>> {
 		if (tagId.isNullOrBlank()) return flowOf(Result.success(null))
 
-		return flow { emitAll(repository.find(tagId)) }
+		return flow { emitAll(repository.getById(tagId)) }
+			.mapLatest { tag -> tag?.takeUnless { it.isDelete } }
 			.mapLatest { Result.success(it) }
 			.catch { emit(Result.failure(it)) }
 	}

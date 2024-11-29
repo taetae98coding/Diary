@@ -22,6 +22,7 @@ public fun Route.fcmRouting() {
 
 			useCase(token = request.token)
 				.onSuccess { call.respond(DiaryResponse.Success) }
+				.onFailure { call.respond(DiaryResponse.InternalServerError) }
 		}
 
 		authenticate("account") {
@@ -39,6 +40,8 @@ public fun Route.fcmRouting() {
 					owner = principal.payload.getClaim("uid").asString(),
 				).onSuccess {
 					call.respond(DiaryResponse.Success)
+				}.onFailure {
+					call.respond(DiaryResponse.InternalServerError)
 				}
 			}
 		}

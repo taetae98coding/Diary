@@ -9,10 +9,7 @@ import io.github.taetae98coding.diary.domain.memo.repository.MemoRepository
 import kotlinx.coroutines.flow.first
 import kotlinx.datetime.Clock
 import org.koin.core.annotation.Factory
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 
-@OptIn(ExperimentalUuidApi::class)
 @Factory
 public class AddMemoUseCase internal constructor(
 	private val getAccountUseCase: GetAccountUseCase,
@@ -28,7 +25,7 @@ public class AddMemoUseCase internal constructor(
 		runCatching {
 			if (detail.title.isBlank()) throw MemoTitleBlankException()
 
-			val memoId = Uuid.random().toString()
+			val memoId = repository.getNextMemoId()
 			val account = getAccountUseCase().first().getOrThrow()
 			val memo =
 				Memo(

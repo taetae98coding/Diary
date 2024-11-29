@@ -24,6 +24,16 @@ kotlin {
         }
     }
 
+//    iosX64()
+//    iosArm64()
+//    iosSimulatorArm64()
+//
+//    @OptIn(ExperimentalSwiftExportDsl::class)
+//    swiftExport {
+//        moduleName = "Kotlin"
+//        flattenPackage = "io.github.taetae98coding.diary"
+//    }
+
     applyDefaultHierarchyTemplate()
 
     sourceSets {

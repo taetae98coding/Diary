@@ -37,8 +37,8 @@ internal class TagDetailViewModel(
 
 	private val tag =
 		tagId
-			.filterNotNull()
 			.flatMapLatest { findTagUseCase(it) }
+			.filterNotNull()
 			.mapLatest { it.getOrNull() }
 			.mapNotNull { it }
 			.stateIn(

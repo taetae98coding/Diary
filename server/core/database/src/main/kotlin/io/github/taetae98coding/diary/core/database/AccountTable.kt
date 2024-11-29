@@ -34,6 +34,15 @@ public data object AccountTable : Table(name = "Account") {
 			.firstOrNull()
 			?.toAccount()
 
+	public fun findByEmail(email: String, uid: String?): List<Account> = selectAll()
+		.where {
+			if (uid.isNullOrBlank()) {
+				(EMAIL like "%$email%")
+			} else {
+				(EMAIL like "%$email%") and (UID neq uid)
+			}
+		}.map { it.toAccount() }
+
 	private fun ResultRow.toAccount(): Account =
 		Account(
 			email = get(EMAIL),

@@ -23,30 +23,29 @@ import kotlinx.coroutines.withContext
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class PushTagBackupQueueUseCaseTest : BehaviorSpec() {
-	init {
-		val dispatcher = UnconfinedTestDispatcher()
-		val scope = CoroutineScope(dispatcher)
+	private val dispatcher = UnconfinedTestDispatcher()
+	private val coroutineScope = CoroutineScope(dispatcher)
+	private val getAccountUseCase = mockk<GetAccountUseCase>()
+	private val backupUseCase = mockk<BackupUseCase>(relaxed = true, relaxUnitFun = true)
+	private val tagBackupRepository = mockk<TagBackupRepository>(relaxed = true, relaxUnitFun = true)
+	private val useCase = PushTagBackupQueueUseCase(
+		getAccountUseCase = getAccountUseCase,
+		backupUseCase = backupUseCase,
+		coroutineScope = coroutineScope,
+		repository = tagBackupRepository,
+	)
 
+	init {
 		coroutineDispatcherFactory = object : CoroutineDispatcherFactory {
 			override suspend fun <T> withDispatcher(testCase: TestCase, f: suspend () -> T): T = withContext(dispatcher) {
 				f()
 			}
 		}
 
-		val getAccountUseCase = mockk<GetAccountUseCase>()
-		val backupUseCase = mockk<BackupUseCase>(relaxed = true, relaxUnitFun = true)
-		val tagBackupRepository = mockk<TagBackupRepository>(relaxed = true, relaxUnitFun = true)
-		val useCase = PushTagBackupQueueUseCase(
-			getAccountUseCase = getAccountUseCase,
-			backupUseCase = backupUseCase,
-			coroutineScope = scope,
-			repository = tagBackupRepository,
-		)
-
 		Given("tagId is null") {
 			val tagId = null
 
-			When("call usecase") {
+			When("call useCase") {
 				val result = useCase(tagId)
 
 				Then("result is success") {
@@ -69,7 +68,7 @@ class PushTagBackupQueueUseCaseTest : BehaviorSpec() {
 			And("account is Guest") {
 				every { getAccountUseCase.invoke() } returns flowOf(Result.success(mockk<Account.Guest>()))
 
-				When("call usecase") {
+				When("call useCase") {
 					val result = useCase(tagId)
 
 					Then("result is success") {
@@ -95,7 +94,7 @@ class PushTagBackupQueueUseCaseTest : BehaviorSpec() {
 
 				every { getAccountUseCase.invoke() } returns flowOf(Result.success(account))
 
-				When("call usecase") {
+				When("call useCase") {
 					val result = useCase(tagId)
 
 					Then("result is success") {

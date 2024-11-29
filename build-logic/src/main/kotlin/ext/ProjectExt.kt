@@ -7,6 +7,8 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.plugins.PluginContainer
 import org.gradle.kotlin.dsl.getByType
+import org.jetbrains.kotlin.gradle.dsl.HasConfigurableKotlinCompilerOptions
+import org.jetbrains.kotlin.gradle.dsl.KotlinCommonCompilerOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
 
@@ -76,4 +78,10 @@ public fun Project.getLocalProperty(): Properties? {
     } else {
         null
     }
+}
+
+internal fun KotlinProjectExtension.compilerOptions(
+    configure: KotlinCommonCompilerOptions.() -> Unit,
+) {
+    (this as HasConfigurableKotlinCompilerOptions<*>).compilerOptions(configure)
 }

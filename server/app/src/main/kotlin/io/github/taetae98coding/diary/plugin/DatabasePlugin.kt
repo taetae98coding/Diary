@@ -1,6 +1,8 @@
 package io.github.taetae98coding.diary.plugin
 
 import io.github.taetae98coding.diary.core.database.AccountTable
+import io.github.taetae98coding.diary.core.database.BuddyGroupAccountRelation
+import io.github.taetae98coding.diary.core.database.BuddyGroupTable
 import io.github.taetae98coding.diary.core.database.FCMTokenTable
 import io.github.taetae98coding.diary.core.database.MemoTable
 import io.github.taetae98coding.diary.core.database.MemoTagTable
@@ -26,6 +28,8 @@ internal fun Application.installDatabase() {
 			MemoTable,
 			MemoTagTable,
 			FCMTokenTable,
+			BuddyGroupTable,
+			BuddyGroupAccountRelation,
 		)
 	}
 }

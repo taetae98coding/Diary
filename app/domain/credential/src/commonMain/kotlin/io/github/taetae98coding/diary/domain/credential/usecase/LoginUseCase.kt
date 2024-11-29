@@ -13,9 +13,9 @@ import org.koin.core.annotation.Factory
 @Factory
 public class LoginUseCase internal constructor(
 	private val coroutineScope: CoroutineScope,
-	private val repository: CredentialRepository,
 	private val fetchUseCase: FetchUseCase,
 	private val updateFCMTokenUseCase: UpdateFCMTokenUseCase,
+	private val repository: CredentialRepository,
 ) {
 	public suspend operator fun invoke(email: String, password: String): Result<Unit> =
 		runCatching {

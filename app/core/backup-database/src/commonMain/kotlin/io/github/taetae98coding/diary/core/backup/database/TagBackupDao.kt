@@ -7,5 +7,5 @@ public interface TagBackupDao {
 
 	public suspend fun delete(ids: Set<String>)
 
-	public fun findByUid(uid: String): Flow<List<String>>
+	public fun getByUid(uid: String): Flow<List<String>>
 }

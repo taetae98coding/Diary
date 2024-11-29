@@ -15,7 +15,7 @@ public class UpdateMemoUseCase internal constructor(
 		return runCatching {
 			if (memoId.isNullOrBlank()) return@runCatching
 
-			val memo = repository.find(memoId).first() ?: return@runCatching
+			val memo = repository.getById(memoId).first() ?: return@runCatching
 			val validDetail = detail.copy(title = detail.title.ifBlank { memo.detail.title })
 
 			if (memo.detail == validDetail) return@runCatching

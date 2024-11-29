@@ -11,6 +11,7 @@ import io.github.taetae98coding.diary.core.holiday.preferences.datastore.Holiday
 import io.github.taetae98coding.diary.core.holiday.service.HolidayServiceModule
 import io.github.taetae98coding.diary.data.account.AccountDataModule
 import io.github.taetae98coding.diary.data.backup.BackupDataModule
+import io.github.taetae98coding.diary.data.buddy.BuddyDataModule
 import io.github.taetae98coding.diary.data.calendar.CalendarDataModule
 import io.github.taetae98coding.diary.data.credential.CredentialDataModule
 import io.github.taetae98coding.diary.data.fcm.FCMDataModule
@@ -20,6 +21,7 @@ import io.github.taetae98coding.diary.data.memo.MemoDataModule
 import io.github.taetae98coding.diary.data.tag.TagDataModule
 import io.github.taetae98coding.diary.domain.account.AccountDomainModule
 import io.github.taetae98coding.diary.domain.backup.BackupDomainModule
+import io.github.taetae98coding.diary.domain.buddy.BuddyDomainModule
 import io.github.taetae98coding.diary.domain.calendar.CalendarDomainModule
 import io.github.taetae98coding.diary.domain.credential.CredentialDomainModule
 import io.github.taetae98coding.diary.domain.fcm.FCMDomainModule
@@ -28,6 +30,7 @@ import io.github.taetae98coding.diary.domain.holiday.HolidayDomainModule
 import io.github.taetae98coding.diary.domain.memo.MemoDomainModule
 import io.github.taetae98coding.diary.domain.tag.TagDomainModule
 import io.github.taetae98coding.diary.feature.account.AccountFeatureModule
+import io.github.taetae98coding.diary.feature.buddy.BuddyFeatureModule
 import io.github.taetae98coding.diary.feature.calendar.CalendarFeatureModule
 import io.github.taetae98coding.diary.feature.memo.MemoFeatureModule
 import io.github.taetae98coding.diary.feature.more.MoreFeatureModule
@@ -65,6 +68,7 @@ import org.koin.core.annotation.Singleton
 		FCMDataModule::class,
 		CredentialDataModule::class,
 		CalendarDataModule::class,
+		BuddyDataModule::class,
 
 		MemoDomainModule::class,
 		TagDomainModule::class,
@@ -75,12 +79,14 @@ import org.koin.core.annotation.Singleton
 		FCMDomainModule::class,
 		CredentialDomainModule::class,
 		CalendarDomainModule::class,
+		BuddyDomainModule::class,
 
 		MemoFeatureModule::class,
 		TagFeatureModule::class,
 		CalendarFeatureModule::class,
 		MoreFeatureModule::class,
 		AccountFeatureModule::class,
+		BuddyFeatureModule::class,
 	],
 )
 @ComponentScan

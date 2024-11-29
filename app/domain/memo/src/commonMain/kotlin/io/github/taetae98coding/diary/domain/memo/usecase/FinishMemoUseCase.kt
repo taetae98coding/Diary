@@ -6,8 +6,8 @@ import org.koin.core.annotation.Factory
 
 @Factory
 public class FinishMemoUseCase internal constructor(
-	private val repository: MemoRepository,
 	private val pushMemoBackupQueueUseCase: PushMemoBackupQueueUseCase,
+	private val repository: MemoRepository,
 ) {
 	public suspend operator fun invoke(memoId: String?): Result<Unit> {
 		return runCatching {

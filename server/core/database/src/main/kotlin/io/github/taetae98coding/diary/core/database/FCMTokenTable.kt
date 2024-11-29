@@ -6,6 +6,7 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.kotlin.datetime.timestamp
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.upsert
 
 public data object FCMTokenTable : Table(name = "FCMToken") {
@@ -33,4 +34,8 @@ public data object FCMTokenTable : Table(name = "FCMToken") {
 	public fun delete(token: String) {
 		deleteWhere { TOKEN eq token }
 	}
+
+	public fun findByOwner(owner: String): List<String> = selectAll()
+		.where { OWNER eq owner }
+		.map { row -> row[TOKEN] }
 }

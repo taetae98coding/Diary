@@ -1,5 +1,6 @@
 package io.github.taetae98coding.diary.app.navigation
 
+import io.github.taetae98coding.diary.core.navigation.buddy.BuddyDestination
 import io.github.taetae98coding.diary.core.navigation.calendar.CalendarDestination
 import io.github.taetae98coding.diary.core.navigation.memo.MemoDestination
 import io.github.taetae98coding.diary.core.navigation.more.MoreDestination
@@ -22,6 +23,11 @@ internal enum class AppNavigation(
 	Calendar(
 		title = "캘린더",
 		route = CalendarDestination,
+	),
+
+	Buddy(
+		title = "버디",
+		route = BuddyDestination,
 	),
 
 	More(

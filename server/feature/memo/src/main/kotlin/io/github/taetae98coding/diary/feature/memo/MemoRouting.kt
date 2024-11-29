@@ -38,7 +38,9 @@ public fun Route.memoRouting() {
 						)
 					}
 
-				useCase(memoList).onSuccess { call.respond(DiaryResponse.Success) }
+				useCase(memoList)
+					.onSuccess { call.respond(DiaryResponse.Success) }
+					.onFailure { call.respond(DiaryResponse.InternalServerError) }
 			}
 
 			get("/fetch") {
@@ -55,6 +57,7 @@ public fun Route.memoRouting() {
 				useCase(uid, updateAt)
 					.first()
 					.onSuccess { call.respond(DiaryResponse.success(it.map(MemoAndTagIds::toEntity))) }
+					.onFailure { call.respond(DiaryResponse.InternalServerError) }
 			}
 		}
 	}

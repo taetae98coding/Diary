@@ -52,16 +52,16 @@ internal class MemoRoomDao(
 		database.memo().updateDelete(memoId, isDelete, clock.now())
 	}
 
-	override fun find(memoId: String, filterNotDelete: Boolean): Flow<MemoDto?> =
+	override fun getById(memoId: String): Flow<MemoDto?> =
 		database
 			.memo()
-			.find(memoId, filterNotDelete)
+			.getById(memoId)
 			.mapLatest { it?.toDto() }
 
-	override fun findMemoAndTagIdsByIds(memoIds: Set<String>, filterNotDelete: Boolean): Flow<List<MemoAndTagIds>> =
+	override fun getMemoAndTagIdsByIds(memoIds: Set<String>): Flow<List<MemoAndTagIds>> =
 		database
 			.memo()
-			.findMemoAndTagIdsByIds(memoIds, filterNotDelete)
+			.getMemoAndTagIdsByIds(memoIds)
 			.mapLatest { map ->
 				map.map { entry ->
 					MemoAndTagIds(

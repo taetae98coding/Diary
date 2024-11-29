@@ -2,8 +2,8 @@ package io.github.taetae98coding.diary.feature.account.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.github.taetae98coding.diary.common.exception.NetworkException
 import io.github.taetae98coding.diary.common.exception.account.AccountNotFoundException
+import io.github.taetae98coding.diary.common.exception.ext.isNetworkException
 import io.github.taetae98coding.diary.domain.credential.usecase.LoginUseCase
 import io.github.taetae98coding.diary.feature.account.login.state.LoginUiState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,7 +33,7 @@ internal class LoginViewModel(
 	private fun handleThrowable(throwable: Throwable) {
 		when (throwable) {
 			is AccountNotFoundException -> _uiState.update { it.copy(isProgress = false, isAccountNotFound = true) }
-			is NetworkException -> _uiState.update { it.copy(isProgress = false, isNetworkError = true) }
+			is Exception if throwable.isNetworkException() -> _uiState.update { it.copy(isProgress = false, isNetworkError = true) }
 			else -> _uiState.update { it.copy(isProgress = false, isUnknownError = true) }
 		}
 	}

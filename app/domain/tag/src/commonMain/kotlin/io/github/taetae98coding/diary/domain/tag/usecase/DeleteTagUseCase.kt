@@ -6,8 +6,8 @@ import org.koin.core.annotation.Factory
 
 @Factory
 public class DeleteTagUseCase internal constructor(
-	private val repository: TagRepository,
 	private val pushTagBackupQueueUseCase: PushTagBackupQueueUseCase,
+	private val repository: TagRepository,
 ) {
 	public suspend operator fun invoke(tagId: String?): Result<Unit> {
 		return runCatching {

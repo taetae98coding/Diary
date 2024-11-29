@@ -19,7 +19,8 @@ public class FindMemoUseCase internal constructor(
 	public operator fun invoke(memoId: String?): Flow<Result<Memo?>> {
 		if (memoId.isNullOrBlank()) return flowOf(Result.success(null))
 
-		return flow { emitAll(repository.find(memoId)) }
+		return flow { emitAll(repository.getById(memoId)) }
+			.mapLatest { memo -> memo?.takeUnless { it.isDelete } }
 			.mapLatest { Result.success(it) }
 			.catch { emit(Result.failure(it)) }
 	}

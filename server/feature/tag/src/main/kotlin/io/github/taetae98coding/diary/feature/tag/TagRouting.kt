@@ -1,7 +1,7 @@
 package io.github.taetae98coding.diary.feature.tag
 
-import io.github.taetae98coding.diary.common.model.memo.TagEntity
 import io.github.taetae98coding.diary.common.model.response.DiaryResponse
+import io.github.taetae98coding.diary.common.model.tag.TagEntity
 import io.github.taetae98coding.diary.core.model.Tag
 import io.github.taetae98coding.diary.domain.tag.usecase.FetchTagUseCase
 import io.github.taetae98coding.diary.domain.tag.usecase.UpsertTagUseCase
@@ -31,7 +31,9 @@ public fun Route.tagRouting() {
 				val useCase = call.scope.get<UpsertTagUseCase>()
 				val memoList = request.map(TagEntity::toTag)
 
-				useCase(memoList).onSuccess { call.respond(DiaryResponse.Success) }
+				useCase(memoList)
+					.onSuccess { call.respond(DiaryResponse.Success) }
+					.onFailure { call.respond(DiaryResponse.InternalServerError) }
 			}
 
 			get("/fetch") {
@@ -48,6 +50,7 @@ public fun Route.tagRouting() {
 				useCase(uid, updateAt)
 					.first()
 					.onSuccess { call.respond(DiaryResponse.success(it.map(Tag::toEntity))) }
+					.onFailure { call.respond(DiaryResponse.InternalServerError) }
 			}
 		}
 	}

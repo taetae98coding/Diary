@@ -20,11 +20,11 @@ public interface MemoDao {
 
 	public suspend fun updateDelete(memoId: String, isDelete: Boolean)
 
+	public fun getById(memoId: String): Flow<MemoDto?>
+
+	public fun getMemoAndTagIdsByIds(memoIds: Set<String>): Flow<List<MemoAndTagIds>>
+
 	public fun findByDateRange(owner: String?, dateRange: ClosedRange<LocalDate>, tagFilter: Set<String>): Flow<List<MemoDto>>
-
-	public fun find(memoId: String, filterNotDelete: Boolean): Flow<MemoDto?>
-
-	public fun findMemoAndTagIdsByIds(memoIds: Set<String>, filterNotDelete: Boolean): Flow<List<MemoAndTagIds>>
 
 	public fun getLastServerUpdateAt(owner: String?): Flow<Instant?>
 }

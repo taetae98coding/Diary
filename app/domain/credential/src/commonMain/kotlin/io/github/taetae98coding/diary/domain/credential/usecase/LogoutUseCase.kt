@@ -7,9 +7,9 @@ import org.koin.core.annotation.Factory
 
 @Factory
 public class LogoutUseCase internal constructor(
-	private val repository: CredentialRepository,
 	private val backupUseCase: BackupUseCase,
 	private val updateFCMTokenUseCase: UpdateFCMTokenUseCase,
+	private val repository: CredentialRepository,
 ) {
 	public suspend operator fun invoke(): Result<Unit> =
 		runCatching {

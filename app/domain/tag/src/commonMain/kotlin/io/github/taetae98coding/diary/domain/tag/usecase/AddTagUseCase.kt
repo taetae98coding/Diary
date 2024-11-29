@@ -9,10 +9,7 @@ import io.github.taetae98coding.diary.domain.tag.repository.TagRepository
 import kotlinx.coroutines.flow.first
 import kotlinx.datetime.Clock
 import org.koin.core.annotation.Factory
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 
-@OptIn(ExperimentalUuidApi::class)
 @Factory
 public class AddTagUseCase internal constructor(
 	private val getAccountUseCase: GetAccountUseCase,
@@ -25,17 +22,16 @@ public class AddTagUseCase internal constructor(
 			if (detail.title.isBlank()) throw TagTitleBlankException()
 
 			val account = getAccountUseCase().first().getOrThrow()
-			val tagId = Uuid.random().toString()
+			val tagId = repository.getNextTagId()
 
-			val tag =
-				Tag(
-					id = tagId,
-					detail = detail,
-					owner = account.uid,
-					isFinish = false,
-					isDelete = false,
-					updateAt = clock.now(),
-				)
+			val tag = Tag(
+				id = tagId,
+				detail = detail,
+				owner = account.uid,
+				isFinish = false,
+				isDelete = false,
+				updateAt = clock.now(),
+			)
 
 			repository.upsert(tag)
 			pushTagBackupQueueUseCase(tagId)

@@ -18,12 +18,12 @@ internal class TagBackupRepositoryImpl(
 	override suspend fun backup(uid: String) {
 		mutex.withLock {
 			while (true) {
-				val ids = tagBackupDao.findByUid(uid).first()
+				val ids = tagBackupDao.getByUid(uid).first()
 				if (ids.isEmpty()) {
 					break
 				}
 
-				tagService.upsert(tagDao.findByIds(ids.toSet(), false).first())
+				tagService.upsert(tagDao.getByIds(ids.toSet()).first())
 				tagBackupDao.delete(ids.toSet())
 			}
 		}

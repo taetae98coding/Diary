@@ -2,8 +2,8 @@ package io.github.taetae98coding.diary.feature.account.join
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.github.taetae98coding.diary.common.exception.NetworkException
 import io.github.taetae98coding.diary.common.exception.account.ExistEmailException
+import io.github.taetae98coding.diary.common.exception.ext.isNetworkException
 import io.github.taetae98coding.diary.domain.credential.usecase.JoinUseCase
 import io.github.taetae98coding.diary.domain.credential.usecase.LoginUseCase
 import io.github.taetae98coding.diary.feature.account.join.state.JoinUiState
@@ -42,7 +42,7 @@ internal class JoinViewModel(
 	private fun handleThrowable(throwable: Throwable) {
 		when (throwable) {
 			is ExistEmailException -> _uiState.update { it.copy(isProgress = false, isExistEmail = true) }
-			is NetworkException -> _uiState.update { it.copy(isProgress = false, isNetworkError = true) }
+			is Exception if throwable.isNetworkException() -> _uiState.update { it.copy(isProgress = false, isNetworkError = true) }
 			else -> _uiState.update { it.copy(isProgress = false, isUnknownError = true) }
 		}
 	}
