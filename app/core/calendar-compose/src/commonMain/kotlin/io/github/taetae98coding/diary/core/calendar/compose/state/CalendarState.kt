@@ -4,7 +4,7 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.focus.FocusRequester
+import io.github.taetae98coding.diary.library.datetime.todayIn
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month
@@ -13,8 +13,6 @@ import kotlinx.datetime.plus
 public class CalendarState internal constructor(
 	internal val pagerState: PagerState,
 ) {
-	internal val focusRequester = FocusRequester()
-
 	internal val localDate: LocalDate
 		get() = LocalDate(1, 1, 1).plus(pagerState.currentPage, DateTimeUnit.MONTH)
 
@@ -27,17 +25,24 @@ public class CalendarState internal constructor(
 	public val month: Month
 		get() = localDate.month
 
+	public val isScrollInProgress: Boolean
+		get() = pagerState.isScrollInProgress
+
+	public suspend fun animateScrollToToday() {
+		animateScrollTo(LocalDate.todayIn())
+	}
+
 	public suspend fun animateScrollTo(localDate: LocalDate) {
 		pagerState.animateScrollToPage(page(localDate))
 	}
 
-	internal suspend fun animateScrollToBackward() {
+	public suspend fun animateScrollToBackward() {
 		if (pagerState.canScrollBackward) {
 			pagerState.animateScrollToPage(pagerState.currentPage - 1)
 		}
 	}
 
-	internal suspend fun animateScrollToForward() {
+	public suspend fun animateScrollToForward() {
 		if (pagerState.canScrollForward) {
 			pagerState.animateScrollToPage(pagerState.currentPage + 1)
 		}

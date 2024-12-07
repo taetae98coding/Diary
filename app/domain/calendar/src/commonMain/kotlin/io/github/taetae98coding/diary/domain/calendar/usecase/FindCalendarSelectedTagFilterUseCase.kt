@@ -24,7 +24,8 @@ public class FindCalendarSelectedTagFilterUseCase internal constructor(
 		getAccountUseCase()
 			.mapLatest { it.getOrThrow() }
 			.flatMapLatest { calendarRepository.findFilter(it.uid) }
-			.flatMapLatest { tagRepository.findByIds(it) }
+			.flatMapLatest { tagRepository.getByIds(it) }
+			.mapLatest { list -> list.filterNot { it.isDelete } }
 			.also { emitAll(it) }
 	}.mapLatest {
 		Result.success(it)

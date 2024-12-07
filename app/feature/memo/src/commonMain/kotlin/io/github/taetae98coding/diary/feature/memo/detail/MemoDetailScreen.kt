@@ -26,6 +26,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.github.taetae98coding.diary.core.compose.button.FloatingAddButton
@@ -235,6 +236,7 @@ private fun InternalDiaryTag(
 					.minimumInteractiveComponentSize()
 					.padding(horizontal = DiaryTheme.dimen.diaryHorizontalPadding),
 				horizontalArrangement = Arrangement.SpaceBetween,
+				verticalAlignment = Alignment.CenterVertically,
 			) {
 				Text(text = "태그")
 				ChevronRightIcon()

@@ -2,10 +2,7 @@ package io.github.taetae98coding.diary.data.tag.repository
 
 import io.github.taetae98coding.diary.core.diary.database.TagDao
 import io.github.taetae98coding.diary.core.model.mapper.toDto
-import io.github.taetae98coding.diary.core.model.mapper.toMemo
 import io.github.taetae98coding.diary.core.model.mapper.toTag
-import io.github.taetae98coding.diary.core.model.memo.Memo
-import io.github.taetae98coding.diary.core.model.memo.MemoDto
 import io.github.taetae98coding.diary.core.model.tag.Tag
 import io.github.taetae98coding.diary.core.model.tag.TagDetail
 import io.github.taetae98coding.diary.core.model.tag.TagDto
@@ -15,8 +12,10 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.mapLatest
 import org.koin.core.annotation.Factory
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
-@OptIn(ExperimentalCoroutinesApi::class)
+@OptIn(ExperimentalCoroutinesApi::class, ExperimentalUuidApi::class)
 @Factory
 internal class TagRepositoryImpl(
 	private val localDataSource: TagDao,
@@ -41,14 +40,12 @@ internal class TagRepositoryImpl(
 		.page(owner)
 		.mapCollectionLatest(TagDto::toTag)
 
-	override fun find(tagId: String): Flow<Tag?> = localDataSource.find(tagId, true).mapLatest { it?.toTag() }
+	override fun getById(tagId: String): Flow<Tag?> = localDataSource.getById(tagId).mapLatest { it?.toTag() }
 
-	override fun findByIds(tagIds: Set<String>): Flow<List<Tag>> =
+	override fun getByIds(tagIds: Set<String>): Flow<List<Tag>> =
 		localDataSource
-			.findByIds(tagIds, true)
+			.getByIds(tagIds)
 			.mapCollectionLatest(TagDto::toTag)
 
-	override fun findMemoByTagId(tagId: String): Flow<List<Memo>> = localDataSource
-		.findMemoByTagId(tagId)
-		.mapCollectionLatest(MemoDto::toMemo)
+	override suspend fun getNextTagId(): String = Uuid.random().toString()
 }

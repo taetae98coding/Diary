@@ -8,7 +8,6 @@ import org.koin.core.annotation.Factory
 
 @Factory
 public class UnselectMemoTagUseCase internal constructor(
-	private val findMemoUseCase: FindMemoUseCase,
 	private val pushMemoBackupQueueUseCase: PushMemoBackupQueueUseCase,
 	private val memoRepository: MemoRepository,
 	private val memoTagRepository: MemoTagRepository,
@@ -17,7 +16,7 @@ public class UnselectMemoTagUseCase internal constructor(
 		return runCatching {
 			if (memoId.isNullOrBlank() || tagId.isNullOrBlank()) return@runCatching
 
-			val memo = findMemoUseCase(memoId).first().getOrThrow() ?: return@runCatching
+			val memo = memoRepository.getById(memoId).first() ?: return@runCatching
 
 			memoTagRepository.delete(memoId, tagId)
 			if (memo.primaryTag == tagId) {

@@ -8,8 +8,12 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.input.VisualTransformation
 import io.github.taetae98coding.diary.core.design.system.icon.ClearIcon
 
@@ -28,11 +32,14 @@ public fun ClearTextField(
 	keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
 	keyboardActions: KeyboardActions = KeyboardActions.Default,
 	singleLine: Boolean = false,
+	shape: Shape = TextFieldDefaults.shape,
 ) {
+	val focusRequester = remember { FocusRequester() }
+
 	TextField(
 		value = valueProvider(),
 		onValueChange = onValueChange,
-		modifier = modifier,
+		modifier = modifier.focusRequester(focusRequester),
 		label = label,
 		placeholder = placeholder,
 		leadingIcon = leadingIcon,
@@ -43,7 +50,12 @@ public fun ClearTextField(
 				}
 
 				if (valueProvider().isNotEmpty()) {
-					IconButton(onClick = { onValueChange("") }) {
+					IconButton(
+						onClick = {
+							onValueChange("")
+							focusRequester.requestFocus()
+						},
+					) {
 						ClearIcon()
 					}
 				}
@@ -54,6 +66,7 @@ public fun ClearTextField(
 		keyboardOptions = keyboardOptions,
 		keyboardActions = keyboardActions,
 		singleLine = singleLine,
+		shape = shape,
 		colors = TextFieldDefaults.colors(
 			focusedIndicatorColor = Color.Transparent,
 			unfocusedIndicatorColor = Color.Transparent,

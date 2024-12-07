@@ -3,8 +3,8 @@ package io.github.taetae98coding.diary.feature.calendar.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.github.taetae98coding.diary.core.calendar.compose.item.CalendarItemUiState
-import io.github.taetae98coding.diary.domain.calendar.usecase.FindCalendarMemoUseCase
 import io.github.taetae98coding.diary.domain.calendar.usecase.HasCalendarFilterUseCase
+import io.github.taetae98coding.diary.domain.calendar.usecase.PageCalendarMemoUseCase
 import io.github.taetae98coding.diary.library.coroutines.mapCollectionLatest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,7 +25,7 @@ import org.koin.android.annotation.KoinViewModel
 @KoinViewModel
 internal class CalendarHomeViewModel(
 	hasCalendarFilterUseCase: HasCalendarFilterUseCase,
-	findCalendarMemoUseCase: FindCalendarMemoUseCase,
+	pageCalendarMemoUseCase: PageCalendarMemoUseCase,
 ) : ViewModel() {
 	private val yearAndMonth = MutableStateFlow<Pair<Int, Month>?>(null)
 
@@ -43,7 +43,7 @@ internal class CalendarHomeViewModel(
 			.filterNotNull()
 			.mapLatest { (year, month) -> LocalDate(year, month, 1) }
 			.mapLatest { it.minus(3, DateTimeUnit.MONTH)..it.plus(3, DateTimeUnit.MONTH) }
-			.flatMapLatest { findCalendarMemoUseCase(it) }
+			.flatMapLatest { pageCalendarMemoUseCase(it) }
 			.mapLatest { it.getOrNull().orEmpty() }
 			.mapCollectionLatest {
 				CalendarItemUiState.Text(

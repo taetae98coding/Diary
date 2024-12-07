@@ -18,5 +18,5 @@ internal class TagBackupRoomDao(
 		database.tag().delete(ids)
 	}
 
-	override fun findByUid(uid: String): Flow<List<String>> = database.tag().findByUid(uid)
+	override fun getByUid(uid: String): Flow<List<String>> = database.tag().findByUid(uid)
 }

@@ -1,6 +1,7 @@
 package io.github.taetae98coding.diary.feature.calendar.home
 
 import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.IconButton
@@ -12,6 +13,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import io.github.taetae98coding.diary.core.calendar.compose.Calendar
 import io.github.taetae98coding.diary.core.calendar.compose.item.CalendarItemUiState
@@ -36,14 +42,41 @@ internal fun CalendarHomeScreen(
 	onCalendarItemClick: (Any) -> Unit,
 	modifier: Modifier = Modifier,
 ) {
+	val coroutineScope = rememberCoroutineScope()
+	val focusRequester = remember { FocusRequester() }
+
 	Scaffold(
-		modifier = modifier,
+		modifier = modifier
+			.onPreviewKeyEvent {
+				when {
+					!state.calendarState.isScrollInProgress && it.key == Key.DirectionRight -> {
+						coroutineScope.launch { state.calendarState.animateScrollToForward() }
+						true
+					}
+
+					!state.calendarState.isScrollInProgress && it.key == Key.DirectionLeft -> {
+						coroutineScope.launch { state.calendarState.animateScrollToBackward() }
+						true
+					}
+
+					it.key == Key.F1 -> {
+						onFilter()
+						true
+					}
+
+					!state.calendarState.isScrollInProgress && it.key == Key.F2 -> {
+						coroutineScope.launch { state.calendarState.animateScrollToToday() }
+						true
+					}
+
+					else -> false
+				}
+			}.focusRequester(focusRequester)
+			.focusable(),
 		topBar = {
 			CalendarTopBar(
 				state = state.calendarState,
 				actions = {
-					val coroutineScope = rememberCoroutineScope()
-
 					IconButton(onClick = onFilter) {
 						Crossfade(hasFilterProvider()) { hasFilter ->
 							if (hasFilter) {
@@ -54,7 +87,7 @@ internal fun CalendarHomeScreen(
 						}
 					}
 
-					IconButton(onClick = { coroutineScope.launch { state.calendarState.animateScrollTo(LocalDate.todayIn()) } }) {
+					IconButton(onClick = { coroutineScope.launch { state.calendarState.animateScrollToToday() } }) {
 						TodayIcon()
 					}
 				},
@@ -82,5 +115,10 @@ internal fun CalendarHomeScreen(
 			today = LocalDate.todayIn()
 			onPauseOrDispose { }
 		}
+	}
+
+	LifecycleResumeEffect(focusRequester) {
+		focusRequester.requestFocus()
+		onPauseOrDispose { }
 	}
 }

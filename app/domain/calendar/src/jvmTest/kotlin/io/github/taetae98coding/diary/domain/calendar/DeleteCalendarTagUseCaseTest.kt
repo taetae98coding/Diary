@@ -15,15 +15,14 @@ import io.mockk.verify
 import kotlinx.coroutines.flow.flowOf
 
 class DeleteCalendarTagUseCaseTest : BehaviorSpec() {
+	private val getAccountUseCase = mockk<GetAccountUseCase>()
+	private val calendarRepository = mockk<CalendarRepository>(relaxed = true, relaxUnitFun = true)
+	private val useCase = DeleteCalendarTagUseCase(
+		getAccountUseCase = getAccountUseCase,
+		repository = calendarRepository,
+	)
+
 	init {
-		val getAccountUseCase = mockk<GetAccountUseCase>()
-		val calendarRepository = mockk<CalendarRepository>(relaxed = true, relaxUnitFun = true)
-
-		val useCase = DeleteCalendarTagUseCase(
-			getAccountUseCase = getAccountUseCase,
-			repository = calendarRepository,
-		)
-
 		Given("has account") {
 			val accountUid = "uid"
 			val account = mockk<Account> {
@@ -35,7 +34,7 @@ class DeleteCalendarTagUseCaseTest : BehaviorSpec() {
 			And("tagId is null") {
 				val tagId = null
 
-				When("call usecase") {
+				When("call useCase") {
 					val result = useCase(tagId)
 
 					Then("result is success") {
@@ -56,7 +55,7 @@ class DeleteCalendarTagUseCaseTest : BehaviorSpec() {
 			And("tagId is not null") {
 				val tagId = "tagId"
 
-				When("call usecase") {
+				When("call useCase") {
 					val result = useCase(tagId)
 
 					Then("result is success") {

@@ -107,7 +107,7 @@ internal class MemoAddViewModel(
 			_uiState.update { it.copy(isProgress = true) }
 			addMemoUseCase(detail = detail, primaryTag = primaryTag.value, tagIds = selectedTag.value)
 				.onSuccess { _uiState.update { it.copy(isProgress = false, isAdd = true) } }
-				.onFailure { handleThrowable(it) }
+				.onFailure(::handleThrowable)
 		}
 	}
 

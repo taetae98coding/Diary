@@ -1,7 +1,11 @@
 package io.github.taetae98coding.diary.data.memo.repository
 
 import io.github.taetae98coding.diary.core.diary.database.MemoTagDao
+import io.github.taetae98coding.diary.core.model.mapper.toTag
+import io.github.taetae98coding.diary.core.model.tag.Tag
+import io.github.taetae98coding.diary.core.model.tag.TagDto
 import io.github.taetae98coding.diary.domain.memo.repository.MemoTagRepository
+import io.github.taetae98coding.diary.library.coroutines.mapCollectionLatest
 import kotlinx.coroutines.flow.Flow
 import org.koin.core.annotation.Factory
 
@@ -9,8 +13,6 @@ import org.koin.core.annotation.Factory
 internal class MemoTagRepositoryImpl(
 	private val localDataSource: MemoTagDao,
 ) : MemoTagRepository {
-	override fun findTagIdsByMemoId(memoId: String): Flow<Set<String>> = localDataSource.findTagIdsByMemoId(memoId)
-
 	override suspend fun upsert(memoId: String, tagId: String) {
 		localDataSource.upsert(memoId, tagId)
 	}
@@ -18,4 +20,8 @@ internal class MemoTagRepositoryImpl(
 	override suspend fun delete(memoId: String, tagId: String) {
 		localDataSource.delete(memoId, tagId)
 	}
+
+	override fun findTagByMemoId(memoId: String): Flow<List<Tag>> = localDataSource
+		.findTagByMemoId(memoId)
+		.mapCollectionLatest(TagDto::toTag)
 }

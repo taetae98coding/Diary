@@ -18,5 +18,5 @@ internal class MemoBackupRoomDao(
 		database.memo().delete(ids)
 	}
 
-	override fun findMemoIdByUid(uid: String): Flow<List<String>> = database.memo().findMemoIdByUid(uid)
+	override fun getMemoIdByUid(uid: String): Flow<List<String>> = database.memo().findMemoIdByUid(uid)
 }

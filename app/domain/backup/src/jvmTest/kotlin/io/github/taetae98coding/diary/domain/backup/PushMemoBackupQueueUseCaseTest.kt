@@ -23,9 +23,19 @@ import kotlinx.coroutines.withContext
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class PushMemoBackupQueueUseCaseTest : BehaviorSpec() {
+	private val dispatcher = UnconfinedTestDispatcher()
+	private val coroutineScope = CoroutineScope(dispatcher)
+	private val getAccountUseCase = mockk<GetAccountUseCase>()
+	private val backupUseCase = mockk<BackupUseCase>(relaxed = true, relaxUnitFun = true)
+	private val memoBackupRepository = mockk<MemoBackupRepository>(relaxed = true, relaxUnitFun = true)
+	private val useCase = PushMemoBackupQueueUseCase(
+		getAccountUseCase = getAccountUseCase,
+		backupUseCase = backupUseCase,
+		coroutineScope = coroutineScope,
+		repository = memoBackupRepository,
+	)
+
 	init {
-		val dispatcher = UnconfinedTestDispatcher()
-		val scope = CoroutineScope(dispatcher)
 
 		coroutineDispatcherFactory = object : CoroutineDispatcherFactory {
 			override suspend fun <T> withDispatcher(
@@ -36,20 +46,10 @@ class PushMemoBackupQueueUseCaseTest : BehaviorSpec() {
 			}
 		}
 
-		val getAccountUseCase = mockk<GetAccountUseCase>()
-		val backupUseCase = mockk<BackupUseCase>(relaxed = true, relaxUnitFun = true)
-		val memoBackupRepository = mockk<MemoBackupRepository>(relaxed = true, relaxUnitFun = true)
-		val useCase = PushMemoBackupQueueUseCase(
-			getAccountUseCase = getAccountUseCase,
-			backupUseCase = backupUseCase,
-			coroutineScope = scope,
-			repository = memoBackupRepository,
-		)
-
 		Given("memoId is null") {
 			val memoId = null
 
-			When("call usecase") {
+			When("call useCase") {
 				val result = useCase(memoId)
 
 				Then("result is success") {
@@ -74,7 +74,7 @@ class PushMemoBackupQueueUseCaseTest : BehaviorSpec() {
 			And("account is Guest") {
 				every { getAccountUseCase() } returns flowOf(Result.success(mockk<Account.Guest>()))
 
-				When("call usecase") {
+				When("call useCase") {
 					val result = useCase(memoId)
 
 					Then("result is success") {
@@ -100,7 +100,7 @@ class PushMemoBackupQueueUseCaseTest : BehaviorSpec() {
 
 				every { getAccountUseCase() } returns flowOf(Result.success(account))
 
-				When("call usecase") {
+				When("call useCase") {
 					val result = useCase(memoId)
 
 					Then("result is success") {

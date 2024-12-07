@@ -12,17 +12,18 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 
 class GetAccountUseCaseTest : BehaviorSpec() {
+	private val accountRepository = mockk<AccountRepository>()
+	private val useCase = GetAccountUseCase(
+		repository = accountRepository,
+	)
+
 	init {
-		val accountRepository = mockk<AccountRepository>()
-		val useCase = GetAccountUseCase(
-			repository = accountRepository,
-		)
 
 		Given("no uid and email") {
 			every { accountRepository.getUid() } returns flowOf(null)
 			every { accountRepository.getEmail() } returns flowOf(null)
 
-			When("call usecase") {
+			When("call useCase") {
 				val result = useCase().first()
 
 				Then("result is guest") {
@@ -42,7 +43,7 @@ class GetAccountUseCaseTest : BehaviorSpec() {
 			every { accountRepository.getUid() } returns flowOf(account.uid)
 			every { accountRepository.getEmail() } returns flowOf(account.email)
 
-			When("call usecase") {
+			When("call useCase") {
 				val result = useCase().first()
 
 				Then("result is member") {

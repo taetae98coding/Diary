@@ -1,6 +1,5 @@
 package io.github.taetae98coding.diary.core.diary.database
 
-import io.github.taetae98coding.diary.core.model.memo.MemoDto
 import io.github.taetae98coding.diary.core.model.tag.TagDetail
 import io.github.taetae98coding.diary.core.model.tag.TagDto
 import kotlinx.coroutines.flow.Flow
@@ -19,11 +18,9 @@ public interface TagDao {
 
 	public fun page(owner: String?): Flow<List<TagDto>>
 
-	public fun find(tagId: String, filterNotDelete: Boolean): Flow<TagDto?>
+	public fun getById(tagId: String): Flow<TagDto?>
 
-	public fun findByIds(tagIds: Set<String>, filterNotDelete: Boolean): Flow<List<TagDto>>
-
-	public fun findMemoByTagId(tagId: String): Flow<List<MemoDto>>
+	public fun getByIds(tagIds: Set<String>): Flow<List<TagDto>>
 
 	public fun getLastServerUpdateAt(owner: String?): Flow<Instant?>
 }

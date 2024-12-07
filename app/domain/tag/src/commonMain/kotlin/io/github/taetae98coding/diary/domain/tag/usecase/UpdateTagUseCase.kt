@@ -15,7 +15,7 @@ public class UpdateTagUseCase internal constructor(
 		return runCatching {
 			if (tagId.isNullOrBlank()) return@runCatching
 
-			val tag = repository.find(tagId).first() ?: return@runCatching
+			val tag = repository.getById(tagId).first() ?: return@runCatching
 			val validDetail = detail.copy(title = detail.title.ifBlank { tag.detail.title })
 
 			if (tag.detail == validDetail) return@runCatching

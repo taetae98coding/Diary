@@ -2,11 +2,9 @@ package io.github.taetae98coding.diary.core.diary.database.room.dao
 
 import io.github.taetae98coding.diary.core.diary.database.TagDao
 import io.github.taetae98coding.diary.core.diary.database.room.DiaryDatabase
-import io.github.taetae98coding.diary.core.diary.database.room.entity.MemoEntity
 import io.github.taetae98coding.diary.core.diary.database.room.entity.TagEntity
 import io.github.taetae98coding.diary.core.diary.database.room.mapper.toDto
 import io.github.taetae98coding.diary.core.diary.database.room.mapper.toEntity
-import io.github.taetae98coding.diary.core.model.memo.MemoDto
 import io.github.taetae98coding.diary.core.model.tag.TagDetail
 import io.github.taetae98coding.diary.core.model.tag.TagDto
 import io.github.taetae98coding.diary.library.coroutines.mapCollectionLatest
@@ -55,18 +53,13 @@ internal class TagRoomDao(
 			.page(owner)
 			.mapCollectionLatest(TagEntity::toDto)
 
-	override fun find(tagId: String, filterNotDelete: Boolean): Flow<TagDto?> = database.tag().find(tagId, filterNotDelete).mapLatest { it?.toDto() }
+	override fun getById(tagId: String): Flow<TagDto?> = database.tag().getById(tagId).mapLatest { it?.toDto() }
 
-	override fun findByIds(tagIds: Set<String>, filterNotDelete: Boolean): Flow<List<TagDto>> =
+	override fun getByIds(tagIds: Set<String>): Flow<List<TagDto>> =
 		database
 			.tag()
-			.findByIds(tagIds, filterNotDelete)
+			.getByIds(tagIds)
 			.mapCollectionLatest(TagEntity::toDto)
-
-	override fun findMemoByTagId(tagId: String): Flow<List<MemoDto>> = database
-		.tag()
-		.findMemoByTagId(tagId)
-		.mapCollectionLatest(MemoEntity::toDto)
 
 	override fun getLastServerUpdateAt(owner: String?): Flow<Instant?> = database.tag().getLastUpdateAt(owner)
 }

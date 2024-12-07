@@ -18,12 +18,12 @@ internal class MemoBackupRepositoryImpl(
 	override suspend fun backup(uid: String) {
 		mutex.withLock {
 			while (true) {
-				val ids = memoBackupDao.findMemoIdByUid(uid).first()
+				val ids = memoBackupDao.getMemoIdByUid(uid).first()
 				if (ids.isEmpty()) {
 					break
 				}
 
-				memoService.upsert(memoDao.findMemoAndTagIdsByIds(ids.toSet(), false).first())
+				memoService.upsert(memoDao.getMemoAndTagIdsByIds(ids.toSet()).first())
 				memoBackupDao.delete(ids.toSet())
 			}
 		}

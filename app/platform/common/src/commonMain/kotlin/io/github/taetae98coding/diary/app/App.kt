@@ -21,16 +21,17 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import io.github.taetae98coding.diary.app.navigation.AppNavigation
 import io.github.taetae98coding.diary.app.state.rememberAppState
+import io.github.taetae98coding.diary.core.design.system.icon.BuddyIcon
 import io.github.taetae98coding.diary.core.design.system.icon.CalendarIcon
 import io.github.taetae98coding.diary.core.design.system.icon.MemoIcon
 import io.github.taetae98coding.diary.core.design.system.icon.MoreIcon
 import io.github.taetae98coding.diary.core.design.system.icon.TagIcon
 import io.github.taetae98coding.diary.core.design.system.theme.DiaryTheme
+import io.github.taetae98coding.diary.core.navigation.buddy.BuddyHomeDestination
 import io.github.taetae98coding.diary.core.navigation.calendar.CalendarFilterDestination
 import io.github.taetae98coding.diary.core.navigation.calendar.CalendarHomeDestination
-import io.github.taetae98coding.diary.core.navigation.memo.MemoDestination
 import io.github.taetae98coding.diary.core.navigation.more.MoreDestination
-import io.github.taetae98coding.diary.core.navigation.tag.TagDestination
+import io.github.taetae98coding.diary.core.navigation.tag.TagHomeDestination
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flowOf
 
@@ -54,19 +55,25 @@ private fun AppScaffold(
 	var isNavigationVisibleFromBackStackEntry by remember { mutableStateOf<Boolean?>(null) }
 	val isNavigationVisible by remember {
 		derivedStateOf {
+			val listDetailDestination = listOf(
+				TagHomeDestination::class,
+				BuddyHomeDestination::class,
+			)
 			val visibleDestination = listOf(
-				TagDestination::class,
-				MemoDestination::class,
 				CalendarHomeDestination::class,
 				CalendarFilterDestination::class,
 				MoreDestination::class,
 			)
 
-			isNavigationVisibleFromBackStackEntry ?: visibleDestination.any {
-				backStackEntry
-					?.destination
-					?.hasRoute(it)
-					?: false
+			if (listDetailDestination.any { backStackEntry?.destination?.hasRoute(it) == true }) {
+				isNavigationVisibleFromBackStackEntry ?: false
+			} else {
+				visibleDestination.any {
+					backStackEntry
+						?.destination
+						?.hasRoute(it)
+						?: false
+				}
 			}
 		}
 	}
@@ -77,13 +84,13 @@ private fun AppScaffold(
 //                AppNavigation.Memo,
 				AppNavigation.Tag,
 				AppNavigation.Calendar,
+				AppNavigation.Buddy,
 				AppNavigation.More,
 			).forEach { navigation ->
 				val isSelected = backStackEntry
 					?.destination
 					?.hierarchy
-					?.any { it.hasRoute(navigation.route::class) }
-					?: false
+					?.any { it.hasRoute(navigation.route::class) } == true
 
 				item(
 					selected = isSelected,
@@ -105,6 +112,7 @@ private fun AppScaffold(
 	}
 
 	LaunchedNavigationVisible(
+		currentVisibleProvider = { isNavigationVisible },
 		backStackEntryProvider = { backStackEntry },
 		onNavigationVisibleChange = { isNavigationVisibleFromBackStackEntry = it },
 	)
@@ -112,13 +120,15 @@ private fun AppScaffold(
 
 @Composable
 private fun LaunchedNavigationVisible(
+	currentVisibleProvider: () -> Boolean,
 	backStackEntryProvider: () -> NavBackStackEntry?,
 	onNavigationVisibleChange: (Boolean?) -> Unit,
 ) {
 	val backStackEntry = backStackEntryProvider()
 
 	LaunchedEffect(backStackEntry) {
-		val flow = backStackEntry?.savedStateHandle?.getStateFlow<Boolean?>("app_navigation_visible", null) ?: flowOf(null)
+		val flow = backStackEntry?.savedStateHandle?.getStateFlow<Boolean?>("app_navigation_visible", currentVisibleProvider()) ?: flowOf(currentVisibleProvider())
+
 		flow.collectLatest { onNavigationVisibleChange(it) }
 	}
 }
@@ -130,8 +140,9 @@ private fun AppNavigationIcon(
 ) {
 	when (navigation) {
 		AppNavigation.Memo -> MemoIcon(modifier = modifier)
-		AppNavigation.Calendar -> CalendarIcon(modifier = modifier)
-		AppNavigation.More -> MoreIcon(modifier = modifier)
 		AppNavigation.Tag -> TagIcon(modifier = modifier)
+		AppNavigation.Calendar -> CalendarIcon(modifier = modifier)
+		AppNavigation.Buddy -> BuddyIcon(modifier = modifier)
+		AppNavigation.More -> MoreIcon(modifier = modifier)
 	}
 }

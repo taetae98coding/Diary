@@ -16,7 +16,9 @@ public interface MemoRepository {
 
 	public suspend fun updateDelete(memoId: String, isDelete: Boolean)
 
-	public fun find(memoId: String): Flow<Memo?>
+	public fun getById(memoId: String): Flow<Memo?>
 
 	public fun findByDateRange(owner: String?, dateRange: ClosedRange<LocalDate>, tagFilter: Set<String>): Flow<List<Memo>>
+
+	public suspend fun getNextMemoId(): String
 }

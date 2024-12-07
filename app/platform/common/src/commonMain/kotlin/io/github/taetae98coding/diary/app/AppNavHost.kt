@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import io.github.taetae98coding.diary.app.state.AppState
 import io.github.taetae98coding.diary.core.navigation.calendar.CalendarDestination
 import io.github.taetae98coding.diary.feature.account.accountNavigation
+import io.github.taetae98coding.diary.feature.buddy.buddyNavigation
 import io.github.taetae98coding.diary.feature.calendar.calendarNavigation
 import io.github.taetae98coding.diary.feature.memo.memoNavigation
 import io.github.taetae98coding.diary.feature.more.moreNavigation
@@ -24,7 +25,9 @@ internal fun AppNavHost(
 		memoNavigation(navController = state.navController)
 		tagNavigation(navController = state.navController)
 		calendarNavigation(navController = state.navController)
+		buddyNavigation(navController = state.navController)
 		moreNavigation(navController = state.navController)
+
 		accountNavigation(navController = state.navController)
 	}
 }

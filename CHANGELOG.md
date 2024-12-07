@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2024-12-07
+
+### 🚀 Features
+
+- App - TagDetail TagMemo Tab
+- App - preferred width 500
+- App - CalendarScreen F1~F2 shortcut(TopBar action)
+- App - calendar filter dialog change to bottom sheet
+- App - Buddy Add
+- Server - Buddy
+
+### 🐛 Bug Fixes
+
+- App - CalendarScreen request focus when resume(after close filter dialog can use keyboard shortcut)
+- App - memo sort start, endInclusive, title
+- App - screen navigate animation
+
+### 🚜 Refactor
+
+- Kotlin 2.1.0
+
 ## [1.2.2] - 2024-11-27
 
 ### 🚀 Features

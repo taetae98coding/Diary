@@ -1,9 +1,9 @@
 [versions]
 ### core
-kotlin = "2.0.21"                           # https://github.com/jetbrains/kotlin/releases
+kotlin = "2.1.0"                            # https://github.com/jetbrains/kotlin/releases
 agp = "8.6.1"                               # https://developer.android.com/build/releases/gradle-plugin?hl=en
-ktor = "3.0.1"                              # https://github.com/ktorio/ktor/releases
-ksp = "2.0.21-1.0.28"                       # https://github.com/google/ksp/releases
+ktor = "3.0.2"                              # https://github.com/ktorio/ktor/releases
+ksp = "2.1.0-1.0.29"                        # https://github.com/google/ksp/releases
 
 kotlinx-serialization = "1.7.3"             # https://github.com/Kotlin/kotlinx.serialization/releases
 kotlinx-coroutines = "1.9.0"                # https://github.com/Kotlin/kotlinx.coroutines/releases
@@ -32,7 +32,7 @@ android-material = "1.12.0"                 # https://github.com/material-compon
 androidx-activity = "1.9.3"                 # https://developer.android.com/jetpack/androidx/releases/activity?hl=en
 androidx-startup = "1.2.0"                  # https://developer.android.com/jetpack/androidx/releases/startup?hl=en
 
-android-firebase-bom = "33.6.0"             # https://firebase.google.com/support/release-notes/android
+android-firebase-bom = "33.7.0"             # https://firebase.google.com/support/release-notes/android
 android-firebase-crashlytics-plugin = "3.0.2"
 android-firebase-perf-plugin = "1.4.2"
 google-services = "4.4.2"
@@ -40,9 +40,9 @@ google-services = "4.4.2"
 leakcanary = "2.14"                         # https://github.com/square/leakcanary/releases
 
 ### server
-exposed = "0.56.0"                          # https://github.com/JetBrains/Exposed/releases
+exposed = "0.57.0"                          # https://github.com/JetBrains/Exposed/releases
 mysql = "8.0.33"
-server-firebase-admin = "9.4.1"             # https://github.com/firebase/firebase-admin-java/releases
+server-firebase-admin = "9.4.2"             # https://github.com/firebase/firebase-admin-java/releases
 
 logback = "1.5.12"                          # https://github.com/qos-ch/logback/tags
 

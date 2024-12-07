@@ -1,6 +1,6 @@
 package io.github.taetae98coding.diary.core.diary.service.memo
 
-import io.github.taetae98coding.diary.common.model.memo.TagEntity
+import io.github.taetae98coding.diary.common.model.tag.TagEntity
 import io.github.taetae98coding.diary.core.diary.service.DiaryServiceModule
 import io.github.taetae98coding.diary.core.diary.service.ext.getOrThrow
 import io.github.taetae98coding.diary.core.model.tag.TagDetail

@@ -1,6 +1,5 @@
 package io.github.taetae98coding.diary.core.calendar.compose
 
-import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.pager.HorizontalPager
@@ -8,12 +7,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.input.key.Key
-import androidx.compose.ui.input.key.key
-import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.unit.dp
 import io.github.taetae98coding.diary.core.calendar.compose.color.CalendarColors
 import io.github.taetae98coding.diary.core.calendar.compose.item.CalendarItemUiState
@@ -21,7 +15,6 @@ import io.github.taetae98coding.diary.core.calendar.compose.month.CalendarMonth
 import io.github.taetae98coding.diary.core.calendar.compose.month.CalendarMonthState
 import io.github.taetae98coding.diary.core.calendar.compose.state.CalendarState
 import io.github.taetae98coding.diary.core.design.system.theme.DiaryTheme
-import kotlinx.coroutines.launch
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.plus
@@ -36,26 +29,8 @@ public fun Calendar(
 	modifier: Modifier = Modifier,
 	colors: CalendarColors = CalendarDefaults.colors(),
 ) {
-	val coroutineScope = rememberCoroutineScope()
-
 	Surface(
-		modifier = modifier
-			.onPreviewKeyEvent {
-				when {
-					!state.pagerState.isScrollInProgress && it.key == Key.DirectionRight -> {
-						coroutineScope.launch { state.animateScrollToForward() }
-						true
-					}
-
-					!state.pagerState.isScrollInProgress && it.key == Key.DirectionLeft -> {
-						coroutineScope.launch { state.animateScrollToBackward() }
-						true
-					}
-
-					else -> false
-				}
-			}.focusRequester(state.focusRequester)
-			.focusable(),
+		modifier = modifier,
 		color = DiaryTheme.color.background,
 	) {
 		Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -69,10 +44,6 @@ public fun Calendar(
 				colors = colors,
 			)
 		}
-	}
-
-	LaunchedEffect(state.focusRequester) {
-		state.focusRequester.requestFocus()
 	}
 }
 

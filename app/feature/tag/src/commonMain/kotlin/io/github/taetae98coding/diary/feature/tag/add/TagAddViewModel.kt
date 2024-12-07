@@ -24,7 +24,7 @@ internal class TagAddViewModel(
 			_uiState.update { it.copy(isProgress = true) }
 			addTagUseCase(detail)
 				.onSuccess { _uiState.update { it.copy(isProgress = false, isAdd = true) } }
-				.onFailure { handleThrowable(it) }
+				.onFailure(::handleThrowable)
 		}
 	}
 

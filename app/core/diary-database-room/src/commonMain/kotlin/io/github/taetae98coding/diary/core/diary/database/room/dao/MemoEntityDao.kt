@@ -96,10 +96,9 @@ internal abstract class MemoEntityDao : EntityDao<MemoEntity>() {
 		SELECT *
 		FROM MemoEntity
 		WHERE id = :memoId
-		AND (:filterNotDelete = 0 OR isDelete = 0)
 	""",
 	)
-	abstract fun find(memoId: String, filterNotDelete: Boolean): Flow<MemoEntity?>
+	abstract fun getById(memoId: String): Flow<MemoEntity?>
 
 	@Query(
 		"""
@@ -108,10 +107,9 @@ internal abstract class MemoEntityDao : EntityDao<MemoEntity>() {
 		LEFT OUTER JOIN MemoTagEntity
 		ON MemoEntity.id = MemoTagEntity.memoId
 		WHERE MemoEntity.id IN (:memoIds)
-		AND (:filterNotDelete = 0 OR isDelete = 0)
 	""",
 	)
-	abstract fun findMemoAndTagIdsByIds(memoIds: Set<String>, filterNotDelete: Boolean): Flow<Map<MemoEntity, List<MemoTagEntity>>>
+	abstract fun getMemoAndTagIdsByIds(memoIds: Set<String>): Flow<Map<MemoEntity, List<MemoTagEntity>>>
 
 	@Query(
 		"""
@@ -123,6 +121,7 @@ internal abstract class MemoEntityDao : EntityDao<MemoEntity>() {
 		AND endInclusive IS NOT NULL
 		AND endInclusive >= :start AND start <= :endInclusive
 		AND (:hasTagFilter = 0 OR id IN (SELECT memoId FROM MemoTagEntity WHERE tagId in (:tagFilter)))
+		ORDER BY start, endInclusive, title
 	""",
 	)
 	abstract fun findByDateRange(owner: String?, start: LocalDate, endInclusive: LocalDate, hasTagFilter: Boolean, tagFilter: Set<String>): Flow<List<MemoEntity>>

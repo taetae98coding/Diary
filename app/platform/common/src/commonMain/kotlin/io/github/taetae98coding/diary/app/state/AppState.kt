@@ -16,16 +16,11 @@ internal class AppState(
 			navController.currentBackStackEntry
 				?.destination
 				?.hierarchy
-				?.any { it.hasRoute(navigation.route::class) }
-				?: false
+				?.any { it.hasRoute(navigation.route::class) } == true
 
 		if (!isSelected) {
 			navController.navigate(navigation.route) {
-				popUpTo(CalendarHomeDestination) {
-					saveState = true
-				}
-
-				restoreState = true
+				popUpTo(CalendarHomeDestination)
 				launchSingleTop = true
 			}
 		}
