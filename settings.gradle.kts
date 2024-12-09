@@ -9,6 +9,7 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 
     includeBuild("build-logic")
@@ -24,6 +25,7 @@ dependencyResolutionManagement {
             }
         }
         mavenCentral()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
 
@@ -32,6 +34,7 @@ rootProject.name = "Diary"
 include(":app:platform:jvm")
 include(":app:platform:android")
 include(":app:platform:ios")
+//include(":app:platform:macos")
 include(":app:platform:common")
 
 include(":app:core:diary-service")

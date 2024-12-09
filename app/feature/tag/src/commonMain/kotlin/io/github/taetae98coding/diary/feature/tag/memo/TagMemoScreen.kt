@@ -18,9 +18,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -34,174 +31,178 @@ import io.github.taetae98coding.diary.library.color.multiplyAlpha
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun TagMemoScreen(
-	state: TagMemoScreenState,
-	navigateButtonProvider: () -> TagMemoNavigateButton,
-	uiStateProvider: () -> TagMemoScreenUiState,
-	onAdd: () -> Unit,
-	listProvider: () -> List<MemoListItemUiState>?,
-	onMemo: (String) -> Unit,
-	modifier: Modifier = Modifier,
+    state: TagMemoScreenState,
+    navigateButtonProvider: () -> TagMemoNavigateButton,
+    uiStateProvider: () -> TagMemoScreenUiState,
+    onAdd: () -> Unit,
+    listProvider: () -> List<MemoListItemUiState>?,
+    onMemo: (String) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-	Scaffold(
-		modifier = modifier,
-		topBar = {
-			TopAppBar(
-				title = { },
-				navigationIcon = {
-					when (val button = navigateButtonProvider()) {
-						is TagMemoNavigateButton.NavigateUp -> {
-							IconButton(onClick = button.onNavigateUp) {
-								NavigateUpIcon()
-							}
-						}
+    Scaffold(
+        modifier = modifier,
+        topBar = {
+            TopAppBar(
+                title = { },
+                navigationIcon = {
+                    when (val button = navigateButtonProvider()) {
+                        is TagMemoNavigateButton.NavigateUp -> {
+                            IconButton(onClick = button.onNavigateUp) {
+                                NavigateUpIcon()
+                            }
+                        }
 
-						is TagMemoNavigateButton.None -> Unit
-					}
-				},
-			)
-		},
-		snackbarHost = { SnackbarHost(hostState = state.hostState) },
-		floatingActionButton = { FloatingAddButton(onClick = onAdd) },
-	) {
-		Content(
-			listProvider = listProvider,
-			onMemo = onMemo,
-			modifier = Modifier
-				.fillMaxSize()
-				.padding(it),
-		)
-	}
+                        is TagMemoNavigateButton.None -> Unit
+                    }
+                },
+            )
+        },
+        snackbarHost = { SnackbarHost(hostState = state.hostState) },
+        floatingActionButton = { FloatingAddButton(onClick = onAdd) },
+    ) {
+        Content(
+            listProvider = listProvider,
+            onMemo = onMemo,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it),
+        )
+    }
 
-	Message(
-		state = state,
-		uiStateProvider = uiStateProvider,
-	)
+    Message(
+        state = state,
+        uiStateProvider = uiStateProvider,
+    )
 }
 
 @Composable
 private fun Message(
-	state: TagMemoScreenState,
-	uiStateProvider: () -> TagMemoScreenUiState,
+    state: TagMemoScreenState,
+    uiStateProvider: () -> TagMemoScreenUiState,
 ) {
-	val uiState = uiStateProvider()
+    val uiState = uiStateProvider()
 
-	LaunchedEffect(
-		uiState.finishTagId,
-		uiState.deleteTagId,
-		uiState.isUnknownError,
-	) {
-		if (!uiState.hasMessage) return@LaunchedEffect
+    LaunchedEffect(
+        uiState.finishTagId,
+        uiState.deleteTagId,
+        uiState.isUnknownError,
+    ) {
+        if (!uiState.hasMessage) return@LaunchedEffect
 
-		when {
-			!uiState.finishTagId.isNullOrBlank() -> {
-				state.showMessage(
-					message = "메모 완료 ${Emoji.congratulate.random()}",
-					actionLabel = "취소",
-				) {
-					uiState.restartTag(uiState.finishTagId)
-				}
-			}
+        when {
+            !uiState.finishTagId.isNullOrBlank() -> {
+                state.showMessage(
+                    message = "메모 완료 ${Emoji.congratulate.random()}",
+                    actionLabel = "취소",
+                ) {
+                    uiState.restartTag(uiState.finishTagId)
+                }
+            }
 
-			!uiState.deleteTagId.isNullOrBlank() -> {
-				state.showMessage(
-					message = "메모 삭제 ${Emoji.congratulate.random()}",
-					actionLabel = "취소",
-				) {
-					uiState.restoreTag(uiState.deleteTagId)
-				}
-			}
+            !uiState.deleteTagId.isNullOrBlank() -> {
+                state.showMessage(
+                    message = "메모 삭제 ${Emoji.congratulate.random()}",
+                    actionLabel = "취소",
+                ) {
+                    uiState.restoreTag(uiState.deleteTagId)
+                }
+            }
 
-			uiState.isUnknownError -> state.showMessage("알 수 없는 에러가 발생했어요 잠시 후 다시 시도해 주세요 ${Emoji.error.random()}")
-		}
+            uiState.isUnknownError -> state.showMessage("알 수 없는 에러가 발생했어요 잠시 후 다시 시도해 주세요 ${Emoji.error.random()}")
+        }
 
-		uiState.onMessageShow()
-	}
+        uiState.onMessageShow()
+    }
 }
 
 @Composable
 private fun Content(
-	listProvider: () -> List<MemoListItemUiState>?,
-	onMemo: (String) -> Unit,
-	modifier: Modifier = Modifier,
+    listProvider: () -> List<MemoListItemUiState>?,
+    onMemo: (String) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-	val isLoading by remember { derivedStateOf { listProvider() == null } }
-	val isEmpty by remember { derivedStateOf { !isLoading && listProvider().isNullOrEmpty() } }
+    LazyColumn(
+        modifier = modifier,
+        contentPadding = DiaryTheme.dimen.screenPaddingValues,
+        verticalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace),
+    ) {
+        val list = listProvider()
 
-	if (isEmpty) {
-		Box(
-			modifier = modifier,
-			contentAlignment = Alignment.Center,
-		) {
-			Text(
-				text = "메모가 없어요 🐰",
-				style = DiaryTheme.typography.headlineMedium,
-			)
-		}
-	} else {
-		LazyColumn(
-			modifier = modifier,
-			contentPadding = DiaryTheme.dimen.screenPaddingValues,
-			verticalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace),
-		) {
-			if (isLoading) {
-				items(
-					count = 5,
-					contentType = { "Tag" },
-				) {
-					MemoItem(
-						uiState = null,
-						onClick = {},
-					)
-				}
-			} else {
-				items(
-					items = listProvider().orEmpty(),
-					key = { it.id },
-					contentType = { "Tag" },
-				) {
-					MemoItem(
-						uiState = it,
-						onClick = { onMemo(it.id) },
-						modifier = Modifier.animateItem(),
-					)
-				}
-			}
-		}
-	}
+        if (list == null) {
+            items(
+                count = 5,
+                contentType = { "Memo" },
+            ) {
+                MemoItem(
+                    uiState = null,
+                    onClick = {},
+                    modifier = Modifier.animateItem(),
+                )
+            }
+        } else if (list.isEmpty()) {
+            item(
+                key = "Loading",
+                contentType = "Loading",
+            ) {
+                Box(
+                    modifier = Modifier.fillParentMaxSize()
+                        .animateItem(),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Text(
+                        text = "메모가 없어요 🐰",
+                        style = DiaryTheme.typography.headlineMedium,
+                    )
+                }
+            }
+        } else {
+            items(
+                items = listProvider().orEmpty(),
+                key = { it.id },
+                contentType = { "Memo" },
+            ) {
+                MemoItem(
+                    uiState = it,
+                    onClick = { onMemo(it.id) },
+                    modifier = Modifier.animateItem(),
+                )
+            }
+        }
+    }
 }
 
 @Composable
 private fun MemoItem(
-	uiState: MemoListItemUiState?,
-	onClick: () -> Unit,
-	modifier: Modifier = Modifier,
+    uiState: MemoListItemUiState?,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-	FinishAndDeleteSwipeBox(
-		modifier = modifier,
-		onFinish = { uiState?.finish?.value?.invoke() },
-		onDelete = { uiState?.delete?.value?.invoke() },
-	) {
-		Card(onClick = onClick) {
-			Column(
-				modifier = Modifier
-					.fillMaxSize()
-					.padding(16.dp),
-			) {
-				MaterialTheme.typography.bodySmall
-				Text(
-					text = uiState?.title.orEmpty(),
-					style = DiaryTheme.typography.titleLarge,
-				)
-				if (uiState?.dateRange != null) {
-					Text(
-						text = listOf(uiState.dateRange.start, uiState.dateRange.endInclusive)
-							.distinct()
-							.joinToString(separator = " ~ "),
-						color = LocalContentColor.current.multiplyAlpha(0.5F),
-						style = DiaryTheme.typography.labelSmall,
-					)
-				}
-			}
-		}
-	}
+    FinishAndDeleteSwipeBox(
+        modifier = modifier,
+        onFinish = { uiState?.finish?.value?.invoke() },
+        onDelete = { uiState?.delete?.value?.invoke() },
+    ) {
+        Card(onClick = onClick) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
+            ) {
+                MaterialTheme.typography.bodySmall
+                Text(
+                    text = uiState?.title.orEmpty(),
+                    style = DiaryTheme.typography.titleLarge,
+                )
+                if (uiState?.dateRange != null) {
+                    Text(
+                        text = listOf(uiState.dateRange.start, uiState.dateRange.endInclusive)
+                            .distinct()
+                            .joinToString(separator = " ~ "),
+                        color = LocalContentColor.current.multiplyAlpha(0.5F),
+                        style = DiaryTheme.typography.labelSmall,
+                    )
+                }
+            }
+        }
+    }
 }

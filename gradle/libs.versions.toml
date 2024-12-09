@@ -10,7 +10,7 @@ kotlinx-coroutines = "1.9.0"                # https://github.com/Kotlin/kotlinx.
 kotlinx-datetime = "0.6.1"                  # https://github.com/Kotlin/kotlinx-datetime/releases
 
 ### multiplatform
-compose = "1.7.1"                           # https://github.com/JetBrains/compose-multiplatform/releases
+    compose = "1.7.1"                           # https://github.com/JetBrains/compose-multiplatform/releases
 compose-material3-adaptive = "1.0.1"
 navigation = "2.8.0-alpha10"
 lifecycle = "2.8.4"

@@ -4,13 +4,13 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.github.taetae98coding.diary.core.compose.runtime.SkipProperty
+import io.github.taetae98coding.diary.core.compose.tag.TagCardItemUiState
 import io.github.taetae98coding.diary.core.navigation.memo.MemoDetailDestination
 import io.github.taetae98coding.diary.domain.memo.usecase.DeleteMemoPrimaryTagUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.FindMemoTagUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.SelectMemoTagUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.UnselectMemoTagUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.UpdateMemoPrimaryTagUseCase
-import io.github.taetae98coding.diary.feature.memo.tag.TagUiState
 import io.github.taetae98coding.diary.library.coroutines.mapCollectionLatest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.SharingStarted
@@ -42,11 +42,11 @@ internal class MemoDetailTagViewModel(
 				initialValue = null,
 			)
 
-	val memoTagUiStateList =
+	val primaryTagList =
 		memoTagList
 			.mapLatest { list -> list?.filter { it.isSelected } }
 			.mapCollectionLatest {
-				TagUiState(
+				TagCardItemUiState(
 					id = it.tag.id,
 					title = it.tag.detail.title,
 					isSelected = it.isPrimary,
@@ -63,7 +63,7 @@ internal class MemoDetailTagViewModel(
 	val tagList =
 		memoTagList
 			.mapCollectionLatest {
-				TagUiState(
+                TagCardItemUiState(
 					id = it.tag.id,
 					title = it.tag.detail.title,
 					isSelected = it.isSelected,

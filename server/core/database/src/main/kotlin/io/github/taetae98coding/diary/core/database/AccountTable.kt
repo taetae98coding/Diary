@@ -1,21 +1,23 @@
 package io.github.taetae98coding.diary.core.database
 
 import io.github.taetae98coding.diary.core.model.Account
+import org.jetbrains.exposed.dao.id.EntityID
+import org.jetbrains.exposed.dao.id.IdTable
+import org.jetbrains.exposed.sql.Column
 import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 
-public data object AccountTable : Table(name = "Account") {
+public data object AccountTable : IdTable<String>(name = "Account") {
+    private val UID = varchar("uid", 255).default("").uniqueIndex()
 	private val EMAIL = varchar("email", 255).default("")
 	private val PASSWORD = varchar("password", 255).default("")
 
-	internal val UID = varchar("uid", 255).default("").uniqueIndex()
-
+    override val id: Column<EntityID<String>> = UID.entityId()
 	override val primaryKey: PrimaryKey = PrimaryKey(EMAIL)
 
-	public fun contains(email: String): Boolean =
+    public fun contains(email: String): Boolean =
 		selectAll()
 			.where { EMAIL eq email }
 			.any()
