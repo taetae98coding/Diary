@@ -19,12 +19,8 @@ public data class MemoEntity(
 	val endInclusive: LocalDate? = null,
 	@SerialName("color")
 	val color: Int = -16777216,
-	@SerialName("owner")
-	val owner: String = "",
 	@SerialName("primaryTag")
 	val primaryTag: String? = null,
-	@SerialName("tagIds")
-	val tagIds: Set<String> = emptySet(),
 	@SerialName("isFinish")
 	val isFinish: Boolean = false,
 	@SerialName("isDelete")

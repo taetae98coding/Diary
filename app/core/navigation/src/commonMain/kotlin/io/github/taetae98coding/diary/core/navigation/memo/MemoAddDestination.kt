@@ -6,14 +6,16 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class MemoAddDestination(
-	@SerialName("start")
+	@SerialName(START)
 	val start: LocalDate? = null,
-	@SerialName("endInclusive")
+	@SerialName(END_INCLUSIVE)
 	val endInclusive: LocalDate? = null,
 	@SerialName(SELECTED_TAG)
 	val selectedTag: String? = null,
 ) {
 	public companion object {
+		public const val START: String = "start"
+		public const val END_INCLUSIVE: String = "endInclusive"
 		public const val SELECTED_TAG: String = "selectedTag"
 	}
 }

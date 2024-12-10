@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.Instant
 
 public interface MemoRepository {
-	public suspend fun upsert(list: List<MemoAndTagIds>)
+	public suspend fun upsert(list: List<MemoAndTagIds>, owner: String)
 
 	public fun findByIds(ids: Set<String>): Flow<List<Memo>>
 

@@ -10,9 +10,8 @@ import org.koin.core.annotation.Factory
 public class UpsertMemoUseCase internal constructor(
 	private val repository: MemoRepository,
 ) {
-	public suspend operator fun invoke(list: List<MemoAndTagIds>): Result<Unit> {
+	public suspend operator fun invoke(list: List<MemoAndTagIds>, owner: String): Result<Unit> {
 		return runCatching {
-			// TODO Permission Check
 			val ids = list.map { it.memo.id }.toSet()
 			val originMap =
 				repository
@@ -38,7 +37,7 @@ public class UpsertMemoUseCase internal constructor(
 						)
 					}
 
-			repository.upsert(validList)
+			repository.upsert(validList, owner)
 		}
 	}
 }

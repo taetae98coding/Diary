@@ -43,11 +43,19 @@ internal fun DependencyHandler.kspIos(
     add("kspIosSimulatorArm64", dependencyNotation)
 }
 
+internal fun DependencyHandler.kspMacos(
+    dependencyNotation: Provider<MinimalExternalModuleDependency>,
+) {
+//    add("kspMacosX64", dependencyNotation)
+//    add("kspMacosArm64", dependencyNotation)
+}
+
 public fun DependencyHandler.kspCommon(
     dependencyNotation: Provider<MinimalExternalModuleDependency>,
 ) {
     kspJvm(dependencyNotation)
     kspIos(dependencyNotation)
+    kspMacos(dependencyNotation)
 }
 
 public fun DependencyHandler.kspAll(
@@ -56,4 +64,5 @@ public fun DependencyHandler.kspAll(
     kspJvm(dependencyNotation)
     kspAndroid(dependencyNotation)
     kspIos(dependencyNotation)
+    kspMacos(dependencyNotation)
 }

@@ -11,6 +11,7 @@ public data class DiaryResponse<T>(
 	public companion object {
 		public val Success: DiaryResponse<Unit> = DiaryResponse(200, "SUCCESS", Unit)
 		public val Created: DiaryResponse<Unit> = DiaryResponse(201, "CREATED", Unit)
+		public val BadRequest: DiaryResponse<Unit> = DiaryResponse(400, "BadRequest", Unit)
 		public val Unauthorized: DiaryResponse<Unit> = DiaryResponse(401, "Unauthorized", Unit)
 		public val InternalServerError: DiaryResponse<Unit> = DiaryResponse(500, "InternalServerError", Unit)
 

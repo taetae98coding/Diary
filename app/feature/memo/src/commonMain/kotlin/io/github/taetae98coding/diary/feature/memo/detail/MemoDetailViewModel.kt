@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import io.github.taetae98coding.diary.core.compose.memo.detail.MemoDetailScaffoldUiState
 import io.github.taetae98coding.diary.core.model.memo.MemoDetail
 import io.github.taetae98coding.diary.core.navigation.memo.MemoDetailDestination
 import io.github.taetae98coding.diary.domain.memo.usecase.DeleteMemoUseCase
@@ -34,7 +35,7 @@ internal class MemoDetailViewModel(
 ) : ViewModel() {
 	private val route = savedStateHandle.toRoute<MemoDetailDestination>()
 
-	private val _uiState = MutableStateFlow(MemoDetailScreenUiState(onMessageShow = ::clearMessage))
+	private val _uiState = MutableStateFlow(MemoDetailScaffoldUiState(onMessageShow = ::clearMessage))
 	val uiState = _uiState.asStateFlow()
 
 	private val memo =
@@ -54,25 +55,6 @@ internal class MemoDetailViewModel(
 				scope = viewModelScope,
 				started = SharingStarted.WhileSubscribed(5_000),
 				initialValue = null,
-			)
-
-	val actionButton =
-		memo
-			.mapLatest {
-				MemoDetailActionButton.FinishAndDetail(
-					isFinish = it?.isFinish ?: false,
-					onFinishChange = ::onFinishChange,
-					delete = ::delete,
-				)
-			}.stateIn(
-				scope = viewModelScope,
-				started = SharingStarted.WhileSubscribed(5_000),
-				initialValue =
-					MemoDetailActionButton.FinishAndDetail(
-						isFinish = false,
-						onFinishChange = ::onFinishChange,
-						delete = ::delete,
-					),
 			)
 
 	private fun onFinishChange(isFinish: Boolean) {

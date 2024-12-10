@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="209pt" height="44pt" viewBox="0 0 208.97 44">
-    <g class="graph">
-        <path fill="#fff" d="M0 44V0h208.97v44z"/>
-        <g class="node" transform="translate(4 40)">
-            <ellipse cx="100.48" cy="-18" fill="none" stroke="#000" rx="100.48" ry="18"/>
-            <text x="100.48" y="-12.95" font-family="Times,serif" font-size="14" text-anchor="middle">:app:core:filter-database</text>
-        </g>
-    </g>
-</svg>

@@ -8,12 +8,17 @@ import io.github.taetae98coding.diary.core.design.system.color.DiaryColor
 import io.github.taetae98coding.diary.core.design.system.color.platformDarkColorScheme
 import io.github.taetae98coding.diary.core.design.system.color.platformLightColorScheme
 import io.github.taetae98coding.diary.core.design.system.dimen.DiaryDimen
+import io.github.taetae98coding.diary.core.design.system.shape.DiaryShape
 import io.github.taetae98coding.diary.core.design.system.typography.DiaryTypography
 
 public data object DiaryTheme {
 	val color: DiaryColor
 		@Composable
 		get() = LocalDiaryColor.current
+
+    val shape: DiaryShape
+        @Composable
+        get() = LocalDiaryShape.current
 
 	val typography: DiaryTypography
 		@Composable
@@ -42,6 +47,9 @@ public fun DiaryTheme(
 			background = colorScheme.background,
 			onSurface = colorScheme.onSurface,
 		),
+        LocalDiaryShape provides DiaryShape(
+            large = MaterialTheme.shapes.large,
+        ),
 		LocalDiaryTypography provides DiaryTypography(
 			headlineMedium = MaterialTheme.typography.headlineMedium,
 			titleLarge = MaterialTheme.typography.titleLarge,

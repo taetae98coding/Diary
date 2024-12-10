@@ -7,6 +7,7 @@ plugins {
 kotlin {
     cocoapods {
         ios.deploymentTarget = "18.0"
+        osx.deploymentTarget = "15.1.1"
 
         noPodspec()
         pod(
@@ -29,7 +30,7 @@ kotlin {
             }
         }
 
-        iosMain {
+        appleMain {
             dependencies {
                 implementation(libs.kotlinx.coroutines.core)
             }

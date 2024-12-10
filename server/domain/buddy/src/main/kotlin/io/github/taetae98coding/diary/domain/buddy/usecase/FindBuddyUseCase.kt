@@ -19,7 +19,7 @@ public class FindBuddyUseCase internal constructor(
 	public operator fun invoke(email: String?, uid: String?): Flow<Result<List<Buddy>>> {
 		if (email.isNullOrBlank()) return flowOf(Result.success(emptyList()))
 
-		return flow { emitAll(repository.findByEmail(email, uid)) }
+		return flow { emitAll(repository.findBuddyByEmail(email, uid)) }
 			.mapLatest { Result.success(it) }
 			.catch { emit(Result.failure(it)) }
 	}

@@ -1,5 +1,7 @@
 package io.github.taetae98coding.diary.data.memo.repository
 
+import io.github.taetae98coding.diary.core.database.MemoAccountTable
+import io.github.taetae98coding.diary.core.database.MemoQuery
 import io.github.taetae98coding.diary.core.database.MemoTable
 import io.github.taetae98coding.diary.core.database.MemoTagTable
 import io.github.taetae98coding.diary.core.model.Memo
@@ -13,14 +15,11 @@ import org.koin.core.annotation.Factory
 
 @Factory
 internal class MemoRepositoryImpl : MemoRepository {
-	override suspend fun upsert(list: List<MemoAndTagIds>) {
+	override suspend fun upsert(list: List<MemoAndTagIds>, owner: String) {
 		newSuspendedTransaction {
 			list.forEach { memoAndTagIds ->
-				MemoTable.upsert(memoAndTagIds.memo)
-				MemoTagTable.deleteByMemoId(memoAndTagIds.memo.id)
-				memoAndTagIds.tagIds.forEach {
-					MemoTagTable.upsert(memoAndTagIds.memo.id, it)
-				}
+                MemoQuery.upsertMemo(memoAndTagIds.memo, memoAndTagIds.tagIds)
+                MemoAccountTable.upsert(memoAndTagIds.memo.id, owner)
 			}
 		}
 	}
@@ -31,7 +30,7 @@ internal class MemoRepositoryImpl : MemoRepository {
 		flow {
 			newSuspendedTransaction {
 				MemoTable
-					.findByUpdateAt(uid, updateAt)
+					.findByUpdateAtOwner(uid, updateAt)
 					.map { memo ->
 						MemoAndTagIds(
 							memo = memo,

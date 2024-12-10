@@ -28,6 +28,7 @@ kotlin {
         nonAndroidMain.dependsOn(commonMain.get())
         jvmMain.get().dependsOn(nonAndroidMain)
         iosMain.get().dependsOn(nonAndroidMain)
+        macosMain.get().dependsOn(nonAndroidMain)
     }
 }
 

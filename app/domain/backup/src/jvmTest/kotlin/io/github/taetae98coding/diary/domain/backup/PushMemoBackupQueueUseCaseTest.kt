@@ -36,7 +36,6 @@ class PushMemoBackupQueueUseCaseTest : BehaviorSpec() {
 	)
 
 	init {
-
 		coroutineDispatcherFactory = object : CoroutineDispatcherFactory {
 			override suspend fun <T> withDispatcher(
 				testCase: TestCase,

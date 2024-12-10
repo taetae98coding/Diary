@@ -1,5 +1,6 @@
 package io.github.taetae98coding.diary.feature.buddy.detail
 
+import androidx.compose.material3.DrawerState
 import androidx.compose.material3.SnackbarHostState
 import io.github.taetae98coding.diary.core.design.system.diary.component.DiaryComponentState
 import io.github.taetae98coding.diary.core.model.buddy.BuddyGroupDetail
@@ -9,43 +10,51 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 internal sealed class BuddyDetailScreenState {
-	protected abstract val coroutineScope: CoroutineScope
+    protected abstract val coroutineScope: CoroutineScope
 
-	abstract val componentState: DiaryComponentState
-	abstract val buddyBottomSheetState: BuddyBottomSheetState
+    abstract val componentState: DiaryComponentState
+    abstract val buddyBottomSheetState: BuddyBottomSheetState
 
-	private var messageJob: Job? = null
+    private var messageJob: Job? = null
 
-	val hostState: SnackbarHostState = SnackbarHostState()
+    val hostState: SnackbarHostState = SnackbarHostState()
 
-	data class Add(
-		override val coroutineScope: CoroutineScope,
-		override val componentState: DiaryComponentState,
-		override val buddyBottomSheetState: BuddyBottomSheetState,
-	) : BuddyDetailScreenState()
+    data class Add(
+        override val coroutineScope: CoroutineScope,
+        override val componentState: DiaryComponentState,
+        override val buddyBottomSheetState: BuddyBottomSheetState,
+    ) : BuddyDetailScreenState()
 
-	val detail: BuddyGroupDetail
-		get() {
-			return BuddyGroupDetail(
-				title = componentState.title,
-				description = componentState.description,
-			)
-		}
+    data class Detail(
+        val onCalendar: () -> Unit,
+        override val coroutineScope: CoroutineScope,
+        val drawerState: DrawerState,
+        override val componentState: DiaryComponentState,
+        override val buddyBottomSheetState: BuddyBottomSheetState,
+    ) : BuddyDetailScreenState()
 
-	fun requestTitleFocus() {
-		componentState.requestTitleFocus()
-	}
+    val detail: BuddyGroupDetail
+        get() {
+            return BuddyGroupDetail(
+                title = componentState.title,
+                description = componentState.description,
+            )
+        }
 
-	fun clearInput() {
-		componentState.clearInput()
-	}
+    fun requestTitleFocus() {
+        componentState.requestTitleFocus()
+    }
 
-	fun titleError() {
-		componentState.titleError()
-	}
+    fun clearInput() {
+        componentState.clearInput()
+    }
 
-	fun showMessage(message: String) {
-		messageJob?.cancel()
-		messageJob = coroutineScope.launch { hostState.showSnackbar(message) }
-	}
+    fun titleError() {
+        componentState.titleError()
+    }
+
+    fun showMessage(message: String) {
+        messageJob?.cancel()
+        messageJob = coroutineScope.launch { hostState.showSnackbar(message) }
+    }
 }

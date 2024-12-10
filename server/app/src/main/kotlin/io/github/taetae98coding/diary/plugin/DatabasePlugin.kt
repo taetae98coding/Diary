@@ -4,6 +4,8 @@ import io.github.taetae98coding.diary.core.database.AccountTable
 import io.github.taetae98coding.diary.core.database.BuddyGroupAccountRelation
 import io.github.taetae98coding.diary.core.database.BuddyGroupTable
 import io.github.taetae98coding.diary.core.database.FCMTokenTable
+import io.github.taetae98coding.diary.core.database.MemoAccountTable
+import io.github.taetae98coding.diary.core.database.MemoBuddyGroupTable
 import io.github.taetae98coding.diary.core.database.MemoTable
 import io.github.taetae98coding.diary.core.database.MemoTagTable
 import io.github.taetae98coding.diary.core.database.TagTable
@@ -26,10 +28,12 @@ internal fun Application.installDatabase() {
 			AccountTable,
 			TagTable,
 			MemoTable,
+			MemoAccountTable,
 			MemoTagTable,
 			FCMTokenTable,
 			BuddyGroupTable,
 			BuddyGroupAccountRelation,
+			MemoBuddyGroupTable,
 		)
 	}
 }

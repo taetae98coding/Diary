@@ -1,9 +1,9 @@
 package io.github.taetae98coding.diary.feature.memo
 
-import io.github.taetae98coding.diary.common.model.memo.MemoEntity
+import io.github.taetae98coding.diary.common.model.memo.LegacyMemoEntity
 import io.github.taetae98coding.diary.common.model.response.DiaryResponse
-import io.github.taetae98coding.diary.core.model.Memo
 import io.github.taetae98coding.diary.core.model.MemoAndTagIds
+import io.github.taetae98coding.diary.core.model.Memo
 import io.github.taetae98coding.diary.domain.memo.usecase.FetchMemoUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.UpsertMemoUseCase
 import io.ktor.http.HttpStatusCode
@@ -20,76 +20,77 @@ import kotlinx.datetime.Instant
 import org.koin.ktor.plugin.scope
 
 public fun Route.memoRouting() {
-	route("/memo") {
-		authenticate("account") {
-			post<List<MemoEntity>>("/upsert") { request ->
-				val principal = call.principal<JWTPrincipal>()
-				if (principal == null) {
-					call.respond(HttpStatusCode.Unauthorized, DiaryResponse.Unauthorized)
-					return@post
-				}
+    route("/memo") {
+        authenticate("account") {
+            post<List<LegacyMemoEntity>>("/upsert") { request ->
+                val principal = call.principal<JWTPrincipal>()
+                if (principal == null) {
+                    call.respond(HttpStatusCode.Unauthorized, DiaryResponse.Unauthorized)
+                    return@post
+                }
 
-				val useCase = call.scope.get<UpsertMemoUseCase>()
-				val memoList =
-					request.map {
-						MemoAndTagIds(
-							memo = it.toMemo(),
-							tagIds = it.tagIds,
-						)
-					}
+                val useCase = call.scope.get<UpsertMemoUseCase>()
+                val memoList =
+                    request.map {
+                        MemoAndTagIds(
+                            memo = it.toMemo(),
+                            tagIds = it.tagIds,
+                        )
+                    }
 
-				useCase(memoList)
-					.onSuccess { call.respond(DiaryResponse.Success) }
-					.onFailure { call.respond(DiaryResponse.InternalServerError) }
-			}
+                useCase(memoList, principal.payload.getClaim("uid").asString())
+                    .onSuccess { call.respond(DiaryResponse.Success) }
+                    .onFailure { call.respond(DiaryResponse.InternalServerError) }
+            }
 
-			get("/fetch") {
-				val principal = call.principal<JWTPrincipal>()
-				if (principal == null) {
-					call.respond(HttpStatusCode.Unauthorized, DiaryResponse.Unauthorized)
-					return@get
-				}
+            get("/fetch") {
+                val principal = call.principal<JWTPrincipal>()
+                if (principal == null) {
+                    call.respond(HttpStatusCode.Unauthorized, DiaryResponse.Unauthorized)
+                    return@get
+                }
 
-				val uid = principal.payload.getClaim("uid").asString()
-				val updateAt = call.parameters["updateAt"]?.let { Instant.parse(it) } ?: return@get
-				val useCase = call.scope.get<FetchMemoUseCase>()
+                val uid = principal.payload.getClaim("uid").asString()
+                val updateAt = call.parameters["updateAt"]?.let { Instant.parse(it) } ?: return@get
+                val useCase = call.scope.get<FetchMemoUseCase>()
 
-				useCase(uid, updateAt)
-					.first()
-					.onSuccess { call.respond(DiaryResponse.success(it.map(MemoAndTagIds::toEntity))) }
-					.onFailure { call.respond(DiaryResponse.InternalServerError) }
-			}
-		}
-	}
+                useCase(uid, updateAt)
+                    .first()
+                    .onSuccess { list ->
+                        call.respond(DiaryResponse.success(list.map { it.toEntity(uid) }))
+                    }
+                    .onFailure { call.respond(DiaryResponse.InternalServerError) }
+            }
+        }
+    }
 }
 
-private fun MemoEntity.toMemo(): Memo =
-	Memo(
-		id = id,
-		title = title,
-		description = description,
-		start = start,
-		endInclusive = endInclusive,
-		color = color,
-		owner = owner,
-		primaryTag = primaryTag,
-		isFinish = isFinish,
-		isDelete = isDelete,
-		updateAt = updateAt,
-	)
+private fun LegacyMemoEntity.toMemo(): Memo =
+    Memo(
+        id = id,
+        title = title,
+        description = description,
+        start = start,
+        endInclusive = endInclusive,
+        color = color,
+        primaryTag = primaryTag,
+        isFinish = isFinish,
+        isDelete = isDelete,
+        updateAt = updateAt,
+    )
 
-private fun MemoAndTagIds.toEntity(): MemoEntity =
-	MemoEntity(
-		id = memo.id,
-		title = memo.title,
-		description = memo.description,
-		start = memo.start,
-		endInclusive = memo.endInclusive,
-		color = memo.color,
-		owner = memo.owner,
-		primaryTag = memo.primaryTag,
-		tagIds = tagIds,
-		isFinish = memo.isFinish,
-		isDelete = memo.isDelete,
-		updateAt = memo.updateAt,
-	)
+private fun MemoAndTagIds.toEntity(owner: String): LegacyMemoEntity =
+    LegacyMemoEntity(
+        id = memo.id,
+        title = memo.title,
+        description = memo.description,
+        start = memo.start,
+        endInclusive = memo.endInclusive,
+        color = memo.color,
+        owner = owner,
+        primaryTag = memo.primaryTag,
+        tagIds = tagIds,
+        isFinish = memo.isFinish,
+        isDelete = memo.isDelete,
+        updateAt = memo.updateAt,
+    )
