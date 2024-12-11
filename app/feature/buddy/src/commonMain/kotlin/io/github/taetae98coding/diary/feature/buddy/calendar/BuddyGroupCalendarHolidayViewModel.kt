@@ -23,31 +23,31 @@ import org.koin.android.annotation.KoinViewModel
 @OptIn(ExperimentalCoroutinesApi::class)
 @KoinViewModel
 internal class BuddyGroupCalendarHolidayViewModel(
-    findHolidayUseCase: FindHolidayUseCase,
+	findHolidayUseCase: FindHolidayUseCase,
 ) : ViewModel() {
-    private val yearAndMonth = MutableStateFlow<Pair<Int, Month>?>(null)
+	private val yearAndMonth = MutableStateFlow<Pair<Int, Month>?>(null)
 
-    val holidayList = yearAndMonth
-        .filterNotNull()
-        .mapLatest { (year, month) -> LocalDate(year, month, 1) }
-        .mapLatest { localDate -> IntRange(-2, 2).map { localDate.plus(it, DateTimeUnit.MONTH) } }
-        .mapLatest { list -> list.map { findHolidayUseCase(it.year, it.month) } }
-        .flatMapLatest { list -> list.combine { array -> array.flatMap { it.getOrNull().orEmpty() } } }
-        .mapCollectionLatest {
-            CalendarItemUiState.Holiday(
-                text = it.name,
-                start = it.start,
-                endInclusive = it.endInclusive,
-            )
-        }.stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = emptyList(),
-        )
+	val holidayList = yearAndMonth
+		.filterNotNull()
+		.mapLatest { (year, month) -> LocalDate(year, month, 1) }
+		.mapLatest { localDate -> IntRange(-2, 2).map { localDate.plus(it, DateTimeUnit.MONTH) } }
+		.mapLatest { list -> list.map { findHolidayUseCase(it.year, it.month) } }
+		.flatMapLatest { list -> list.combine { array -> array.flatMap { it.getOrNull().orEmpty() } } }
+		.mapCollectionLatest {
+			CalendarItemUiState.Holiday(
+				text = it.name,
+				start = it.start,
+				endInclusive = it.endInclusive,
+			)
+		}.stateIn(
+			scope = viewModelScope,
+			started = SharingStarted.WhileSubscribed(5_000),
+			initialValue = emptyList(),
+		)
 
-    fun fetchHoliday(year: Int, month: Month) {
-        viewModelScope.launch {
-            yearAndMonth.emit(year to month)
-        }
-    }
+	fun fetchHoliday(year: Int, month: Month) {
+		viewModelScope.launch {
+			yearAndMonth.emit(year to month)
+		}
+	}
 }

@@ -1,6 +1,7 @@
 package io.github.taetae98coding.diary.core.database
 
 import io.github.taetae98coding.diary.core.model.Memo
+import io.github.taetae98coding.diary.core.model.MemoDetail
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
@@ -14,6 +15,7 @@ import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.kotlin.datetime.date
 import org.jetbrains.exposed.sql.kotlin.datetime.timestamp
 import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.update
 import org.jetbrains.exposed.sql.upsert
 
 public data object MemoTable : IdTable<String>(name = "Memo") {
@@ -51,6 +53,37 @@ public data object MemoTable : IdTable<String>(name = "Memo") {
         }
     }
 
+    public fun update(id: String, memo: MemoDetail) {
+        update({ ID eq id }) {
+            it[TITLE] = memo.title
+            it[DESCRIPTION] = memo.description
+            it[START] = memo.start
+            it[END_INCLUSIVE] = memo.endInclusive
+            it[COLOR] = memo.color
+        }
+    }
+
+    public fun updateFinish(id: String, isFinish: Boolean) {
+        update({ ID eq id }) {
+            it[IS_FINISH] = isFinish
+            it[UPDATE_AT] = Clock.System.now()
+        }
+    }
+
+    public fun updateDelete(id: String, isDelete: Boolean) {
+        update({ ID eq id }) {
+            it[IS_DELETE] = isDelete
+            it[UPDATE_AT] = Clock.System.now()
+        }
+    }
+
+    public fun findById(id: String): Memo? {
+        return selectAll()
+            .where { ID eq id }
+            .singleOrNull()
+            ?.toMemo()
+    }
+
     public fun findByIds(ids: Set<String>): List<Memo> =
         selectAll()
             .where { ID.inList(ids) }
@@ -70,6 +103,7 @@ public data object MemoTable : IdTable<String>(name = "Memo") {
             .selectAll()
             .where {
                 (MemoBuddyGroupTable.BUDDY_GROUP eq groupId) and
+                        (IS_DELETE eq false) and
                         (START.isNotNull() and (START lessEq dateRange.endInclusive)) and
                         (END_INCLUSIVE.isNotNull() and (END_INCLUSIVE greaterEq dateRange.start))
             }

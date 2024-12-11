@@ -16,19 +16,17 @@ import org.koin.core.annotation.Factory
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
 public class PageBuddyGroupCalendarMemo internal constructor(
-    private val getAccountUseCase: GetAccountUseCase,
-    private val repository: BuddyRepository,
+	private val getAccountUseCase: GetAccountUseCase,
+	private val repository: BuddyRepository,
 ) {
-    public operator fun invoke(groupId: String, dateRange: ClosedRange<LocalDate>): Flow<Result<List<Memo>>> {
-        return getAccountUseCase().mapLatest { it.getOrThrow() }
-            .flatMapLatest { account ->
-                if (account is Account.Guest) {
-                    flowOf(emptyList())
-                } else {
-                    repository.findMemoByDateRange(groupId, dateRange)
-                }
-            }
-            .mapLatest { Result.success(it) }
-            .catch { emit(Result.failure(it)) }
-    }
+	public operator fun invoke(groupId: String, dateRange: ClosedRange<LocalDate>): Flow<Result<List<Memo>>> = getAccountUseCase()
+		.mapLatest { it.getOrThrow() }
+		.flatMapLatest { account ->
+			if (account is Account.Guest) {
+				flowOf(emptyList())
+			} else {
+				repository.findMemoByDateRange(groupId, dateRange)
+			}
+		}.mapLatest { Result.success(it) }
+		.catch { emit(Result.failure(it)) }
 }

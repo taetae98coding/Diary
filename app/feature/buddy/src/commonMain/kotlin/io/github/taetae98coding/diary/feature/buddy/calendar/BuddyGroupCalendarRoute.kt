@@ -16,59 +16,58 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 internal fun BuddyGroupCalendarRoute(
-    navigateUp: () -> Unit,
-    navigateToBuddyGroupMemoAdd: (ClosedRange<LocalDate>) -> Unit,
-    navigateToBuddyGroupMemoDetail: (String) -> Unit,
-    modifier: Modifier = Modifier,
-    memoViewModel: BuddyGroupCalendarMemoViewModel = koinViewModel(),
-    holidayViewModel: BuddyGroupCalendarHolidayViewModel = koinViewModel(),
+	navigateUp: () -> Unit,
+	navigateToBuddyGroupMemoAdd: (ClosedRange<LocalDate>) -> Unit,
+	navigateToBuddyGroupMemoDetail: (String) -> Unit,
+	modifier: Modifier = Modifier,
+	memoViewModel: BuddyGroupCalendarMemoViewModel = koinViewModel(),
+	holidayViewModel: BuddyGroupCalendarHolidayViewModel = koinViewModel(),
 ) {
-    val state = rememberCalendarScaffoldState(
-        onFilter = {},
-    )
-    val memoList by memoViewModel.memoList.collectAsStateWithLifecycle()
-    val holidayList by holidayViewModel.holidayList.collectAsStateWithLifecycle()
+	val state = rememberCalendarScaffoldState(
+		onFilter = {},
+	)
+	val memoList by memoViewModel.memoList.collectAsStateWithLifecycle()
+	val holidayList by holidayViewModel.holidayList.collectAsStateWithLifecycle()
 
-    CalendarScaffold(
-        state = state,
-        onSelectDate = navigateToBuddyGroupMemoAdd,
-        hasFilterProvider = { false },
-        textItemListProvider = { memoList },
-        holidayListProvider = { holidayList },
-        onCalendarItemClick = {
-            when (it) {
-                is MemoKey -> navigateToBuddyGroupMemoDetail(it.id)
-            }
-        },
-        navigationIcon = {
-            IconButton(onClick = navigateUp) {
-                NavigateUpIcon()
-            }
-        },
-    )
+	CalendarScaffold(
+		state = state,
+		onSelectDate = navigateToBuddyGroupMemoAdd,
+		hasFilterProvider = { false },
+		textItemListProvider = { memoList },
+		holidayListProvider = { holidayList },
+		onCalendarItemClick = {
+			when (it) {
+				is MemoKey -> navigateToBuddyGroupMemoDetail(it.id)
+			}
+		},
+		navigationIcon = {
+			IconButton(onClick = navigateUp) {
+				NavigateUpIcon()
+			}
+		},
+	)
 
-    Fetch(
-        state = state,
-        memoViewModel = memoViewModel,
-        holidayViewModel = holidayViewModel,
-    )
+	Fetch(
+		state = state,
+		memoViewModel = memoViewModel,
+		holidayViewModel = holidayViewModel,
+	)
 
-    LifecycleStartEffect(memoViewModel) {
-        memoViewModel.refresh()
-        onStopOrDispose {
-
-        }
-    }
+	LifecycleStartEffect(memoViewModel) {
+		memoViewModel.refresh()
+		onStopOrDispose {
+		}
+	}
 }
 
 @Composable
 private fun Fetch(
-    state: CalendarScaffoldState,
-    memoViewModel: BuddyGroupCalendarMemoViewModel,
-    holidayViewModel: BuddyGroupCalendarHolidayViewModel,
+	state: CalendarScaffoldState,
+	memoViewModel: BuddyGroupCalendarMemoViewModel,
+	holidayViewModel: BuddyGroupCalendarHolidayViewModel,
 ) {
-    LaunchedEffect(state.calendarState.year, state.calendarState.month) {
-        memoViewModel.fetchMemo(state.calendarState.year, state.calendarState.month)
-        holidayViewModel.fetchHoliday(state.calendarState.year, state.calendarState.month)
-    }
+	LaunchedEffect(state.calendarState.year, state.calendarState.month) {
+		memoViewModel.fetchMemo(state.calendarState.year, state.calendarState.month)
+		holidayViewModel.fetchHoliday(state.calendarState.year, state.calendarState.month)
+	}
 }

@@ -2,6 +2,7 @@ package io.github.taetae98coding.diary.domain.memo
 
 import io.github.taetae98coding.diary.core.model.memo.MemoDetail
 import io.github.taetae98coding.diary.domain.backup.usecase.PushMemoBackupQueueUseCase
+import io.github.taetae98coding.diary.domain.memo.repository.MemoBuddyGroupRepository
 import io.github.taetae98coding.diary.domain.memo.repository.MemoRepository
 import io.github.taetae98coding.diary.domain.memo.usecase.UpdateMemoUseCase
 import io.kotest.core.spec.style.BehaviorSpec
@@ -15,9 +16,13 @@ import kotlinx.coroutines.flow.flowOf
 class UpdateMemoUseCaseTest : BehaviorSpec() {
 	private val pushMemoBackupQueueUseCase = mockk<PushMemoBackupQueueUseCase>(relaxed = true, relaxUnitFun = true)
 	private val memoRepository = mockk<MemoRepository>(relaxed = true, relaxUnitFun = true)
+	private val memoBuddyGroupRepository = mockk<MemoBuddyGroupRepository> {
+		every { isBuddyGroupMemo(any()) } returns flowOf(false)
+	}
 	private val useCase = UpdateMemoUseCase(
 		pushMemoBackupQueueUseCase = pushMemoBackupQueueUseCase,
-		repository = memoRepository,
+		memoRepository = memoRepository,
+		memoBuddyGroupRepository = memoBuddyGroupRepository,
 	)
 
 	init {
@@ -47,7 +52,7 @@ class UpdateMemoUseCaseTest : BehaviorSpec() {
 						}
 					}
 
-					clearAllMocks()
+					clearAllMocks(answers = false)
 				}
 			}
 
@@ -72,7 +77,7 @@ class UpdateMemoUseCaseTest : BehaviorSpec() {
 						}
 					}
 
-					clearAllMocks()
+					clearAllMocks(answers = false)
 				}
 			}
 		}
@@ -105,7 +110,7 @@ class UpdateMemoUseCaseTest : BehaviorSpec() {
 					coVerify { memoRepository.update(any(), detail.copy(title = "title")) }
 				}
 
-				clearAllMocks()
+				clearAllMocks(answers = false)
 			}
 		}
 	}

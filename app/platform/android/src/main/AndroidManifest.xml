@@ -1,55 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+          xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
     <application
-        android:name=".DiaryApplication"
-        android:enableOnBackInvokedCallback="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher"
-        android:theme="@style/Theme.Material3.DayNight.NoActionBar"
-        android:usesCleartextTraffic="true">
+            android:name=".DiaryApplication"
+            android:enableOnBackInvokedCallback="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher"
+            android:theme="@style/Theme.Material3.DayNight.NoActionBar"
+            android:usesCleartextTraffic="true">
         <activity
-            android:name=".DiaryActivity"
-            android:exported="true">
+                android:name=".DiaryActivity"
+                android:launchMode="singleInstancePerTask"
+                android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
         <service
-            android:name=".service.DiaryFirebaseMessagingService"
-            android:exported="false">
+                android:name=".service.DiaryFirebaseMessagingService"
+                android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
 
         <provider
-            android:name="androidx.startup.InitializationProvider"
-            android:authorities="${applicationId}.androidx-startup"
-            android:exported="false"
-            tools:node="merge">
+                android:name="androidx.startup.InitializationProvider"
+                android:authorities="${applicationId}.androidx-startup"
+                android:exported="false"
+                tools:node="merge">
             <meta-data
-                android:name="io.github.taetae98coding.diary.initializer.BackupManagerInitializer"
-                android:value="androidx.startup" />
+                    android:name="io.github.taetae98coding.diary.initializer.BackupManagerInitializer"
+                    android:value="androidx.startup"/>
 
             <meta-data
-                android:name="io.github.taetae98coding.diary.initializer.FCMManagerInitializer"
-                android:value="androidx.startup" />
+                    android:name="io.github.taetae98coding.diary.initializer.FCMManagerInitializer"
+                    android:value="androidx.startup"/>
 
             <meta-data
-                android:name="io.github.taetae98coding.diary.initializer.FetchManagerInitializer"
-                android:value="androidx.startup" />
+                    android:name="io.github.taetae98coding.diary.initializer.FetchManagerInitializer"
+                    android:value="androidx.startup"/>
 
             <meta-data
-                android:name="io.github.taetae98coding.diary.initializer.KoinInitializer"
-                android:value="androidx.startup" />
+                    android:name="io.github.taetae98coding.diary.initializer.KoinInitializer"
+                    android:value="androidx.startup"/>
         </provider>
     </application>
 </manifest>

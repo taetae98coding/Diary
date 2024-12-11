@@ -11,58 +11,58 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 public sealed class MemoDetailScaffoldState {
-    protected abstract val coroutineScope: CoroutineScope
+	protected abstract val coroutineScope: CoroutineScope
 
-    internal abstract val componentState: DiaryComponentState
-    internal abstract val dateState: DiaryDateState
-    internal abstract val colorState: DiaryColorState
+	internal abstract val componentState: DiaryComponentState
+	internal abstract val dateState: DiaryDateState
+	internal abstract val colorState: DiaryColorState
 
-    private var messageJob: Job? = null
+	private var messageJob: Job? = null
 
-    internal val hostState: SnackbarHostState = SnackbarHostState()
+	internal val hostState: SnackbarHostState = SnackbarHostState()
 
-    public data class Add(
-        override val coroutineScope: CoroutineScope,
-        override val componentState: DiaryComponentState,
-        override val dateState: DiaryDateState,
-        override val colorState: DiaryColorState,
-    ) : MemoDetailScaffoldState()
+	public data class Add(
+		override val coroutineScope: CoroutineScope,
+		override val componentState: DiaryComponentState,
+		override val dateState: DiaryDateState,
+		override val colorState: DiaryColorState,
+	) : MemoDetailScaffoldState()
 
-    public data class Detail(
-        val onDelete: () -> Unit,
-        val onUpdate: () -> Unit,
-        override val coroutineScope: CoroutineScope,
-        override val componentState: DiaryComponentState,
-        override val dateState: DiaryDateState,
-        override val colorState: DiaryColorState,
-    ) : MemoDetailScaffoldState()
+	public data class Detail(
+		val onDelete: () -> Unit,
+		val onUpdate: () -> Unit,
+		override val coroutineScope: CoroutineScope,
+		override val componentState: DiaryComponentState,
+		override val dateState: DiaryDateState,
+		override val colorState: DiaryColorState,
+	) : MemoDetailScaffoldState()
 
-    public val detail: MemoDetail
-        get() {
-            return MemoDetail(
-                title = componentState.title,
-                description = componentState.description,
-                start = dateState.start.takeIf { dateState.hasDate },
-                endInclusive = dateState.endInclusive.takeIf { dateState.hasDate },
-                color = colorState.color.toArgb(),
-            )
-        }
+	public val detail: MemoDetail
+		get() {
+			return MemoDetail(
+				title = componentState.title,
+				description = componentState.description,
+				start = dateState.start.takeIf { dateState.hasDate },
+				endInclusive = dateState.endInclusive.takeIf { dateState.hasDate },
+				color = colorState.color.toArgb(),
+			)
+		}
 
-    internal fun requestTitleFocus() {
-        componentState.requestTitleFocus()
-    }
+	internal fun requestTitleFocus() {
+		componentState.requestTitleFocus()
+	}
 
-    internal fun titleError() {
-        requestTitleFocus()
-        componentState.titleError()
-    }
+	internal fun titleError() {
+		requestTitleFocus()
+		componentState.titleError()
+	}
 
-    internal fun showMessage(message: String) {
-        messageJob?.cancel()
-        messageJob = coroutineScope.launch { hostState.showSnackbar(message) }
-    }
+	internal fun showMessage(message: String) {
+		messageJob?.cancel()
+		messageJob = coroutineScope.launch { hostState.showSnackbar(message) }
+	}
 
-    internal fun clearInput() {
-        componentState.clearInput()
-    }
+	internal fun clearInput() {
+		componentState.clearInput()
+	}
 }

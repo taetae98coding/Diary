@@ -7,12 +7,12 @@ import androidx.compose.ui.Modifier
 
 @Composable
 public fun TopBarTitle(
-    text: String,
-    modifier: Modifier = Modifier,
+	text: String,
+	modifier: Modifier = Modifier,
 ) {
-    Text(
-        text = text,
-        modifier = modifier.basicMarquee(iterations = Int.MAX_VALUE),
-        maxLines = 1,
-    )
+	Text(
+		text = text,
+		modifier = modifier.basicMarquee(iterations = Int.MAX_VALUE),
+		maxLines = 1,
+	)
 }

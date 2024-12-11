@@ -113,6 +113,8 @@ public fun Route.buddyRouting() {
                         return@post
                     }
 
+                    val uid = principal.payload.getClaim("uid").asString()
+
                     val groupId = call.parameters["groupId"] ?: run {
                         call.respond(HttpStatusCode.BadRequest, DiaryResponse.BadRequest)
                         return@post
@@ -120,7 +122,7 @@ public fun Route.buddyRouting() {
 
                     val useCase = call.scope.get<UpsertBuddyGroupMemoUseCase>()
 
-                    useCase(groupId, request.toMemo(), request.tagIds)
+                    useCase(groupId, request.toMemo(), request.tagIds, uid)
                         .onSuccess { call.respond(DiaryResponse.Success) }
                         .onFailure { call.respond(DiaryResponse.InternalServerError) }
                 }

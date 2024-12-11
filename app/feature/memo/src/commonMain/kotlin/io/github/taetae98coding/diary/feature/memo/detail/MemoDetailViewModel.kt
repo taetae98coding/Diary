@@ -38,7 +38,7 @@ internal class MemoDetailViewModel(
 	private val _uiState = MutableStateFlow(MemoDetailScaffoldUiState(onMessageShow = ::clearMessage))
 	val uiState = _uiState.asStateFlow()
 
-	private val memo =
+	val memo =
 		findMemoUseCase(route.memoId)
 			.mapLatest { it.getOrNull() }
 			.filterNotNull()
@@ -57,7 +57,7 @@ internal class MemoDetailViewModel(
 				initialValue = null,
 			)
 
-	private fun onFinishChange(isFinish: Boolean) {
+	fun onFinishChange(isFinish: Boolean) {
 		viewModelScope.launch {
 			if (isFinish) {
 				finishMemoUseCase(route.memoId).onFailure { handleThrowable() }
@@ -67,7 +67,7 @@ internal class MemoDetailViewModel(
 		}
 	}
 
-	private fun delete() {
+	fun delete() {
 		viewModelScope.launch {
 			deleteMemoUseCase(route.memoId)
 				.onSuccess { _uiState.update { it.copy(isDelete = true) } }

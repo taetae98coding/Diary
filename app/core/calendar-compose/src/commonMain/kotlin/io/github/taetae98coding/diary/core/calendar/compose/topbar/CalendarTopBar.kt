@@ -31,7 +31,7 @@ import kotlinx.coroutines.launch
 public fun CalendarTopBar(
 	state: CalendarState,
 	modifier: Modifier = Modifier,
-    navigationIcon: @Composable () -> Unit = {},
+	navigationIcon: @Composable () -> Unit = {},
 	actions: @Composable RowScope.() -> Unit = {},
 ) {
 	CenterAlignedTopAppBar(
@@ -61,7 +61,7 @@ public fun CalendarTopBar(
 			}
 		},
 		modifier = modifier,
-        navigationIcon = navigationIcon,
+		navigationIcon = navigationIcon,
 		actions = actions,
 	)
 }

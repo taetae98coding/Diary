@@ -1,6 +1,7 @@
 package io.github.taetae98coding.diary.domain.memo
 
 import io.github.taetae98coding.diary.domain.backup.usecase.PushMemoBackupQueueUseCase
+import io.github.taetae98coding.diary.domain.memo.repository.MemoBuddyGroupRepository
 import io.github.taetae98coding.diary.domain.memo.repository.MemoRepository
 import io.github.taetae98coding.diary.domain.memo.usecase.RestartMemoUseCase
 import io.kotest.core.spec.style.BehaviorSpec
@@ -8,15 +9,21 @@ import io.kotest.matchers.result.shouldBeSuccess
 import io.mockk.Called
 import io.mockk.clearAllMocks
 import io.mockk.coVerifyOrder
+import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import kotlinx.coroutines.flow.flowOf
 
 class RestartMemoUseCaseTest : BehaviorSpec() {
 	private val pushMemoBackupQueueUseCase = mockk<PushMemoBackupQueueUseCase>(relaxed = true, relaxUnitFun = true)
 	private val memoRepository = mockk<MemoRepository>(relaxed = true, relaxUnitFun = true)
+	private val memoBuddyGroupRepository = mockk<MemoBuddyGroupRepository> {
+		every { isBuddyGroupMemo(any()) } returns flowOf(false)
+	}
 	private val useCase = RestartMemoUseCase(
 		pushMemoBackupQueueUseCase = pushMemoBackupQueueUseCase,
-		repository = memoRepository,
+		memoRepository = memoRepository,
+		memoBuddyGroupRepository = memoBuddyGroupRepository,
 	)
 
 	init {
@@ -36,7 +43,8 @@ class RestartMemoUseCaseTest : BehaviorSpec() {
 						pushMemoBackupQueueUseCase wasNot Called
 					}
 				}
-				clearAllMocks()
+
+				clearAllMocks(answers = false)
 			}
 		}
 
@@ -56,7 +64,8 @@ class RestartMemoUseCaseTest : BehaviorSpec() {
 						pushMemoBackupQueueUseCase(memoId)
 					}
 				}
-				clearAllMocks()
+
+				clearAllMocks(answers = false)
 			}
 		}
 	}

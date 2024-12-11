@@ -15,10 +15,10 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 
 class FindBuddyUseCaseTest : BehaviorSpec() {
-    private val getAccountUseCase = mockk<GetAccountUseCase>()
+	private val getAccountUseCase = mockk<GetAccountUseCase>()
 	private val buddyRepository = mockk<BuddyRepository>(relaxed = true, relaxUnitFun = true)
 	private val useCase = FindBuddyUseCase(
-        getAccountUseCase = getAccountUseCase,
+		getAccountUseCase = getAccountUseCase,
 		repository = buddyRepository,
 	)
 
@@ -26,47 +26,47 @@ class FindBuddyUseCaseTest : BehaviorSpec() {
 		Given("given email") {
 			val email = "email"
 
-            And("account is Login") {
-                every { getAccountUseCase() } returns flowOf(Result.success(mockk<Account.Member>()))
+			And("account is Login") {
+				every { getAccountUseCase() } returns flowOf(Result.success(mockk<Account.Member>()))
 
-                When("call useCase") {
-                    every { buddyRepository.findBuddyByEmail(any()) } returns flowOf(emptyList())
+				When("call useCase") {
+					every { buddyRepository.findBuddyByEmail(any()) } returns flowOf(emptyList())
 
-                    val result = useCase(email).first()
+					val result = useCase(email).first()
 
-                    Then("result is success") {
-                        result.shouldBeSuccess()
-                    }
+					Then("result is success") {
+						result.shouldBeSuccess()
+					}
 
-                    Then("do find") {
-                        verify { buddyRepository.findBuddyByEmail(email) }
-                    }
+					Then("do find") {
+						verify { buddyRepository.findBuddyByEmail(email) }
+					}
 
-                    clearAllMocks()
-                }
-            }
+					clearAllMocks()
+				}
+			}
 
-            And("account is not login") {
-                every { getAccountUseCase() } returns flowOf(Result.success(mockk<Account.Guest>()))
+			And("account is not login") {
+				every { getAccountUseCase() } returns flowOf(Result.success(mockk<Account.Guest>()))
 
-                When("call useCase") {
-                    every { buddyRepository.findBuddyByEmail(any()) } returns flowOf(emptyList())
+				When("call useCase") {
+					every { buddyRepository.findBuddyByEmail(any()) } returns flowOf(emptyList())
 
-                    val result = useCase(email).first()
+					val result = useCase(email).first()
 
-                    Then("result is success") {
-                        result.shouldBeSuccess()
-                    }
+					Then("result is success") {
+						result.shouldBeSuccess()
+					}
 
-                    Then("do nothing") {
-                        verify {
-                            buddyRepository wasNot Called
-                        }
-                    }
+					Then("do nothing") {
+						verify {
+							buddyRepository wasNot Called
+						}
+					}
 
-                    clearAllMocks()
-                }
-            }
+					clearAllMocks()
+				}
+			}
 		}
 
 		Given("blank email") {

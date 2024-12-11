@@ -1,6 +1,5 @@
 package io.github.taetae98coding.diary.core.compose.navigation
 
-import androidx.compose.material3.DismissibleNavigationDrawer
 import androidx.compose.material3.DrawerDefaults
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
@@ -15,41 +14,41 @@ import androidx.compose.ui.unit.LayoutDirection
 
 @Composable
 public fun ReverseModalNavigationDrawer(
-    drawerContent: @Composable () -> Unit,
-    modifier: Modifier = Modifier,
-    drawerState: DrawerState = rememberDrawerState(DrawerValue.Closed),
-    gesturesEnabled: Boolean = true,
-    scrimColor: Color = DrawerDefaults.scrimColor,
-    content: @Composable () -> Unit,
+	drawerContent: @Composable () -> Unit,
+	modifier: Modifier = Modifier,
+	drawerState: DrawerState = rememberDrawerState(DrawerValue.Closed),
+	gesturesEnabled: Boolean = true,
+	scrimColor: Color = DrawerDefaults.scrimColor,
+	content: @Composable () -> Unit,
 ) {
-    val originLayoutDirection = LocalLayoutDirection.current
-    val reverseLayoutDirection = when (originLayoutDirection) {
-        LayoutDirection.Ltr -> LayoutDirection.Rtl
-        LayoutDirection.Rtl -> LayoutDirection.Ltr
-    }
+	val originLayoutDirection = LocalLayoutDirection.current
+	val reverseLayoutDirection = when (originLayoutDirection) {
+		LayoutDirection.Ltr -> LayoutDirection.Rtl
+		LayoutDirection.Rtl -> LayoutDirection.Ltr
+	}
 
-    CompositionLocalProvider(
-        LocalLayoutDirection provides reverseLayoutDirection,
-    ) {
-        ModalNavigationDrawer(
-            drawerContent = {
-                CompositionLocalProvider(
-                    LocalLayoutDirection provides originLayoutDirection,
-                ) {
-                    drawerContent()
-                }
-            },
-            modifier = modifier,
-            drawerState = drawerState,
-            gesturesEnabled = gesturesEnabled,
-            scrimColor = scrimColor,
-            content = {
-                CompositionLocalProvider(
-                    LocalLayoutDirection provides originLayoutDirection,
-                ) {
-                    content()
-                }
-            },
-        )
-    }
+	CompositionLocalProvider(
+		LocalLayoutDirection provides reverseLayoutDirection,
+	) {
+		ModalNavigationDrawer(
+			drawerContent = {
+				CompositionLocalProvider(
+					LocalLayoutDirection provides originLayoutDirection,
+				) {
+					drawerContent()
+				}
+			},
+			modifier = modifier,
+			drawerState = drawerState,
+			gesturesEnabled = gesturesEnabled,
+			scrimColor = scrimColor,
+			content = {
+				CompositionLocalProvider(
+					LocalLayoutDirection provides originLayoutDirection,
+				) {
+					content()
+				}
+			},
+		)
+	}
 }

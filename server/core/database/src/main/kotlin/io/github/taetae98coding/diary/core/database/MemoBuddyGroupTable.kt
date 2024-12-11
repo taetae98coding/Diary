@@ -2,6 +2,7 @@ package io.github.taetae98coding.diary.core.database
 
 import org.jetbrains.exposed.sql.ReferenceOption
 import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.upsert
 
 public data object MemoBuddyGroupTable : Table("MemoBuddyGroup") {
@@ -25,5 +26,13 @@ public data object MemoBuddyGroupTable : Table("MemoBuddyGroup") {
             it[MEMO_ID] = memoId
             it[BUDDY_GROUP] = buddyGroup
         }
+    }
+
+    public fun findGroupIdsByMemoId(memoId: String): String? {
+        return selectAll()
+            .where { MEMO_ID eq memoId }
+            .singleOrNull()
+            ?.get(BUDDY_GROUP)
+            ?.value
     }
 }
