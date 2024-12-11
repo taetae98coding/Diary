@@ -2,6 +2,9 @@ package io.github.taetae98coding.diary.core.diary.database.room.dao
 
 import androidx.room.Dao
 import androidx.room.Query
+import androidx.room.Transaction
+import androidx.room.Upsert
+import io.github.taetae98coding.diary.core.diary.database.room.entity.TagAccountEntity
 import io.github.taetae98coding.diary.core.diary.database.room.entity.TagEntity
 import io.github.taetae98coding.diary.library.room.dao.EntityDao
 import kotlinx.coroutines.flow.Flow
@@ -9,6 +12,20 @@ import kotlinx.datetime.Instant
 
 @Dao
 internal abstract class TagEntityDao : EntityDao<TagEntity>() {
+	@Transaction
+	open suspend fun upsert(owner: String, entity: TagEntity) {
+		upsert(entity)
+		upsert(TagAccountEntity(tagId = entity.id, owner = owner))
+	}
+
+	@Transaction
+	open suspend fun upsert(owner: String, entityList: List<TagEntity>) {
+		entityList.forEach { upsert(owner, it) }
+	}
+
+	@Upsert
+	abstract suspend fun upsert(entity: TagAccountEntity)
+
 	@Query(
 		"""
 		UPDATE TagEntity
@@ -56,7 +73,7 @@ internal abstract class TagEntityDao : EntityDao<TagEntity>() {
 		FROM TagEntity
 		WHERE isDelete = 0
 		AND isFinish = 0
-		AND (owner = :owner OR (owner IS NULL AND :owner IS NULL))
+		AND id IN (SELECT tagId FROM TagAccountEntity WHERE owner = :owner)
 		ORDER BY title
 	""",
 	)
@@ -80,6 +97,12 @@ internal abstract class TagEntityDao : EntityDao<TagEntity>() {
 	)
 	abstract fun getByIds(tagIds: Set<String>): Flow<List<TagEntity>>
 
-	@Query("SELECT MAX(serverUpdateAt) FROM TagEntity WHERE owner = :owner")
+	@Query(
+		"""
+	SELECT MAX(serverUpdateAt)
+	FROM TagEntity
+	WHERE id IN (SELECT tagId FROM TagAccountEntity WHERE owner = :owner)
+	""",
+	)
 	abstract fun getLastUpdateAt(owner: String?): Flow<Instant?>
 }

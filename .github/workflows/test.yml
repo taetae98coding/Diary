@@ -13,6 +13,8 @@ jobs:
       matrix:
         command: [
           './gradlew jvmTest',
+          './gradlew testReleaseUnitTest',
+          './gradlew testRealReleaseUnitTest',
         ]
     steps:
       - name: Checkout repository

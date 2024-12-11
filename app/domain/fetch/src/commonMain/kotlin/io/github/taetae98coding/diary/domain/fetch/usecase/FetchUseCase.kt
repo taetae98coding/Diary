@@ -23,5 +23,7 @@ public class FetchUseCase internal constructor(
 				tagFetchRepository.fetch(account.uid)
 				memoFetchRepository.fetch(account.uid)
 			}
+		}.onFailure { exception ->
+			exception.printStackTrace()
 		}
 }

@@ -9,27 +9,29 @@ import org.koin.core.annotation.Factory
 
 @Factory
 public class UpsertBuddyGroupMemoUseCase internal constructor(
-    private val buddyRepository: BuddyRepository,
-    private val fcmRepository: FCMRepository,
-    private val accountRepository: AccountRepository,
+	private val buddyRepository: BuddyRepository,
+	private val fcmRepository: FCMRepository,
+	private val accountRepository: AccountRepository,
 ) {
-    public suspend operator fun invoke(
-        groupId: String,
-        memo: Memo,
-        tagIds: Set<String>,
-        requesterUid: String,
-    ): Result<Unit> {
-        return runCatching {
-            // TODO Permission Check
+	public suspend operator fun invoke(
+		groupId: String,
+		memo: Memo,
+		tagIds: Set<String>,
+		requesterUid: String,
+	): Result<Unit> {
+		return runCatching {
+			// TODO Permission Check
 
-            val account = accountRepository.findByUid(requesterUid).first() ?: return@runCatching
+			val account = accountRepository.findByUid(requesterUid).first() ?: return@runCatching
 
-            buddyRepository.upsert(groupId, memo, tagIds)
-            buddyRepository.findBuddyIdByGroupId(groupId).first()
-                .filter { it != requesterUid }
-                .forEach {
-                    fcmRepository.send(it, "그룹 메모", "\'${memo.title}\' 메모가 추가됐습니다. (${account.email})")
-                }
-        }
-    }
+			buddyRepository.upsert(groupId, memo, tagIds)
+			buddyRepository
+				.findBuddyIdByGroupId(groupId)
+				.first()
+				.filter { it != requesterUid }
+				.forEach {
+					fcmRepository.send(it, "그룹 메모", "'${memo.title}' 메모가 추가됐습니다. (${account.email})")
+				}
+		}
+	}
 }

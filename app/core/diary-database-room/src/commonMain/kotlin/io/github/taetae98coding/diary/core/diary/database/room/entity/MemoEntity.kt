@@ -8,6 +8,9 @@ import androidx.room.PrimaryKey
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 
+/***
+ * @param owner multiplatform does not support delete column. it should be deleted
+ */
 @Entity(
 	indices = [
 		Index("primaryTag"),

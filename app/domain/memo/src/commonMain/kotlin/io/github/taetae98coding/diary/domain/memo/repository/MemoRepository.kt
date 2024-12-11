@@ -6,9 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.LocalDate
 
 public interface MemoRepository {
-	public suspend fun fetch(memoId: String)
-
-	public suspend fun upsert(memo: Memo, tagIds: Set<String>)
+	public suspend fun upsert(owner: String, memo: Memo, tagIds: Set<String>)
 
 	public suspend fun update(memoId: String, detail: MemoDetail)
 
@@ -20,7 +18,7 @@ public interface MemoRepository {
 
 	public fun getById(memoId: String): Flow<Memo?>
 
-	public fun findByDateRange(owner: String?, dateRange: ClosedRange<LocalDate>, tagFilter: Set<String>): Flow<List<Memo>>
+	public fun findByDateRange(owner: String, dateRange: ClosedRange<LocalDate>, tagFilter: Set<String>): Flow<List<Memo>>
 
 	public suspend fun getNextMemoId(): String
 }

@@ -5,7 +5,7 @@ import io.github.taetae98coding.diary.core.model.tag.TagDetail
 import kotlinx.coroutines.flow.Flow
 
 public interface TagRepository {
-	public suspend fun upsert(tag: Tag)
+	public suspend fun upsert(owner: String, tag: Tag)
 
 	public suspend fun update(tagId: String, detail: TagDetail)
 

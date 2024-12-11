@@ -47,7 +47,7 @@ compose {
                 targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
 
                 packageName = "Diary"
-                packageVersion = "1.3.2"
+                packageVersion = "1.3.3"
 
                 macOS {
                     appStore = true

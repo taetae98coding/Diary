@@ -9,14 +9,13 @@ import io.github.taetae98coding.diary.library.datetime.todayIn
 import kotlinx.datetime.LocalDate
 
 public class DiaryDateState internal constructor(
-	initialStart: LocalDate?,
-	initialEndInclusive: LocalDate?,
+	initialDateRange: ClosedRange<LocalDate>?,
 ) : ClosedRange<LocalDate> {
-	public var hasDate: Boolean by mutableStateOf(initialStart != null && initialEndInclusive != null)
+	public var hasDate: Boolean by mutableStateOf(initialDateRange != null)
 		private set
-	override var start: LocalDate by mutableStateOf(initialStart ?: LocalDate.todayIn())
+	override var start: LocalDate by mutableStateOf(initialDateRange?.start ?: LocalDate.todayIn())
 		private set
-	override var endInclusive: LocalDate by mutableStateOf(initialEndInclusive ?: LocalDate.todayIn())
+	override var endInclusive: LocalDate by mutableStateOf(initialDateRange?.endInclusive ?: LocalDate.todayIn())
 		private set
 
 	internal fun onHasDateChange(value: Boolean) {
@@ -43,8 +42,7 @@ public class DiaryDateState internal constructor(
 				save = { listOf(it.hasDate, it.start.toEpochDays(), it.endInclusive.toEpochDays()) },
 				restore = {
 					DiaryDateState(
-						initialStart = LocalDate.fromEpochDays(it[1] as Int),
-						initialEndInclusive = LocalDate.fromEpochDays(it[2] as Int),
+						initialDateRange = LocalDate.fromEpochDays(it[1] as Int)..LocalDate.fromEpochDays(it[2] as Int),
 					).apply {
 						hasDate = it[0] as Boolean
 					}

@@ -22,9 +22,9 @@ public class UpsertBuddyGroupUseCase internal constructor(
 			.filter { it != requester }
 			.forEach {
 				if (buddyGroup == null) {
-					fcmRepository.send(it, "그룹 초대", "${buddyGroupAndBuddyIds.buddyGroup.title}에 초대됐습니다.")
+					fcmRepository.send(it, "그룹 초대", "'${buddyGroupAndBuddyIds.buddyGroup.title}'에 초대됐습니다.")
 				} else {
-					fcmRepository.send(it, "그룹 업데이트", "${buddyGroup.title} 업데이트됐습니다.")
+					fcmRepository.send(it, "그룹 업데이트", "'${buddyGroup.title}' 업데이트됐습니다.")
 				}
 			}
 	}

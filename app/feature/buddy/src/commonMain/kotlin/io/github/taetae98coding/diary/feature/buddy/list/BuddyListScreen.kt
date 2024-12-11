@@ -128,6 +128,24 @@ private fun Content(
 					}
 				}
 			}
+
+			is BuddyListUiState.ZZ -> {
+				item(
+					key = "ZZ",
+					contentType = "ZZ",
+				) {
+					Box(
+						modifier = Modifier
+							.fillParentMaxSize()
+							.animateItem(),
+						contentAlignment = Alignment.Center,
+					) {
+						Text(
+							text = uiState.throwable.toString(),
+						)
+					}
+				}
+			}
 		}
 	}
 }

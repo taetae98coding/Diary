@@ -40,7 +40,7 @@ internal class BuddyRepositoryImpl(
 	override fun findMemoByDateRange(groupId: String, dateRange: ClosedRange<LocalDate>): Flow<List<Memo>> = flow {
 		buddyRemoteDataSource
 			.findMemoByDateRange(groupId, dateRange)
-			.also { memoLocalDataSource.upsertMemo(it) }
+			.onEach { memoLocalDataSource.upsert(it) }
 			.also { memoBuddyGroupLocalDataSource.upsert(it.map(MemoDto::id).toSet(), groupId) }
 			.map(MemoDto::toMemo)
 			.also { emit(it) }

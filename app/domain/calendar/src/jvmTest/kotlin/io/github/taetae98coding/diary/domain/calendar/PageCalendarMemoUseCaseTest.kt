@@ -103,7 +103,6 @@ class PageCalendarMemoUseCaseTest : BehaviorSpec() {
 			color = MEMO_COLOR,
 		),
 		primaryTag = index.toString().takeIf { index % 2 == 0 },
-		owner = null,
 		isFinish = false,
 		isDelete = false,
 		updateAt = Instant.DISTANT_PAST,

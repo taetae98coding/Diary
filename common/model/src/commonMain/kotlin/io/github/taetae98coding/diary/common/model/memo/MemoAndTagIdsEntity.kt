@@ -6,7 +6,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class LegacyMemoEntity(
+public data class MemoAndTagIdsEntity(
 	@SerialName("id")
 	val id: String = "",
 	@SerialName("title")
@@ -19,8 +19,6 @@ public data class LegacyMemoEntity(
 	val endInclusive: LocalDate? = null,
 	@SerialName("color")
 	val color: Int = -16777216,
-	@SerialName("owner")
-	val owner: String,
 	@SerialName("primaryTag")
 	val primaryTag: String? = null,
 	@SerialName("tagIds")

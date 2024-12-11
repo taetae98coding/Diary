@@ -11,16 +11,11 @@ import kotlinx.datetime.LocalDate
 
 @Composable
 public fun rememberMemoDetailScaffoldAddState(
-	initialStart: LocalDate?,
-	initialEndInclusive: LocalDate?,
+	initialDateRange: ClosedRange<LocalDate>?,
 ): MemoDetailScaffoldState.Add {
 	val coroutineScope = rememberCoroutineScope()
 	val componentState = rememberDiaryComponentState()
-	val dateState =
-		rememberDiaryDateState(
-			initialStart = initialStart,
-			initialEndInclusive = initialEndInclusive,
-		)
+	val dateState = rememberDiaryDateState(initialDateRange = initialDateRange)
 	val colorState = rememberDiaryColorState()
 
 	return remember {

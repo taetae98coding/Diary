@@ -1,6 +1,9 @@
 package io.github.taetae98coding.diary.feature.account.login
 
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.exclude
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -10,6 +13,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -27,7 +31,6 @@ import io.github.taetae98coding.diary.core.design.system.icon.NavigateUpIcon
 import io.github.taetae98coding.diary.core.design.system.theme.DiaryTheme
 import io.github.taetae98coding.diary.feature.account.common.BasePasswordTextField
 import io.github.taetae98coding.diary.feature.account.common.BottomBarButton
-import io.github.taetae98coding.diary.feature.account.common.BottomBarButtonContent
 import io.github.taetae98coding.diary.feature.account.common.EmailTextField
 import io.github.taetae98coding.diary.feature.account.login.state.LoginScreenButtonUiState
 import io.github.taetae98coding.diary.feature.account.login.state.LoginScreenState
@@ -78,6 +81,7 @@ internal fun LoginScreen(
 			}
 		},
 		snackbarHost = { SnackbarHost(hostState = state.hostState) },
+		contentWindowInsets = ScaffoldDefaults.contentWindowInsets.exclude(WindowInsets.navigationBars),
 	) {
 		Content(
 			state = state,
@@ -127,23 +131,33 @@ private fun LoginButtonContent(
 	uiState: LoginScreenButtonUiState,
 	modifier: Modifier = Modifier,
 ) {
-	BottomBarButtonContent(modifier = modifier) {
-		when (uiState) {
-			LoginScreenButtonUiState.LoginEnable -> {
-				Text(text = "로그인")
-			}
+	when (uiState) {
+		LoginScreenButtonUiState.LoginEnable -> {
+			Text(
+				text = "로그인",
+				modifier = modifier,
+			)
+		}
 
-			LoginScreenButtonUiState.EmailBlank -> {
-				Text(text = "이메일을 입력해 주세요 🐸")
-			}
+		LoginScreenButtonUiState.EmailBlank -> {
+			Text(
+				text = "이메일을 입력해 주세요 🐸",
+				modifier = modifier,
+			)
+		}
 
-			LoginScreenButtonUiState.PasswordBlank -> {
-				Text(text = "비밀번호를 입력해 주세요 🐷")
-			}
+		LoginScreenButtonUiState.PasswordBlank -> {
+			Text(
+				text = "비밀번호를 입력해 주세요 🐷",
+				modifier = modifier,
+			)
+		}
 
-			LoginScreenButtonUiState.Progress -> {
-				CircularProgressIndicator(color = LocalContentColor.current)
-			}
+		LoginScreenButtonUiState.Progress -> {
+			CircularProgressIndicator(
+				modifier = modifier,
+				color = LocalContentColor.current,
+			)
 		}
 	}
 }

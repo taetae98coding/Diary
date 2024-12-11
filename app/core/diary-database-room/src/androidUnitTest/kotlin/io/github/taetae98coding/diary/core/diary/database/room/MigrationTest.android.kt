@@ -2,9 +2,9 @@ package io.github.taetae98coding.diary.core.diary.database.room
 
 import androidx.room.testing.MigrationTestHelper
 import androidx.test.platform.app.InstrumentationRegistry
+import kotlin.test.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import kotlin.test.Test
 
 @RunWith(RobolectricTestRunner::class)
 class MigrationTest {

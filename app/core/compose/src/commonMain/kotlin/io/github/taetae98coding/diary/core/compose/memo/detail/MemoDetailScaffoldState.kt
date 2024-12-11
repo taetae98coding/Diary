@@ -1,6 +1,7 @@
 package io.github.taetae98coding.diary.core.compose.memo.detail
 
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.ui.graphics.toArgb
 import io.github.taetae98coding.diary.core.design.system.diary.color.DiaryColorState
 import io.github.taetae98coding.diary.core.design.system.diary.component.DiaryComponentState
@@ -60,6 +61,24 @@ public sealed class MemoDetailScaffoldState {
 	internal fun showMessage(message: String) {
 		messageJob?.cancel()
 		messageJob = coroutineScope.launch { hostState.showSnackbar(message) }
+	}
+
+	internal fun showMessage(
+		message: String,
+		actionLabel: String,
+		action: () -> Unit,
+	) {
+		messageJob?.cancel()
+		messageJob = coroutineScope.launch {
+			val result = hostState.showSnackbar(
+				message = message,
+				actionLabel = actionLabel,
+			)
+
+			if (result == SnackbarResult.ActionPerformed) {
+				action()
+			}
+		}
 	}
 
 	internal fun clearInput() {

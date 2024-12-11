@@ -14,11 +14,9 @@ import org.koin.core.annotation.Factory
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
 public class FindBuddyGroupMemoByDate internal constructor(
-    private val repository: BuddyRepository,
+	private val repository: BuddyRepository,
 ) {
-    public operator fun invoke(groupId: String, dateRange: ClosedRange<LocalDate>): Flow<Result<List<Memo>>> {
-        return flow { emitAll(repository.findMemoByDate(groupId, dateRange)) }
-            .mapLatest { Result.success(it) }
-            .catch { emit(Result.failure(it)) }
-    }
+	public operator fun invoke(groupId: String, dateRange: ClosedRange<LocalDate>): Flow<Result<List<Memo>>> = flow { emitAll(repository.findMemoByDate(groupId, dateRange)) }
+		.mapLatest { Result.success(it) }
+		.catch { emit(Result.failure(it)) }
 }

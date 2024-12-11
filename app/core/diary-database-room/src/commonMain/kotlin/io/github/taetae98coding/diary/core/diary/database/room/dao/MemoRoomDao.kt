@@ -23,12 +23,20 @@ internal class MemoRoomDao(
 	private val clock: Clock,
 	private val database: DiaryDatabase,
 ) : MemoDao {
-	override suspend fun upsertMemo(dto: List<MemoDto>) {
-		database.memo().upsert(dto.map(MemoDto::toEntity))
+	override suspend fun upsert(dto: MemoDto) {
+		database.memo().upsert(dto.toEntity())
 	}
 
-	override suspend fun upsert(dto: MemoAndTagIds) {
-		database.memo().upsertMemoAndTagIds(dto)
+	override suspend fun upsert(owner: String, dto: MemoDto, tagIds: Set<String>) {
+		database.memo().upsert(owner, dto.toEntity(), tagIds)
+	}
+
+	override suspend fun upsert(owner: String, list: List<MemoAndTagIds>) {
+		database.memo().upsert(
+			owner = owner,
+			memoList = list.map { it.memo.toEntity() },
+			tagIdsList = list.map { it.tagIds },
+		)
 	}
 
 	override suspend fun update(memoId: String, detail: MemoDetail) {
@@ -76,15 +84,11 @@ internal class MemoRoomDao(
 				}
 			}
 
-	override fun findByDateRange(owner: String?, dateRange: ClosedRange<LocalDate>, tagFilter: Set<String>): Flow<List<MemoDto>> =
+	override fun findByDateRange(owner: String, dateRange: ClosedRange<LocalDate>, tagFilter: Set<String>): Flow<List<MemoDto>> =
 		database
 			.memo()
 			.findByDateRange(owner, dateRange.start, dateRange.endInclusive, tagFilter.isNotEmpty(), tagFilter)
 			.mapCollectionLatest(MemoEntity::toDto)
 
-	override suspend fun upsert(memoList: List<MemoAndTagIds>) {
-		database.memo().upsertMemoAndTagIds(memoList)
-	}
-
-	override fun getLastServerUpdateAt(owner: String?): Flow<Instant?> = database.memo().getLastUpdateAt(owner)
+	override fun getLastServerUpdateAt(owner: String): Flow<Instant?> = database.memo().getLastUpdateAt(owner)
 }

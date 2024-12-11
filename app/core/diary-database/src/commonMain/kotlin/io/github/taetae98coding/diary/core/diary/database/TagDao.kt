@@ -6,9 +6,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.Instant
 
 public interface TagDao {
-	public suspend fun upsert(tag: TagDto)
+	public suspend fun upsert(owner: String, tag: TagDto)
 
-	public suspend fun upsert(tagList: List<TagDto>)
+	public suspend fun upsert(owner: String, tagList: List<TagDto>)
 
 	public suspend fun update(tagId: String, detail: TagDetail)
 

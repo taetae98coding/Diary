@@ -9,5 +9,6 @@ public interface AccountRepository {
 	public suspend fun upsert(account: Account)
 
 	public fun findByEmail(email: String, password: String): Flow<Account?>
-    public fun findByUid(uid: String): Flow<Account?>
+
+	public fun findByUid(uid: String): Flow<Account?>
 }

@@ -28,10 +28,11 @@ public fun Route.tagRouting() {
 					return@post
 				}
 
+				val uid = principal.payload.getClaim("uid").asString()
 				val useCase = call.scope.get<UpsertTagUseCase>()
-				val memoList = request.map(TagEntity::toTag)
+				val tagList = request.map(TagEntity::toTag)
 
-				useCase(memoList)
+				useCase(uid, tagList)
 					.onSuccess { call.respond(DiaryResponse.Success) }
 					.onFailure { call.respond(DiaryResponse.InternalServerError) }
 			}
@@ -62,7 +63,6 @@ private fun TagEntity.toTag(): Tag =
 		title = title,
 		description = description,
 		color = color,
-		owner = owner,
 		isFinish = isFinish,
 		isDelete = isDelete,
 		updateAt = updateAt,
@@ -74,7 +74,6 @@ private fun Tag.toEntity(): TagEntity =
 		title = title,
 		description = description,
 		color = color,
-		owner = owner,
 		isFinish = isFinish,
 		isDelete = isDelete,
 		updateAt = updateAt,

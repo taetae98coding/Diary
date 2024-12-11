@@ -35,7 +35,8 @@ public fun Route.accountRouting() {
 		post<LoginRequest>("/login") { request ->
 			val useCase = call.scope.get<FindAccountUseCase>()
 
-			useCase(request.email, request.password).first()
+			useCase(request.email, request.password)
+				.first()
 				.onSuccess { account ->
 					if (account == null) {
 						call.respond(HttpStatusCode.NotFound, DiaryResponse.AccountNotFound)

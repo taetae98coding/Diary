@@ -10,14 +10,14 @@ import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 
 public data object AccountTable : IdTable<String>(name = "Account") {
-    private val UID = varchar("uid", 255).default("").uniqueIndex()
+	private val UID = varchar("uid", 255).default("").uniqueIndex()
 	private val EMAIL = varchar("email", 255).default("")
 	private val PASSWORD = varchar("password", 255).default("")
 
-    override val id: Column<EntityID<String>> = UID.entityId()
+	override val id: Column<EntityID<String>> = UID.entityId()
 	override val primaryKey: PrimaryKey = PrimaryKey(EMAIL)
 
-    public fun contains(email: String): Boolean =
+	public fun contains(email: String): Boolean =
 		selectAll()
 			.where { EMAIL eq email }
 			.any()
@@ -45,12 +45,10 @@ public data object AccountTable : IdTable<String>(name = "Account") {
 			}
 		}.map { it.toAccount() }
 
-    public fun findByUid(uid: String): Account? {
-        return selectAll()
-            .where { UID eq uid }
-            .singleOrNull()
-            ?.toAccount()
-    }
+	public fun findByUid(uid: String): Account? = selectAll()
+		.where { UID eq uid }
+		.singleOrNull()
+		?.toAccount()
 
 	private fun ResultRow.toAccount(): Account =
 		Account(

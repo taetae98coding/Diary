@@ -16,41 +16,39 @@ import org.koin.core.annotation.Factory
 
 @Factory
 internal class MemoRepositoryImpl : MemoRepository {
-    override suspend fun upsert(list: List<MemoAndTagIds>, owner: String) {
+	override suspend fun upsert(list: List<MemoAndTagIds>, owner: String) {
 		newSuspendedTransaction {
 			list.forEach { memoAndTagIds ->
-                MemoQuery.upsertMemo(memoAndTagIds.memo, memoAndTagIds.tagIds)
-                MemoAccountTable.upsert(memoAndTagIds.memo.id, owner)
+				MemoQuery.upsertMemo(memoAndTagIds.memo, memoAndTagIds.tagIds)
+				MemoAccountTable.upsert(memoAndTagIds.memo.id, owner)
 			}
 		}
 	}
 
-    override suspend fun update(id: String, detail: MemoDetail) {
-        newSuspendedTransaction {
-            MemoTable.update(id, detail)
-        }
-    }
+	override suspend fun update(id: String, detail: MemoDetail) {
+		newSuspendedTransaction {
+			MemoTable.update(id, detail)
+		}
+	}
 
-    override suspend fun updateFinish(id: String, isFinish: Boolean) {
-        newSuspendedTransaction {
-            MemoTable.updateFinish(id, isFinish)
-        }
-    }
+	override suspend fun updateFinish(id: String, isFinish: Boolean) {
+		newSuspendedTransaction {
+			MemoTable.updateFinish(id, isFinish)
+		}
+	}
 
-    override suspend fun updateDelete(id: String, isDelete: Boolean) {
-        newSuspendedTransaction {
-            MemoTable.updateDelete(id, isDelete)
-        }
-    }
+	override suspend fun updateDelete(id: String, isDelete: Boolean) {
+		newSuspendedTransaction {
+			MemoTable.updateDelete(id, isDelete)
+		}
+	}
 
-    override fun findById(id: String): Flow<Memo?> {
-        return flow {
-            newSuspendedTransaction { MemoTable.findById(id) }
-                .also { emit(it) }
-        }
-    }
+	override fun findById(id: String): Flow<Memo?> = flow {
+		newSuspendedTransaction { MemoTable.findById(id) }
+			.also { emit(it) }
+	}
 
-    override fun findByIds(ids: Set<String>): Flow<List<Memo>> = flow { emit(newSuspendedTransaction { MemoTable.findByIds(ids) }) }
+	override fun findByIds(ids: Set<String>): Flow<List<Memo>> = flow { emit(newSuspendedTransaction { MemoTable.findByIds(ids) }) }
 
 	override fun findMemoAndTagIdsByUpdateAt(uid: String, updateAt: Instant): Flow<List<MemoAndTagIds>> =
 		flow {

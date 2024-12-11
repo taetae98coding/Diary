@@ -6,33 +6,31 @@ import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.upsert
 
 public data object MemoBuddyGroupTable : Table("MemoBuddyGroup") {
-    internal val MEMO_ID = reference(
-        name = "memoId",
-        foreign = MemoTable,
-        onDelete = ReferenceOption.CASCADE,
-        onUpdate = ReferenceOption.CASCADE,
-    )
-    internal val BUDDY_GROUP = reference(
-        name = "buddyGroup",
-        foreign = BuddyGroupTable,
-        onDelete = ReferenceOption.CASCADE,
-        onUpdate = ReferenceOption.CASCADE,
-    )
+	internal val MEMO_ID = reference(
+		name = "memoId",
+		foreign = MemoTable,
+		onDelete = ReferenceOption.CASCADE,
+		onUpdate = ReferenceOption.CASCADE,
+	)
+	internal val BUDDY_GROUP = reference(
+		name = "buddyGroup",
+		foreign = BuddyGroupTable,
+		onDelete = ReferenceOption.CASCADE,
+		onUpdate = ReferenceOption.CASCADE,
+	)
 
-    public override val primaryKey: PrimaryKey = PrimaryKey(MEMO_ID, BUDDY_GROUP)
+	public override val primaryKey: PrimaryKey = PrimaryKey(MEMO_ID, BUDDY_GROUP)
 
-    public fun upsert(memoId: String, buddyGroup: String) {
-        upsert {
-            it[MEMO_ID] = memoId
-            it[BUDDY_GROUP] = buddyGroup
-        }
-    }
+	public fun upsert(memoId: String, buddyGroup: String) {
+		upsert {
+			it[MEMO_ID] = memoId
+			it[BUDDY_GROUP] = buddyGroup
+		}
+	}
 
-    public fun findGroupIdsByMemoId(memoId: String): String? {
-        return selectAll()
-            .where { MEMO_ID eq memoId }
-            .singleOrNull()
-            ?.get(BUDDY_GROUP)
-            ?.value
-    }
+	public fun findGroupIdsByMemoId(memoId: String): String? = selectAll()
+		.where { MEMO_ID eq memoId }
+		.singleOrNull()
+		?.get(BUDDY_GROUP)
+		?.value
 }

@@ -19,54 +19,50 @@ import org.koin.core.annotation.Factory
 
 @Factory
 internal class BuddyRepositoryImpl : BuddyRepository {
-    override suspend fun upsert(buddyGroupAndBuddyIds: BuddyGroupAndBuddyIds) {
-        newSuspendedTransaction {
-            BuddyGroupTable.upsert(buddyGroupAndBuddyIds.buddyGroup)
-            BuddyGroupAccountRelation.deleteByBuddyGroupId(buddyGroupAndBuddyIds.buddyGroup.id)
-            buddyGroupAndBuddyIds.buddyIds.forEach {
-                BuddyGroupAccountRelation.upsert(buddyGroupAndBuddyIds.buddyGroup.id, it)
-            }
-        }
-    }
+	override suspend fun upsert(buddyGroupAndBuddyIds: BuddyGroupAndBuddyIds) {
+		newSuspendedTransaction {
+			BuddyGroupTable.upsert(buddyGroupAndBuddyIds.buddyGroup)
+			BuddyGroupAccountRelation.deleteByBuddyGroupId(buddyGroupAndBuddyIds.buddyGroup.id)
+			buddyGroupAndBuddyIds.buddyIds.forEach {
+				BuddyGroupAccountRelation.upsert(buddyGroupAndBuddyIds.buddyGroup.id, it)
+			}
+		}
+	}
 
-    override suspend fun upsert(groupId: String, memo: Memo, tagIds: Set<String>) {
-        newSuspendedTransaction {
-            MemoQuery.upsertMemo(memo, tagIds)
-            MemoBuddyGroupTable.upsert(memo.id, groupId)
-        }
-    }
+	override suspend fun upsert(groupId: String, memo: Memo, tagIds: Set<String>) {
+		newSuspendedTransaction {
+			MemoQuery.upsertMemo(memo, tagIds)
+			MemoBuddyGroupTable.upsert(memo.id, groupId)
+		}
+	}
 
-    override fun findGroupByUid(uid: String): Flow<List<BuddyGroup>> = flow {
-        newSuspendedTransaction {
-            val groupIds = BuddyGroupAccountRelation.findByUid(uid).toSet()
-            BuddyGroupTable.findByIds(groupIds)
-        }.also {
-            emit(it)
-        }
-    }
+	override fun findGroupByUid(uid: String): Flow<List<BuddyGroup>> = flow {
+		newSuspendedTransaction {
+			val groupIds = BuddyGroupAccountRelation.findByUid(uid).toSet()
+			BuddyGroupTable.findByIds(groupIds)
+		}.also {
+			emit(it)
+		}
+	}
 
-    override fun findGroupById(id: String): Flow<BuddyGroup?> = flow {
-        newSuspendedTransaction { BuddyGroupTable.findById(id) }
-            .also { emit(it) }
-    }
+	override fun findGroupById(id: String): Flow<BuddyGroup?> = flow {
+		newSuspendedTransaction { BuddyGroupTable.findById(id) }
+			.also { emit(it) }
+	}
 
-    override fun findBuddyIdByGroupId(groupId: String): Flow<List<String>> {
-        return flow {
-            newSuspendedTransaction { BuddyGroupAccountRelation.findBuddyIdByGroupId(groupId) }
-                .also { emit(it) }
-        }
-    }
+	override fun findBuddyIdByGroupId(groupId: String): Flow<List<String>> = flow {
+		newSuspendedTransaction { BuddyGroupAccountRelation.findBuddyIdByGroupId(groupId) }
+			.also { emit(it) }
+	}
 
-    override fun findMemoByDate(groupId: String, dateRange: ClosedRange<LocalDate>): Flow<List<Memo>> {
-        return flow {
-            newSuspendedTransaction { MemoTable.findGroupMemoByDateRange(groupId, dateRange) }
-                .also { emit(it) }
-        }
-    }
+	override fun findMemoByDate(groupId: String, dateRange: ClosedRange<LocalDate>): Flow<List<Memo>> = flow {
+		newSuspendedTransaction { MemoTable.findGroupMemoByDateRange(groupId, dateRange) }
+			.also { emit(it) }
+	}
 
-    override fun findBuddyByEmail(email: String, uid: String?): Flow<List<Buddy>> = flow {
-        newSuspendedTransaction { AccountTable.findByEmail(email, uid) }
-            .map { Buddy(uid = it.uid, email = it.email) }
-            .also { emit(it) }
-    }
+	override fun findBuddyByEmail(email: String, uid: String?): Flow<List<Buddy>> = flow {
+		newSuspendedTransaction { AccountTable.findByEmail(email, uid) }
+			.map { Buddy(uid = it.uid, email = it.email) }
+			.also { emit(it) }
+	}
 }

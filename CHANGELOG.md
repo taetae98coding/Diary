@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### 🐛 Bug Fixes
+
+- Ios - push notification when app foreground
+- LoginScreen, JoinScreen Button WindowInset
+- Ios holiday
+
 ## [1.3.2] - 2024-12-18
 
 ### 🚀 Features
