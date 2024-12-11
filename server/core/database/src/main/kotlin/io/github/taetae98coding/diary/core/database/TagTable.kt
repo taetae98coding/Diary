@@ -1,12 +1,12 @@
 package io.github.taetae98coding.diary.core.database
 
+import io.github.taetae98coding.diary.core.database.MemoAccountTable.OWNER
 import io.github.taetae98coding.diary.core.model.Tag
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IdTable
 import org.jetbrains.exposed.sql.Column
-import org.jetbrains.exposed.sql.ReferenceOption
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.kotlin.datetime.timestamp
@@ -18,12 +18,6 @@ public data object TagTable : IdTable<String>(name = "Tag") {
     private val TITLE = varchar("title", 255).default("")
     private val DESCRIPTION = text("description")
     private val COLOR = integer("color").default(0xFFFFFFFF.toInt())
-    private val OWNER = reference(
-        name = "owner",
-        foreign = AccountTable,
-        onDelete = ReferenceOption.CASCADE,
-        onUpdate = ReferenceOption.CASCADE,
-    )
     private val IS_FINISH = bool("isFinish").default(false)
     private val IS_DELETE = bool("isDelete").default(false)
     private val UPDATE_AT = timestamp("updateAt").default(Clock.System.now())
@@ -38,7 +32,6 @@ public data object TagTable : IdTable<String>(name = "Tag") {
                 it[TITLE] = tag.title
                 it[DESCRIPTION] = tag.description
                 it[COLOR] = tag.color
-                it[OWNER] = tag.owner
                 it[IS_FINISH] = tag.isFinish
                 it[IS_DELETE] = tag.isDelete
                 it[UPDATE_AT] = tag.updateAt
@@ -64,7 +57,6 @@ public data object TagTable : IdTable<String>(name = "Tag") {
             title = get(TITLE),
             description = get(DESCRIPTION),
             color = get(COLOR),
-            owner = get(OWNER).value,
             isFinish = get(IS_FINISH),
             isDelete = get(IS_DELETE),
             updateAt = get(UPDATE_AT),

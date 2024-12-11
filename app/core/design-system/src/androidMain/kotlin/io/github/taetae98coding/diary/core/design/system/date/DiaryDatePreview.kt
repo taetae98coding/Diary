@@ -10,20 +10,19 @@ import kotlinx.datetime.LocalDate
 @DiaryPreview
 @Composable
 private fun NonePreview() {
-	DiaryTheme {
-		DiaryDate(state = rememberDiaryDateState(initialStart = null, initialEndInclusive = null))
-	}
+    DiaryTheme {
+        DiaryDate(state = rememberDiaryDateState(initialDateRange = null))
+    }
 }
 
 @DiaryPreview
 @Composable
 private fun YesPreview() {
-	DiaryTheme {
-		DiaryDate(
-			state = rememberDiaryDateState(
-				initialStart = LocalDate(2024, 11, 1),
-				initialEndInclusive = LocalDate(2024, 11, 1),
-			),
-		)
-	}
+    DiaryTheme {
+        DiaryDate(
+            state = rememberDiaryDateState(
+                initialDateRange = LocalDate(2024, 11, 1)..LocalDate(2024, 11, 1),
+            ),
+        )
+    }
 }

@@ -35,8 +35,8 @@ android {
     defaultConfig {
         applicationId = "io.github.taetae98coding.diary"
 
-        versionCode = 8
-        versionName = "1.3.2"
+        versionCode = 9
+        versionName = "1.3.3"
     }
 
     buildTypes {

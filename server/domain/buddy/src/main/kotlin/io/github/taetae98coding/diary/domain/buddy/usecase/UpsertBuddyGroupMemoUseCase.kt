@@ -28,7 +28,7 @@ public class UpsertBuddyGroupMemoUseCase internal constructor(
             buddyRepository.findBuddyIdByGroupId(groupId).first()
                 .filter { it != requesterUid }
                 .forEach {
-                    fcmRepository.send(it, "그룹 메모", "\'${memo.title}\' 메모가 추가됐습니다. (${account.email})")
+                    fcmRepository.send(it, "그룹 메모", "'${memo.title}' 메모가 추가됐습니다. (${account.email})")
                 }
         }
     }

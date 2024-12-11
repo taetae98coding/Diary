@@ -1,6 +1,6 @@
 package io.github.taetae98coding.diary.feature.memo
 
-import io.github.taetae98coding.diary.common.model.memo.LegacyMemoEntity
+import io.github.taetae98coding.diary.common.model.memo.MemoAndTagIdsEntity
 import io.github.taetae98coding.diary.common.model.memo.MemoDetailEntity
 import io.github.taetae98coding.diary.common.model.memo.MemoEntity
 import io.github.taetae98coding.diary.common.model.response.DiaryResponse
@@ -31,7 +31,7 @@ import org.koin.ktor.plugin.scope
 public fun Route.memoRouting() {
     route("/memo") {
         authenticate("account") {
-            post<List<LegacyMemoEntity>>("/upsert") { request ->
+            post<List<MemoAndTagIdsEntity>>("/upsert") { request ->
                 val principal = call.principal<JWTPrincipal>()
                 if (principal == null) {
                     call.respond(HttpStatusCode.Unauthorized, DiaryResponse.Unauthorized)
@@ -66,7 +66,7 @@ public fun Route.memoRouting() {
                 useCase(uid, updateAt)
                     .first()
                     .onSuccess { list ->
-                        call.respond(DiaryResponse.success(list.map { it.toEntity(uid) }))
+                        call.respond(DiaryResponse.success(list.map { it.toEntity() }))
                     }
                     .onFailure { call.respond(DiaryResponse.InternalServerError) }
             }
@@ -173,7 +173,7 @@ public fun Route.memoRouting() {
     }
 }
 
-private fun LegacyMemoEntity.toMemo(): Memo =
+private fun MemoAndTagIdsEntity.toMemo(): Memo =
     Memo(
         id = id,
         title = title,
@@ -197,15 +197,14 @@ private fun MemoDetailEntity.toDetail(): MemoDetail {
     )
 }
 
-private fun MemoAndTagIds.toEntity(owner: String): LegacyMemoEntity =
-    LegacyMemoEntity(
+private fun MemoAndTagIds.toEntity(): MemoAndTagIdsEntity =
+    MemoAndTagIdsEntity(
         id = memo.id,
         title = memo.title,
         description = memo.description,
         start = memo.start,
         endInclusive = memo.endInclusive,
         color = memo.color,
-        owner = owner,
         primaryTag = memo.primaryTag,
         tagIds = tagIds,
         isFinish = memo.isFinish,

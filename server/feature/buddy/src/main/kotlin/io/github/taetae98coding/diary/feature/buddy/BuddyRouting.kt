@@ -2,7 +2,7 @@ package io.github.taetae98coding.diary.feature.buddy
 
 import io.github.taetae98coding.diary.common.model.buddy.BuddyEntity
 import io.github.taetae98coding.diary.common.model.buddy.BuddyGroupEntity
-import io.github.taetae98coding.diary.common.model.memo.LegacyMemoEntity
+import io.github.taetae98coding.diary.common.model.memo.MemoAndTagIdsEntity
 import io.github.taetae98coding.diary.common.model.memo.MemoEntity
 import io.github.taetae98coding.diary.common.model.request.buddy.UpsertBuddyGroupRequest
 import io.github.taetae98coding.diary.common.model.response.DiaryResponse
@@ -106,7 +106,7 @@ public fun Route.buddyRouting() {
                         .onFailure { call.respond(DiaryResponse.InternalServerError) }
                 }
 
-                post<LegacyMemoEntity>("/{groupId}/upsertMemo") { request ->
+                post<MemoAndTagIdsEntity>("/{groupId}/upsertMemo") { request ->
                     val principal = call.principal<JWTPrincipal>()
                     if (principal == null) {
                         call.respond(HttpStatusCode.Unauthorized, DiaryResponse.Unauthorized)
@@ -170,7 +170,7 @@ public fun Route.buddyRouting() {
     }
 }
 
-private fun LegacyMemoEntity.toMemo(): Memo =
+private fun MemoAndTagIdsEntity.toMemo(): Memo =
     Memo(
         id = id,
         title = title,

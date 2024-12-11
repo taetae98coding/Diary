@@ -21,6 +21,7 @@ internal data class TagEntity(
 	@ColumnInfo(defaultValue = "0")
 	val isDelete: Boolean,
 	@ColumnInfo(defaultValue = "null")
+	// TODO multiplatform does not support delete column
 	val owner: String?,
 	@ColumnInfo(defaultValue = "0")
 	val updateAt: Instant,

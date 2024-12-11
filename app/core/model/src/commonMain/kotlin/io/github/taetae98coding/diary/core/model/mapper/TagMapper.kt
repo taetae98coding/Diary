@@ -7,7 +7,6 @@ public fun Tag.toDto(): TagDto =
 	TagDto(
 		id = id,
 		detail = detail,
-		owner = owner,
 		isFinish = isFinish,
 		isDelete = isDelete,
 		updateAt = updateAt,
@@ -18,7 +17,6 @@ public fun TagDto.toTag(): Tag =
 	Tag(
 		id = id,
 		detail = detail,
-		owner = owner,
 		isFinish = isFinish,
 		isDelete = isDelete,
 		updateAt = updateAt,

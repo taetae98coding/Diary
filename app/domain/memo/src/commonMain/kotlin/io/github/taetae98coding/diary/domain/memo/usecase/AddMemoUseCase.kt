@@ -12,33 +12,31 @@ import org.koin.core.annotation.Factory
 
 @Factory
 public class AddMemoUseCase internal constructor(
-	private val getAccountUseCase: GetAccountUseCase,
-	private val pushMemoBackupQueueUseCase: PushMemoBackupQueueUseCase,
-	private val clock: Clock,
-	private val repository: MemoRepository,
+    private val getAccountUseCase: GetAccountUseCase,
+    private val pushMemoBackupQueueUseCase: PushMemoBackupQueueUseCase,
+    private val clock: Clock,
+    private val repository: MemoRepository,
 ) {
-	public suspend operator fun invoke(
-		detail: MemoDetail,
-		primaryTag: String?,
-		tagIds: Set<String>,
-	): Result<Unit> =
-		runCatching {
-			if (detail.title.isBlank()) throw MemoTitleBlankException()
+    public suspend operator fun invoke(
+        detail: MemoDetail,
+        primaryTag: String?,
+        tagIds: Set<String>,
+    ): Result<Unit> =
+        runCatching<Unit> {
+            if (detail.title.isBlank()) throw MemoTitleBlankException()
 
-			val memoId = repository.getNextMemoId()
-			val account = getAccountUseCase().first().getOrThrow()
-			val memo =
-				Memo(
-					id = memoId,
-					detail = detail,
-					primaryTag = primaryTag,
-					owner = account.uid,
-					isFinish = false,
-					isDelete = false,
-					updateAt = clock.now(),
-				)
+            val memoId = repository.getNextMemoId()
+            val account = getAccountUseCase().first().getOrThrow()
+            val memo = Memo(
+                id = memoId,
+                detail = detail,
+                primaryTag = primaryTag,
+                isFinish = false,
+                isDelete = false,
+                updateAt = clock.now(),
+            )
 
-			repository.upsert(memo, tagIds)
-			pushMemoBackupQueueUseCase(memoId)
-		}
+            repository.upsert(account.uid, memo, tagIds)
+            pushMemoBackupQueueUseCase(memoId)
+        }
 }

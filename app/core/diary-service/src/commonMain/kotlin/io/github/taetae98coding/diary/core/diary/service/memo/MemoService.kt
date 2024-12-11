@@ -1,6 +1,6 @@
 package io.github.taetae98coding.diary.core.diary.service.memo
 
-import io.github.taetae98coding.diary.common.model.memo.LegacyMemoEntity
+import io.github.taetae98coding.diary.common.model.memo.MemoAndTagIdsEntity
 import io.github.taetae98coding.diary.common.model.memo.MemoEntity
 import io.github.taetae98coding.diary.core.diary.service.DiaryServiceModule
 import io.github.taetae98coding.diary.core.diary.service.ext.getOrThrow
@@ -46,7 +46,7 @@ public class MemoService internal constructor(
 		val response = client
 			.get("/memo/fetch") {
 				parameter("updateAt", updateAt)
-			}.getOrThrow<List<LegacyMemoEntity>>()
+			}.getOrThrow<List<MemoAndTagIdsEntity>>()
 
 		return response.map {
 			MemoAndTagIds(it.toDto(), it.tagIds)

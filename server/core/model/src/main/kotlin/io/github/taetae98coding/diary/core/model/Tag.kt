@@ -7,7 +7,6 @@ public data class Tag(
 	val title: String,
 	val description: String,
 	val color: Int,
-	val owner: String,
 	val isFinish: Boolean,
 	val isDelete: Boolean,
 	val updateAt: Instant,

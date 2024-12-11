@@ -40,6 +40,7 @@ internal data class MemoEntity(
 	val isFinish: Boolean,
 	@ColumnInfo(defaultValue = "0")
 	val isDelete: Boolean,
+	// TODO multiplatform does not support delete column
 	@ColumnInfo(defaultValue = "null")
 	val owner: String?,
 	@ColumnInfo(defaultValue = "null")

@@ -10,7 +10,7 @@ import org.koin.core.annotation.Factory
 public class UpsertTagUseCase internal constructor(
 	private val repository: TagRepository,
 ) {
-	public suspend operator fun invoke(list: List<Tag>): Result<Unit> {
+	public suspend operator fun invoke(owner: String, list: List<Tag>): Result<Unit> {
 		return runCatching {
 			// TODO Permission Check
 			val ids = list.map { it.id }.toSet()
@@ -35,7 +35,7 @@ public class UpsertTagUseCase internal constructor(
 						)
 					}
 
-			repository.upsert(validList)
+			repository.upsert(owner, validList)
 		}
 	}
 }

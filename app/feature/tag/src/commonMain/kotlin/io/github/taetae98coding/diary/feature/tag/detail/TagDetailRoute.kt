@@ -1,11 +1,9 @@
 package io.github.taetae98coding.diary.feature.tag.detail
 
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
-import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.material3.adaptive.layout.AnimatedPane
 import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffold
 import androidx.compose.material3.adaptive.layout.ThreePaneScaffoldRole
-import androidx.compose.material3.adaptive.layout.calculatePaneScaffoldDirective
 import androidx.compose.material3.adaptive.navigation.ThreePaneScaffoldNavigator
 import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaffoldNavigator
 import androidx.compose.runtime.Composable
@@ -35,8 +33,7 @@ internal fun TagDetailRoute(
     detailViewModel: TagDetailViewModel = koinViewModel(),
     memoViewModel: TagMemoViewModel = koinViewModel(),
 ) {
-    val windowAdaptiveInfo = currentWindowAdaptiveInfo()
-    val navigator = rememberListDetailPaneScaffoldNavigator(scaffoldDirective = calculatePaneScaffoldDirective(windowAdaptiveInfo))
+    val navigator = rememberListDetailPaneScaffoldNavigator()
 
     ListDetailPaneScaffold(
         directive = navigator.scaffoldDirective.copy(defaultPanePreferredWidth = 500.dp),

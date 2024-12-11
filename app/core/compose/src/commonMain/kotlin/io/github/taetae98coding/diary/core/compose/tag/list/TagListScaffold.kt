@@ -21,6 +21,7 @@ import io.github.taetae98coding.diary.core.compose.button.FloatingAddButton
 import io.github.taetae98coding.diary.core.compose.error.NetworkError
 import io.github.taetae98coding.diary.core.compose.error.UnknownError
 import io.github.taetae98coding.diary.core.compose.swipe.FinishAndDeleteSwipeBox
+import io.github.taetae98coding.diary.core.compose.topbar.TopBarTitle
 import io.github.taetae98coding.diary.core.design.system.emoji.Emoji
 import io.github.taetae98coding.diary.core.design.system.theme.DiaryTheme
 
@@ -35,7 +36,7 @@ public fun TagListScaffold(
 ) {
 	Scaffold(
 		modifier = modifier,
-		topBar = { TopAppBar(title = { Text(text = "태그") }) },
+		topBar = { TopAppBar(title = { TopBarTitle(text = "태그") }) },
 		snackbarHost = { SnackbarHost(hostState = state.hostState) },
 		floatingActionButton = {
 			when (val floatingButton = floatingButtonProvider()) {

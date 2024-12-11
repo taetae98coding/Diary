@@ -25,6 +25,10 @@ internal class TagAddViewModel(
     val uiState = _uiState.asStateFlow()
 
     private fun add(detail: TagDetail) {
+        if (uiState.value.isAddInProgress) {
+            return
+        }
+
         viewModelScope.launch {
             _uiState.update { it.copy(isAddInProgress = true) }
             addTagUseCase(detail)

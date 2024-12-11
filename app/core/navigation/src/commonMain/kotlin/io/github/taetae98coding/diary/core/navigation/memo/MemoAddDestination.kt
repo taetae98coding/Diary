@@ -13,6 +13,14 @@ public data class MemoAddDestination(
 	@SerialName(SELECTED_TAG)
 	val selectedTag: String? = null,
 ) {
+	val dateRange: ClosedRange<LocalDate>?
+		get() {
+			if (start == null) return null
+			if (endInclusive == null) return null
+
+			return start..endInclusive
+		}
+
 	public companion object {
 		public const val START: String = "start"
 		public const val END_INCLUSIVE: String = "endInclusive"

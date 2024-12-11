@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.github.taetae98coding.diary.core.compose.button.FloatingAddButton
+import io.github.taetae98coding.diary.core.compose.topbar.TopBarTitle
 import io.github.taetae98coding.diary.core.design.system.diary.color.DiaryColor
 import io.github.taetae98coding.diary.core.design.system.diary.component.DiaryComponent
 import io.github.taetae98coding.diary.core.design.system.emoji.Emoji
@@ -47,7 +48,7 @@ public fun TagDetailScaffold(
 		modifier = modifier,
 		topBar = {
 			TopAppBar(
-				title = { titleProvider()?.let { Text(text = it) } },
+				title = { titleProvider()?.let { TopBarTitle(text = it) } },
 				navigationIcon = {
 					when (val navigationIcon = navigationIconProvider()) {
 						is TagDetailScaffoldNavigationIcon.NavigateUp -> {

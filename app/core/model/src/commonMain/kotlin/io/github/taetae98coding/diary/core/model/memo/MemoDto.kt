@@ -5,7 +5,6 @@ import kotlinx.datetime.Instant
 public data class MemoDto(
 	val id: String,
 	val detail: MemoDetail,
-	val owner: String?,
 	val primaryTag: String?,
 	val isFinish: Boolean,
 	val isDelete: Boolean,

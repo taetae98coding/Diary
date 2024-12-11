@@ -21,11 +21,11 @@ internal class TagRoomDao(
 	private val clock: Clock,
 	private val database: DiaryDatabase,
 ) : TagDao {
-	override suspend fun upsert(tag: TagDto) {
-		database.tag().upsert(tag.toEntity())
+	override suspend fun upsert(owner: String, tag: TagDto) {
+		database.tag().upsert(owner, tag.toEntity())
 	}
 
-	override suspend fun upsert(tagList: List<TagDto>) {
+	override suspend fun upsert(owner: String, tagList: List<TagDto>) {
 		database.tag().upsert(tagList.map(TagDto::toEntity))
 	}
 

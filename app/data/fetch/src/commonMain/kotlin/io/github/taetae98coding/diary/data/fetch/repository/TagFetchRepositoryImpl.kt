@@ -24,7 +24,7 @@ internal class TagFetchRepositoryImpl(
 					break
 				}
 
-				localDataSource.upsert(list)
+				localDataSource.upsert(uid, list)
 			}
 		}
 	}

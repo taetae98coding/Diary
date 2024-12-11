@@ -1,0 +1,452 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 4,
+    "identityHash": "7a902cb6f74238b0331a832f96ffdba9",
+    "entities": [
+      {
+        "tableName": "MemoEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL DEFAULT '', `title` TEXT NOT NULL DEFAULT '', `description` TEXT NOT NULL DEFAULT '', `start` TEXT DEFAULT null, `endInclusive` TEXT DEFAULT null, `color` INTEGER NOT NULL DEFAULT -16777216, `isFinish` INTEGER NOT NULL DEFAULT 0, `isDelete` INTEGER NOT NULL DEFAULT 0, `owner` TEXT DEFAULT null, `primaryTag` TEXT DEFAULT null, `updateAt` INTEGER NOT NULL DEFAULT 0, `serverUpdateAt` INTEGER DEFAULT null, PRIMARY KEY(`id`), FOREIGN KEY(`primaryTag`) REFERENCES `TagEntity`(`id`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "start",
+            "columnName": "start",
+            "affinity": "TEXT",
+            "defaultValue": "null"
+          },
+          {
+            "fieldPath": "endInclusive",
+            "columnName": "endInclusive",
+            "affinity": "TEXT",
+            "defaultValue": "null"
+          },
+          {
+            "fieldPath": "color",
+            "columnName": "color",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-16777216"
+          },
+          {
+            "fieldPath": "isFinish",
+            "columnName": "isFinish",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "isDelete",
+            "columnName": "isDelete",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "owner",
+            "columnName": "owner",
+            "affinity": "TEXT",
+            "defaultValue": "null"
+          },
+          {
+            "fieldPath": "primaryTag",
+            "columnName": "primaryTag",
+            "affinity": "TEXT",
+            "defaultValue": "null"
+          },
+          {
+            "fieldPath": "updateAt",
+            "columnName": "updateAt",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "serverUpdateAt",
+            "columnName": "serverUpdateAt",
+            "affinity": "INTEGER",
+            "defaultValue": "null"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_MemoEntity_primaryTag",
+            "unique": false,
+            "columnNames": [
+              "primaryTag"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_MemoEntity_primaryTag` ON `${TABLE_NAME}` (`primaryTag`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "TagEntity",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "primaryTag"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "MemoBuddyGroupEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`memoId` TEXT NOT NULL DEFAULT '', `buddyGroupId` TEXT NOT NULL DEFAULT '', PRIMARY KEY(`memoId`, `buddyGroupId`), FOREIGN KEY(`memoId`) REFERENCES `MemoEntity`(`id`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "memoId",
+            "columnName": "memoId",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "buddyGroupId",
+            "columnName": "buddyGroupId",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "memoId",
+            "buddyGroupId"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_MemoBuddyGroupEntity_memoId",
+            "unique": false,
+            "columnNames": [
+              "memoId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_MemoBuddyGroupEntity_memoId` ON `${TABLE_NAME}` (`memoId`)"
+          },
+          {
+            "name": "index_MemoBuddyGroupEntity_buddyGroupId",
+            "unique": false,
+            "columnNames": [
+              "buddyGroupId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_MemoBuddyGroupEntity_buddyGroupId` ON `${TABLE_NAME}` (`buddyGroupId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "MemoEntity",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "memoId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "MemoAccountEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`memoId` TEXT NOT NULL DEFAULT '', `owner` TEXT NOT NULL DEFAULT '', PRIMARY KEY(`memoId`, `owner`), FOREIGN KEY(`memoId`) REFERENCES `MemoEntity`(`id`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "memoId",
+            "columnName": "memoId",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "owner",
+            "columnName": "owner",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "memoId",
+            "owner"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_MemoAccountEntity_memoId",
+            "unique": false,
+            "columnNames": [
+              "memoId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_MemoAccountEntity_memoId` ON `${TABLE_NAME}` (`memoId`)"
+          },
+          {
+            "name": "index_MemoAccountEntity_owner",
+            "unique": false,
+            "columnNames": [
+              "owner"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_MemoAccountEntity_owner` ON `${TABLE_NAME}` (`owner`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "MemoEntity",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "memoId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "TagEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL DEFAULT '', `title` TEXT NOT NULL DEFAULT '', `description` TEXT NOT NULL DEFAULT '', `color` INTEGER NOT NULL DEFAULT -16777216, `isFinish` INTEGER NOT NULL DEFAULT 0, `isDelete` INTEGER NOT NULL DEFAULT 0, `owner` TEXT DEFAULT null, `updateAt` INTEGER NOT NULL DEFAULT 0, `serverUpdateAt` INTEGER DEFAULT null, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "color",
+            "columnName": "color",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "-16777216"
+          },
+          {
+            "fieldPath": "isFinish",
+            "columnName": "isFinish",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "isDelete",
+            "columnName": "isDelete",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "owner",
+            "columnName": "owner",
+            "affinity": "TEXT",
+            "defaultValue": "null"
+          },
+          {
+            "fieldPath": "updateAt",
+            "columnName": "updateAt",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "serverUpdateAt",
+            "columnName": "serverUpdateAt",
+            "affinity": "INTEGER",
+            "defaultValue": "null"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "TagAccountEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`tagId` TEXT NOT NULL DEFAULT '', `owner` TEXT NOT NULL DEFAULT '', PRIMARY KEY(`tagId`, `owner`), FOREIGN KEY(`tagId`) REFERENCES `TagEntity`(`id`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "tagId",
+            "columnName": "tagId",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "owner",
+            "columnName": "owner",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "tagId",
+            "owner"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_TagAccountEntity_tagId",
+            "unique": false,
+            "columnNames": [
+              "tagId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_TagAccountEntity_tagId` ON `${TABLE_NAME}` (`tagId`)"
+          },
+          {
+            "name": "index_TagAccountEntity_owner",
+            "unique": false,
+            "columnNames": [
+              "owner"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_TagAccountEntity_owner` ON `${TABLE_NAME}` (`owner`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "TagEntity",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "tagId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "MemoTagEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`memoId` TEXT NOT NULL DEFAULT '', `tagId` TEXT NOT NULL DEFAULT '', PRIMARY KEY(`memoId`, `tagId`), FOREIGN KEY(`memoId`) REFERENCES `MemoEntity`(`id`) ON UPDATE CASCADE ON DELETE CASCADE , FOREIGN KEY(`tagId`) REFERENCES `TagEntity`(`id`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "memoId",
+            "columnName": "memoId",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "tagId",
+            "columnName": "tagId",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "memoId",
+            "tagId"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_MemoTagEntity_memoId",
+            "unique": false,
+            "columnNames": [
+              "memoId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_MemoTagEntity_memoId` ON `${TABLE_NAME}` (`memoId`)"
+          },
+          {
+            "name": "index_MemoTagEntity_tagId",
+            "unique": false,
+            "columnNames": [
+              "tagId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_MemoTagEntity_tagId` ON `${TABLE_NAME}` (`tagId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "MemoEntity",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "memoId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "TagEntity",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "tagId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7a902cb6f74238b0331a832f96ffdba9')"
+    ]
+  }
+}
