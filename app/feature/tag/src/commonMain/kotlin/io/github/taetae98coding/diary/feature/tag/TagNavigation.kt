@@ -28,12 +28,7 @@ public fun NavGraphBuilder.tagNavigation(
 		composable<TagHomeDestination> { backStackEntry ->
 			TagHomeRoute(
 				navigateToMemoAdd = { navController.navigate(MemoAddDestination(selectedTag = it)) },
-				navigateToMemoDetail = {
-					navController.navigate(
-						route = MemoDetailDestination(it),
-						navOptions = navOptions { launchSingleTop = true },
-					)
-				},
+				navigateToMemoDetail = { navController.navigate(MemoDetailDestination(it),) },
 				onScaffoldValueChange = { backStackEntry.savedStateHandle["app_navigation_visible"] = it.isListVisible() },
 			)
 		}

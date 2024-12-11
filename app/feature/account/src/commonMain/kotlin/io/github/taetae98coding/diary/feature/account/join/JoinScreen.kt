@@ -223,7 +223,7 @@ private fun Message(
 		when {
 			uiState.isLoginFinish -> onLoginFinish()
 			uiState.isExistEmail -> state.showMessage("이미 사용되는 이메일이에요 ${Emoji.invalid.random()}")
-			uiState.isNetworkError -> state.showMessage("네트워크 연결 상태를 확인해 주세요 ${Emoji.fail.random()}")
+			uiState.isNetworkError -> state.showMessage("네트워크 상태를 확인해 주세요 ${Emoji.fail.random()}")
 			uiState.isUnknownError -> state.showMessage("알 수 없는 에러가 발생했어요 잠시 후 다시 시도해 주세요 ${Emoji.error.random()}")
 		}
 

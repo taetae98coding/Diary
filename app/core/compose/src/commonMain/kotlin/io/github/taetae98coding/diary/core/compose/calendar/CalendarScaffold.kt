@@ -32,93 +32,92 @@ import kotlinx.datetime.LocalDate
 
 @Composable
 public fun CalendarScaffold(
-    state: CalendarScaffoldState,
-    onSelectDate: (ClosedRange<LocalDate>) -> Unit,
-    hasFilterProvider: () -> Boolean,
-    textItemListProvider: () -> List<CalendarItemUiState.Text>,
-    holidayListProvider: () -> List<CalendarItemUiState.Holiday>,
-    onCalendarItemClick: (Any) -> Unit,
-    modifier: Modifier = Modifier,
-    navigationIcon: @Composable () -> Unit = {},
+	state: CalendarScaffoldState,
+	onSelectDate: (ClosedRange<LocalDate>) -> Unit,
+	hasFilterProvider: () -> Boolean,
+	textItemListProvider: () -> List<CalendarItemUiState.Text>,
+	holidayListProvider: () -> List<CalendarItemUiState.Holiday>,
+	onCalendarItemClick: (Any) -> Unit,
+	modifier: Modifier = Modifier,
+	navigationIcon: @Composable () -> Unit = {},
 ) {
-    val coroutineScope = rememberCoroutineScope()
+	val coroutineScope = rememberCoroutineScope()
 
-    Scaffold(
-        modifier = modifier
-            .onPreviewKeyEvent {
-                when {
-                    !state.calendarState.isScrollInProgress && it.key == Key.DirectionRight -> {
-                        coroutineScope.launch { state.calendarState.animateScrollToForward() }
-                        true
-                    }
+	Scaffold(
+		modifier = modifier
+			.onPreviewKeyEvent {
+				when {
+					!state.calendarState.isScrollInProgress && it.key == Key.DirectionRight -> {
+						coroutineScope.launch { state.calendarState.animateScrollToForward() }
+						true
+					}
 
-                    !state.calendarState.isScrollInProgress && it.key == Key.DirectionLeft -> {
-                        coroutineScope.launch { state.calendarState.animateScrollToBackward() }
-                        true
-                    }
+					!state.calendarState.isScrollInProgress && it.key == Key.DirectionLeft -> {
+						coroutineScope.launch { state.calendarState.animateScrollToBackward() }
+						true
+					}
 
-                    it.key == Key.F1 -> {
-                        state.onFilter()
-                        true
-                    }
+					it.key == Key.F1 -> {
+						state.onFilter()
+						true
+					}
 
-                    !state.calendarState.isScrollInProgress && it.key == Key.F2 -> {
-                        coroutineScope.launch { state.calendarState.animateScrollToToday() }
-                        true
-                    }
+					!state.calendarState.isScrollInProgress && it.key == Key.F2 -> {
+						coroutineScope.launch { state.calendarState.animateScrollToToday() }
+						true
+					}
 
-                    else -> false
-                }
-            }
-            .focusRequester(state.focusRequester)
-            .focusable(),
-        topBar = {
-            CalendarTopBar(
-                state = state.calendarState,
-                actions = {
-                    IconButton(onClick = state.onFilter) {
-                        Crossfade(hasFilterProvider()) { hasFilter ->
-                            if (hasFilter) {
-                                FilterIcon(tint = DiaryTheme.color.primary)
-                            } else {
-                                FilterOffIcon()
-                            }
-                        }
-                    }
+					else -> false
+				}
+			}.focusRequester(state.focusRequester)
+			.focusable(),
+		topBar = {
+			CalendarTopBar(
+				state = state.calendarState,
+				actions = {
+					IconButton(onClick = state.onFilter) {
+						Crossfade(hasFilterProvider()) { hasFilter ->
+							if (hasFilter) {
+								FilterIcon(tint = DiaryTheme.color.primary)
+							} else {
+								FilterOffIcon()
+							}
+						}
+					}
 
-                    IconButton(onClick = { coroutineScope.launch { state.calendarState.animateScrollToToday() } }) {
-                        TodayIcon()
-                    }
-                },
-                navigationIcon = navigationIcon,
-            )
-        },
-    ) {
-        var today by remember { mutableStateOf(LocalDate.todayIn()) }
+					IconButton(onClick = { coroutineScope.launch { state.calendarState.animateScrollToToday() } }) {
+						TodayIcon()
+					}
+				},
+				navigationIcon = navigationIcon,
+			)
+		},
+	) {
+		var today by remember { mutableStateOf(LocalDate.todayIn()) }
 
-        Calendar(
-            state = state.calendarState,
-            primaryDateListProvider = { listOf(today) },
-            textItemListProvider = textItemListProvider,
-            holidayListProvider = holidayListProvider,
-            onCalendarItemClick = onCalendarItemClick,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(it)
-                .calendarDateRangeSelectable(
-                    state = state.calendarState,
-                    onSelectDate = onSelectDate,
-                ),
-        )
+		Calendar(
+			state = state.calendarState,
+			primaryDateListProvider = { listOf(today) },
+			textItemListProvider = textItemListProvider,
+			holidayListProvider = holidayListProvider,
+			onCalendarItemClick = onCalendarItemClick,
+			modifier = Modifier
+				.fillMaxSize()
+				.padding(it)
+				.calendarDateRangeSelectable(
+					state = state.calendarState,
+					onSelectDate = onSelectDate,
+				),
+		)
 
-        LifecycleResumeEffect(Unit) {
-            today = LocalDate.todayIn()
-            onPauseOrDispose { }
-        }
-    }
+		LifecycleResumeEffect(Unit) {
+			today = LocalDate.todayIn()
+			onPauseOrDispose { }
+		}
+	}
 
-    LifecycleResumeEffect(state.focusRequester) {
-        state.focusRequester.requestFocus()
-        onPauseOrDispose { }
-    }
+	LifecycleResumeEffect(state.focusRequester) {
+		state.focusRequester.requestFocus()
+		onPauseOrDispose { }
+	}
 }

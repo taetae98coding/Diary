@@ -15,107 +15,143 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import io.github.taetae98coding.diary.core.compose.error.NetworkError
+import io.github.taetae98coding.diary.core.compose.error.UnknownError
 import io.github.taetae98coding.diary.core.design.system.theme.DiaryTheme
 import io.github.taetae98coding.diary.core.model.buddy.BuddyGroup
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun BuddyListScreen(
-    listProvider: () -> List<BuddyGroup>?,
-    onGroup: (String) -> Unit,
-    modifier: Modifier = Modifier,
-    floatingActionButton: @Composable () -> Unit = {},
+	listUiStateProvider: () -> BuddyListUiState,
+	onGroup: (String) -> Unit,
+	modifier: Modifier = Modifier,
+	floatingActionButton: @Composable () -> Unit = {},
 ) {
-    Scaffold(
-        modifier = modifier,
-        topBar = { TopAppBar(title = { Text(text = "버디") }) },
-        floatingActionButton = floatingActionButton,
-    ) {
-        Content(
-            listProvider = listProvider,
-            onGroup = onGroup,
-            modifier = Modifier.fillMaxSize()
-                .padding(it),
-        )
-    }
+	Scaffold(
+		modifier = modifier,
+		topBar = { TopAppBar(title = { Text(text = "버디") }) },
+		floatingActionButton = floatingActionButton,
+	) {
+		Content(
+			listUiStateProvider = listUiStateProvider,
+			onGroup = onGroup,
+			modifier = Modifier
+				.fillMaxSize()
+				.padding(it),
+		)
+	}
 }
 
 @Composable
 private fun Content(
-    listProvider: () -> List<BuddyGroup>?,
-    onGroup: (String) -> Unit,
-    modifier: Modifier = Modifier,
+	listUiStateProvider: () -> BuddyListUiState,
+	onGroup: (String) -> Unit,
+	modifier: Modifier = Modifier,
 ) {
-    LazyColumn(
-        modifier = modifier,
-        contentPadding = DiaryTheme.dimen.screenPaddingValues,
-        verticalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace),
-    ) {
-        val list = listProvider()
+	LazyColumn(
+		modifier = modifier,
+		contentPadding = DiaryTheme.dimen.screenPaddingValues,
+		verticalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace),
+	) {
+		when (val uiState = listUiStateProvider()) {
+			is BuddyListUiState.Loading -> {
+				items(
+					count = 5,
+					contentType = { "BuddyGroup" },
+				) {
+					BuddyListItem(
+						group = null,
+						onClick = {},
+						modifier = Modifier.animateItem(),
+					)
+				}
+			}
 
-        if (list == null) {
-            items(
-                count = 5,
-                contentType = { "BuddyGroup" },
-            ) {
-                BuddyListItem(
-                    group = null,
-                    onClick = {},
-                    modifier = Modifier.animateItem(),
-                )
-            }
-        } else if (list.isEmpty()) {
-            item(
-                key = "Loading",
-                contentType = "Loading",
-            ) {
-                Box(
-                    modifier = Modifier.fillParentMaxSize()
-                        .animateItem(),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    Text(
-                        text = "그룹이 없어요 🐭",
-                        style = DiaryTheme.typography.headlineMedium,
-                    )
-                }
-            }
-        } else {
-            items(
-                items = list,
-                key = { it.id },
-                contentType = { "BuddyGroup" },
-            ) {
-                BuddyListItem(
-                    group = it,
-                    onClick = { onGroup(it.id) },
-                    modifier = Modifier.animateItem(),
-                )
-            }
-        }
-    }
+			is BuddyListUiState.NetworkError -> {
+				item(
+					key = "NetworkError",
+					contentType = "NetworkError",
+				) {
+					NetworkError(
+						onRetry = uiState.retry,
+						modifier = Modifier
+							.fillParentMaxSize()
+							.animateItem(),
+					)
+				}
+			}
+
+			is BuddyListUiState.UnknownError -> {
+				item(
+					key = "UnknownError",
+					contentType = "UnknownError",
+				) {
+					UnknownError(
+						onRetry = uiState.retry,
+						modifier = Modifier
+							.fillParentMaxSize()
+							.animateItem(),
+					)
+				}
+			}
+
+			is BuddyListUiState.State -> {
+				if (uiState.list.isEmpty()) {
+					item(
+						key = "Empty",
+						contentType = "Empty",
+					) {
+						Box(
+							modifier = Modifier
+								.fillParentMaxSize()
+								.animateItem(),
+							contentAlignment = Alignment.Center,
+						) {
+							Text(
+								text = "그룹이 없어요 🐭",
+								style = DiaryTheme.typography.headlineMedium,
+							)
+						}
+					}
+				} else {
+					items(
+						items = uiState.list,
+						key = { it.id },
+						contentType = { "BuddyGroup" },
+					) {
+						BuddyListItem(
+							group = it,
+							onClick = { onGroup(it.id) },
+							modifier = Modifier.animateItem(),
+						)
+					}
+				}
+			}
+		}
+	}
 }
 
 @Composable
 private fun BuddyListItem(
-    group: BuddyGroup?,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
+	group: BuddyGroup?,
+	onClick: () -> Unit,
+	modifier: Modifier = Modifier,
 ) {
-    Card(
-        onClick = onClick,
-        modifier = modifier,
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            contentAlignment = Alignment.Center,
-        ) {
-            Text(
-                text = group?.detail?.title.orEmpty(),
-                style = DiaryTheme.typography.titleLarge,
-            )
-        }
-    }
+	Card(
+		onClick = onClick,
+		modifier = modifier,
+	) {
+		Box(
+			modifier = Modifier
+				.fillMaxSize()
+				.padding(16.dp),
+			contentAlignment = Alignment.Center,
+		) {
+			Text(
+				text = group?.detail?.title.orEmpty(),
+				style = DiaryTheme.typography.titleLarge,
+			)
+		}
+	}
 }

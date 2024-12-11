@@ -10,20 +10,22 @@ import io.github.taetae98coding.diary.feature.buddy.common.rememberBuddyBottomSh
 
 @Composable
 internal fun rememberBuddyDetailScreenDetailState(
-    onCalendar: () -> Unit,
+	onTag: () -> Unit,
+	onCalendar: () -> Unit,
 ): BuddyDetailScreenState.Detail {
-    val coroutineScope = rememberCoroutineScope()
-    val drawerState = rememberDrawerState(DrawerValue.Closed)
-    val componentState = rememberDiaryComponentState()
-    val buddyBottomSheetState = rememberBuddyBottomSheetState()
+	val coroutineScope = rememberCoroutineScope()
+	val drawerState = rememberDrawerState(DrawerValue.Closed)
+	val componentState = rememberDiaryComponentState()
+	val buddyBottomSheetState = rememberBuddyBottomSheetState()
 
-    return remember {
-        BuddyDetailScreenState.Detail(
-            onCalendar = onCalendar,
-            coroutineScope = coroutineScope,
-            drawerState = drawerState,
-            componentState = componentState,
-            buddyBottomSheetState = buddyBottomSheetState,
-        )
-    }
+	return remember {
+		BuddyDetailScreenState.Detail(
+			onTag = onTag,
+			onCalendar = onCalendar,
+			coroutineScope = coroutineScope,
+			drawerState = drawerState,
+			componentState = componentState,
+			buddyBottomSheetState = buddyBottomSheetState,
+		)
+	}
 }

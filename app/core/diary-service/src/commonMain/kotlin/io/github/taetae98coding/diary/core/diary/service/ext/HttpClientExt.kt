@@ -8,18 +8,29 @@ import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.isSuccess
 
-internal suspend inline fun <reified T> HttpResponse.getOrThrow(): T = try {
-	if (status.isSuccess()) {
+internal suspend inline fun <reified T> HttpResponse.getOrThrow(): T = if (status.isSuccess()) {
+	try {
 		val body = body<DiaryResponse<T>>()
 
 		requireNotNull(body.body)
-	} else {
-		throw when (val errorBody = body<DiaryResponse<Unit>>()) {
-			DiaryResponse.AlreadyExistEmail -> ExistEmailException()
-			DiaryResponse.AccountNotFound -> AccountNotFoundException()
-			else -> ApiException(message = errorBody.message)
-		}
+	} catch (throwable: Throwable) {
+		throw wrapApiException(throwable = throwable)
 	}
-} catch (e: Throwable) {
-	throw ApiException(message = "Unknown error", cause = e)
+} else {
+	val errorBody = try {
+		body<DiaryResponse<Unit>>()
+	} catch (throwable: Throwable) {
+		throw wrapApiException(throwable = throwable)
+	}
+
+	throw when (errorBody) {
+		DiaryResponse.AlreadyExistEmail -> throw ExistEmailException()
+		DiaryResponse.AccountNotFound -> throw AccountNotFoundException()
+		else -> throw ApiException(message = errorBody.message)
+	}
 }
+
+private fun wrapApiException(
+	message: String = "Unknown error",
+	throwable: Throwable,
+): ApiException = ApiException(message = message, cause = throwable)

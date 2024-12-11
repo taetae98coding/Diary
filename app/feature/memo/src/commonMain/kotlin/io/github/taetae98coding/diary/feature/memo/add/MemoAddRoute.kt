@@ -8,7 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.taetae98coding.diary.core.compose.button.FloatingAddButton
-import io.github.taetae98coding.diary.core.compose.memo.MemoListDetailPaneScaffold
+import io.github.taetae98coding.diary.core.compose.memo.MemoDetailMultiPaneScaffold
 import io.github.taetae98coding.diary.core.compose.memo.add.rememberMemoDetailScaffoldAddState
 import io.github.taetae98coding.diary.core.compose.topbar.TopBarTitle
 import org.koin.compose.viewmodel.koinViewModel
@@ -16,36 +16,36 @@ import org.koin.compose.viewmodel.koinViewModel
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 internal fun MemoAddRoute(
-    navigateUp: () -> Unit,
-    navigateToTagAdd: () -> Unit,
-    navigateToTagDetail: (String) -> Unit,
-    modifier: Modifier = Modifier,
-    addViewModel: MemoAddViewModel = koinViewModel(),
+	navigateUp: () -> Unit,
+	navigateToTagAdd: () -> Unit,
+	navigateToTagDetail: (String) -> Unit,
+	modifier: Modifier = Modifier,
+	addViewModel: MemoAddViewModel = koinViewModel(),
 ) {
-    val detailScaffoldState = rememberMemoDetailScaffoldAddState(
-        initialStart = addViewModel.route.start,
-        initialEndInclusive = addViewModel.route.endInclusive,
-    )
-    val detailUiState by addViewModel.uiState.collectAsStateWithLifecycle()
-    val primaryTagList by addViewModel.primaryTagList.collectAsStateWithLifecycle()
-    val tagList by addViewModel.tagList.collectAsStateWithLifecycle()
+	val detailScaffoldState = rememberMemoDetailScaffoldAddState(
+		initialStart = addViewModel.route.start,
+		initialEndInclusive = addViewModel.route.endInclusive,
+	)
+	val detailUiState by addViewModel.uiState.collectAsStateWithLifecycle()
+	val primaryTagList by addViewModel.primaryTagList.collectAsStateWithLifecycle()
+	val tagList by addViewModel.tagList.collectAsStateWithLifecycle()
 
-    MemoListDetailPaneScaffold(
-        onNavigateUp = navigateUp,
-        onDetailTag = navigateToTagDetail,
-        detailScaffoldStateProvider = { detailScaffoldState },
-        detailUiStateProvider = { detailUiState },
-        detailTagListProvider = { primaryTagList },
-        detailTitle = { TopBarTitle(text = "메모 추가") },
-        onTagAdd = navigateToTagAdd,
-        tagListProvider = { tagList },
-        detailFloatingActionButton = {
-            val isProgress by remember { derivedStateOf { detailUiState.isProgress } }
+	MemoDetailMultiPaneScaffold(
+		onNavigateUp = navigateUp,
+		onDetailTag = navigateToTagDetail,
+		detailScaffoldStateProvider = { detailScaffoldState },
+		detailUiStateProvider = { detailUiState },
+		detailTagListProvider = { primaryTagList },
+		detailTitle = { TopBarTitle(text = "메모 추가") },
+		onTagAdd = navigateToTagAdd,
+		tagListProvider = { tagList },
+		detailFloatingActionButton = {
+			val isProgress by remember { derivedStateOf { detailUiState.isProgress } }
 
-            FloatingAddButton(
-                onClick = { addViewModel.add(detailScaffoldState.detail) },
-                progressProvider = { isProgress },
-            )
-        },
-    )
+			FloatingAddButton(
+				onClick = { addViewModel.add(detailScaffoldState.detail) },
+				progressProvider = { isProgress },
+			)
+		},
+	)
 }

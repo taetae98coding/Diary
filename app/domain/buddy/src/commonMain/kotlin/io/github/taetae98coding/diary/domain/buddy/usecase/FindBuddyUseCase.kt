@@ -15,21 +15,21 @@ import org.koin.core.annotation.Factory
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
 public class FindBuddyUseCase internal constructor(
-    private val getAccountUseCase: GetAccountUseCase,
-    private val repository: BuddyRepository,
+	private val getAccountUseCase: GetAccountUseCase,
+	private val repository: BuddyRepository,
 ) {
-    public operator fun invoke(email: String?): Flow<Result<List<Buddy>>> {
-        if (email.isNullOrBlank()) return flowOf(Result.success(emptyList()))
+	public operator fun invoke(email: String?): Flow<Result<List<Buddy>>> {
+		if (email.isNullOrBlank()) return flowOf(Result.success(emptyList()))
 
-        return getAccountUseCase().mapLatest { it.getOrThrow() }
-            .flatMapLatest { account ->
-                if (account is Guest) {
-                    flowOf(emptyList())
-                } else {
-                    repository.findBuddyByEmail(email)
-                }
-            }
-            .mapLatest { Result.success(it) }
-            .catch { emit(Result.failure(it)) }
-    }
+		return getAccountUseCase()
+			.mapLatest { it.getOrThrow() }
+			.flatMapLatest { account ->
+				if (account is Guest) {
+					flowOf(emptyList())
+				} else {
+					repository.findBuddyByEmail(email)
+				}
+			}.mapLatest { Result.success(it) }
+			.catch { emit(Result.failure(it)) }
+	}
 }

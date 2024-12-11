@@ -39,6 +39,6 @@ internal class FCMRepositoryImpl : FCMRepository {
 				.build()
 		}
 
-		FirebaseMessaging.getInstance().sendEach(messageList)
+		FirebaseMessaging.getInstance().sendEachAsync(messageList)
 	}
 }

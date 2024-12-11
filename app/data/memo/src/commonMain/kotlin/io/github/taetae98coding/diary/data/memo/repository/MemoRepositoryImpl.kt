@@ -1,6 +1,8 @@
 package io.github.taetae98coding.diary.data.memo.repository
 
+import io.github.taetae98coding.diary.core.diary.database.MemoBuddyGroupDao
 import io.github.taetae98coding.diary.core.diary.database.MemoDao
+import io.github.taetae98coding.diary.core.diary.service.memo.MemoService
 import io.github.taetae98coding.diary.core.model.mapper.toDto
 import io.github.taetae98coding.diary.core.model.mapper.toMemo
 import io.github.taetae98coding.diary.core.model.memo.Memo
@@ -11,6 +13,7 @@ import io.github.taetae98coding.diary.domain.memo.repository.MemoRepository
 import io.github.taetae98coding.diary.library.coroutines.mapCollectionLatest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.datetime.LocalDate
 import org.koin.core.annotation.Factory
@@ -20,35 +23,66 @@ import kotlin.uuid.Uuid
 @OptIn(ExperimentalCoroutinesApi::class, ExperimentalUuidApi::class)
 @Factory
 internal class MemoRepositoryImpl(
-	private val localDataSource: MemoDao,
+	private val memoLocalDataSource: MemoDao,
+	private val memoBuddyGroupLocalDataSource: MemoBuddyGroupDao,
+	private val memoRemoteDataSource: MemoService,
 ) : MemoRepository {
+	override suspend fun fetch(memoId: String) {
+	}
+
 	override suspend fun upsert(memo: Memo, tagIds: Set<String>) {
-		localDataSource.upsert(MemoAndTagIds(memo.toDto(), tagIds))
+		memoLocalDataSource.upsert(MemoAndTagIds(memo.toDto(), tagIds))
 	}
 
 	override suspend fun update(memoId: String, detail: MemoDetail) {
-		localDataSource.update(memoId, detail)
+		if (memoBuddyGroupLocalDataSource.isBuddyGroupMemo(memoId).first()) {
+			try {
+				memoRemoteDataSource.update(memoId, detail)
+				memoLocalDataSource.update(memoId, detail)
+			} catch (throwable: Throwable) {
+				memoLocalDataSource.update(memoId, detail)
+				throw throwable
+			}
+		} else {
+			memoLocalDataSource.update(memoId, detail)
+		}
 	}
 
 	override suspend fun updatePrimaryTag(memoId: String, tagId: String?) {
-		localDataSource.updatePrimaryTag(memoId, tagId)
+		memoLocalDataSource.updatePrimaryTag(memoId, tagId)
 	}
 
 	override suspend fun updateFinish(memoId: String, isFinish: Boolean) {
-		localDataSource.updateFinish(memoId, isFinish)
+		memoLocalDataSource.updateFinish(memoId, isFinish)
+		if (memoBuddyGroupLocalDataSource.isBuddyGroupMemo(memoId).first()) {
+			try {
+				memoRemoteDataSource.updateFinish(memoId, isFinish)
+			} catch (throwable: Throwable) {
+				memoLocalDataSource.updateFinish(memoId, !isFinish)
+				throw throwable
+			}
+		}
 	}
 
 	override suspend fun updateDelete(memoId: String, isDelete: Boolean) {
-		localDataSource.updateDelete(memoId, isDelete)
+		memoLocalDataSource.updateDelete(memoId, isDelete)
+		if (memoBuddyGroupLocalDataSource.isBuddyGroupMemo(memoId).first()) {
+			try {
+				memoRemoteDataSource.updateDelete(memoId, isDelete)
+			} catch (throwable: Throwable) {
+				memoLocalDataSource.updateDelete(memoId, !isDelete)
+				throw throwable
+			}
+		}
 	}
 
 	override fun getById(memoId: String): Flow<Memo?> =
-		localDataSource
+		memoLocalDataSource
 			.getById(memoId)
 			.mapLatest { it?.toMemo() }
 
 	override fun findByDateRange(owner: String?, dateRange: ClosedRange<LocalDate>, tagFilter: Set<String>): Flow<List<Memo>> =
-		localDataSource
+		memoLocalDataSource
 			.findByDateRange(owner, dateRange, tagFilter)
 			.mapCollectionLatest(MemoDto::toMemo)
 

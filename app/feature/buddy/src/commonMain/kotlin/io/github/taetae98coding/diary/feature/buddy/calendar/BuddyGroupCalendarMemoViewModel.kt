@@ -26,45 +26,45 @@ import org.koin.android.annotation.KoinViewModel
 @OptIn(ExperimentalCoroutinesApi::class)
 @KoinViewModel
 internal class BuddyGroupCalendarMemoViewModel(
-    savedStateHandle: SavedStateHandle,
-    private val pageBuddyGroupCalendarMemo: PageBuddyGroupCalendarMemo,
+	savedStateHandle: SavedStateHandle,
+	private val pageBuddyGroupCalendarMemo: PageBuddyGroupCalendarMemo,
 ) : ViewModel() {
-    private val route = savedStateHandle.toRoute<BuddyGroupCalendarDestination>()
-    private val yearAndMonth = MutableStateFlow<Pair<Int, Month>?>(null)
+	private val route = savedStateHandle.toRoute<BuddyGroupCalendarDestination>()
+	private val yearAndMonth = MutableStateFlow<Pair<Int, Month>?>(null)
 
-    private val refreshCount = MutableStateFlow(0)
+	private val refreshCount = MutableStateFlow(0)
 
-    val memoList = yearAndMonth
-        .filterNotNull()
-        .mapLatest { (year, month) -> LocalDate(year, month, 1) }
-        .mapLatest { it.minus(3, DateTimeUnit.MONTH)..it.plus(3, DateTimeUnit.MONTH) }
-        .flatMapLatest { dateRange ->
-            refreshCount.flatMapLatest {
-                pageBuddyGroupCalendarMemo(route.groupId, dateRange)
-            }
-        }
-        .mapLatest { it.getOrNull().orEmpty() }
-        .mapCollectionLatest {
-            CalendarItemUiState.Text(
-                key = MemoKey(it.id),
-                text = it.detail.title,
-                color = it.detail.color,
-                start = requireNotNull(it.detail.start),
-                endInclusive = requireNotNull(it.detail.endInclusive),
-            )
-        }.stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = emptyList(),
-        )
+	val memoList = yearAndMonth
+		.filterNotNull()
+		.mapLatest { (year, month) -> LocalDate(year, month, 1) }
+		.mapLatest { it.minus(3, DateTimeUnit.MONTH)..it.plus(3, DateTimeUnit.MONTH) }
+		.flatMapLatest { dateRange ->
+			refreshCount.flatMapLatest {
+				pageBuddyGroupCalendarMemo(route.groupId, dateRange)
+			}
+		}.mapLatest { it.getOrNull() }
+		.filterNotNull()
+		.mapCollectionLatest {
+			CalendarItemUiState.Text(
+				key = MemoKey(it.id),
+				text = it.detail.title,
+				color = it.detail.color,
+				start = requireNotNull(it.detail.start),
+				endInclusive = requireNotNull(it.detail.endInclusive),
+			)
+		}.stateIn(
+			scope = viewModelScope,
+			started = SharingStarted.WhileSubscribed(5_000),
+			initialValue = emptyList(),
+		)
 
-    fun fetchMemo(year: Int, month: Month) {
-        viewModelScope.launch {
-            yearAndMonth.emit(year to month)
-        }
-    }
+	fun fetchMemo(year: Int, month: Month) {
+		viewModelScope.launch {
+			yearAndMonth.emit(year to month)
+		}
+	}
 
-    fun refresh() {
-        refreshCount.value++
-    }
+	fun refresh() {
+		refreshCount.value++
+	}
 }

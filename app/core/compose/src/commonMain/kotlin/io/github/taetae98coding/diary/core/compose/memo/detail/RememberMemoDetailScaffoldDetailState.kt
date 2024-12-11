@@ -11,36 +11,36 @@ import io.github.taetae98coding.diary.core.model.memo.MemoDetail
 
 @Composable
 public fun rememberMemoDetailScaffoldDetailState(
-    onDelete: () -> Unit,
-    onUpdate: () -> Unit,
-    detailProvider: () -> MemoDetail?,
+	onDelete: () -> Unit,
+	onUpdate: () -> Unit,
+	detailProvider: () -> MemoDetail?,
 ): MemoDetailScaffoldState.Detail {
-    val detail = detailProvider()
+	val detail = detailProvider()
 
-    val coroutineScope = rememberCoroutineScope()
-    val componentState = rememberDiaryComponentState(
-        inputs = arrayOf(detail?.title, detail?.description),
-        initialTitle = detail?.title.orEmpty(),
-        initialDescription = detail?.description.orEmpty(),
-    )
-    val dateState = rememberDiaryDateState(
-        inputs = arrayOf(detail?.start, detail?.endInclusive),
-        initialStart = detail?.start,
-        initialEndInclusive = detail?.endInclusive,
-    )
-    val colorState = rememberDiaryColorState(
-        inputs = arrayOf(detail?.color),
-        initialColor = detail?.color?.let { Color(it) } ?: Color.Unspecified,
-    )
+	val coroutineScope = rememberCoroutineScope()
+	val componentState = rememberDiaryComponentState(
+		inputs = arrayOf(detail?.title, detail?.description),
+		initialTitle = detail?.title.orEmpty(),
+		initialDescription = detail?.description.orEmpty(),
+	)
+	val dateState = rememberDiaryDateState(
+		inputs = arrayOf(detail?.start, detail?.endInclusive),
+		initialStart = detail?.start,
+		initialEndInclusive = detail?.endInclusive,
+	)
+	val colorState = rememberDiaryColorState(
+		inputs = arrayOf(detail?.color),
+		initialColor = detail?.color?.let { Color(it) } ?: Color.Unspecified,
+	)
 
-    return remember(coroutineScope, componentState, dateState, colorState) {
-        MemoDetailScaffoldState.Detail(
-            onDelete = onDelete,
-            onUpdate = onUpdate,
-            coroutineScope = coroutineScope,
-            componentState = componentState,
-            dateState = dateState,
-            colorState = colorState,
-        )
-    }
+	return remember(coroutineScope, componentState, dateState, colorState) {
+		MemoDetailScaffoldState.Detail(
+			onDelete = onDelete,
+			onUpdate = onUpdate,
+			coroutineScope = coroutineScope,
+			componentState = componentState,
+			dateState = dateState,
+			colorState = colorState,
+		)
+	}
 }

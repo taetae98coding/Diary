@@ -6,6 +6,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.LocalDate
 
 public interface MemoRepository {
+	public suspend fun fetch(memoId: String)
+
 	public suspend fun upsert(memo: Memo, tagIds: Set<String>)
 
 	public suspend fun update(memoId: String, detail: MemoDetail)

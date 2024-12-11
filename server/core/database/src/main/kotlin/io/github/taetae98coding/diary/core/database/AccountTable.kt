@@ -45,6 +45,13 @@ public data object AccountTable : IdTable<String>(name = "Account") {
 			}
 		}.map { it.toAccount() }
 
+    public fun findByUid(uid: String): Account? {
+        return selectAll()
+            .where { UID eq uid }
+            .singleOrNull()
+            ?.toAccount()
+    }
+
 	private fun ResultRow.toAccount(): Account =
 		Account(
 			email = get(EMAIL),
