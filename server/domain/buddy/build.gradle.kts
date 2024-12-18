@@ -4,4 +4,5 @@ plugins {
 
 dependencies {
     implementation(project(":server:domain:fcm"))
+    implementation(project(":server:domain:account"))
 }

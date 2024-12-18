@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.2] - 2024-12-18
+
+### 🚀 Features
+
+- App - BuddyGroupMemo Detail update, finish, delete
+- Android - multi instance
+
+### 🐛 Bug Fixes
+
+- App - MemoDetailRoute Finish, Delete Button
+- App - MemoDetail Update
+- Server - filter not fcm requester
+
 ## [1.3.1] - 2024-12-10
 
 ### 🚀 Features

@@ -10,7 +10,7 @@ kotlinx-coroutines = "1.9.0"                # https://github.com/Kotlin/kotlinx.
 kotlinx-datetime = "0.6.1"                  # https://github.com/Kotlin/kotlinx-datetime/releases
 
 ### multiplatform
-    compose = "1.7.1"                           # https://github.com/JetBrains/compose-multiplatform/releases
+compose = "1.7.1"                           # https://github.com/JetBrains/compose-multiplatform/releases
 compose-material3-adaptive = "1.0.1"
 navigation = "2.8.0-alpha10"
 lifecycle = "2.8.4"
@@ -21,8 +21,8 @@ compose-markdown = "0.27.0"                 # https://github.com/mikepenz/multip
 koin = "4.1.0-Beta1"                        # https://github.com/InsertKoinIO/koin/releases
 koin-annotations = "2.0.0-Beta2"            # https://github.com/InsertKoinIO/koin-annotations/releases
 datastore = "1.1.1"                         # https://developer.android.com/jetpack/androidx/releases/datastore?hl=en
-room = "2.7.0-alpha11"                      # https://developer.android.com/jetpack/androidx/releases/room?hl=en
-sqlite = "2.5.0-alpha11"                    # https://developer.android.com/jetpack/androidx/releases/sqlite?hl=en
+room = "2.7.0-alpha12"                      # https://developer.android.com/jetpack/androidx/releases/room?hl=en
+sqlite = "2.5.0-alpha12"                    # https://developer.android.com/jetpack/androidx/releases/sqlite?hl=en
 
 kotest = "6.0.0.M1"                         # https://github.com/kotest/kotest/releases
 mockk = "1.13.13"                           # https://github.com/mockk/mockk/releases
@@ -36,6 +36,9 @@ android-firebase-bom = "33.7.0"             # https://firebase.google.com/suppor
 android-firebase-crashlytics-plugin = "3.0.2"
 android-firebase-perf-plugin = "1.4.2"
 google-services = "4.4.2"
+
+test-core = "1.6.1"                         # https://developer.android.com/jetpack/androidx/releases/test?hl=en
+roboletric = "4.14.1"                       # https://github.com/robolectric/robolectric/releases
 
 leakcanary = "2.14"                         # https://github.com/square/leakcanary/releases
 
@@ -87,6 +90,7 @@ datastore-preferences = { group = "androidx.datastore", name = "datastore-prefer
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 sqlite-bundled = { group = "androidx.sqlite", name = "sqlite-bundled", version.ref = "sqlite" }
+room-testing = { group = "androidx.room", name = "room-testing", version.ref = "room" }
 
 koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin" }
 koin-core = { group = "io.insert-koin", name = "koin-core" }
@@ -116,6 +120,8 @@ android-firebase-crashlytics = { group = "com.google.firebase", name = "firebase
 android-firebase-perf = { group = "com.google.firebase", name = "firebase-perf" }
 android-firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging" }
 
+test-core = { group = "androidx.test", name = "core", version.ref = "test-core" }
+roboletric = { group = "org.robolectric", name = "robolectric", version.ref = "roboletric" }
 leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakcanary" }
 
 ### ktor

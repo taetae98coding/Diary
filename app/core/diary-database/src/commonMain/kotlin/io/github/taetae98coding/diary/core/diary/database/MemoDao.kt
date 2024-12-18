@@ -8,6 +8,8 @@ import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 
 public interface MemoDao {
+	public suspend fun upsertMemo(dto: List<MemoDto>)
+
 	public suspend fun upsert(dto: MemoAndTagIds)
 
 	public suspend fun upsert(memoList: List<MemoAndTagIds>)

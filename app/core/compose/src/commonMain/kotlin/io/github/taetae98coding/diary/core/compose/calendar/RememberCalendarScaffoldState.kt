@@ -6,14 +6,14 @@ import io.github.taetae98coding.diary.core.calendar.compose.state.rememberCalend
 
 @Composable
 public fun rememberCalendarScaffoldState(
-    onFilter: () -> Unit,
+	onFilter: () -> Unit,
 ): CalendarScaffoldState {
-    val calendarState = rememberCalendarState()
+	val calendarState = rememberCalendarState()
 
-    return remember {
-        CalendarScaffoldState(
-            onFilter = onFilter,
-            calendarState = calendarState,
-        )
-    }
+	return remember {
+		CalendarScaffoldState(
+			onFilter = onFilter,
+			calendarState = calendarState,
+		)
+	}
 }

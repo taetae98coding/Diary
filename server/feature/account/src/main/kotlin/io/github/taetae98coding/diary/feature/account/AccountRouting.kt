@@ -14,6 +14,7 @@ import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.post
 import io.ktor.server.routing.route
+import kotlinx.coroutines.flow.first
 import org.koin.ktor.plugin.scope
 
 public fun Route.accountRouting() {
@@ -34,7 +35,7 @@ public fun Route.accountRouting() {
 		post<LoginRequest>("/login") { request ->
 			val useCase = call.scope.get<FindAccountUseCase>()
 
-			useCase(request.email, request.password)
+			useCase(request.email, request.password).first()
 				.onSuccess { account ->
 					if (account == null) {
 						call.respond(HttpStatusCode.NotFound, DiaryResponse.AccountNotFound)

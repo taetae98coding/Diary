@@ -4,7 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.github.taetae98coding.diary.core.compose.runtime.SkipProperty
-import io.github.taetae98coding.diary.core.compose.tag.TagCardItemUiState
+import io.github.taetae98coding.diary.core.compose.tag.card.TagCardItemUiState
 import io.github.taetae98coding.diary.core.navigation.memo.MemoDetailDestination
 import io.github.taetae98coding.diary.domain.memo.usecase.DeleteMemoPrimaryTagUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.FindMemoTagUseCase
@@ -63,7 +63,7 @@ internal class MemoDetailTagViewModel(
 	val tagList =
 		memoTagList
 			.mapCollectionLatest {
-                TagCardItemUiState(
+				TagCardItemUiState(
 					id = it.tag.id,
 					title = it.tag.detail.title,
 					isSelected = it.isSelected,

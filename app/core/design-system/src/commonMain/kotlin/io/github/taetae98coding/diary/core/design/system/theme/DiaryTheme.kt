@@ -16,9 +16,9 @@ public data object DiaryTheme {
 		@Composable
 		get() = LocalDiaryColor.current
 
-    val shape: DiaryShape
-        @Composable
-        get() = LocalDiaryShape.current
+	val shape: DiaryShape
+		@Composable
+		get() = LocalDiaryShape.current
 
 	val typography: DiaryTypography
 		@Composable
@@ -47,9 +47,9 @@ public fun DiaryTheme(
 			background = colorScheme.background,
 			onSurface = colorScheme.onSurface,
 		),
-        LocalDiaryShape provides DiaryShape(
-            large = MaterialTheme.shapes.large,
-        ),
+		LocalDiaryShape provides DiaryShape(
+			large = MaterialTheme.shapes.large,
+		),
 		LocalDiaryTypography provides DiaryTypography(
 			headlineMedium = MaterialTheme.typography.headlineMedium,
 			titleLarge = MaterialTheme.typography.titleLarge,

@@ -5,9 +5,11 @@ import androidx.room.ConstructedBy
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import io.github.taetae98coding.diary.core.diary.database.room.dao.MemoBuddyEntityDao
 import io.github.taetae98coding.diary.core.diary.database.room.dao.MemoEntityDao
 import io.github.taetae98coding.diary.core.diary.database.room.dao.MemoTagEntityDao
 import io.github.taetae98coding.diary.core.diary.database.room.dao.TagEntityDao
+import io.github.taetae98coding.diary.core.diary.database.room.entity.MemoBuddyGroupEntity
 import io.github.taetae98coding.diary.core.diary.database.room.entity.MemoEntity
 import io.github.taetae98coding.diary.core.diary.database.room.entity.MemoTagEntity
 import io.github.taetae98coding.diary.core.diary.database.room.entity.TagEntity
@@ -21,10 +23,12 @@ import io.github.taetae98coding.diary.library.room.LocalDataConverter
 		MemoEntity::class,
 		TagEntity::class,
 		MemoTagEntity::class,
+		MemoBuddyGroupEntity::class,
 	],
-	version = 2,
+	version = 3,
 	autoMigrations = [
 		AutoMigration(from = 1, to = 2, AutoMigration1To2::class),
+		AutoMigration(from = 2, to = 3),
 	],
 )
 @ConstructedBy(DiaryDatabaseConstructor::class)
@@ -38,4 +42,6 @@ internal abstract class DiaryDatabase : RoomDatabase() {
 	abstract fun tag(): TagEntityDao
 
 	abstract fun memoTag(): MemoTagEntityDao
+
+	abstract fun memoBuddyGroup(): MemoBuddyEntityDao
 }

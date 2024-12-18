@@ -9,6 +9,7 @@ kotlin {
                 implementation(project(":app:core:calendar-compose"))
 
                 implementation(project(":app:domain:account"))
+                implementation(project(":app:domain:memo"))
                 implementation(project(":app:domain:buddy"))
                 implementation(project(":app:domain:holiday"))
             }

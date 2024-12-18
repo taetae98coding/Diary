@@ -26,76 +26,78 @@ import org.koin.core.annotation.Named
 
 @Factory
 public class BuddyService internal constructor(
-    @Named(DiaryServiceModule.DIARY_CLIENT)
-    private val client: HttpClient,
+	@Named(DiaryServiceModule.DIARY_CLIENT)
+	private val client: HttpClient,
 ) {
-    public suspend fun upsert(
-        buddyGroup: BuddyGroup,
-        buddyIds: Set<String>,
-    ) {
-        client
-            .post("/buddy/group/upsert") {
-                val body = UpsertBuddyGroupRequest(
-                    buddyGroup = BuddyGroupEntity(
-                        id = buddyGroup.id,
-                        title = buddyGroup.detail.title,
-                        description = buddyGroup.detail.description,
-                    ),
-                    buddyIds = buddyIds,
-                )
+	public suspend fun upsert(
+		buddyGroup: BuddyGroup,
+		buddyIds: Set<String>,
+	) {
+		client
+			.post("/buddy/group/upsert") {
+				val body = UpsertBuddyGroupRequest(
+					buddyGroup = BuddyGroupEntity(
+						id = buddyGroup.id,
+						title = buddyGroup.detail.title,
+						description = buddyGroup.detail.description,
+					),
+					buddyIds = buddyIds,
+				)
 
-                setBody(body)
-                contentType(ContentType.Application.Json)
-            }.getOrThrow<Unit>()
-    }
+				setBody(body)
+				contentType(ContentType.Application.Json)
+			}.getOrThrow<Unit>()
+	}
 
-    public suspend fun upsert(
-        groupId: String,
-        memoAndTagIds: MemoAndTagIds,
-    ) {
-        client.post("/buddy/group/$groupId/upsertMemo") {
-            setBody(memoAndTagIds.toEntity())
-            contentType(ContentType.Application.Json)
-        }.getOrThrow<Unit>()
-    }
+	public suspend fun upsert(
+		groupId: String,
+		memoAndTagIds: MemoAndTagIds,
+	) {
+		client
+			.post("/buddy/group/$groupId/upsertMemo") {
+				setBody(memoAndTagIds.toEntity())
+				contentType(ContentType.Application.Json)
+			}.getOrThrow<Unit>()
+	}
 
-    public suspend fun findBuddyGroup(): List<BuddyGroup> {
-        val response = client.get("/buddy/group/find").getOrThrow<List<BuddyGroupEntity>>()
+	public suspend fun findBuddyGroup(): List<BuddyGroup> {
+		val response = client.get("/buddy/group/find").getOrThrow<List<BuddyGroupEntity>>()
 
-        return response.map {
-            BuddyGroup(
-                id = it.id,
-                detail = BuddyGroupDetail(
-                    title = it.title,
-                    description = it.description,
-                ),
-            )
-        }
-    }
+		return response.map {
+			BuddyGroup(
+				id = it.id,
+				detail = BuddyGroupDetail(
+					title = it.title,
+					description = it.description,
+				),
+			)
+		}
+	}
 
-    public suspend fun findBuddyByEmail(email: String): List<Buddy> {
-        val response = client
-            .get("/buddy/find") {
-                parameter("email", email)
-            }.getOrThrow<List<BuddyEntity>>()
+	public suspend fun findBuddyByEmail(email: String): List<Buddy> {
+		val response = client
+			.get("/buddy/find") {
+				parameter("email", email)
+			}.getOrThrow<List<BuddyEntity>>()
 
-        return response.map {
-            Buddy(
-                uid = it.uid,
-                email = it.email,
-            )
-        }
-    }
+		return response.map {
+			Buddy(
+				uid = it.uid,
+				email = it.email,
+			)
+		}
+	}
 
-    public suspend fun findMemoByDateRange(
-        groupId: String,
-        dateRange: ClosedRange<LocalDate>,
-    ): List<MemoDto> {
-        val response = client.get("/buddy/group/$groupId/findMemoByDateRange") {
-            parameter("start", dateRange.start)
-            parameter("endInclusive", dateRange.endInclusive)
-        }.getOrThrow<List<MemoEntity>>()
+	public suspend fun findMemoByDateRange(
+		groupId: String,
+		dateRange: ClosedRange<LocalDate>,
+	): List<MemoDto> {
+		val response = client
+			.get("/buddy/group/$groupId/findMemoByDateRange") {
+				parameter("start", dateRange.start)
+				parameter("endInclusive", dateRange.endInclusive)
+			}.getOrThrow<List<MemoEntity>>()
 
-        return response.map(MemoEntity::toDto)
-    }
+		return response.map(MemoEntity::toDto)
+	}
 }

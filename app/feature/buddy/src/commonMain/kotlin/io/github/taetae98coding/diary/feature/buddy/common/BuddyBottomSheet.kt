@@ -90,7 +90,7 @@ internal fun BuddyBottomSheet(
 					is BuddyBottomSheetUiState.NetworkError -> {
 						item(contentType = "MessageBox") {
 							MessageBox(
-								message = "네트워크 오류 🐹",
+								message = "네트워크 상태를 확인해 주세요 🐹",
 								modifier = Modifier.animateItem(),
 							)
 						}

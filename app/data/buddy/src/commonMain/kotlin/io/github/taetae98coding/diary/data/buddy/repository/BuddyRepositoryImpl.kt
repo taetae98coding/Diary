@@ -1,5 +1,7 @@
 package io.github.taetae98coding.diary.data.buddy.repository
 
+import io.github.taetae98coding.diary.core.diary.database.MemoBuddyGroupDao
+import io.github.taetae98coding.diary.core.diary.database.MemoDao
 import io.github.taetae98coding.diary.core.diary.service.buddy.BuddyService
 import io.github.taetae98coding.diary.core.model.buddy.Buddy
 import io.github.taetae98coding.diary.core.model.buddy.BuddyGroup
@@ -19,10 +21,12 @@ import kotlin.uuid.Uuid
 @OptIn(ExperimentalUuidApi::class)
 @Factory
 internal class BuddyRepositoryImpl(
-	private val remoteDataSource: BuddyService,
+	private val memoLocalDataSource: MemoDao,
+	private val memoBuddyGroupLocalDataSource: MemoBuddyGroupDao,
+	private val buddyRemoteDataSource: BuddyService,
 ) : BuddyRepository {
 	override suspend fun upsert(buddyGroup: BuddyGroup, buddyIds: Set<String>) {
-		remoteDataSource.upsert(buddyGroup, buddyIds)
+		buddyRemoteDataSource.upsert(buddyGroup, buddyIds)
 	}
 
 	override suspend fun upsert(
@@ -30,19 +34,21 @@ internal class BuddyRepositoryImpl(
 		memo: Memo,
 		tagIds: Set<String>,
 	) {
-		remoteDataSource.upsert(groupId, MemoAndTagIds(memo.toDto(), tagIds))
+		buddyRemoteDataSource.upsert(groupId, MemoAndTagIds(memo.toDto(), tagIds))
 	}
 
 	override fun findMemoByDateRange(groupId: String, dateRange: ClosedRange<LocalDate>): Flow<List<Memo>> = flow {
-		remoteDataSource
+		buddyRemoteDataSource
 			.findMemoByDateRange(groupId, dateRange)
+			.also { memoLocalDataSource.upsertMemo(it) }
+			.also { memoBuddyGroupLocalDataSource.upsert(it.map(MemoDto::id).toSet(), groupId) }
 			.map(MemoDto::toMemo)
 			.also { emit(it) }
 	}
 
-	override fun findBuddyGroup(): Flow<List<BuddyGroup>> = flow { emit(remoteDataSource.findBuddyGroup()) }
+	override fun findBuddyGroup(): Flow<List<BuddyGroup>> = flow { emit(buddyRemoteDataSource.findBuddyGroup()) }
 
-	override fun findBuddyByEmail(email: String): Flow<List<Buddy>> = flow { emit(remoteDataSource.findBuddyByEmail(email)) }
+	override fun findBuddyByEmail(email: String): Flow<List<Buddy>> = flow { emit(buddyRemoteDataSource.findBuddyByEmail(email)) }
 
 	override suspend fun getNextBuddyGroupId(): String = Uuid.random().toString()
 

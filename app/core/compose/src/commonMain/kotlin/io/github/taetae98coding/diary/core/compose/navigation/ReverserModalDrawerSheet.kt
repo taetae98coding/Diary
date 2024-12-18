@@ -15,21 +15,21 @@ import io.github.taetae98coding.diary.core.design.system.theme.DiaryTheme
 
 @Composable
 public fun ReverseModalDrawerSheet(
-    modifier: Modifier = Modifier,
-    drawerShape: Shape = DiaryTheme.shape.large.start(),
-    drawerContainerColor: Color = DrawerDefaults.modalContainerColor,
-    drawerContentColor: Color = contentColorFor(drawerContainerColor),
-    drawerTonalElevation: Dp = DrawerDefaults.ModalDrawerElevation,
-    windowInsets: WindowInsets = DrawerDefaults.windowInsets,
-    content: @Composable ColumnScope.() -> Unit
+	modifier: Modifier = Modifier,
+	drawerShape: Shape = DiaryTheme.shape.large.start(),
+	drawerContainerColor: Color = DrawerDefaults.modalContainerColor,
+	drawerContentColor: Color = contentColorFor(drawerContainerColor),
+	drawerTonalElevation: Dp = DrawerDefaults.ModalDrawerElevation,
+	windowInsets: WindowInsets = DrawerDefaults.windowInsets,
+	content: @Composable ColumnScope.() -> Unit,
 ) {
-    ModalDrawerSheet(
-        modifier = modifier,
-        drawerShape = drawerShape,
-        drawerContainerColor = drawerContainerColor,
-        drawerContentColor = drawerContentColor,
-        drawerTonalElevation = drawerTonalElevation,
-        windowInsets = windowInsets,
-        content = content
-    )
+	ModalDrawerSheet(
+		modifier = modifier,
+		drawerShape = drawerShape,
+		drawerContainerColor = drawerContainerColor,
+		drawerContentColor = drawerContentColor,
+		drawerTonalElevation = drawerTonalElevation,
+		windowInsets = windowInsets,
+		content = content,
+	)
 }

@@ -15,7 +15,9 @@ import kotlinx.coroutines.flow.flowOf
 
 class FindMemoUseCaseTest : BehaviorSpec() {
 	private val memoRepository = mockk<MemoRepository>()
-	private val useCase = FindMemoUseCase(repository = memoRepository)
+	private val useCase = FindMemoUseCase(
+		memoRepository = memoRepository,
+	)
 
 	init {
 		Given("memoId is null") {
