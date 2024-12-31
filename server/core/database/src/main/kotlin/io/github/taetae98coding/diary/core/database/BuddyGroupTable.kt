@@ -12,7 +12,7 @@ public data object BuddyGroupTable : IdTable<String>("BuddyGroup") {
 	private val TITLE = varchar("title", 255).default("")
 	private val DESCRIPTION = text("description")
 
-    override val id: Column<EntityID<String>> = ID.entityId()
+	override val id: Column<EntityID<String>> = ID.entityId()
 	override val primaryKey: PrimaryKey = PrimaryKey(id)
 
 	public fun findByIds(ids: Set<String>): List<BuddyGroup> = selectAll()

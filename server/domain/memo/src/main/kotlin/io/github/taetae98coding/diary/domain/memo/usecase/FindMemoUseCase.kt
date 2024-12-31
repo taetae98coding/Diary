@@ -14,14 +14,14 @@ import org.koin.core.annotation.Factory
 @OptIn(ExperimentalCoroutinesApi::class)
 @Factory
 public class FindMemoUseCase internal constructor(
-    private val repository: MemoRepository,
+	private val repository: MemoRepository,
 ) {
-    public operator fun invoke(id: String?): Flow<Result<Memo?>> {
-        // TODO permission check
-        if (id.isNullOrBlank()) return flowOf(Result.success(null))
+	public operator fun invoke(id: String?): Flow<Result<Memo?>> {
+		// TODO permission check
+		if (id.isNullOrBlank()) return flowOf(Result.success(null))
 
-        return flow { emitAll(repository.findById(id)) }
-            .mapLatest { Result.success(it) }
-            .catch { emit(Result.failure(it)) }
-    }
+		return flow { emitAll(repository.findById(id)) }
+			.mapLatest { Result.success(it) }
+			.catch { emit(Result.failure(it)) }
+	}
 }

@@ -10,14 +10,14 @@ import org.koin.core.annotation.Factory
 
 @Factory
 internal class MemoBuddyRepositoryImpl : MemoBuddyRepository {
-    override fun findBuddyIdByMemoId(memoId: String): Flow<List<String>> {
-        return flow {
-            newSuspendedTransaction<List<String>> {
-                val groupId = MemoBuddyGroupTable.findGroupIdsByMemoId(memoId) ?: return@newSuspendedTransaction emptyList()
-                BuddyGroupAccountRelation.findBuddyIdByGroupId(groupId)
-            }.also {
-                emit(it)
-            }
-        }
-    }
+	override fun findBuddyIdByMemoId(memoId: String): Flow<List<String>> {
+		return flow {
+			newSuspendedTransaction<List<String>> {
+				val groupId = MemoBuddyGroupTable.findGroupIdsByMemoId(memoId) ?: return@newSuspendedTransaction emptyList()
+				BuddyGroupAccountRelation.findBuddyIdByGroupId(groupId)
+			}.also {
+				emit(it)
+			}
+		}
+	}
 }

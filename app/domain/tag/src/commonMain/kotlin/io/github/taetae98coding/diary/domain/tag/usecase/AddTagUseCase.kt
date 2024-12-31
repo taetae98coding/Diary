@@ -27,13 +27,12 @@ public class AddTagUseCase internal constructor(
 			val tag = Tag(
 				id = tagId,
 				detail = detail,
-				owner = account.uid,
 				isFinish = false,
 				isDelete = false,
 				updateAt = clock.now(),
 			)
 
-			repository.upsert(tag)
+			repository.upsert(account.uid, tag)
 			pushTagBackupQueueUseCase(tagId)
 		}
 }

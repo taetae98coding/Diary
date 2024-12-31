@@ -27,7 +27,6 @@ import io.github.taetae98coding.diary.core.design.system.icon.NavigateUpIcon
 import io.github.taetae98coding.diary.core.design.system.theme.DiaryTheme
 import io.github.taetae98coding.diary.feature.account.common.BasePasswordTextField
 import io.github.taetae98coding.diary.feature.account.common.BottomBarButton
-import io.github.taetae98coding.diary.feature.account.common.BottomBarButtonContent
 import io.github.taetae98coding.diary.feature.account.common.EmailTextField
 import io.github.taetae98coding.diary.feature.account.join.state.JoinScreenButtonUiState
 import io.github.taetae98coding.diary.feature.account.join.state.JoinScreenState
@@ -100,31 +99,47 @@ private fun JoinButtonContent(
 	uiState: JoinScreenButtonUiState,
 	modifier: Modifier = Modifier,
 ) {
-	BottomBarButtonContent(modifier = modifier) {
-		when (uiState) {
-			JoinScreenButtonUiState.JoinEnable -> {
-				Text(text = "회원가입")
-			}
+	when (uiState) {
+		JoinScreenButtonUiState.JoinEnable -> {
+			Text(
+				text = "회원가입",
+				modifier = modifier,
+			)
+		}
 
-			JoinScreenButtonUiState.EmailBlank -> {
-				Text(text = "이메일을 입력해 주세요 🐮")
-			}
+		JoinScreenButtonUiState.EmailBlank -> {
+			Text(
+				text = "이메일을 입력해 주세요 🐮",
+				modifier = modifier,
+			)
+		}
 
-			JoinScreenButtonUiState.PasswordBlank -> {
-				Text(text = "비밀번호를 입력해 주세요 🦁")
-			}
+		JoinScreenButtonUiState.PasswordBlank -> {
+			Text(
+				text = "비밀번호를 입력해 주세요 🦁",
+				modifier = modifier,
+			)
+		}
 
-			JoinScreenButtonUiState.InvalidEmail -> {
-				Text(text = "이메일 형식을 지켜주세요 🐯")
-			}
+		JoinScreenButtonUiState.InvalidEmail -> {
+			Text(
+				text = "이메일 형식을 지켜주세요 🐯",
+				modifier = modifier,
+			)
+		}
 
-			JoinScreenButtonUiState.PasswordDifferent -> {
-				Text(text = "입력된 패스워드가 달라요 🐨")
-			}
+		JoinScreenButtonUiState.PasswordDifferent -> {
+			Text(
+				text = "입력된 패스워드가 달라요 🐨",
+				modifier = modifier,
+			)
+		}
 
-			JoinScreenButtonUiState.Progress -> {
-				CircularProgressIndicator(color = LocalContentColor.current)
-			}
+		JoinScreenButtonUiState.Progress -> {
+			CircularProgressIndicator(
+				modifier = modifier,
+				color = LocalContentColor.current,
+			)
 		}
 	}
 }

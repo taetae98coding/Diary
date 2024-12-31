@@ -10,13 +10,12 @@ import io.github.taetae98coding.diary.core.compose.adaptive.isListVisible
 import io.github.taetae98coding.diary.core.navigation.buddy.BuddyDestination
 import io.github.taetae98coding.diary.core.navigation.buddy.BuddyGroupCalendarDestination
 import io.github.taetae98coding.diary.core.navigation.buddy.BuddyGroupMemoAddDestination
-import io.github.taetae98coding.diary.core.navigation.buddy.BuddyGroupMemoDetailDestination
 import io.github.taetae98coding.diary.core.navigation.buddy.BuddyHomeDestination
 import io.github.taetae98coding.diary.core.navigation.buddy.BuddyTagHomeDestination
+import io.github.taetae98coding.diary.core.navigation.memo.MemoDetailDestination
 import io.github.taetae98coding.diary.feature.buddy.calendar.BuddyGroupCalendarRoute
 import io.github.taetae98coding.diary.feature.buddy.home.BuddyHomeRoute
 import io.github.taetae98coding.diary.feature.buddy.memo.add.BuddyGroupMemoAddRoute
-import io.github.taetae98coding.diary.feature.buddy.memo.detail.BuddyGroupMemoDetailRoute
 import io.github.taetae98coding.diary.feature.buddy.tag.BuddyTagHomeRoute
 import io.github.taetae98coding.diary.library.navigation.LocalDateNavType
 import kotlinx.datetime.LocalDate
@@ -37,13 +36,19 @@ public fun NavGraphBuilder.buddyNavigation(
 			)
 		}
 
-		composable<BuddyGroupCalendarDestination> {
-			val route = it.toRoute<BuddyGroupCalendarDestination>()
-
+		composable<BuddyGroupCalendarDestination> { backStackEntry ->
 			BuddyGroupCalendarRoute(
 				navigateUp = navController::popBackStack,
-				navigateToBuddyGroupMemoAdd = { navController.navigate(BuddyGroupMemoAddDestination(route.groupId, it.start, it.endInclusive)) },
-				navigateToBuddyGroupMemoDetail = { navController.navigate(BuddyGroupMemoDetailDestination(it)) },
+				navigateToBuddyGroupMemoAdd = {
+					navController.navigate(
+						BuddyGroupMemoAddDestination(
+							groupId = backStackEntry.toRoute<BuddyGroupCalendarDestination>().groupId,
+							start = it.start,
+							endInclusive = it.endInclusive,
+						),
+					)
+				},
+				navigateToBuddyGroupMemoDetail = { navController.navigate(MemoDetailDestination(it)) },
 			)
 		}
 
@@ -55,15 +60,18 @@ public fun NavGraphBuilder.buddyNavigation(
 			)
 		}
 
-		composable<BuddyGroupMemoDetailDestination> {
-			BuddyGroupMemoDetailRoute(
-				navigateUp = navController::popBackStack,
-			)
-		}
-
-		composable<BuddyTagHomeDestination> {
+		composable<BuddyTagHomeDestination> { backStackEntry ->
 			BuddyTagHomeRoute(
 				navigateUp = navController::popBackStack,
+				navigateToMemoAdd = {
+					navController.navigate(
+						BuddyGroupMemoAddDestination(
+							groupId = backStackEntry.toRoute<BuddyTagHomeDestination>().groupId,
+							selectedTag = it,
+						),
+					)
+				},
+				navigateToMemoDetail = { navController.navigate(MemoDetailDestination(it)) },
 			)
 		}
 	}

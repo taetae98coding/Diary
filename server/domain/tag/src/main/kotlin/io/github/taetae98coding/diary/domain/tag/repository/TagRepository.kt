@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.Instant
 
 public interface TagRepository {
-	public suspend fun upsert(list: List<Tag>)
+	public suspend fun upsert(owner: String, list: List<Tag>)
 
 	public fun findByIds(ids: Set<String>): Flow<List<Tag>>
 

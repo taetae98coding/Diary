@@ -22,23 +22,21 @@ public class AddMemoUseCase internal constructor(
 		primaryTag: String?,
 		tagIds: Set<String>,
 	): Result<Unit> =
-		runCatching {
+		runCatching<Unit> {
 			if (detail.title.isBlank()) throw MemoTitleBlankException()
 
 			val memoId = repository.getNextMemoId()
 			val account = getAccountUseCase().first().getOrThrow()
-			val memo =
-				Memo(
-					id = memoId,
-					detail = detail,
-					primaryTag = primaryTag,
-					owner = account.uid,
-					isFinish = false,
-					isDelete = false,
-					updateAt = clock.now(),
-				)
+			val memo = Memo(
+				id = memoId,
+				detail = detail,
+				primaryTag = primaryTag,
+				isFinish = false,
+				isDelete = false,
+				updateAt = clock.now(),
+			)
 
-			repository.upsert(memo, tagIds)
+			repository.upsert(account.uid, memo, tagIds)
 			pushMemoBackupQueueUseCase(memoId)
 		}
 }

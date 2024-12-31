@@ -6,7 +6,6 @@ public data class Memo(
 	val id: String,
 	val detail: MemoDetail,
 	val primaryTag: String?,
-	val owner: String?,
 	val isFinish: Boolean,
 	val isDelete: Boolean,
 	val updateAt: Instant,

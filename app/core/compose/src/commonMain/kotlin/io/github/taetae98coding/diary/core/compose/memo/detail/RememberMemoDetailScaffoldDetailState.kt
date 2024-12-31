@@ -25,8 +25,7 @@ public fun rememberMemoDetailScaffoldDetailState(
 	)
 	val dateState = rememberDiaryDateState(
 		inputs = arrayOf(detail?.start, detail?.endInclusive),
-		initialStart = detail?.start,
-		initialEndInclusive = detail?.endInclusive,
+		initialDateRange = detail?.dateRange,
 	)
 	val colorState = rememberDiaryColorState(
 		inputs = arrayOf(detail?.color),

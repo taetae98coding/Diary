@@ -19,37 +19,37 @@ import org.koin.compose.viewmodel.koinViewModel
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 internal fun TagAddRoute(
-    navigateUp: () -> Unit,
-    modifier: Modifier = Modifier,
-    addViewModel: TagAddViewModel = koinViewModel(),
+	navigateUp: () -> Unit,
+	modifier: Modifier = Modifier,
+	addViewModel: TagAddViewModel = koinViewModel(),
 ) {
-    val navigator = rememberListDetailPaneScaffoldNavigator()
+	val navigator = rememberListDetailPaneScaffoldNavigator()
 
-    ListDetailPaneScaffold(
-        directive = navigator.scaffoldDirective.copy(defaultPanePreferredWidth = 500.dp),
-        value = navigator.scaffoldValue,
-        listPane = {
-            AnimatedPane {
-                val state = rememberTagDetailScaffoldAddState()
-                val uiState by addViewModel.uiState.collectAsStateWithLifecycle()
+	ListDetailPaneScaffold(
+		directive = navigator.scaffoldDirective.copy(defaultPanePreferredWidth = 500.dp),
+		value = navigator.scaffoldValue,
+		listPane = {
+			AnimatedPane {
+				val state = rememberTagDetailScaffoldAddState()
+				val uiState by addViewModel.uiState.collectAsStateWithLifecycle()
 
-                TagDetailScaffold(
-                    state = state,
-                    titleProvider = { "태그 추가" },
-                    navigationIconProvider = { TagDetailScaffoldNavigationIcon.NavigateUp(navigateUp = navigateUp) },
-                    actionsProvider = { TagDetailScaffoldActions.None },
-                    floatingButtonProvider = {
-                        TagDetailScaffoldFloatingButton.Add(
-                            isInProgress = uiState.isAddInProgress,
-                            add = { uiState.add(state.tagDetail) },
-                        )
-                    },
-                    uiStateProvider = { uiState },
-                )
-            }
-        },
-        detailPane = {
-        },
-        modifier = modifier,
-    )
+				TagDetailScaffold(
+					state = state,
+					titleProvider = { "태그 추가" },
+					navigationIconProvider = { TagDetailScaffoldNavigationIcon.NavigateUp(navigateUp = navigateUp) },
+					actionsProvider = { TagDetailScaffoldActions.None },
+					floatingButtonProvider = {
+						TagDetailScaffoldFloatingButton.Add(
+							isInProgress = uiState.isAddInProgress,
+							add = { uiState.add(state.tagDetail) },
+						)
+					},
+					uiStateProvider = { uiState },
+				)
+			}
+		},
+		detailPane = {
+		},
+		modifier = modifier,
+	)
 }

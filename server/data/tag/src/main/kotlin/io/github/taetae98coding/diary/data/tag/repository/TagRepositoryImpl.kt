@@ -1,5 +1,6 @@
 package io.github.taetae98coding.diary.data.tag.repository
 
+import io.github.taetae98coding.diary.core.database.TagAccountTable
 import io.github.taetae98coding.diary.core.database.TagTable
 import io.github.taetae98coding.diary.core.model.Tag
 import io.github.taetae98coding.diary.domain.tag.repository.TagRepository
@@ -11,9 +12,12 @@ import org.koin.core.annotation.Factory
 
 @Factory
 internal class TagRepositoryImpl : TagRepository {
-	override suspend fun upsert(list: List<Tag>) {
+	override suspend fun upsert(owner: String, list: List<Tag>) {
 		newSuspendedTransaction {
 			TagTable.upsert(list)
+			list.forEach {
+				TagAccountTable.upsert(it.id, owner)
+			}
 		}
 	}
 

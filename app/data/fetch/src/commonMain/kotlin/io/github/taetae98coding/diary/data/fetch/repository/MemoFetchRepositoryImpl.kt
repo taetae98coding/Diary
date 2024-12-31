@@ -24,7 +24,7 @@ internal class MemoFetchRepositoryImpl(
 					break
 				}
 
-				localDataSource.upsert(list)
+				localDataSource.upsert(uid, list)
 			}
 		}
 	}

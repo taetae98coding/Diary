@@ -9,24 +9,26 @@ import org.koin.core.annotation.Factory
 
 @Factory
 public class RestartMemoUseCase internal constructor(
-    private val memoRepository: MemoRepository,
-    private val memoBuddyRepository: MemoBuddyRepository,
-    private val fcmRepository: FCMRepository,
-    private val accountRepository: AccountRepository,
+	private val memoRepository: MemoRepository,
+	private val memoBuddyRepository: MemoBuddyRepository,
+	private val fcmRepository: FCMRepository,
+	private val accountRepository: AccountRepository,
 ) {
-    public suspend operator fun invoke(id: String?, requesterUid: String): Result<Unit> {
-        return runCatching {
-            // TODO permission check
-            if (id.isNullOrBlank()) return@runCatching
-            val memo = memoRepository.findById(id).first() ?: return@runCatching
-            val account = accountRepository.findByUid(requesterUid).first() ?: return@runCatching
+	public suspend operator fun invoke(id: String?, requesterUid: String): Result<Unit> {
+		return runCatching {
+			// TODO permission check
+			if (id.isNullOrBlank()) return@runCatching
+			val memo = memoRepository.findById(id).first() ?: return@runCatching
+			val account = accountRepository.findByUid(requesterUid).first() ?: return@runCatching
 
-            memoRepository.updateFinish(id, false)
-            memoBuddyRepository.findBuddyIdByMemoId(id).first()
-                .filter { it != requesterUid }
-                .forEach {
-                    fcmRepository.send(it, "그룹 메모", "'${memo.title}' 메모가 시작됐습니다. (${account.email})")
-                }
-        }
-    }
+			memoRepository.updateFinish(id, false)
+			memoBuddyRepository
+				.findBuddyIdByMemoId(id)
+				.first()
+				.filter { it != requesterUid }
+				.forEach {
+					fcmRepository.send(it, "그룹 메모", "'${memo.title}' 메모가 시작됐습니다. (${account.email})")
+				}
+		}
+	}
 }

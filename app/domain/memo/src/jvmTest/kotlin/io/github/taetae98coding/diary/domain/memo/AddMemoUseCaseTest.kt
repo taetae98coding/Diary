@@ -75,7 +75,6 @@ class AddMemoUseCaseTest : BehaviorSpec() {
 					id = memoId,
 					detail = detail,
 					primaryTag = primaryTag,
-					owner = accountUid,
 					isFinish = false,
 					isDelete = false,
 					updateAt = Instant.DISTANT_PAST,
@@ -87,7 +86,7 @@ class AddMemoUseCaseTest : BehaviorSpec() {
 
 				Then("upsert memo and backup") {
 					coVerifyOrder {
-						memoRepository.upsert(memo, tagIds)
+						memoRepository.upsert(accountUid, memo, tagIds)
 						pushMemoBackupQueueUseCase(memoId)
 					}
 				}

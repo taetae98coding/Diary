@@ -7,15 +7,11 @@ import kotlinx.datetime.LocalDate
 @Composable
 public fun rememberDiaryDateState(
 	vararg inputs: Any?,
-	initialStart: LocalDate?,
-	initialEndInclusive: LocalDate?,
+	initialDateRange: ClosedRange<LocalDate>?,
 ): DiaryDateState =
 	rememberSaveable(
 		inputs = inputs,
 		saver = DiaryDateState.saver(),
 	) {
-		DiaryDateState(
-			initialStart = initialStart,
-			initialEndInclusive = initialEndInclusive,
-		)
+		DiaryDateState(initialDateRange = initialDateRange)
 	}

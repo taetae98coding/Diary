@@ -26,100 +26,100 @@ import org.koin.android.annotation.KoinViewModel
 @OptIn(ExperimentalCoroutinesApi::class)
 @KoinViewModel
 internal class TagListViewModel(
-    pageTagUseCase: PageTagUseCase,
-    private val finishTagUseCase: FinishTagUseCase,
-    private val deleteTagUseCase: DeleteTagUseCase,
-    private val restartTagUseCase: RestartTagUseCase,
-    private val restoreTagUseCase: RestoreTagUseCase,
+	pageTagUseCase: PageTagUseCase,
+	private val finishTagUseCase: FinishTagUseCase,
+	private val deleteTagUseCase: DeleteTagUseCase,
+	private val restartTagUseCase: RestartTagUseCase,
+	private val restoreTagUseCase: RestoreTagUseCase,
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(TagListScaffoldUiState(clearState = ::clearState))
-    val uiState = _uiState.asStateFlow()
+	private val _uiState = MutableStateFlow(TagListScaffoldUiState(clearState = ::clearState))
+	val uiState = _uiState.asStateFlow()
 
-    private val refreshFlow = MutableStateFlow(0)
-    val list = refreshFlow.flatMapLatest { pageTagUseCase() }
-        .mapLatest { result ->
-            if (result.isSuccess) {
-                TagListUiState.State(
-                    list = result.getOrNull()
-                        .orEmpty()
-                        .map {
-                            TagListItemUiState(
-                                id = it.id,
-                                title = it.detail.title,
-                                finish = SkipProperty { finish(it.id) },
-                                delete = SkipProperty { delete(it.id) },
-                            )
-                        },
-                )
-            } else {
-                when (val exception = result.exceptionOrNull()) {
-                    is Exception if exception.isNetworkException() -> TagListUiState.NetworkError(::refresh)
-                    else -> TagListUiState.UnknownError(::refresh)
-                }
-            }
-        }.stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = TagListUiState.Loading,
-        )
+	private val refreshFlow = MutableStateFlow(0)
+	val list = refreshFlow.flatMapLatest { pageTagUseCase() }
+		.mapLatest { result ->
+			if (result.isSuccess) {
+				TagListUiState.State(
+					list = result.getOrNull()
+						.orEmpty()
+						.map {
+							TagListItemUiState(
+								id = it.id,
+								title = it.detail.title,
+								finish = SkipProperty { finish(it.id) },
+								delete = SkipProperty { delete(it.id) },
+							)
+						},
+				)
+			} else {
+				when (val exception = result.exceptionOrNull()) {
+					is Exception if exception.isNetworkException() -> TagListUiState.NetworkError(::refresh)
+					else -> TagListUiState.UnknownError(::refresh)
+				}
+			}
+		}.stateIn(
+			scope = viewModelScope,
+			started = SharingStarted.WhileSubscribed(5_000),
+			initialValue = TagListUiState.Loading,
+		)
 
-    private fun finish(tagId: String) {
-        viewModelScope.launch {
-            finishTagUseCase(tagId)
-                .onSuccess {
-                    _uiState.update {
-                        it.copy(
-                            isTagFinish = true,
-                            restart = SkipProperty { restart(tagId) },
-                        )
-                    }
-                }
-                .onFailure { _uiState.update { it.copy(isUnknownError = true) } }
-        }
-    }
+	private fun finish(tagId: String) {
+		viewModelScope.launch {
+			finishTagUseCase(tagId)
+				.onSuccess {
+					_uiState.update {
+						it.copy(
+							isTagFinish = true,
+							restart = SkipProperty { restart(tagId) },
+						)
+					}
+				}
+				.onFailure { _uiState.update { it.copy(isUnknownError = true) } }
+		}
+	}
 
-    private fun delete(tagId: String) {
-        viewModelScope.launch {
-            deleteTagUseCase(tagId)
-                .onSuccess {
-                    _uiState.update {
-                        it.copy(
-                            isTagDelete = true,
-                            restore = SkipProperty { restore(tagId) },
-                        )
-                    }
-                }
-                .onFailure { _uiState.update { it.copy(isUnknownError = true) } }
-        }
-    }
+	private fun delete(tagId: String) {
+		viewModelScope.launch {
+			deleteTagUseCase(tagId)
+				.onSuccess {
+					_uiState.update {
+						it.copy(
+							isTagDelete = true,
+							restore = SkipProperty { restore(tagId) },
+						)
+					}
+				}
+				.onFailure { _uiState.update { it.copy(isUnknownError = true) } }
+		}
+	}
 
-    private fun restart(id: String) {
-        viewModelScope.launch {
-            restartTagUseCase(id)
-        }
-    }
+	private fun restart(id: String) {
+		viewModelScope.launch {
+			restartTagUseCase(id)
+		}
+	}
 
-    private fun restore(id: String) {
-        viewModelScope.launch {
-            restoreTagUseCase(id)
-        }
-    }
+	private fun restore(id: String) {
+		viewModelScope.launch {
+			restoreTagUseCase(id)
+		}
+	}
 
-    private fun clearState() {
-        _uiState.update {
-            it.copy(
-                isTagFinish = false,
-                isTagDelete = false,
-                isUnknownError = false,
-                restart = SkipProperty {},
-                restore = SkipProperty {},
-            )
-        }
-    }
+	private fun clearState() {
+		_uiState.update {
+			it.copy(
+				isTagFinish = false,
+				isTagDelete = false,
+				isUnknownError = false,
+				restart = SkipProperty {},
+				restore = SkipProperty {},
+			)
+		}
+	}
 
-    private fun refresh() {
-        viewModelScope.launch {
-            refreshFlow.emit(refreshFlow.value + 1)
-        }
-    }
+	private fun refresh() {
+		viewModelScope.launch {
+			refreshFlow.emit(refreshFlow.value + 1)
+		}
+	}
 }

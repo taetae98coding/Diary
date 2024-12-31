@@ -14,39 +14,43 @@ import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 internal class TagAddViewModel(
-    private val addTagUseCase: AddTagUseCase,
+	private val addTagUseCase: AddTagUseCase,
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(
-        TagDetailScaffoldUiState.Add(
-            add = ::add,
-            clearState = ::clearState,
-        ),
-    )
-    val uiState = _uiState.asStateFlow()
+	private val _uiState = MutableStateFlow(
+		TagDetailScaffoldUiState.Add(
+			add = ::add,
+			clearState = ::clearState,
+		),
+	)
+	val uiState = _uiState.asStateFlow()
 
-    private fun add(detail: TagDetail) {
-        viewModelScope.launch {
-            _uiState.update { it.copy(isAddInProgress = true) }
-            addTagUseCase(detail)
-                .onSuccess { _uiState.update { it.copy(isAddInProgress = false, isAddFinish = true) } }
-                .onFailure(::handleThrowable)
-        }
-    }
+	private fun add(detail: TagDetail) {
+		if (uiState.value.isAddInProgress) {
+			return
+		}
 
-    private fun handleThrowable(throwable: Throwable) {
-        when (throwable) {
-            is TagTitleBlankException -> _uiState.update { it.copy(isAddInProgress = false, isTitleBlankError = true) }
-            else -> _uiState.update { it.copy(isAddInProgress = false, isUnknownError = true) }
-        }
-    }
+		viewModelScope.launch {
+			_uiState.update { it.copy(isAddInProgress = true) }
+			addTagUseCase(detail)
+				.onSuccess { _uiState.update { it.copy(isAddInProgress = false, isAddFinish = true) } }
+				.onFailure(::handleThrowable)
+		}
+	}
 
-    private fun clearState() {
-        _uiState.update {
-            it.copy(
-                isAddFinish = false,
-                isTitleBlankError = false,
-                isUnknownError = false,
-            )
-        }
-    }
+	private fun handleThrowable(throwable: Throwable) {
+		when (throwable) {
+			is TagTitleBlankException -> _uiState.update { it.copy(isAddInProgress = false, isTitleBlankError = true) }
+			else -> _uiState.update { it.copy(isAddInProgress = false, isUnknownError = true) }
+		}
+	}
+
+	private fun clearState() {
+		_uiState.update {
+			it.copy(
+				isAddFinish = false,
+				isTitleBlankError = false,
+				isUnknownError = false,
+			)
+		}
+	}
 }

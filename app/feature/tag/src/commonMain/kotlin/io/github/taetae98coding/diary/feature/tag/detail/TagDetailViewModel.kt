@@ -28,104 +28,105 @@ import org.koin.android.annotation.KoinViewModel
 @OptIn(ExperimentalCoroutinesApi::class)
 @KoinViewModel
 internal class TagDetailViewModel(
-    private val savedStateHandle: SavedStateHandle,
-    private val findTagUseCase: FindTagUseCase,
-    private val finishTagUseCase: FinishTagUseCase,
-    private val restartTagUseCase: RestartTagUseCase,
-    private val deleteTagUseCase: DeleteTagUseCase,
-    private val updateTagUseCase: UpdateTagUseCase,
+	private val savedStateHandle: SavedStateHandle,
+	private val findTagUseCase: FindTagUseCase,
+	private val finishTagUseCase: FinishTagUseCase,
+	private val restartTagUseCase: RestartTagUseCase,
+	private val deleteTagUseCase: DeleteTagUseCase,
+	private val updateTagUseCase: UpdateTagUseCase,
 ) : ViewModel() {
-    private val tagId = savedStateHandle.getStateFlow<String?>(TagDetailDestination.TAG_ID, null)
+	private val tagId = savedStateHandle.getStateFlow<String?>(TagDetailDestination.TAG_ID, null)
 
-    private val tag = tagId
-        .flatMapLatest { findTagUseCase(it) }
-        .filterNotNull()
-        .mapLatest { it.getOrNull() }
-        .mapNotNull { it }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = null,
-        )
+	private val tag = tagId
+		.flatMapLatest { findTagUseCase(it) }
+		.filterNotNull()
+		.mapLatest { it.getOrNull() }
+		.mapNotNull { it }
+		.stateIn(
+			scope = viewModelScope,
+			started = SharingStarted.WhileSubscribed(5_000),
+			initialValue = null,
+		)
 
-    private val _uiState = MutableStateFlow(
-        TagDetailScaffoldUiState.Detail(
-            update = ::update,
-            clearState = ::clearState,
-        ),
-    )
+	private val _uiState = MutableStateFlow(
+		TagDetailScaffoldUiState.Detail(
+			update = ::update,
+			clearState = ::clearState,
+		),
+	)
 
-    val uiState = _uiState.asStateFlow()
+	val uiState = _uiState.asStateFlow()
 
-    val actionsUiState = tag.mapLatest {
-        TagDetailScaffoldActionsUiState(
-            isFinish = it?.isFinish == true,
-            finish = ::finish,
-            restart = ::restart,
-            delete = ::delete,
-        )
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = TagDetailScaffoldActionsUiState(
-            isFinish = false,
-            finish = ::finish,
-            restart = ::restart,
-            delete = ::delete,
-        ),
-    )
+	val actionsUiState = tag
+		.mapLatest {
+			TagDetailScaffoldActionsUiState(
+				isFinish = it?.isFinish == true,
+				finish = ::finish,
+				restart = ::restart,
+				delete = ::delete,
+			)
+		}.stateIn(
+			scope = viewModelScope,
+			started = SharingStarted.WhileSubscribed(5_000),
+			initialValue = TagDetailScaffoldActionsUiState(
+				isFinish = false,
+				finish = ::finish,
+				restart = ::restart,
+				delete = ::delete,
+			),
+		)
 
-    val tagDetail = tag
-        .mapLatest { it?.detail }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = null,
-        )
+	val tagDetail = tag
+		.mapLatest { it?.detail }
+		.stateIn(
+			scope = viewModelScope,
+			started = SharingStarted.WhileSubscribed(5_000),
+			initialValue = null,
+		)
 
-    private fun finish() {
-        viewModelScope.launch {
-            finishTagUseCase(tagId.value).onFailure { handleThrowable() }
-        }
-    }
+	private fun finish() {
+		viewModelScope.launch {
+			finishTagUseCase(tagId.value).onFailure { handleThrowable() }
+		}
+	}
 
-    private fun restart() {
-        viewModelScope.launch {
-            restartTagUseCase(tagId.value).onFailure { handleThrowable() }
-        }
-    }
+	private fun restart() {
+		viewModelScope.launch {
+			restartTagUseCase(tagId.value).onFailure { handleThrowable() }
+		}
+	}
 
-    private fun delete() {
-        viewModelScope.launch {
-            deleteTagUseCase(tagId.value)
-                .onSuccess { _uiState.update { it.copy(isDeleteFinish = true) } }
-                .onFailure { handleThrowable() }
-        }
-    }
+	private fun delete() {
+		viewModelScope.launch {
+			deleteTagUseCase(tagId.value)
+				.onSuccess { _uiState.update { it.copy(isDeleteFinish = true) } }
+				.onFailure { handleThrowable() }
+		}
+	}
 
-    private fun handleThrowable() {
-        _uiState.update { it.copy(isUnknownError = true) }
-    }
+	private fun handleThrowable() {
+		_uiState.update { it.copy(isUnknownError = true) }
+	}
 
-    private fun clearState() {
-        _uiState.update {
-            it.copy(
-                isUpdateFinish = false,
-                isDeleteFinish = false,
-                isUnknownError = false,
-            )
-        }
-    }
+	private fun clearState() {
+		_uiState.update {
+			it.copy(
+				isUpdateFinish = false,
+				isDeleteFinish = false,
+				isUnknownError = false,
+			)
+		}
+	}
 
-    fun update(detail: TagDetail) {
-        viewModelScope.launch {
-            updateTagUseCase(tagId.value, detail)
-                .onSuccess { _uiState.update { it.copy(isUpdateFinish = true) } }
-                .onFailure { handleThrowable() }
-        }
-    }
+	fun update(detail: TagDetail) {
+		viewModelScope.launch {
+			updateTagUseCase(tagId.value, detail)
+				.onSuccess { _uiState.update { it.copy(isUpdateFinish = true) } }
+				.onFailure { handleThrowable() }
+		}
+	}
 
-    fun fetch(tagId: String?) {
-        savedStateHandle[TagDetailDestination.TAG_ID] = tagId
-    }
+	fun fetch(tagId: String?) {
+		savedStateHandle[TagDetailDestination.TAG_ID] = tagId
+	}
 }

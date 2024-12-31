@@ -52,7 +52,6 @@ class AddTagUseCaseTest : BehaviorSpec() {
 				val tag = Tag(
 					id = tagId,
 					detail = detail,
-					owner = accountUid,
 					isFinish = false,
 					isDelete = false,
 					updateAt = Instant.DISTANT_PAST,
@@ -64,7 +63,7 @@ class AddTagUseCaseTest : BehaviorSpec() {
 
 				Then("upsert and backup") {
 					coVerifyOrder {
-						tagRepository.upsert(tag)
+						tagRepository.upsert(accountUid, tag)
 						pushTagBackupQueueUseCase(tagId)
 					}
 				}

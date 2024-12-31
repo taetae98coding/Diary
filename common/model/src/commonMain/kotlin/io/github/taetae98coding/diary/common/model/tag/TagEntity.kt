@@ -14,8 +14,6 @@ public data class TagEntity(
 	val description: String,
 	@SerialName("color")
 	val color: Int,
-	@SerialName("owner")
-	val owner: String,
 	@SerialName("isFinish")
 	val isFinish: Boolean,
 	@SerialName("isDelete")

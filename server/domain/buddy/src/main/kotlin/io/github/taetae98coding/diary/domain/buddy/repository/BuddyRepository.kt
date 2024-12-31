@@ -9,15 +9,16 @@ import kotlinx.datetime.LocalDate
 
 public interface BuddyRepository {
 	public suspend fun upsert(buddyGroup: BuddyGroupAndBuddyIds)
-    public suspend fun upsert(groupId: String, memo: Memo, tagIds: Set<String>)
+
+	public suspend fun upsert(groupId: String, memo: Memo, tagIds: Set<String>)
 
 	public fun findGroupById(id: String): Flow<BuddyGroup?>
 
 	public fun findGroupByUid(uid: String): Flow<List<BuddyGroup>>
 
-    public fun findBuddyIdByGroupId(groupId: String): Flow<List<String>>
+	public fun findBuddyIdByGroupId(groupId: String): Flow<List<String>>
+
 	public fun findBuddyByEmail(email: String, uid: String?): Flow<List<Buddy>>
 
-    public fun findMemoByDate(groupId: String, dateRange: ClosedRange<LocalDate>): Flow<List<Memo>>
-
+	public fun findMemoByDate(groupId: String, dateRange: ClosedRange<LocalDate>): Flow<List<Memo>>
 }

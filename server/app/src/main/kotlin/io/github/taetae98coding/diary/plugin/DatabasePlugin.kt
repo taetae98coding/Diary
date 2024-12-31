@@ -8,6 +8,7 @@ import io.github.taetae98coding.diary.core.database.MemoAccountTable
 import io.github.taetae98coding.diary.core.database.MemoBuddyGroupTable
 import io.github.taetae98coding.diary.core.database.MemoTable
 import io.github.taetae98coding.diary.core.database.MemoTagTable
+import io.github.taetae98coding.diary.core.database.TagAccountTable
 import io.github.taetae98coding.diary.core.database.TagTable
 import io.ktor.server.application.Application
 import org.jetbrains.exposed.sql.Database
@@ -27,6 +28,7 @@ internal fun Application.installDatabase() {
 		SchemaUtils.createMissingTablesAndColumns(
 			AccountTable,
 			TagTable,
+			TagAccountTable,
 			MemoTable,
 			MemoAccountTable,
 			MemoTagTable,

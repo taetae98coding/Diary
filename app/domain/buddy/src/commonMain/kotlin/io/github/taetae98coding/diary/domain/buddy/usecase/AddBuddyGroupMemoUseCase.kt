@@ -26,7 +26,6 @@ public class AddBuddyGroupMemoUseCase internal constructor(
 				id = repository.getNextMemoId(),
 				detail = detail,
 				primaryTag = primaryTag,
-				owner = groupId,
 				isFinish = false,
 				isDelete = false,
 				updateAt = clock.now(),

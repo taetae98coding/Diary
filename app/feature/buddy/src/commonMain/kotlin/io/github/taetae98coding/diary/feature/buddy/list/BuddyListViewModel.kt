@@ -25,10 +25,13 @@ internal class BuddyListViewModel(
 			if (result.isSuccess) {
 				BuddyListUiState.State(result.getOrThrow())
 			} else {
+				result.exceptionOrNull()?.printStackTrace()
 				when (val exception = result.exceptionOrNull()) {
 					is Exception if (exception.isNetworkException()) -> BuddyListUiState.NetworkError(::retry)
 					else -> BuddyListUiState.UnknownError(::retry)
 				}
+
+				BuddyListUiState.ZZ(result.exceptionOrNull()!!)
 			}
 		}
 		.stateIn(

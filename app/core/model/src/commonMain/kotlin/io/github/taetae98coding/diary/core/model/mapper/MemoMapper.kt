@@ -7,7 +7,6 @@ public fun Memo.toDto(): MemoDto =
 	MemoDto(
 		id = id,
 		detail = detail,
-		owner = owner,
 		primaryTag = primaryTag,
 		isFinish = isFinish,
 		isDelete = isDelete,
@@ -19,7 +18,6 @@ public fun MemoDto.toMemo(): Memo =
 	Memo(
 		id = id,
 		detail = detail,
-		owner = owner,
 		primaryTag = primaryTag,
 		isFinish = isFinish,
 		isDelete = isDelete,

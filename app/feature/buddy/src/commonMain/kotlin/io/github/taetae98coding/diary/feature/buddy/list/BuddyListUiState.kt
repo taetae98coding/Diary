@@ -16,4 +16,8 @@ internal sealed class BuddyListUiState {
 	data class State(
 		val list: List<BuddyGroup>,
 	) : BuddyListUiState()
+
+	data class ZZ(
+		val throwable: Throwable,
+	) : BuddyListUiState()
 }

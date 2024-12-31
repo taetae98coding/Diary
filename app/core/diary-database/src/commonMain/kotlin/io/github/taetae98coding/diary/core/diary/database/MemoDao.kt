@@ -8,11 +8,11 @@ import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 
 public interface MemoDao {
-	public suspend fun upsertMemo(dto: List<MemoDto>)
+	public suspend fun upsert(dto: MemoDto)
 
-	public suspend fun upsert(dto: MemoAndTagIds)
+	public suspend fun upsert(owner: String, dto: MemoDto, tagIds: Set<String>)
 
-	public suspend fun upsert(memoList: List<MemoAndTagIds>)
+	public suspend fun upsert(owner: String, list: List<MemoAndTagIds>)
 
 	public suspend fun update(memoId: String, detail: MemoDetail)
 
@@ -26,7 +26,7 @@ public interface MemoDao {
 
 	public fun getMemoAndTagIdsByIds(memoIds: Set<String>): Flow<List<MemoAndTagIds>>
 
-	public fun findByDateRange(owner: String?, dateRange: ClosedRange<LocalDate>, tagFilter: Set<String>): Flow<List<MemoDto>>
+	public fun findByDateRange(owner: String, dateRange: ClosedRange<LocalDate>, tagFilter: Set<String>): Flow<List<MemoDto>>
 
-	public fun getLastServerUpdateAt(owner: String?): Flow<Instant?>
+	public fun getLastServerUpdateAt(owner: String): Flow<Instant?>
 }

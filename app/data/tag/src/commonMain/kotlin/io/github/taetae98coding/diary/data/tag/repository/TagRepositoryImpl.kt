@@ -20,8 +20,8 @@ import kotlin.uuid.Uuid
 internal class TagRepositoryImpl(
 	private val localDataSource: TagDao,
 ) : TagRepository {
-	override suspend fun upsert(tag: Tag) {
-		localDataSource.upsert(tag.toDto())
+	override suspend fun upsert(owner: String, tag: Tag) {
+		localDataSource.upsert(owner, tag.toDto())
 	}
 
 	override suspend fun update(tagId: String, detail: TagDetail) {

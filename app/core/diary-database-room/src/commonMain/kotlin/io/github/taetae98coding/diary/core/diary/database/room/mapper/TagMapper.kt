@@ -12,7 +12,7 @@ internal fun TagDto.toEntity(): TagEntity =
 		color = detail.color,
 		isFinish = isFinish,
 		isDelete = isDelete,
-		owner = owner,
+		owner = null,
 		updateAt = updateAt,
 		serverUpdateAt = serverUpdateAt,
 	)
@@ -26,7 +26,6 @@ internal fun TagEntity.toDto(): TagDto =
 				description = description,
 				color = color,
 			),
-		owner = owner,
 		isFinish = isFinish,
 		isDelete = isDelete,
 		updateAt = updateAt,

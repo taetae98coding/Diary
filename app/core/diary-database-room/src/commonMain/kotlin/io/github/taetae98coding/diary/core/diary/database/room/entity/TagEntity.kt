@@ -5,6 +5,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.datetime.Instant
 
+/***
+ * @param owner multiplatform does not support delete column. it should be deleted
+ */
 @Entity
 internal data class TagEntity(
 	@PrimaryKey

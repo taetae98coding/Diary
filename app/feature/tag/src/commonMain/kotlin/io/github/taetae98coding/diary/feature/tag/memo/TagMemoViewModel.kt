@@ -28,108 +28,108 @@ import org.koin.android.annotation.KoinViewModel
 @OptIn(ExperimentalCoroutinesApi::class)
 @KoinViewModel
 internal class TagMemoViewModel(
-    private val savedStateHandle: SavedStateHandle,
-    private val pageTagMemoUseCase: PageTagMemoUseCase,
-    private val finishMemoUseCase: FinishMemoUseCase,
-    private val deleteMemoUseCase: DeleteMemoUseCase,
-    private val restartMemoUseCase: RestartMemoUseCase,
-    private val restoreMemoUseCase: RestoreMemoUseCase,
+	private val savedStateHandle: SavedStateHandle,
+	private val pageTagMemoUseCase: PageTagMemoUseCase,
+	private val finishMemoUseCase: FinishMemoUseCase,
+	private val deleteMemoUseCase: DeleteMemoUseCase,
+	private val restartMemoUseCase: RestartMemoUseCase,
+	private val restoreMemoUseCase: RestoreMemoUseCase,
 ) : ViewModel() {
-    private val tagId = savedStateHandle.getStateFlow<String?>(TagDetailDestination.TAG_ID, null)
+	private val tagId = savedStateHandle.getStateFlow<String?>(TagDetailDestination.TAG_ID, null)
 
-    private val _uiState = MutableStateFlow(TagMemoScaffoldUiState(clearState = ::clearState))
-    val uiState = _uiState.asStateFlow()
+	private val _uiState = MutableStateFlow(TagMemoScaffoldUiState(clearState = ::clearState))
+	val uiState = _uiState.asStateFlow()
 
-    private val refreshFlow = MutableStateFlow(0)
-    val memoList = refreshFlow.flatMapLatest {
-        tagId.flatMapLatest { pageTagMemoUseCase(it) }
-    }.mapLatest { result ->
-        if (result.isSuccess) {
-            val list = result.getOrThrow()
-                .map {
-                    MemoListItemUiState(
-                        id = it.id,
-                        title = it.detail.title,
-                        dateRange = it.detail.dateRange,
-                        finish = SkipProperty { finish(it.id) },
-                        delete = SkipProperty { delete(it.id) },
-                    )
-                }
-            TagMemoListUiState.State(list)
-        } else {
-            when (val throwable = result.exceptionOrNull()) {
-                is Exception if throwable.isNetworkException() -> TagMemoListUiState.NetworkError(::refresh)
-                else -> TagMemoListUiState.UnknownError(::refresh)
-            }
-        }
-    }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = TagMemoListUiState.Loading,
-        )
+	private val refreshFlow = MutableStateFlow(0)
+	val memoList = refreshFlow.flatMapLatest {
+		tagId.flatMapLatest { pageTagMemoUseCase(it) }
+	}.mapLatest { result ->
+		if (result.isSuccess) {
+			val list = result.getOrThrow()
+				.map {
+					MemoListItemUiState(
+						id = it.id,
+						title = it.detail.title,
+						dateRange = it.detail.dateRange,
+						finish = SkipProperty { finish(it.id) },
+						delete = SkipProperty { delete(it.id) },
+					)
+				}
+			TagMemoListUiState.State(list)
+		} else {
+			when (val throwable = result.exceptionOrNull()) {
+				is Exception if throwable.isNetworkException() -> TagMemoListUiState.NetworkError(::refresh)
+				else -> TagMemoListUiState.UnknownError(::refresh)
+			}
+		}
+	}
+		.stateIn(
+			scope = viewModelScope,
+			started = SharingStarted.WhileSubscribed(5_000),
+			initialValue = TagMemoListUiState.Loading,
+		)
 
-    private fun finish(memoId: String) {
-        viewModelScope.launch {
-            finishMemoUseCase(memoId)
-                .onSuccess {
-                    _uiState.update {
-                        it.copy(
-                            isFinish = true,
-                            restartTag = { restart(memoId) },
-                        )
-                    }
-                }
-                .onFailure { _uiState.update { it.copy(isUnknownError = true) } }
-        }
-    }
+	private fun finish(memoId: String) {
+		viewModelScope.launch {
+			finishMemoUseCase(memoId)
+				.onSuccess {
+					_uiState.update {
+						it.copy(
+							isFinish = true,
+							restartTag = { restart(memoId) },
+						)
+					}
+				}
+				.onFailure { _uiState.update { it.copy(isUnknownError = true) } }
+		}
+	}
 
-    private fun delete(memoId: String) {
-        viewModelScope.launch {
-            deleteMemoUseCase(memoId)
-                .onSuccess {
-                    _uiState.update {
-                        it.copy(
-                            isDelete = true,
-                            restoreTag = { restore(memoId) },
-                        )
-                    }
-                }
-                .onFailure { _uiState.update { it.copy(isUnknownError = true) } }
-        }
-    }
+	private fun delete(memoId: String) {
+		viewModelScope.launch {
+			deleteMemoUseCase(memoId)
+				.onSuccess {
+					_uiState.update {
+						it.copy(
+							isDelete = true,
+							restoreTag = { restore(memoId) },
+						)
+					}
+				}
+				.onFailure { _uiState.update { it.copy(isUnknownError = true) } }
+		}
+	}
 
-    private fun restart(id: String) {
-        viewModelScope.launch {
-            restartMemoUseCase(id)
-        }
-    }
+	private fun restart(id: String) {
+		viewModelScope.launch {
+			restartMemoUseCase(id)
+		}
+	}
 
-    private fun restore(id: String) {
-        viewModelScope.launch {
-            restoreMemoUseCase(id)
-        }
-    }
+	private fun restore(id: String) {
+		viewModelScope.launch {
+			restoreMemoUseCase(id)
+		}
+	}
 
-    private fun clearState() {
-        _uiState.update {
-            it.copy(
-                isFinish = false,
-                isDelete = false,
-                isUnknownError = false,
-                restartTag = {},
-                restoreTag = {},
-            )
-        }
-    }
+	private fun clearState() {
+		_uiState.update {
+			it.copy(
+				isFinish = false,
+				isDelete = false,
+				isUnknownError = false,
+				restartTag = {},
+				restoreTag = {},
+			)
+		}
+	}
 
-    private fun refresh() {
-        viewModelScope.launch {
-            refreshFlow.value++
-        }
-    }
+	private fun refresh() {
+		viewModelScope.launch {
+			refreshFlow.value++
+		}
+	}
 
-    fun fetch(tagId: String?) {
-        savedStateHandle[TagDetailDestination.TAG_ID] = tagId
-    }
+	fun fetch(tagId: String?) {
+		savedStateHandle[TagDetailDestination.TAG_ID] = tagId
+	}
 }
