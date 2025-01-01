@@ -28,158 +28,162 @@ import kotlinx.datetime.LocalDate
 import org.koin.ktor.plugin.scope
 
 public fun Route.buddyRouting() {
-	route("/buddy") {
-		authenticate("account") {
-			get("/find") {
-				val email = call.parameters["email"]
-				val uid = call
-					.principal<JWTPrincipal>()
-					?.payload
-					?.getClaim("uid")
-					?.toString()
+    route("/buddy") {
+        authenticate("account") {
+            get("/find") {
+                val email = call.parameters["email"]
+                val uid = call
+                    .principal<JWTPrincipal>()
+                    ?.payload
+                    ?.getClaim("uid")
+                    ?.toString()
 
-				val useCase = call.scope.get<FindBuddyUseCase>()
+                val useCase = call.scope.get<FindBuddyUseCase>()
 
-				useCase(email, uid)
-					.first()
-					.onSuccess { list ->
-						list
-							.map {
-								BuddyEntity(
-									uid = it.uid,
-									email = it.email,
-								)
-							}.also {
-								call.respond(DiaryResponse.success(it))
-							}
-					}.onFailure { call.respond(DiaryResponse.InternalServerError) }
-			}
+                useCase(email, uid)
+                    .first()
+                    .onSuccess { list ->
+                        list
+                            .map {
+                                BuddyEntity(
+                                    uid = it.uid,
+                                    email = it.email,
+                                )
+                            }.also {
+                                call.respond(DiaryResponse.success(it))
+                            }
+                    }.onFailure {
+                        call.respond(HttpStatusCode.InternalServerError, DiaryResponse.InternalServerError)
+                    }
+            }
 
-			route("/group") {
-				get("/find") {
-					val principal = call.principal<JWTPrincipal>()
-					if (principal == null) {
-						call.respond(HttpStatusCode.Unauthorized, DiaryResponse.Unauthorized)
-						return@get
-					}
+            route("/group") {
+                get("/find") {
+                    val principal = call.principal<JWTPrincipal>()
+                    if (principal == null) {
+                        call.respond(HttpStatusCode.Unauthorized, DiaryResponse.Unauthorized)
+                        return@get
+                    }
 
-					val uid = principal.payload.getClaim("uid").asString()
-					val useCase = call.scope.get<FindBuddyGroupUseCase>()
+                    val uid = principal.payload.getClaim("uid").asString()
+                    val useCase = call.scope.get<FindBuddyGroupUseCase>()
 
-					useCase(uid)
-						.first()
-						.onSuccess { list ->
-							list
-								.map {
-									BuddyGroupEntity(
-										id = it.id,
-										title = it.title,
-										description = it.description,
-									)
-								}.also {
-									call.respond(DiaryResponse.success(it))
-								}
-						}.onFailure { call.respond(DiaryResponse.InternalServerError) }
-				}
+                    useCase(uid)
+                        .first()
+                        .onSuccess { list ->
+                            list
+                                .map {
+                                    BuddyGroupEntity(
+                                        id = it.id,
+                                        title = it.title,
+                                        description = it.description,
+                                    )
+                                }.also {
+                                    call.respond(DiaryResponse.success(it))
+                                }
+                        }.onFailure {
+                            call.respond(HttpStatusCode.InternalServerError,DiaryResponse.InternalServerError)
+                        }
+                }
 
-				post<UpsertBuddyGroupRequest>("/upsert") { request ->
-					val principal = call.principal<JWTPrincipal>()
-					if (principal == null) {
-						call.respond(HttpStatusCode.Unauthorized, DiaryResponse.Unauthorized)
-						return@post
-					}
+                post<UpsertBuddyGroupRequest>("/upsert") { request ->
+                    val principal = call.principal<JWTPrincipal>()
+                    if (principal == null) {
+                        call.respond(HttpStatusCode.Unauthorized, DiaryResponse.Unauthorized)
+                        return@post
+                    }
 
-					val uid = principal.payload.getClaim("uid").asString()
-					val buddyGroupAndBuddyIds = BuddyGroupAndBuddyIds(
-						buddyGroup = BuddyGroup(
-							id = request.buddyGroup.id,
-							title = request.buddyGroup.title,
-							description = request.buddyGroup.description,
-						),
-						buddyIds = request.buddyIds,
-					)
+                    val uid = principal.payload.getClaim("uid").asString()
+                    val buddyGroupAndBuddyIds = BuddyGroupAndBuddyIds(
+                        buddyGroup = BuddyGroup(
+                            id = request.buddyGroup.id,
+                            title = request.buddyGroup.title,
+                            description = request.buddyGroup.description,
+                        ),
+                        buddyIds = request.buddyIds,
+                    )
 
-					val useCase = call.scope.get<UpsertBuddyGroupUseCase>()
+                    val useCase = call.scope.get<UpsertBuddyGroupUseCase>()
 
-					useCase(buddyGroupAndBuddyIds, uid)
-						.onSuccess { call.respond(DiaryResponse.Success) }
-						.onFailure { call.respond(DiaryResponse.InternalServerError) }
-				}
+                    useCase(buddyGroupAndBuddyIds, uid)
+                        .onSuccess { call.respond(DiaryResponse.Success) }
+                        .onFailure { call.respond(HttpStatusCode.InternalServerError,DiaryResponse.InternalServerError) }
+                }
 
-				post<MemoAndTagIdsEntity>("/{groupId}/upsertMemo") { request ->
-					val principal = call.principal<JWTPrincipal>()
-					if (principal == null) {
-						call.respond(HttpStatusCode.Unauthorized, DiaryResponse.Unauthorized)
-						return@post
-					}
+                post<MemoAndTagIdsEntity>("/{groupId}/upsertMemo") { request ->
+                    val principal = call.principal<JWTPrincipal>()
+                    if (principal == null) {
+                        call.respond(HttpStatusCode.Unauthorized, DiaryResponse.Unauthorized)
+                        return@post
+                    }
 
-					val uid = principal.payload.getClaim("uid").asString()
+                    val uid = principal.payload.getClaim("uid").asString()
 
-					val groupId = call.parameters["groupId"] ?: run {
-						call.respond(HttpStatusCode.BadRequest, DiaryResponse.BadRequest)
-						return@post
-					}
+                    val groupId = call.parameters["groupId"] ?: run {
+                        call.respond(HttpStatusCode.BadRequest, DiaryResponse.BadRequest)
+                        return@post
+                    }
 
-					val useCase = call.scope.get<UpsertBuddyGroupMemoUseCase>()
+                    val useCase = call.scope.get<UpsertBuddyGroupMemoUseCase>()
 
-					useCase(groupId, request.toMemo(), request.tagIds, uid)
-						.onSuccess { call.respond(DiaryResponse.Success) }
-						.onFailure { call.respond(DiaryResponse.InternalServerError) }
-				}
+                    useCase(groupId, request.toMemo(), request.tagIds, uid)
+                        .onSuccess { call.respond(DiaryResponse.Success) }
+                        .onFailure { call.respond(HttpStatusCode.InternalServerError,DiaryResponse.InternalServerError) }
+                }
 
-				get("/{groupId}/findMemoByDateRange") {
-					val groupId = call.parameters["groupId"] ?: run {
-						call.respond(HttpStatusCode.BadRequest, DiaryResponse.BadRequest)
-						return@get
-					}
-					val start = call.parameters["start"]?.let(LocalDate::parse) ?: run {
-						call.respond(HttpStatusCode.BadRequest, DiaryResponse.BadRequest)
-						return@get
-					}
-					val endInclusive = call.parameters["endInclusive"]?.let(LocalDate::parse) ?: run {
-						call.respond(HttpStatusCode.BadRequest, DiaryResponse.BadRequest)
-						return@get
-					}
-					val useCase = call.scope.get<FindBuddyGroupMemoByDate>()
+                get("/{groupId}/findMemoByDateRange") {
+                    val groupId = call.parameters["groupId"] ?: run {
+                        call.respond(HttpStatusCode.BadRequest, DiaryResponse.BadRequest)
+                        return@get
+                    }
+                    val start = call.parameters["start"]?.let(LocalDate::parse) ?: run {
+                        call.respond(HttpStatusCode.BadRequest, DiaryResponse.BadRequest)
+                        return@get
+                    }
+                    val endInclusive = call.parameters["endInclusive"]?.let(LocalDate::parse) ?: run {
+                        call.respond(HttpStatusCode.BadRequest, DiaryResponse.BadRequest)
+                        return@get
+                    }
+                    val useCase = call.scope.get<FindBuddyGroupMemoByDate>()
 
-					useCase(groupId, start..endInclusive)
-						.first()
-						.onSuccess { list ->
-							val body = list.map {
-								MemoEntity(
-									id = it.id,
-									title = it.title,
-									description = it.description,
-									start = it.start,
-									endInclusive = it.endInclusive,
-									color = it.color,
-									primaryTag = it.primaryTag,
-									isFinish = it.isFinish,
-									isDelete = it.isDelete,
-									updateAt = it.updateAt,
-								)
-							}
+                    useCase(groupId, start..endInclusive)
+                        .first()
+                        .onSuccess { list ->
+                            val body = list.map {
+                                MemoEntity(
+                                    id = it.id,
+                                    title = it.title,
+                                    description = it.description,
+                                    start = it.start,
+                                    endInclusive = it.endInclusive,
+                                    color = it.color,
+                                    primaryTag = it.primaryTag,
+                                    isFinish = it.isFinish,
+                                    isDelete = it.isDelete,
+                                    updateAt = it.updateAt,
+                                )
+                            }
 
-							call.respond(DiaryResponse.success(body))
-						}.onFailure {
-							call.respond(DiaryResponse.InternalServerError)
-						}
-				}
-			}
-		}
-	}
+                            call.respond(DiaryResponse.success(body))
+                        }.onFailure {
+                            call.respond(HttpStatusCode.InternalServerError,DiaryResponse.InternalServerError)
+                        }
+                }
+            }
+        }
+    }
 }
 
 private fun MemoAndTagIdsEntity.toMemo(): Memo =
-	Memo(
-		id = id,
-		title = title,
-		description = description,
-		start = start,
-		endInclusive = endInclusive,
-		color = color,
-		primaryTag = primaryTag,
-		isFinish = isFinish,
-		isDelete = isDelete,
-		updateAt = updateAt,
-	)
+    Memo(
+        id = id,
+        title = title,
+        description = description,
+        start = start,
+        endInclusive = endInclusive,
+        color = color,
+        primaryTag = primaryTag,
+        isFinish = isFinish,
+        isDelete = isDelete,
+        updateAt = updateAt,
+    )

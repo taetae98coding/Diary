@@ -21,7 +21,7 @@ compose-markdown = "0.29.0"                 # https://github.com/mikepenz/multip
 koin = "4.1.0-Beta1"                        # https://github.com/InsertKoinIO/koin/releases
 koin-annotations = "2.0.0-Beta3"            # https://github.com/InsertKoinIO/koin-annotations/releases
 datastore = "1.1.1"                         # https://developer.android.com/jetpack/androidx/releases/datastore?hl=en
-room = "2.7.0-alpha12"                      # https://developer.android.com/jetpack/androidx/releases/room?hl=en
+room = "2.7.0-alpha12"                      # h ttps://developer.android.com/jetpack/androidx/releases/room?hl=en
 sqlite = "2.5.0-alpha12"                    # https://developer.android.com/jetpack/androidx/releases/sqlite?hl=en
 
 kotest = "6.0.0.M1"                         # https://github.com/kotest/kotest/releases

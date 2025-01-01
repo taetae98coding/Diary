@@ -19,62 +19,62 @@ import kotlinx.datetime.Instant
 import org.koin.ktor.plugin.scope
 
 public fun Route.tagRouting() {
-	route("/tag") {
-		authenticate("account") {
-			post<List<TagEntity>>("/upsert") { request ->
-				val principal = call.principal<JWTPrincipal>()
-				if (principal == null) {
-					call.respond(HttpStatusCode.Unauthorized, DiaryResponse.Unauthorized)
-					return@post
-				}
+    route("/tag") {
+        authenticate("account") {
+            post<List<TagEntity>>("/upsert") { request ->
+                val principal = call.principal<JWTPrincipal>()
+                if (principal == null) {
+                    call.respond(HttpStatusCode.Unauthorized, DiaryResponse.Unauthorized)
+                    return@post
+                }
 
-				val uid = principal.payload.getClaim("uid").asString()
-				val useCase = call.scope.get<UpsertTagUseCase>()
-				val tagList = request.map(TagEntity::toTag)
+                val uid = principal.payload.getClaim("uid").asString()
+                val useCase = call.scope.get<UpsertTagUseCase>()
+                val tagList = request.map(TagEntity::toTag)
 
-				useCase(uid, tagList)
-					.onSuccess { call.respond(DiaryResponse.Success) }
-					.onFailure { call.respond(DiaryResponse.InternalServerError) }
-			}
+                useCase(uid, tagList)
+                    .onSuccess { call.respond(DiaryResponse.Success) }
+                    .onFailure { call.respond(HttpStatusCode.InternalServerError, DiaryResponse.InternalServerError) }
+            }
 
-			get("/fetch") {
-				val principal = call.principal<JWTPrincipal>()
-				if (principal == null) {
-					call.respond(HttpStatusCode.Unauthorized, DiaryResponse.Unauthorized)
-					return@get
-				}
+            get("/fetch") {
+                val principal = call.principal<JWTPrincipal>()
+                if (principal == null) {
+                    call.respond(HttpStatusCode.Unauthorized, DiaryResponse.Unauthorized)
+                    return@get
+                }
 
-				val uid = principal.payload.getClaim("uid").asString()
-				val updateAt = call.parameters["updateAt"]?.let { Instant.parse(it) } ?: return@get
-				val useCase = call.scope.get<FetchTagUseCase>()
+                val uid = principal.payload.getClaim("uid").asString()
+                val updateAt = call.parameters["updateAt"]?.let { Instant.parse(it) } ?: return@get
+                val useCase = call.scope.get<FetchTagUseCase>()
 
-				useCase(uid, updateAt)
-					.first()
-					.onSuccess { call.respond(DiaryResponse.success(it.map(Tag::toEntity))) }
-					.onFailure { call.respond(DiaryResponse.InternalServerError) }
-			}
-		}
-	}
+                useCase(uid, updateAt)
+                    .first()
+                    .onSuccess { call.respond(DiaryResponse.success(it.map(Tag::toEntity))) }
+                    .onFailure { call.respond(HttpStatusCode.InternalServerError, DiaryResponse.InternalServerError) }
+            }
+        }
+    }
 }
 
 private fun TagEntity.toTag(): Tag =
-	Tag(
-		id = id,
-		title = title,
-		description = description,
-		color = color,
-		isFinish = isFinish,
-		isDelete = isDelete,
-		updateAt = updateAt,
-	)
+    Tag(
+        id = id,
+        title = title,
+        description = description,
+        color = color,
+        isFinish = isFinish,
+        isDelete = isDelete,
+        updateAt = updateAt,
+    )
 
 private fun Tag.toEntity(): TagEntity =
-	TagEntity(
-		id = id,
-		title = title,
-		description = description,
-		color = color,
-		isFinish = isFinish,
-		isDelete = isDelete,
-		updateAt = updateAt,
-	)
+    TagEntity(
+        id = id,
+        title = title,
+        description = description,
+        color = color,
+        isFinish = isFinish,
+        isDelete = isDelete,
+        updateAt = updateAt,
+    )

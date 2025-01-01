@@ -7,7 +7,7 @@ import org.jetbrains.exposed.sql.upsert
 public data object TagAccountTable : Table("TagAccount") {
 	internal val TAG_ID = reference(
 		name = "tagId",
-		foreign = MemoTable,
+		foreign = TagTable,
 		onDelete = ReferenceOption.CASCADE,
 		onUpdate = ReferenceOption.CASCADE,
 	)

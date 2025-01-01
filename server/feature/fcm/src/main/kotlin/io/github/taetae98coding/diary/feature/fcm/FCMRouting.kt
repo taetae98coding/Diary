@@ -22,7 +22,7 @@ public fun Route.fcmRouting() {
 
 			useCase(token = request.token)
 				.onSuccess { call.respond(DiaryResponse.Success) }
-				.onFailure { call.respond(DiaryResponse.InternalServerError) }
+				.onFailure { call.respond(HttpStatusCode.InternalServerError,DiaryResponse.InternalServerError) }
 		}
 
 		authenticate("account") {
@@ -41,7 +41,7 @@ public fun Route.fcmRouting() {
 				).onSuccess {
 					call.respond(DiaryResponse.Success)
 				}.onFailure {
-					call.respond(DiaryResponse.InternalServerError)
+					call.respond(HttpStatusCode.InternalServerError,DiaryResponse.InternalServerError)
 				}
 			}
 		}
