@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [1.3.4] - 2025-01-01
+
+### 🐛 Bug Fixes
+
+- App - PrimaryTag
+
+## [1.3.3] - 2024-12-31
 
 ### 🐛 Bug Fixes
 

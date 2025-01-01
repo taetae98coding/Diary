@@ -47,7 +47,7 @@ internal class MemoDetailTagViewModel(
 		if (result.isSuccess) {
 			val list = result.getOrNull()
 				.orEmpty()
-				.filter { it.isPrimary }
+				.filter { it.isSelected }
 				.map {
 					TagCardItemUiState(
 						id = it.tag.id,
