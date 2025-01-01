@@ -20,5 +20,7 @@ public class BackupUseCase internal constructor(
 				tagBackupRepository.backup(account.uid)
 				memoBackupRepository.backup(account.uid)
 			}
-		}
+		}.onFailure { exception ->
+            exception.printStackTrace()
+        }
 }
