@@ -1,0 +1,14 @@
+plugins {
+    alias(libs.plugins.diary.convention.domain)
+}
+
+kotlin {
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation(projects.domain.account)
+                implementation(projects.domain.sync)
+            }
+        }
+    }
+}

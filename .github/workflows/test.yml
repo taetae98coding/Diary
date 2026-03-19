@@ -1,0 +1,50 @@
+name: 🧪 테스트
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+concurrency:
+  group: test-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  jvm-test:
+    name: ☕ JVM 테스트
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: ./.github/actions/gradle-setup
+        with:
+          local-properties: ${{ secrets.LOCAL_PROPERTIES }}
+
+      - name: 🧪 JVM 테스트 실행
+        run: ./gradlew jvmTest
+
+  android-host-test:
+    name: 🤖 Android Host 테스트
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: ./.github/actions/gradle-setup
+        with:
+          local-properties: ${{ secrets.LOCAL_PROPERTIES }}
+
+      - name: 🧪 Android Host 테스트 실행
+        run: ./gradlew testAndroidHostTest
+
+  android-device-test:
+    name: 📱 Android Device 테스트
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: ./.github/actions/gradle-setup
+        with:
+          local-properties: ${{ secrets.LOCAL_PROPERTIES }}
+
+      - name: 🧪 Android Device 테스트 실행
+        run: ./gradlew allSdksGroupAndroidDeviceTest

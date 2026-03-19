@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diary</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #1a1a1a;
+            background: #fafafa;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        header nav a {
+            color: #555;
+            text-decoration: none;
+            margin-left: 24px;
+            font-size: 14px;
+        }
+
+        header nav a:hover {
+            color: #1a1a1a;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 24px;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 32px;
+        }
+
+        .platforms {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+
+        .platform {
+            background: #ffffff;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 16px 28px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .features {
+            background: #ffffff;
+            border-top: 1px solid #e5e5e5;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 64px 24px;
+        }
+
+        .features-inner {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .features h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .feature-item {
+            padding: 20px;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            font-size: 15px;
+        }
+
+        .feature-item span {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .feature-item p {
+            color: #555;
+            font-size: 13px;
+        }
+
+        .docs {
+            text-align: center;
+            padding: 64px 24px;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .docs h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .docs p {
+            color: #555;
+            margin-bottom: 24px;
+        }
+
+        .docs a {
+            display: inline-block;
+            background: #1a1a1a;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .docs a:hover {
+            background: #333;
+        }
+
+        footer {
+            text-align: center;
+            padding: 32px 24px;
+            font-size: 13px;
+            color: #999;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        footer a {
+            color: #555;
+            text-decoration: none;
+        }
+
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 28px;
+            }
+
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Diary</h1>
+        <nav>
+            <a href="https://github.com/taetae98coding/Diary">GitHub</a>
+            <a href="projectGuard/index.html">Docs</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Diary</h2>
+        <p>Kotlin Multiplatform 기반의 다이어리 앱</p>
+        <div class="platforms">
+            <div class="platform">Android</div>
+            <div class="platform">iOS</div>
+            <div class="platform">Desktop</div>
+            <div class="platform">Web</div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="features-inner">
+            <h3>Features</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span>메모</span>
+                    <p>간편하게 메모를 작성하고 관리합니다.</p>
+                </div>
+                <div class="feature-item">
+                    <span>캘린더</span>
+                    <p>날짜별로 메모를 확인합니다.</p>
+                </div>
+                <div class="feature-item">
+                    <span>Google 로그인</span>
+                    <p>Google 계정으로 간편하게 로그인합니다.</p>
+                </div>
+                <div class="feature-item">
+                    <span>동기화</span>
+                    <p>Supabase를 통해 기기 간 데이터를 동기화합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="docs">
+        <h3>Project Guard</h3>
+        <p>모듈 간 의존성 규칙을 확인합니다.</p>
+        <a href="projectGuard/index.html">리포트 보기</a>
+    </section>
+
+    <footer>
+        <p>
+            <a href="https://github.com/taetae98coding/Diary">taetae98coding/Diary</a>
+            &middot; AGPL-3.0
+        </p>
+    </footer>
+</body>
+</html>

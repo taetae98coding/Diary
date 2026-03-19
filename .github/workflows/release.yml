@@ -1,0 +1,145 @@
+name: 🚀 릴리즈
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "📦 릴리즈 버전 (예: 1.1.0)"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  prepare:
+    name: 📦 릴리즈 준비
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/gradle-setup
+        with:
+          local-properties: ${{ secrets.LOCAL_PROPERTIES }}
+
+      - name: ⚙️ Git 설정
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: 📋 CHANGELOG 생성
+        uses: orhun/git-cliff-action@v4
+        with:
+          config: cliff.toml
+          args: --tag ${{ inputs.version }} -o CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🛡️ Project Guard 실행
+        run: ./gradlew projectGuardAggregateCheck
+
+      - name: 📁 리포트 이동
+        run: |
+          mkdir -p docs/projectGuard
+          cp -r build/reports/projectguard/* docs/projectGuard/
+
+      - name: 💾 커밋
+        run: |
+          git add -A
+          git commit -m "${{ inputs.version }}"
+
+      - name: 🏷️ 태그 & 푸시
+        run: |
+          git tag -a "${{ inputs.version }}" -m "Release ${{ inputs.version }}"
+          git push origin "${{ inputs.version }}"
+
+      - name: 📤 브랜치 푸시
+        run: git push origin HEAD
+
+  distribute-android:
+    name: 🤖 Android Firebase 배포
+    runs-on: self-hosted
+    needs: prepare
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref }}
+
+      - uses: ./.github/actions/gradle-setup
+        with:
+          local-properties: ${{ secrets.LOCAL_PROPERTIES }}
+
+      - name: 🔨 APK 빌드
+        run: ./gradlew :app:android:assembleRealRelease -Pbuildkonfig.flavor=real --no-build-cache --no-configuration-cache
+
+      - name: 🔥 Firebase App Distribution 업로드
+        uses: emertozd/Firebase-Distribution-Github-Action@v4
+        with:
+          appId: ${{ secrets.FIREBASE_ANDROID_APP_ID }}
+          serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          groups: Tester
+          file: app/android/build/outputs/apk/real/release/android-real-release.apk
+          releaseNotesFile: CHANGELOG.md
+
+  distribute-ios:
+    name: 🍎 iOS Firebase 배포
+    runs-on: self-hosted
+    needs: prepare
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref }}
+
+      - uses: ./.github/actions/gradle-setup
+        with:
+          local-properties: ${{ secrets.LOCAL_PROPERTIES }}
+          dev-xcconfig: ${{ secrets.DEV_XCCONFIG }}
+          real-xcconfig: ${{ secrets.REAL_XCCONFIG }}
+
+      - name: 📦 Archive
+        run: |
+          xcodebuild archive \
+            -project Diary/Diary.xcodeproj \
+            -scheme Release \
+            -configuration RealRelease \
+            -archivePath Diary/build/Diary.xcarchive \
+            -allowProvisioningUpdates
+
+      - name: 🔨 IPA Export
+        run: |
+          xcodebuild -exportArchive \
+            -archivePath Diary/build/Diary.xcarchive \
+            -exportPath Diary/build/ipa \
+            -exportOptionsPlist Diary/ExportOptions.plist \
+            -allowProvisioningUpdates
+
+      - name: 🔥 Firebase App Distribution 업로드
+        uses: emertozd/Firebase-Distribution-Github-Action@v4
+        with:
+          appId: ${{ secrets.FIREBASE_IOS_APP_ID }}
+          serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          groups: Tester
+          file: Diary/build/ipa/Apps/Diary.ipa
+          releaseNotesFile: CHANGELOG.md
+
+  github-release:
+    name: 🎉 GitHub 릴리즈 생성
+    runs-on: self-hosted
+    needs: prepare
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.version }}
+
+      - name: 🎉 GitHub 릴리즈 생성
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.version }}
+          name: ${{ inputs.version }}
+          body_path: CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,20 @@
+package io.github.taetae98coding.diary.compose.calendar.internal
+
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.LocalDateRange
+import kotlinx.datetime.YearMonth
+import kotlinx.datetime.minus
+import kotlinx.datetime.plus
+
+@Suppress("FunctionName")
+internal fun WeekLocalDateRange(
+    yearMonth: YearMonth,
+    weekOfMonth: Int,
+): LocalDateRange {
+    val start = yearMonth.firstDay
+        .minus(yearMonth.firstDay.dayOfWeek.toSundayBasedNumber(), DateTimeUnit.DAY)
+        .plus(weekOfMonth, DateTimeUnit.WEEK)
+    val endInclusive = start.plus(6, DateTimeUnit.DAY)
+
+    return LocalDateRange(start, endInclusive)
+}
