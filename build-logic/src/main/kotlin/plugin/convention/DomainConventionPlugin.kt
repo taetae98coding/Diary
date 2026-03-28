@@ -23,8 +23,9 @@ internal class DomainConventionPlugin : Plugin<Project> {
             sourceSets {
                 commonMain {
                     dependencies {
-                        api(target.project(":core:model"))
-                        api(libs.library("kotlinx-coroutines-core"))
+                        api(project(":core:model"))
+                        api(project(":library:kotlinx-coroutines-core"))
+                        api(project(":library:paging-common"))
                     }
                 }
             }

@@ -27,5 +27,11 @@ public interface MemoLocalDataSource {
         updatedAt: Long,
     )
 
+    public suspend fun updatePrimaryTag(
+        memoId: Uuid,
+        primaryTag: Uuid?,
+        updatedAt: Long,
+    )
+
     public fun get(memoId: Uuid): Flow<MemoLocalEntity?>
 }

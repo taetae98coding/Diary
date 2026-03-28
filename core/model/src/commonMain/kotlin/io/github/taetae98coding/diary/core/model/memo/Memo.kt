@@ -5,8 +5,9 @@ import kotlin.uuid.Uuid
 public data class Memo(
     val id: Uuid,
     val detail: MemoDetail,
-    val isFinished: Boolean = false,
-    val isDeleted: Boolean = false,
+    val primaryTag: Uuid?,
+    val isFinished: Boolean,
+    val isDeleted: Boolean,
     val updatedAt: Long,
     val createdAt: Long,
 )

@@ -14,9 +14,12 @@ import androidx.compose.ui.input.key.isMetaPressed
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
+import androidx.lifecycle.compose.LifecycleStartEffect
 import io.github.taetae98coding.diary.compose.core.icon.CalendarIcon
 import io.github.taetae98coding.diary.compose.core.icon.MoreIcon
+import io.github.taetae98coding.diary.compose.core.icon.TagIcon
 import kotlinx.coroutines.flow.collectLatest
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 internal fun AppScaffold(
@@ -30,6 +33,11 @@ internal fun AppScaffold(
             .onPreviewKeyEvent { event ->
                 if (event.type == KeyEventType.KeyDown && event.isMetaPressed) {
                     when (event.key) {
+                        Key.Two -> {
+                            state.navigateTo(TopLevelDestination.Tag)
+                            true
+                        }
+
                         Key.Three -> {
                             state.navigateTo(TopLevelDestination.Calendar)
                             true
@@ -54,16 +62,19 @@ internal fun AppScaffold(
                     onClick = { state.navigateTo(destination) },
                     icon = {
                         when (destination) {
+                            TopLevelDestination.Tag -> TagIcon()
                             TopLevelDestination.Calendar -> CalendarIcon()
                             TopLevelDestination.More -> MoreIcon()
                         }
                     },
                     label = {
                         when (destination) {
+                            TopLevelDestination.Tag -> Text(text = "태그")
                             TopLevelDestination.Calendar -> Text(text = "캘린더")
                             TopLevelDestination.More -> Text(text = "더보기")
                         }
                     },
+                    alwaysShowLabel = false,
                 )
             }
         },
@@ -73,6 +84,15 @@ internal fun AppScaffold(
 
     NavigationVisibilityEffect(state = state)
     NavigationShortKeyFocusEffect(state = state)
+    SyncEffect()
+}
+
+@Composable
+private fun SyncEffect(viewModel: AppViewModel = koinViewModel()) {
+    LifecycleStartEffect(Unit) {
+        viewModel.sync()
+        onStopOrDispose { }
+    }
 }
 
 @Composable

@@ -7,6 +7,7 @@ public fun MemoLocalEntity.toDomain(): Memo {
     return Memo(
         id = id,
         detail = detail.toDomain(),
+        primaryTag = primaryTag,
         isFinished = isFinished,
         isDeleted = isDeleted,
         updatedAt = updatedAt,

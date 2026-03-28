@@ -6,7 +6,9 @@ import { MemoV1 } from "./entity/memo-v1.ts";
 
 const memoRepository = new MemoRepository(supabaseAdmin);
 
-function toMemo(v1: MemoV1): Memo {
+async function toMemo(v1: MemoV1): Promise<Memo> {
+  const existing = await memoRepository.findById(v1.id);
+
   return {
     id: v1.id,
     detail: {
@@ -17,6 +19,7 @@ function toMemo(v1: MemoV1): Memo {
       endInclusive: v1.detail.endInclusive,
       color: v1.detail.color,
     },
+    primaryTag: existing?.primaryTag ?? null,
     isFinished: v1.isFinished,
     isDeleted: v1.isDeleted,
     updatedAt: v1.updatedAt,
@@ -53,7 +56,8 @@ Deno.serve(async (req: Request) => {
     }
 
     const { memoList }: { memoList: MemoV1[] } = await req.json();
-    await memoRepository.upsertIfNewer(user.id, memoList.map(toMemo));
+    const memos = await Promise.all(memoList.map(toMemo));
+    await memoRepository.upsertIfNewer(user.id, memos);
 
     return new Response(null, { status: 204 });
   } catch (error) {

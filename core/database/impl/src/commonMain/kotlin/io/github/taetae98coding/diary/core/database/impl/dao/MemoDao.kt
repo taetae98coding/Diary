@@ -51,4 +51,11 @@ internal interface MemoDao : RoomDao<MemoLocalEntity> {
         isDeleted: Boolean,
         updatedAt: Long,
     )
+
+    @Query("UPDATE Memo SET primaryTag = :primaryTag, updatedAt = :updatedAt WHERE id = :memoId")
+    suspend fun updatePrimaryTag(
+        memoId: Uuid,
+        primaryTag: Uuid?,
+        updatedAt: Long,
+    )
 }

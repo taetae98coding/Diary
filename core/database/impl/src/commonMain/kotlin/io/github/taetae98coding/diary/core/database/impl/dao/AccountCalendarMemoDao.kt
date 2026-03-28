@@ -10,13 +10,15 @@ import kotlinx.coroutines.flow.Flow
 internal interface AccountCalendarMemoDao {
     @Query(
         """
-        SELECT Memo.*
+        SELECT Memo.*,
+            COALESCE(Tag.color, Memo.color) AS calendarMemoColor
         FROM Memo
-        INNER JOIN AccountMemoLocalEntity ON AccountMemoLocalEntity.memoId = Memo.id AND AccountMemoLocalEntity.accountId = :accountId
+        INNER JOIN AccountMemo ON AccountMemo.memoId = Memo.id AND AccountMemo.accountId = :accountId
+        LEFT JOIN Tag ON Tag.id = Memo.primaryTag
         WHERE CAST(strftime('%Y', Memo.start) AS INTEGER) <= :year
         AND CAST(strftime('%Y', Memo.endInclusive) AS INTEGER) >= :year
         AND Memo.isDeleted = 0
-        ORDER BY isAllDay DESC, start, title
+        ORDER BY Memo.isAllDay DESC, Memo.start, Memo.endInclusive DESC, Memo.title
         """,
     )
     fun get(

@@ -24,6 +24,7 @@ class MemoMapperTest : FunSpec() {
 
             result.id shouldBe entity.id
             result.detail shouldBe entity.detail.toDomain()
+            result.primaryTag shouldBe entity.primaryTag
             result.isFinished shouldBe entity.isFinished
             result.isDeleted shouldBe entity.isDeleted
             result.updatedAt shouldBe entity.updatedAt

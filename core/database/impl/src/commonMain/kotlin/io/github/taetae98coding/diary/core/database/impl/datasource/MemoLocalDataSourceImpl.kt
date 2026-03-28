@@ -51,6 +51,14 @@ internal class MemoLocalDataSourceImpl(private val database: DiaryDatabase) : Me
         database.memoDao().updateDelete(memoId, isDeleted, updatedAt)
     }
 
+    override suspend fun updatePrimaryTag(
+        memoId: Uuid,
+        primaryTag: Uuid?,
+        updatedAt: Long,
+    ) {
+        database.memoDao().updatePrimaryTag(memoId, primaryTag, updatedAt)
+    }
+
     override fun get(memoId: Uuid): Flow<MemoLocalEntity?> {
         return database.memoDao().get(memoId)
     }

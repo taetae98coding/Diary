@@ -9,6 +9,8 @@ import com.navercorp.fixturemonkey.kotlin.giveMeKotlinBuilder
 import io.github.taetae98coding.diary.core.database.api.entity.AccountMemoLocalEntity
 import io.github.taetae98coding.diary.core.database.api.entity.MemoDetailLocalEntity
 import io.github.taetae98coding.diary.core.database.api.entity.MemoLocalEntity
+import io.github.taetae98coding.diary.core.database.api.entity.TagDetailLocalEntity
+import io.github.taetae98coding.diary.core.database.api.entity.TagLocalEntity
 import io.github.taetae98coding.diary.core.database.impl.DiaryDatabase
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldHaveSize
@@ -29,6 +31,7 @@ class AccountCalendarMemoDaoTest {
     private lateinit var accountCalendarMemoDao: AccountCalendarMemoDao
     private lateinit var memoDao: MemoDao
     private lateinit var accountMemoDao: AccountMemoDao
+    private lateinit var tagDao: TagDao
 
     private val fixtureMonkey = FixtureMonkey.builder()
         .plugin(KotlinPlugin())
@@ -42,6 +45,7 @@ class AccountCalendarMemoDaoTest {
         accountCalendarMemoDao = database.accountCalendarMemoDao()
         memoDao = database.memoDao()
         accountMemoDao = database.accountMemoDao()
+        tagDao = database.tagDao()
     }
 
     @After
@@ -242,5 +246,47 @@ class AccountCalendarMemoDaoTest {
         // 같은 start → title 순 → memoC("A") < memoA("B")
         result[1].id shouldBe memoC
         result[2].id shouldBe memoA
+    }
+
+    @Test
+    fun `primaryTag가 있는 경우 memo의 color가 아니라 primaryTag의 color를 사용한다`() = runTest {
+        val accountId = Uuid.random()
+        val memoId = Uuid.random()
+        val tagId = Uuid.random()
+        val memoColor = 0xFF0000
+        val tagColor = 0x00FF00
+
+        tagDao.upsert(
+            TagLocalEntity(
+                id = tagId,
+                detail = TagDetailLocalEntity(
+                    title = "tag",
+                    description = "",
+                    color = tagColor,
+                ),
+            ),
+        )
+
+        val memo = fixtureMonkey.giveMeKotlinBuilder<MemoLocalEntity>()
+            .set(MemoLocalEntity::id, memoId)
+            .set(
+                MemoLocalEntity::detail,
+                fixtureMonkey.giveMeKotlinBuilder<MemoDetailLocalEntity>()
+                    .set(MemoDetailLocalEntity::start, LocalDateTime(2025, 6, 1, 0, 0))
+                    .set(MemoDetailLocalEntity::endInclusive, LocalDateTime(2025, 6, 30, 23, 59))
+                    .set(MemoDetailLocalEntity::color, memoColor)
+                    .sample(),
+            )
+            .set(MemoLocalEntity::primaryTag, tagId)
+            .set(MemoLocalEntity::isDeleted, false)
+            .sample()
+
+        memoDao.upsert(memo)
+        accountMemoDao.upsert(AccountMemoLocalEntity(accountId = accountId, memoId = memoId))
+
+        val result = accountCalendarMemoDao.get(accountId, 2025).first()
+
+        result shouldHaveSize 1
+        result[0].color shouldBe tagColor
     }
 }

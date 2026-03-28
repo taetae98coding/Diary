@@ -7,6 +7,8 @@ public interface AccountMemoRepository {
     public suspend fun add(
         accountId: Uuid,
         detail: MemoDetail,
+        primaryTag: Uuid?,
+        memoTagIds: Set<Uuid>,
     )
 
     public suspend fun updateDetail(

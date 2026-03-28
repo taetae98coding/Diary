@@ -7,6 +7,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(projects.domain.memo)
+                implementation(projects.domain.tag)
                 implementation(projects.presenter.memo.compose)
             }
         }

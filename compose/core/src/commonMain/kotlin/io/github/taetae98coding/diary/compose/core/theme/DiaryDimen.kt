@@ -10,6 +10,7 @@ public data class DiaryDimen(
     val screenHorizontalPadding: Dp,
     val screenVerticalPAdding: Dp,
     val screenCardSpace: Dp,
+    val itemSpace: Dp,
 ) {
     val screenPaddingValues: PaddingValues
         get() = PaddingValues(horizontal = screenHorizontalPadding, vertical = screenVerticalPAdding)
@@ -19,6 +20,7 @@ public data class DiaryDimen(
             screenHorizontalPadding = 20.dp,
             screenVerticalPAdding = 16.dp,
             screenCardSpace = 16.dp,
+            itemSpace = 6.dp,
         )
 
         internal val LARGE = COMPAT.copy(

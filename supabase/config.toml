@@ -362,6 +362,12 @@ verify_jwt = false
 [functions.v1-memo-pull]
 verify_jwt = false
 
+[functions.v1-memo-tag-push]
+verify_jwt = false
+
+[functions.v1-memo-tag-pull]
+verify_jwt = false
+
 [edge_runtime]
 enabled = true
 # Supported request policies: `oneshot`, `per_worker`.

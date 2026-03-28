@@ -6,10 +6,10 @@ import com.navercorp.fixturemonkey.kotlin.giveMeKotlinBuilder
 import com.navercorp.fixturemonkey.kotlin.giveMeOne
 import io.github.taetae98coding.diary.core.model.account.Account
 import io.github.taetae98coding.diary.core.model.memo.MemoDetail
+import io.github.taetae98coding.diary.core.model.memo.MemoTitleBlankException
 import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
 import io.github.taetae98coding.diary.domain.memo.repository.AccountMemoRepository
 import io.github.taetae98coding.diary.domain.sync.usecase.RequestSyncUseCase
-import io.github.taetae98coding.diary.core.model.memo.MemoTitleBlankException
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.result.shouldBeFailure
 import io.kotest.matchers.result.shouldBeSuccess
@@ -20,6 +20,7 @@ import io.mockk.coVerifyOrder
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import kotlin.uuid.Uuid
 import kotlinx.coroutines.flow.flowOf
 
 class AddMemoUseCaseTest : BehaviorSpec() {
@@ -40,11 +41,14 @@ class AddMemoUseCaseTest : BehaviorSpec() {
                 .set(MemoDetail::title, "title")
                 .sample()
 
+            val primaryTag = fixtureMonkey.giveMeOne<Uuid?>()
+            val memoTagIds = fixtureMonkey.giveMeOne<Set<Uuid>>()
+
             every { getAccountUseCase() } returns flowOf(Result.success(account))
-            coEvery { repository.add(account.accountId, detail) } returns Unit
+            coEvery { repository.add(account.accountId, detail, primaryTag, memoTagIds) } returns Unit
 
             When("AddMemoUseCase를 호출하면") {
-                val result = useCase(detail)
+                val result = useCase(detail, primaryTag, memoTagIds)
 
                 Then("성공한다") {
                     result.shouldBeSuccess()
@@ -53,16 +57,16 @@ class AddMemoUseCaseTest : BehaviorSpec() {
                 Then("GetAccountUseCase를 호출한 후 repository에 메모를 추가한다") {
                     coVerifyOrder {
                         getAccountUseCase()
-                        repository.add(account.accountId, detail)
+                        repository.add(account.accountId, detail, primaryTag, memoTagIds)
                     }
                 }
 
                 Then("account의 accountId로 repository를 호출한다") {
-                    coVerify(exactly = 1) { repository.add(account.accountId, detail) }
+                    coVerify(exactly = 1) { repository.add(account.accountId, detail, primaryTag, memoTagIds) }
                 }
 
                 Then("RequestSyncUseCase를 호출한다") {
-                    verify(exactly = 1) { requestSyncUseCase(account.accountId) }
+                    coVerify(exactly = 1) { requestSyncUseCase() }
                 }
             }
         }
@@ -74,18 +78,21 @@ class AddMemoUseCaseTest : BehaviorSpec() {
                 .set(MemoDetail::title, "title")
                 .sample()
 
+            val primaryTag = fixtureMonkey.giveMeOne<Uuid?>()
+            val memoTagIds = fixtureMonkey.giveMeOne<Set<Uuid>>()
+
             every { getAccountUseCase() } returns flowOf(Result.success(account))
-            coEvery { repository.add(account.accountId, detail) } returns Unit
+            coEvery { repository.add(account.accountId, detail, primaryTag, memoTagIds) } returns Unit
 
             When("AddMemoUseCase를 호출하면") {
-                val result = useCase(detail)
+                val result = useCase(detail, primaryTag, memoTagIds)
 
                 Then("성공한다") {
                     result.shouldBeSuccess()
                 }
 
-                Then("RequestSyncUseCase를 호출하지 않는다") {
-                    verify(exactly = 0) { requestSyncUseCase(any()) }
+                Then("RequestSyncUseCase를 호출한다") {
+                    coVerify(exactly = 1) { requestSyncUseCase() }
                 }
             }
         }
@@ -104,11 +111,11 @@ class AddMemoUseCaseTest : BehaviorSpec() {
                 }
 
                 Then("repository를 호출하지 않는다") {
-                    coVerify(exactly = 0) { repository.add(any(), any()) }
+                    coVerify(exactly = 0) { repository.add(any(), any(), any(), any()) }
                 }
 
                 Then("RequestSyncUseCase를 호출하지 않는다") {
-                    verify(exactly = 0) { requestSyncUseCase(any()) }
+                    coVerify(exactly = 0) { requestSyncUseCase() }
                 }
             }
         }

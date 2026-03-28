@@ -61,6 +61,8 @@ import kotlinx.datetime.yearMonth
 public fun CalendarScaffold(
     memoStateHolder: CalendarMemoStateHolder,
     modifier: Modifier = Modifier,
+    isFetchingProvider: () -> Boolean = { false },
+    onFetch: () -> Unit = {},
     onLocalDateRangeSelect: (LocalDateRange) -> Unit = {},
     onMemoClick: (Uuid) -> Unit = {},
 ) {
@@ -71,6 +73,8 @@ public fun CalendarScaffold(
     CalendarScaffold(
         modifier = modifier,
         state = state,
+        isFetchingProvider = isFetchingProvider,
+        onFetch = onFetch,
         memoListProvider = { memoList },
         onLocalDateRangeSelect = onLocalDateRangeSelect,
         onMemoClick = onMemoClick,
@@ -96,6 +100,8 @@ public fun CalendarScaffold(
 public fun CalendarScaffold(
     modifier: Modifier = Modifier,
     state: CalendarScaffoldState = rememberCalendarScaffoldState(),
+    isFetchingProvider: () -> Boolean = { false },
+    onFetch: () -> Unit = {},
     memoListProvider: () -> List<CalendarMemo>,
     onLocalDateRangeSelect: (LocalDateRange) -> Unit = {},
     onMemoClick: (Uuid) -> Unit = {},
@@ -107,8 +113,8 @@ public fun CalendarScaffold(
         topBar = { TopBar(state = state) },
     ) { paddingValues ->
         PullToRefreshBox(
-            isRefreshing = false,
-            onRefresh = {},
+            isRefreshing = isFetchingProvider(),
+            onRefresh = onFetch,
             modifier = Modifier.padding(paddingValues),
         ) {
             Calendar(
@@ -148,7 +154,8 @@ public fun CalendarScaffold(
                     CalendarText(
                         text = it.title,
                         color = Color(it.color),
-                        modifier = Modifier.clickable(onClick = dropUnlessResumed { onMemoClick(it.id) }),
+                        modifier = Modifier.animateItem()
+                            .clickable(onClick = dropUnlessResumed { onMemoClick(it.id) }),
                     )
                 }
 
@@ -161,7 +168,8 @@ public fun CalendarScaffold(
                     CalendarColorLabelText(
                         text = it.title,
                         color = Color(it.color),
-                        modifier = Modifier.clickable { onMemoClick(it.id) },
+                        modifier = Modifier.animateItem()
+                            .clickable { onMemoClick(it.id) },
                     )
                 }
             }

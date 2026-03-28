@@ -12,6 +12,7 @@ kotlin {
                 api(projects.presenter.memo.api)
 
                 implementation(libs.jetbrains.lifecycle.runtime.compose)
+                implementation(libs.androidx.paging.compose)
             }
         }
     }
