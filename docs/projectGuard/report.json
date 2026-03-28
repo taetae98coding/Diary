@@ -1,0 +1,236 @@
+{
+  "modules": [
+    {
+      "module": ":app",
+      "restrictions": []
+    },
+    {
+      "module": ":app:android",
+      "restrictions": []
+    },
+    {
+      "module": ":app:ios",
+      "restrictions": []
+    },
+    {
+      "module": ":app:jvm",
+      "restrictions": []
+    },
+    {
+      "module": ":app:shared",
+      "restrictions": []
+    },
+    {
+      "module": ":app:wasm",
+      "restrictions": []
+    },
+    {
+      "module": ":compose",
+      "restrictions": []
+    },
+    {
+      "module": ":compose:calendar",
+      "restrictions": []
+    },
+    {
+      "module": ":compose:core",
+      "restrictions": []
+    },
+    {
+      "module": ":core",
+      "restrictions": []
+    },
+    {
+      "module": ":core:database",
+      "restrictions": []
+    },
+    {
+      "module": ":core:database:api",
+      "restrictions": []
+    },
+    {
+      "module": ":core:database:impl",
+      "restrictions": []
+    },
+    {
+      "module": ":core:datastore",
+      "restrictions": []
+    },
+    {
+      "module": ":core:datastore:api",
+      "restrictions": []
+    },
+    {
+      "module": ":core:datastore:impl",
+      "restrictions": []
+    },
+    {
+      "module": ":core:google-credentials",
+      "restrictions": []
+    },
+    {
+      "module": ":core:google-credentials:api",
+      "restrictions": []
+    },
+    {
+      "module": ":core:google-credentials:compose",
+      "restrictions": []
+    },
+    {
+      "module": ":core:google-credentials:impl",
+      "restrictions": []
+    },
+    {
+      "module": ":core:mapper",
+      "restrictions": []
+    },
+    {
+      "module": ":core:model",
+      "restrictions": []
+    },
+    {
+      "module": ":core:navigation",
+      "restrictions": []
+    },
+    {
+      "module": ":core:network",
+      "restrictions": []
+    },
+    {
+      "module": ":core:network:api",
+      "restrictions": []
+    },
+    {
+      "module": ":core:network:impl",
+      "restrictions": []
+    },
+    {
+      "module": ":core:supabase",
+      "restrictions": []
+    },
+    {
+      "module": ":core:supabase:api",
+      "restrictions": []
+    },
+    {
+      "module": ":core:supabase:impl",
+      "restrictions": []
+    },
+    {
+      "module": ":data",
+      "restrictions": []
+    },
+    {
+      "module": ":data:account",
+      "restrictions": []
+    },
+    {
+      "module": ":data:credentials",
+      "restrictions": []
+    },
+    {
+      "module": ":data:memo",
+      "restrictions": []
+    },
+    {
+      "module": ":data:sync",
+      "restrictions": []
+    },
+    {
+      "module": ":domain",
+      "restrictions": []
+    },
+    {
+      "module": ":domain:account",
+      "restrictions": []
+    },
+    {
+      "module": ":domain:credentials",
+      "restrictions": []
+    },
+    {
+      "module": ":domain:memo",
+      "restrictions": []
+    },
+    {
+      "module": ":domain:sync",
+      "restrictions": []
+    },
+    {
+      "module": ":feature",
+      "restrictions": []
+    },
+    {
+      "module": ":feature:calendar",
+      "restrictions": []
+    },
+    {
+      "module": ":feature:login",
+      "restrictions": []
+    },
+    {
+      "module": ":feature:memo",
+      "restrictions": []
+    },
+    {
+      "module": ":feature:more",
+      "restrictions": []
+    },
+    {
+      "module": ":library",
+      "restrictions": []
+    },
+    {
+      "module": ":library:compose-ui",
+      "restrictions": []
+    },
+    {
+      "module": ":library:koin-compose",
+      "restrictions": []
+    },
+    {
+      "module": ":library:kotlinx-coroutines-core",
+      "restrictions": []
+    },
+    {
+      "module": ":library:kotlinx-datetime",
+      "restrictions": []
+    },
+    {
+      "module": ":library:navigation3-runtime",
+      "restrictions": []
+    },
+    {
+      "module": ":library:room-common",
+      "restrictions": []
+    },
+    {
+      "module": ":presenter",
+      "restrictions": []
+    },
+    {
+      "module": ":presenter:calendar",
+      "restrictions": []
+    },
+    {
+      "module": ":presenter:calendar:api",
+      "restrictions": []
+    },
+    {
+      "module": ":presenter:calendar:compose",
+      "restrictions": []
+    },
+    {
+      "module": ":presenter:memo",
+      "restrictions": []
+    },
+    {
+      "module": ":presenter:memo:api",
+      "restrictions": []
+    },
+    {
+      "module": ":presenter:memo:compose",
+      "restrictions": []
+    }
+  ]
+}
