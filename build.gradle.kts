@@ -11,6 +11,9 @@ plugins {
     // abc
     alias(libs.plugins.buildkonfig) apply false
     alias(libs.plugins.dependency.guard) apply false
+    alias(libs.plugins.firebase.crashlytics) apply false
+    alias(libs.plugins.firebase.perf) apply false
+    alias(libs.plugins.google.services) apply false
     alias(libs.plugins.koin.compiler) apply false
     alias(libs.plugins.spm) apply false
 

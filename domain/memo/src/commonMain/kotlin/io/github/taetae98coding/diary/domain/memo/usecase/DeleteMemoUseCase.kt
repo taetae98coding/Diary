@@ -1,6 +1,5 @@
 package io.github.taetae98coding.diary.domain.memo.usecase
 
-import io.github.taetae98coding.diary.core.model.account.Account
 import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
 import io.github.taetae98coding.diary.domain.memo.repository.AccountMemoRepository
 import io.github.taetae98coding.diary.domain.sync.usecase.RequestSyncUseCase
@@ -20,10 +19,7 @@ public class DeleteMemoUseCase(
 
             accountMemoRepository.updateDelete(memoId = memoId, isDeleted = true)
 
-            when (account) {
-                is Account.User -> requestSyncUseCase(account.accountId)
-                is Account.Guest -> Unit
-            }
+            requestSyncUseCase()
         }
     }
 }

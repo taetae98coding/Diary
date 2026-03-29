@@ -6,6 +6,7 @@ import io.github.jan.supabase.auth.status.SessionStatus
 import io.github.taetae98coding.diary.core.supabase.api.SupabaseAuth
 import io.github.taetae98coding.diary.core.supabase.api.SupabaseSessionStatus
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.mapLatest
 import org.koin.core.annotation.Factory
 
@@ -43,5 +44,6 @@ internal class SupabaseAuthImpl(private val supabase: SupabaseClient) : Supabase
             retrieveUser = retrieveUser,
             autoRefresh = autoRefresh,
         )
+        supabase.auth.sessionStatus.first { it is SessionStatus.Authenticated || (it is SessionStatus.NotAuthenticated && !it.isSignOut) }
     }
 }

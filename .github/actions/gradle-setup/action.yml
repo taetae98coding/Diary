@@ -1,5 +1,5 @@
 name: 🛠️ Gradle 설정
-description: local.properties, xcconfig, Java, Android SDK, Gradle 설정
+description: local.properties, xcconfig, Google Service, Java, Android SDK, Gradle 설정
 
 inputs:
   local-properties:
@@ -10,6 +10,21 @@ inputs:
     required: false
   real-xcconfig:
     description: real.xcconfig 내용
+    required: false
+  google-services-dev:
+    description: google-services.json (dev)
+    required: false
+  google-services-real:
+    description: google-services.json (real)
+    required: false
+  google-service-info-dev-debug:
+    description: GoogleService-Info.plist (DevDebug)
+    required: false
+  google-service-info-real-debug:
+    description: GoogleService-Info.plist (RealDebug)
+    required: false
+  google-service-info-real-release:
+    description: GoogleService-Info.plist (RealRelease)
     required: false
 
 runs:
@@ -28,6 +43,41 @@ runs:
       if: inputs.real-xcconfig != ''
       shell: bash
       run: echo "${{ inputs.real-xcconfig }}" > Diary/Diary/real.xcconfig
+
+    - name: 📝 google-services.json (dev) 생성
+      if: inputs.google-services-dev != ''
+      shell: bash
+      run: |
+        mkdir -p app/android/src/dev
+        echo '${{ inputs.google-services-dev }}' > app/android/src/dev/google-services.json
+
+    - name: 📝 google-services.json (real) 생성
+      if: inputs.google-services-real != ''
+      shell: bash
+      run: |
+        mkdir -p app/android/src/real
+        echo '${{ inputs.google-services-real }}' > app/android/src/real/google-services.json
+
+    - name: 📝 GoogleService-Info.plist (DevDebug) 생성
+      if: inputs.google-service-info-dev-debug != ''
+      shell: bash
+      run: |
+        mkdir -p Diary/GoogleService/DevDebug
+        echo '${{ inputs.google-service-info-dev-debug }}' > Diary/GoogleService/DevDebug/GoogleService-Info.plist
+
+    - name: 📝 GoogleService-Info.plist (RealDebug) 생성
+      if: inputs.google-service-info-real-debug != ''
+      shell: bash
+      run: |
+        mkdir -p Diary/GoogleService/RealDebug
+        echo '${{ inputs.google-service-info-real-debug }}' > Diary/GoogleService/RealDebug/GoogleService-Info.plist
+
+    - name: 📝 GoogleService-Info.plist (RealRelease) 생성
+      if: inputs.google-service-info-real-release != ''
+      shell: bash
+      run: |
+        mkdir -p Diary/GoogleService/RealRelease
+        echo '${{ inputs.google-service-info-real-release }}' > Diary/GoogleService/RealRelease/GoogleService-Info.plist
 
     - name: ☕ Java 설정
       uses: actions/setup-java@v5

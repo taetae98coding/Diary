@@ -2,51 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "3a16a9ad59c9aeeb0b556119a1704403",
+    "identityHash": "9cf2e49c44b6745e1f19a2c30d564170",
     "entities": [
       {
-        "tableName": "AccountMemoLocalEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`accountId` TEXT NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000', `memoId` TEXT NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000', PRIMARY KEY(`accountId`, `memoId`), FOREIGN KEY(`memoId`) REFERENCES `Memo`(`id`) ON UPDATE CASCADE ON DELETE CASCADE )",
-        "fields": [
-          {
-            "fieldPath": "accountId",
-            "columnName": "accountId",
-            "affinity": "TEXT",
-            "notNull": true,
-            "defaultValue": "'00000000-0000-0000-0000-000000000000'"
-          },
-          {
-            "fieldPath": "memoId",
-            "columnName": "memoId",
-            "affinity": "TEXT",
-            "notNull": true,
-            "defaultValue": "'00000000-0000-0000-0000-000000000000'"
-          }
-        ],
-        "primaryKey": {
-          "autoGenerate": false,
-          "columnNames": [
-            "accountId",
-            "memoId"
-          ]
-        },
-        "foreignKeys": [
-          {
-            "table": "Memo",
-            "onDelete": "CASCADE",
-            "onUpdate": "CASCADE",
-            "columns": [
-              "memoId"
-            ],
-            "referencedColumns": [
-              "id"
-            ]
-          }
-        ]
-      },
-      {
         "tableName": "Memo",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000', `isFinished` INTEGER NOT NULL DEFAULT 0, `isDeleted` INTEGER NOT NULL DEFAULT 0, `updatedAt` INTEGER NOT NULL DEFAULT 0, `createdAt` INTEGER NOT NULL DEFAULT 0, `title` TEXT NOT NULL DEFAULT '', `description` TEXT NOT NULL DEFAULT '', `isAllDay` INTEGER NOT NULL DEFAULT 0, `start` TEXT DEFAULT NULL, `endInclusive` TEXT DEFAULT NULL, `color` INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000', `primaryTag` TEXT DEFAULT NULL, `isFinished` INTEGER NOT NULL DEFAULT 0, `isDeleted` INTEGER NOT NULL DEFAULT 0, `updatedAt` INTEGER NOT NULL DEFAULT 0, `createdAt` INTEGER NOT NULL DEFAULT 0, `title` TEXT NOT NULL DEFAULT '', `description` TEXT NOT NULL DEFAULT '', `isAllDay` INTEGER NOT NULL DEFAULT 0, `start` TEXT DEFAULT NULL, `endInclusive` TEXT DEFAULT NULL, `color` INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -54,6 +14,12 @@
             "affinity": "TEXT",
             "notNull": true,
             "defaultValue": "'00000000-0000-0000-0000-000000000000'"
+          },
+          {
+            "fieldPath": "primaryTag",
+            "columnName": "primaryTag",
+            "affinity": "TEXT",
+            "defaultValue": "NULL"
           },
           {
             "fieldPath": "isFinished",
@@ -132,6 +98,219 @@
         }
       },
       {
+        "tableName": "Tag",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000', `isFinished` INTEGER NOT NULL DEFAULT 0, `isDeleted` INTEGER NOT NULL DEFAULT 0, `updatedAt` INTEGER NOT NULL DEFAULT 0, `createdAt` INTEGER NOT NULL DEFAULT 0, `title` TEXT NOT NULL DEFAULT '', `description` TEXT NOT NULL DEFAULT '', `color` INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'00000000-0000-0000-0000-000000000000'"
+          },
+          {
+            "fieldPath": "isFinished",
+            "columnName": "isFinished",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "isDeleted",
+            "columnName": "isDeleted",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updatedAt",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "detail.title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "detail.description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "detail.color",
+            "columnName": "color",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "MemoTag",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`memoId` TEXT NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000', `tagId` TEXT NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000', `isMemoTag` INTEGER NOT NULL DEFAULT 0, `updatedAt` INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(`memoId`, `tagId`), FOREIGN KEY(`memoId`) REFERENCES `Memo`(`id`) ON UPDATE CASCADE ON DELETE CASCADE , FOREIGN KEY(`tagId`) REFERENCES `Tag`(`id`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "memoId",
+            "columnName": "memoId",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'00000000-0000-0000-0000-000000000000'"
+          },
+          {
+            "fieldPath": "tagId",
+            "columnName": "tagId",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'00000000-0000-0000-0000-000000000000'"
+          },
+          {
+            "fieldPath": "isMemoTag",
+            "columnName": "isMemoTag",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updatedAt",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "memoId",
+            "tagId"
+          ]
+        },
+        "foreignKeys": [
+          {
+            "table": "Memo",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "memoId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "Tag",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "tagId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "AccountMemo",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`accountId` TEXT NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000', `memoId` TEXT NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000', PRIMARY KEY(`accountId`, `memoId`), FOREIGN KEY(`memoId`) REFERENCES `Memo`(`id`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "accountId",
+            "columnName": "accountId",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'00000000-0000-0000-0000-000000000000'"
+          },
+          {
+            "fieldPath": "memoId",
+            "columnName": "memoId",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'00000000-0000-0000-0000-000000000000'"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "accountId",
+            "memoId"
+          ]
+        },
+        "foreignKeys": [
+          {
+            "table": "Memo",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "memoId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "AccountTag",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`accountId` TEXT NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000', `tagId` TEXT NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000', PRIMARY KEY(`accountId`, `tagId`), FOREIGN KEY(`tagId`) REFERENCES `Tag`(`id`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "accountId",
+            "columnName": "accountId",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'00000000-0000-0000-0000-000000000000'"
+          },
+          {
+            "fieldPath": "tagId",
+            "columnName": "tagId",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'00000000-0000-0000-0000-000000000000'"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "accountId",
+            "tagId"
+          ]
+        },
+        "foreignKeys": [
+          {
+            "table": "Tag",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "tagId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
         "tableName": "SyncMemo",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`memoId` TEXT NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000', `state` INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(`memoId`), FOREIGN KEY(`memoId`) REFERENCES `Memo`(`id`) ON UPDATE CASCADE ON DELETE CASCADE )",
         "fields": [
@@ -169,11 +348,99 @@
             ]
           }
         ]
+      },
+      {
+        "tableName": "SyncMemoTag",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`memoId` TEXT NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000', `tagId` TEXT NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000', `state` INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(`memoId`, `tagId`), FOREIGN KEY(`memoId`, `tagId`) REFERENCES `MemoTag`(`memoId`, `tagId`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "memoId",
+            "columnName": "memoId",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'00000000-0000-0000-0000-000000000000'"
+          },
+          {
+            "fieldPath": "tagId",
+            "columnName": "tagId",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'00000000-0000-0000-0000-000000000000'"
+          },
+          {
+            "fieldPath": "state",
+            "columnName": "state",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "memoId",
+            "tagId"
+          ]
+        },
+        "foreignKeys": [
+          {
+            "table": "MemoTag",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "memoId",
+              "tagId"
+            ],
+            "referencedColumns": [
+              "memoId",
+              "tagId"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "SyncTag",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`tagId` TEXT NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000', `state` INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(`tagId`), FOREIGN KEY(`tagId`) REFERENCES `Tag`(`id`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "tagId",
+            "columnName": "tagId",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'00000000-0000-0000-0000-000000000000'"
+          },
+          {
+            "fieldPath": "state",
+            "columnName": "state",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "tagId"
+          ]
+        },
+        "foreignKeys": [
+          {
+            "table": "Tag",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "tagId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3a16a9ad59c9aeeb0b556119a1704403')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9cf2e49c44b6745e1f19a2c30d564170')"
     ]
   }
 }

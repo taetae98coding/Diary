@@ -58,7 +58,7 @@ class UpdateMemoUseCaseTest : BehaviorSpec() {
                 }
 
                 Then("RequestSyncUseCase를 호출한다") {
-                    verify(exactly = 1) { requestSyncUseCase(account.accountId) }
+                    coVerify(exactly = 1) { requestSyncUseCase() }
                 }
             }
         }
@@ -94,7 +94,7 @@ class UpdateMemoUseCaseTest : BehaviorSpec() {
                 }
 
                 Then("RequestSyncUseCase를 호출한다") {
-                    verify(exactly = 1) { requestSyncUseCase(account.accountId) }
+                    coVerify(exactly = 1) { requestSyncUseCase() }
                 }
             }
         }
@@ -117,8 +117,8 @@ class UpdateMemoUseCaseTest : BehaviorSpec() {
                     result.shouldBeSuccess()
                 }
 
-                Then("RequestSyncUseCase를 호출하지 않는다") {
-                    verify(exactly = 0) { requestSyncUseCase(any()) }
+                Then("RequestSyncUseCase를 호출한다") {
+                    coVerify(exactly = 1) { requestSyncUseCase() }
                 }
             }
         }

@@ -10,6 +10,8 @@ public data class MemoRemoteEntity(
     val id: Uuid,
     @SerialName("detail")
     val detail: MemoDetailRemoteEntity,
+    @SerialName("primaryTag")
+    val primaryTag: Uuid? = null,
     @SerialName("isFinished")
     val isFinished: Boolean,
     @SerialName("isDeleted")

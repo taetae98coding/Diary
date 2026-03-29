@@ -21,6 +21,7 @@ import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.isMetaPressed
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.type
+import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.compose.dropUnlessResumed
 import io.github.taetae98coding.diary.compose.core.button.AddFloatingButton
@@ -35,6 +36,9 @@ import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
 import io.github.taetae98coding.diary.library.compose.ui.random
 import io.github.taetae98coding.diary.presenter.memo.api.MemoAddEffect
 import io.github.taetae98coding.diary.presenter.memo.api.MemoAddStateHolder
+import io.github.taetae98coding.diary.presenter.memo.api.TagCardUiState
+import io.github.taetae98coding.diary.presenter.memo.compose.TagCard
+import kotlin.uuid.Uuid
 import kotlinx.coroutines.launch
 
 @Composable
@@ -43,15 +47,21 @@ public fun MemoAddScaffold(
     modifier: Modifier = Modifier,
     state: MemoAddScaffoldState = rememberMemoAddScaffoldState(),
     onNavigateUp: () -> Unit = {},
+    onTagCard: () -> Unit = {},
+    onTag: (Uuid) -> Unit = {},
 ) {
     val isInProgress by stateHolder.isInProgress.collectAsStateWithLifecycle()
+    val tagCardUiState by stateHolder.tagCardUiState.collectAsStateWithLifecycle()
 
     MemoAddScaffold(
+        modifier = modifier,
         state = state,
+        tagCardUiStateProvider = { tagCardUiState },
         isInProgressProvider = { isInProgress },
         onNavigateUp = onNavigateUp,
+        onTagCard = onTagCard,
+        onTag = onTag,
         onAdd = { stateHolder.add(state.detail) },
-        modifier = modifier,
     )
 
     TitleFocusEffect(state = state)
@@ -64,11 +74,14 @@ public fun MemoAddScaffold(
 
 @Composable
 internal fun MemoAddScaffold(
-    state: MemoAddScaffoldState,
-    isInProgressProvider: () -> Boolean,
-    onNavigateUp: () -> Unit,
-    onAdd: () -> Unit,
     modifier: Modifier = Modifier,
+    state: MemoAddScaffoldState = rememberMemoAddScaffoldState(),
+    tagCardUiStateProvider: () -> TagCardUiState = { TagCardUiState.Loading },
+    isInProgressProvider: () -> Boolean = { false },
+    onNavigateUp: () -> Unit = {},
+    onTagCard: () -> Unit = {},
+    onTag: (Uuid) -> Unit = {},
+    onAdd: () -> Unit = {},
 ) {
     Scaffold(
         modifier = modifier
@@ -81,17 +94,16 @@ internal fun MemoAddScaffold(
                 }
             }.imePadding(),
         topBar = { TopBar(onNavigateUp = onNavigateUp) },
+        snackbarHost = { SnackbarHost(hostState = state.hostState) },
         floatingActionButton = {
             AddFloatingButton(
                 onClick = dropUnlessResumed(block = onAdd),
                 isInProgressProvider = isInProgressProvider,
             )
         },
-        snackbarHost = { SnackbarHost(hostState = state.hostState) },
     ) { paddingValues ->
         LazyColumn(
-            modifier = Modifier
-                .padding(paddingValues)
+            modifier = Modifier.padding(paddingValues)
                 .fillMaxSize(),
             contentPadding = DiaryTheme.dimen.screenPaddingValues,
             verticalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.screenCardSpace),
@@ -114,14 +126,23 @@ internal fun MemoAddScaffold(
                     modifier = Modifier.fillParentMaxWidth(),
                 )
             }
+
+            item {
+                TagCard(
+                    uiStateProvider = tagCardUiStateProvider,
+                    onClick = onTagCard,
+                    onTag = onTag,
+                )
+            }
         }
     }
 }
 
 @Composable
 private fun TitleFocusEffect(state: MemoAddScaffoldState) {
-    LaunchedEffect(state) {
+    LifecycleResumeEffect(state) {
         state.titleCardState.focusRequester.requestFocus()
+        onPauseOrDispose { }
     }
 }
 

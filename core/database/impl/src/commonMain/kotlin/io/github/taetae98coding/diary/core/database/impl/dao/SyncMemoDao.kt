@@ -15,7 +15,7 @@ internal interface SyncMemoDao : RoomDao<SyncMemoLocalEntity> {
         SELECT Memo.*
         FROM Memo
         INNER JOIN SyncMemo ON SyncMemo.memoId = Memo.id
-        INNER JOIN AccountMemoLocalEntity ON AccountMemoLocalEntity.memoId = Memo.id AND AccountMemoLocalEntity.accountId = :accountId
+        INNER JOIN AccountMemo ON AccountMemo.memoId = Memo.id AND AccountMemo.accountId = :accountId
         WHERE SyncMemo.state = :state
         LIMIT 100
         """,
@@ -30,7 +30,7 @@ internal interface SyncMemoDao : RoomDao<SyncMemoLocalEntity> {
         SELECT COALESCE(MAX(Memo.updatedAt), 0)
         FROM Memo
         INNER JOIN SyncMemo ON SyncMemo.memoId = Memo.id
-        INNER JOIN AccountMemoLocalEntity ON AccountMemoLocalEntity.memoId = Memo.id AND AccountMemoLocalEntity.accountId = :accountId
+        INNER JOIN AccountMemo ON AccountMemo.memoId = Memo.id AND AccountMemo.accountId = :accountId
         WHERE SyncMemo.state = :state
         """,
     )

@@ -2,8 +2,10 @@ package io.github.taetae98coding.diary.feature.memo.detail
 
 import io.github.taetae98coding.diary.core.model.memo.Memo
 import io.github.taetae98coding.diary.core.model.memo.MemoDetail
+import io.github.taetae98coding.diary.core.model.tag.Tag
 import io.github.taetae98coding.diary.domain.memo.usecase.DeleteMemoUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.FinishMemoUseCase
+import io.github.taetae98coding.diary.domain.memo.usecase.GetMemoTagUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.GetMemoUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.RestartMemoUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.UpdateMemoUseCase
@@ -19,9 +21,14 @@ internal class AccountMemoDetailStrategy(
     private val finishMemoUseCase: FinishMemoUseCase,
     private val restartMemoUseCase: RestartMemoUseCase,
     private val deleteMemoUseCase: DeleteMemoUseCase,
+    private val getMemoTagUseCase: GetMemoTagUseCase,
 ) : MemoDetailStrategy {
     override fun get(memoId: Uuid): Flow<Result<Memo?>> {
         return getMemoUseCase(memoId)
+    }
+
+    override fun getMemoTag(memoId: Uuid): Flow<Result<List<Tag>>> {
+        return getMemoTagUseCase(memoId)
     }
 
     override suspend fun update(

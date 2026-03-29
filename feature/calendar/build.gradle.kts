@@ -6,8 +6,8 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(projects.domain.memo)
                 implementation(projects.domain.sync)
+                implementation(projects.domain.memo)
                 implementation(projects.presenter.calendar.compose)
             }
         }

@@ -28,13 +28,13 @@ class MemoAddStateHolderTest : FunSpec() {
         beforeTest {
             clearAllMocks()
             testScope = TestScope()
-            strategy = mockk()
+            strategy = mockk(relaxed = true)
             stateHolder = MemoAddStateHolder(testScope, strategy)
         }
 
         test("add 성공 시 effect가 AddFinish") {
             val detail = fixtureMonkey.giveMeOne<MemoDetail>()
-            coEvery { strategy.add(detail) } returns Result.success(Unit)
+            coEvery { strategy.add(detail, any(), any()) } returns Result.success(Unit)
 
             stateHolder.add(detail)
             testScope.advanceUntilIdle()
@@ -45,7 +45,7 @@ class MemoAddStateHolderTest : FunSpec() {
 
         test("add 시 MemoTitleBlankException이면 effect가 TitleBlank") {
             val detail = fixtureMonkey.giveMeOne<MemoDetail>()
-            coEvery { strategy.add(detail) } returns Result.failure(MemoTitleBlankException())
+            coEvery { strategy.add(detail, any(), any()) } returns Result.failure(MemoTitleBlankException())
 
             stateHolder.add(detail)
             testScope.advanceUntilIdle()
@@ -55,7 +55,7 @@ class MemoAddStateHolderTest : FunSpec() {
 
         test("add 시 알 수 없는 에러면 effect가 UnknownError") {
             val detail = fixtureMonkey.giveMeOne<MemoDetail>()
-            coEvery { strategy.add(detail) } returns Result.failure(RuntimeException())
+            coEvery { strategy.add(detail, any(), any()) } returns Result.failure(RuntimeException())
 
             stateHolder.add(detail)
             testScope.advanceUntilIdle()
@@ -66,7 +66,7 @@ class MemoAddStateHolderTest : FunSpec() {
         test("isInProgress 중이면 add를 무시한다") {
             val detail = fixtureMonkey.giveMeOne<MemoDetail>()
             val deferred = CompletableDeferred<Result<Unit>>()
-            coEvery { strategy.add(detail) } coAnswers { deferred.await() }
+            coEvery { strategy.add(detail, any(), any()) } coAnswers { deferred.await() }
 
             stateHolder.add(detail)
             testScope.advanceUntilIdle()
@@ -77,12 +77,12 @@ class MemoAddStateHolderTest : FunSpec() {
             deferred.complete(Result.success(Unit))
             testScope.advanceUntilIdle()
 
-            coVerify(exactly = 1) { strategy.add(detail) }
+            coVerify(exactly = 1) { strategy.add(detail, any(), any()) }
         }
 
         test("consumeEffect 호출 시 effect가 None으로 초기화된다") {
             val detail = fixtureMonkey.giveMeOne<MemoDetail>()
-            coEvery { strategy.add(detail) } returns Result.success(Unit)
+            coEvery { strategy.add(detail, any(), any()) } returns Result.success(Unit)
 
             stateHolder.add(detail)
             testScope.advanceUntilIdle()

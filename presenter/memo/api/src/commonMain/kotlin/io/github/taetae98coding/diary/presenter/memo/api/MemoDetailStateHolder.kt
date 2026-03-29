@@ -26,6 +26,27 @@ public class MemoDetailStateHolder(
             initialValue = null,
         )
 
+    public val tagCardUiState: StateFlow<TagCardUiState> = combine(
+        memo,
+        strategy.getMemoTag(memoId.value).mapLatest { it.getOrDefault(emptyList()) },
+    ) { memo, tagList ->
+        TagCardUiState.State(
+            tagList = tagList.map { tag ->
+                MemoTagUiState(
+                    tagId = tag.id,
+                    title = tag.detail.title,
+                    color = tag.detail.color,
+                    isSelected = true,
+                    isPrimary = tag.id == memo?.primaryTag,
+                )
+            },
+        )
+    }.stateIn(
+        scope = coroutineScope,
+        started = SharingStarted.WhileSubscribed(5_000),
+        initialValue = TagCardUiState.Loading,
+    )
+
     private val _updateInProgress: MutableStateFlow<Boolean> = MutableStateFlow(false)
     public val updateInProgress: StateFlow<Boolean> = _updateInProgress.asStateFlow()
 

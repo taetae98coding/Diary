@@ -22,6 +22,15 @@ compose {
     desktop {
         application {
             mainClass = "io.github.taetae98coding.diary.JvmAppKt"
+
+            nativeDistributions {
+                packageName = "Diary"
+                packageVersion = BuildConfig.VERSION_NAME
+
+                macOS {
+                    bundleID = BuildConfig.NAMESPACE
+                }
+            }
         }
     }
 }

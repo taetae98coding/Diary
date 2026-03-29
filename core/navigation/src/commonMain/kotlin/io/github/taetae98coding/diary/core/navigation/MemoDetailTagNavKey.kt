@@ -1,0 +1,12 @@
+package io.github.taetae98coding.diary.core.navigation
+
+import androidx.navigation3.runtime.NavKey
+import io.github.taetae98coding.diary.core.navigation.argument.MemoId
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+public data class MemoDetailTagNavKey(
+    @SerialName("memoId")
+    val memoId: MemoId,
+) : NavKey

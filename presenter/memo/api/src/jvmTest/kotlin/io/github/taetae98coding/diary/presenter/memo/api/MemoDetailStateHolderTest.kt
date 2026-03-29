@@ -34,7 +34,7 @@ class MemoDetailStateHolderTest : FunSpec() {
         beforeTest {
             clearAllMocks()
             testScope = TestScope()
-            strategy = mockk {
+            strategy = mockk(relaxed = true) {
                 every { get(memoId.value) } returns flowOf(Result.success(null))
             }
             stateHolder = MemoDetailStateHolder(testScope, memoId, strategy)
