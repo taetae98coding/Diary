@@ -52,6 +52,9 @@ import io.github.taetae98coding.diary.presenter.memo.api.MemoDetailDeleteUiState
 import io.github.taetae98coding.diary.presenter.memo.api.MemoDetailEffect
 import io.github.taetae98coding.diary.presenter.memo.api.MemoDetailFinishUiState
 import io.github.taetae98coding.diary.presenter.memo.api.MemoDetailStateHolder
+import io.github.taetae98coding.diary.presenter.memo.api.TagCardUiState
+import io.github.taetae98coding.diary.presenter.memo.compose.TagCard
+import kotlin.uuid.Uuid
 import kotlinx.coroutines.launch
 
 @Composable
@@ -59,11 +62,14 @@ public fun MemoDetailScaffold(
     stateHolder: MemoDetailStateHolder,
     modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit = {},
+    onTagCard: () -> Unit = {},
+    onTag: (Uuid) -> Unit = {},
 ) {
     val updateInProgress by stateHolder.updateInProgress.collectAsStateWithLifecycle()
     val finishUiState by stateHolder.finishUiState.collectAsStateWithLifecycle()
     val deleteUiState by stateHolder.deleteUiState.collectAsStateWithLifecycle()
     val memo by stateHolder.memo.collectAsStateWithLifecycle()
+    val tagCardUiState by stateHolder.tagCardUiState.collectAsStateWithLifecycle()
     val state = rememberMemoDetailScaffoldState(memoProvider = { memo })
 
     MemoDetailScaffold(
@@ -72,11 +78,14 @@ public fun MemoDetailScaffold(
         finishUiStateProvider = { finishUiState },
         deleteUiStateProvider = { deleteUiState },
         updateInProgressProvider = { updateInProgress },
+        tagCardUiStateProvider = { tagCardUiState },
         onNavigateUp = onNavigateUp,
         onUpdate = { stateHolder.update(state.detail) },
         onFinish = stateHolder::finish,
         onRestart = stateHolder::restart,
         onDelete = stateHolder::delete,
+        onTagCard = onTagCard,
+        onTag = onTag,
         modifier = modifier,
     )
 
@@ -94,11 +103,14 @@ internal fun MemoDetailScaffold(
     finishUiStateProvider: () -> MemoDetailFinishUiState,
     deleteUiStateProvider: () -> MemoDetailDeleteUiState,
     updateInProgressProvider: () -> Boolean,
+    tagCardUiStateProvider: () -> TagCardUiState,
     onNavigateUp: () -> Unit,
     onUpdate: () -> Unit,
     onFinish: () -> Unit,
     onRestart: () -> Unit,
     onDelete: () -> Unit,
+    onTagCard: () -> Unit,
+    onTag: (Uuid) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val isLoading by remember { derivedStateOf { detailProvider() == null } }
@@ -172,6 +184,14 @@ internal fun MemoDetailScaffold(
                         ColorCard(
                             state = state.colorCardState,
                             modifier = Modifier.fillParentMaxWidth(),
+                        )
+                    }
+
+                    item {
+                        TagCard(
+                            uiStateProvider = tagCardUiStateProvider,
+                            onClick = onTagCard,
+                            onTag = onTag,
                         )
                     }
                 }

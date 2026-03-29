@@ -15,6 +15,6 @@ public data class CalendarMemoLocalEntity(
     val start: LocalDateTime,
     @ColumnInfo(name = "endInclusive", defaultValue = "1998-01-09T00:00")
     val endInclusive: LocalDateTime,
-    @ColumnInfo(name = "color", defaultValue = "")
+    @ColumnInfo(name = "calendarMemoColor", defaultValue = "")
     val color: Int,
 )

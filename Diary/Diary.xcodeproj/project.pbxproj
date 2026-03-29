@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8800ABC52F78110700B86BB3 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 8800ABC42F78110700B86BB3 /* GoogleSignIn */; };
+		88CA4DF12F79822300659434 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 88CA4DF02F79822300659434 /* FirebaseAnalytics */; };
+		88CA4DF32F79822300659434 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 88CA4DF22F79822300659434 /* FirebaseCrashlytics */; };
+		88CA4DF52F79822300659434 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 88CA4DF42F79822300659434 /* FirebasePerformance */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88CA4DF32F79822300659434 /* FirebaseCrashlytics in Frameworks */,
+				88CA4DF12F79822300659434 /* FirebaseAnalytics in Frameworks */,
+				88CA4DF52F79822300659434 /* FirebasePerformance in Frameworks */,
 				8800ABC52F78110700B86BB3 /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,10 +76,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8800ABB32F78058500B86BB3 /* Build configuration list for PBXNativeTarget "Diary" */;
 			buildPhases = (
+				88CA4DF62F7983A200659434 /* Copy GoogleService-Info */,
 				8800ABB62F7805A300B86BB3 /* Kotlin Build */,
 				8800ABA42F78058400B86BB3 /* Sources */,
 				8800ABA52F78058400B86BB3 /* Frameworks */,
 				8800ABA62F78058400B86BB3 /* Resources */,
+				88CA4DF72F79866500659434 /* FirebaseCrashlytics */,
 			);
 			buildRules = (
 			);
@@ -85,6 +93,9 @@
 			name = Diary;
 			packageProductDependencies = (
 				8800ABC42F78110700B86BB3 /* GoogleSignIn */,
+				88CA4DF02F79822300659434 /* FirebaseAnalytics */,
+				88CA4DF22F79822300659434 /* FirebaseCrashlytics */,
+				88CA4DF42F79822300659434 /* FirebasePerformance */,
 			);
 			productName = Diary;
 			productReference = 8800ABA82F78058400B86BB3 /* Diary.app */;
@@ -106,16 +117,18 @@
 				};
 			};
 			buildConfigurationList = 8800ABA32F78058400B86BB3 /* Build configuration list for PBXProject "Diary" */;
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				ko,
+				en,
 			);
 			mainGroup = 8800AB9F2F78058400B86BB3;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				8800ABC32F78110700B86BB3 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				88CA4DEF2F79822300659434 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8800ABA92F78058400B86BB3 /* Products */;
@@ -155,7 +168,48 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :app:ios:embedAndSignAppleFrameworkForXcode\n\ncase \"${CONFIGURATION}\" in\n  \"DevDebug\")\n    # DevDebug용 실행 (예: 특정 플래그 추가)\n    ./gradlew :app:ios:embedAndSignAppleFrameworkForXcode -Pbuildkonfig.flavor=dev\n    ;;\n  \"RealDebug\")\n    # RealDebug용 실행\n    ./gradlew :app:ios:embedAndSignAppleFrameworkForXcode -Pbuildkonfig.flavor=real\n    ;;\n  \"RealRelease\")\n    # RealRelease용 실행\n    ./gradlew :app:ios:embedAndSignAppleFrameworkForXcode -Pbuildkonfig.flavor=real --no-build-cache --no-configuration-cache\n    ;;\n  *)\n    # 그 외 기본 설정\n    ./gradlew :app:ios:embedAndSignAppleFrameworkForXcode\n    ;;\nesac\n";
+			shellScript = "cd \"$SRCROOT/..\"\n\ncase \"${CONFIGURATION}\" in\n  \"DevDebug\")\n    # DevDebug용 실행 (예: 특정 플래그 추가)\n    ./gradlew :app:ios:embedAndSignAppleFrameworkForXcode -Pbuildkonfig.flavor=dev\n    ;;\n  \"RealDebug\")\n    # RealDebug용 실행\n    ./gradlew :app:ios:embedAndSignAppleFrameworkForXcode -Pbuildkonfig.flavor=real\n    ;;\n  \"RealRelease\")\n    # RealRelease용 실행\n    ./gradlew :app:ios:embedAndSignAppleFrameworkForXcode -Pbuildkonfig.flavor=real --no-build-cache --no-configuration-cache\n    ;;\n  *)\n    # 그 외 기본 설정\n    ./gradlew :app:ios:embedAndSignAppleFrameworkForXcode\n    ;;\nesac\n";
+		};
+		88CA4DF62F7983A200659434 /* Copy GoogleService-Info */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy GoogleService-Info";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Configuration 이름과 동일한 폴더에서 파일 찾기\nSOURCE_PLIST=\"${PROJECT_DIR}/GoogleService/${CONFIGURATION}/GoogleService-Info.plist\"\nDEST_PLIST=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\n\n# 파일 복사\nif [ -f \"$SOURCE_PLIST\" ]; then\n    cp \"$SOURCE_PLIST\" \"$DEST_PLIST\"\nelse\n    echo \"error: File not found at $SOURCE_PLIST\"\n    exit 1\nfi\n";
+		};
+		88CA4DF72F79866500659434 /* FirebaseCrashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
+			);
+			name = FirebaseCrashlytics;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -250,7 +304,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Diary/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = DiaryRealDebug;
+				INFOPLIST_KEY_CFBundleDisplayName = Diary;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -261,7 +315,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.taetae98coding.diary.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -348,7 +402,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Diary/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = DiaryRealDebug;
+				INFOPLIST_KEY_CFBundleDisplayName = Diary;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -359,7 +413,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.taetae98coding.diary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -453,7 +507,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Diary/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = DiaryRealDebug;
+				INFOPLIST_KEY_CFBundleDisplayName = Diary;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -464,7 +518,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.taetae98coding.diary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -512,6 +566,14 @@
 				version = 9.0.0;
 			};
 		};
+		88CA4DEF2F79822300659434 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = exactVersion;
+				version = 12.11.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -519,6 +581,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8800ABC32F78110700B86BB3 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignIn;
+		};
+		88CA4DF02F79822300659434 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 88CA4DEF2F79822300659434 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		88CA4DF22F79822300659434 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 88CA4DEF2F79822300659434 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		88CA4DF42F79822300659434 /* FirebasePerformance */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 88CA4DEF2F79822300659434 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebasePerformance;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

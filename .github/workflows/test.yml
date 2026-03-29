@@ -19,6 +19,8 @@ jobs:
       - uses: ./.github/actions/gradle-setup
         with:
           local-properties: ${{ secrets.LOCAL_PROPERTIES }}
+          google-services-dev: ${{ secrets.GOOGLE_SERVICES_DEV }}
+          google-services-real: ${{ secrets.GOOGLE_SERVICES_REAL }}
 
       - name: 🧪 JVM 테스트 실행
         run: ./gradlew jvmTest
@@ -32,6 +34,8 @@ jobs:
       - uses: ./.github/actions/gradle-setup
         with:
           local-properties: ${{ secrets.LOCAL_PROPERTIES }}
+          google-services-dev: ${{ secrets.GOOGLE_SERVICES_DEV }}
+          google-services-real: ${{ secrets.GOOGLE_SERVICES_REAL }}
 
       - name: 🧪 Android Host 테스트 실행
         run: ./gradlew testAndroidHostTest
@@ -45,6 +49,8 @@ jobs:
       - uses: ./.github/actions/gradle-setup
         with:
           local-properties: ${{ secrets.LOCAL_PROPERTIES }}
+          google-services-dev: ${{ secrets.GOOGLE_SERVICES_DEV }}
+          google-services-real: ${{ secrets.GOOGLE_SERVICES_REAL }}
 
       - name: 🧪 Android Device 테스트 실행
         run: ./gradlew allSdksGroupAndroidDeviceTest

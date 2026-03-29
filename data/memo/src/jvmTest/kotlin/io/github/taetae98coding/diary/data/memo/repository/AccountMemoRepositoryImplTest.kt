@@ -6,7 +6,9 @@ import com.navercorp.fixturemonkey.kotlin.giveMeOne
 import io.github.taetae98coding.diary.core.database.api.DatabaseTransactor
 import io.github.taetae98coding.diary.core.database.api.datasource.AccountMemoLocalDataSource
 import io.github.taetae98coding.diary.core.database.api.datasource.MemoLocalDataSource
+import io.github.taetae98coding.diary.core.database.api.datasource.MemoTagLocalDataSource
 import io.github.taetae98coding.diary.core.database.api.datasource.SyncMemoLocalDataSource
+import io.github.taetae98coding.diary.core.database.api.datasource.SyncMemoTagLocalDataSource
 import io.github.taetae98coding.diary.core.database.api.entity.AccountMemoLocalEntity
 import io.github.taetae98coding.diary.core.database.api.entity.MemoLocalEntity
 import io.github.taetae98coding.diary.core.database.api.entity.SyncMemoLocalEntity
@@ -24,13 +26,17 @@ import kotlin.uuid.Uuid
 class AccountMemoRepositoryImplTest : FunSpec() {
     private val databaseTransactor = mockk<DatabaseTransactor>()
     private val memoLocalDataSource = mockk<MemoLocalDataSource>(relaxUnitFun = true)
+    private val memoTagLocalDataSource = mockk<MemoTagLocalDataSource>(relaxUnitFun = true)
     private val accountMemoLocalDataSource = mockk<AccountMemoLocalDataSource>(relaxUnitFun = true)
     private val syncMemoLocalDataSource = mockk<SyncMemoLocalDataSource>(relaxUnitFun = true)
+    private val syncMemoTagLocalDataSource = mockk<SyncMemoTagLocalDataSource>(relaxUnitFun = true)
     private val repository = AccountMemoRepositoryImpl(
         databaseTransactor,
         memoLocalDataSource,
+        memoTagLocalDataSource,
         accountMemoLocalDataSource,
         syncMemoLocalDataSource,
+        syncMemoTagLocalDataSource,
     )
 
     private val fixtureMonkey = FixtureMonkey.builder()
@@ -55,7 +61,7 @@ class AccountMemoRepositoryImplTest : FunSpec() {
             coEvery { accountMemoLocalDataSource.upsert(capture(accountMemoSlot)) } returns Unit
             coEvery { syncMemoLocalDataSource.upsert(capture(syncMemoSlot)) } returns Unit
 
-            repository.add(accountId, detail)
+            repository.add(accountId, detail, primaryTag = null, memoTagIds = emptySet())
 
             memoSlot.captured.detail shouldBe detail.toLocal()
             accountMemoSlot.captured.accountId shouldBe accountId
@@ -71,7 +77,7 @@ class AccountMemoRepositoryImplTest : FunSpec() {
                 firstArg<suspend () -> Unit>().invoke()
             }
 
-            repository.add(accountId, detail)
+            repository.add(accountId, detail, primaryTag = null, memoTagIds = emptySet())
 
             coVerifyOrder {
                 memoLocalDataSource.upsert(any<MemoLocalEntity>())

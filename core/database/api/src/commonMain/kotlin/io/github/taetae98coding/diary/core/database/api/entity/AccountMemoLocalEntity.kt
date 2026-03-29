@@ -6,6 +6,7 @@ import androidx.room3.ForeignKey
 import kotlin.uuid.Uuid
 
 @Entity(
+    tableName = "AccountMemo",
     primaryKeys = ["accountId", "memoId"],
     foreignKeys = [
         ForeignKey(
@@ -18,8 +19,8 @@ import kotlin.uuid.Uuid
     ],
 )
 public data class AccountMemoLocalEntity(
-    @ColumnInfo(defaultValue = "00000000-0000-0000-0000-000000000000")
+    @ColumnInfo(name = "accountId", defaultValue = "00000000-0000-0000-0000-000000000000")
     val accountId: Uuid,
-    @ColumnInfo(defaultValue = "00000000-0000-0000-0000-000000000000")
+    @ColumnInfo(name = "memoId", defaultValue = "00000000-0000-0000-0000-000000000000")
     val memoId: Uuid,
 )

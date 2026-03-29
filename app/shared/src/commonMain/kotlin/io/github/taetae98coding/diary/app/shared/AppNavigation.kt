@@ -10,11 +10,12 @@ import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.scene.Scene
 import androidx.navigation3.ui.NavDisplay
 import androidx.navigationevent.NavigationEvent
+import io.github.taetae98coding.diary.app.shared.navigation3.rememberRetainedValuesStoreNavEntryDecorator
 import io.github.taetae98coding.diary.feature.calendar.calendarEntry
 import io.github.taetae98coding.diary.feature.login.loginEntry
 import io.github.taetae98coding.diary.feature.memo.memoEntry
 import io.github.taetae98coding.diary.feature.more.moreEntry
-import io.github.taetae98coding.diary.app.shared.navigation3.rememberRetainedValuesStoreNavEntryDecorator
+import io.github.taetae98coding.diary.feature.tag.tagEntry
 
 @Composable
 internal fun AppNavigation(
@@ -30,6 +31,7 @@ internal fun AppNavigation(
             rememberViewModelStoreNavEntryDecorator(),
         ),
         entryProvider = entryProvider {
+            tagEntry(backStack = state.backStack)
             calendarEntry(backStack = state.backStack)
             memoEntry(backStack = state.backStack)
             moreEntry(backStack = state.backStack)

@@ -19,3 +19,7 @@ local.properties
 xcuserdata/
 *.xcuserstate
 *.xcconfig
+
+# Google
+google-services.json
+GoogleService-Info.plist

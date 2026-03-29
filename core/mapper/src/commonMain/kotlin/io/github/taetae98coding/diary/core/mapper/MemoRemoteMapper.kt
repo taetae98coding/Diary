@@ -7,6 +7,7 @@ public fun MemoLocalEntity.toRemote(): MemoRemoteEntity {
     return MemoRemoteEntity(
         id = id,
         detail = detail.toRemote(),
+        primaryTag = primaryTag,
         isFinished = isFinished,
         isDeleted = isDeleted,
         updatedAt = updatedAt,
@@ -18,6 +19,7 @@ public fun MemoRemoteEntity.toLocal(): MemoLocalEntity {
     return MemoLocalEntity(
         id = id,
         detail = detail.toLocal(),
+        primaryTag = primaryTag,
         isFinished = isFinished,
         isDeleted = isDeleted,
         updatedAt = updatedAt,

@@ -25,6 +25,8 @@ jobs:
       - uses: ./.github/actions/gradle-setup
         with:
           local-properties: ${{ secrets.LOCAL_PROPERTIES }}
+          google-services-dev: ${{ secrets.GOOGLE_SERVICES_DEV }}
+          google-services-real: ${{ secrets.GOOGLE_SERVICES_REAL }}
 
       - name: ⚙️ Git 설정
         run: |
@@ -72,6 +74,8 @@ jobs:
       - uses: ./.github/actions/gradle-setup
         with:
           local-properties: ${{ secrets.LOCAL_PROPERTIES }}
+          google-services-dev: ${{ secrets.GOOGLE_SERVICES_DEV }}
+          google-services-real: ${{ secrets.GOOGLE_SERVICES_REAL }}
 
       - name: 🔨 APK 빌드
         run: ./gradlew :app:android:assembleRealRelease -Pbuildkonfig.flavor=real --no-build-cache --no-configuration-cache
@@ -99,6 +103,11 @@ jobs:
           local-properties: ${{ secrets.LOCAL_PROPERTIES }}
           dev-xcconfig: ${{ secrets.DEV_XCCONFIG }}
           real-xcconfig: ${{ secrets.REAL_XCCONFIG }}
+          google-services-dev: ${{ secrets.GOOGLE_SERVICES_DEV }}
+          google-services-real: ${{ secrets.GOOGLE_SERVICES_REAL }}
+          google-service-info-dev-debug: ${{ secrets.GOOGLE_SERVICE_INFO_DEV_DEBUG }}
+          google-service-info-real-debug: ${{ secrets.GOOGLE_SERVICE_INFO_REAL_DEBUG }}
+          google-service-info-real-release: ${{ secrets.GOOGLE_SERVICE_INFO_REAL_RELEASE }}
 
       - name: 📦 Archive
         run: |

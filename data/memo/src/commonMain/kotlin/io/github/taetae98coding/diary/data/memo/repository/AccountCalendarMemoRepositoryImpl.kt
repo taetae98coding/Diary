@@ -15,8 +15,7 @@ public class AccountCalendarMemoRepositoryImpl(private val accountCalendarMemoLo
         accountId: Uuid,
         year: Int,
     ): Flow<List<CalendarMemo>> {
-        return accountCalendarMemoLocalDataSource
-            .get(accountId, year)
+        return accountCalendarMemoLocalDataSource.get(accountId, year)
             .map { entities -> entities.map { it.toDomain() } }
     }
 }

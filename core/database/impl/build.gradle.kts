@@ -16,6 +16,7 @@ kotlin {
                 implementation(projects.core.database.api)
                 implementation(projects.library.roomCommon)
                 implementation(libs.androidx.room3.runtime)
+                implementation(libs.androidx.room3.paging)
             }
         }
 

@@ -6,13 +6,16 @@ import io.github.taetae98coding.diary.core.navigation.MemoAddNavKey
 import io.github.taetae98coding.diary.presenter.memo.api.MemoAddStateHolder
 import io.github.taetae98coding.diary.presenter.memo.compose.add.MemoAddScaffold
 import io.github.taetae98coding.diary.presenter.memo.compose.add.rememberMemoAddScaffoldState
+import kotlin.uuid.Uuid
 
 @Composable
 internal fun MemoAddScreen(
     navKey: MemoAddNavKey,
+    navigateUp: () -> Unit,
+    navigateToMemoAddTag: () -> Unit,
+    navigateToTagDetail: (Uuid) -> Unit,
     stateHolder: MemoAddStateHolder,
     modifier: Modifier = Modifier,
-    navigateUp: () -> Unit = {},
 ) {
     val localDateRange = navKey.localDateRange
 
@@ -21,5 +24,7 @@ internal fun MemoAddScreen(
         modifier = modifier,
         state = rememberMemoAddScaffoldState(initialLocalDateRange = localDateRange),
         onNavigateUp = navigateUp,
+        onTagCard = navigateToMemoAddTag,
+        onTag = navigateToTagDetail,
     )
 }

@@ -1,9 +1,13 @@
+import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
 import io.github.taetae98coding.diary.gradle.getLocalProperties
 
 plugins {
     alias(libs.plugins.diary.primitive.android.application)
     alias(libs.plugins.diary.primitive.compose)
     alias(libs.plugins.dependency.guard)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.firebase.perf)
 }
 
 private val localProperties = getLocalProperties()
@@ -48,6 +52,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
+
+            configure<CrashlyticsExtension> {
+                mappingFileUploadEnabled = true
+            }
         }
     }
 
@@ -75,7 +83,12 @@ dependencyGuard {
 }
 
 dependencies {
-    implementation(libs.androidx.activity.compose)
     implementation(projects.app.shared)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.performance)
+    implementation(libs.koin.androidx.workmanager)
     debugImplementation(libs.leakcanary)
 }

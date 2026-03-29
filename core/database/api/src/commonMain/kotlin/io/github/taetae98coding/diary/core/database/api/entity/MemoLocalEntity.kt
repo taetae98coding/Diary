@@ -13,6 +13,8 @@ public data class MemoLocalEntity(
     val id: Uuid,
     @Embedded
     val detail: MemoDetailLocalEntity,
+    @ColumnInfo(name = "primaryTag", defaultValue = "NULL")
+    val primaryTag: Uuid? = null,
     @ColumnInfo(name = "isFinished", defaultValue = "0")
     val isFinished: Boolean = false,
     @ColumnInfo(name = "isDeleted", defaultValue = "0")

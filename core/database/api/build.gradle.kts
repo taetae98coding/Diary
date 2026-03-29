@@ -8,6 +8,7 @@ kotlin {
             dependencies {
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.androidx.room3.common)
+                implementation(libs.androidx.paging.common)
                 api(libs.kotlinx.datetime)
             }
         }
