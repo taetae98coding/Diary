@@ -137,6 +137,10 @@
       "restrictions": []
     },
     {
+      "module": ":data:tag",
+      "restrictions": []
+    },
+    {
       "module": ":domain",
       "restrictions": []
     },
@@ -157,6 +161,10 @@
       "restrictions": []
     },
     {
+      "module": ":domain:tag",
+      "restrictions": []
+    },
+    {
       "module": ":feature",
       "restrictions": []
     },
@@ -174,6 +182,10 @@
     },
     {
       "module": ":feature:more",
+      "restrictions": []
+    },
+    {
+      "module": ":feature:tag",
       "restrictions": []
     },
     {
@@ -198,6 +210,10 @@
     },
     {
       "module": ":library:navigation3-runtime",
+      "restrictions": []
+    },
+    {
+      "module": ":library:paging-common",
       "restrictions": []
     },
     {
@@ -230,6 +246,18 @@
     },
     {
       "module": ":presenter:memo:compose",
+      "restrictions": []
+    },
+    {
+      "module": ":presenter:tag",
+      "restrictions": []
+    },
+    {
+      "module": ":presenter:tag:api",
+      "restrictions": []
+    },
+    {
+      "module": ":presenter:tag:compose",
       "restrictions": []
     }
   ]
