@@ -19,11 +19,31 @@
               "isLibrary": true
             },
             {
+              "id": ":app:shared"
+            },
+            {
               "id": "androidx.activity:activity-compose",
               "isLibrary": true
             },
             {
-              "id": ":app:shared"
+              "id": "com.google.firebase:firebase-bom",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-analytics",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-crashlytics",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-perf",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-androidx-workmanager",
+              "isLibrary": true
             }
           ]
         },
@@ -39,11 +59,31 @@
               "isLibrary": true
             },
             {
+              "id": ":app:shared"
+            },
+            {
               "id": "androidx.activity:activity-compose",
               "isLibrary": true
             },
             {
-              "id": ":app:shared"
+              "id": "com.google.firebase:firebase-bom",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-analytics",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-crashlytics",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-perf",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-androidx-workmanager",
+              "isLibrary": true
             }
           ]
         },
@@ -59,11 +99,31 @@
               "isLibrary": true
             },
             {
+              "id": ":app:shared"
+            },
+            {
               "id": "androidx.activity:activity-compose",
               "isLibrary": true
             },
             {
-              "id": ":app:shared"
+              "id": "com.google.firebase:firebase-bom",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-analytics",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-crashlytics",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-perf",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-androidx-workmanager",
+              "isLibrary": true
             }
           ]
         },
@@ -75,11 +135,31 @@
               "isLibrary": true
             },
             {
+              "id": ":app:shared"
+            },
+            {
               "id": "androidx.activity:activity-compose",
               "isLibrary": true
             },
             {
-              "id": ":app:shared"
+              "id": "com.google.firebase:firebase-bom",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-analytics",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-crashlytics",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-perf",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-androidx-workmanager",
+              "isLibrary": true
             }
           ]
         },
@@ -95,11 +175,31 @@
               "isLibrary": true
             },
             {
+              "id": ":app:shared"
+            },
+            {
               "id": "androidx.activity:activity-compose",
               "isLibrary": true
             },
             {
-              "id": ":app:shared"
+              "id": "com.google.firebase:firebase-bom",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-analytics",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-crashlytics",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-perf",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-androidx-workmanager",
+              "isLibrary": true
             }
           ]
         },
@@ -115,11 +215,31 @@
               "isLibrary": true
             },
             {
+              "id": ":app:shared"
+            },
+            {
               "id": "androidx.activity:activity-compose",
               "isLibrary": true
             },
             {
-              "id": ":app:shared"
+              "id": "com.google.firebase:firebase-bom",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-analytics",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-crashlytics",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-perf",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-androidx-workmanager",
+              "isLibrary": true
             }
           ]
         },
@@ -135,11 +255,31 @@
               "isLibrary": true
             },
             {
+              "id": ":app:shared"
+            },
+            {
               "id": "androidx.activity:activity-compose",
               "isLibrary": true
             },
             {
-              "id": ":app:shared"
+              "id": "com.google.firebase:firebase-bom",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-analytics",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-crashlytics",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-perf",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-androidx-workmanager",
+              "isLibrary": true
             }
           ]
         },
@@ -151,11 +291,31 @@
               "isLibrary": true
             },
             {
+              "id": ":app:shared"
+            },
+            {
               "id": "androidx.activity:activity-compose",
               "isLibrary": true
             },
             {
-              "id": ":app:shared"
+              "id": "com.google.firebase:firebase-bom",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-analytics",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-crashlytics",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-perf",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-androidx-workmanager",
+              "isLibrary": true
             }
           ]
         }
@@ -392,6 +552,9 @@
               "id": ":data:sync"
             },
             {
+              "id": ":data:tag"
+            },
+            {
               "id": ":domain:account"
             },
             {
@@ -404,6 +567,9 @@
               "id": ":domain:sync"
             },
             {
+              "id": ":domain:tag"
+            },
+            {
               "id": ":feature:calendar"
             },
             {
@@ -414,6 +580,9 @@
             },
             {
               "id": ":feature:more"
+            },
+            {
+              "id": ":feature:tag"
             },
             {
               "id": ":library:navigation3-runtime"
@@ -439,7 +608,7 @@
               "isLibrary": true
             },
             {
-              "id": "io.insert-koin:koin-compose",
+              "id": "io.insert-koin:koin-compose-viewmodel",
               "isLibrary": true
             }
           ]
@@ -490,6 +659,9 @@
               "id": ":data:sync"
             },
             {
+              "id": ":data:tag"
+            },
+            {
               "id": ":domain:account"
             },
             {
@@ -502,6 +674,9 @@
               "id": ":domain:sync"
             },
             {
+              "id": ":domain:tag"
+            },
+            {
               "id": ":feature:calendar"
             },
             {
@@ -512,6 +687,9 @@
             },
             {
               "id": ":feature:more"
+            },
+            {
+              "id": ":feature:tag"
             },
             {
               "id": ":library:navigation3-runtime"
@@ -537,7 +715,7 @@
               "isLibrary": true
             },
             {
-              "id": "io.insert-koin:koin-compose",
+              "id": "io.insert-koin:koin-compose-viewmodel",
               "isLibrary": true
             }
           ]
@@ -588,6 +766,9 @@
               "id": ":data:sync"
             },
             {
+              "id": ":data:tag"
+            },
+            {
               "id": ":domain:account"
             },
             {
@@ -600,6 +781,9 @@
               "id": ":domain:sync"
             },
             {
+              "id": ":domain:tag"
+            },
+            {
               "id": ":feature:calendar"
             },
             {
@@ -610,6 +794,9 @@
             },
             {
               "id": ":feature:more"
+            },
+            {
+              "id": ":feature:tag"
             },
             {
               "id": ":library:navigation3-runtime"
@@ -635,7 +822,7 @@
               "isLibrary": true
             },
             {
-              "id": "io.insert-koin:koin-compose",
+              "id": "io.insert-koin:koin-compose-viewmodel",
               "isLibrary": true
             },
             {
@@ -694,6 +881,9 @@
               "id": ":data:sync"
             },
             {
+              "id": ":data:tag"
+            },
+            {
               "id": ":domain:account"
             },
             {
@@ -706,6 +896,9 @@
               "id": ":domain:sync"
             },
             {
+              "id": ":domain:tag"
+            },
+            {
               "id": ":feature:calendar"
             },
             {
@@ -716,6 +909,9 @@
             },
             {
               "id": ":feature:more"
+            },
+            {
+              "id": ":feature:tag"
             },
             {
               "id": ":library:navigation3-runtime"
@@ -741,7 +937,7 @@
               "isLibrary": true
             },
             {
-              "id": "io.insert-koin:koin-compose",
+              "id": "io.insert-koin:koin-compose-viewmodel",
               "isLibrary": true
             }
           ]
@@ -792,6 +988,9 @@
               "id": ":data:sync"
             },
             {
+              "id": ":data:tag"
+            },
+            {
               "id": ":domain:account"
             },
             {
@@ -804,6 +1003,9 @@
               "id": ":domain:sync"
             },
             {
+              "id": ":domain:tag"
+            },
+            {
               "id": ":feature:calendar"
             },
             {
@@ -814,6 +1016,9 @@
             },
             {
               "id": ":feature:more"
+            },
+            {
+              "id": ":feature:tag"
             },
             {
               "id": ":library:navigation3-runtime"
@@ -839,7 +1044,7 @@
               "isLibrary": true
             },
             {
-              "id": "io.insert-koin:koin-compose",
+              "id": "io.insert-koin:koin-compose-viewmodel",
               "isLibrary": true
             }
           ]
@@ -890,6 +1095,9 @@
               "id": ":data:sync"
             },
             {
+              "id": ":data:tag"
+            },
+            {
               "id": ":domain:account"
             },
             {
@@ -902,6 +1110,9 @@
               "id": ":domain:sync"
             },
             {
+              "id": ":domain:tag"
+            },
+            {
               "id": ":feature:calendar"
             },
             {
@@ -912,6 +1123,9 @@
             },
             {
               "id": ":feature:more"
+            },
+            {
+              "id": ":feature:tag"
             },
             {
               "id": ":library:navigation3-runtime"
@@ -937,7 +1151,7 @@
               "isLibrary": true
             },
             {
-              "id": "io.insert-koin:koin-compose",
+              "id": "io.insert-koin:koin-compose-viewmodel",
               "isLibrary": true
             }
           ]
@@ -988,6 +1202,9 @@
               "id": ":data:sync"
             },
             {
+              "id": ":data:tag"
+            },
+            {
               "id": ":domain:account"
             },
             {
@@ -1000,6 +1217,9 @@
               "id": ":domain:sync"
             },
             {
+              "id": ":domain:tag"
+            },
+            {
               "id": ":feature:calendar"
             },
             {
@@ -1010,6 +1230,9 @@
             },
             {
               "id": ":feature:more"
+            },
+            {
+              "id": ":feature:tag"
             },
             {
               "id": ":library:navigation3-runtime"
@@ -1035,7 +1258,7 @@
               "isLibrary": true
             },
             {
-              "id": "io.insert-koin:koin-compose",
+              "id": "io.insert-koin:koin-compose-viewmodel",
               "isLibrary": true
             }
           ]
@@ -1086,6 +1309,9 @@
               "id": ":data:sync"
             },
             {
+              "id": ":data:tag"
+            },
+            {
               "id": ":domain:account"
             },
             {
@@ -1098,6 +1324,9 @@
               "id": ":domain:sync"
             },
             {
+              "id": ":domain:tag"
+            },
+            {
               "id": ":feature:calendar"
             },
             {
@@ -1108,6 +1337,9 @@
             },
             {
               "id": ":feature:more"
+            },
+            {
+              "id": ":feature:tag"
             },
             {
               "id": ":library:navigation3-runtime"
@@ -1133,7 +1365,7 @@
               "isLibrary": true
             },
             {
-              "id": "io.insert-koin:koin-compose",
+              "id": "io.insert-koin:koin-compose-viewmodel",
               "isLibrary": true
             }
           ]
@@ -1184,6 +1416,9 @@
               "id": ":data:sync"
             },
             {
+              "id": ":data:tag"
+            },
+            {
               "id": ":domain:account"
             },
             {
@@ -1196,6 +1431,9 @@
               "id": ":domain:sync"
             },
             {
+              "id": ":domain:tag"
+            },
+            {
               "id": ":feature:calendar"
             },
             {
@@ -1206,6 +1444,9 @@
             },
             {
               "id": ":feature:more"
+            },
+            {
+              "id": ":feature:tag"
             },
             {
               "id": ":library:navigation3-runtime"
@@ -1231,7 +1472,7 @@
               "isLibrary": true
             },
             {
-              "id": "io.insert-koin:koin-compose",
+              "id": "io.insert-koin:koin-compose-viewmodel",
               "isLibrary": true
             },
             {
@@ -1286,6 +1527,9 @@
               "id": ":data:sync"
             },
             {
+              "id": ":data:tag"
+            },
+            {
               "id": ":domain:account"
             },
             {
@@ -1298,6 +1542,9 @@
               "id": ":domain:sync"
             },
             {
+              "id": ":domain:tag"
+            },
+            {
               "id": ":feature:calendar"
             },
             {
@@ -1308,6 +1555,9 @@
             },
             {
               "id": ":feature:more"
+            },
+            {
+              "id": ":feature:tag"
             },
             {
               "id": ":library:navigation3-runtime"
@@ -1333,7 +1583,7 @@
               "isLibrary": true
             },
             {
-              "id": "io.insert-koin:koin-compose",
+              "id": "io.insert-koin:koin-compose-viewmodel",
               "isLibrary": true
             }
           ]
@@ -1384,6 +1634,9 @@
               "id": ":data:sync"
             },
             {
+              "id": ":data:tag"
+            },
+            {
               "id": ":domain:account"
             },
             {
@@ -1396,6 +1649,9 @@
               "id": ":domain:sync"
             },
             {
+              "id": ":domain:tag"
+            },
+            {
               "id": ":feature:calendar"
             },
             {
@@ -1406,6 +1662,9 @@
             },
             {
               "id": ":feature:more"
+            },
+            {
+              "id": ":feature:tag"
             },
             {
               "id": ":library:navigation3-runtime"
@@ -1431,7 +1690,7 @@
               "isLibrary": true
             },
             {
-              "id": "io.insert-koin:koin-compose",
+              "id": "io.insert-koin:koin-compose-viewmodel",
               "isLibrary": true
             }
           ]
@@ -1482,6 +1741,9 @@
               "id": ":data:sync"
             },
             {
+              "id": ":data:tag"
+            },
+            {
               "id": ":domain:account"
             },
             {
@@ -1494,6 +1756,9 @@
               "id": ":domain:sync"
             },
             {
+              "id": ":domain:tag"
+            },
+            {
               "id": ":feature:calendar"
             },
             {
@@ -1504,6 +1769,9 @@
             },
             {
               "id": ":feature:more"
+            },
+            {
+              "id": ":feature:tag"
             },
             {
               "id": ":library:navigation3-runtime"
@@ -1529,7 +1797,7 @@
               "isLibrary": true
             },
             {
-              "id": "io.insert-koin:koin-compose",
+              "id": "io.insert-koin:koin-compose-viewmodel",
               "isLibrary": true
             }
           ]
@@ -1580,6 +1848,9 @@
               "id": ":data:sync"
             },
             {
+              "id": ":data:tag"
+            },
+            {
               "id": ":domain:account"
             },
             {
@@ -1592,6 +1863,9 @@
               "id": ":domain:sync"
             },
             {
+              "id": ":domain:tag"
+            },
+            {
               "id": ":feature:calendar"
             },
             {
@@ -1602,6 +1876,9 @@
             },
             {
               "id": ":feature:more"
+            },
+            {
+              "id": ":feature:tag"
             },
             {
               "id": ":library:navigation3-runtime"
@@ -1627,7 +1904,7 @@
               "isLibrary": true
             },
             {
-              "id": "io.insert-koin:koin-compose",
+              "id": "io.insert-koin:koin-compose-viewmodel",
               "isLibrary": true
             }
           ]
@@ -1678,6 +1955,9 @@
               "id": ":data:sync"
             },
             {
+              "id": ":data:tag"
+            },
+            {
               "id": ":domain:account"
             },
             {
@@ -1690,6 +1970,9 @@
               "id": ":domain:sync"
             },
             {
+              "id": ":domain:tag"
+            },
+            {
               "id": ":feature:calendar"
             },
             {
@@ -1700,6 +1983,9 @@
             },
             {
               "id": ":feature:more"
+            },
+            {
+              "id": ":feature:tag"
             },
             {
               "id": ":library:navigation3-runtime"
@@ -1725,7 +2011,7 @@
               "isLibrary": true
             },
             {
-              "id": "io.insert-koin:koin-compose",
+              "id": "io.insert-koin:koin-compose-viewmodel",
               "isLibrary": true
             }
           ]
@@ -2584,6 +2870,10 @@
             {
               "id": "androidx.room3:room3-common",
               "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
             }
           ]
         },
@@ -2604,6 +2894,10 @@
             },
             {
               "id": "androidx.room3:room3-common",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
               "isLibrary": true
             }
           ]
@@ -2626,6 +2920,10 @@
             {
               "id": "androidx.room3:room3-common",
               "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
             }
           ]
         },
@@ -2646,6 +2944,10 @@
             },
             {
               "id": "androidx.room3:room3-common",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
               "isLibrary": true
             }
           ]
@@ -2668,6 +2970,10 @@
             {
               "id": "androidx.room3:room3-common",
               "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
             }
           ]
         },
@@ -2688,6 +2994,10 @@
             },
             {
               "id": "androidx.room3:room3-common",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
               "isLibrary": true
             }
           ]
@@ -2710,6 +3020,10 @@
             {
               "id": "androidx.room3:room3-common",
               "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
             }
           ]
         },
@@ -2730,6 +3044,10 @@
             },
             {
               "id": "androidx.room3:room3-common",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
               "isLibrary": true
             }
           ]
@@ -2752,6 +3070,10 @@
             {
               "id": "androidx.room3:room3-common",
               "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
             }
           ]
         },
@@ -2772,6 +3094,10 @@
             },
             {
               "id": "androidx.room3:room3-common",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
               "isLibrary": true
             }
           ]
@@ -2807,6 +3133,10 @@
               "isLibrary": true
             },
             {
+              "id": "androidx.room3:room3-paging",
+              "isLibrary": true
+            },
+            {
               "id": "androidx.sqlite:sqlite-bundled",
               "isLibrary": true
             }
@@ -2839,6 +3169,10 @@
             },
             {
               "id": "androidx.room3:room3-runtime",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.room3:room3-paging",
               "isLibrary": true
             },
             {
@@ -2905,6 +3239,10 @@
               "isLibrary": true
             },
             {
+              "id": "androidx.room3:room3-paging",
+              "isLibrary": true
+            },
+            {
               "id": "androidx.sqlite:sqlite-bundled",
               "isLibrary": true
             }
@@ -2933,6 +3271,10 @@
             },
             {
               "id": "androidx.room3:room3-runtime",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.room3:room3-paging",
               "isLibrary": true
             },
             {
@@ -2967,6 +3309,10 @@
               "isLibrary": true
             },
             {
+              "id": "androidx.room3:room3-paging",
+              "isLibrary": true
+            },
+            {
               "id": "androidx.sqlite:sqlite-bundled",
               "isLibrary": true
             }
@@ -2995,6 +3341,10 @@
             },
             {
               "id": "androidx.room3:room3-runtime",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.room3:room3-paging",
               "isLibrary": true
             },
             {
@@ -3027,6 +3377,10 @@
             {
               "id": "androidx.room3:room3-runtime",
               "isLibrary": true
+            },
+            {
+              "id": "androidx.room3:room3-paging",
+              "isLibrary": true
             }
           ]
         },
@@ -3054,6 +3408,10 @@
             {
               "id": "androidx.room3:room3-runtime",
               "isLibrary": true
+            },
+            {
+              "id": "androidx.room3:room3-paging",
+              "isLibrary": true
             }
           ]
         },
@@ -3080,6 +3438,10 @@
             },
             {
               "id": "androidx.room3:room3-runtime",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.room3:room3-paging",
               "isLibrary": true
             },
             {
@@ -3112,6 +3474,10 @@
             {
               "id": "androidx.room3:room3-runtime",
               "isLibrary": true
+            },
+            {
+              "id": "androidx.room3:room3-paging",
+              "isLibrary": true
             }
           ]
         },
@@ -3138,6 +3504,10 @@
             },
             {
               "id": "androidx.room3:room3-runtime",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.room3:room3-paging",
               "isLibrary": true
             },
             {
@@ -3170,6 +3540,10 @@
             {
               "id": "androidx.room3:room3-runtime",
               "isLibrary": true
+            },
+            {
+              "id": "androidx.room3:room3-paging",
+              "isLibrary": true
             }
           ]
         },
@@ -3196,6 +3570,10 @@
             },
             {
               "id": "androidx.room3:room3-runtime",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.room3:room3-paging",
               "isLibrary": true
             }
           ]
@@ -6647,6 +7025,42 @@
       "module": ":data:sync",
       "configurations": [
         {
+          "id": "androidCompileClasspath",
+          "dependencies": [
+            {
+              "id": "androidx.work:work-runtime-ktx",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:mapper"
+            },
+            {
+              "id": ":core:database:api"
+            },
+            {
+              "id": ":core:network:api"
+            },
+            {
+              "id": ":domain:account"
+            },
+            {
+              "id": ":domain:sync"
+            }
+          ]
+        },
+        {
           "id": "jvmCompileClasspath",
           "dependencies": [
             {
@@ -6669,6 +7083,9 @@
             },
             {
               "id": ":core:network:api"
+            },
+            {
+              "id": ":domain:account"
             },
             {
               "id": ":domain:sync"
@@ -6700,6 +7117,9 @@
               "id": ":core:network:api"
             },
             {
+              "id": ":domain:account"
+            },
+            {
               "id": ":domain:sync"
             }
           ]
@@ -6727,6 +7147,9 @@
             },
             {
               "id": ":core:network:api"
+            },
+            {
+              "id": ":domain:account"
             },
             {
               "id": ":domain:sync"
@@ -6782,6 +7205,9 @@
               "id": ":core:network:api"
             },
             {
+              "id": ":domain:account"
+            },
+            {
               "id": ":domain:sync"
             }
           ]
@@ -6809,6 +7235,9 @@
             },
             {
               "id": ":core:network:api"
+            },
+            {
+              "id": ":domain:account"
             },
             {
               "id": ":domain:sync"
@@ -6840,6 +7269,9 @@
               "id": ":core:network:api"
             },
             {
+              "id": ":domain:account"
+            },
+            {
               "id": ":domain:sync"
             }
           ]
@@ -6867,6 +7299,9 @@
             },
             {
               "id": ":core:network:api"
+            },
+            {
+              "id": ":domain:account"
             },
             {
               "id": ":domain:sync"
@@ -6898,6 +7333,41 @@
               "id": ":core:network:api"
             },
             {
+              "id": ":domain:account"
+            },
+            {
+              "id": ":domain:sync"
+            }
+          ]
+        },
+        {
+          "id": "metadataNonAndroidMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:mapper"
+            },
+            {
+              "id": ":core:database:api"
+            },
+            {
+              "id": ":core:network:api"
+            },
+            {
+              "id": ":domain:account"
+            },
+            {
               "id": ":domain:sync"
             }
           ]
@@ -6925,6 +7395,9 @@
             },
             {
               "id": ":core:network:api"
+            },
+            {
+              "id": ":domain:account"
             },
             {
               "id": ":domain:sync"
@@ -6956,7 +7429,299 @@
               "id": ":core:network:api"
             },
             {
+              "id": ":domain:account"
+            },
+            {
               "id": ":domain:sync"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": ":data:tag",
+      "configurations": [
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:mapper"
+            },
+            {
+              "id": ":core:database:api"
+            },
+            {
+              "id": ":domain:tag"
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:mapper"
+            },
+            {
+              "id": ":core:database:api"
+            },
+            {
+              "id": ":domain:tag"
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:mapper"
+            },
+            {
+              "id": ":core:database:api"
+            },
+            {
+              "id": ":domain:tag"
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-test",
+              "isLibrary": true
+            },
+            {
+              "id": "io.kotest:kotest-framework-engine",
+              "isLibrary": true
+            },
+            {
+              "id": "io.kotest:kotest-assertions-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.mockk:mockk",
+              "isLibrary": true
+            },
+            {
+              "id": "com.navercorp.fixturemonkey:fixture-monkey-starter-kotlin",
+              "isLibrary": true
+            },
+            {
+              "id": "app.cash.turbine:turbine",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:mapper"
+            },
+            {
+              "id": ":core:database:api"
+            },
+            {
+              "id": ":domain:tag"
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:mapper"
+            },
+            {
+              "id": ":core:database:api"
+            },
+            {
+              "id": ":domain:tag"
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:mapper"
+            },
+            {
+              "id": ":core:database:api"
+            },
+            {
+              "id": ":domain:tag"
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:mapper"
+            },
+            {
+              "id": ":core:database:api"
+            },
+            {
+              "id": ":domain:tag"
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:mapper"
+            },
+            {
+              "id": ":core:database:api"
+            },
+            {
+              "id": ":domain:tag"
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:mapper"
+            },
+            {
+              "id": ":core:database:api"
+            },
+            {
+              "id": ":domain:tag"
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:mapper"
+            },
+            {
+              "id": ":core:database:api"
+            },
+            {
+              "id": ":domain:tag"
             }
           ]
         }
@@ -6976,8 +7741,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7000,8 +7767,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7024,8 +7793,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7072,8 +7843,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7096,8 +7869,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7120,8 +7895,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7144,8 +7921,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7168,8 +7947,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7192,8 +7973,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7216,8 +7999,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7245,8 +8030,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7259,6 +8046,12 @@
             {
               "id": "io.insert-koin:koin-annotations",
               "isLibrary": true
+            },
+            {
+              "id": ":domain:account"
+            },
+            {
+              "id": ":domain:sync"
             }
           ]
         },
@@ -7269,8 +8062,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7283,6 +8078,12 @@
             {
               "id": "io.insert-koin:koin-annotations",
               "isLibrary": true
+            },
+            {
+              "id": ":domain:account"
+            },
+            {
+              "id": ":domain:sync"
             }
           ]
         },
@@ -7293,8 +8094,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7307,6 +8110,12 @@
             {
               "id": "io.insert-koin:koin-annotations",
               "isLibrary": true
+            },
+            {
+              "id": ":domain:account"
+            },
+            {
+              "id": ":domain:sync"
             },
             {
               "id": "org.jetbrains.kotlinx:kotlinx-coroutines-test",
@@ -7341,8 +8150,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7355,6 +8166,12 @@
             {
               "id": "io.insert-koin:koin-annotations",
               "isLibrary": true
+            },
+            {
+              "id": ":domain:account"
+            },
+            {
+              "id": ":domain:sync"
             }
           ]
         },
@@ -7365,8 +8182,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7379,6 +8198,12 @@
             {
               "id": "io.insert-koin:koin-annotations",
               "isLibrary": true
+            },
+            {
+              "id": ":domain:account"
+            },
+            {
+              "id": ":domain:sync"
             }
           ]
         },
@@ -7389,8 +8214,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7403,6 +8230,12 @@
             {
               "id": "io.insert-koin:koin-annotations",
               "isLibrary": true
+            },
+            {
+              "id": ":domain:account"
+            },
+            {
+              "id": ":domain:sync"
             }
           ]
         },
@@ -7413,8 +8246,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7427,6 +8262,12 @@
             {
               "id": "io.insert-koin:koin-annotations",
               "isLibrary": true
+            },
+            {
+              "id": ":domain:account"
+            },
+            {
+              "id": ":domain:sync"
             }
           ]
         },
@@ -7437,8 +8278,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7451,6 +8294,12 @@
             {
               "id": "io.insert-koin:koin-annotations",
               "isLibrary": true
+            },
+            {
+              "id": ":domain:account"
+            },
+            {
+              "id": ":domain:sync"
             }
           ]
         },
@@ -7461,8 +8310,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7475,6 +8326,12 @@
             {
               "id": "io.insert-koin:koin-annotations",
               "isLibrary": true
+            },
+            {
+              "id": ":domain:account"
+            },
+            {
+              "id": ":domain:sync"
             }
           ]
         },
@@ -7485,8 +8342,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7499,6 +8358,12 @@
             {
               "id": "io.insert-koin:koin-annotations",
               "isLibrary": true
+            },
+            {
+              "id": ":domain:account"
+            },
+            {
+              "id": ":domain:sync"
             }
           ]
         }
@@ -7514,8 +8379,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7544,8 +8411,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7574,8 +8443,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7628,8 +8499,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7658,8 +8531,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7688,8 +8563,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7718,8 +8595,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7748,8 +8627,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7778,8 +8659,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7808,8 +8691,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7843,8 +8728,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7870,8 +8757,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7897,8 +8786,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7948,8 +8839,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -7975,8 +8868,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -8002,8 +8897,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -8029,8 +8926,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -8056,8 +8955,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -8083,8 +8984,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -8110,8 +9013,10 @@
               "id": ":core:model"
             },
             {
-              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
-              "isLibrary": true
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
@@ -8127,6 +9032,355 @@
             },
             {
               "id": ":domain:account"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": ":domain:tag",
+      "configurations": [
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:account"
+            },
+            {
+              "id": ":domain:sync"
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:account"
+            },
+            {
+              "id": ":domain:sync"
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:account"
+            },
+            {
+              "id": ":domain:sync"
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-test",
+              "isLibrary": true
+            },
+            {
+              "id": "io.kotest:kotest-framework-engine",
+              "isLibrary": true
+            },
+            {
+              "id": "io.kotest:kotest-assertions-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.mockk:mockk",
+              "isLibrary": true
+            },
+            {
+              "id": "com.navercorp.fixturemonkey:fixture-monkey-starter-kotlin",
+              "isLibrary": true
+            },
+            {
+              "id": "app.cash.turbine:turbine",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:account"
+            },
+            {
+              "id": ":domain:sync"
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:account"
+            },
+            {
+              "id": ":domain:sync"
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:account"
+            },
+            {
+              "id": ":domain:sync"
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:account"
+            },
+            {
+              "id": ":domain:sync"
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:account"
+            },
+            {
+              "id": ":domain:sync"
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:account"
+            },
+            {
+              "id": ":domain:sync"
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:account"
+            },
+            {
+              "id": ":domain:sync"
             }
           ]
         }
@@ -8180,10 +9434,10 @@
               "isLibrary": true
             },
             {
-              "id": ":domain:memo"
+              "id": ":domain:sync"
             },
             {
-              "id": ":domain:sync"
+              "id": ":domain:memo"
             },
             {
               "id": ":presenter:calendar:compose"
@@ -8235,10 +9489,10 @@
               "isLibrary": true
             },
             {
-              "id": ":domain:memo"
+              "id": ":domain:sync"
             },
             {
-              "id": ":domain:sync"
+              "id": ":domain:memo"
             },
             {
               "id": ":presenter:calendar:compose"
@@ -8314,10 +9568,10 @@
               "isLibrary": true
             },
             {
-              "id": ":domain:memo"
+              "id": ":domain:sync"
             },
             {
-              "id": ":domain:sync"
+              "id": ":domain:memo"
             },
             {
               "id": ":presenter:calendar:compose"
@@ -8365,10 +9619,10 @@
               "isLibrary": true
             },
             {
-              "id": ":domain:memo"
+              "id": ":domain:sync"
             },
             {
-              "id": ":domain:sync"
+              "id": ":domain:memo"
             },
             {
               "id": ":presenter:calendar:compose"
@@ -8424,10 +9678,10 @@
               "isLibrary": true
             },
             {
-              "id": ":domain:memo"
+              "id": ":domain:sync"
             },
             {
-              "id": ":domain:sync"
+              "id": ":domain:memo"
             },
             {
               "id": ":presenter:calendar:compose"
@@ -8475,10 +9729,10 @@
               "isLibrary": true
             },
             {
-              "id": ":domain:memo"
+              "id": ":domain:sync"
             },
             {
-              "id": ":domain:sync"
+              "id": ":domain:memo"
             },
             {
               "id": ":presenter:calendar:compose"
@@ -8526,10 +9780,10 @@
               "isLibrary": true
             },
             {
-              "id": ":domain:memo"
+              "id": ":domain:sync"
             },
             {
-              "id": ":domain:sync"
+              "id": ":domain:memo"
             },
             {
               "id": ":presenter:calendar:compose"
@@ -8577,10 +9831,10 @@
               "isLibrary": true
             },
             {
-              "id": ":domain:memo"
+              "id": ":domain:sync"
             },
             {
-              "id": ":domain:sync"
+              "id": ":domain:memo"
             },
             {
               "id": ":presenter:calendar:compose"
@@ -8628,10 +9882,10 @@
               "isLibrary": true
             },
             {
-              "id": ":domain:memo"
+              "id": ":domain:sync"
             },
             {
-              "id": ":domain:sync"
+              "id": ":domain:memo"
             },
             {
               "id": ":presenter:calendar:compose"
@@ -8679,10 +9933,10 @@
               "isLibrary": true
             },
             {
-              "id": ":domain:memo"
+              "id": ":domain:sync"
             },
             {
-              "id": ":domain:sync"
+              "id": ":domain:memo"
             },
             {
               "id": ":presenter:calendar:compose"
@@ -8730,10 +9984,10 @@
               "isLibrary": true
             },
             {
-              "id": ":domain:memo"
+              "id": ":domain:sync"
             },
             {
-              "id": ":domain:sync"
+              "id": ":domain:memo"
             },
             {
               "id": ":presenter:calendar:compose"
@@ -8781,10 +10035,10 @@
               "isLibrary": true
             },
             {
-              "id": ":domain:memo"
+              "id": ":domain:sync"
             },
             {
-              "id": ":domain:sync"
+              "id": ":domain:memo"
             },
             {
               "id": ":presenter:calendar:compose"
@@ -8832,10 +10086,10 @@
               "isLibrary": true
             },
             {
-              "id": ":domain:memo"
+              "id": ":domain:sync"
             },
             {
-              "id": ":domain:sync"
+              "id": ":domain:memo"
             },
             {
               "id": ":presenter:calendar:compose"
@@ -9608,6 +10862,9 @@
               "id": ":domain:memo"
             },
             {
+              "id": ":domain:tag"
+            },
+            {
               "id": ":presenter:memo:compose"
             }
           ]
@@ -9658,6 +10915,9 @@
             },
             {
               "id": ":domain:memo"
+            },
+            {
+              "id": ":domain:tag"
             },
             {
               "id": ":presenter:memo:compose"
@@ -9736,6 +10996,9 @@
               "id": ":domain:memo"
             },
             {
+              "id": ":domain:tag"
+            },
+            {
               "id": ":presenter:memo:compose"
             }
           ]
@@ -9782,6 +11045,9 @@
             },
             {
               "id": ":domain:memo"
+            },
+            {
+              "id": ":domain:tag"
             },
             {
               "id": ":presenter:memo:compose"
@@ -9840,6 +11106,9 @@
               "id": ":domain:memo"
             },
             {
+              "id": ":domain:tag"
+            },
+            {
               "id": ":presenter:memo:compose"
             }
           ]
@@ -9886,6 +11155,9 @@
             },
             {
               "id": ":domain:memo"
+            },
+            {
+              "id": ":domain:tag"
             },
             {
               "id": ":presenter:memo:compose"
@@ -9936,6 +11208,9 @@
               "id": ":domain:memo"
             },
             {
+              "id": ":domain:tag"
+            },
+            {
               "id": ":presenter:memo:compose"
             }
           ]
@@ -9982,6 +11257,9 @@
             },
             {
               "id": ":domain:memo"
+            },
+            {
+              "id": ":domain:tag"
             },
             {
               "id": ":presenter:memo:compose"
@@ -10032,6 +11310,9 @@
               "id": ":domain:memo"
             },
             {
+              "id": ":domain:tag"
+            },
+            {
               "id": ":presenter:memo:compose"
             }
           ]
@@ -10078,6 +11359,9 @@
             },
             {
               "id": ":domain:memo"
+            },
+            {
+              "id": ":domain:tag"
             },
             {
               "id": ":presenter:memo:compose"
@@ -10128,6 +11412,9 @@
               "id": ":domain:memo"
             },
             {
+              "id": ":domain:tag"
+            },
+            {
               "id": ":presenter:memo:compose"
             }
           ]
@@ -10176,6 +11463,9 @@
               "id": ":domain:memo"
             },
             {
+              "id": ":domain:tag"
+            },
+            {
               "id": ":presenter:memo:compose"
             }
           ]
@@ -10222,6 +11512,9 @@
             },
             {
               "id": ":domain:memo"
+            },
+            {
+              "id": ":domain:tag"
             },
             {
               "id": ":presenter:memo:compose"
@@ -10894,6 +12187,714 @@
             },
             {
               "id": ":domain:credentials"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": ":feature:tag",
+      "configurations": [
+        {
+          "id": "androidCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":core:navigation"
+            },
+            {
+              "id": ":library:koin-compose"
+            },
+            {
+              "id": "org.jetbrains.androidx.navigation3:navigation3-ui",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose-viewmodel",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:sync"
+            },
+            {
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:tag:compose"
+            }
+          ]
+        },
+        {
+          "id": "androidHostTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-test",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":core:navigation"
+            },
+            {
+              "id": ":library:koin-compose"
+            },
+            {
+              "id": "org.jetbrains.androidx.navigation3:navigation3-ui",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose-viewmodel",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:sync"
+            },
+            {
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:tag:compose"
+            },
+            {
+              "id": "androidx.test:core",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-test",
+              "isLibrary": true
+            },
+            {
+              "id": "org.robolectric:robolectric",
+              "isLibrary": true
+            },
+            {
+              "id": "io.kotest:kotest-assertions-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.mockk:mockk",
+              "isLibrary": true
+            },
+            {
+              "id": "com.navercorp.fixturemonkey:fixture-monkey-starter-kotlin",
+              "isLibrary": true
+            },
+            {
+              "id": "app.cash.turbine:turbine",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":core:navigation"
+            },
+            {
+              "id": ":library:koin-compose"
+            },
+            {
+              "id": "org.jetbrains.androidx.navigation3:navigation3-ui",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose-viewmodel",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:sync"
+            },
+            {
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:tag:compose"
+            }
+          ]
+        },
+        {
+          "id": "jvmDevCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":core:navigation"
+            },
+            {
+              "id": ":library:koin-compose"
+            },
+            {
+              "id": "org.jetbrains.androidx.navigation3:navigation3-ui",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose-viewmodel",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:sync"
+            },
+            {
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:tag:compose"
+            },
+            {
+              "id": "org.jetbrains.compose.hot-reload:hot-reload-runtime-api",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.desktop:desktop-jvm-macos-arm64",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":core:navigation"
+            },
+            {
+              "id": ":library:koin-compose"
+            },
+            {
+              "id": "org.jetbrains.androidx.navigation3:navigation3-ui",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose-viewmodel",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:sync"
+            },
+            {
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:tag:compose"
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":core:navigation"
+            },
+            {
+              "id": ":library:koin-compose"
+            },
+            {
+              "id": "org.jetbrains.androidx.navigation3:navigation3-ui",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose-viewmodel",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:sync"
+            },
+            {
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:tag:compose"
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":core:navigation"
+            },
+            {
+              "id": ":library:koin-compose"
+            },
+            {
+              "id": "org.jetbrains.androidx.navigation3:navigation3-ui",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose-viewmodel",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:sync"
+            },
+            {
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:tag:compose"
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":core:navigation"
+            },
+            {
+              "id": ":library:koin-compose"
+            },
+            {
+              "id": "org.jetbrains.androidx.navigation3:navigation3-ui",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose-viewmodel",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:sync"
+            },
+            {
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:tag:compose"
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":core:navigation"
+            },
+            {
+              "id": ":library:koin-compose"
+            },
+            {
+              "id": "org.jetbrains.androidx.navigation3:navigation3-ui",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose-viewmodel",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:sync"
+            },
+            {
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:tag:compose"
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":core:navigation"
+            },
+            {
+              "id": ":library:koin-compose"
+            },
+            {
+              "id": "org.jetbrains.androidx.navigation3:navigation3-ui",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose-viewmodel",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:sync"
+            },
+            {
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:tag:compose"
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":core:navigation"
+            },
+            {
+              "id": ":library:koin-compose"
+            },
+            {
+              "id": "org.jetbrains.androidx.navigation3:navigation3-ui",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose-viewmodel",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:sync"
+            },
+            {
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:tag:compose"
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":core:navigation"
+            },
+            {
+              "id": ":library:koin-compose"
+            },
+            {
+              "id": "org.jetbrains.androidx.navigation3:navigation3-ui",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose-viewmodel",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:sync"
+            },
+            {
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:tag:compose"
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":core:navigation"
+            },
+            {
+              "id": ":library:koin-compose"
+            },
+            {
+              "id": "org.jetbrains.androidx.navigation3:navigation3-ui",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose-viewmodel",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:sync"
+            },
+            {
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:tag:compose"
             }
           ]
         }
@@ -11926,6 +13927,181 @@
       ]
     },
     {
+      "module": ":library:paging-common",
+      "configurations": [
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        }
+      ]
+    },
+    {
       "module": ":library:room-common",
       "configurations": [
         {
@@ -12622,6 +14798,10 @@
               "isLibrary": true
             },
             {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
               "isLibrary": true
             },
@@ -12641,6 +14821,10 @@
               "isLibrary": true
             },
             {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
               "isLibrary": true
             },
@@ -12657,6 +14841,10 @@
             },
             {
               "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
               "isLibrary": true
             },
             {
@@ -12703,6 +14891,10 @@
               "isLibrary": true
             },
             {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
               "isLibrary": true
             },
@@ -12719,6 +14911,10 @@
             },
             {
               "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
               "isLibrary": true
             },
             {
@@ -12741,6 +14937,10 @@
               "isLibrary": true
             },
             {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
               "isLibrary": true
             },
@@ -12757,6 +14957,10 @@
             },
             {
               "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
               "isLibrary": true
             },
             {
@@ -12779,6 +14983,10 @@
               "isLibrary": true
             },
             {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
               "isLibrary": true
             },
@@ -12798,6 +15006,10 @@
               "isLibrary": true
             },
             {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
               "isLibrary": true
             },
@@ -12814,6 +15026,10 @@
             },
             {
               "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
               "isLibrary": true
             },
             {
@@ -12849,6 +15065,10 @@
             {
               "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
               "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -12871,6 +15091,10 @@
             {
               "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
               "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -12892,6 +15116,10 @@
             },
             {
               "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
               "isLibrary": true
             },
             {
@@ -12923,6 +15151,10 @@
             {
               "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
               "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -12944,6 +15176,10 @@
             },
             {
               "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
               "isLibrary": true
             }
           ]
@@ -12967,6 +15203,10 @@
             {
               "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
               "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -12988,6 +15228,10 @@
             },
             {
               "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
               "isLibrary": true
             }
           ]
@@ -13011,6 +15255,10 @@
             {
               "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
               "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -13032,6 +15280,10 @@
             },
             {
               "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
               "isLibrary": true
             }
           ]
@@ -13055,6 +15307,10 @@
             {
               "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
               "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -13077,6 +15333,10 @@
             {
               "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
               "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -13098,6 +15358,598 @@
             },
             {
               "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": ":presenter:tag",
+      "configurations": []
+    },
+    {
+      "module": ":presenter:tag:api",
+      "configurations": [
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:navigation"
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:navigation"
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:navigation"
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-test",
+              "isLibrary": true
+            },
+            {
+              "id": "io.kotest:kotest-framework-engine",
+              "isLibrary": true
+            },
+            {
+              "id": "io.kotest:kotest-assertions-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.mockk:mockk",
+              "isLibrary": true
+            },
+            {
+              "id": "com.navercorp.fixturemonkey:fixture-monkey-starter-kotlin",
+              "isLibrary": true
+            },
+            {
+              "id": "app.cash.turbine:turbine",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:navigation"
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:navigation"
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:navigation"
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:navigation"
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:navigation"
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:navigation"
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:navigation"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": ":presenter:tag:compose",
+      "configurations": [
+        {
+          "id": "androidCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":presenter:tag:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":presenter:tag:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmDevCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":presenter:tag:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.hot-reload:hot-reload-runtime-api",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.desktop:desktop-jvm-macos-arm64",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":presenter:tag:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":presenter:tag:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":presenter:tag:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":presenter:tag:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":presenter:tag:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":presenter:tag:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":presenter:tag:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":presenter:tag:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":presenter:tag:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
               "isLibrary": true
             }
           ]
