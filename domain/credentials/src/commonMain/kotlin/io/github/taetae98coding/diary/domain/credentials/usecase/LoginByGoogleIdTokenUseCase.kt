@@ -13,7 +13,7 @@ public class LoginByGoogleIdTokenUseCase(
     public suspend operator fun invoke(idToken: String): Result<Unit> {
         return runCatching {
             sessionRepository.updateByGoogleIdToken(idToken)
-            requestSyncUseCase(SyncType.Background)
+            requestSyncUseCase(SyncType.Foreground)
         }
     }
 }

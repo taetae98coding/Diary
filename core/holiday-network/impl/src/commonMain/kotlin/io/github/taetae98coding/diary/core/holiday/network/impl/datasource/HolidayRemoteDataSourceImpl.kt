@@ -1,6 +1,6 @@
-package io.github.taetae98coding.diary.core.holiday.network.impl
+package io.github.taetae98coding.diary.core.holiday.network.impl.datasource
 
-import io.github.taetae98coding.diary.core.holiday.network.api.HolidayRemoteDataSource
+import io.github.taetae98coding.diary.core.holiday.network.api.datasource.HolidayRemoteDataSource
 import io.github.taetae98coding.diary.core.holiday.network.api.entity.HolidayRemoteEntity
 import io.github.taetae98coding.diary.core.holiday.network.impl.di.HolidayHttpClient
 import io.ktor.client.HttpClient

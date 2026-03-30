@@ -3,10 +3,17 @@ package io.github.taetae98coding.diary.presenter.calendar.compose
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -26,12 +33,15 @@ import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.type
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.LifecycleStartEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.compose.dropUnlessResumed
+import coil3.compose.AsyncImage
 import io.github.taetae98coding.diary.compose.calendar.Calendar
 import io.github.taetae98coding.diary.compose.calendar.CalendarDefaults
 import io.github.taetae98coding.diary.compose.calendar.item.CALENDAR_COLOR_LABEL_TEXT_CONTENT_TYPE
@@ -51,6 +61,9 @@ import io.github.taetae98coding.diary.core.model.memo.CalendarMemo
 import io.github.taetae98coding.diary.presenter.calendar.api.CalendarHolidayStateHolder
 import io.github.taetae98coding.diary.presenter.calendar.api.CalendarMemoFilterStateHolder
 import io.github.taetae98coding.diary.presenter.calendar.api.CalendarMemoStateHolder
+import io.github.taetae98coding.diary.presenter.calendar.api.CalendarWeatherStateHolder
+import io.github.taetae98coding.diary.presenter.calendar.api.CalendarWeatherUiState
+import kotlin.math.roundToInt
 import kotlin.time.Clock
 import kotlin.uuid.Uuid
 import kotlinx.coroutines.launch
@@ -68,6 +81,7 @@ import kotlinx.datetime.yearMonth
 public fun CalendarScaffold(
     memoStateHolder: CalendarMemoStateHolder,
     holidayStateHolder: CalendarHolidayStateHolder,
+    weatherStateHolder: CalendarWeatherStateHolder,
     filterStateHolder: CalendarMemoFilterStateHolder,
     modifier: Modifier = Modifier,
     isFetchingProvider: () -> Boolean = { false },
@@ -78,6 +92,7 @@ public fun CalendarScaffold(
 ) {
     val memoList by memoStateHolder.calendarMemo.collectAsStateWithLifecycle()
     val holidayList by holidayStateHolder.holiday.collectAsStateWithLifecycle()
+    val weatherList by weatherStateHolder.weather.collectAsStateWithLifecycle()
     val hasFilter by filterStateHolder.hasFilter.collectAsStateWithLifecycle()
     val state = rememberCalendarScaffoldState()
     val coroutineScope = rememberCoroutineScope()
@@ -89,6 +104,7 @@ public fun CalendarScaffold(
         hasFilterProvider = { hasFilter },
         memoListProvider = { memoList },
         holidayListProvider = { holidayList },
+        weatherListProvider = { weatherList },
         onFetch = onFetch,
         onFilterClick = onFilterClick,
         onLocalDateRangeSelect = onLocalDateRangeSelect,
@@ -108,6 +124,7 @@ public fun CalendarScaffold(
     LifecycleStartEffect(state.calendarState.yearMonth) {
         memoStateHolder.fetch(state.calendarState.yearMonth)
         holidayStateHolder.fetch(state.calendarState.yearMonth)
+        weatherStateHolder.fetch()
         onStopOrDispose { }
     }
 }
@@ -120,6 +137,7 @@ public fun CalendarScaffold(
     hasFilterProvider: () -> Boolean = { false },
     memoListProvider: () -> List<CalendarMemo>,
     holidayListProvider: () -> List<Holiday> = { emptyList() },
+    weatherListProvider: () -> List<CalendarWeatherUiState> = { emptyList() },
     onFetch: () -> Unit = {},
     onFilterClick: () -> Unit = {},
     onLocalDateRangeSelect: (LocalDateRange) -> Unit = {},
@@ -171,8 +189,15 @@ public fun CalendarScaffold(
                         }
                     },
                 primaryDayListProvider = { listOfNotNull(state.primaryDate) },
+                holidayListProvider = { holidayListProvider().filter(Holiday::isHoliday).map(Holiday::localDateRange) },
                 colors = calendarColors,
             ) {
+                items(
+                    items = weatherListProvider(),
+                    localDateRange = { it.localDate..it.localDate },
+                ) {
+                    WeatherItem(uiState = it)
+                }
                 items(
                     items = holidayListProvider(),
                     key = { it.toString() },
@@ -280,6 +305,56 @@ private fun TopBar(
             }
         },
     )
+}
+
+@Composable
+private fun WeatherItem(
+    uiState: CalendarWeatherUiState,
+    modifier: Modifier = Modifier,
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth()
+                .horizontalScroll(rememberScrollState()),
+            horizontalArrangement = Arrangement.spacedBy(2.dp, Alignment.CenterHorizontally),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            uiState.typeList.forEach { type ->
+                AsyncImage(
+                    model = type.icon,
+                    contentDescription = type.description,
+                    modifier = Modifier.height(32.dp),
+                    contentScale = ContentScale.FillHeight,
+                )
+            }
+        }
+
+        val text = if (uiState.isToday) {
+            "${uiState.temperature.roundToInt()}°"
+        } else {
+            listOfNotNull(
+                uiState.minTemperature,
+                uiState.maxTemperature,
+            ).joinToString(separator = "/") {
+                "${it.roundToInt()}°"
+            }
+        }
+
+        Text(
+            text = text,
+            color = if (isSystemInDarkTheme()) {
+                Color.White
+            } else {
+                Color.Black
+            },
+            textAlign = TextAlign.Center,
+            maxLines = 1,
+            style = DiaryTheme.typography.labelSmall,
+        )
+    }
 }
 
 @ScreenPreview

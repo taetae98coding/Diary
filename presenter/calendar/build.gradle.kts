@@ -8,15 +8,16 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(projects.library.kotlinxCoroutinesCore)
-                implementation(projects.domain.holiday)
-                api(projects.core.model)
-                api(libs.kotlinx.datetime)
-
                 implementation(projects.compose.core)
                 implementation(projects.compose.calendar)
+                implementation(projects.domain.holiday)
+                implementation(projects.domain.weather)
+                implementation(projects.library.kotlinxCoroutinesCore)
+                api(projects.core.model)
 
                 implementation(libs.jetbrains.lifecycle.runtime.compose)
+                implementation(libs.coil.compose)
+                api(libs.kotlinx.datetime)
             }
         }
     }

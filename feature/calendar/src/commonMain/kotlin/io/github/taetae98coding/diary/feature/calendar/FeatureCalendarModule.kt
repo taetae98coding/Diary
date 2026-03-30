@@ -2,12 +2,16 @@ package io.github.taetae98coding.diary.feature.calendar
 
 import io.github.taetae98coding.diary.domain.holiday.usecase.FetchHolidayUseCase
 import io.github.taetae98coding.diary.domain.holiday.usecase.GetHolidayUseCase
+import io.github.taetae98coding.diary.domain.weather.usecase.FetchCurrentWeatherUseCase
+import io.github.taetae98coding.diary.domain.weather.usecase.GetCurrentWeatherUseCase
 import io.github.taetae98coding.diary.feature.calendar.di.CalendarHomeScope
 import io.github.taetae98coding.diary.feature.calendar.home.AccountCalendarFilterStrategy
 import io.github.taetae98coding.diary.feature.calendar.home.AccountCalendarMemoStrategy
 import io.github.taetae98coding.diary.presenter.calendar.api.CalendarHolidayStateHolder
 import io.github.taetae98coding.diary.presenter.calendar.api.CalendarMemoFilterStateHolder
 import io.github.taetae98coding.diary.presenter.calendar.api.CalendarMemoStateHolder
+import io.github.taetae98coding.diary.presenter.calendar.api.CalendarWeatherStateHolder
+import kotlin.time.Clock
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Configuration
 import org.koin.core.annotation.Module
@@ -47,6 +51,21 @@ public class FeatureCalendarModule : KoinComponent {
             coroutineScope = getKoin().getScope(CalendarHomeScope.DEFAULT_ID).get(),
             getHolidayUseCase = getHolidayUseCase,
             fetchHolidayUseCase = fetchHolidayUseCase,
+        )
+    }
+
+    @Scope(CalendarHomeScope::class)
+    @Scoped
+    internal fun providesWeatherStateHolder(
+        clock: Clock,
+        getCurrentWeatherUseCase: GetCurrentWeatherUseCase,
+        fetchCurrentWeatherUseCase: FetchCurrentWeatherUseCase,
+    ): CalendarWeatherStateHolder {
+        return CalendarWeatherStateHolder(
+            clock = clock,
+            coroutineScope = getKoin().getScope(CalendarHomeScope.DEFAULT_ID).get(),
+            getCurrentWeatherUseCase = getCurrentWeatherUseCase,
+            fetchCurrentWeatherUseCase = fetchCurrentWeatherUseCase,
         )
     }
 }

@@ -44,6 +44,6 @@ internal class SupabaseAuthImpl(private val supabase: SupabaseClient) : Supabase
             retrieveUser = retrieveUser,
             autoRefresh = autoRefresh,
         )
-        supabase.auth.sessionStatus.first { it is SessionStatus.Authenticated || (it is SessionStatus.NotAuthenticated && !it.isSignOut) }
+        supabase.auth.sessionStatus.first { it is SessionStatus.Authenticated }
     }
 }
