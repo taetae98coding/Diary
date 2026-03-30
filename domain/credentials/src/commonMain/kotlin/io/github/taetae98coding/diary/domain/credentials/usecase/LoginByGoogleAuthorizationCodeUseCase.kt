@@ -17,7 +17,7 @@ public class LoginByGoogleAuthorizationCodeUseCase(
     ): Result<Unit> {
         return runCatching {
             sessionRepository.updateByGoogleAuthorizationCode(clientId, code, redirectUri)
-            requestSyncUseCase(SyncType.Background)
+            requestSyncUseCase(SyncType.Foreground)
         }
     }
 }

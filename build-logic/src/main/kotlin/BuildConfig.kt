@@ -4,6 +4,6 @@ public data object BuildConfig {
     internal const val ANDROID_TARGET_SDK = 36
 
     public const val NAMESPACE: String = "io.github.taetae98coding.diary"
-    public const val VERSION_NAME: String = "1.2.0"
-    public const val VERSION_CODE: Int = 3
+    public const val VERSION_NAME: String = "1.3.0"
+    public const val VERSION_CODE: Int = 4
 }

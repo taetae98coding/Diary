@@ -32,7 +32,7 @@ class LoginByGoogleAuthorizationCodeUseCaseTest : BehaviorSpec() {
             val redirectUri = fixtureMonkey.giveMeOne<String>()
 
             coEvery { sessionRepository.updateByGoogleAuthorizationCode(clientId, code, redirectUri) } returns Unit
-            coEvery { requestSyncUseCase(SyncType.Background) } returns Unit
+            coEvery { requestSyncUseCase(SyncType.Foreground) } returns Unit
 
             When("LoginByGoogleAuthorizationCodeUseCase를 호출하면") {
                 val result = useCase(clientId, code, redirectUri)
@@ -44,7 +44,7 @@ class LoginByGoogleAuthorizationCodeUseCaseTest : BehaviorSpec() {
                 Then("세션을 업데이트한 후 동기화를 요청한다") {
                     coVerifyOrder {
                         sessionRepository.updateByGoogleAuthorizationCode(clientId, code, redirectUri)
-                        requestSyncUseCase(SyncType.Background)
+                        requestSyncUseCase(SyncType.Foreground)
                     }
                 }
             }
@@ -67,7 +67,7 @@ class LoginByGoogleAuthorizationCodeUseCaseTest : BehaviorSpec() {
                 }
 
                 Then("동기화를 요청하지 않는다") {
-                    coVerify(exactly = 0) { requestSyncUseCase(SyncType.Background) }
+                    coVerify(exactly = 0) { requestSyncUseCase(SyncType.Foreground) }
                 }
             }
         }

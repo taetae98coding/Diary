@@ -30,7 +30,7 @@ class LoginByGoogleIdTokenUseCaseTest : BehaviorSpec() {
             val idToken = fixtureMonkey.giveMeOne<String>()
 
             coEvery { sessionRepository.updateByGoogleIdToken(idToken) } returns Unit
-            coEvery { requestSyncUseCase(SyncType.Background) } returns Unit
+            coEvery { requestSyncUseCase(SyncType.Foreground) } returns Unit
 
             When("LoginByGoogleIdTokenUseCase를 호출하면") {
                 val result = useCase(idToken)
@@ -42,7 +42,7 @@ class LoginByGoogleIdTokenUseCaseTest : BehaviorSpec() {
                 Then("세션을 업데이트한 후 동기화를 요청한다") {
                     coVerifyOrder {
                         sessionRepository.updateByGoogleIdToken(idToken)
-                        requestSyncUseCase(SyncType.Background)
+                        requestSyncUseCase(SyncType.Foreground)
                     }
                 }
             }
@@ -63,7 +63,7 @@ class LoginByGoogleIdTokenUseCaseTest : BehaviorSpec() {
                 }
 
                 Then("동기화를 요청하지 않는다") {
-                    coVerify(exactly = 0) { requestSyncUseCase(SyncType.Background) }
+                    coVerify(exactly = 0) { requestSyncUseCase(SyncType.Foreground) }
                 }
             }
         }
