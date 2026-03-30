@@ -1,6 +1,6 @@
 package io.github.taetae98coding.diary.core.holiday.network.impl
 
-import io.github.taetae98coding.diary.core.holiday.network.api.HolidayRemoteDataSource
+import io.github.taetae98coding.diary.core.holiday.network.api.datasource.HolidayRemoteDataSource
 import io.github.taetae98coding.diary.core.holiday.network.impl.di.HolidayHttpEngine
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldHaveSize

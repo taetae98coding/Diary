@@ -1,7 +1,7 @@
 package io.github.taetae98coding.diary.data.holiday.repository
 
 import io.github.taetae98coding.diary.core.holiday.database.api.HolidayLocalDataSource
-import io.github.taetae98coding.diary.core.holiday.network.api.HolidayRemoteDataSource
+import io.github.taetae98coding.diary.core.holiday.network.api.datasource.HolidayRemoteDataSource
 import io.github.taetae98coding.diary.core.holiday.network.api.entity.HolidayRemoteEntity
 import io.github.taetae98coding.diary.core.mapper.toDomain
 import io.github.taetae98coding.diary.core.mapper.toLocal

@@ -1,4 +1,4 @@
-package io.github.taetae98coding.diary.core.holiday.network.api
+package io.github.taetae98coding.diary.core.holiday.network.api.datasource
 
 import io.github.taetae98coding.diary.core.holiday.network.api.entity.HolidayRemoteEntity
 

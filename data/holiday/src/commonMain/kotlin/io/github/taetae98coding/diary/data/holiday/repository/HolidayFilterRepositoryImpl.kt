@@ -3,9 +3,9 @@ package io.github.taetae98coding.diary.data.holiday.repository
 import io.github.taetae98coding.diary.domain.holiday.repository.HolidayFilterRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
-import org.koin.core.annotation.Single
+import org.koin.core.annotation.Factory
 
-@Single
+@Factory
 public class HolidayFilterRepositoryImpl : HolidayFilterRepository {
     override fun get(): Flow<List<String>> {
         return flowOf(

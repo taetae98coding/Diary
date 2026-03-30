@@ -13,6 +13,7 @@ kotlin {
                 implementation(projects.core.holidayDatabase.api)
                 implementation(projects.core.holidayNetwork.api)
                 implementation(projects.core.network.api)
+                implementation(projects.core.weatherNetwork.api)
             }
         }
     }
