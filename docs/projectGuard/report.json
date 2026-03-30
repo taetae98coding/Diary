@@ -81,6 +81,30 @@
       "restrictions": []
     },
     {
+      "module": ":core:holiday-database",
+      "restrictions": []
+    },
+    {
+      "module": ":core:holiday-database:api",
+      "restrictions": []
+    },
+    {
+      "module": ":core:holiday-database:impl",
+      "restrictions": []
+    },
+    {
+      "module": ":core:holiday-network",
+      "restrictions": []
+    },
+    {
+      "module": ":core:holiday-network:api",
+      "restrictions": []
+    },
+    {
+      "module": ":core:holiday-network:impl",
+      "restrictions": []
+    },
+    {
       "module": ":core:mapper",
       "restrictions": []
     },
@@ -129,6 +153,10 @@
       "restrictions": []
     },
     {
+      "module": ":data:holiday",
+      "restrictions": []
+    },
+    {
       "module": ":data:memo",
       "restrictions": []
     },
@@ -150,6 +178,10 @@
     },
     {
       "module": ":domain:credentials",
+      "restrictions": []
+    },
+    {
+      "module": ":domain:holiday",
       "restrictions": []
     },
     {
@@ -209,6 +241,10 @@
       "restrictions": []
     },
     {
+      "module": ":library:kotlinx-file",
+      "restrictions": []
+    },
+    {
       "module": ":library:navigation3-runtime",
       "restrictions": []
     },
@@ -229,35 +265,11 @@
       "restrictions": []
     },
     {
-      "module": ":presenter:calendar:api",
-      "restrictions": []
-    },
-    {
-      "module": ":presenter:calendar:compose",
-      "restrictions": []
-    },
-    {
       "module": ":presenter:memo",
       "restrictions": []
     },
     {
-      "module": ":presenter:memo:api",
-      "restrictions": []
-    },
-    {
-      "module": ":presenter:memo:compose",
-      "restrictions": []
-    },
-    {
       "module": ":presenter:tag",
-      "restrictions": []
-    },
-    {
-      "module": ":presenter:tag:api",
-      "restrictions": []
-    },
-    {
-      "module": ":presenter:tag:compose",
       "restrictions": []
     }
   ]

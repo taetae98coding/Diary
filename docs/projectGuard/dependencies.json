@@ -531,6 +531,12 @@
               "id": ":core:datastore:impl"
             },
             {
+              "id": ":core:holiday-database:impl"
+            },
+            {
+              "id": ":core:holiday-network:impl"
+            },
+            {
               "id": ":core:navigation"
             },
             {
@@ -546,6 +552,9 @@
               "id": ":data:credentials"
             },
             {
+              "id": ":data:holiday"
+            },
+            {
               "id": ":data:memo"
             },
             {
@@ -559,6 +568,9 @@
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             },
             {
               "id": ":domain:memo"
@@ -638,6 +650,12 @@
               "id": ":core:datastore:impl"
             },
             {
+              "id": ":core:holiday-database:impl"
+            },
+            {
+              "id": ":core:holiday-network:impl"
+            },
+            {
               "id": ":core:navigation"
             },
             {
@@ -653,6 +671,9 @@
               "id": ":data:credentials"
             },
             {
+              "id": ":data:holiday"
+            },
+            {
               "id": ":data:memo"
             },
             {
@@ -666,6 +687,9 @@
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             },
             {
               "id": ":domain:memo"
@@ -745,6 +769,12 @@
               "id": ":core:datastore:impl"
             },
             {
+              "id": ":core:holiday-database:impl"
+            },
+            {
+              "id": ":core:holiday-network:impl"
+            },
+            {
               "id": ":core:navigation"
             },
             {
@@ -760,6 +790,9 @@
               "id": ":data:credentials"
             },
             {
+              "id": ":data:holiday"
+            },
+            {
               "id": ":data:memo"
             },
             {
@@ -773,6 +806,9 @@
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             },
             {
               "id": ":domain:memo"
@@ -860,6 +896,12 @@
               "id": ":core:datastore:impl"
             },
             {
+              "id": ":core:holiday-database:impl"
+            },
+            {
+              "id": ":core:holiday-network:impl"
+            },
+            {
               "id": ":core:navigation"
             },
             {
@@ -875,6 +917,9 @@
               "id": ":data:credentials"
             },
             {
+              "id": ":data:holiday"
+            },
+            {
               "id": ":data:memo"
             },
             {
@@ -888,6 +933,9 @@
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             },
             {
               "id": ":domain:memo"
@@ -967,6 +1015,12 @@
               "id": ":core:datastore:impl"
             },
             {
+              "id": ":core:holiday-database:impl"
+            },
+            {
+              "id": ":core:holiday-network:impl"
+            },
+            {
               "id": ":core:navigation"
             },
             {
@@ -982,6 +1036,9 @@
               "id": ":data:credentials"
             },
             {
+              "id": ":data:holiday"
+            },
+            {
               "id": ":data:memo"
             },
             {
@@ -995,6 +1052,9 @@
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             },
             {
               "id": ":domain:memo"
@@ -1074,6 +1134,12 @@
               "id": ":core:datastore:impl"
             },
             {
+              "id": ":core:holiday-database:impl"
+            },
+            {
+              "id": ":core:holiday-network:impl"
+            },
+            {
               "id": ":core:navigation"
             },
             {
@@ -1089,6 +1155,9 @@
               "id": ":data:credentials"
             },
             {
+              "id": ":data:holiday"
+            },
+            {
               "id": ":data:memo"
             },
             {
@@ -1102,6 +1171,9 @@
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             },
             {
               "id": ":domain:memo"
@@ -1181,6 +1253,12 @@
               "id": ":core:datastore:impl"
             },
             {
+              "id": ":core:holiday-database:impl"
+            },
+            {
+              "id": ":core:holiday-network:impl"
+            },
+            {
               "id": ":core:navigation"
             },
             {
@@ -1196,6 +1274,9 @@
               "id": ":data:credentials"
             },
             {
+              "id": ":data:holiday"
+            },
+            {
               "id": ":data:memo"
             },
             {
@@ -1209,6 +1290,9 @@
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             },
             {
               "id": ":domain:memo"
@@ -1288,6 +1372,12 @@
               "id": ":core:datastore:impl"
             },
             {
+              "id": ":core:holiday-database:impl"
+            },
+            {
+              "id": ":core:holiday-network:impl"
+            },
+            {
               "id": ":core:navigation"
             },
             {
@@ -1303,6 +1393,9 @@
               "id": ":data:credentials"
             },
             {
+              "id": ":data:holiday"
+            },
+            {
               "id": ":data:memo"
             },
             {
@@ -1316,6 +1409,9 @@
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             },
             {
               "id": ":domain:memo"
@@ -1395,6 +1491,12 @@
               "id": ":core:datastore:impl"
             },
             {
+              "id": ":core:holiday-database:impl"
+            },
+            {
+              "id": ":core:holiday-network:impl"
+            },
+            {
               "id": ":core:navigation"
             },
             {
@@ -1410,6 +1512,9 @@
               "id": ":data:credentials"
             },
             {
+              "id": ":data:holiday"
+            },
+            {
               "id": ":data:memo"
             },
             {
@@ -1423,6 +1528,9 @@
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             },
             {
               "id": ":domain:memo"
@@ -1506,6 +1614,12 @@
               "id": ":core:datastore:impl"
             },
             {
+              "id": ":core:holiday-database:impl"
+            },
+            {
+              "id": ":core:holiday-network:impl"
+            },
+            {
               "id": ":core:navigation"
             },
             {
@@ -1521,6 +1635,9 @@
               "id": ":data:credentials"
             },
             {
+              "id": ":data:holiday"
+            },
+            {
               "id": ":data:memo"
             },
             {
@@ -1534,6 +1651,9 @@
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             },
             {
               "id": ":domain:memo"
@@ -1613,6 +1733,12 @@
               "id": ":core:datastore:impl"
             },
             {
+              "id": ":core:holiday-database:impl"
+            },
+            {
+              "id": ":core:holiday-network:impl"
+            },
+            {
               "id": ":core:navigation"
             },
             {
@@ -1628,6 +1754,9 @@
               "id": ":data:credentials"
             },
             {
+              "id": ":data:holiday"
+            },
+            {
               "id": ":data:memo"
             },
             {
@@ -1641,6 +1770,9 @@
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             },
             {
               "id": ":domain:memo"
@@ -1720,6 +1852,12 @@
               "id": ":core:datastore:impl"
             },
             {
+              "id": ":core:holiday-database:impl"
+            },
+            {
+              "id": ":core:holiday-network:impl"
+            },
+            {
               "id": ":core:navigation"
             },
             {
@@ -1735,6 +1873,9 @@
               "id": ":data:credentials"
             },
             {
+              "id": ":data:holiday"
+            },
+            {
               "id": ":data:memo"
             },
             {
@@ -1748,6 +1889,9 @@
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             },
             {
               "id": ":domain:memo"
@@ -1827,6 +1971,12 @@
               "id": ":core:datastore:impl"
             },
             {
+              "id": ":core:holiday-database:impl"
+            },
+            {
+              "id": ":core:holiday-network:impl"
+            },
+            {
               "id": ":core:navigation"
             },
             {
@@ -1842,6 +1992,9 @@
               "id": ":data:credentials"
             },
             {
+              "id": ":data:holiday"
+            },
+            {
               "id": ":data:memo"
             },
             {
@@ -1855,6 +2008,9 @@
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             },
             {
               "id": ":domain:memo"
@@ -1934,6 +2090,12 @@
               "id": ":core:datastore:impl"
             },
             {
+              "id": ":core:holiday-database:impl"
+            },
+            {
+              "id": ":core:holiday-network:impl"
+            },
+            {
               "id": ":core:navigation"
             },
             {
@@ -1949,6 +2111,9 @@
               "id": ":data:credentials"
             },
             {
+              "id": ":data:holiday"
+            },
+            {
               "id": ":data:memo"
             },
             {
@@ -1962,6 +2127,9 @@
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             },
             {
               "id": ":domain:memo"
@@ -3129,6 +3297,9 @@
               "id": ":library:room-common"
             },
             {
+              "id": ":library:kotlinx-file"
+            },
+            {
               "id": "androidx.room3:room3-runtime",
               "isLibrary": true
             },
@@ -3166,6 +3337,9 @@
             },
             {
               "id": ":library:room-common"
+            },
+            {
+              "id": ":library:kotlinx-file"
             },
             {
               "id": "androidx.room3:room3-runtime",
@@ -3235,6 +3409,9 @@
               "id": ":library:room-common"
             },
             {
+              "id": ":library:kotlinx-file"
+            },
+            {
               "id": "androidx.room3:room3-runtime",
               "isLibrary": true
             },
@@ -3268,6 +3445,9 @@
             },
             {
               "id": ":library:room-common"
+            },
+            {
+              "id": ":library:kotlinx-file"
             },
             {
               "id": "androidx.room3:room3-runtime",
@@ -3305,6 +3485,9 @@
               "id": ":library:room-common"
             },
             {
+              "id": ":library:kotlinx-file"
+            },
+            {
               "id": "androidx.room3:room3-runtime",
               "isLibrary": true
             },
@@ -3338,6 +3521,9 @@
             },
             {
               "id": ":library:room-common"
+            },
+            {
+              "id": ":library:kotlinx-file"
             },
             {
               "id": "androidx.room3:room3-runtime",
@@ -3375,6 +3561,9 @@
               "id": ":library:room-common"
             },
             {
+              "id": ":library:kotlinx-file"
+            },
+            {
               "id": "androidx.room3:room3-runtime",
               "isLibrary": true
             },
@@ -3406,6 +3595,9 @@
               "id": ":library:room-common"
             },
             {
+              "id": ":library:kotlinx-file"
+            },
+            {
               "id": "androidx.room3:room3-runtime",
               "isLibrary": true
             },
@@ -3435,6 +3627,9 @@
             },
             {
               "id": ":library:room-common"
+            },
+            {
+              "id": ":library:kotlinx-file"
             },
             {
               "id": "androidx.room3:room3-runtime",
@@ -3472,6 +3667,9 @@
               "id": ":library:room-common"
             },
             {
+              "id": ":library:kotlinx-file"
+            },
+            {
               "id": "androidx.room3:room3-runtime",
               "isLibrary": true
             },
@@ -3501,6 +3699,9 @@
             },
             {
               "id": ":library:room-common"
+            },
+            {
+              "id": ":library:kotlinx-file"
             },
             {
               "id": "androidx.room3:room3-runtime",
@@ -3538,6 +3739,9 @@
               "id": ":library:room-common"
             },
             {
+              "id": ":library:kotlinx-file"
+            },
+            {
               "id": "androidx.room3:room3-runtime",
               "isLibrary": true
             },
@@ -3567,6 +3771,9 @@
             },
             {
               "id": ":library:room-common"
+            },
+            {
+              "id": ":library:kotlinx-file"
             },
             {
               "id": "androidx.room3:room3-runtime",
@@ -4606,6 +4813,1178 @@
       ]
     },
     {
+      "module": ":core:holiday-database",
+      "configurations": []
+    },
+    {
+      "module": ":core:holiday-database:api",
+      "configurations": [
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-datetime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.room3:room3-common",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-datetime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.room3:room3-common",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-datetime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.room3:room3-common",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-datetime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.room3:room3-common",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-datetime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.room3:room3-common",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-datetime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.room3:room3-common",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-datetime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.room3:room3-common",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-datetime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.room3:room3-common",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-datetime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.room3:room3-common",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-datetime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.room3:room3-common",
+              "isLibrary": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": ":core:holiday-database:impl",
+      "configurations": [
+        {
+          "id": "androidCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":library:kotlinx-file"
+            },
+            {
+              "id": ":library:room-common"
+            },
+            {
+              "id": "androidx.room3:room3-runtime",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.sqlite:sqlite-bundled",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":library:kotlinx-file"
+            },
+            {
+              "id": ":library:room-common"
+            },
+            {
+              "id": "androidx.room3:room3-runtime",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.sqlite:sqlite-bundled",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":library:kotlinx-file"
+            },
+            {
+              "id": ":library:room-common"
+            },
+            {
+              "id": "androidx.room3:room3-runtime",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.sqlite:sqlite-bundled",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":library:kotlinx-file"
+            },
+            {
+              "id": ":library:room-common"
+            },
+            {
+              "id": "androidx.room3:room3-runtime",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.sqlite:sqlite-bundled",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":library:kotlinx-file"
+            },
+            {
+              "id": ":library:room-common"
+            },
+            {
+              "id": "androidx.room3:room3-runtime",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.sqlite:sqlite-bundled",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":library:kotlinx-file"
+            },
+            {
+              "id": ":library:room-common"
+            },
+            {
+              "id": "androidx.room3:room3-runtime",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":library:kotlinx-file"
+            },
+            {
+              "id": ":library:room-common"
+            },
+            {
+              "id": "androidx.room3:room3-runtime",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":library:kotlinx-file"
+            },
+            {
+              "id": ":library:room-common"
+            },
+            {
+              "id": "androidx.room3:room3-runtime",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.sqlite:sqlite-bundled",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":library:kotlinx-file"
+            },
+            {
+              "id": ":library:room-common"
+            },
+            {
+              "id": "androidx.room3:room3-runtime",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataNonWasmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":library:kotlinx-file"
+            },
+            {
+              "id": ":library:room-common"
+            },
+            {
+              "id": "androidx.room3:room3-runtime",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.sqlite:sqlite-bundled",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":library:kotlinx-file"
+            },
+            {
+              "id": ":library:room-common"
+            },
+            {
+              "id": "androidx.room3:room3-runtime",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":library:kotlinx-file"
+            },
+            {
+              "id": ":library:room-common"
+            },
+            {
+              "id": "androidx.room3:room3-runtime",
+              "isLibrary": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": ":core:holiday-network",
+      "configurations": []
+    },
+    {
+      "module": ":core:holiday-network:api",
+      "configurations": [
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-datetime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-serialization-core",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-datetime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-serialization-core",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-datetime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-serialization-core",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-datetime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-serialization-core",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-datetime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-serialization-core",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-datetime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-serialization-core",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-datetime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-serialization-core",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-datetime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-serialization-core",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-datetime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-serialization-core",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-datetime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-serialization-core",
+              "isLibrary": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": ":core:holiday-network:impl",
+      "configurations": [
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-content-negotiation",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-serialization-kotlinx-json",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-okhttp",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-content-negotiation",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-serialization-kotlinx-json",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-okhttp",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-content-negotiation",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-serialization-kotlinx-json",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-okhttp",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-test",
+              "isLibrary": true
+            },
+            {
+              "id": "io.kotest:kotest-framework-engine",
+              "isLibrary": true
+            },
+            {
+              "id": "io.kotest:kotest-assertions-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.mockk:mockk",
+              "isLibrary": true
+            },
+            {
+              "id": "com.navercorp.fixturemonkey:fixture-monkey-starter-kotlin",
+              "isLibrary": true
+            },
+            {
+              "id": "app.cash.turbine:turbine",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-mock",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "io.ktor:ktor-client-darwin",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-content-negotiation",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-serialization-kotlinx-json",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-content-negotiation",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-serialization-kotlinx-json",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-content-negotiation",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-serialization-kotlinx-json",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "io.ktor:ktor-client-darwin",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-content-negotiation",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-serialization-kotlinx-json",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-content-negotiation",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-serialization-kotlinx-json",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-content-negotiation",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-serialization-kotlinx-json",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-js",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-content-negotiation",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-serialization-kotlinx-json",
+              "isLibrary": true
+            },
+            {
+              "id": "io.ktor:ktor-client-js",
+              "isLibrary": true
+            }
+          ]
+        }
+      ]
+    },
+    {
       "module": ":core:mapper",
       "configurations": [
         {
@@ -4623,6 +6002,12 @@
             },
             {
               "id": ":core:datastore:api"
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":core:holiday-network:api"
             },
             {
               "id": ":core:network:api"
@@ -4646,6 +6031,12 @@
               "id": ":core:datastore:api"
             },
             {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
               "id": ":core:network:api"
             }
           ]
@@ -4665,6 +6056,12 @@
             },
             {
               "id": ":core:datastore:api"
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":core:holiday-network:api"
             },
             {
               "id": ":core:network:api"
@@ -4712,6 +6109,12 @@
               "id": ":core:datastore:api"
             },
             {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
               "id": ":core:network:api"
             }
           ]
@@ -4731,6 +6134,12 @@
             },
             {
               "id": ":core:datastore:api"
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":core:holiday-network:api"
             },
             {
               "id": ":core:network:api"
@@ -4754,6 +6163,12 @@
               "id": ":core:datastore:api"
             },
             {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
               "id": ":core:network:api"
             }
           ]
@@ -4773,6 +6188,12 @@
             },
             {
               "id": ":core:datastore:api"
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":core:holiday-network:api"
             },
             {
               "id": ":core:network:api"
@@ -4796,6 +6217,12 @@
               "id": ":core:datastore:api"
             },
             {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
               "id": ":core:network:api"
             }
           ]
@@ -4817,6 +6244,12 @@
               "id": ":core:datastore:api"
             },
             {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
               "id": ":core:network:api"
             }
           ]
@@ -4836,6 +6269,12 @@
             },
             {
               "id": ":core:datastore:api"
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":core:holiday-network:api"
             },
             {
               "id": ":core:network:api"
@@ -6733,6 +8172,325 @@
       ]
     },
     {
+      "module": ":data:holiday",
+      "configurations": [
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:mapper"
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
+              "id": ":domain:holiday"
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:mapper"
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
+              "id": ":domain:holiday"
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:mapper"
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
+              "id": ":domain:holiday"
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-test",
+              "isLibrary": true
+            },
+            {
+              "id": "io.kotest:kotest-framework-engine",
+              "isLibrary": true
+            },
+            {
+              "id": "io.kotest:kotest-assertions-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.mockk:mockk",
+              "isLibrary": true
+            },
+            {
+              "id": "com.navercorp.fixturemonkey:fixture-monkey-starter-kotlin",
+              "isLibrary": true
+            },
+            {
+              "id": "app.cash.turbine:turbine",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:mapper"
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
+              "id": ":domain:holiday"
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:mapper"
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
+              "id": ":domain:holiday"
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:mapper"
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
+              "id": ":domain:holiday"
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:mapper"
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
+              "id": ":domain:holiday"
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:mapper"
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
+              "id": ":domain:holiday"
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:mapper"
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
+              "id": ":domain:holiday"
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:mapper"
+            },
+            {
+              "id": ":core:holiday-database:api"
+            },
+            {
+              "id": ":core:holiday-network:api"
+            },
+            {
+              "id": ":domain:holiday"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "module": ":data:memo",
       "configurations": [
         {
@@ -8370,6 +10128,295 @@
       ]
     },
     {
+      "module": ":domain:holiday",
+      "configurations": [
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-test",
+              "isLibrary": true
+            },
+            {
+              "id": "io.kotest:kotest-framework-engine",
+              "isLibrary": true
+            },
+            {
+              "id": "io.kotest:kotest-assertions-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.mockk:mockk",
+              "isLibrary": true
+            },
+            {
+              "id": "com.navercorp.fixturemonkey:fixture-monkey-starter-kotlin",
+              "isLibrary": true
+            },
+            {
+              "id": "app.cash.turbine:turbine",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":library:paging-common"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            }
+          ]
+        }
+      ]
+    },
+    {
       "module": ":domain:memo",
       "configurations": [
         {
@@ -9415,6 +11462,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -9434,13 +11484,23 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:holiday"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:memo"
             },
             {
-              "id": ":presenter:calendar:compose"
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:calendar"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -9470,6 +11530,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -9489,13 +11552,23 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:holiday"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:memo"
             },
             {
-              "id": ":presenter:calendar:compose"
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:calendar"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             },
             {
               "id": "androidx.test:core",
@@ -9549,6 +11622,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -9568,13 +11644,23 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:holiday"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:memo"
             },
             {
-              "id": ":presenter:calendar:compose"
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:calendar"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -9600,6 +11686,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -9619,13 +11708,23 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:holiday"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:memo"
             },
             {
-              "id": ":presenter:calendar:compose"
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:calendar"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             },
             {
               "id": "org.jetbrains.compose.hot-reload:hot-reload-runtime-api",
@@ -9659,6 +11758,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -9678,13 +11780,23 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:holiday"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:memo"
             },
             {
-              "id": ":presenter:calendar:compose"
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:calendar"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -9710,6 +11822,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -9729,13 +11844,23 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:holiday"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:memo"
             },
             {
-              "id": ":presenter:calendar:compose"
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:calendar"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -9761,6 +11886,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -9780,13 +11908,23 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:holiday"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:memo"
             },
             {
-              "id": ":presenter:calendar:compose"
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:calendar"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -9812,6 +11950,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -9831,13 +11972,23 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:holiday"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:memo"
             },
             {
-              "id": ":presenter:calendar:compose"
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:calendar"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -9863,6 +12014,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -9882,13 +12036,23 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:holiday"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:memo"
             },
             {
-              "id": ":presenter:calendar:compose"
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:calendar"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -9914,6 +12078,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -9933,13 +12100,23 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:holiday"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:memo"
             },
             {
-              "id": ":presenter:calendar:compose"
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:calendar"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -9965,6 +12142,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -9984,13 +12164,23 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:holiday"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:memo"
             },
             {
-              "id": ":presenter:calendar:compose"
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:calendar"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -10016,6 +12206,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -10035,13 +12228,23 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:holiday"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:memo"
             },
             {
-              "id": ":presenter:calendar:compose"
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:calendar"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -10067,6 +12270,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -10086,13 +12292,23 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:holiday"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:memo"
             },
             {
-              "id": ":presenter:calendar:compose"
+              "id": ":domain:tag"
+            },
+            {
+              "id": ":presenter:calendar"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         }
@@ -10123,6 +12339,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -10173,6 +12392,9 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":library:compose-ui"
             },
             {
               "id": ":library:koin-compose"
@@ -10251,6 +12473,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -10297,6 +12522,9 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":library:compose-ui"
             },
             {
               "id": ":library:koin-compose"
@@ -10355,6 +12583,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -10401,6 +12632,9 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":library:compose-ui"
             },
             {
               "id": ":library:koin-compose"
@@ -10451,6 +12685,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -10497,6 +12734,9 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":library:compose-ui"
             },
             {
               "id": ":library:koin-compose"
@@ -10547,6 +12787,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -10595,6 +12838,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -10641,6 +12887,9 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":library:compose-ui"
             },
             {
               "id": ":library:koin-compose"
@@ -10691,6 +12940,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -10739,6 +12991,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -10785,6 +13040,9 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":library:compose-ui"
             },
             {
               "id": ":library:koin-compose"
@@ -10840,6 +13098,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -10862,10 +13123,17 @@
               "id": ":domain:memo"
             },
             {
+              "id": ":domain:sync"
+            },
+            {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:memo:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -10895,6 +13163,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -10917,10 +13188,17 @@
               "id": ":domain:memo"
             },
             {
+              "id": ":domain:sync"
+            },
+            {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:memo:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             },
             {
               "id": "androidx.test:core",
@@ -10974,6 +13252,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -10996,10 +13277,17 @@
               "id": ":domain:memo"
             },
             {
+              "id": ":domain:sync"
+            },
+            {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:memo:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -11025,6 +13313,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -11047,10 +13338,17 @@
               "id": ":domain:memo"
             },
             {
+              "id": ":domain:sync"
+            },
+            {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:memo:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             },
             {
               "id": "org.jetbrains.compose.hot-reload:hot-reload-runtime-api",
@@ -11084,6 +13382,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -11106,10 +13407,17 @@
               "id": ":domain:memo"
             },
             {
+              "id": ":domain:sync"
+            },
+            {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:memo:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -11135,6 +13443,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -11157,10 +13468,17 @@
               "id": ":domain:memo"
             },
             {
+              "id": ":domain:sync"
+            },
+            {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:memo:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -11186,6 +13504,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -11208,10 +13529,17 @@
               "id": ":domain:memo"
             },
             {
+              "id": ":domain:sync"
+            },
+            {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:memo:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -11237,6 +13565,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -11259,10 +13590,17 @@
               "id": ":domain:memo"
             },
             {
+              "id": ":domain:sync"
+            },
+            {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:memo:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -11288,6 +13626,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -11310,10 +13651,17 @@
               "id": ":domain:memo"
             },
             {
+              "id": ":domain:sync"
+            },
+            {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:memo:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -11339,6 +13687,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -11361,10 +13712,17 @@
               "id": ":domain:memo"
             },
             {
+              "id": ":domain:sync"
+            },
+            {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:memo:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -11390,6 +13748,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -11412,10 +13773,17 @@
               "id": ":domain:memo"
             },
             {
+              "id": ":domain:sync"
+            },
+            {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:memo:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -11441,6 +13809,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -11463,10 +13834,17 @@
               "id": ":domain:memo"
             },
             {
+              "id": ":domain:sync"
+            },
+            {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:memo:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -11492,6 +13870,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -11514,10 +13895,17 @@
               "id": ":domain:memo"
             },
             {
+              "id": ":domain:sync"
+            },
+            {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:memo:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         }
@@ -11548,6 +13936,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -11598,6 +13989,9 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":library:compose-ui"
             },
             {
               "id": ":library:koin-compose"
@@ -11676,6 +14070,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -11722,6 +14119,9 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":library:compose-ui"
             },
             {
               "id": ":library:koin-compose"
@@ -11780,6 +14180,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -11826,6 +14229,9 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":library:compose-ui"
             },
             {
               "id": ":library:koin-compose"
@@ -11876,6 +14282,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -11922,6 +14331,9 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":library:compose-ui"
             },
             {
               "id": ":library:koin-compose"
@@ -11972,6 +14384,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -12018,6 +14433,9 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":library:compose-ui"
             },
             {
               "id": ":library:koin-compose"
@@ -12068,6 +14486,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -12116,6 +14537,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -12162,6 +14586,9 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":library:compose-ui"
             },
             {
               "id": ":library:koin-compose"
@@ -12217,6 +14644,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -12236,13 +14666,19 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:memo"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:tag:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": ":presenter:tag"
             }
           ]
         },
@@ -12272,6 +14708,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -12291,13 +14730,19 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:memo"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:tag:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": ":presenter:tag"
             },
             {
               "id": "androidx.test:core",
@@ -12351,6 +14796,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -12370,13 +14818,19 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:memo"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:tag:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": ":presenter:tag"
             }
           ]
         },
@@ -12402,6 +14856,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -12421,13 +14878,19 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:memo"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:tag:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": ":presenter:tag"
             },
             {
               "id": "org.jetbrains.compose.hot-reload:hot-reload-runtime-api",
@@ -12461,6 +14924,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -12480,13 +14946,19 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:memo"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:tag:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": ":presenter:tag"
             }
           ]
         },
@@ -12512,6 +14984,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -12531,13 +15006,19 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:memo"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:tag:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": ":presenter:tag"
             }
           ]
         },
@@ -12563,6 +15044,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -12582,13 +15066,19 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:memo"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:tag:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": ":presenter:tag"
             }
           ]
         },
@@ -12614,6 +15104,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -12633,13 +15126,19 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:memo"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:tag:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": ":presenter:tag"
             }
           ]
         },
@@ -12665,6 +15164,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -12684,13 +15186,19 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:memo"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:tag:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": ":presenter:tag"
             }
           ]
         },
@@ -12716,6 +15224,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -12735,13 +15246,19 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:memo"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:tag:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": ":presenter:tag"
             }
           ]
         },
@@ -12767,6 +15284,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -12786,13 +15306,19 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:memo"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:tag:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": ":presenter:tag"
             }
           ]
         },
@@ -12818,6 +15344,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -12837,13 +15366,19 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:memo"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:tag:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": ":presenter:tag"
             }
           ]
         },
@@ -12869,6 +15404,9 @@
               "id": ":core:navigation"
             },
             {
+              "id": ":library:compose-ui"
+            },
+            {
               "id": ":library:koin-compose"
             },
             {
@@ -12888,13 +15426,19 @@
               "isLibrary": true
             },
             {
+              "id": ":domain:memo"
+            },
+            {
               "id": ":domain:sync"
             },
             {
               "id": ":domain:tag"
             },
             {
-              "id": ":presenter:tag:compose"
+              "id": ":presenter:memo"
+            },
+            {
+              "id": ":presenter:tag"
             }
           ]
         }
@@ -13657,6 +16201,101 @@
       ]
     },
     {
+      "module": ":library:kotlinx-file",
+      "configurations": [
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        }
+      ]
+    },
+    {
       "module": ":library:navigation3-runtime",
       "configurations": [
         {
@@ -14282,11 +16921,39 @@
     },
     {
       "module": ":presenter:calendar",
-      "configurations": []
-    },
-    {
-      "module": ":presenter:calendar:api",
       "configurations": [
+        {
+          "id": "androidCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-datetime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":domain:holiday"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":compose:calendar"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            }
+          ]
+        },
         {
           "id": "jvmCompileClasspath",
           "dependencies": [
@@ -14303,6 +16970,59 @@
             },
             {
               "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":domain:holiday"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":compose:calendar"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmDevCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-datetime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":domain:holiday"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":compose:calendar"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.hot-reload:hot-reload-runtime-api",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.desktop:desktop-jvm-macos-arm64",
+              "isLibrary": true
             }
           ]
         },
@@ -14322,6 +17042,19 @@
             },
             {
               "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":domain:holiday"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":compose:calendar"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -14341,6 +17074,19 @@
             },
             {
               "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":domain:holiday"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":compose:calendar"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
             },
             {
               "id": "org.jetbrains.kotlinx:kotlinx-coroutines-test",
@@ -14384,6 +17130,19 @@
             },
             {
               "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":domain:holiday"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":compose:calendar"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -14403,6 +17162,19 @@
             },
             {
               "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":domain:holiday"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":compose:calendar"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -14422,6 +17194,19 @@
             },
             {
               "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":domain:holiday"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":compose:calendar"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -14441,6 +17226,19 @@
             },
             {
               "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":domain:holiday"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":compose:calendar"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -14460,6 +17258,19 @@
             },
             {
               "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":domain:holiday"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":compose:calendar"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -14479,6 +17290,19 @@
             },
             {
               "id": ":library:kotlinx-coroutines-core"
+            },
+            {
+              "id": ":domain:holiday"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":compose:calendar"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -14498,273 +17322,9 @@
             },
             {
               "id": ":library:kotlinx-coroutines-core"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "module": ":presenter:calendar:compose",
-      "configurations": [
-        {
-          "id": "androidCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:calendar:api"
             },
             {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":compose:calendar"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "jvmCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:calendar:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":compose:calendar"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "jvmDevCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:calendar:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":compose:calendar"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "org.jetbrains.compose.hot-reload:hot-reload-runtime-api",
-              "isLibrary": true
-            },
-            {
-              "id": "org.jetbrains.compose.desktop:desktop-jvm-macos-arm64",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "jvmMainCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:calendar:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":compose:calendar"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "jvmTestCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:calendar:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":compose:calendar"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "metadataAppleMainCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:calendar:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":compose:calendar"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "metadataCommonMainCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:calendar:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":compose:calendar"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "metadataCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:calendar:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":compose:calendar"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "metadataIosMainCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:calendar:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":compose:calendar"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "metadataNativeMainCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:calendar:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":compose:calendar"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "wasmJsCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:calendar:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":compose:calendar"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "wasmJsTestCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:calendar:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
+              "id": ":domain:holiday"
             },
             {
               "id": ":compose:core"
@@ -14782,11 +17342,44 @@
     },
     {
       "module": ":presenter:memo",
-      "configurations": []
-    },
-    {
-      "module": ":presenter:memo:api",
       "configurations": [
+        {
+          "id": "androidCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:navigation"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
+            }
+          ]
+        },
         {
           "id": "jvmCompileClasspath",
           "dependencies": [
@@ -14807,6 +17400,65 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmDevCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:navigation"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.hot-reload:hot-reload-runtime-api",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.desktop:desktop-jvm-macos-arm64",
+              "isLibrary": true
             }
           ]
         },
@@ -14830,6 +17482,20 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -14853,6 +17519,20 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             },
             {
               "id": "org.jetbrains.kotlinx:kotlinx-coroutines-test",
@@ -14900,6 +17580,20 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -14923,6 +17617,20 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -14946,6 +17654,20 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -14969,6 +17691,20 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -14992,6 +17728,20 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -15015,6 +17765,20 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -15038,317 +17802,6 @@
             },
             {
               "id": ":core:navigation"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "module": ":presenter:memo:compose",
-      "configurations": [
-        {
-          "id": "androidCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:memo:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":library:compose-ui"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "androidx.paging:paging-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "jvmCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:memo:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":library:compose-ui"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "androidx.paging:paging-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "jvmDevCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:memo:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":library:compose-ui"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "androidx.paging:paging-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "org.jetbrains.compose.hot-reload:hot-reload-runtime-api",
-              "isLibrary": true
-            },
-            {
-              "id": "org.jetbrains.compose.desktop:desktop-jvm-macos-arm64",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "jvmMainCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:memo:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":library:compose-ui"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "androidx.paging:paging-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "jvmTestCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:memo:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":library:compose-ui"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "androidx.paging:paging-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "metadataAppleMainCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:memo:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":library:compose-ui"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "androidx.paging:paging-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "metadataCommonMainCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:memo:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":library:compose-ui"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "androidx.paging:paging-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "metadataCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:memo:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":library:compose-ui"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "androidx.paging:paging-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "metadataIosMainCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:memo:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":library:compose-ui"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "androidx.paging:paging-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "metadataNativeMainCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:memo:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":library:compose-ui"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "androidx.paging:paging-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "wasmJsCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:memo:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":library:compose-ui"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "androidx.paging:paging-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "wasmJsTestCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:memo:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
             },
             {
               "id": ":compose:core"
@@ -15370,11 +17823,44 @@
     },
     {
       "module": ":presenter:tag",
-      "configurations": []
-    },
-    {
-      "module": ":presenter:tag:api",
       "configurations": [
+        {
+          "id": "androidCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:navigation"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
+            }
+          ]
+        },
         {
           "id": "jvmCompileClasspath",
           "dependencies": [
@@ -15395,6 +17881,65 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmDevCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:model"
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-common",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:navigation"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.hot-reload:hot-reload-runtime-api",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.desktop:desktop-jvm-macos-arm64",
+              "isLibrary": true
             }
           ]
         },
@@ -15418,6 +17963,20 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -15441,6 +18000,20 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             },
             {
               "id": "org.jetbrains.kotlinx:kotlinx-coroutines-test",
@@ -15488,6 +18061,20 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -15511,6 +18098,20 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -15534,6 +18135,20 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -15557,6 +18172,20 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -15580,6 +18209,20 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -15603,6 +18246,20 @@
             },
             {
               "id": ":core:navigation"
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
             }
           ]
         },
@@ -15626,317 +18283,6 @@
             },
             {
               "id": ":core:navigation"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "module": ":presenter:tag:compose",
-      "configurations": [
-        {
-          "id": "androidCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:tag:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":library:compose-ui"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "androidx.paging:paging-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "jvmCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:tag:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":library:compose-ui"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "androidx.paging:paging-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "jvmDevCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:tag:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":library:compose-ui"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "androidx.paging:paging-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "org.jetbrains.compose.hot-reload:hot-reload-runtime-api",
-              "isLibrary": true
-            },
-            {
-              "id": "org.jetbrains.compose.desktop:desktop-jvm-macos-arm64",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "jvmMainCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:tag:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":library:compose-ui"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "androidx.paging:paging-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "jvmTestCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:tag:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":library:compose-ui"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "androidx.paging:paging-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "metadataAppleMainCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:tag:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":library:compose-ui"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "androidx.paging:paging-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "metadataCommonMainCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:tag:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":library:compose-ui"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "androidx.paging:paging-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "metadataCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:tag:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":library:compose-ui"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "androidx.paging:paging-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "metadataIosMainCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:tag:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":library:compose-ui"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "androidx.paging:paging-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "metadataNativeMainCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:tag:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":library:compose-ui"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "androidx.paging:paging-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "wasmJsCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:tag:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
-            },
-            {
-              "id": ":compose:core"
-            },
-            {
-              "id": ":library:compose-ui"
-            },
-            {
-              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
-              "isLibrary": true
-            },
-            {
-              "id": "androidx.paging:paging-compose",
-              "isLibrary": true
-            }
-          ]
-        },
-        {
-          "id": "wasmJsTestCompileClasspath",
-          "dependencies": [
-            {
-              "id": ":presenter:tag:api"
-            },
-            {
-              "id": "org.jetbrains.kotlin:kotlin-stdlib",
-              "isLibrary": true
             },
             {
               "id": ":compose:core"

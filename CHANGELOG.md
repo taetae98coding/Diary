@@ -1,3 +1,16 @@
+## [1.2.0] - 2026-03-30
+
+### 🚀 Features
+
+- Sync Background/Foreground 분리
+- 메모 리스트
+- 태그 메모
+- 공휴일
+- 태그 필터
+
+### 🐛 Bug Fixes
+
+- ColorPicker Slider 변경 시 RGB 텍스트 변경안되는 케이스 수정
 ## [1.1.0] - 2026-03-29
 
 ### 🚀 Features
