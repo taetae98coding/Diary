@@ -18,6 +18,23 @@ internal interface AccountCalendarMemoDao {
         WHERE CAST(strftime('%Y', Memo.start) AS INTEGER) <= :year
         AND CAST(strftime('%Y', Memo.endInclusive) AS INTEGER) >= :year
         AND Memo.isDeleted = 0
+        AND (
+            NOT EXISTS (
+                SELECT 1
+                FROM CalendarMemoFilterTag
+                INNER JOIN AccountTag ON AccountTag.tagId = CalendarMemoFilterTag.tagId AND AccountTag.accountId = :accountId
+                INNER JOIN Tag AS FilterTag ON FilterTag.id = CalendarMemoFilterTag.tagId AND FilterTag.isFinished = 0 AND FilterTag.isDeleted = 0
+            )
+            OR
+            EXISTS (
+                SELECT 1
+                FROM MemoTag
+                INNER JOIN CalendarMemoFilterTag ON CalendarMemoFilterTag.tagId = MemoTag.tagId
+                INNER JOIN AccountTag ON AccountTag.tagId = CalendarMemoFilterTag.tagId AND AccountTag.accountId = :accountId
+                INNER JOIN Tag AS FilterTag ON FilterTag.id = CalendarMemoFilterTag.tagId AND FilterTag.isFinished = 0 AND FilterTag.isDeleted = 0
+                WHERE MemoTag.memoId = Memo.id AND MemoTag.isMemoTag = 1
+            )
+        )
         ORDER BY Memo.isAllDay DESC, Memo.start, Memo.endInclusive DESC, Memo.title
         """,
     )

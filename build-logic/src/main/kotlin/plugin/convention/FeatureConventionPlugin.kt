@@ -28,6 +28,7 @@ internal class FeatureConventionPlugin : Plugin<Project> {
                     dependencies {
                         implementation(target.project(":compose:core"))
                         implementation(target.project(":core:navigation"))
+                        implementation(target.project(":library:compose-ui"))
                         implementation(target.project(":library:koin-compose"))
                         implementation(libs.library("jetbrains-navigation3-ui"))
                         implementation(libs.library("koin-compose"))

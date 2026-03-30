@@ -1,5 +1,8 @@
 package io.github.taetae98coding.diary.data.memo.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import io.github.taetae98coding.diary.core.database.api.DatabaseTransactor
 import io.github.taetae98coding.diary.core.database.api.datasource.AccountMemoLocalDataSource
 import io.github.taetae98coding.diary.core.database.api.datasource.MemoLocalDataSource
@@ -11,11 +14,15 @@ import io.github.taetae98coding.diary.core.database.api.entity.MemoLocalEntity
 import io.github.taetae98coding.diary.core.database.api.entity.MemoTagLocalEntity
 import io.github.taetae98coding.diary.core.database.api.entity.SyncMemoLocalEntity
 import io.github.taetae98coding.diary.core.database.api.entity.SyncMemoTagLocalEntity
+import io.github.taetae98coding.diary.core.mapper.toDomain
 import io.github.taetae98coding.diary.core.mapper.toLocal
+import io.github.taetae98coding.diary.core.model.memo.Memo
 import io.github.taetae98coding.diary.core.model.memo.MemoDetail
 import io.github.taetae98coding.diary.domain.memo.repository.AccountMemoRepository
+import io.github.taetae98coding.diary.library.paging.common.mapPagingLatest
 import kotlin.time.Clock
 import kotlin.uuid.Uuid
+import kotlinx.coroutines.flow.Flow
 import org.koin.core.annotation.Factory
 
 @Factory
@@ -119,5 +126,17 @@ public class AccountMemoRepositoryImpl(
                 SyncMemoLocalEntity(memoId = memoId),
             )
         }
+    }
+
+    override fun pageByTag(
+        accountId: Uuid,
+        tagId: Uuid,
+    ): Flow<PagingData<Memo>> {
+        val pager = Pager(
+            config = PagingConfig(pageSize = 30),
+            pagingSourceFactory = { accountMemoLocalDataSource.pageByTag(accountId, tagId) },
+        )
+
+        return pager.flow.mapPagingLatest(MemoLocalEntity::toDomain)
     }
 }

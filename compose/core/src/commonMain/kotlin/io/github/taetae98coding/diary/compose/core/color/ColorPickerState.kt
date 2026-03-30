@@ -3,12 +3,9 @@ package io.github.taetae98coding.diary.compose.core.color
 import androidx.compose.animation.Animatable
 import androidx.compose.material3.SliderState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import io.github.taetae98coding.diary.library.compose.ui.random
 
@@ -20,11 +17,7 @@ public class ColorPickerState(initialColor: Color) {
     public val value: Color
         get() = Color(redState.value, greenState.value, blueState.value)
 
-    public var targetValue: Color by mutableStateOf(initialColor)
-        private set
-
     public suspend fun animateTo(color: Color) {
-        targetValue = color
         Animatable(value).animateTo(color) {
             redState.value = value.red
             greenState.value = value.green
@@ -36,9 +29,9 @@ public class ColorPickerState(initialColor: Color) {
 private fun colorPickerStateSaver(): Saver<ColorPickerState, List<Float>> = Saver(
     save = { state ->
         listOf(
-            state.targetValue.red,
-            state.targetValue.green,
-            state.targetValue.blue,
+            state.value.red,
+            state.value.green,
+            state.value.blue,
         )
     },
     restore = { values ->

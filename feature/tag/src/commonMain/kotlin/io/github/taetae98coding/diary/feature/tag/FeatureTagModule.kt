@@ -1,11 +1,20 @@
 package io.github.taetae98coding.diary.feature.tag
 
+import io.github.taetae98coding.diary.core.navigation.argument.TagId
+import io.github.taetae98coding.diary.domain.memo.usecase.DeleteMemoUseCase
+import io.github.taetae98coding.diary.domain.memo.usecase.FinishMemoUseCase
+import io.github.taetae98coding.diary.domain.memo.usecase.PageMemoByTagUseCase
+import io.github.taetae98coding.diary.domain.memo.usecase.RestartMemoUseCase
+import io.github.taetae98coding.diary.domain.memo.usecase.RestoreMemoUseCase
 import io.github.taetae98coding.diary.feature.tag.add.AccountTagAddStrategy
 import io.github.taetae98coding.diary.feature.tag.detail.AccountTagDetailStrategy
 import io.github.taetae98coding.diary.feature.tag.di.TagAddScope
 import io.github.taetae98coding.diary.feature.tag.di.TagDetailScope
 import io.github.taetae98coding.diary.feature.tag.di.TagHomeScope
+import io.github.taetae98coding.diary.feature.tag.di.TagMemoScope
 import io.github.taetae98coding.diary.feature.tag.home.AccountTagListStrategy
+import io.github.taetae98coding.diary.feature.tag.memo.AccountTagMemoListStrategy
+import io.github.taetae98coding.diary.presenter.memo.api.MemoListStateHolder
 import io.github.taetae98coding.diary.presenter.tag.api.TagAddStateHolder
 import io.github.taetae98coding.diary.presenter.tag.api.TagDetailStateHolder
 import io.github.taetae98coding.diary.presenter.tag.api.TagListStateHolder
@@ -50,6 +59,32 @@ public class FeatureTagModule : KoinComponent {
         return TagDetailStateHolder(
             coroutineScope = scope.get(),
             tagId = scope.get(),
+            strategy = strategy,
+        )
+    }
+
+    @Scope(TagMemoScope::class)
+    @Scoped
+    internal fun providesMemoListStateHolder(
+        pageMemoByTagUseCase: PageMemoByTagUseCase,
+        finishMemoUseCase: FinishMemoUseCase,
+        restartMemoUseCase: RestartMemoUseCase,
+        deleteMemoUseCase: DeleteMemoUseCase,
+        restoreMemoUseCase: RestoreMemoUseCase,
+    ): MemoListStateHolder {
+        val scope = getKoin().getScope(TagMemoScope.DEFAULT_ID)
+
+        val strategy = AccountTagMemoListStrategy(
+            tagId = scope.get<TagId>().value,
+            pageMemoByTagUseCase = pageMemoByTagUseCase,
+            finishMemoUseCase = finishMemoUseCase,
+            restartMemoUseCase = restartMemoUseCase,
+            deleteMemoUseCase = deleteMemoUseCase,
+            restoreMemoUseCase = restoreMemoUseCase,
+        )
+
+        return MemoListStateHolder(
+            coroutineScope = scope.get(),
             strategy = strategy,
         )
     }

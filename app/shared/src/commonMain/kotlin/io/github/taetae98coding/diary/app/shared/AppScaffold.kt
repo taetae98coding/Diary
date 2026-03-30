@@ -16,6 +16,7 @@ import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
 import androidx.lifecycle.compose.LifecycleStartEffect
 import io.github.taetae98coding.diary.compose.core.icon.CalendarIcon
+import io.github.taetae98coding.diary.compose.core.icon.MemoIcon
 import io.github.taetae98coding.diary.compose.core.icon.MoreIcon
 import io.github.taetae98coding.diary.compose.core.icon.TagIcon
 import kotlinx.coroutines.flow.collectLatest
@@ -33,6 +34,11 @@ internal fun AppScaffold(
             .onPreviewKeyEvent { event ->
                 if (event.type == KeyEventType.KeyDown && event.isMetaPressed) {
                     when (event.key) {
+                        Key.One -> {
+                            state.navigateTo(TopLevelDestination.Memo)
+                            true
+                        }
+
                         Key.Two -> {
                             state.navigateTo(TopLevelDestination.Tag)
                             true
@@ -62,6 +68,7 @@ internal fun AppScaffold(
                     onClick = { state.navigateTo(destination) },
                     icon = {
                         when (destination) {
+                            TopLevelDestination.Memo -> MemoIcon()
                             TopLevelDestination.Tag -> TagIcon()
                             TopLevelDestination.Calendar -> CalendarIcon()
                             TopLevelDestination.More -> MoreIcon()
@@ -69,6 +76,7 @@ internal fun AppScaffold(
                     },
                     label = {
                         when (destination) {
+                            TopLevelDestination.Memo -> Text(text = "메모")
                             TopLevelDestination.Tag -> Text(text = "태그")
                             TopLevelDestination.Calendar -> Text(text = "캘린더")
                             TopLevelDestination.More -> Text(text = "더보기")
