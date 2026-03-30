@@ -68,10 +68,12 @@ class GetHolidayUseCaseTest : BehaviorSpec() {
             val year = 2026
             val sinjeong = fixtureMonkey.giveMeKotlinBuilder<Holiday>()
                 .set(Holiday::name, "신정")
+                .set(Holiday::isHoliday, false)
                 .set(Holiday::localDateRange, LocalDate(2026, 1, 1)..LocalDate(2026, 1, 1))
                 .sample()
             val seolnal = fixtureMonkey.giveMeKotlinBuilder<Holiday>()
                 .set(Holiday::name, "설날")
+                .set(Holiday::isHoliday, false)
                 .set(Holiday::localDateRange, LocalDate(2026, 1, 28)..LocalDate(2026, 1, 30))
                 .sample()
             val holidays = listOf(sinjeong, seolnal)
@@ -90,12 +92,42 @@ class GetHolidayUseCaseTest : BehaviorSpec() {
             }
         }
 
+        Given("필터가 있지만 isHoliday가 true인 공휴일이 있을 때") {
+            clearAllMocks()
+            val year = 2026
+            val sinjeong = fixtureMonkey.giveMeKotlinBuilder<Holiday>()
+                .set(Holiday::name, "신정")
+                .set(Holiday::isHoliday, true)
+                .set(Holiday::localDateRange, LocalDate(2026, 1, 1)..LocalDate(2026, 1, 1))
+                .sample()
+            val seolnal = fixtureMonkey.giveMeKotlinBuilder<Holiday>()
+                .set(Holiday::name, "설날")
+                .set(Holiday::isHoliday, false)
+                .set(Holiday::localDateRange, LocalDate(2026, 1, 28)..LocalDate(2026, 1, 30))
+                .sample()
+            val holidays = listOf(sinjeong, seolnal)
+            val filter = listOf("설날")
+
+            every { holidayRepository.get(year) } returns flowOf(holidays)
+            every { holidayFilterRepository.get() } returns flowOf(filter)
+
+            When("GetHolidayUseCase를 호출하면") {
+                val result = useCase(year).first()
+
+                Then("isHoliday가 true인 공휴일과 필터에 포함된 공휴일을 모두 반환한다") {
+                    result.shouldBeSuccess()
+                    result.getOrThrow() shouldBe listOf(sinjeong, seolnal)
+                }
+            }
+        }
+
         Given("필터에 매칭되는 공휴일이 없을 때") {
             clearAllMocks()
             val year = 2026
             val holidays = listOf(
                 fixtureMonkey.giveMeKotlinBuilder<Holiday>()
                     .set(Holiday::name, "신정")
+                    .set(Holiday::isHoliday, false)
                     .set(Holiday::localDateRange, LocalDate(2026, 1, 1)..LocalDate(2026, 1, 1))
                     .sample(),
             )

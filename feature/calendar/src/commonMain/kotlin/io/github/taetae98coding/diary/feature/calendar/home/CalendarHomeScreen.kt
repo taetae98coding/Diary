@@ -7,6 +7,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.taetae98coding.diary.presenter.calendar.api.CalendarHolidayStateHolder
 import io.github.taetae98coding.diary.presenter.calendar.api.CalendarMemoFilterStateHolder
 import io.github.taetae98coding.diary.presenter.calendar.api.CalendarMemoStateHolder
+import io.github.taetae98coding.diary.presenter.calendar.api.CalendarWeatherStateHolder
 import io.github.taetae98coding.diary.presenter.calendar.compose.CalendarScaffold
 import kotlin.uuid.Uuid
 import kotlinx.datetime.LocalDateRange
@@ -19,6 +20,7 @@ internal fun CalendarHomeScreen(
     navigateToFilter: () -> Unit,
     memoStateHolder: CalendarMemoStateHolder,
     holidayStateHolder: CalendarHolidayStateHolder,
+    weatherStateHolder: CalendarWeatherStateHolder,
     filterStateHolder: CalendarMemoFilterStateHolder,
     modifier: Modifier = Modifier,
     viewModel: CalendarHomeViewModel = koinViewModel(),
@@ -28,6 +30,7 @@ internal fun CalendarHomeScreen(
     CalendarScaffold(
         memoStateHolder = memoStateHolder,
         holidayStateHolder = holidayStateHolder,
+        weatherStateHolder = weatherStateHolder,
         filterStateHolder = filterStateHolder,
         modifier = modifier,
         isFetchingProvider = { isSyncing },

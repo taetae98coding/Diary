@@ -21,8 +21,10 @@ kotlin {
                 implementation(projects.core.datastore.impl)
                 implementation(projects.core.holidayDatabase.impl)
                 implementation(projects.core.holidayNetwork.impl)
+                implementation(projects.core.ipNetwork.impl)
                 implementation(projects.core.navigation)
                 implementation(projects.core.network.impl)
+                implementation(projects.core.weatherNetwork.impl)
                 implementation(projects.core.supabase.impl)
                 implementation(projects.data.account)
                 implementation(projects.data.credentials)
@@ -30,12 +32,14 @@ kotlin {
                 implementation(projects.data.memo)
                 implementation(projects.data.sync)
                 implementation(projects.data.tag)
+                implementation(projects.data.weather)
                 implementation(projects.domain.account)
                 implementation(projects.domain.credentials)
                 implementation(projects.domain.holiday)
                 implementation(projects.domain.memo)
                 implementation(projects.domain.sync)
                 implementation(projects.domain.tag)
+                implementation(projects.domain.weather)
                 implementation(projects.feature.calendar)
                 implementation(projects.feature.login)
                 implementation(projects.feature.memo)
@@ -91,11 +95,13 @@ buildkonfig {
     defaultConfigs("dev") {
         buildConfigField(type = STRING, name = "SUPABASE_URL", value = requireNotNull(localProperties.getProperty("dev.supabase.url")), nullable = false, const = true)
         buildConfigField(type = STRING, name = "SUPABASE_KEY", value = requireNotNull(localProperties.getProperty("dev.supabase.key")), nullable = false, const = true)
+        buildConfigField(type = STRING, name = "OPENWEATHERMAP_API_KEY", value = localProperties.getProperty("dev.openweathermap.api.key").orEmpty(), nullable = false, const = true)
     }
 
     defaultConfigs("real") {
         buildConfigField(type = STRING, name = "SUPABASE_URL", value = requireNotNull(localProperties.getProperty("real.supabase.url")), nullable = false, const = true)
         buildConfigField(type = STRING, name = "SUPABASE_KEY", value = requireNotNull(localProperties.getProperty("real.supabase.key")), nullable = false, const = true)
+        buildConfigField(type = STRING, name = "OPENWEATHERMAP_API_KEY", value = localProperties.getProperty("real.openweathermap.api.key").orEmpty(), nullable = false, const = true)
     }
 
     targetConfigs("dev") {

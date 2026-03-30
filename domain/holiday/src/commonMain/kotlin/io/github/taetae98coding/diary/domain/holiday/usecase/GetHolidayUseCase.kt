@@ -26,7 +26,7 @@ public class GetHolidayUseCase(
                 if (filter.isEmpty()) {
                     holidays
                 } else {
-                    holidays.filter { it.name in filter }
+                    holidays.filter { it.isHoliday || it.name in filter }
                 }
             }.also {
                 emitAll(it)

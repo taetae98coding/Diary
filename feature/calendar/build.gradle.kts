@@ -10,6 +10,7 @@ kotlin {
                 implementation(projects.domain.sync)
                 implementation(projects.domain.memo)
                 implementation(projects.domain.tag)
+                implementation(projects.domain.weather)
                 implementation(projects.presenter.calendar)
                 implementation(libs.androidx.paging.compose)
             }

@@ -27,6 +27,7 @@ public fun EntryProviderScope<NavKey>.calendarEntry(backStack: NavBackStack<NavK
             memoStateHolder = koinInject(scope = scope),
             filterStateHolder = koinInject(scope = scope),
             holidayStateHolder = koinInject(scope = scope),
+            weatherStateHolder = koinInject(scope = scope),
         )
     }
 
