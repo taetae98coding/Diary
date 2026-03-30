@@ -2,6 +2,7 @@ package io.github.taetae98coding.diary.app.shared
 
 import io.github.taetae98coding.diary.core.database.impl.DatabaseParentFile
 import io.github.taetae98coding.diary.core.datastore.impl.DataStoreParentFile
+import io.github.taetae98coding.diary.core.holiday.database.impl.HolidayDatabaseParentFile
 import io.github.taetae98coding.diary.feature.login.di.GoogleClientId
 import java.io.File
 import org.koin.core.annotation.Configuration
@@ -23,6 +24,13 @@ public class JvmAppModule {
     internal fun providesDatabaseParentFile(): File {
         val appSupport = File(System.getProperty("user.home"), "Library/Application Support/${BuildKonfig.APP_NAME}")
         return File(appSupport, "database").apply { mkdirs() }
+    }
+
+    @Single
+    @HolidayDatabaseParentFile
+    internal fun providesHolidayDatabaseParentFile(): File {
+        val appSupport = File(System.getProperty("user.home"), "Library/Application Support/${BuildKonfig.APP_NAME}")
+        return File(appSupport, "holiday database").apply { mkdirs() }
     }
 
     @Single

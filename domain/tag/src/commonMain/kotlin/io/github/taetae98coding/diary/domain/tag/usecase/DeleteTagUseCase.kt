@@ -1,5 +1,6 @@
 package io.github.taetae98coding.diary.domain.tag.usecase
 
+import io.github.taetae98coding.diary.core.model.sync.SyncType
 import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
 import io.github.taetae98coding.diary.domain.sync.usecase.RequestSyncUseCase
 import io.github.taetae98coding.diary.domain.tag.repository.AccountTagRepository
@@ -19,7 +20,7 @@ public class DeleteTagUseCase(
 
             accountTagRepository.updateDelete(tagId = tagId, isDeleted = true)
 
-            requestSyncUseCase()
+            requestSyncUseCase(SyncType.Background)
         }
     }
 }

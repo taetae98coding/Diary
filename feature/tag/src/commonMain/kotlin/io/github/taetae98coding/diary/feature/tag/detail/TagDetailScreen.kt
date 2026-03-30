@@ -8,6 +8,7 @@ import io.github.taetae98coding.diary.presenter.tag.compose.detail.TagDetailScaf
 @Composable
 internal fun TagDetailScreen(
     navigateUp: () -> Unit,
+    navigateToTagMemo: () -> Unit,
     stateHolder: TagDetailStateHolder,
     modifier: Modifier = Modifier,
 ) {
@@ -15,5 +16,6 @@ internal fun TagDetailScreen(
         stateHolder = stateHolder,
         modifier = modifier,
         onNavigateUp = navigateUp,
+        onNavigateToTagMemo = navigateToTagMemo,
     )
 }

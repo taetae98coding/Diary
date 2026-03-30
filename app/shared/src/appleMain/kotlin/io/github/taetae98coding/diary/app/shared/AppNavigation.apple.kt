@@ -16,7 +16,7 @@ import androidx.navigationevent.NavigationEvent
 private const val DEFAULT_TRANSITION_DURATION_MILLISECOND = 700
 
 private fun Scene<*>.isTopLevel(state: AppState): Boolean {
-    return key in state.topLevelNavKeys.mapNotNull { it::class.simpleName }.toSet()
+    return key in state.topLevelScreenNavKeys.mapNotNull { it::class.simpleName }.toSet()
 }
 
 internal actual fun <T : Any> platformTransitionSpec(state: AppState): AnimatedContentTransitionScope<Scene<T>>.() -> ContentTransform {

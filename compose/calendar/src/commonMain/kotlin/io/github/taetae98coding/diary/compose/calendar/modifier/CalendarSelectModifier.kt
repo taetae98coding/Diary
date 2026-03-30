@@ -85,7 +85,7 @@ private class CalendarSelectNode(
 
                     if (localDateRange != state.selectState.localDateRange) {
                         state.selectState.select(localDateRange)
-                        currentValueOf(LocalHapticFeedback).performHapticFeedback(HapticFeedbackType.LongPress)
+                        currentValueOf(LocalHapticFeedback).performHapticFeedback(HapticFeedbackType.SegmentTick)
                     }
 
                     if (autoScrollJob?.isActive != true) {

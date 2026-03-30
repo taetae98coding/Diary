@@ -7,8 +7,11 @@ import com.navercorp.fixturemonkey.FixtureMonkey
 import com.navercorp.fixturemonkey.kotlin.KotlinPlugin
 import com.navercorp.fixturemonkey.kotlin.giveMeKotlinBuilder
 import io.github.taetae98coding.diary.core.database.api.entity.AccountMemoLocalEntity
+import io.github.taetae98coding.diary.core.database.api.entity.AccountTagLocalEntity
+import io.github.taetae98coding.diary.core.database.api.entity.CalendarMemoFilterTagLocalEntity
 import io.github.taetae98coding.diary.core.database.api.entity.MemoDetailLocalEntity
 import io.github.taetae98coding.diary.core.database.api.entity.MemoLocalEntity
+import io.github.taetae98coding.diary.core.database.api.entity.MemoTagLocalEntity
 import io.github.taetae98coding.diary.core.database.api.entity.TagDetailLocalEntity
 import io.github.taetae98coding.diary.core.database.api.entity.TagLocalEntity
 import io.github.taetae98coding.diary.core.database.impl.DiaryDatabase
@@ -32,6 +35,9 @@ class AccountCalendarMemoDaoTest {
     private lateinit var memoDao: MemoDao
     private lateinit var accountMemoDao: AccountMemoDao
     private lateinit var tagDao: TagDao
+    private lateinit var accountTagDao: AccountTagDao
+    private lateinit var memoTagDao: MemoTagDao
+    private lateinit var calendarMemoFilterTagDao: CalendarMemoFilterTagDao
 
     private val fixtureMonkey = FixtureMonkey.builder()
         .plugin(KotlinPlugin())
@@ -46,6 +52,9 @@ class AccountCalendarMemoDaoTest {
         memoDao = database.memoDao()
         accountMemoDao = database.accountMemoDao()
         tagDao = database.tagDao()
+        accountTagDao = database.accountTagDao()
+        memoTagDao = database.memoTagDao()
+        calendarMemoFilterTagDao = database.calendarMemoFilterTagDao()
     }
 
     @After
@@ -288,5 +297,194 @@ class AccountCalendarMemoDaoTest {
 
         result shouldHaveSize 1
         result[0].color shouldBe tagColor
+    }
+
+    @Test
+    fun `필터 태그가 없으면 모든 메모를 조회한다`() = runTest {
+        val accountId = Uuid.random()
+        val memoId = Uuid.random()
+        val memo = fixtureMonkey.giveMeKotlinBuilder<MemoLocalEntity>()
+            .set(MemoLocalEntity::id, memoId)
+            .set(
+                MemoLocalEntity::detail,
+                fixtureMonkey.giveMeKotlinBuilder<MemoDetailLocalEntity>()
+                    .set(MemoDetailLocalEntity::start, LocalDateTime(2025, 6, 1, 0, 0))
+                    .set(MemoDetailLocalEntity::endInclusive, LocalDateTime(2025, 6, 30, 23, 59))
+                    .sample(),
+            )
+            .set(MemoLocalEntity::isDeleted, false)
+            .sample()
+
+        memoDao.upsert(memo)
+        accountMemoDao.upsert(AccountMemoLocalEntity(accountId = accountId, memoId = memoId))
+
+        val result = accountCalendarMemoDao.get(accountId, 2025).first()
+
+        result shouldHaveSize 1
+        result[0].id shouldBe memoId
+    }
+
+    @Test
+    fun `필터 태그가 있으면 해당 태그가 달린 메모만 조회한다`() = runTest {
+        val accountId = Uuid.random()
+        val tagId = Uuid.random()
+        val memoWithTag = Uuid.random()
+        val memoWithoutTag = Uuid.random()
+
+        tagDao.upsert(
+            TagLocalEntity(
+                id = tagId,
+                detail = TagDetailLocalEntity(title = "filter", description = "", color = 0),
+            ),
+        )
+        accountTagDao.upsert(AccountTagLocalEntity(accountId = accountId, tagId = tagId))
+        calendarMemoFilterTagDao.upsert(CalendarMemoFilterTagLocalEntity(tagId = tagId))
+
+        memoDao.upsert(
+            fixtureMonkey.giveMeKotlinBuilder<MemoLocalEntity>()
+                .set(MemoLocalEntity::id, memoWithTag)
+                .set(
+                    MemoLocalEntity::detail,
+                    fixtureMonkey.giveMeKotlinBuilder<MemoDetailLocalEntity>()
+                        .set(MemoDetailLocalEntity::start, LocalDateTime(2025, 6, 1, 0, 0))
+                        .set(MemoDetailLocalEntity::endInclusive, LocalDateTime(2025, 6, 30, 23, 59))
+                        .sample(),
+                )
+                .set(MemoLocalEntity::isDeleted, false)
+                .sample(),
+        )
+        accountMemoDao.upsert(AccountMemoLocalEntity(accountId = accountId, memoId = memoWithTag))
+        memoTagDao.upsert(MemoTagLocalEntity(memoId = memoWithTag, tagId = tagId, isMemoTag = true))
+
+        memoDao.upsert(
+            fixtureMonkey.giveMeKotlinBuilder<MemoLocalEntity>()
+                .set(MemoLocalEntity::id, memoWithoutTag)
+                .set(
+                    MemoLocalEntity::detail,
+                    fixtureMonkey.giveMeKotlinBuilder<MemoDetailLocalEntity>()
+                        .set(MemoDetailLocalEntity::start, LocalDateTime(2025, 6, 1, 0, 0))
+                        .set(MemoDetailLocalEntity::endInclusive, LocalDateTime(2025, 6, 30, 23, 59))
+                        .sample(),
+                )
+                .set(MemoLocalEntity::isDeleted, false)
+                .sample(),
+        )
+        accountMemoDao.upsert(AccountMemoLocalEntity(accountId = accountId, memoId = memoWithoutTag))
+
+        val result = accountCalendarMemoDao.get(accountId, 2025).first()
+
+        result shouldHaveSize 1
+        result[0].id shouldBe memoWithTag
+    }
+
+    @Test
+    fun `삭제된 필터 태그는 필터로 동작하지 않는다`() = runTest {
+        val accountId = Uuid.random()
+        val tagId = Uuid.random()
+        val memoId = Uuid.random()
+
+        tagDao.upsert(
+            TagLocalEntity(
+                id = tagId,
+                detail = TagDetailLocalEntity(title = "deleted", description = "", color = 0),
+                isDeleted = true,
+            ),
+        )
+        accountTagDao.upsert(AccountTagLocalEntity(accountId = accountId, tagId = tagId))
+        calendarMemoFilterTagDao.upsert(CalendarMemoFilterTagLocalEntity(tagId = tagId))
+
+        memoDao.upsert(
+            fixtureMonkey.giveMeKotlinBuilder<MemoLocalEntity>()
+                .set(MemoLocalEntity::id, memoId)
+                .set(
+                    MemoLocalEntity::detail,
+                    fixtureMonkey.giveMeKotlinBuilder<MemoDetailLocalEntity>()
+                        .set(MemoDetailLocalEntity::start, LocalDateTime(2025, 6, 1, 0, 0))
+                        .set(MemoDetailLocalEntity::endInclusive, LocalDateTime(2025, 6, 30, 23, 59))
+                        .sample(),
+                )
+                .set(MemoLocalEntity::isDeleted, false)
+                .sample(),
+        )
+        accountMemoDao.upsert(AccountMemoLocalEntity(accountId = accountId, memoId = memoId))
+
+        val result = accountCalendarMemoDao.get(accountId, 2025).first()
+
+        result shouldHaveSize 1
+        result[0].id shouldBe memoId
+    }
+
+    @Test
+    fun `완료된 필터 태그는 필터로 동작하지 않는다`() = runTest {
+        val accountId = Uuid.random()
+        val tagId = Uuid.random()
+        val memoId = Uuid.random()
+
+        tagDao.upsert(
+            TagLocalEntity(
+                id = tagId,
+                detail = TagDetailLocalEntity(title = "finished", description = "", color = 0),
+                isFinished = true,
+            ),
+        )
+        accountTagDao.upsert(AccountTagLocalEntity(accountId = accountId, tagId = tagId))
+        calendarMemoFilterTagDao.upsert(CalendarMemoFilterTagLocalEntity(tagId = tagId))
+
+        memoDao.upsert(
+            fixtureMonkey.giveMeKotlinBuilder<MemoLocalEntity>()
+                .set(MemoLocalEntity::id, memoId)
+                .set(
+                    MemoLocalEntity::detail,
+                    fixtureMonkey.giveMeKotlinBuilder<MemoDetailLocalEntity>()
+                        .set(MemoDetailLocalEntity::start, LocalDateTime(2025, 6, 1, 0, 0))
+                        .set(MemoDetailLocalEntity::endInclusive, LocalDateTime(2025, 6, 30, 23, 59))
+                        .sample(),
+                )
+                .set(MemoLocalEntity::isDeleted, false)
+                .sample(),
+        )
+        accountMemoDao.upsert(AccountMemoLocalEntity(accountId = accountId, memoId = memoId))
+
+        val result = accountCalendarMemoDao.get(accountId, 2025).first()
+
+        result shouldHaveSize 1
+        result[0].id shouldBe memoId
+    }
+
+    @Test
+    fun `다른 계정의 필터 태그는 필터로 동작하지 않는다`() = runTest {
+        val accountId = Uuid.random()
+        val otherAccountId = Uuid.random()
+        val tagId = Uuid.random()
+        val memoId = Uuid.random()
+
+        tagDao.upsert(
+            TagLocalEntity(
+                id = tagId,
+                detail = TagDetailLocalEntity(title = "other", description = "", color = 0),
+            ),
+        )
+        accountTagDao.upsert(AccountTagLocalEntity(accountId = otherAccountId, tagId = tagId))
+        calendarMemoFilterTagDao.upsert(CalendarMemoFilterTagLocalEntity(tagId = tagId))
+
+        memoDao.upsert(
+            fixtureMonkey.giveMeKotlinBuilder<MemoLocalEntity>()
+                .set(MemoLocalEntity::id, memoId)
+                .set(
+                    MemoLocalEntity::detail,
+                    fixtureMonkey.giveMeKotlinBuilder<MemoDetailLocalEntity>()
+                        .set(MemoDetailLocalEntity::start, LocalDateTime(2025, 6, 1, 0, 0))
+                        .set(MemoDetailLocalEntity::endInclusive, LocalDateTime(2025, 6, 30, 23, 59))
+                        .sample(),
+                )
+                .set(MemoLocalEntity::isDeleted, false)
+                .sample(),
+        )
+        accountMemoDao.upsert(AccountMemoLocalEntity(accountId = accountId, memoId = memoId))
+
+        val result = accountCalendarMemoDao.get(accountId, 2025).first()
+
+        result shouldHaveSize 1
+        result[0].id shouldBe memoId
     }
 }

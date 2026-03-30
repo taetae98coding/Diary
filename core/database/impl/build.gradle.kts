@@ -1,3 +1,4 @@
+import com.android.build.api.variant.HasHostTests
 import io.github.taetae98coding.diary.gradle.kspAll
 import io.github.taetae98coding.diary.gradle.nonWasmMain
 
@@ -15,6 +16,7 @@ kotlin {
             dependencies {
                 implementation(projects.core.database.api)
                 implementation(projects.library.roomCommon)
+                implementation(projects.library.kotlinxFile)
                 implementation(libs.androidx.room3.runtime)
                 implementation(libs.androidx.room3.paging)
             }
@@ -31,6 +33,17 @@ kotlin {
                 implementation(libs.androidx.room3.testing)
             }
         }
+    }
+}
+
+androidComponents {
+    onVariants { variant ->
+        (variant as? HasHostTests)
+            ?.hostTests
+            ?.values
+            ?.forEach { hostTest ->
+                hostTest.sources.assets?.addStaticSourceDirectory("$projectDir/schemas")
+            }
     }
 }
 

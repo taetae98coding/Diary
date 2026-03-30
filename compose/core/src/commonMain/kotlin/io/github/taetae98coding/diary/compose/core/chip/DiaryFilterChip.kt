@@ -26,7 +26,11 @@ public fun DiaryFilterChip(
     shape: Shape = CircleShape,
     colors: SelectableChipColors = FilterChipDefaults.filterChipColors(),
     elevation: SelectableChipElevation? = FilterChipDefaults.filterChipElevation(),
-    border: BorderStroke? = FilterChipDefaults.filterChipBorder(enabled, selected),
+    border: BorderStroke? = if (selected) {
+        null
+    } else {
+        FilterChipDefaults.filterChipBorder(enabled, selected)
+    },
     interactionSource: MutableInteractionSource? = null,
 ) {
     CompositionLocalProvider(
