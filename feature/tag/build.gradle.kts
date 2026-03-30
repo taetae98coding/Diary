@@ -6,9 +6,11 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation(projects.domain.memo)
                 implementation(projects.domain.sync)
                 implementation(projects.domain.tag)
-                implementation(projects.presenter.tag.compose)
+                implementation(projects.presenter.memo)
+                implementation(projects.presenter.tag)
             }
         }
     }

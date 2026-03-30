@@ -3,6 +3,7 @@ package io.github.taetae98coding.diary.feature.tag.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.github.taetae98coding.diary.core.model.sync.SyncStatus
+import io.github.taetae98coding.diary.core.model.sync.SyncType
 import io.github.taetae98coding.diary.domain.sync.usecase.GetSyncStatusUseCase
 import io.github.taetae98coding.diary.domain.sync.usecase.RequestSyncUseCase
 import kotlinx.coroutines.flow.SharingStarted
@@ -18,7 +19,7 @@ internal class TagHomeViewModel(
     private val requestSyncUseCase: RequestSyncUseCase,
 ) : ViewModel() {
     val isSyncing = getSyncStatusUseCase().mapLatest { it.getOrNull() }
-        .map { it is SyncStatus.Syncing }
+        .map { it is SyncStatus.Syncing && it.type == SyncType.Foreground }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
@@ -26,6 +27,6 @@ internal class TagHomeViewModel(
         )
 
     fun sync() {
-        viewModelScope.launch { requestSyncUseCase() }
+        viewModelScope.launch { requestSyncUseCase(SyncType.Foreground) }
     }
 }

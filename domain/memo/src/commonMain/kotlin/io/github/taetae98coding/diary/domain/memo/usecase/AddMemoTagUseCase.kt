@@ -1,5 +1,6 @@
 package io.github.taetae98coding.diary.domain.memo.usecase
 
+import io.github.taetae98coding.diary.core.model.sync.SyncType
 import io.github.taetae98coding.diary.domain.memo.repository.AccountMemoTagRepository
 import io.github.taetae98coding.diary.domain.sync.usecase.RequestSyncUseCase
 import kotlin.uuid.Uuid
@@ -16,7 +17,7 @@ public class AddMemoTagUseCase(
     ): Result<Unit> {
         return runCatching {
             accountMemoTagRepository.upsertMemoTag(memoId, tagId, isMemoTag = true)
-            requestSyncUseCase()
+            requestSyncUseCase(SyncType.Background)
         }
     }
 }

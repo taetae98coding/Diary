@@ -5,6 +5,7 @@ import com.navercorp.fixturemonkey.kotlin.KotlinPlugin
 import com.navercorp.fixturemonkey.kotlin.giveMeKotlinBuilder
 import com.navercorp.fixturemonkey.kotlin.giveMeOne
 import io.github.taetae98coding.diary.core.model.account.Account
+import io.github.taetae98coding.diary.core.model.sync.SyncType
 import io.github.taetae98coding.diary.core.model.tag.Tag
 import io.github.taetae98coding.diary.core.model.tag.TagDetail
 import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
@@ -58,7 +59,7 @@ class UpdateTagUseCaseTest : BehaviorSpec() {
                 }
 
                 Then("RequestSyncUseCase를 호출한다") {
-                    coVerify(exactly = 1) { requestSyncUseCase() }
+                    coVerify(exactly = 1) { requestSyncUseCase(SyncType.Background) }
                 }
             }
         }
@@ -94,7 +95,7 @@ class UpdateTagUseCaseTest : BehaviorSpec() {
                 }
 
                 Then("RequestSyncUseCase를 호출한다") {
-                    coVerify(exactly = 1) { requestSyncUseCase() }
+                    coVerify(exactly = 1) { requestSyncUseCase(SyncType.Background) }
                 }
             }
         }
@@ -118,7 +119,7 @@ class UpdateTagUseCaseTest : BehaviorSpec() {
                 }
 
                 Then("RequestSyncUseCase를 호출한다") {
-                    coVerify(exactly = 1) { requestSyncUseCase() }
+                    coVerify(exactly = 1) { requestSyncUseCase(SyncType.Background) }
                 }
             }
         }

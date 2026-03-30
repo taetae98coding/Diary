@@ -1,5 +1,6 @@
 package io.github.taetae98coding.diary.domain.memo.usecase
 
+import io.github.taetae98coding.diary.core.model.sync.SyncType
 import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
 import io.github.taetae98coding.diary.domain.memo.repository.AccountMemoRepository
 import io.github.taetae98coding.diary.domain.sync.usecase.RequestSyncUseCase
@@ -19,7 +20,7 @@ public class RestartMemoUseCase(
 
             accountMemoRepository.updateFinish(memoId = memoId, isFinished = false)
 
-            requestSyncUseCase()
+            requestSyncUseCase(SyncType.Background)
         }
     }
 }

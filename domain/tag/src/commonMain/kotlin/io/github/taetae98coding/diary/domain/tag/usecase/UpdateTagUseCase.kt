@@ -1,5 +1,6 @@
 package io.github.taetae98coding.diary.domain.tag.usecase
 
+import io.github.taetae98coding.diary.core.model.sync.SyncType
 import io.github.taetae98coding.diary.core.model.tag.TagDetail
 import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
 import io.github.taetae98coding.diary.domain.sync.usecase.RequestSyncUseCase
@@ -31,7 +32,7 @@ public class UpdateTagUseCase(
                 detail = detail,
             )
 
-            requestSyncUseCase()
+            requestSyncUseCase(SyncType.Background)
         }
     }
 }

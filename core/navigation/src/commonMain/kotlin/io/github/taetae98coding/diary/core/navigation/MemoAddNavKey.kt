@@ -1,6 +1,7 @@
 package io.github.taetae98coding.diary.core.navigation
 
 import androidx.navigation3.runtime.NavKey
+import io.github.taetae98coding.diary.core.navigation.argument.TagId
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateRange
 import kotlinx.serialization.SerialName
@@ -12,6 +13,8 @@ public data class MemoAddNavKey(
     val start: LocalDate? = null,
     @SerialName("endInclusive")
     val endInclusive: LocalDate? = null,
+    @SerialName("tagId")
+    val tagId: TagId? = null,
 ) : NavKey {
     val localDateRange: LocalDateRange?
         get() = if (start == null || endInclusive == null) {

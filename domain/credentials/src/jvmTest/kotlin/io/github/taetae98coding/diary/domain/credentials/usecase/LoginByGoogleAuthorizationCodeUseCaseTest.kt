@@ -3,6 +3,7 @@ package io.github.taetae98coding.diary.domain.credentials.usecase
 import com.navercorp.fixturemonkey.FixtureMonkey
 import com.navercorp.fixturemonkey.kotlin.KotlinPlugin
 import com.navercorp.fixturemonkey.kotlin.giveMeOne
+import io.github.taetae98coding.diary.core.model.sync.SyncType
 import io.github.taetae98coding.diary.domain.credentials.repository.SessionRepository
 import io.github.taetae98coding.diary.domain.sync.usecase.RequestSyncUseCase
 import io.kotest.core.spec.style.BehaviorSpec
@@ -31,7 +32,7 @@ class LoginByGoogleAuthorizationCodeUseCaseTest : BehaviorSpec() {
             val redirectUri = fixtureMonkey.giveMeOne<String>()
 
             coEvery { sessionRepository.updateByGoogleAuthorizationCode(clientId, code, redirectUri) } returns Unit
-            coEvery { requestSyncUseCase() } returns Unit
+            coEvery { requestSyncUseCase(SyncType.Background) } returns Unit
 
             When("LoginByGoogleAuthorizationCodeUseCase를 호출하면") {
                 val result = useCase(clientId, code, redirectUri)
@@ -43,7 +44,7 @@ class LoginByGoogleAuthorizationCodeUseCaseTest : BehaviorSpec() {
                 Then("세션을 업데이트한 후 동기화를 요청한다") {
                     coVerifyOrder {
                         sessionRepository.updateByGoogleAuthorizationCode(clientId, code, redirectUri)
-                        requestSyncUseCase()
+                        requestSyncUseCase(SyncType.Background)
                     }
                 }
             }
@@ -66,7 +67,7 @@ class LoginByGoogleAuthorizationCodeUseCaseTest : BehaviorSpec() {
                 }
 
                 Then("동기화를 요청하지 않는다") {
-                    coVerify(exactly = 0) { requestSyncUseCase() }
+                    coVerify(exactly = 0) { requestSyncUseCase(SyncType.Background) }
                 }
             }
         }

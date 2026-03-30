@@ -5,14 +5,18 @@ import androidx.work.Constraints
 import androidx.work.ExistingWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import io.github.taetae98coding.diary.core.model.sync.SyncStatus
+import io.github.taetae98coding.diary.core.model.sync.SyncType
 import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
 import io.github.taetae98coding.diary.domain.sync.SyncManager
 import kotlin.uuid.Uuid
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.mapLatest
@@ -23,13 +27,17 @@ internal class AndroidSyncManager(
     private val context: Context,
     getAccountUseCase: GetAccountUseCase,
 ) : SyncManager {
-    override val syncStatus: Flow<SyncStatus> = getAccountUseCase().flatMapLatest { result ->
-        result.fold(
+    private val syncTypeFlow = MutableStateFlow(SyncType.Background)
+    override val syncStatus: Flow<SyncStatus> = combine(
+        syncTypeFlow,
+        getAccountUseCase(),
+    ) { syncType, accountResult ->
+        accountResult.fold(
             onSuccess = { account ->
                 WorkManager.getInstance(context).getWorkInfosForUniqueWorkFlow("SYNC_${account.accountId}")
                     .mapLatest { workInfos ->
                         if (workInfos.any { it.state == WorkInfo.State.RUNNING || it.state == WorkInfo.State.ENQUEUED }) {
-                            SyncStatus.Syncing
+                            SyncStatus.Syncing(syncType)
                         } else {
                             SyncStatus.Idle
                         }
@@ -37,9 +45,14 @@ internal class AndroidSyncManager(
             },
             onFailure = { flowOf(SyncStatus.Idle) },
         )
+    }.flatMapLatest {
+        it
     }
 
-    override fun requestSync(accountId: Uuid) {
+    override fun requestSync(
+        accountId: Uuid,
+        type: SyncType,
+    ) {
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
@@ -47,11 +60,13 @@ internal class AndroidSyncManager(
         val request = OneTimeWorkRequestBuilder<SyncWorker>()
             .setConstraints(constraints)
             .setInputData(workDataOf(SyncWorker.ACCOUNT_ID to accountId.toString()))
+            .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
             .build()
 
+        syncTypeFlow.value = type
         WorkManager.getInstance(context).enqueueUniqueWork(
             uniqueWorkName = "SYNC_$accountId",
-            existingWorkPolicy = ExistingWorkPolicy.KEEP,
+            existingWorkPolicy = ExistingWorkPolicy.REPLACE,
             request = request,
         )
     }
