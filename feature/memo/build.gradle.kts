@@ -7,8 +7,10 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(projects.domain.memo)
+                implementation(projects.domain.sync)
                 implementation(projects.domain.tag)
-                implementation(projects.presenter.memo.compose)
+                implementation(projects.presenter.memo)
+                implementation(libs.androidx.paging.compose)
             }
         }
     }

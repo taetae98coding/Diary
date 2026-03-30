@@ -5,6 +5,7 @@ import com.navercorp.fixturemonkey.kotlin.KotlinPlugin
 import com.navercorp.fixturemonkey.kotlin.giveMeKotlinBuilder
 import com.navercorp.fixturemonkey.kotlin.giveMeOne
 import io.github.taetae98coding.diary.core.model.account.Account
+import io.github.taetae98coding.diary.core.model.sync.SyncType
 import io.github.taetae98coding.diary.core.model.tag.TagDetail
 import io.github.taetae98coding.diary.core.model.tag.TagTitleBlankException
 import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
@@ -62,7 +63,7 @@ class AddTagUseCaseTest : BehaviorSpec() {
                 }
 
                 Then("RequestSyncUseCase를 호출한다") {
-                    coVerify(exactly = 1) { requestSyncUseCase() }
+                    coVerify(exactly = 1) { requestSyncUseCase(SyncType.Background) }
                 }
             }
         }
@@ -85,7 +86,7 @@ class AddTagUseCaseTest : BehaviorSpec() {
                 }
 
                 Then("RequestSyncUseCase를 호출한다") {
-                    coVerify(exactly = 1) { requestSyncUseCase() }
+                    coVerify(exactly = 1) { requestSyncUseCase(SyncType.Background) }
                 }
             }
         }
@@ -108,7 +109,7 @@ class AddTagUseCaseTest : BehaviorSpec() {
                 }
 
                 Then("RequestSyncUseCase를 호출하지 않는다") {
-                    coVerify(exactly = 0) { requestSyncUseCase() }
+                    coVerify(exactly = 0) { requestSyncUseCase(SyncType.Background) }
                 }
             }
         }

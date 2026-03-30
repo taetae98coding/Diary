@@ -6,15 +6,18 @@ import androidx.work.WorkerParameters
 import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
 import kotlin.uuid.Uuid
 import kotlinx.coroutines.flow.first
-import org.koin.android.annotation.KoinWorker
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-@KoinWorker
+// TODO Koin annotations
 internal class SyncWorker(
     context: Context,
     params: WorkerParameters,
-    private val getAccountUseCase: GetAccountUseCase,
-    private val synchronizer: Synchronizer,
-) : CoroutineWorker(context, params) {
+) : CoroutineWorker(context, params),
+    KoinComponent {
+    private val getAccountUseCase: GetAccountUseCase by inject()
+    private val synchronizer: Synchronizer by inject()
+
     override suspend fun doWork(): Result {
         return try {
             val currentAccount = getAccountUseCase().first().getOrThrow()

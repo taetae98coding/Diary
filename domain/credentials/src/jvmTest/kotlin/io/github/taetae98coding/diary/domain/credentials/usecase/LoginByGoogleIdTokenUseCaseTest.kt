@@ -3,6 +3,7 @@ package io.github.taetae98coding.diary.domain.credentials.usecase
 import com.navercorp.fixturemonkey.FixtureMonkey
 import com.navercorp.fixturemonkey.kotlin.KotlinPlugin
 import com.navercorp.fixturemonkey.kotlin.giveMeOne
+import io.github.taetae98coding.diary.core.model.sync.SyncType
 import io.github.taetae98coding.diary.domain.credentials.repository.SessionRepository
 import io.github.taetae98coding.diary.domain.sync.usecase.RequestSyncUseCase
 import io.kotest.core.spec.style.BehaviorSpec
@@ -29,7 +30,7 @@ class LoginByGoogleIdTokenUseCaseTest : BehaviorSpec() {
             val idToken = fixtureMonkey.giveMeOne<String>()
 
             coEvery { sessionRepository.updateByGoogleIdToken(idToken) } returns Unit
-            coEvery { requestSyncUseCase() } returns Unit
+            coEvery { requestSyncUseCase(SyncType.Background) } returns Unit
 
             When("LoginByGoogleIdTokenUseCase를 호출하면") {
                 val result = useCase(idToken)
@@ -41,7 +42,7 @@ class LoginByGoogleIdTokenUseCaseTest : BehaviorSpec() {
                 Then("세션을 업데이트한 후 동기화를 요청한다") {
                     coVerifyOrder {
                         sessionRepository.updateByGoogleIdToken(idToken)
-                        requestSyncUseCase()
+                        requestSyncUseCase(SyncType.Background)
                     }
                 }
             }
@@ -62,7 +63,7 @@ class LoginByGoogleIdTokenUseCaseTest : BehaviorSpec() {
                 }
 
                 Then("동기화를 요청하지 않는다") {
-                    coVerify(exactly = 0) { requestSyncUseCase() }
+                    coVerify(exactly = 0) { requestSyncUseCase(SyncType.Background) }
                 }
             }
         }

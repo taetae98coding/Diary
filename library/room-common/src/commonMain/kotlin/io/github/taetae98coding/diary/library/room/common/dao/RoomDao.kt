@@ -1,6 +1,7 @@
 package io.github.taetae98coding.diary.library.room.common.dao
 
 import androidx.room3.Dao
+import androidx.room3.Delete
 import androidx.room3.Transaction
 import androidx.room3.Upsert
 
@@ -12,4 +13,7 @@ public interface RoomDao<E> {
     @Transaction
     @Upsert
     public suspend fun upsert(entities: Collection<E>)
+
+    @Delete
+    public suspend fun delete(entity: E)
 }

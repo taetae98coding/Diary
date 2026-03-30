@@ -7,7 +7,9 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
+import androidx.navigation3.scene.DialogSceneStrategy
 import androidx.navigation3.scene.Scene
+import androidx.navigation3.scene.SinglePaneSceneStrategy
 import androidx.navigation3.ui.NavDisplay
 import androidx.navigationevent.NavigationEvent
 import io.github.taetae98coding.diary.app.shared.navigation3.rememberRetainedValuesStoreNavEntryDecorator
@@ -30,10 +32,14 @@ internal fun AppNavigation(
             rememberRetainedValuesStoreNavEntryDecorator(),
             rememberViewModelStoreNavEntryDecorator(),
         ),
+        sceneStrategies = listOf(
+            DialogSceneStrategy(),
+            SinglePaneSceneStrategy(),
+        ),
         entryProvider = entryProvider {
+            memoEntry(backStack = state.backStack)
             tagEntry(backStack = state.backStack)
             calendarEntry(backStack = state.backStack)
-            memoEntry(backStack = state.backStack)
             moreEntry(backStack = state.backStack)
 
             loginEntry(backStack = state.backStack)

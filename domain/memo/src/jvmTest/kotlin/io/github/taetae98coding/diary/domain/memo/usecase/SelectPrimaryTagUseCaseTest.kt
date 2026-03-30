@@ -1,5 +1,6 @@
 package io.github.taetae98coding.diary.domain.memo.usecase
 
+import io.github.taetae98coding.diary.core.model.sync.SyncType
 import io.github.taetae98coding.diary.domain.memo.repository.AccountMemoTagRepository
 import io.github.taetae98coding.diary.domain.sync.usecase.RequestSyncUseCase
 import io.kotest.core.spec.style.BehaviorSpec
@@ -39,7 +40,7 @@ class SelectPrimaryTagUseCaseTest : BehaviorSpec() {
                 Then("updatePrimaryTag 후 RequestSyncUseCase를 호출한다") {
                     coVerifyOrder {
                         accountMemoTagRepository.updatePrimaryTag(memoId, tagId)
-                        requestSyncUseCase()
+                        requestSyncUseCase(SyncType.Background)
                     }
                 }
             }
@@ -60,7 +61,7 @@ class SelectPrimaryTagUseCaseTest : BehaviorSpec() {
                 }
 
                 Then("RequestSyncUseCase를 호출하지 않는다") {
-                    coVerify(exactly = 0) { requestSyncUseCase() }
+                    coVerify(exactly = 0) { requestSyncUseCase(SyncType.Background) }
                 }
             }
         }

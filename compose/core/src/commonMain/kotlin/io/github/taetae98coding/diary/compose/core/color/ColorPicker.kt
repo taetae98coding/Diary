@@ -40,15 +40,15 @@ public fun ColorPicker(
             contentAlignment = Alignment.Center,
         ) {
             Text(
-                text = "#${state.targetValue.rgbText()}",
+                text = "#${state.value.rgbText()}",
                 modifier = Modifier.padding(horizontal = 12.dp, vertical = 40.dp),
-                color = state.targetValue.wcagAAAContentColor(),
+                color = state.value.wcagAAAContentColor(),
             )
             IconButton(
                 onClick = { coroutineScope.launch { state.animateTo(Color.random()) } },
                 modifier = Modifier.padding(4.dp)
                     .align(Alignment.TopEnd),
-                colors = IconButtonDefaults.iconButtonColors(contentColor = state.targetValue.wcagAAAContentColor()),
+                colors = IconButtonDefaults.iconButtonColors(contentColor = state.value.wcagAAAContentColor()),
             ) {
                 RefreshIcon()
             }

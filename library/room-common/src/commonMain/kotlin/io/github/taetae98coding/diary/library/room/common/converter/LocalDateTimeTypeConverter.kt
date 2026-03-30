@@ -5,12 +5,12 @@ import kotlinx.datetime.LocalDateTime
 
 public class LocalDateTimeTypeConverter {
     @TypeConverter
-    public fun fromLocalDateTime(value: LocalDateTime?): String? {
-        return value?.toString()
+    public fun fromLocalDateTime(value: LocalDateTime): String {
+        return value.toString()
     }
 
     @TypeConverter
-    public fun toLocalDateTime(value: String?): LocalDateTime? {
-        return value?.let(LocalDateTime::parse)
+    public fun toLocalDateTime(value: String): LocalDateTime {
+        return LocalDateTime.parse(value)
     }
 }

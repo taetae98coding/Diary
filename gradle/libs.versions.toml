@@ -31,8 +31,8 @@ androidx-work = "2.11.2"						# https://developer.android.com/jetpack/androidx/r
 buildkonfig = "0.17.1"						    # https://github.com/yshrsmz/BuildKonfig/releases
 dependency-guard = "0.5.0"					    # https://github.com/dropbox/dependency-guard/releases
 project-guard = "1.0.0-rc03"				    # https://github.com/rubensousa/ProjectGuard/releases
-firebase-bom = "34.11.0"                        # https://github.com/firebase/firebase-android-sdk/releases
-google-services = "4.4.4"						# https://github.com/google/play-services-plugins/releases
+google-services = "4.4.4"						# https://firebase.google.com/support/release-notes/android?hl=en
+firebase-bom = "34.11.0"                        # https://firebase.google.com/support/release-notes/android?hl=en
 firebase-crashlytics-plugin = "3.0.6"			# https://firebase.google.com/support/release-notes/android?hl=en
 firebase-perf-plugin = "2.0.2"					# https://firebase.google.com/support/release-notes/android?hl=en
 coil = "3.4.0"								    # https://github.com/coil-kt/coil/releases
@@ -120,6 +120,8 @@ ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-conte
 ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
 ktor-client-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor" }
 ktor-client-js = { group = "io.ktor", name = "ktor-client-js", version.ref = "ktor" }
+ktor-client-mock = { group = "io.ktor", name = "ktor-client-mock", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
 leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakcanary" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 multiplatform-markdown-material3 = { group = "com.mikepenz", name = "multiplatform-markdown-renderer-m3", version.ref = "multiplatform-markdown" }
