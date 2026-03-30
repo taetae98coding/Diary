@@ -105,6 +105,18 @@
       "restrictions": []
     },
     {
+      "module": ":core:ip-network",
+      "restrictions": []
+    },
+    {
+      "module": ":core:ip-network:api",
+      "restrictions": []
+    },
+    {
+      "module": ":core:ip-network:impl",
+      "restrictions": []
+    },
+    {
       "module": ":core:mapper",
       "restrictions": []
     },
@@ -141,6 +153,18 @@
       "restrictions": []
     },
     {
+      "module": ":core:weather-network",
+      "restrictions": []
+    },
+    {
+      "module": ":core:weather-network:api",
+      "restrictions": []
+    },
+    {
+      "module": ":core:weather-network:impl",
+      "restrictions": []
+    },
+    {
       "module": ":data",
       "restrictions": []
     },
@@ -169,6 +193,10 @@
       "restrictions": []
     },
     {
+      "module": ":data:weather",
+      "restrictions": []
+    },
+    {
       "module": ":domain",
       "restrictions": []
     },
@@ -194,6 +222,10 @@
     },
     {
       "module": ":domain:tag",
+      "restrictions": []
+    },
+    {
+      "module": ":domain:weather",
       "restrictions": []
     },
     {
