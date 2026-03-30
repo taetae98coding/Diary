@@ -198,6 +198,9 @@ public fun CalendarScaffold(
                 ) {
                     WeatherItem(uiState = it)
                 }
+
+                appendLine()
+
                 items(
                     items = holidayListProvider(),
                     key = { it.toString() },

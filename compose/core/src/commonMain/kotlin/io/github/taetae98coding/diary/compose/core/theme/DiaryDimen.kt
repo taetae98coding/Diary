@@ -19,7 +19,7 @@ public data class DiaryDimen(
         internal val COMPAT = DiaryDimen(
             screenHorizontalPadding = 20.dp,
             screenVerticalPAdding = 16.dp,
-            screenCardSpace = 16.dp,
+            screenCardSpace = 12.dp,
             itemSpace = 6.dp,
         )
 

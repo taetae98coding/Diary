@@ -30,7 +30,7 @@ public class CalendarState(
 @Composable
 public fun rememberCalendarState(initialYearMonth: YearMonth = remember { Clock.System.todayIn(TimeZone.currentSystemDefault()).yearMonth }): CalendarState {
     val pagerState = rememberPagerState(initialPage = initialYearMonth.toPage()) { Int.MAX_VALUE }
-    val selectState = retain { CalendarSelectState() }
+    val selectState = rememberCalendarSelectState()
 
     return retain(
         pagerState,

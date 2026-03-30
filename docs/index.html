@@ -62,6 +62,68 @@
             margin-bottom: 32px;
         }
 
+        .vibe-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .donut {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: conic-gradient(#34d399 0% 10%, #6366f1 10% 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .donut-inner {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: #fafafa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .donut-inner strong {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .donut-inner small {
+            font-size: 10px;
+            color: #555;
+        }
+
+        .vibe-legend {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+        }
+
+        .vibe-legend span::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+
+        .legend-coding::before {
+            background: #34d399 !important;
+        }
+
+        .legend-vibe::before {
+            background: #6366f1 !important;
+        }
+
         .platforms {
             display: flex;
             justify-content: center;
@@ -191,11 +253,23 @@
     <section class="hero">
         <h2>Diary</h2>
         <p>Kotlin Multiplatform 기반의 다이어리 앱</p>
+        <div class="vibe-chart">
+            <div class="donut">
+                <div class="donut-inner">
+                    <strong>1 : 9</strong>
+                    <small>코딩 : 바이브</small>
+                </div>
+            </div>
+            <div class="vibe-legend">
+                <span class="legend-coding">코딩 10%</span>
+                <span class="legend-vibe">바이브 코딩 90%</span>
+            </div>
+        </div>
         <div class="platforms">
             <div class="platform">Android</div>
             <div class="platform">iOS</div>
             <div class="platform">Desktop</div>
-            <div class="platform">Web</div>
+            <div class="platform">Web (⏸️)</div>
         </div>
     </section>
 
@@ -218,6 +292,26 @@
                 <div class="feature-item">
                     <span>동기화</span>
                     <p>Supabase를 통해 기기 간 데이터를 동기화합니다.</p>
+                </div>
+                <div class="feature-item">
+                    <span>날씨</span>
+                    <p>날씨 정보를 확인합니다.</p>
+                </div>
+                <div class="feature-item">
+                    <span>태그</span>
+                    <p>메모에 태그를 추가하여 분류합니다.</p>
+                </div>
+                <div class="feature-item">
+                    <span>공휴일</span>
+                    <p>공휴일 정보를 캘린더에서 확인합니다.</p>
+                </div>
+                <div class="feature-item">
+                    <span>황금연휴 찾기</span>
+                    <p>연차를 활용한 황금연휴를 찾아줍니다.</p>
+                </div>
+                <div class="feature-item">
+                    <span>태그 필터</span>
+                    <p>태그별로 메모를 필터링합니다.</p>
                 </div>
             </div>
         </div>

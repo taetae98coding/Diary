@@ -154,11 +154,11 @@ private fun DescriptionMarkdown(
             .verticalScroll(state = rememberScrollState())
             .padding(horizontal = 16.dp, vertical = 8.dp),
         typography = markdownTypography(
-            h1 = DiaryTheme.typography.displayLarge.copy(fontSize = 40.sp),
-            h2 = DiaryTheme.typography.displayMedium.copy(fontSize = 36.sp),
-            h3 = DiaryTheme.typography.displaySmall.copy(fontSize = 32.sp),
-            h4 = DiaryTheme.typography.headlineMedium.copy(fontSize = 28.sp),
-            h5 = DiaryTheme.typography.headlineSmall.copy(fontSize = 24.sp),
+            h1 = DiaryTheme.typography.displayLarge.copy(fontSize = 36.sp),
+            h2 = DiaryTheme.typography.displayMedium.copy(fontSize = 32.sp),
+            h3 = DiaryTheme.typography.displaySmall.copy(fontSize = 28.sp),
+            h4 = DiaryTheme.typography.headlineMedium.copy(fontSize = 24.sp),
+            h5 = DiaryTheme.typography.headlineSmall.copy(fontSize = 22.sp),
             h6 = DiaryTheme.typography.titleLarge.copy(fontSize = 20.sp),
         ),
     )
