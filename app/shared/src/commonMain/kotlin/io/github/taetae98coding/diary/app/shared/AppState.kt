@@ -22,8 +22,8 @@ internal class AppState(
 ) {
     val navigationShortKeyFocusRequester = FocusRequester()
 
-    val topLevelScreenNavKeys = TopLevelDestination.entries.map(TopLevelDestination::navKey).toSet()
-    val topLevelDialogNavKeys = listOf(MemoListFilterNavKey, CalendarFilterNavKey).toSet()
+    val topLevelScreenNavKeys: Set<NavKey> = TopLevelDestination.entries.map(TopLevelDestination::navKey).toSet()
+    val topLevelDialogNavKeys: Set<NavKey> = listOf(MemoListFilterNavKey, CalendarFilterNavKey).toSet()
 
     val currentTopLevelDestination by derivedStateOf {
         val topLevelNavKey = backStack.lastOrNull { it in topLevelScreenNavKeys }
@@ -31,7 +31,10 @@ internal class AppState(
     }
 
     val isNavigationVisible by derivedStateOf {
-        backStack.lastOrNull() in topLevelScreenNavKeys || backStack.lastOrNull() in topLevelDialogNavKeys
+        val isTopLevelScreen = backStack.lastOrNull() in topLevelScreenNavKeys
+        val isTopLevelDialog = backStack.lastOrNull() in topLevelDialogNavKeys
+
+        isTopLevelScreen || isTopLevelDialog
     }
 
     fun navigateTo(destination: TopLevelDestination) {
