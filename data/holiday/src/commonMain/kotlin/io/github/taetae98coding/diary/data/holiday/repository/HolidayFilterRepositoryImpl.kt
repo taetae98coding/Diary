@@ -15,7 +15,6 @@ public class HolidayFilterRepositoryImpl : HolidayFilterRepository {
                 "근로자의 날",
                 "입하",
                 "어버이 날",
-                "스승의 날",
                 "단오",
                 "초복",
                 "중복",

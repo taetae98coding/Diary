@@ -2,7 +2,7 @@ package io.github.taetae98coding.diary.compose.calendar.week
 
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import io.github.taetae98coding.diary.compose.calendar.internal.WeekLocalDateRange
-import io.github.taetae98coding.diary.compose.calendar.internal.toSundayBasedNumber
+import io.github.taetae98coding.diary.compose.calendar.ext.toSundayBasedNumber
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDateRange
 import kotlinx.datetime.YearMonth

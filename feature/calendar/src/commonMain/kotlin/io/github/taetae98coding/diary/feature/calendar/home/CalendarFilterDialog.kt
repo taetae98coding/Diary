@@ -50,28 +50,23 @@ internal fun CalendarFilterDialog(
                 text = "메모태그",
                 style = DiaryTheme.typography.titleMedium,
             )
-
-            if (pagingItems.loadState.refresh !is LoadState.Loading && pagingItems.itemCount == 0) {
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    Text(
-                        text = "태그가 없습니다",
-                        style = DiaryTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                    Button(onClick = dropUnlessResumed(block = navigateToTagAdd)) {
-                        Text(text = "추가하기")
+            FlowRow(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+                verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically),
+            ) {
+                if (pagingItems.loadState.refresh !is LoadState.Loading && pagingItems.itemCount == 0) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            text = "태그가 없습니다",
+                            style = DiaryTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                        Button(onClick = dropUnlessResumed(block = navigateToTagAdd)) {
+                            Text(text = "추가하기")
+                        }
                     }
-                }
-            } else {
-                FlowRow(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(4.dp),
-                ) {
+                } else {
                     repeat(pagingItems.itemCount) { index ->
                         val uiState = pagingItems[index]
                         val color = uiState?.color?.let(::Color) ?: Color.Unspecified

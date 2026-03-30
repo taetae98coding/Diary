@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import io.github.taetae98coding.diary.compose.calendar.CalendarDefaults
 import io.github.taetae98coding.diary.compose.calendar.CalendarSelectState
+import io.github.taetae98coding.diary.compose.calendar.rememberCalendarSelectState
 import io.github.taetae98coding.diary.compose.calendar.theme.CalendarColors
 import io.github.taetae98coding.diary.compose.calendar.week.CalendarWeekGridScope
 import io.github.taetae98coding.diary.compose.calendar.week.CalendarWeekOfMonth
@@ -18,8 +19,8 @@ import kotlinx.datetime.YearMonth
 @Composable
 public fun CalendarMonth(
     yearMonth: YearMonth,
-    selectState: CalendarSelectState,
     modifier: Modifier = Modifier,
+    selectState: CalendarSelectState = rememberCalendarSelectState(),
     primaryDayListProvider: () -> List<LocalDate> = { emptyList() },
     holidayListProvider: () -> List<LocalDateRange> = { emptyList() },
     colors: CalendarColors = CalendarDefaults.colors(),

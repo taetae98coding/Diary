@@ -14,9 +14,10 @@ import androidx.compose.ui.unit.dp
 import io.github.taetae98coding.diary.compose.calendar.CalendarDefaults
 import io.github.taetae98coding.diary.compose.calendar.CalendarSelectState
 import io.github.taetae98coding.diary.compose.calendar.day.CalendarDay
+import io.github.taetae98coding.diary.compose.calendar.ext.toSundayBasedDayOfWeek
+import io.github.taetae98coding.diary.compose.calendar.ext.toSundayBasedNumber
 import io.github.taetae98coding.diary.compose.calendar.internal.WeekLocalDateRange
-import io.github.taetae98coding.diary.compose.calendar.internal.toSundayBasedDayOfWeek
-import io.github.taetae98coding.diary.compose.calendar.internal.toSundayBasedNumber
+import io.github.taetae98coding.diary.compose.calendar.rememberCalendarSelectState
 import io.github.taetae98coding.diary.compose.calendar.theme.CalendarColors
 import io.github.taetae98coding.diary.compose.core.preview.ComponentPreview
 import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
@@ -30,8 +31,8 @@ import kotlinx.datetime.daysUntil
 public fun CalendarWeekOfMonth(
     yearMonth: YearMonth,
     weekOfMonth: Int,
-    selectState: CalendarSelectState,
     modifier: Modifier = Modifier,
+    selectState: CalendarSelectState = rememberCalendarSelectState(),
     primaryDayListProvider: () -> List<LocalDate> = { emptyList() },
     holidayListProvider: () -> List<LocalDateRange> = { emptyList() },
     colors: CalendarColors = CalendarDefaults.colors(),

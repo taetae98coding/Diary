@@ -9,6 +9,7 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 internal fun MoreHomeScreen(
     navigateToLogin: () -> Unit,
+    navigateToGoldenHoliday: () -> Unit,
     modifier: Modifier = Modifier,
     accountViewModel: MoreHomeAccountViewModel = koinViewModel(),
 ) {
@@ -19,5 +20,6 @@ internal fun MoreHomeScreen(
         accountUiStateProvider = { accountUiState },
         onLogin = navigateToLogin,
         onLogout = accountViewModel::logout,
+        onGoldenHoliday = navigateToGoldenHoliday,
     )
 }

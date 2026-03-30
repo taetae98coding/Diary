@@ -25,6 +25,7 @@ projectGuard {
         deny(":feature")
         deny(":compose")
         deny(":presenter")
+        deny(":core:navigation")
     }
 
     guard(":domain") {
@@ -34,23 +35,40 @@ projectGuard {
         deny(":presenter")
         deny(":core:database")
         deny(":core:datastore")
+        deny(":core:google-credentials")
+        deny(":core:holiday-database")
+        deny(":core:holiday-network")
+        deny(":core:ip-network")
+        deny(":core:mapper")
+        deny(":core:navigation")
         deny(":core:network")
         deny(":core:supabase")
-        deny(":core:google-credentials")
+        deny(":core:weather-network")
     }
 
     guard(":feature") {
         deny(":data")
         deny(":core:database")
         deny(":core:datastore")
+        deny(":core:holiday-database")
+        deny(":core:holiday-network")
+        deny(":core:ip-network")
+        deny(":core:mapper")
         deny(":core:network")
         deny(":core:supabase")
+        deny(":core:weather-network")
     }
+
     guard(":presenter") {
         deny(":data")
         deny(":core:database")
         deny(":core:datastore")
+        deny(":core:holiday-database")
+        deny(":core:holiday-network")
+        deny(":core:ip-network")
+        deny(":core:mapper")
         deny(":core:network")
         deny(":core:supabase")
+        deny(":core:weather-network")
     }
 }
