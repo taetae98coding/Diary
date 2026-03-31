@@ -1,3 +1,10 @@
+## [1.4.0] - 2026-03-31
+
+### 🚀 Features
+
+- 황금연휴
+- TagFilter UI/UX 수정
+- Android 백업 제거
 ## [1.3.0] - 2026-03-30
 
 ### 🚀 Features

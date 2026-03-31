@@ -11710,6 +11710,9 @@
             {
               "id": "io.insert-koin:koin-annotations",
               "isLibrary": true
+            },
+            {
+              "id": ":library:kotlinx-datetime"
             }
           ]
         },
@@ -11736,6 +11739,9 @@
             {
               "id": "io.insert-koin:koin-annotations",
               "isLibrary": true
+            },
+            {
+              "id": ":library:kotlinx-datetime"
             }
           ]
         },
@@ -11762,6 +11768,9 @@
             {
               "id": "io.insert-koin:koin-annotations",
               "isLibrary": true
+            },
+            {
+              "id": ":library:kotlinx-datetime"
             },
             {
               "id": "org.jetbrains.kotlinx:kotlinx-coroutines-test",
@@ -11812,6 +11821,9 @@
             {
               "id": "io.insert-koin:koin-annotations",
               "isLibrary": true
+            },
+            {
+              "id": ":library:kotlinx-datetime"
             }
           ]
         },
@@ -11838,6 +11850,9 @@
             {
               "id": "io.insert-koin:koin-annotations",
               "isLibrary": true
+            },
+            {
+              "id": ":library:kotlinx-datetime"
             }
           ]
         },
@@ -11864,6 +11879,9 @@
             {
               "id": "io.insert-koin:koin-annotations",
               "isLibrary": true
+            },
+            {
+              "id": ":library:kotlinx-datetime"
             }
           ]
         },
@@ -11890,6 +11908,9 @@
             {
               "id": "io.insert-koin:koin-annotations",
               "isLibrary": true
+            },
+            {
+              "id": ":library:kotlinx-datetime"
             }
           ]
         },
@@ -11916,6 +11937,9 @@
             {
               "id": "io.insert-koin:koin-annotations",
               "isLibrary": true
+            },
+            {
+              "id": ":library:kotlinx-datetime"
             }
           ]
         },
@@ -11942,6 +11966,9 @@
             {
               "id": "io.insert-koin:koin-annotations",
               "isLibrary": true
+            },
+            {
+              "id": ":library:kotlinx-datetime"
             }
           ]
         },
@@ -11968,6 +11995,9 @@
             {
               "id": "io.insert-koin:koin-annotations",
               "isLibrary": true
+            },
+            {
+              "id": ":library:kotlinx-datetime"
             }
           ]
         }
@@ -15843,10 +15873,16 @@
               "isLibrary": true
             },
             {
+              "id": ":compose:calendar"
+            },
+            {
               "id": ":domain:account"
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             }
           ]
         },
@@ -15898,10 +15934,16 @@
               "isLibrary": true
             },
             {
+              "id": ":compose:calendar"
+            },
+            {
               "id": ":domain:account"
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             },
             {
               "id": "androidx.test:core",
@@ -15977,10 +16019,16 @@
               "isLibrary": true
             },
             {
+              "id": ":compose:calendar"
+            },
+            {
               "id": ":domain:account"
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             }
           ]
         },
@@ -16028,10 +16076,16 @@
               "isLibrary": true
             },
             {
+              "id": ":compose:calendar"
+            },
+            {
               "id": ":domain:account"
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             },
             {
               "id": "org.jetbrains.compose.hot-reload:hot-reload-runtime-api",
@@ -16087,10 +16141,16 @@
               "isLibrary": true
             },
             {
+              "id": ":compose:calendar"
+            },
+            {
               "id": ":domain:account"
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             }
           ]
         },
@@ -16138,10 +16198,16 @@
               "isLibrary": true
             },
             {
+              "id": ":compose:calendar"
+            },
+            {
               "id": ":domain:account"
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             }
           ]
         },
@@ -16189,10 +16255,16 @@
               "isLibrary": true
             },
             {
+              "id": ":compose:calendar"
+            },
+            {
               "id": ":domain:account"
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             }
           ]
         },
@@ -16240,10 +16312,16 @@
               "isLibrary": true
             },
             {
+              "id": ":compose:calendar"
+            },
+            {
               "id": ":domain:account"
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             }
           ]
         },
@@ -16291,10 +16369,16 @@
               "isLibrary": true
             },
             {
+              "id": ":compose:calendar"
+            },
+            {
               "id": ":domain:account"
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             }
           ]
         },
@@ -16342,10 +16426,16 @@
               "isLibrary": true
             },
             {
+              "id": ":compose:calendar"
+            },
+            {
               "id": ":domain:account"
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             }
           ]
         },
@@ -16393,10 +16483,16 @@
               "isLibrary": true
             },
             {
+              "id": ":compose:calendar"
+            },
+            {
               "id": ":domain:account"
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             }
           ]
         },
@@ -16444,10 +16540,16 @@
               "isLibrary": true
             },
             {
+              "id": ":compose:calendar"
+            },
+            {
               "id": ":domain:account"
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             }
           ]
         },
@@ -16495,10 +16597,16 @@
               "isLibrary": true
             },
             {
+              "id": ":compose:calendar"
+            },
+            {
               "id": ":domain:account"
             },
             {
               "id": ":domain:credentials"
+            },
+            {
+              "id": ":domain:holiday"
             }
           ]
         }
