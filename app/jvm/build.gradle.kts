@@ -1,4 +1,6 @@
+
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
     alias(libs.plugins.diary.primitive.jvm)
@@ -23,12 +25,25 @@ compose {
         application {
             mainClass = "io.github.taetae98coding.diary.JvmAppKt"
 
+            buildTypes.release.proguard {
+                isEnabled.set(true)
+                obfuscate.set(true)
+                optimize.set(false)
+                joinOutputJars.set(false)
+            }
+
             nativeDistributions {
+                targetFormats(TargetFormat.Dmg)
                 packageName = "Diary"
                 packageVersion = BuildConfig.VERSION_NAME
 
+                includeAllModules = true
                 macOS {
+                    appStore = true
                     bundleID = BuildConfig.NAMESPACE
+                    infoPlist {
+                        extraKeysRawXml = project.file("jvm-info.plist").readText()
+                    }
                 }
             }
         }

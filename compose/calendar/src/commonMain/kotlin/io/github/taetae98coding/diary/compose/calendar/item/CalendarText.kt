@@ -24,11 +24,11 @@ public fun CalendarText(
     Text(
         text = text,
         modifier = modifier.background(color, RoundedCornerShape(4.dp))
-            .padding(2.dp)
+            .padding(horizontal = 2.dp, vertical = 4.dp)
             .basicMarquee(iterations = Int.MAX_VALUE),
         color = color.wcagAAAContentColor(),
         textAlign = TextAlign.Center,
         maxLines = 1,
-        style = DiaryTheme.typography.bodyMedium,
+        style = DiaryTheme.typography.bodySmall,
     )
 }

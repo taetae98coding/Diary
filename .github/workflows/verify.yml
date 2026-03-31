@@ -1,4 +1,4 @@
-name: 🧪 테스트
+name: ✅ 검증
 
 on:
   push:
@@ -6,10 +6,40 @@ on:
   pull_request:
 
 concurrency:
-  group: test-${{ github.ref }}
+  group: verify-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
+  dependency-guard:
+    name: 🛡️ Dependency Guard
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: ./.github/actions/gradle-setup
+        with:
+          local-properties: ${{ secrets.LOCAL_PROPERTIES }}
+          google-services-dev: ${{ secrets.GOOGLE_SERVICES_DEV }}
+          google-services-real: ${{ secrets.GOOGLE_SERVICES_REAL }}
+
+      - name: 🛡️ Dependency Guard 실행
+        run: ./gradlew dependencyGuard
+
+  project-guard:
+    name: 🛡️ Project Guard
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: ./.github/actions/gradle-setup
+        with:
+          local-properties: ${{ secrets.LOCAL_PROPERTIES }}
+          google-services-dev: ${{ secrets.GOOGLE_SERVICES_DEV }}
+          google-services-real: ${{ secrets.GOOGLE_SERVICES_REAL }}
+
+      - name: 🛡️ Project Guard 실행
+        run: ./gradlew projectGuardAggregateCheck
+
   jvm-test:
     name: ☕ JVM 테스트
     runs-on: self-hosted

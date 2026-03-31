@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Card
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -23,7 +24,6 @@ import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.isMetaPressed
 import androidx.compose.ui.input.key.key
-import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.dropUnlessResumed
@@ -32,6 +32,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import io.github.taetae98coding.diary.compose.core.button.AddFloatingButton
 import io.github.taetae98coding.diary.compose.core.color.ColorCircle
+import io.github.taetae98coding.diary.compose.core.icon.MemoIcon
 import io.github.taetae98coding.diary.compose.core.modifier.focusableKeyEvent
 import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
 import io.github.taetae98coding.diary.core.model.tag.Tag
@@ -45,8 +46,9 @@ public fun TagListScaffold(
     state: TagListScaffoldState = rememberTagListScaffoldState(),
     isFetchingProvider: () -> Boolean = { false },
     onFetch: () -> Unit = {},
-    onNavigateToAdd: () -> Unit = {},
-    onNavigateToDetail: (Uuid) -> Unit = {},
+    onAdd: () -> Unit = {},
+    onTag: (Uuid) -> Unit = {},
+    onTagMemo: (Uuid) -> Unit = {},
 ) {
     val pagingItems = stateHolder.pagingData.collectAsLazyPagingItems()
 
@@ -55,8 +57,9 @@ public fun TagListScaffold(
         pagingItems = pagingItems,
         isFetchingProvider = isFetchingProvider,
         onFetch = onFetch,
-        onNavigateToAdd = onNavigateToAdd,
-        onNavigateToDetail = onNavigateToDetail,
+        onAdd = onAdd,
+        onTag = onTag,
+        onTagMemo = onTagMemo,
         modifier = modifier,
     )
 }
@@ -67,21 +70,22 @@ internal fun TagListScaffold(
     pagingItems: LazyPagingItems<Tag>,
     isFetchingProvider: () -> Boolean = { false },
     onFetch: () -> Unit = {},
-    onNavigateToAdd: () -> Unit,
-    onNavigateToDetail: (Uuid) -> Unit,
+    onAdd: () -> Unit,
+    onTag: (Uuid) -> Unit,
+    onTagMemo: (Uuid) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
         modifier = modifier.focusableKeyEvent {
             if (it.type == KeyEventType.KeyDown && it.isMetaPressed && it.key == Key.A) {
-                onNavigateToAdd()
+                onAdd()
                 true
             } else {
                 false
             }
         },
         topBar = { TopBar() },
-        floatingActionButton = { AddFloatingButton(onClick = dropUnlessResumed(block = onNavigateToAdd)) },
+        floatingActionButton = { AddFloatingButton(onClick = dropUnlessResumed(block = onAdd)) },
         snackbarHost = { SnackbarHost(hostState = state.hostState) },
     ) { paddingValues ->
         PullToRefreshBox(
@@ -117,7 +121,8 @@ internal fun TagListScaffold(
 
                         TagCard(
                             uiState = uiState,
-                            onClick = dropUnlessResumed { uiState?.id?.let(onNavigateToDetail) },
+                            onClick = dropUnlessResumed { uiState?.id?.let(onTag) },
+                            onMemo = dropUnlessResumed { uiState?.id?.let(onTagMemo) },
                             modifier = Modifier.animateItem()
                                 .fillParentMaxWidth(),
                         )
@@ -140,6 +145,7 @@ private fun TopBar(modifier: Modifier = Modifier) {
 private fun TagCard(
     uiState: Tag?,
     onClick: () -> Unit,
+    onMemo: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Card(
@@ -147,7 +153,7 @@ private fun TagCard(
         modifier = modifier,
     ) {
         Row(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(12.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -157,10 +163,15 @@ private fun TagCard(
             )
             Text(
                 text = uiState?.detail?.title.orEmpty(),
-                modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE),
+                modifier = Modifier
+                    .weight(1f)
+                    .basicMarquee(iterations = Int.MAX_VALUE),
                 maxLines = 1,
                 style = MaterialTheme.typography.titleMedium,
             )
+            IconButton(onClick = onMemo) {
+                MemoIcon()
+            }
         }
     }
 }
