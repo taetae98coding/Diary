@@ -179,10 +179,17 @@ internal fun TagDetailScaffold(
                     }
 
                     item {
-                        MemoCard(
+                        Card(
                             onClick = dropUnlessResumed(block = onNavigateToTagMemo),
-                            modifier = Modifier.fillParentMaxWidth(),
-                        )
+                            modifier = Modifier.size(64.dp),
+                        ) {
+                            Box(
+                                modifier = Modifier.fillMaxSize(),
+                                contentAlignment = Alignment.Center,
+                            ) {
+                                MemoIcon()
+                            }
+                        }
                     }
                 }
             }

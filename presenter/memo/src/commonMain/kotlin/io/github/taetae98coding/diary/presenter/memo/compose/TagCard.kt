@@ -19,7 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import io.github.taetae98coding.diary.compose.core.chip.DiaryFilterChip
 import io.github.taetae98coding.diary.compose.core.color.ColorCircle
-import io.github.taetae98coding.diary.compose.core.icon.AddIcon
+import io.github.taetae98coding.diary.compose.core.icon.ChevronRightIcon
 import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
 import io.github.taetae98coding.diary.library.compose.ui.wcagAAAContentColor
 import io.github.taetae98coding.diary.presenter.memo.api.MemoTagUiState
@@ -62,7 +62,7 @@ private fun Title(
             text = "태그",
             style = DiaryTheme.typography.titleMedium,
         )
-        AddIcon()
+        ChevronRightIcon()
     }
 }
 

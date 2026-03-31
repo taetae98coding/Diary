@@ -13,6 +13,7 @@ import org.koin.compose.viewmodel.koinViewModel
 internal fun TagHomeScreen(
     navigateToTagAdd: () -> Unit,
     navigateToTagDetail: (Uuid) -> Unit,
+    navigateToTagMemo: (Uuid) -> Unit,
     stateHolder: TagListStateHolder,
     modifier: Modifier = Modifier,
     viewModel: TagHomeViewModel = koinViewModel(),
@@ -24,7 +25,8 @@ internal fun TagHomeScreen(
         modifier = modifier,
         isFetchingProvider = { isSyncing },
         onFetch = viewModel::sync,
-        onNavigateToAdd = navigateToTagAdd,
-        onNavigateToDetail = navigateToTagDetail,
+        onAdd = navigateToTagAdd,
+        onTag = navigateToTagDetail,
+        onTagMemo = navigateToTagMemo,
     )
 }

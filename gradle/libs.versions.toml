@@ -38,16 +38,16 @@ firebase-perf-plugin = "2.0.2"					# https://firebase.google.com/support/release
 coil = "3.4.0"								    # https://github.com/coil-kt/coil/releases
 koin = "4.2.0"								    # https://github.com/InsertKoinIO/koin/releases
 koin-compiler-plugin = "0.4.1"				    # https://github.com/InsertKoinIO/koin-compiler-plugin/releases
-fixture-monkey = "1.1.18"						# https://github.com/naver/fixture-monkey/releases
+fixture-monkey = "1.1.19"						# https://github.com/naver/fixture-monkey/releases
 google-identity = "1.2.0"						# https://developers.google.com/identity/android-credential-manager/releases?hl=en
 google-oauth-client = "1.39.0"					# https://github.com/googleapis/google-oauth-java-client/releases
-kotest = "6.1.9"                                # https://github.com/kotest/kotest/releases
-ktor = "3.4.1"                                  # https://github.com/ktorio/ktor/releases
+kotest = "6.1.10"                               # https://github.com/kotest/kotest/releases
+ktor = "3.4.2"                                  # https://github.com/ktorio/ktor/releases
 leakcanary = "2.14"							    # https://github.com/square/leakcanary/releases
 mockk = "1.14.9"								# https://github.com/mockk/mockk/releases
 robolectric = "4.16.1"							# https://github.com/robolectric/robolectric/releases
 multiplatform-markdown = "0.39.2"               # https://github.com/mikepenz/multiplatform-markdown-renderer/releases
-spm = "1.6.1"                                   # https://github.com/frankois944/spm4Kmp/releases
+spm = "1.7.0"                                   # https://github.com/frankois944/spm4Kmp/releases
 supabase = "3.4.1"                              # https://github.com/supabase-community/supabase-kt/releases
 turbine = "1.2.1"								# https://github.com/cashapp/turbine/releases
 

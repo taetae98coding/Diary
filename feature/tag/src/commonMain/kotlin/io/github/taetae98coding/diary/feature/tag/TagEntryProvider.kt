@@ -31,6 +31,7 @@ public fun EntryProviderScope<NavKey>.tagEntry(backStack: NavBackStack<NavKey>) 
         TagHomeScreen(
             navigateToTagAdd = { backStack.add(TagAddNavKey) },
             navigateToTagDetail = { backStack.add(TagDetailNavKey(TagId(it))) },
+            navigateToTagMemo = { backStack.add(TagMemoNavKey(TagId(it))) },
             stateHolder = koinInject(scope = scope),
         )
     }

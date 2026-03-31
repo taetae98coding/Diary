@@ -32,4 +32,8 @@ internal class CalendarWeekGridScopeImpl(
 
         _rows.last().add(item)
     }
+
+    override fun appendLine() {
+        _rows.add(mutableListOf())
+    }
 }
