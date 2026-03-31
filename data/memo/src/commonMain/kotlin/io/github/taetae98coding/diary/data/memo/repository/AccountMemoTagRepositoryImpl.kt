@@ -13,13 +13,19 @@ import kotlin.time.Clock
 import kotlin.uuid.Uuid
 import kotlinx.coroutines.flow.first
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
 public class AccountMemoTagRepositoryImpl(
+    @param:Provided
     private val databaseTransactor: DatabaseTransactor,
+    @param:Provided
     private val memoLocalDataSource: MemoLocalDataSource,
+    @param:Provided
     private val memoTagLocalDataSource: MemoTagLocalDataSource,
+    @param:Provided
     private val syncMemoLocalDataSource: SyncMemoLocalDataSource,
+    @param:Provided
     private val syncMemoTagLocalDataSource: SyncMemoTagLocalDataSource,
 ) : AccountMemoTagRepository {
     override suspend fun updatePrimaryTag(

@@ -8,9 +8,13 @@ import kotlin.uuid.Uuid
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
-public class MemoRepositoryImpl(private val memoLocalDataSource: MemoLocalDataSource) : MemoRepository {
+public class MemoRepositoryImpl(
+    @param:Provided
+    private val memoLocalDataSource: MemoLocalDataSource,
+) : MemoRepository {
     override fun get(memoId: Uuid): Flow<Memo?> {
         return memoLocalDataSource.get(memoId).map { it?.toDomain() }
     }

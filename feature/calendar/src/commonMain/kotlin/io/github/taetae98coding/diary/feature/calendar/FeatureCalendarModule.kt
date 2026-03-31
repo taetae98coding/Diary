@@ -15,6 +15,7 @@ import kotlin.time.Clock
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Configuration
 import org.koin.core.annotation.Module
+import org.koin.core.annotation.Provided
 import org.koin.core.annotation.Scope
 import org.koin.core.annotation.Scoped
 import org.koin.core.component.KoinComponent
@@ -57,6 +58,7 @@ public class FeatureCalendarModule : KoinComponent {
     @Scope(CalendarHomeScope::class)
     @Scoped
     internal fun providesWeatherStateHolder(
+        @Provided
         clock: Clock,
         getCurrentWeatherUseCase: GetCurrentWeatherUseCase,
         fetchCurrentWeatherUseCase: FetchCurrentWeatherUseCase,

@@ -27,7 +27,7 @@ class AddTagUseCaseTest : BehaviorSpec() {
     private val getAccountUseCase = mockk<GetAccountUseCase>()
     private val repository = mockk<AccountTagRepository>()
     private val requestSyncUseCase = mockk<RequestSyncUseCase>(relaxed = true)
-    private val useCase = AddTagUseCase(getAccountUseCase, repository, requestSyncUseCase)
+    private val useCase = AddTagUseCase(getAccountUseCase, requestSyncUseCase, repository)
 
     private val fixtureMonkey = FixtureMonkey.builder()
         .plugin(KotlinPlugin())

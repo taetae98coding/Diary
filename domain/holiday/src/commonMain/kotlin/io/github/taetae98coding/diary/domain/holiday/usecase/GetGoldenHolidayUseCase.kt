@@ -15,9 +15,13 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
-public class GetGoldenHolidayUseCase internal constructor(private val holidayRepository: HolidayRepository) {
+public class GetGoldenHolidayUseCase internal constructor(
+    @param:Provided
+    private val holidayRepository: HolidayRepository,
+) {
     public operator fun invoke(
         year: Int,
         annualLeave: Int,

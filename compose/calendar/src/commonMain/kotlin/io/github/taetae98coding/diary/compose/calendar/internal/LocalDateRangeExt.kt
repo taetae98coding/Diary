@@ -8,7 +8,7 @@ import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 
 @Suppress("FunctionName")
-internal fun WeekLocalDateRange(
+public fun WeekLocalDateRange(
     yearMonth: YearMonth,
     weekOfMonth: Int,
 ): LocalDateRange {

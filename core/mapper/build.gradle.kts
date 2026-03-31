@@ -14,6 +14,9 @@ kotlin {
                 implementation(projects.core.holidayNetwork.api)
                 implementation(projects.core.network.api)
                 implementation(projects.core.weatherNetwork.api)
+
+                // TODO 한글 URL 변경 시 사용 중 추후 제거
+                implementation(libs.ktor.client.core)
             }
         }
     }

@@ -12,11 +12,14 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import org.koin.core.annotation.Provided
 import org.koin.core.annotation.Single
 
 @Single
 public class WeatherRepositoryImpl(
+    @param:Provided
     private val ipRemoteDataSource: IpRemoteDataSource,
+    @param:Provided
     private val weatherRemoteDataSource: WeatherRemoteDataSource,
 ) : WeatherRepository {
     private val currentWeather = MutableStateFlow(emptyList<Weather>())

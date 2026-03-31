@@ -39,7 +39,7 @@ internal class AppState(
 
     fun navigateTo(destination: TopLevelDestination) {
         backStack.clear()
-        backStack.add(destination.navKey)
+        backStack.addAll(listOf(CalendarHomeNavKey, destination.navKey).distinct())
     }
 }
 

@@ -5,9 +5,13 @@ import io.github.taetae98coding.diary.core.database.api.entity.ListMemoFilterTag
 import io.github.taetae98coding.diary.domain.memo.repository.ListMemoFilterTagRepository
 import kotlin.uuid.Uuid
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
-public class ListMemoFilterTagRepositoryImpl(private val listMemoFilterTagLocalDataSource: ListMemoFilterTagLocalDataSource) : ListMemoFilterTagRepository {
+public class ListMemoFilterTagRepositoryImpl(
+    @param:Provided
+    private val listMemoFilterTagLocalDataSource: ListMemoFilterTagLocalDataSource,
+) : ListMemoFilterTagRepository {
     override suspend fun upsert(tagId: Uuid) {
         listMemoFilterTagLocalDataSource.upsert(ListMemoFilterTagLocalEntity(tagId))
     }

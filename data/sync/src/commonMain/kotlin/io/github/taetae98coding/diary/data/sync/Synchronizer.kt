@@ -28,20 +28,33 @@ import io.github.taetae98coding.diary.core.network.api.entity.MemoTagRemoteEntit
 import io.github.taetae98coding.diary.core.network.api.entity.TagRemoteEntity
 import kotlin.uuid.Uuid
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
 internal class Synchronizer(
+    @param:Provided
     private val databaseTransactor: DatabaseTransactor,
+    @param:Provided
     private val memoLocalDataSource: MemoLocalDataSource,
+    @param:Provided
     private val accountMemoLocalDataSource: AccountMemoLocalDataSource,
+    @param:Provided
     private val syncMemoLocalDataSource: SyncMemoLocalDataSource,
+    @param:Provided
     private val memoRemoteDataSource: MemoRemoteDataSource,
+    @param:Provided
     private val memoTagLocalDataSource: MemoTagLocalDataSource,
+    @param:Provided
     private val syncMemoTagLocalDataSource: SyncMemoTagLocalDataSource,
+    @param:Provided
     private val memoTagRemoteDataSource: MemoTagRemoteDataSource,
+    @param:Provided
     private val tagLocalDataSource: TagLocalDataSource,
+    @param:Provided
     private val accountTagLocalDataSource: AccountTagLocalDataSource,
+    @param:Provided
     private val syncTagLocalDataSource: SyncTagLocalDataSource,
+    @param:Provided
     private val tagRemoteDataSource: TagRemoteDataSource,
 ) {
     suspend fun sync(accountId: Uuid) {

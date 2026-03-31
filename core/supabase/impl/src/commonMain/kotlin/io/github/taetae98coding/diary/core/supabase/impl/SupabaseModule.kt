@@ -7,6 +7,7 @@ import io.github.jan.supabase.functions.Functions
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Configuration
 import org.koin.core.annotation.Module
+import org.koin.core.annotation.Provided
 import org.koin.core.annotation.Single
 
 @Module
@@ -14,7 +15,10 @@ import org.koin.core.annotation.Single
 @Configuration
 public class SupabaseModule {
     @Single
-    internal fun providesSupabaseClient(config: SupabaseConfig): SupabaseClient {
+    internal fun providesSupabaseClient(
+        @Provided
+        config: SupabaseConfig,
+    ): SupabaseClient {
         return createSupabaseClient(
             supabaseUrl = config.url,
             supabaseKey = config.key,

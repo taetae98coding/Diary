@@ -29,7 +29,7 @@ class UpdateMemoUseCaseTest : BehaviorSpec() {
     private val memoRepository = mockk<MemoRepository>()
     private val accountMemoRepository = mockk<AccountMemoRepository>()
     private val requestSyncUseCase = mockk<RequestSyncUseCase>(relaxed = true)
-    private val useCase = UpdateMemoUseCase(getAccountUseCase, memoRepository, accountMemoRepository, requestSyncUseCase)
+    private val useCase = UpdateMemoUseCase(getAccountUseCase, requestSyncUseCase, memoRepository, accountMemoRepository)
 
     private val fixtureMonkey = FixtureMonkey.builder()
         .plugin(KotlinPlugin())

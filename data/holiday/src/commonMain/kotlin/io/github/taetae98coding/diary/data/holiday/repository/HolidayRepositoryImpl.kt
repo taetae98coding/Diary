@@ -9,11 +9,14 @@ import io.github.taetae98coding.diary.core.model.holiday.Holiday
 import io.github.taetae98coding.diary.domain.holiday.repository.HolidayRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import org.koin.core.annotation.Provided
 import org.koin.core.annotation.Single
 
 @Single
 public class HolidayRepositoryImpl(
+    @param:Provided
     private val holidayRemoteDataSource: HolidayRemoteDataSource,
+    @param:Provided
     private val holidayLocalDataSource: HolidayLocalDataSource,
 ) : HolidayRepository {
     private val fetchedYears = mutableSetOf<Int>()

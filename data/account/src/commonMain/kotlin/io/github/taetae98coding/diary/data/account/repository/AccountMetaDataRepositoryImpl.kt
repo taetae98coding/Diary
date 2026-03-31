@@ -7,9 +7,13 @@ import io.github.taetae98coding.diary.domain.account.repository.AccountMetaDataR
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
-internal class AccountMetaDataRepositoryImpl(private val accountMetaDataDataStoreDataSource: AccountMetaDataDataStoreDataSource) : AccountMetaDataRepository {
+internal class AccountMetaDataRepositoryImpl(
+    @param:Provided
+    private val accountMetaDataDataStoreDataSource: AccountMetaDataDataStoreDataSource,
+) : AccountMetaDataRepository {
     override fun get(): Flow<AccountMetaData?> {
         return accountMetaDataDataStoreDataSource.get().map { it?.toDomain() }
     }
