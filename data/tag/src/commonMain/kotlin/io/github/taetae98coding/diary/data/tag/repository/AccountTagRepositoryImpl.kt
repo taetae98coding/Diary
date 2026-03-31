@@ -20,12 +20,17 @@ import kotlin.time.Clock
 import kotlin.uuid.Uuid
 import kotlinx.coroutines.flow.Flow
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
 public class AccountTagRepositoryImpl(
+    @param:Provided
     private val databaseTransactor: DatabaseTransactor,
+    @param:Provided
     private val tagLocalDataSource: TagLocalDataSource,
+    @param:Provided
     private val accountTagLocalDataSource: AccountTagLocalDataSource,
+    @param:Provided
     private val syncTagLocalDataSource: SyncTagLocalDataSource,
 ) : AccountTagRepository {
     override suspend fun add(

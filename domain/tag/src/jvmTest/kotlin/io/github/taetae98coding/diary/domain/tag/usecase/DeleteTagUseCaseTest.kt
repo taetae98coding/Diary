@@ -23,7 +23,7 @@ class DeleteTagUseCaseTest : BehaviorSpec() {
     private val getAccountUseCase = mockk<GetAccountUseCase>()
     private val accountTagRepository = mockk<AccountTagRepository>()
     private val requestSyncUseCase = mockk<RequestSyncUseCase>(relaxed = true)
-    private val useCase = DeleteTagUseCase(getAccountUseCase, accountTagRepository, requestSyncUseCase)
+    private val useCase = DeleteTagUseCase(getAccountUseCase, requestSyncUseCase, accountTagRepository)
 
     private val fixtureMonkey = FixtureMonkey.builder()
         .plugin(KotlinPlugin())

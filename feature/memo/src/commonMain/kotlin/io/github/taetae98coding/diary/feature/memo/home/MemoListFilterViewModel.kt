@@ -5,8 +5,13 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
+import io.github.taetae98coding.diary.core.model.FilterPresence
+import io.github.taetae98coding.diary.core.model.memo.ListMemoFilterOption
+import io.github.taetae98coding.diary.domain.memo.usecase.GetListMemoFilterOptionUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.GetListMemoFilterTagUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.SelectListMemoFilterTagUseCase
+import io.github.taetae98coding.diary.domain.memo.usecase.SetDatePresenceFilterUseCase
+import io.github.taetae98coding.diary.domain.memo.usecase.SetTagPresenceFilterUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.UnselectListMemoFilterTagUseCase
 import io.github.taetae98coding.diary.domain.tag.usecase.PageTagUseCase
 import kotlin.uuid.Uuid
@@ -22,8 +27,11 @@ import org.koin.core.annotation.KoinViewModel
 internal class MemoListFilterViewModel(
     pageTagUseCase: PageTagUseCase,
     getListMemoFilterTagUseCase: GetListMemoFilterTagUseCase,
+    getListMemoFilterOptionUseCase: GetListMemoFilterOptionUseCase,
     private val selectListMemoFilterTagUseCase: SelectListMemoFilterTagUseCase,
     private val unselectListMemoFilterTagUseCase: UnselectListMemoFilterTagUseCase,
+    private val setTagPresenceFilterUseCase: SetTagPresenceFilterUseCase,
+    private val setDatePresenceFilterUseCase: SetDatePresenceFilterUseCase,
 ) : ViewModel() {
     private val tagPagingData: Flow<PagingData<io.github.taetae98coding.diary.core.model.tag.Tag>> = pageTagUseCase()
         .mapLatest { it.getOrDefault(PagingData.empty()) }
@@ -48,6 +56,14 @@ internal class MemoListFilterViewModel(
         }
     }.cachedIn(viewModelScope)
 
+    val filterOption = getListMemoFilterOptionUseCase()
+        .mapLatest { it.getOrDefault(ListMemoFilterOption()) }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = ListMemoFilterOption(),
+        )
+
     fun select(tagId: Uuid) {
         viewModelScope.launch {
             selectListMemoFilterTagUseCase(tagId)
@@ -57,6 +73,18 @@ internal class MemoListFilterViewModel(
     fun unselect(tagId: Uuid) {
         viewModelScope.launch {
             unselectListMemoFilterTagUseCase(tagId)
+        }
+    }
+
+    fun setTagPresence(tagPresence: FilterPresence) {
+        viewModelScope.launch {
+            setTagPresenceFilterUseCase(tagPresence)
+        }
+    }
+
+    fun setDatePresence(datePresence: FilterPresence) {
+        viewModelScope.launch {
+            setDatePresenceFilterUseCase(datePresence)
         }
     }
 }

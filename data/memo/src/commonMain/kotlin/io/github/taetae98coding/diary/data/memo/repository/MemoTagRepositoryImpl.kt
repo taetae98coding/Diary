@@ -9,9 +9,13 @@ import io.github.taetae98coding.diary.library.coroutines.mapCollectionLatest
 import kotlin.uuid.Uuid
 import kotlinx.coroutines.flow.Flow
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
-public class MemoTagRepositoryImpl(private val memoTagLocalDataSource: MemoTagLocalDataSource) : MemoTagRepository {
+public class MemoTagRepositoryImpl(
+    @param:Provided
+    private val memoTagLocalDataSource: MemoTagLocalDataSource,
+) : MemoTagRepository {
     override fun getMemoTag(memoId: Uuid): Flow<List<Tag>> {
         return memoTagLocalDataSource.get(memoId).mapCollectionLatest(TagLocalEntity::toDomain)
     }

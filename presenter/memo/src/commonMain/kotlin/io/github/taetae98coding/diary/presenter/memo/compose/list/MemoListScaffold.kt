@@ -181,10 +181,12 @@ private fun MemoListScaffold(
                 contentPadding = DiaryTheme.dimen.screenPaddingValues,
                 verticalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace),
             ) {
-                if (pagingItems.loadState.refresh !is LoadState.Loading && pagingItems.itemCount == 0) {
+                if (!isFetchingProvider() && pagingItems.loadState.refresh !is LoadState.Loading && pagingItems.itemCount == 0) {
                     item {
                         Box(
-                            modifier = Modifier.fillParentMaxSize(),
+                            modifier = Modifier
+                                .fillParentMaxSize()
+                                .animateItem(),
                             contentAlignment = Alignment.Center,
                         ) {
                             Text(
@@ -193,6 +195,16 @@ private fun MemoListScaffold(
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
                         }
+                    }
+                } else if (isFetchingProvider() && pagingItems.itemCount == 0) {
+                    items(count = 5) {
+                        MemoCard(
+                            uiState = null,
+                            onClick = {},
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .animateItem(),
+                        )
                     }
                 } else {
                     items(

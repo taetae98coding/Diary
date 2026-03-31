@@ -34,6 +34,7 @@ import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.type
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
@@ -119,12 +120,12 @@ public fun CalendarScaffold(
 
     LifecycleEventEffect(Lifecycle.Event.ON_START) {
         state.updatePrimaryDate(Clock.System.todayIn(TimeZone.currentSystemDefault()))
+        weatherStateHolder.fetch()
     }
 
     LifecycleStartEffect(state.calendarState.yearMonth) {
         memoStateHolder.fetch(state.calendarState.yearMonth)
         holidayStateHolder.fetch(state.calendarState.yearMonth)
-        weatherStateHolder.fetch()
         onStopOrDispose { }
     }
 }
@@ -143,6 +144,7 @@ public fun CalendarScaffold(
     onLocalDateRangeSelect: (LocalDateRange) -> Unit = {},
     onMemoClick: (Uuid) -> Unit = {},
 ) {
+    val uriHandler = LocalUriHandler.current
     val coroutineScope = rememberCoroutineScope()
 
     Scaffold(
@@ -214,7 +216,8 @@ public fun CalendarScaffold(
                         } else {
                             DiaryTheme.colorScheme.secondary
                         },
-                        modifier = Modifier.animateItem(),
+                        modifier = Modifier.animateItem()
+                            .clickable { uriHandler.openUri(it.link) },
                     )
                 }
 

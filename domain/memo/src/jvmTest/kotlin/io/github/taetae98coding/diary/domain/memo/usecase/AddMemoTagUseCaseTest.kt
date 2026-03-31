@@ -16,7 +16,7 @@ import kotlin.uuid.Uuid
 class AddMemoTagUseCaseTest : BehaviorSpec() {
     private val accountMemoTagRepository = mockk<AccountMemoTagRepository>()
     private val requestSyncUseCase = mockk<RequestSyncUseCase>(relaxed = true)
-    private val useCase = AddMemoTagUseCase(accountMemoTagRepository, requestSyncUseCase)
+    private val useCase = AddMemoTagUseCase(requestSyncUseCase, accountMemoTagRepository)
 
     init {
         Given("유효한 memoId와 tagId") {

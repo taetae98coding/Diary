@@ -13,6 +13,7 @@ import kotlinx.serialization.json.Json
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Configuration
 import org.koin.core.annotation.Module
+import org.koin.core.annotation.Provided
 import org.koin.core.annotation.Single
 
 @Module
@@ -24,6 +25,7 @@ public class WeatherNetworkModule {
     internal fun providesWeatherHttpClient(
         @WeatherHttpEngine
         engine: HttpClientEngine,
+        @Provided
         @WeatherApiKey
         apiKey: String,
     ): HttpClient {

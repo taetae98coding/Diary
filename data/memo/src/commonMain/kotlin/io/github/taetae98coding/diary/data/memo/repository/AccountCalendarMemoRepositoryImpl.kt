@@ -8,9 +8,13 @@ import kotlin.uuid.Uuid
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
-public class AccountCalendarMemoRepositoryImpl(private val accountCalendarMemoLocalDataSource: AccountCalendarMemoLocalDataSource) : AccountCalendarMemoRepository {
+public class AccountCalendarMemoRepositoryImpl(
+    @param:Provided
+    private val accountCalendarMemoLocalDataSource: AccountCalendarMemoLocalDataSource,
+) : AccountCalendarMemoRepository {
     override fun get(
         accountId: Uuid,
         year: Int,

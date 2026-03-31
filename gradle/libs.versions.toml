@@ -3,7 +3,7 @@
 kotlin = "2.3.20"                               # https://github.com/JetBrains/kotlin/releases
 ksp = "2.3.6"                                   # https://github.com/google/ksp/releases
 # agp
-agp = "9.0.1"                                   # https://developer.android.com/build/releases/gradle-plugin?hl=en
+agp = "9.1.0"                                   # https://developer.android.com/build/releases/gradle-plugin?hl=en
 # jetbrains
 jetbrains-compose = "1.11.0-beta01"             # https://github.com/JetBrains/compose-multiplatform/releases
 jetbrains-compose-material-icons = "1.7.3"
@@ -36,8 +36,8 @@ firebase-bom = "34.11.0"                        # https://firebase.google.com/su
 firebase-crashlytics-plugin = "3.0.6"			# https://firebase.google.com/support/release-notes/android?hl=en
 firebase-perf-plugin = "2.0.2"					# https://firebase.google.com/support/release-notes/android?hl=en
 coil = "3.4.0"								    # https://github.com/coil-kt/coil/releases
-koin = "4.2.0"								    # https://github.com/InsertKoinIO/koin/releases
-koin-compiler-plugin = "0.4.1"				    # https://github.com/InsertKoinIO/koin-compiler-plugin/releases
+koin = "4.2.1-RC1"                              # https://github.com/InsertKoinIO/koin/releases
+koin-compiler-plugin = "0.6.2"				    # https://github.com/InsertKoinIO/koin-compiler-plugin/releases
 fixture-monkey = "1.1.19"						# https://github.com/naver/fixture-monkey/releases
 google-identity = "1.2.0"						# https://developers.google.com/identity/android-credential-manager/releases?hl=en
 google-oauth-client = "1.39.0"					# https://github.com/googleapis/google-oauth-java-client/releases

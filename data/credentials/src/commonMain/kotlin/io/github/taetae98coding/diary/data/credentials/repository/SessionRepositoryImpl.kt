@@ -7,11 +7,15 @@ import io.github.taetae98coding.diary.core.network.api.entity.SessionRemoteEntit
 import io.github.taetae98coding.diary.core.supabase.api.SupabaseAuth
 import io.github.taetae98coding.diary.domain.credentials.repository.SessionRepository
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
 public class SessionRepositoryImpl(
+    @param:Provided
     private val supabaseAuth: SupabaseAuth,
+    @param:Provided
     private val sessionRemoteDataSource: SessionRemoteDataSource,
+    @param:Provided
     private val accountMetaDataDataStoreDataSource: AccountMetaDataDataStoreDataSource,
 ) : SessionRepository {
     override suspend fun updateByGoogleAuthorizationCode(

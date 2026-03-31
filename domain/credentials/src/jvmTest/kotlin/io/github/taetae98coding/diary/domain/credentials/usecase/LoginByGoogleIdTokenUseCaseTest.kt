@@ -18,7 +18,7 @@ import io.mockk.mockk
 class LoginByGoogleIdTokenUseCaseTest : BehaviorSpec() {
     private val sessionRepository = mockk<SessionRepository>()
     private val requestSyncUseCase = mockk<RequestSyncUseCase>(relaxed = true)
-    private val useCase = LoginByGoogleIdTokenUseCase(sessionRepository, requestSyncUseCase)
+    private val useCase = LoginByGoogleIdTokenUseCase(requestSyncUseCase, sessionRepository)
 
     private val fixtureMonkey = FixtureMonkey.builder()
         .plugin(KotlinPlugin())
