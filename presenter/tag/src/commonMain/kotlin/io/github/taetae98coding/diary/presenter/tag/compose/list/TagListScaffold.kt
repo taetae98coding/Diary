@@ -1,5 +1,6 @@
 package io.github.taetae98coding.diary.presenter.tag.compose.list
 
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -7,7 +8,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Card
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -94,38 +96,51 @@ internal fun TagListScaffold(
             modifier = Modifier
                 .padding(paddingValues),
         ) {
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = DiaryTheme.dimen.screenPaddingValues,
-                verticalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace),
-            ) {
-                if (pagingItems.loadState.refresh !is LoadState.Loading && pagingItems.itemCount == 0) {
-                    item {
-                        Box(
-                            modifier = Modifier.fillParentMaxSize(),
-                            contentAlignment = Alignment.Center,
-                        ) {
-                            Text(
-                                text = "태그가 없습니다",
-                                style = MaterialTheme.typography.titleMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            )
-                        }
+            val isEmpty = !isFetchingProvider() && pagingItems.loadState.refresh !is LoadState.Loading && pagingItems.itemCount == 0
+
+            Crossfade(targetState = isEmpty) { isEmpty ->
+                if (isEmpty) {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Text(
+                            text = "태그가 없습니다",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
                     }
                 } else {
-                    items(
-                        count = pagingItems.itemCount,
-                        key = { pagingItems[it]?.id ?: it },
-                    ) { index ->
-                        val uiState = pagingItems[index]
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(2),
+                        modifier = Modifier.fillMaxSize(),
+                        contentPadding = DiaryTheme.dimen.screenPaddingValues,
+                        verticalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace),
+                        horizontalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace),
+                    ) {
+                        if (isFetchingProvider() && pagingItems.itemCount == 0) {
+                            items(count = 5) {
+                                TagCard(
+                                    uiState = null,
+                                    onClick = {},
+                                    onMemo = {},
+                                )
+                            }
+                        } else {
+                            items(
+                                count = pagingItems.itemCount,
+                                key = { pagingItems[it]?.id ?: it },
+                            ) { index ->
+                                val uiState = pagingItems[index]
 
-                        TagCard(
-                            uiState = uiState,
-                            onClick = dropUnlessResumed { uiState?.id?.let(onTag) },
-                            onMemo = dropUnlessResumed { uiState?.id?.let(onTagMemo) },
-                            modifier = Modifier.animateItem()
-                                .fillParentMaxWidth(),
-                        )
+                                TagCard(
+                                    uiState = uiState,
+                                    onClick = dropUnlessResumed { uiState?.id?.let(onTag) },
+                                    onMemo = dropUnlessResumed { uiState?.id?.let(onTagMemo) },
+                                    modifier = Modifier.animateItem(),
+                                )
+                            }
+                        }
                     }
                 }
             }

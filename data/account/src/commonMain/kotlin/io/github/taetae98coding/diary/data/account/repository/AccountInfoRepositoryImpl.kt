@@ -10,9 +10,13 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.runningFold
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
-internal class AccountInfoRepositoryImpl(private val supabaseAuth: SupabaseAuth) : AccountInfoRepository {
+internal class AccountInfoRepositoryImpl(
+    @param:Provided
+    private val supabaseAuth: SupabaseAuth,
+) : AccountInfoRepository {
     override fun get(): Flow<AccountInfo?> {
         return supabaseAuth.sessionStatus.runningFold<SupabaseSessionStatus, SupabaseSessionStatus>(SupabaseSessionStatus.Loading) { acc, value ->
             when (value) {

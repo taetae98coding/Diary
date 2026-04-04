@@ -12,11 +12,13 @@ import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.encodeToJsonElement
 import kotlinx.serialization.json.put
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
 public class MemoTagRemoteDataSourceImpl(
     @param:ApiJson
     private val json: Json,
+    @param:Provided
     private val supabaseFunctions: SupabaseFunctions,
 ) : MemoTagRemoteDataSource {
     override suspend fun push(memoTagList: List<MemoTagRemoteEntity>) {

@@ -28,7 +28,7 @@ class AddMemoUseCaseTest : BehaviorSpec() {
     private val getAccountUseCase = mockk<GetAccountUseCase>()
     private val repository = mockk<AccountMemoRepository>()
     private val requestSyncUseCase = mockk<RequestSyncUseCase>(relaxed = true)
-    private val useCase = AddMemoUseCase(getAccountUseCase, repository, requestSyncUseCase)
+    private val useCase = AddMemoUseCase(getAccountUseCase, requestSyncUseCase, repository)
 
     private val fixtureMonkey = FixtureMonkey.builder()
         .plugin(KotlinPlugin())

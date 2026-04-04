@@ -23,7 +23,7 @@ class RestartMemoUseCaseTest : BehaviorSpec() {
     private val getAccountUseCase = mockk<GetAccountUseCase>()
     private val accountMemoRepository = mockk<AccountMemoRepository>()
     private val requestSyncUseCase = mockk<RequestSyncUseCase>(relaxed = true)
-    private val useCase = RestartMemoUseCase(getAccountUseCase, accountMemoRepository, requestSyncUseCase)
+    private val useCase = RestartMemoUseCase(getAccountUseCase, requestSyncUseCase, accountMemoRepository)
 
     private val fixtureMonkey = FixtureMonkey.builder()
         .plugin(KotlinPlugin())

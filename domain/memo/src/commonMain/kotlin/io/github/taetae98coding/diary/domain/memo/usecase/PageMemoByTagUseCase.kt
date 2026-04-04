@@ -13,10 +13,12 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
 public class PageMemoByTagUseCase(
     private val getAccountUseCase: GetAccountUseCase,
+    @param:Provided
     private val accountMemoRepository: AccountMemoRepository,
 ) {
     public operator fun invoke(tagId: Uuid): Flow<Result<PagingData<Memo>>> {

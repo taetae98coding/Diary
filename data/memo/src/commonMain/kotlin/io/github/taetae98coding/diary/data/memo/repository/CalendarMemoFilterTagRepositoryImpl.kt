@@ -5,9 +5,13 @@ import io.github.taetae98coding.diary.core.database.api.entity.CalendarMemoFilte
 import io.github.taetae98coding.diary.domain.memo.repository.CalendarMemoFilterTagRepository
 import kotlin.uuid.Uuid
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
-public class CalendarMemoFilterTagRepositoryImpl(private val calendarMemoFilterTagLocalDataSource: CalendarMemoFilterTagLocalDataSource) : CalendarMemoFilterTagRepository {
+public class CalendarMemoFilterTagRepositoryImpl(
+    @param:Provided
+    private val calendarMemoFilterTagLocalDataSource: CalendarMemoFilterTagLocalDataSource,
+) : CalendarMemoFilterTagRepository {
     override suspend fun upsert(tagId: Uuid) {
         calendarMemoFilterTagLocalDataSource.upsert(CalendarMemoFilterTagLocalEntity(tagId))
     }

@@ -3,7 +3,6 @@ package io.github.taetae98coding.diary.feature.more.goldenholiday
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -32,12 +31,14 @@ import io.github.taetae98coding.diary.compose.core.chip.DiaryFilterChip
 import io.github.taetae98coding.diary.compose.core.icon.SettingsIcon
 import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.datetime.LocalDateRange
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
 internal fun GoldenHolidayScreen(
     navigateUp: () -> Unit,
+    navigateToMemoAdd: (LocalDateRange) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val state = rememberGoldenHolidayScaffoldState()
@@ -46,6 +47,7 @@ internal fun GoldenHolidayScreen(
         modifier = modifier,
         state = state,
         onNavigateUp = navigateUp,
+        onLocalDateRangeSelect = navigateToMemoAdd,
     )
 
     SettingDialogHost(state = state)
@@ -56,6 +58,7 @@ private fun GoldenHolidayScreen(
     modifier: Modifier = Modifier,
     state: GoldenHolidayScaffoldState = rememberGoldenHolidayScaffoldState(),
     onNavigateUp: () -> Unit = {},
+    onLocalDateRangeSelect: (LocalDateRange) -> Unit = {},
 ) {
     val provider = rememberViewModelStoreProvider()
 
@@ -77,11 +80,11 @@ private fun GoldenHolidayScreen(
                 val viewModel = koinViewModel<GoldenHolidayViewModel> { parametersOf(year) }
                 val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-                GoldenHolidayScaffold(
+                GoldenHolidayContent(
                     sortOrderProvider = { state.sortOrder },
                     uiStateProvider = { uiState },
                     onRetry = { viewModel.fetch(state.annualLeave) },
-                    modifier = Modifier.consumeWindowInsets(paddingValues),
+                    onLocalDateRangeSelect = onLocalDateRangeSelect,
                 )
 
                 LaunchedEffect(state, viewModel) {

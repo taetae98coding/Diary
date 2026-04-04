@@ -9,9 +9,13 @@ import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
-public class GetTagUseCase(private val tagRepository: TagRepository) {
+public class GetTagUseCase(
+    @param:Provided
+    private val tagRepository: TagRepository,
+) {
     public operator fun invoke(tagId: Uuid): Flow<Result<Tag?>> {
         return flow { emitAll(tagRepository.get(tagId)) }
             .map { Result.success(it) }

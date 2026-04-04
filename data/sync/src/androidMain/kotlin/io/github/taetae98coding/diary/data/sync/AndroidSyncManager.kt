@@ -12,7 +12,7 @@ import androidx.work.workDataOf
 import io.github.taetae98coding.diary.core.model.sync.SyncStatus
 import io.github.taetae98coding.diary.core.model.sync.SyncType
 import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
-import io.github.taetae98coding.diary.domain.sync.SyncManager
+import io.github.taetae98coding.diary.domain.sync.manager.SyncManager
 import kotlin.uuid.Uuid
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

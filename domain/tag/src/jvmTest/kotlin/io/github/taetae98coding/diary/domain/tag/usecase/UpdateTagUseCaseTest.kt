@@ -29,7 +29,7 @@ class UpdateTagUseCaseTest : BehaviorSpec() {
     private val tagRepository = mockk<TagRepository>()
     private val accountTagRepository = mockk<AccountTagRepository>()
     private val requestSyncUseCase = mockk<RequestSyncUseCase>(relaxed = true)
-    private val useCase = UpdateTagUseCase(getAccountUseCase, tagRepository, accountTagRepository, requestSyncUseCase)
+    private val useCase = UpdateTagUseCase(getAccountUseCase, requestSyncUseCase, tagRepository, accountTagRepository)
 
     private val fixtureMonkey = FixtureMonkey.builder()
         .plugin(KotlinPlugin())

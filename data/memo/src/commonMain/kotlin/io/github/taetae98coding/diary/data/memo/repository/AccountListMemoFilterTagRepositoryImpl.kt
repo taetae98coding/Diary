@@ -5,9 +5,13 @@ import io.github.taetae98coding.diary.domain.memo.repository.AccountListMemoFilt
 import kotlin.uuid.Uuid
 import kotlinx.coroutines.flow.Flow
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
-public class AccountListMemoFilterTagRepositoryImpl(private val accountListMemoFilterTagLocalDataSource: AccountListMemoFilterTagLocalDataSource) : AccountListMemoFilterTagRepository {
+public class AccountListMemoFilterTagRepositoryImpl(
+    @param:Provided
+    private val accountListMemoFilterTagLocalDataSource: AccountListMemoFilterTagLocalDataSource,
+) : AccountListMemoFilterTagRepository {
     override fun get(accountId: Uuid): Flow<List<Uuid>> {
         return accountListMemoFilterTagLocalDataSource.get(accountId)
     }

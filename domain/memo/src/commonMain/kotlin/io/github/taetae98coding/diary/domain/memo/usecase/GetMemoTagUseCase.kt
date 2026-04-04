@@ -9,9 +9,13 @@ import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
-public class GetMemoTagUseCase(private val memoTagRepository: MemoTagRepository) {
+public class GetMemoTagUseCase(
+    @param:Provided
+    private val memoTagRepository: MemoTagRepository,
+) {
     public operator fun invoke(memoId: Uuid): Flow<Result<List<Tag>>> {
         return flow { emitAll(memoTagRepository.getMemoTag(memoId)) }
             .map { Result.success(it) }

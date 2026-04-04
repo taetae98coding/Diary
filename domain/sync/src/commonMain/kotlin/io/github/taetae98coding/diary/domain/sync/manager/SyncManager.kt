@@ -1,4 +1,4 @@
-package io.github.taetae98coding.diary.domain.sync
+package io.github.taetae98coding.diary.domain.sync.manager
 
 import io.github.taetae98coding.diary.core.model.sync.SyncStatus
 import io.github.taetae98coding.diary.core.model.sync.SyncType

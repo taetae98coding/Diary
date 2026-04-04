@@ -16,7 +16,7 @@ import kotlin.uuid.Uuid
 class UnselectPrimaryTagUseCaseTest : BehaviorSpec() {
     private val accountMemoTagRepository = mockk<AccountMemoTagRepository>()
     private val requestSyncUseCase = mockk<RequestSyncUseCase>(relaxed = true)
-    private val useCase = UnselectPrimaryTagUseCase(accountMemoTagRepository, requestSyncUseCase)
+    private val useCase = UnselectPrimaryTagUseCase(requestSyncUseCase, accountMemoTagRepository)
 
     init {
         Given("유효한 memoId") {

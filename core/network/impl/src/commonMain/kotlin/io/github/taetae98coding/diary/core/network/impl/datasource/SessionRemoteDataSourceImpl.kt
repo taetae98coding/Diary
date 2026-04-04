@@ -9,9 +9,13 @@ import io.ktor.http.HttpHeaders
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
-public class SessionRemoteDataSourceImpl(private val supabaseFunctions: SupabaseFunctions) : SessionRemoteDataSource {
+public class SessionRemoteDataSourceImpl(
+    @param:Provided
+    private val supabaseFunctions: SupabaseFunctions,
+) : SessionRemoteDataSource {
     override suspend fun getByGoogleAuthorizationCode(
         clientId: String,
         code: String,

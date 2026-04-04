@@ -8,6 +8,7 @@ import java.io.File
 import org.koin.core.annotation.Configuration
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Module
+import org.koin.core.annotation.Provided
 
 @Module
 @Configuration
@@ -15,6 +16,7 @@ public class JvmDatabaseModule {
     @DiaryDatabaseBuilder
     @Factory
     internal fun providesDiaryDatabaseBuilder(
+        @Provided
         @DatabaseParentFile
         parentFile: File,
     ): RoomDatabase.Builder<DiaryDatabase> {

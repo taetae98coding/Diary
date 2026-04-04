@@ -7,6 +7,7 @@ import io.github.taetae98coding.diary.core.holiday.database.api.entity.HolidayLo
 import io.github.taetae98coding.diary.core.holiday.network.api.entity.HolidayRemoteEntity
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import io.ktor.http.encodeURLParameter
 import kotlinx.datetime.LocalDate
 
 class HolidayMapperTest : FunSpec() {
@@ -26,6 +27,7 @@ class HolidayMapperTest : FunSpec() {
             result.name shouldBe entity.name
             result.isHoliday shouldBe entity.isHoliday
             result.localDateRange shouldBe entity.start..entity.endInclusive
+            result.link shouldBe "https://namu.wiki/w/${entity.name.encodeURLParameter()}"
         }
 
         test("Remote to Local") {

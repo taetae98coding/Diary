@@ -8,9 +8,13 @@ import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.mapLatest
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
-public class GetCurrentWeatherUseCase(private val weatherRepository: WeatherRepository) {
+public class GetCurrentWeatherUseCase(
+    @param:Provided
+    private val weatherRepository: WeatherRepository,
+) {
     public operator fun invoke(): Flow<Result<List<Weather>>> {
         return flow { emitAll(weatherRepository.getCurrentWeather()) }
             .mapLatest { Result.success(it) }

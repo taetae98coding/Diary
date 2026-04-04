@@ -9,13 +9,16 @@ import io.github.taetae98coding.diary.domain.tag.repository.TagRepository
 import kotlin.uuid.Uuid
 import kotlinx.coroutines.flow.first
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
 public class UpdateTagUseCase(
     private val getAccountUseCase: GetAccountUseCase,
-    private val tagRepository: TagRepository,
-    private val accountTagRepository: AccountTagRepository,
     private val requestSyncUseCase: RequestSyncUseCase,
+    @param:Provided
+    private val tagRepository: TagRepository,
+    @param:Provided
+    private val accountTagRepository: AccountTagRepository,
 ) {
     public suspend operator fun invoke(
         tagId: Uuid,
