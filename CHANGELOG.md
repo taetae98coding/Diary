@@ -1,3 +1,17 @@
+## [1.5.0] - 2026-04-04
+
+### 🚀 Features
+
+- MemoList, TagList 로딩중 상태 강화
+- MemoListFilter 태그유무, 날짜유무 추가
+- 공휴일 클릭 시 나무위키 이동
+- 황금연휴 날짜 선택 기능 추가
+
+### 🐛 Bug Fixes
+
+- 날씨 업데이트 onStart 시점으로 수정
+- 황금연휴 PaddingValues 버그 수정
+- TopLevel에서 뒤로가기 시 Calendar 이동하도록 수정
 ## [1.4.0] - 2026-03-31
 
 ### 🚀 Features
