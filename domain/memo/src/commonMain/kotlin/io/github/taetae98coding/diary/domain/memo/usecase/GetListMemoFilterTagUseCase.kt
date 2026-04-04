@@ -11,10 +11,12 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
 public class GetListMemoFilterTagUseCase(
     private val getAccountUseCase: GetAccountUseCase,
+    @param:Provided
     private val accountListMemoFilterTagRepository: AccountListMemoFilterTagRepository,
 ) {
     public operator fun invoke(): Flow<Result<List<Uuid>>> {

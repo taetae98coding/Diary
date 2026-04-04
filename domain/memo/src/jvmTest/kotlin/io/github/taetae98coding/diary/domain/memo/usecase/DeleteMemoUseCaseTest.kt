@@ -22,7 +22,7 @@ class DeleteMemoUseCaseTest : BehaviorSpec() {
     private val getAccountUseCase = mockk<GetAccountUseCase>()
     private val accountMemoRepository = mockk<AccountMemoRepository>()
     private val requestSyncUseCase = mockk<RequestSyncUseCase>(relaxed = true)
-    private val useCase = DeleteMemoUseCase(getAccountUseCase, accountMemoRepository, requestSyncUseCase)
+    private val useCase = DeleteMemoUseCase(getAccountUseCase, requestSyncUseCase, accountMemoRepository)
 
     private val fixtureMonkey = FixtureMonkey.builder()
         .plugin(KotlinPlugin())

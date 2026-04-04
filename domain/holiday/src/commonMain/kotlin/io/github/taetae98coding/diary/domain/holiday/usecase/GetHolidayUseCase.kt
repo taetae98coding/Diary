@@ -11,10 +11,13 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
 public class GetHolidayUseCase(
+    @param:Provided
     private val holidayRepository: HolidayRepository,
+    @param:Provided
     private val holidayFilterRepository: HolidayFilterRepository,
 ) {
     public operator fun invoke(year: Int): Flow<Result<List<Holiday>>> {

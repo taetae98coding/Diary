@@ -17,6 +17,6 @@ internal object AccountMetaDataSerializer : OkioSerializer<AccountMetaDataDataSt
         t: AccountMetaDataDataStoreEntity,
         sink: BufferedSink,
     ) {
-        sink.writeUtf8(Json.Default.encodeToString(t))
+        sink.writeUtf8(Json.encodeToString(t))
     }
 }

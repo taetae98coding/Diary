@@ -14,9 +14,11 @@ import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.koin.core.annotation.KoinViewModel
+import org.koin.core.annotation.Provided
 
 @KoinViewModel
 internal class TagMemoViewModel(
+    @Provided
     tagId: TagId,
     getTagUseCase: GetTagUseCase,
     getSyncStatusUseCase: GetSyncStatusUseCase,

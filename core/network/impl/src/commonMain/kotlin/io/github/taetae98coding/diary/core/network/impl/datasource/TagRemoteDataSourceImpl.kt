@@ -12,11 +12,13 @@ import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.encodeToJsonElement
 import kotlinx.serialization.json.put
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
 public class TagRemoteDataSourceImpl(
     @param:ApiJson
     private val json: Json,
+    @param:Provided
     private val supabaseFunctions: SupabaseFunctions,
 ) : TagRemoteDataSource {
     override suspend fun push(tagList: List<TagRemoteEntity>) {

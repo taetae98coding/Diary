@@ -8,7 +8,6 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.invoke
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import org.koin.compiler.plugin.KoinGradleExtension
 
 internal class KoinPrimitivePlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -27,11 +26,6 @@ internal class KoinPrimitivePlugin : Plugin<Project> {
                     }
                 }
             }
-        }
-
-        target.configure<KoinGradleExtension> {
-            // TODO @Provided issue fix
-            compileSafety.set(false)
         }
     }
 }

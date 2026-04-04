@@ -12,10 +12,12 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
 public class GetCalendarMemoUseCase(
     private val getAccountUseCase: GetAccountUseCase,
+    @param:Provided
     private val accountCalendarMemoRepository: AccountCalendarMemoRepository,
 ) {
     public operator fun invoke(year: Int): Flow<Result<List<CalendarMemo>>> {

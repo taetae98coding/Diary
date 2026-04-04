@@ -9,13 +9,16 @@ import io.github.taetae98coding.diary.domain.sync.usecase.RequestSyncUseCase
 import kotlin.uuid.Uuid
 import kotlinx.coroutines.flow.first
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
 public class UpdateMemoUseCase(
     private val getAccountUseCase: GetAccountUseCase,
-    private val memoRepository: MemoRepository,
-    private val accountMemoRepository: AccountMemoRepository,
     private val requestSyncUseCase: RequestSyncUseCase,
+    @param:Provided
+    private val memoRepository: MemoRepository,
+    @param:Provided
+    private val accountMemoRepository: AccountMemoRepository,
 ) {
     public suspend operator fun invoke(
         memoId: Uuid,

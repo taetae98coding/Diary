@@ -5,11 +5,14 @@ import io.github.taetae98coding.diary.domain.memo.repository.AccountMemoTagRepos
 import io.github.taetae98coding.diary.domain.sync.usecase.RequestSyncUseCase
 import kotlin.uuid.Uuid
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Provided
 
 @Factory
 public class SelectPrimaryTagUseCase(
-    private val accountMemoTagRepository: AccountMemoTagRepository,
     private val requestSyncUseCase: RequestSyncUseCase,
+    @param:Provided
+    private val accountMemoTagRepository: AccountMemoTagRepository,
+
 ) {
     public suspend operator fun invoke(
         memoId: Uuid,
