@@ -6702,6 +6702,10 @@
             },
             {
               "id": ":core:weather-network:api"
+            },
+            {
+              "id": "io.ktor:ktor-client-core",
+              "isLibrary": true
             }
           ]
         },
@@ -6732,6 +6736,10 @@
             },
             {
               "id": ":core:weather-network:api"
+            },
+            {
+              "id": "io.ktor:ktor-client-core",
+              "isLibrary": true
             }
           ]
         },
@@ -6762,6 +6770,10 @@
             },
             {
               "id": ":core:weather-network:api"
+            },
+            {
+              "id": "io.ktor:ktor-client-core",
+              "isLibrary": true
             },
             {
               "id": "org.jetbrains.kotlinx:kotlinx-coroutines-test",
@@ -6816,6 +6828,10 @@
             },
             {
               "id": ":core:weather-network:api"
+            },
+            {
+              "id": "io.ktor:ktor-client-core",
+              "isLibrary": true
             }
           ]
         },
@@ -6846,6 +6862,10 @@
             },
             {
               "id": ":core:weather-network:api"
+            },
+            {
+              "id": "io.ktor:ktor-client-core",
+              "isLibrary": true
             }
           ]
         },
@@ -6876,6 +6896,10 @@
             },
             {
               "id": ":core:weather-network:api"
+            },
+            {
+              "id": "io.ktor:ktor-client-core",
+              "isLibrary": true
             }
           ]
         },
@@ -6906,6 +6930,10 @@
             },
             {
               "id": ":core:weather-network:api"
+            },
+            {
+              "id": "io.ktor:ktor-client-core",
+              "isLibrary": true
             }
           ]
         },
@@ -6936,6 +6964,10 @@
             },
             {
               "id": ":core:weather-network:api"
+            },
+            {
+              "id": "io.ktor:ktor-client-core",
+              "isLibrary": true
             }
           ]
         },
@@ -6966,6 +6998,10 @@
             },
             {
               "id": ":core:weather-network:api"
+            },
+            {
+              "id": "io.ktor:ktor-client-core",
+              "isLibrary": true
             }
           ]
         },
@@ -6996,6 +7032,10 @@
             },
             {
               "id": ":core:weather-network:api"
+            },
+            {
+              "id": "io.ktor:ktor-client-core",
+              "isLibrary": true
             }
           ]
         }
@@ -9753,6 +9793,9 @@
               "id": ":core:database:api"
             },
             {
+              "id": ":core:datastore:api"
+            },
+            {
               "id": ":domain:memo"
             }
           ]
@@ -9779,6 +9822,9 @@
               "id": ":core:database:api"
             },
             {
+              "id": ":core:datastore:api"
+            },
+            {
               "id": ":domain:memo"
             }
           ]
@@ -9803,6 +9849,9 @@
             },
             {
               "id": ":core:database:api"
+            },
+            {
+              "id": ":core:datastore:api"
             },
             {
               "id": ":domain:memo"
@@ -9855,6 +9904,9 @@
               "id": ":core:database:api"
             },
             {
+              "id": ":core:datastore:api"
+            },
+            {
               "id": ":domain:memo"
             }
           ]
@@ -9879,6 +9931,9 @@
             },
             {
               "id": ":core:database:api"
+            },
+            {
+              "id": ":core:datastore:api"
             },
             {
               "id": ":domain:memo"
@@ -9907,6 +9962,9 @@
               "id": ":core:database:api"
             },
             {
+              "id": ":core:datastore:api"
+            },
+            {
               "id": ":domain:memo"
             }
           ]
@@ -9931,6 +9989,9 @@
             },
             {
               "id": ":core:database:api"
+            },
+            {
+              "id": ":core:datastore:api"
             },
             {
               "id": ":domain:memo"
@@ -9959,6 +10020,9 @@
               "id": ":core:database:api"
             },
             {
+              "id": ":core:datastore:api"
+            },
+            {
               "id": ":domain:memo"
             }
           ]
@@ -9985,6 +10049,9 @@
               "id": ":core:database:api"
             },
             {
+              "id": ":core:datastore:api"
+            },
+            {
               "id": ":domain:memo"
             }
           ]
@@ -10009,6 +10076,9 @@
             },
             {
               "id": ":core:database:api"
+            },
+            {
+              "id": ":core:datastore:api"
             },
             {
               "id": ":domain:memo"
