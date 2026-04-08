@@ -18,6 +18,19 @@ plugins {
     alias(libs.plugins.spm) apply false
 
     alias(libs.plugins.project.guard)
+    alias(libs.plugins.spotless)
+}
+
+spotless {
+    kotlin {
+        target("**/src/**/*.kt")
+        ktlint()
+    }
+    kotlinGradle {
+        target("**/*.kts")
+        targetExclude("**/build/**")
+        ktlint()
+    }
 }
 
 projectGuard {

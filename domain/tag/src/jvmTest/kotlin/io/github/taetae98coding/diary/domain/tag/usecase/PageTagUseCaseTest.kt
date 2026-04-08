@@ -8,7 +8,6 @@ import io.github.taetae98coding.diary.core.model.account.Account
 import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
 import io.github.taetae98coding.diary.domain.tag.repository.AccountTagRepository
 import io.kotest.core.spec.style.BehaviorSpec
-import io.kotest.matchers.result.shouldBeFailure
 import io.kotest.matchers.result.shouldBeSuccess
 import io.mockk.clearAllMocks
 import io.mockk.every

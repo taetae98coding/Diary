@@ -19,6 +19,7 @@ kotlin {
                 implementation(projects.library.kotlinxFile)
                 implementation(libs.androidx.room3.runtime)
                 implementation(libs.androidx.room3.paging)
+                implementation(libs.kotlinx.serialization.json)
             }
         }
 

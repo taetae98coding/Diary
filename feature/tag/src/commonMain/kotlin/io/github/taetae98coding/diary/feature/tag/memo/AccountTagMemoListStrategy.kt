@@ -2,6 +2,7 @@ package io.github.taetae98coding.diary.feature.tag.memo
 
 import androidx.paging.PagingData
 import io.github.taetae98coding.diary.core.model.memo.Memo
+import io.github.taetae98coding.diary.core.navigation.argument.TagId
 import io.github.taetae98coding.diary.domain.memo.usecase.DeleteMemoUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.FinishMemoUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.PageMemoByTagUseCase
@@ -10,9 +11,13 @@ import io.github.taetae98coding.diary.domain.memo.usecase.RestoreMemoUseCase
 import io.github.taetae98coding.diary.presenter.memo.api.MemoListStrategy
 import kotlin.uuid.Uuid
 import kotlinx.coroutines.flow.Flow
+import org.koin.core.annotation.Factory
+import org.koin.core.annotation.InjectedParam
 
+@Factory
 internal class AccountTagMemoListStrategy(
-    private val tagId: Uuid,
+    @param:InjectedParam
+    private val tagId: TagId,
     private val pageMemoByTagUseCase: PageMemoByTagUseCase,
     private val finishMemoUseCase: FinishMemoUseCase,
     private val restartMemoUseCase: RestartMemoUseCase,
@@ -20,7 +25,7 @@ internal class AccountTagMemoListStrategy(
     private val restoreMemoUseCase: RestoreMemoUseCase,
 ) : MemoListStrategy {
     override fun page(): Flow<Result<PagingData<Memo>>> {
-        return pageMemoByTagUseCase(tagId)
+        return pageMemoByTagUseCase(tagId.value)
     }
 
     override suspend fun finish(memoId: Uuid): Result<Unit> {

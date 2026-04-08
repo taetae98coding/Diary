@@ -10,7 +10,6 @@ public class ListMemoFilterStateHolder(
     coroutineScope: CoroutineScope,
     strategy: ListMemoFilterStrategy,
 ) {
-
     public val hasFilter: StateFlow<Boolean> = strategy.hasFilter()
         .mapLatest { it.getOrDefault(false) }
         .stateIn(

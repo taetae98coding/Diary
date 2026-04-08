@@ -10,11 +10,15 @@ import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.ChipColors
 import androidx.compose.material3.ChipElevation
 import androidx.compose.material3.LocalMinimumInteractiveComponentSize
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
+import io.github.taetae98coding.diary.compose.core.preview.ComponentPreview
+import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
 
 @Composable
 public fun DiaryAssistChip(
@@ -50,5 +54,18 @@ public fun DiaryAssistChip(
             contentPadding = contentPadding,
             interactionSource = interactionSource,
         )
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun Preview() {
+    DiaryTheme {
+        Surface {
+            DiaryAssistChip(
+                onClick = {},
+                label = { Text("Assist") },
+            )
+        }
     }
 }

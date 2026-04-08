@@ -10,6 +10,7 @@ kotlin {
                 implementation(projects.domain.account)
                 implementation(projects.domain.credentials)
                 implementation(projects.domain.holiday)
+                implementation(projects.library.kotlinxDatetime)
             }
         }
     }

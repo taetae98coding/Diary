@@ -10,7 +10,6 @@ import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
 import io.github.taetae98coding.diary.domain.memo.repository.AccountCalendarMemoRepository
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.result.shouldBeSuccess
-import io.kotest.matchers.shouldBe
 import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.mockk
@@ -46,8 +45,7 @@ class GetCalendarMemoUseCaseTest : BehaviorSpec() {
                 val result = useCase(year).first()
 
                 Then("성공한다") {
-                    result.shouldBeSuccess()
-                    result.getOrThrow() shouldBe memos
+                    result.shouldBeSuccess(memos)
                 }
 
                 Then("GetAccountUseCase를 호출한다") {
@@ -77,8 +75,7 @@ class GetCalendarMemoUseCaseTest : BehaviorSpec() {
                 val result = useCase(year).first()
 
                 Then("성공한다") {
-                    result.shouldBeSuccess()
-                    result.getOrThrow() shouldBe memos
+                    result.shouldBeSuccess(memos)
                 }
 
                 Then("Guest의 accountId로 repository를 호출한다") {

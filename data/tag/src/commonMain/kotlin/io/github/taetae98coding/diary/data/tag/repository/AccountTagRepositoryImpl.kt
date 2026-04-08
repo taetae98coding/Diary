@@ -25,6 +25,8 @@ import org.koin.core.annotation.Provided
 @Factory
 public class AccountTagRepositoryImpl(
     @param:Provided
+    private val clock: Clock,
+    @param:Provided
     private val databaseTransactor: DatabaseTransactor,
     @param:Provided
     private val tagLocalDataSource: TagLocalDataSource,
@@ -38,7 +40,7 @@ public class AccountTagRepositoryImpl(
         detail: TagDetail,
     ) {
         val tagId = Uuid.random()
-        val now = Clock.System.now().toEpochMilliseconds()
+        val now = clock.now().toEpochMilliseconds()
 
         databaseTransactor.writeTransaction {
             tagLocalDataSource.upsert(
@@ -69,7 +71,7 @@ public class AccountTagRepositoryImpl(
             tagLocalDataSource.updateDetail(
                 tagId = tagId,
                 detail = detail.toLocal(),
-                updatedAt = Clock.System.now().toEpochMilliseconds(),
+                updatedAt = clock.now().toEpochMilliseconds(),
             )
             syncTagLocalDataSource.upsert(
                 SyncTagLocalEntity(tagId = tagId),
@@ -85,7 +87,7 @@ public class AccountTagRepositoryImpl(
             tagLocalDataSource.updateFinish(
                 tagId = tagId,
                 isFinished = isFinished,
-                updatedAt = Clock.System.now().toEpochMilliseconds(),
+                updatedAt = clock.now().toEpochMilliseconds(),
             )
             syncTagLocalDataSource.upsert(
                 SyncTagLocalEntity(tagId = tagId),
@@ -101,7 +103,7 @@ public class AccountTagRepositoryImpl(
             tagLocalDataSource.updateDelete(
                 tagId = tagId,
                 isDeleted = isDeleted,
-                updatedAt = Clock.System.now().toEpochMilliseconds(),
+                updatedAt = clock.now().toEpochMilliseconds(),
             )
             syncTagLocalDataSource.upsert(
                 SyncTagLocalEntity(tagId = tagId),

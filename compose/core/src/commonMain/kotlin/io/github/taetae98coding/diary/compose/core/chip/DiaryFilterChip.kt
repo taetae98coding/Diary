@@ -8,11 +8,15 @@ import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.SelectableChipColors
 import androidx.compose.material3.SelectableChipElevation
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
+import io.github.taetae98coding.diary.compose.core.preview.ComponentPreview
+import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
 
 @Composable
 public fun DiaryFilterChip(
@@ -50,5 +54,33 @@ public fun DiaryFilterChip(
             border = border,
             interactionSource = interactionSource,
         )
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun SelectedPreview() {
+    DiaryTheme {
+        Surface {
+            DiaryFilterChip(
+                selected = true,
+                onClick = {},
+                label = { Text("Filter") },
+            )
+        }
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun UnselectedPreview() {
+    DiaryTheme {
+        Surface {
+            DiaryFilterChip(
+                selected = false,
+                onClick = {},
+                label = { Text("Filter") },
+            )
+        }
     }
 }

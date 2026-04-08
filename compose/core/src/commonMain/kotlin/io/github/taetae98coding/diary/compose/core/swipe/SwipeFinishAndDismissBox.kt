@@ -9,10 +9,13 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.Surface
 import androidx.compose.material3.SwipeToDismissBox
 import androidx.compose.material3.SwipeToDismissBoxDefaults
 import androidx.compose.material3.SwipeToDismissBoxState
 import androidx.compose.material3.SwipeToDismissBoxValue
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -27,6 +30,8 @@ import androidx.compose.ui.unit.dp
 import io.github.taetae98coding.diary.compose.core.icon.CircleIcon
 import io.github.taetae98coding.diary.compose.core.icon.DeleteIcon
 import io.github.taetae98coding.diary.compose.core.icon.FinishIcon
+import io.github.taetae98coding.diary.compose.core.preview.ComponentPreview
+import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -122,6 +127,23 @@ private fun AnimateIconBox(
                 icon(animateSize)
             } else {
                 CircleIcon(modifier = Modifier.size(animateSize))
+            }
+        }
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun Preview() {
+    DiaryTheme {
+        Surface {
+            SwipeFinishAndDismissBox(
+                onFinish = {},
+                onDelete = {},
+            ) {
+                ListItem(
+                    headlineContent = { Text("Swipe me") },
+                )
             }
         }
     }

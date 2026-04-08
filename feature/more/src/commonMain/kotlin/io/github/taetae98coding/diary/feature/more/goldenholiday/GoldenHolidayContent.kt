@@ -21,14 +21,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.github.taetae98coding.diary.compose.calendar.CalendarDefaults
-import io.github.taetae98coding.diary.compose.calendar.ext.toSundayBasedNumber
 import io.github.taetae98coding.diary.compose.calendar.item.CalendarText
 import io.github.taetae98coding.diary.compose.calendar.rememberCalendarSelectState
 import io.github.taetae98coding.diary.compose.calendar.week.CalendarWeekOfMonth
 import io.github.taetae98coding.diary.compose.core.box.LoadingBox
+import io.github.taetae98coding.diary.compose.core.preview.ComponentPreview
 import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
 import io.github.taetae98coding.diary.core.model.holiday.GoldenHoliday
 import io.github.taetae98coding.diary.core.model.holiday.Holiday
+import io.github.taetae98coding.diary.library.datetime.toSundayBasedNumber
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDateRange
 import kotlinx.datetime.minus
@@ -38,9 +39,9 @@ import kotlinx.datetime.number
 internal fun GoldenHolidayContent(
     sortOrderProvider: () -> GoldenHolidaySortOrder,
     uiStateProvider: () -> GoldenHolidayScaffoldUiState,
-    onRetry: () -> Unit,
-    onLocalDateRangeSelect: (LocalDateRange) -> Unit,
     modifier: Modifier = Modifier,
+    onRetry: () -> Unit = {},
+    onLocalDateRangeSelect: (LocalDateRange) -> Unit = {},
 ) {
     Crossfade(
         targetState = uiStateProvider(),
@@ -115,8 +116,8 @@ internal fun GoldenHolidayContent(
 @Composable
 private fun GoldenHolidayCard(
     uiState: GoldenHoliday,
-    onLocalDateRangeSelect: (LocalDateRange) -> Unit,
     modifier: Modifier = Modifier,
+    onLocalDateRangeSelect: (LocalDateRange) -> Unit = {},
 ) {
     val calendarColors = CalendarDefaults.colors()
     val selectState = rememberCalendarSelectState()
@@ -198,5 +199,38 @@ private fun GoldenHolidayCard(
                 }
             }
         }
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun LoadingPreview() {
+    DiaryTheme {
+        GoldenHolidayContent(
+            sortOrderProvider = { GoldenHolidaySortOrder.LONGEST_FIRST },
+            uiStateProvider = { GoldenHolidayScaffoldUiState.Loading(annualLeave = 0) },
+        )
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun HolidayNotExistPreview() {
+    DiaryTheme {
+        GoldenHolidayContent(
+            sortOrderProvider = { GoldenHolidaySortOrder.LONGEST_FIRST },
+            uiStateProvider = { GoldenHolidayScaffoldUiState.HolidayNotExist },
+        )
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun UnknownErrorPreview() {
+    DiaryTheme {
+        GoldenHolidayContent(
+            sortOrderProvider = { GoldenHolidaySortOrder.LONGEST_FIRST },
+            uiStateProvider = { GoldenHolidayScaffoldUiState.UnknownError },
+        )
     }
 }

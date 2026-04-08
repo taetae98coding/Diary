@@ -9,6 +9,7 @@ import com.navercorp.fixturemonkey.kotlin.KotlinPlugin
 import com.navercorp.fixturemonkey.kotlin.giveMeKotlinBuilder
 import io.github.taetae98coding.diary.core.database.api.entity.AccountMemoLocalEntity
 import io.github.taetae98coding.diary.core.database.api.entity.AccountTagLocalEntity
+import io.github.taetae98coding.diary.core.database.api.entity.FilterPresenceLocalEntity
 import io.github.taetae98coding.diary.core.database.api.entity.ListMemoFilterTagLocalEntity
 import io.github.taetae98coding.diary.core.database.api.entity.MemoDetailLocalEntity
 import io.github.taetae98coding.diary.core.database.api.entity.MemoLocalEntity
@@ -89,7 +90,7 @@ class AccountListMemoDaoTest {
         memoDao.upsert(memo)
         accountMemoDao.upsert(AccountMemoLocalEntity(accountId = accountId, memoId = memoId))
 
-        val result = accountListMemoDao.page(accountId, tagPresence = 0, datePresence = 0).loadAll()
+        val result = accountListMemoDao.page(accountId, tagPresence = FilterPresenceLocalEntity.NONE, datePresence = FilterPresenceLocalEntity.NONE).loadAll()
 
         result shouldHaveSize 1
         result[0].id shouldBe memoId
@@ -115,7 +116,7 @@ class AccountListMemoDaoTest {
         memoDao.upsert(memo)
         accountMemoDao.upsert(AccountMemoLocalEntity(accountId = accountId, memoId = memoId))
 
-        val result = accountListMemoDao.page(accountId, tagPresence = 0, datePresence = 0).loadAll()
+        val result = accountListMemoDao.page(accountId, tagPresence = FilterPresenceLocalEntity.NONE, datePresence = FilterPresenceLocalEntity.NONE).loadAll()
 
         result.shouldBeEmpty()
     }
@@ -140,7 +141,7 @@ class AccountListMemoDaoTest {
         memoDao.upsert(memo)
         accountMemoDao.upsert(AccountMemoLocalEntity(accountId = accountId, memoId = memoId))
 
-        val result = accountListMemoDao.page(accountId, tagPresence = 0, datePresence = 0).loadAll()
+        val result = accountListMemoDao.page(accountId, tagPresence = FilterPresenceLocalEntity.NONE, datePresence = FilterPresenceLocalEntity.NONE).loadAll()
 
         result.shouldBeEmpty()
     }
@@ -166,7 +167,7 @@ class AccountListMemoDaoTest {
         memoDao.upsert(memo)
         accountMemoDao.upsert(AccountMemoLocalEntity(accountId = otherAccountId, memoId = memoId))
 
-        val result = accountListMemoDao.page(accountId, tagPresence = 0, datePresence = 0).loadAll()
+        val result = accountListMemoDao.page(accountId, tagPresence = FilterPresenceLocalEntity.NONE, datePresence = FilterPresenceLocalEntity.NONE).loadAll()
 
         result.shouldBeEmpty()
     }
@@ -229,7 +230,7 @@ class AccountListMemoDaoTest {
         )
         accountMemoDao.upsert(AccountMemoLocalEntity(accountId = accountId, memoId = memoC))
 
-        val result = accountListMemoDao.page(accountId, tagPresence = 0, datePresence = 0).loadAll()
+        val result = accountListMemoDao.page(accountId, tagPresence = FilterPresenceLocalEntity.NONE, datePresence = FilterPresenceLocalEntity.NONE).loadAll()
 
         result shouldHaveSize 3
         // start 순 → memoB(2월) 먼저
@@ -259,7 +260,7 @@ class AccountListMemoDaoTest {
         memoDao.upsert(memo)
         accountMemoDao.upsert(AccountMemoLocalEntity(accountId = accountId, memoId = memoId))
 
-        val result = accountListMemoDao.page(accountId, tagPresence = 0, datePresence = 0).loadAll()
+        val result = accountListMemoDao.page(accountId, tagPresence = FilterPresenceLocalEntity.NONE, datePresence = FilterPresenceLocalEntity.NONE).loadAll()
 
         result shouldHaveSize 1
         result[0].id shouldBe memoId
@@ -314,7 +315,7 @@ class AccountListMemoDaoTest {
         )
         accountMemoDao.upsert(AccountMemoLocalEntity(accountId = accountId, memoId = memoWithoutTag))
 
-        val result = accountListMemoDao.page(accountId, tagPresence = 0, datePresence = 0).loadAll()
+        val result = accountListMemoDao.page(accountId, tagPresence = FilterPresenceLocalEntity.NONE, datePresence = FilterPresenceLocalEntity.NONE).loadAll()
 
         result shouldHaveSize 1
         result[0].id shouldBe memoWithTag
@@ -352,7 +353,7 @@ class AccountListMemoDaoTest {
         )
         accountMemoDao.upsert(AccountMemoLocalEntity(accountId = accountId, memoId = memoId))
 
-        val result = accountListMemoDao.page(accountId, tagPresence = 0, datePresence = 0).loadAll()
+        val result = accountListMemoDao.page(accountId, tagPresence = FilterPresenceLocalEntity.NONE, datePresence = FilterPresenceLocalEntity.NONE).loadAll()
 
         result shouldHaveSize 1
         result[0].id shouldBe memoId
@@ -390,7 +391,7 @@ class AccountListMemoDaoTest {
         )
         accountMemoDao.upsert(AccountMemoLocalEntity(accountId = accountId, memoId = memoId))
 
-        val result = accountListMemoDao.page(accountId, tagPresence = 0, datePresence = 0).loadAll()
+        val result = accountListMemoDao.page(accountId, tagPresence = FilterPresenceLocalEntity.NONE, datePresence = FilterPresenceLocalEntity.NONE).loadAll()
 
         result shouldHaveSize 1
         result[0].id shouldBe memoId
@@ -428,7 +429,7 @@ class AccountListMemoDaoTest {
         )
         accountMemoDao.upsert(AccountMemoLocalEntity(accountId = accountId, memoId = memoId))
 
-        val result = accountListMemoDao.page(accountId, tagPresence = 0, datePresence = 0).loadAll()
+        val result = accountListMemoDao.page(accountId, tagPresence = FilterPresenceLocalEntity.NONE, datePresence = FilterPresenceLocalEntity.NONE).loadAll()
 
         result shouldHaveSize 1
         result[0].id shouldBe memoId
