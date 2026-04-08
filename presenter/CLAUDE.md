@@ -1,5 +1,7 @@
 # Presenter
 
+@.claude/docs/compose-conventions.md
+
 :presenter 모듈은 :feature 모듈에서 공통으로 사용하는 코드를 작성한다.
 
 ## 지침

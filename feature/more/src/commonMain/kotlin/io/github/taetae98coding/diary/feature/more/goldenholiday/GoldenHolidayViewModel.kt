@@ -9,12 +9,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import org.koin.core.annotation.InjectedParam
 import org.koin.core.annotation.KoinViewModel
-import org.koin.core.annotation.Provided
 
 @KoinViewModel
 internal class GoldenHolidayViewModel(
-    @param:Provided
+    @param:InjectedParam
     private val year: Int,
     private val fetchHolidayUseCase: FetchHolidayUseCase,
     private val getHolidayUseCase: GetHolidayUseCase,

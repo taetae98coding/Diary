@@ -59,8 +59,8 @@ internal fun LoginHomeScaffold(
 
 @Composable
 private fun TopBar(
-    onNavigateUp: () -> Unit,
     modifier: Modifier = Modifier,
+    onNavigateUp: () -> Unit = {},
 ) {
     TopAppBar(
         title = { Text(text = "로그인") },

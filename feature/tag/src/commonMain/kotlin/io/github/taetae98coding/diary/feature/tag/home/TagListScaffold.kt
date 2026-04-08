@@ -1,0 +1,171 @@
+package io.github.taetae98coding.diary.feature.tag.home
+
+import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.basicMarquee
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material3.Card
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.isMetaPressed
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.type
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.dropUnlessResumed
+import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
+import io.github.taetae98coding.diary.compose.core.button.AddFloatingButton
+import io.github.taetae98coding.diary.compose.core.color.ColorCircle
+import io.github.taetae98coding.diary.compose.core.icon.MemoIcon
+import io.github.taetae98coding.diary.compose.core.modifier.focusableKeyEvent
+import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
+import io.github.taetae98coding.diary.core.model.tag.Tag
+import kotlin.uuid.Uuid
+
+@Composable
+internal fun TagListScaffold(
+    state: TagListScaffoldState,
+    pagingItems: LazyPagingItems<Tag>,
+    modifier: Modifier = Modifier,
+    isFetchingProvider: () -> Boolean = { false },
+    onFetch: () -> Unit = {},
+    onAdd: () -> Unit = {},
+    onTag: (Uuid) -> Unit = {},
+    onTagMemo: (Uuid) -> Unit = {},
+) {
+    Scaffold(
+        modifier = modifier.focusableKeyEvent {
+            if (it.type == KeyEventType.KeyDown && it.isMetaPressed && it.key == Key.A) {
+                onAdd()
+                true
+            } else {
+                false
+            }
+        },
+        topBar = { TopBar() },
+        floatingActionButton = { AddFloatingButton(onClick = dropUnlessResumed(block = onAdd)) },
+        snackbarHost = { SnackbarHost(hostState = state.hostState) },
+    ) { paddingValues ->
+        PullToRefreshBox(
+            isRefreshing = isFetchingProvider(),
+            onRefresh = onFetch,
+            modifier = Modifier
+                .padding(paddingValues),
+        ) {
+            val isEmpty by remember {
+                derivedStateOf {
+                    !isFetchingProvider() && pagingItems.loadState.refresh !is LoadState.Loading && pagingItems.itemCount == 0
+                }
+            }
+
+            Crossfade(targetState = isEmpty) { isEmpty ->
+                if (isEmpty) {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Text(
+                            text = "태그가 없습니다",
+                            style = DiaryTheme.typography.titleMedium,
+                            color = DiaryTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                } else {
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(2),
+                        modifier = Modifier.fillMaxSize(),
+                        contentPadding = DiaryTheme.dimen.screenPaddingValues,
+                        verticalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace),
+                        horizontalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.itemSpace),
+                    ) {
+                        if (isFetchingProvider() && pagingItems.itemCount == 0) {
+                            items(count = 5) {
+                                TagCard(
+                                    uiState = null,
+                                    onClick = {},
+                                    onMemo = {},
+                                )
+                            }
+                        } else {
+                            items(
+                                count = pagingItems.itemCount,
+                                key = { pagingItems[it]?.id ?: it },
+                            ) { index ->
+                                val uiState = pagingItems[index]
+
+                                TagCard(
+                                    uiState = uiState,
+                                    onClick = dropUnlessResumed { uiState?.id?.let(onTag) },
+                                    onMemo = dropUnlessResumed { uiState?.id?.let(onTagMemo) },
+                                    modifier = Modifier.animateItem(),
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun TopBar(modifier: Modifier = Modifier) {
+    TopAppBar(
+        title = { Text(text = "태그") },
+        modifier = modifier,
+    )
+}
+
+@Composable
+private fun TagCard(
+    modifier: Modifier = Modifier,
+    uiState: Tag? = null,
+    onClick: () -> Unit = {},
+    onMemo: () -> Unit = {},
+) {
+    Card(
+        onClick = onClick,
+        modifier = modifier,
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            ColorCircle(
+                colorProvider = { uiState?.detail?.color?.let(::Color) ?: Color.Unspecified },
+                modifier = Modifier.size(8.dp),
+            )
+            Text(
+                text = uiState?.detail?.title.orEmpty(),
+                modifier = Modifier
+                    .weight(1f)
+                    .basicMarquee(iterations = Int.MAX_VALUE),
+                maxLines = 1,
+                style = DiaryTheme.typography.titleMedium,
+            )
+            IconButton(onClick = onMemo) {
+                MemoIcon()
+            }
+        }
+    }
+}

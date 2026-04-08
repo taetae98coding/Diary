@@ -24,7 +24,7 @@ public fun CalendarMonth(
     primaryDayListProvider: () -> List<LocalDate> = { emptyList() },
     holidayListProvider: () -> List<LocalDateRange> = { emptyList() },
     colors: CalendarColors = CalendarDefaults.colors(),
-    content: CalendarWeekGridScope.() -> Unit,
+    content: CalendarWeekGridScope.() -> Unit = {},
 ) {
     Column(modifier = modifier) {
         repeat(6) { weekOfMonth ->

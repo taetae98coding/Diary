@@ -9,6 +9,7 @@ import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.clearText
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
@@ -22,6 +23,8 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.testTag
 import io.github.taetae98coding.diary.compose.core.icon.ClearIcon
+import io.github.taetae98coding.diary.compose.core.preview.ComponentPreview
+import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
 
 public const val CLEAR_BUTTON_TEST_TAG: String = "ClearButton"
 
@@ -62,4 +65,28 @@ public fun ClearTextField(
         lineLimits = lineLimits,
         colors = colors,
     )
+}
+
+@ComponentPreview
+@Composable
+private fun Preview() {
+    DiaryTheme {
+        ClearTextField(
+            state = TextFieldState(),
+            label = { Text(text = "Label") },
+            lineLimits = TextFieldLineLimits.SingleLine,
+        )
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun NotEmptyPreview() {
+    DiaryTheme {
+        ClearTextField(
+            state = TextFieldState(initialText = "Hello"),
+            label = { Text(text = "Label") },
+            lineLimits = TextFieldLineLimits.SingleLine,
+        )
+    }
 }

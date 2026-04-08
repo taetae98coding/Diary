@@ -36,10 +36,10 @@ internal class AndroidSyncManager(
             onSuccess = { account ->
                 WorkManager.getInstance(context).getWorkInfosForUniqueWorkFlow("SYNC_${account.accountId}")
                     .mapLatest { workInfos ->
-                        if (workInfos.any { it.state == WorkInfo.State.RUNNING || it.state == WorkInfo.State.ENQUEUED }) {
-                            SyncStatus.Syncing(syncType)
-                        } else {
-                            SyncStatus.Idle
+                        when {
+                            workInfos.any { it.state == WorkInfo.State.RUNNING || it.state == WorkInfo.State.ENQUEUED } -> SyncStatus.Syncing(syncType)
+                            workInfos.any { it.state == WorkInfo.State.FAILED } -> SyncStatus.Failed
+                            else -> SyncStatus.Idle
                         }
                     }
             },

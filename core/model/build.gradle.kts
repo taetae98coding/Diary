@@ -6,6 +6,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation(projects.library.kotlinxDatetime)
                 api(libs.kotlinx.datetime)
             }
         }

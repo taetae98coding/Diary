@@ -12,6 +12,7 @@
 
 ## 테스트
 
+- Mapper 함수에는 항상 TC를 작성한다.
 - 테스트 이름은 간결하게 작성한다.
   - Domain to Local
   - Local to Domain

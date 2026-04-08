@@ -21,7 +21,7 @@ public fun Calendar(
     primaryDayListProvider: () -> List<LocalDate> = { emptyList() },
     holidayListProvider: () -> List<LocalDateRange> = { emptyList() },
     colors: CalendarColors = CalendarDefaults.colors(),
-    content: CalendarWeekGridScope.() -> Unit,
+    content: CalendarWeekGridScope.() -> Unit = {},
 ) {
     HorizontalPager(
         state = state.pagerState,

@@ -2,7 +2,6 @@ package io.github.taetae98coding.diary.domain.memo.usecase
 
 import io.github.taetae98coding.diary.core.model.memo.MemoDetail
 import io.github.taetae98coding.diary.core.model.sync.SyncType
-import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
 import io.github.taetae98coding.diary.domain.memo.repository.AccountMemoRepository
 import io.github.taetae98coding.diary.domain.memo.repository.MemoRepository
 import io.github.taetae98coding.diary.domain.sync.usecase.RequestSyncUseCase
@@ -13,7 +12,6 @@ import org.koin.core.annotation.Provided
 
 @Factory
 public class UpdateMemoUseCase(
-    private val getAccountUseCase: GetAccountUseCase,
     private val requestSyncUseCase: RequestSyncUseCase,
     @param:Provided
     private val memoRepository: MemoRepository,
@@ -25,7 +23,6 @@ public class UpdateMemoUseCase(
         detail: MemoDetail,
     ): Result<Unit> {
         return runCatching {
-            val account = getAccountUseCase().first().getOrThrow()
             val detail = detail.copy(
                 title = detail.title.ifBlank { requireNotNull(memoRepository.get(memoId).first()).detail.title },
             )

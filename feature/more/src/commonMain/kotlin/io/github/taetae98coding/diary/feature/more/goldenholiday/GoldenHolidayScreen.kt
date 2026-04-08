@@ -99,8 +99,8 @@ private fun GoldenHolidayScreen(
 @Composable
 private fun TopBar(
     state: GoldenHolidayScaffoldState,
-    onNavigateUp: () -> Unit,
     modifier: Modifier = Modifier,
+    onNavigateUp: () -> Unit = {},
 ) {
     CenterAlignedTopAppBar(
         title = { Text(text = "${state.pagerState.currentPage}년 황금연휴") },

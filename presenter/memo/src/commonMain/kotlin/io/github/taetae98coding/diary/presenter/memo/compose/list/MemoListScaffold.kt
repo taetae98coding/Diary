@@ -14,7 +14,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Card
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
@@ -140,6 +139,7 @@ public fun MemoListScaffold(
 private fun MemoListScaffold(
     state: MemoListScaffoldState,
     pagingItems: LazyPagingItems<Memo>,
+    modifier: Modifier = Modifier,
     titleProvider: () -> String = { "메모" },
     navigationProvider: () -> MemoListNavigation = { MemoListNavigation.None },
     actions: @Composable RowScope.() -> Unit = {},
@@ -147,9 +147,8 @@ private fun MemoListScaffold(
     onFetch: () -> Unit = {},
     onFinish: (Uuid) -> Unit = {},
     onDelete: (Uuid) -> Unit = {},
-    onNavigateToAdd: () -> Unit,
-    onNavigateToDetail: (Uuid) -> Unit,
-    modifier: Modifier = Modifier,
+    onNavigateToAdd: () -> Unit = {},
+    onNavigateToDetail: (Uuid) -> Unit = {},
 ) {
     Scaffold(
         modifier = modifier.focusableKeyEvent {
@@ -191,8 +190,8 @@ private fun MemoListScaffold(
                         ) {
                             Text(
                                 text = "메모가 없습니다",
-                                style = MaterialTheme.typography.titleMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                style = DiaryTheme.typography.titleMedium,
+                                color = DiaryTheme.colorScheme.onSurfaceVariant,
                             )
                         }
                     }
@@ -271,9 +270,9 @@ private fun MemoListEffectHandler(
 
 @Composable
 private fun TopBar(
-    titleProvider: () -> String,
-    navigationProvider: () -> MemoListNavigation,
     modifier: Modifier = Modifier,
+    titleProvider: () -> String = { "" },
+    navigationProvider: () -> MemoListNavigation = { MemoListNavigation.None },
     actions: @Composable RowScope.() -> Unit = {},
 ) {
     val navigation = navigationProvider()
@@ -296,9 +295,9 @@ private fun TopBar(
 
 @Composable
 private fun MemoCard(
-    uiState: Memo?,
-    onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    uiState: Memo? = null,
+    onClick: () -> Unit = {},
 ) {
     Card(
         onClick = onClick,
@@ -310,7 +309,7 @@ private fun MemoCard(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             ColorCircle(
-                color = uiState?.detail?.color?.let(::Color) ?: Color.Unspecified,
+                colorProvider = { uiState?.detail?.color?.let(::Color) ?: Color.Unspecified },
                 modifier = Modifier.size(8.dp),
             )
             Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
@@ -318,7 +317,7 @@ private fun MemoCard(
                     text = uiState?.detail?.title.orEmpty(),
                     modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE),
                     maxLines = 1,
-                    style = MaterialTheme.typography.titleMedium,
+                    style = DiaryTheme.typography.titleMedium,
                 )
                 uiState?.detail?.localDateTimeRange?.let {
                     val text = listOfNotNull(it.start.date, it.endInclusive.date)
@@ -329,8 +328,8 @@ private fun MemoCard(
                         text = text,
                         modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE),
                         maxLines = 1,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        style = DiaryTheme.typography.bodySmall,
+                        color = DiaryTheme.colorScheme.onSurfaceVariant,
                     )
                 }
             }

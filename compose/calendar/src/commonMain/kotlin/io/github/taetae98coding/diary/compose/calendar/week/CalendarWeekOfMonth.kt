@@ -14,14 +14,14 @@ import androidx.compose.ui.unit.dp
 import io.github.taetae98coding.diary.compose.calendar.CalendarDefaults
 import io.github.taetae98coding.diary.compose.calendar.CalendarSelectState
 import io.github.taetae98coding.diary.compose.calendar.day.CalendarDay
-import io.github.taetae98coding.diary.compose.calendar.ext.toSundayBasedDayOfWeek
-import io.github.taetae98coding.diary.compose.calendar.ext.toSundayBasedNumber
 import io.github.taetae98coding.diary.compose.calendar.internal.WeekLocalDateRange
 import io.github.taetae98coding.diary.compose.calendar.rememberCalendarSelectState
 import io.github.taetae98coding.diary.compose.calendar.theme.CalendarColors
 import io.github.taetae98coding.diary.compose.core.preview.ComponentPreview
 import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
 import io.github.taetae98coding.diary.library.datetime.overlaps
+import io.github.taetae98coding.diary.library.datetime.toSundayBasedDayOfWeek
+import io.github.taetae98coding.diary.library.datetime.toSundayBasedNumber
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateRange
 import kotlinx.datetime.YearMonth
@@ -36,7 +36,7 @@ public fun CalendarWeekOfMonth(
     primaryDayListProvider: () -> List<LocalDate> = { emptyList() },
     holidayListProvider: () -> List<LocalDateRange> = { emptyList() },
     colors: CalendarColors = CalendarDefaults.colors(),
-    content: CalendarWeekGridScope.() -> Unit,
+    content: CalendarWeekGridScope.() -> Unit = {},
 ) {
     val weekLocalDateRange = remember { WeekLocalDateRange(yearMonth, weekOfMonth) }
 

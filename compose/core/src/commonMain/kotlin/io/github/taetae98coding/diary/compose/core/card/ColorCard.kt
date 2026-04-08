@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import io.github.taetae98coding.diary.compose.core.dialog.ColorPickerHost
+import io.github.taetae98coding.diary.compose.core.preview.ComponentPreview
 import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
 import io.github.taetae98coding.diary.library.compose.ui.rgbText
 import io.github.taetae98coding.diary.library.compose.ui.wcagAAAContentColor
@@ -58,4 +59,12 @@ public fun ColorCard(
         colorProvider = { state.value },
         onSelect = { color -> coroutineScope.launch { state.updateColor(color) } },
     )
+}
+
+@ComponentPreview
+@Composable
+private fun Preview() {
+    DiaryTheme {
+        ColorCard()
+    }
 }
