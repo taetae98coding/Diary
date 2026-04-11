@@ -10,6 +10,21 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  spotless:
+    name: 🎨 Spotless
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: ./.github/actions/gradle-setup
+        with:
+          local-properties: ${{ secrets.LOCAL_PROPERTIES }}
+          google-services-dev: ${{ secrets.GOOGLE_SERVICES_DEV }}
+          google-services-real: ${{ secrets.GOOGLE_SERVICES_REAL }}
+
+      - name: 🎨 Spotless 검사 실행
+        run: ./gradlew --no-configuration-cache spotlessCheck
+
   dependency-guard:
     name: 🛡️ Dependency Guard
     runs-on: self-hosted

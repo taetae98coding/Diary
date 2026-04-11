@@ -11,6 +11,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderState
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -20,6 +21,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import io.github.taetae98coding.diary.compose.core.icon.RefreshIcon
+import io.github.taetae98coding.diary.compose.core.preview.ComponentPreview
 import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
 import io.github.taetae98coding.diary.library.compose.ui.random
 import io.github.taetae98coding.diary.library.compose.ui.rgbText
@@ -107,4 +109,14 @@ private fun SliderValueText(
         modifier = modifier,
         style = DiaryTheme.typography.bodySmall,
     )
+}
+
+@ComponentPreview
+@Composable
+private fun Preview() {
+    DiaryTheme {
+        Surface {
+            ColorPicker(state = rememberColorPickerState())
+        }
+    }
 }

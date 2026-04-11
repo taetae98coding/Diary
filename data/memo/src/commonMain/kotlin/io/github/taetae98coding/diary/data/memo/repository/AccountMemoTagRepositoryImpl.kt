@@ -18,6 +18,8 @@ import org.koin.core.annotation.Provided
 @Factory
 public class AccountMemoTagRepositoryImpl(
     @param:Provided
+    private val clock: Clock,
+    @param:Provided
     private val databaseTransactor: DatabaseTransactor,
     @param:Provided
     private val memoLocalDataSource: MemoLocalDataSource,
@@ -32,7 +34,7 @@ public class AccountMemoTagRepositoryImpl(
         memoId: Uuid,
         primaryTag: Uuid?,
     ) {
-        val now = Clock.System.now().toEpochMilliseconds()
+        val now = clock.now().toEpochMilliseconds()
 
         databaseTransactor.writeTransaction {
             memoLocalDataSource.updatePrimaryTag(
@@ -66,7 +68,7 @@ public class AccountMemoTagRepositoryImpl(
         tagId: Uuid,
         isMemoTag: Boolean,
     ) {
-        val now = Clock.System.now().toEpochMilliseconds()
+        val now = clock.now().toEpochMilliseconds()
 
         databaseTransactor.writeTransaction {
             memoTagLocalDataSource.upsert(

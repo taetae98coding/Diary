@@ -36,7 +36,8 @@ internal class NonAndroidSyncManager(
             mutex.withLock {
                 _syncStatus.value = SyncStatus.Syncing(type)
                 runCatching { synchronizer.sync(accountId) }
-                _syncStatus.value = SyncStatus.Idle
+                    .onSuccess { _syncStatus.value = SyncStatus.Idle }
+                    .onFailure { _syncStatus.value = SyncStatus.Failed }
             }
         }
     }

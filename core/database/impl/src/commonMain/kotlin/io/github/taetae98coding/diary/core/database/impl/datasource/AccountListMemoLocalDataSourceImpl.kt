@@ -15,6 +15,6 @@ internal class AccountListMemoLocalDataSourceImpl(private val database: DiaryDat
         tagPresence: FilterPresenceLocalEntity,
         datePresence: FilterPresenceLocalEntity,
     ): PagingSource<Int, MemoLocalEntity> {
-        return database.accountListMemoDao().page(accountId, tagPresence.persistentValue, datePresence.persistentValue)
+        return database.accountListMemoDao().page(accountId, tagPresence, datePresence)
     }
 }

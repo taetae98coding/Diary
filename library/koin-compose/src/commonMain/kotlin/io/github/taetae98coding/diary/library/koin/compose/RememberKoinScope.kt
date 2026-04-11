@@ -1,8 +1,8 @@
 package io.github.taetae98coding.diary.library.koin.compose
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.retain.RetainedEffect
 import androidx.compose.runtime.retain.retain
+import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -13,30 +13,24 @@ import org.koin.core.scope.ScopeCallback
 import org.koin.core.scope.ScopeID
 
 @Composable
-public inline fun <reified T : Any> rememberKoinScope(
+public inline fun <reified T : Any> rememberCoroutineKoinScope(
     scopeId: ScopeID,
-    autoClose: Boolean = false,
+    coroutineContext: CoroutineContext = SupervisorJob() + Dispatchers.Main.immediate,
 ): Scope {
     val koin = getKoin()
-    val scope = retain(koin) {
-        val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
+    val retainKoinScope = retain(koin) {
+        val coroutineScope = CoroutineScope(coroutineContext)
         val scopeCallback = object : ScopeCallback {
             override fun onScopeClose(scope: Scope) {
                 coroutineScope.cancel()
             }
         }
-
-        koin
-            .getOrCreateScope<T>(scopeId)
+        val scope = koin.createScope<T>(scopeId = scopeId)
             .apply { declare(coroutineScope) }
             .apply { registerCallback(scopeCallback) }
+
+        RetainKoinScope(scope)
     }
 
-    if (autoClose) {
-        RetainedEffect(scope) {
-            onRetire { scope.close() }
-        }
-    }
-
-    return scope
+    return retainKoinScope.scope
 }

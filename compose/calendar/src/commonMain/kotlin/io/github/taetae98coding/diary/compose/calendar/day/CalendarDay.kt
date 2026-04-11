@@ -16,11 +16,11 @@ import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import io.github.taetae98coding.diary.compose.calendar.CalendarDefaults
-import io.github.taetae98coding.diary.compose.calendar.ext.toSundayBasedNumber
 import io.github.taetae98coding.diary.compose.calendar.theme.CalendarColors
 import io.github.taetae98coding.diary.compose.core.preview.ComponentPreview
 import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
 import io.github.taetae98coding.diary.library.compose.ui.wcagAAAContentColor
+import io.github.taetae98coding.diary.library.datetime.toSundayBasedNumber
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate

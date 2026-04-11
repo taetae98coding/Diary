@@ -11,7 +11,9 @@ import io.github.taetae98coding.diary.core.database.api.datasource.SyncMemoLocal
 import io.github.taetae98coding.diary.core.database.api.datasource.SyncMemoTagLocalDataSource
 import io.github.taetae98coding.diary.core.database.api.entity.AccountMemoLocalEntity
 import io.github.taetae98coding.diary.core.database.api.entity.MemoLocalEntity
+import io.github.taetae98coding.diary.core.database.api.entity.MemoTagLocalEntity
 import io.github.taetae98coding.diary.core.database.api.entity.SyncMemoLocalEntity
+import io.github.taetae98coding.diary.core.database.api.entity.SyncMemoTagLocalEntity
 import io.github.taetae98coding.diary.core.mapper.toLocal
 import io.github.taetae98coding.diary.core.model.memo.MemoDetail
 import io.kotest.core.spec.style.FunSpec
@@ -21,9 +23,11 @@ import io.mockk.coEvery
 import io.mockk.coVerifyOrder
 import io.mockk.mockk
 import io.mockk.slot
+import kotlin.time.Clock
 import kotlin.uuid.Uuid
 
 class AccountMemoRepositoryImplTest : FunSpec() {
+    private val clock = mockk<Clock>(relaxed = true)
     private val databaseTransactor = mockk<DatabaseTransactor>()
     private val memoLocalDataSource = mockk<MemoLocalDataSource>(relaxUnitFun = true)
     private val memoTagLocalDataSource = mockk<MemoTagLocalDataSource>(relaxUnitFun = true)
@@ -31,6 +35,7 @@ class AccountMemoRepositoryImplTest : FunSpec() {
     private val syncMemoLocalDataSource = mockk<SyncMemoLocalDataSource>(relaxUnitFun = true)
     private val syncMemoTagLocalDataSource = mockk<SyncMemoTagLocalDataSource>(relaxUnitFun = true)
     private val repository = AccountMemoRepositoryImpl(
+        clock,
         databaseTransactor,
         memoLocalDataSource,
         memoTagLocalDataSource,
@@ -82,6 +87,26 @@ class AccountMemoRepositoryImplTest : FunSpec() {
             coVerifyOrder {
                 memoLocalDataSource.upsert(any<MemoLocalEntity>())
                 accountMemoLocalDataSource.upsert(any<AccountMemoLocalEntity>())
+                syncMemoLocalDataSource.upsert(any<SyncMemoLocalEntity>())
+            }
+        }
+
+        test("add - memoTagIds가 있으면 memoTag와 syncMemoTag도 저장한다") {
+            val accountId = Uuid.random()
+            val detail = fixtureMonkey.giveMeOne<MemoDetail>()
+            val memoTagIds = setOf(Uuid.random(), Uuid.random())
+
+            coEvery { databaseTransactor.writeTransaction(any<suspend () -> Unit>()) } coAnswers {
+                firstArg<suspend () -> Unit>().invoke()
+            }
+
+            repository.add(accountId, detail, primaryTag = null, memoTagIds = memoTagIds)
+
+            coVerifyOrder {
+                memoLocalDataSource.upsert(any<MemoLocalEntity>())
+                memoTagLocalDataSource.upsert(any<List<MemoTagLocalEntity>>())
+                accountMemoLocalDataSource.upsert(any<AccountMemoLocalEntity>())
+                syncMemoTagLocalDataSource.upsert(any<List<SyncMemoTagLocalEntity>>())
                 syncMemoLocalDataSource.upsert(any<SyncMemoLocalEntity>())
             }
         }

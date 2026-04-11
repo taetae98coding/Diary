@@ -14,6 +14,7 @@ public fun NavigateUpIcon(modifier: Modifier = Modifier) {
     Icon(
         imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
         contentDescription = null,
+        modifier = modifier,
     )
 }
 

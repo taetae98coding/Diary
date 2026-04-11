@@ -8,6 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.github.taetae98coding.diary.compose.core.icon.AddIcon
+import io.github.taetae98coding.diary.compose.core.preview.ComponentPreview
+import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
 
 @Composable
 public fun AddFloatingButton(
@@ -28,5 +30,21 @@ public fun AddFloatingButton(
                 AddIcon()
             }
         }
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun Preview() {
+    DiaryTheme {
+        AddFloatingButton(onClick = {})
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun InProgressPreview() {
+    DiaryTheme {
+        AddFloatingButton(onClick = {}, isInProgressProvider = { true })
     }
 }

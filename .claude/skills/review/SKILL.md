@@ -1,11 +1,11 @@
 ---
 name: review
-description: ":client 하위 모듈의 코드를 리뷰한다."
+description: "코드를 리뷰한다."
 argument-hint: [대상 파일 또는 컴포넌트 이름]
 allowed-tools: Read, Grep, Glob, Agent
 ---
 
-:client 하위 모듈의 코드를 리뷰한다.
+코드를 리뷰한다.
 
 대상: `$ARGUMENTS`
 

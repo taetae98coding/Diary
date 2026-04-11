@@ -1,0 +1,56 @@
+package io.github.taetae98coding.diary.feature.calendar.home
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import io.github.taetae98coding.diary.core.model.memo.CalendarMemo
+import io.github.taetae98coding.diary.domain.memo.usecase.GetCalendarMemoUseCase
+import io.github.taetae98coding.diary.domain.memo.usecase.HasCalendarMemoFilterUseCase
+import io.github.taetae98coding.diary.library.coroutines.combine
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.datetime.Month
+import kotlinx.datetime.YearMonth
+import org.koin.core.annotation.KoinViewModel
+
+@KoinViewModel
+internal class CalendarMemoViewModel(
+    private val getCalendarMemoUseCase: GetCalendarMemoUseCase,
+    hasCalendarMemoFilterUseCase: HasCalendarMemoFilterUseCase,
+) : ViewModel() {
+    private val yearMonthFlow = MutableStateFlow<YearMonth?>(null)
+
+    val calendarMemo: StateFlow<List<CalendarMemo>> = yearMonthFlow.flatMapLatest { yearMonth ->
+        if (yearMonth == null) {
+            emptyFlow()
+        } else {
+            listOfNotNull(
+                (yearMonth.year - 1).takeIf { yearMonth.month == Month.JANUARY },
+                yearMonth.year,
+                (yearMonth.year + 1).takeIf { yearMonth.month == Month.DECEMBER },
+            ).map { year ->
+                getCalendarMemoUseCase(year).mapLatest { it.getOrDefault(emptyList()) }
+            }.combine { it.toList().flatten() }
+        }
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5_000),
+        initialValue = emptyList(),
+    )
+
+    val hasFilter: StateFlow<Boolean> = hasCalendarMemoFilterUseCase()
+        .mapLatest { it.getOrDefault(false) }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = false,
+        )
+
+    fun fetchYearMonth(yearMonth: YearMonth) {
+        yearMonthFlow.value = yearMonth
+    }
+}

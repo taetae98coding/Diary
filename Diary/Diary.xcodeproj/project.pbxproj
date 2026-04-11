@@ -18,7 +18,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		8800ABB82F780AF500B86BB3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		8800ABB82F780AF500B86BB3 /* Exceptions for "Diary" folder in "Diary" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -31,7 +31,7 @@
 		8800ABAA2F78058400B86BB3 /* Diary */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				8800ABB82F780AF500B86BB3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */,
+				8800ABB82F780AF500B86BB3 /* Exceptions for "Diary" folder in "Diary" target */,
 			);
 			path = Diary;
 			sourceTree = "<group>";
@@ -315,7 +315,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.0;
+				MARKETING_VERSION = 1.6.0;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.taetae98coding.diary.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -397,7 +397,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4TV6L66XZ8;
+				DEVELOPMENT_TEAM = "${TEAM_ID}";
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -413,7 +413,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.0;
+				MARKETING_VERSION = 1.6.0;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.taetae98coding.diary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -518,7 +518,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.0;
+				MARKETING_VERSION = 1.6.0;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.taetae98coding.diary;
 				PRODUCT_NAME = "$(TARGET_NAME)";

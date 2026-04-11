@@ -79,10 +79,10 @@ private fun ProfileRow(
 
 @Composable
 private fun ActionRow(
-    uiStateProvider: () -> MoreHomeAccountUiState,
-    onLogin: () -> Unit,
-    onLogout: () -> Unit,
     modifier: Modifier = Modifier,
+    uiStateProvider: () -> MoreHomeAccountUiState = { MoreHomeAccountUiState.Loading },
+    onLogin: () -> Unit = {},
+    onLogout: () -> Unit = {},
 ) {
     LazyRow(
         modifier = modifier,

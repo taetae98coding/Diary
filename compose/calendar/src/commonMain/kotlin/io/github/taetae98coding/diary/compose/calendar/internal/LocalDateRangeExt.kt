@@ -1,6 +1,6 @@
 package io.github.taetae98coding.diary.compose.calendar.internal
 
-import io.github.taetae98coding.diary.compose.calendar.ext.toSundayBasedNumber
+import io.github.taetae98coding.diary.library.datetime.toSundayBasedNumber
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDateRange
 import kotlinx.datetime.YearMonth

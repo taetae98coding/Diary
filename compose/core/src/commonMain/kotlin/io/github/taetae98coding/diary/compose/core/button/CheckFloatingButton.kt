@@ -8,6 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import io.github.taetae98coding.diary.compose.core.icon.CheckIcon
+import io.github.taetae98coding.diary.compose.core.preview.ComponentPreview
+import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
 
 @Composable
 public fun CheckFloatingButton(
@@ -28,5 +30,21 @@ public fun CheckFloatingButton(
                 CheckIcon()
             }
         }
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun Preview() {
+    DiaryTheme {
+        CheckFloatingButton(onClick = {})
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun InProgressPreview() {
+    DiaryTheme {
+        CheckFloatingButton(onClick = {}, isInProgressProvider = { true })
     }
 }

@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.FilterChipDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -52,15 +51,15 @@ internal fun CalendarFilterDialog(
             )
             FlowRow(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
-                verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically),
+                horizontalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterHorizontally),
+                verticalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterVertically),
             ) {
                 if (pagingItems.loadState.refresh !is LoadState.Loading && pagingItems.itemCount == 0) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(
                             text = "태그가 없습니다",
                             style = DiaryTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            color = DiaryTheme.colorScheme.onSurfaceVariant,
                         )
                         Button(onClick = dropUnlessResumed(block = navigateToTagAdd)) {
                             Text(text = "추가하기")
@@ -86,7 +85,7 @@ internal fun CalendarFilterDialog(
                             modifier = if (uiState == null) Modifier.width(80.dp) else Modifier,
                             leadingIcon = {
                                 ColorCircle(
-                                    color = color,
+                                    colorProvider = { color },
                                     modifier = Modifier.size(8.dp),
                                 )
                             },
