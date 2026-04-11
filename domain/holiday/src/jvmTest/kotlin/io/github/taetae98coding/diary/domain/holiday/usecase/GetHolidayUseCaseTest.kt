@@ -9,7 +9,6 @@ import io.github.taetae98coding.diary.domain.holiday.repository.HolidayRepositor
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.result.shouldBeFailure
 import io.kotest.matchers.result.shouldBeSuccess
-import io.kotest.matchers.shouldBe
 import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.mockk
@@ -49,8 +48,7 @@ class GetHolidayUseCaseTest : BehaviorSpec() {
                 val result = useCase(year).first()
 
                 Then("모든 공휴일을 반환한다") {
-                    result.shouldBeSuccess()
-                    result.getOrThrow() shouldBe holidays
+                    result.shouldBeSuccess(holidays)
                 }
 
                 Then("HolidayRepository를 호출한다") {
@@ -86,8 +84,7 @@ class GetHolidayUseCaseTest : BehaviorSpec() {
                 val result = useCase(year).first()
 
                 Then("필터에 포함된 공휴일만 반환한다") {
-                    result.shouldBeSuccess()
-                    result.getOrThrow() shouldBe listOf(sinjeong)
+                    result.shouldBeSuccess(listOf(sinjeong))
                 }
             }
         }
@@ -115,8 +112,7 @@ class GetHolidayUseCaseTest : BehaviorSpec() {
                 val result = useCase(year).first()
 
                 Then("isHoliday가 true인 공휴일과 필터에 포함된 공휴일을 모두 반환한다") {
-                    result.shouldBeSuccess()
-                    result.getOrThrow() shouldBe listOf(sinjeong, seolnal)
+                    result.shouldBeSuccess(listOf(sinjeong, seolnal))
                 }
             }
         }
@@ -140,8 +136,7 @@ class GetHolidayUseCaseTest : BehaviorSpec() {
                 val result = useCase(year).first()
 
                 Then("빈 리스트를 반환한다") {
-                    result.shouldBeSuccess()
-                    result.getOrThrow() shouldBe emptyList()
+                    result.shouldBeSuccess(emptyList())
                 }
             }
         }

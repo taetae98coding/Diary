@@ -29,7 +29,7 @@ allowed-tools: Read, Grep, Glob, Edit, Write, Bash, Agent
 ### 4단계: TC 실행 및 검증
 
 - 작성한 테스트를 실행하여 모두 성공하는지 확인한다.
-- Compose 테스트 실행 명령: `./gradlew :<module-path>:sdk35AndroidDeviceTest -Pandroid.testInstrumentationRunnerArguments.class=<fully-qualified-class-name>`
+- Android 디바이스 테스트 실행 명령: `./gradlew :<module-path>:allSdksGroupAndroidDeviceTest -Pandroid.testInstrumentationRunnerArguments.class=<fully-qualified-class-name>`
 - Kotest 테스트 실행 명령: `./gradlew :<module-path>:jvmTest --tests "<fully-qualified-class-name>"`
 - 실패하는 테스트가 있으면 원인을 분석하고 수정한 후 재실행한다.
 - 모든 테스트가 성공할 때까지 반복한다.

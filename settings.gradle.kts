@@ -17,6 +17,10 @@ pluginManagement {
     includeBuild("build-logic")
 }
 
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+}
+
 dependencyResolutionManagement {
     repositories {
         google {
@@ -63,6 +67,7 @@ include(":data:account")
 include(":data:credentials")
 include(":data:holiday")
 include(":data:memo")
+include(":data:routine")
 include(":data:sync")
 include(":data:tag")
 include(":data:weather")
@@ -70,16 +75,16 @@ include(":domain:account")
 include(":domain:credentials")
 include(":domain:holiday")
 include(":domain:memo")
+include(":domain:routine")
 include(":domain:sync")
 include(":domain:tag")
 include(":domain:weather")
-include(":presenter:calendar")
 include(":presenter:memo")
-include(":presenter:tag")
 include(":feature:calendar")
 include(":feature:login")
 include(":feature:memo")
 include(":feature:more")
+include(":feature:routine")
 include(":feature:tag")
 include(":library:kotlinx-file")
 include(":library:paging-common")

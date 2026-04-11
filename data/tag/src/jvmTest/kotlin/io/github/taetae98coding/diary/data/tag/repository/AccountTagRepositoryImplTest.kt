@@ -19,14 +19,17 @@ import io.mockk.coEvery
 import io.mockk.coVerifyOrder
 import io.mockk.mockk
 import io.mockk.slot
+import kotlin.time.Clock
 import kotlin.uuid.Uuid
 
 class AccountTagRepositoryImplTest : FunSpec() {
+    private val clock = mockk<Clock>(relaxed = true)
     private val databaseTransactor = mockk<DatabaseTransactor>()
     private val tagLocalDataSource = mockk<TagLocalDataSource>(relaxUnitFun = true)
     private val accountTagLocalDataSource = mockk<AccountTagLocalDataSource>(relaxUnitFun = true)
     private val syncTagLocalDataSource = mockk<SyncTagLocalDataSource>(relaxUnitFun = true)
     private val repository = AccountTagRepositoryImpl(
+        clock,
         databaseTransactor,
         tagLocalDataSource,
         accountTagLocalDataSource,

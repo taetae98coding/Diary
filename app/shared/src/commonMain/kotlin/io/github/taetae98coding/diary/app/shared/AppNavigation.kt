@@ -17,6 +17,7 @@ import io.github.taetae98coding.diary.feature.calendar.calendarEntry
 import io.github.taetae98coding.diary.feature.login.loginEntry
 import io.github.taetae98coding.diary.feature.memo.memoEntry
 import io.github.taetae98coding.diary.feature.more.moreEntry
+import io.github.taetae98coding.diary.feature.routine.routineEntry
 import io.github.taetae98coding.diary.feature.tag.tagEntry
 
 @Composable
@@ -40,6 +41,7 @@ internal fun AppNavigation(
             memoEntry(backStack = state.backStack)
             tagEntry(backStack = state.backStack)
             calendarEntry(backStack = state.backStack)
+            routineEntry(backStack = state.backStack)
             moreEntry(backStack = state.backStack)
 
             loginEntry(backStack = state.backStack)

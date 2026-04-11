@@ -91,15 +91,15 @@ private fun MemoTagFilterLayout(
         )
         FlowRow(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
-            verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically),
+            horizontalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterHorizontally),
+            verticalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterVertically),
         ) {
             if (pagingItems.loadState.refresh !is LoadState.Loading && pagingItems.itemCount == 0) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
                         text = "태그가 없습니다",
                         style = DiaryTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = DiaryTheme.colorScheme.onSurfaceVariant,
                     )
                     Button(onClick = dropUnlessResumed(block = onTagAdd)) {
                         Text(text = "추가하기")
@@ -125,7 +125,7 @@ private fun MemoTagFilterLayout(
                         modifier = if (uiState == null) Modifier.width(80.dp) else Modifier,
                         leadingIcon = {
                             ColorCircle(
-                                color = color,
+                                colorProvider = { color },
                                 modifier = Modifier.size(8.dp),
                             )
                         },

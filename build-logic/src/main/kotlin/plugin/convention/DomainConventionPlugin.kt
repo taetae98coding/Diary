@@ -1,6 +1,5 @@
 package plugin.convention
 
-import io.github.taetae98coding.diary.gradle.library
 import io.github.taetae98coding.diary.gradle.libs
 import io.github.taetae98coding.diary.gradle.plugins
 import org.gradle.api.Plugin

@@ -32,6 +32,7 @@ import io.github.taetae98coding.diary.compose.core.dialog.LocalDatePickerDialogH
 import io.github.taetae98coding.diary.compose.core.dialog.LocalTimePickerDialogHost
 import io.github.taetae98coding.diary.compose.core.dialog.rememberDialogState
 import io.github.taetae98coding.diary.compose.core.icon.ScheduleIcon
+import io.github.taetae98coding.diary.compose.core.preview.ComponentPreview
 import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
@@ -67,7 +68,10 @@ private fun DateRangeTitle(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(text = "날짜 범위")
+        Text(
+            text = "날짜 범위",
+            style = DiaryTheme.typography.titleMedium,
+        )
         Switch(
             checked = state.hasDateRange,
             onCheckedChange = null,
@@ -84,13 +88,11 @@ private fun DateRangePicker(
         DateRangeIsAllDay(state = state)
         Row {
             LocalDateButton(
-                state = state,
                 localDateProvider = state.start::date,
                 onLocalDateChange = { state.updateStart(LocalDateTime(it, state.start.time)) },
                 modifier = Modifier.weight(1F),
             )
             LocalDateButton(
-                state = state,
                 localDateProvider = state.endInclusive::date,
                 onLocalDateChange = { state.updateEndInclusive(LocalDateTime(it, state.endInclusive.time)) },
                 modifier = Modifier.weight(1F),
@@ -99,13 +101,11 @@ private fun DateRangePicker(
         AnimatedVisibility(visible = !state.isAllDay) {
             Row {
                 LocalTimeButton(
-                    state = state,
                     localTimeProvider = state.start::time,
                     onLocalTimeChange = { state.updateStart(LocalDateTime(state.start.date, it)) },
                     modifier = Modifier.weight(1F),
                 )
                 LocalTimeButton(
-                    state = state,
                     localTimeProvider = state.endInclusive::time,
                     onLocalTimeChange = { state.updateEndInclusive(LocalDateTime(state.endInclusive.date, it)) },
                     modifier = Modifier.weight(1F),
@@ -141,7 +141,6 @@ private fun DateRangeIsAllDay(
 
 @Composable
 private fun LocalDateButton(
-    state: DateRangeCardState,
     localDateProvider: () -> LocalDate,
     onLocalDateChange: (LocalDate) -> Unit,
     modifier: Modifier = Modifier,
@@ -163,7 +162,6 @@ private fun LocalDateButton(
 
 @Composable
 private fun LocalTimeButton(
-    state: DateRangeCardState,
     localTimeProvider: () -> LocalTime,
     onLocalTimeChange: (LocalTime) -> Unit,
     modifier: Modifier = Modifier,
@@ -294,5 +292,13 @@ private fun <T : Comparable<T>> transitionSpec(): AnimatedContentTransitionScope
         }.using(
             SizeTransform(clip = false),
         )
+    }
+}
+
+@ComponentPreview
+@Composable
+private fun Preview() {
+    DiaryTheme {
+        DateRangeCard()
     }
 }

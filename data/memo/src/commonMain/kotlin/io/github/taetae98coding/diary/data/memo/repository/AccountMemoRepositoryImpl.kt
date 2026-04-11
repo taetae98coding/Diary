@@ -29,6 +29,8 @@ import org.koin.core.annotation.Provided
 @Factory
 public class AccountMemoRepositoryImpl(
     @param:Provided
+    private val clock: Clock,
+    @param:Provided
     private val databaseTransactor: DatabaseTransactor,
     @param:Provided
     private val memoLocalDataSource: MemoLocalDataSource,
@@ -48,7 +50,7 @@ public class AccountMemoRepositoryImpl(
         memoTagIds: Set<Uuid>,
     ) {
         val memoId = Uuid.random()
-        val now = Clock.System.now().toEpochMilliseconds()
+        val now = clock.now().toEpochMilliseconds()
 
         databaseTransactor.writeTransaction {
             memoLocalDataSource.upsert(
@@ -66,7 +68,7 @@ public class AccountMemoRepositoryImpl(
                         memoId = memoId,
                         tagId = tagId,
                         isMemoTag = true,
-                        updatedAt = Clock.System.now().toEpochMilliseconds(),
+                        updatedAt = clock.now().toEpochMilliseconds(),
                     )
                 },
             )
@@ -95,7 +97,7 @@ public class AccountMemoRepositoryImpl(
             memoLocalDataSource.updateDetail(
                 memoId = memoId,
                 detail = detail.toLocal(),
-                updatedAt = Clock.System.now().toEpochMilliseconds(),
+                updatedAt = clock.now().toEpochMilliseconds(),
             )
             syncMemoLocalDataSource.upsert(
                 SyncMemoLocalEntity(memoId = memoId),
@@ -111,7 +113,7 @@ public class AccountMemoRepositoryImpl(
             memoLocalDataSource.updateFinish(
                 memoId = memoId,
                 isFinished = isFinished,
-                updatedAt = Clock.System.now().toEpochMilliseconds(),
+                updatedAt = clock.now().toEpochMilliseconds(),
             )
             syncMemoLocalDataSource.upsert(
                 SyncMemoLocalEntity(memoId = memoId),
@@ -127,7 +129,7 @@ public class AccountMemoRepositoryImpl(
             memoLocalDataSource.updateDelete(
                 memoId = memoId,
                 isDeleted = isDeleted,
-                updatedAt = Clock.System.now().toEpochMilliseconds(),
+                updatedAt = clock.now().toEpochMilliseconds(),
             )
             syncMemoLocalDataSource.upsert(
                 SyncMemoLocalEntity(memoId = memoId),

@@ -5,6 +5,7 @@ import androidx.room3.Dao
 import androidx.room3.DaoReturnTypeConverters
 import androidx.room3.Query
 import androidx.room3.paging.PagingSourceDaoReturnTypeConverter
+import io.github.taetae98coding.diary.core.database.api.entity.FilterPresenceLocalEntity
 import io.github.taetae98coding.diary.core.database.api.entity.MemoLocalEntity
 import kotlin.uuid.Uuid
 
@@ -70,7 +71,7 @@ internal interface AccountListMemoDao {
     )
     fun page(
         accountId: Uuid,
-        tagPresence: Int,
-        datePresence: Int,
+        tagPresence: FilterPresenceLocalEntity,
+        datePresence: FilterPresenceLocalEntity,
     ): PagingSource<Int, MemoLocalEntity>
 }

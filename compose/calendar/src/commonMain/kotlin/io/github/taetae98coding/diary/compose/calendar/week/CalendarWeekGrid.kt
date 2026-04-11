@@ -17,7 +17,7 @@ internal fun CalendarWeekGrid(
     yearMonth: YearMonth,
     weekOfMonth: Int,
     modifier: Modifier = Modifier,
-    content: CalendarWeekGridScope.() -> Unit,
+    content: CalendarWeekGridScope.() -> Unit = {},
 ) {
     val gridScope = CalendarWeekGridScopeImpl(yearMonth, weekOfMonth).apply(content)
     val gridItems by remember(gridScope.rows) {
