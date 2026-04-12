@@ -185,6 +185,10 @@
       "restrictions": []
     },
     {
+      "module": ":data:routine",
+      "restrictions": []
+    },
+    {
       "module": ":data:sync",
       "restrictions": []
     },
@@ -217,6 +221,10 @@
       "restrictions": []
     },
     {
+      "module": ":domain:routine",
+      "restrictions": []
+    },
+    {
       "module": ":domain:sync",
       "restrictions": []
     },
@@ -246,6 +254,10 @@
     },
     {
       "module": ":feature:more",
+      "restrictions": []
+    },
+    {
+      "module": ":feature:routine",
       "restrictions": []
     },
     {
@@ -293,15 +305,7 @@
       "restrictions": []
     },
     {
-      "module": ":presenter:calendar",
-      "restrictions": []
-    },
-    {
       "module": ":presenter:memo",
-      "restrictions": []
-    },
-    {
-      "module": ":presenter:tag",
       "restrictions": []
     }
   ]
