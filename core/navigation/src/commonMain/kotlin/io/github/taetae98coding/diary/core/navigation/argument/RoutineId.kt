@@ -1,5 +1,6 @@
 package io.github.taetae98coding.diary.core.navigation.argument
 
+import kotlin.jvm.JvmInline
 import kotlin.uuid.Uuid
 import kotlinx.serialization.Serializable
 
