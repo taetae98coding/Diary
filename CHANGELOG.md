@@ -1,3 +1,13 @@
+## [1.6.0] - 2026-04-12
+
+### 🚀 Features
+
+- Routine
+- 동기화 실패 시 Snackbar 노출
+
+### 🐛 Bug Fixes
+
+- TopLevel 경우만 TopLevel Navigation 단축키 호출하도록 수정
 ## [1.5.0] - 2026-04-04
 
 ### 🚀 Features
