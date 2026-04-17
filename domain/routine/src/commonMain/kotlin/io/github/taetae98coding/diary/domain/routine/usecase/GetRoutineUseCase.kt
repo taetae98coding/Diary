@@ -17,13 +17,8 @@ public class GetRoutineUseCase(
     private val routineRepository: RoutineRepository,
 ) {
     public operator fun invoke(routineId: Uuid): Flow<Result<Routine?>> {
-        return flow {
-            routineRepository.get(routineId)
-                .also { emitAll(it) }
-        }.map {
-            Result.success(it)
-        }.catch {
-            emit(Result.failure(it))
-        }
+        return flow { emitAll(routineRepository.get(routineId)) }
+            .map { Result.success(it) }
+            .catch { emit(Result.failure(it)) }
     }
 }

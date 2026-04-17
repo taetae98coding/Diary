@@ -29,7 +29,7 @@ class GetListMemoFilterTagUseCaseTest : BehaviorSpec() {
         Given("User 계정") {
             clearAllMocks()
             val account = fixtureMonkey.giveMeOne<Account.User>()
-            val tags = fixtureMonkey.giveMeOne<List<Uuid>>()
+            val tags = fixtureMonkey.giveMeOne<Set<Uuid>>()
 
             every { getAccountUseCase() } returns flowOf(Result.success(account))
             every { accountListMemoFilterTagRepository.get(account.accountId) } returns flowOf(tags)
@@ -54,7 +54,7 @@ class GetListMemoFilterTagUseCaseTest : BehaviorSpec() {
         Given("Guest 계정") {
             clearAllMocks()
             val account = Account.Guest
-            val tags = fixtureMonkey.giveMeOne<List<Uuid>>()
+            val tags = fixtureMonkey.giveMeOne<Set<Uuid>>()
 
             every { getAccountUseCase() } returns flowOf(Result.success(account))
             every { accountListMemoFilterTagRepository.get(account.accountId) } returns flowOf(tags)

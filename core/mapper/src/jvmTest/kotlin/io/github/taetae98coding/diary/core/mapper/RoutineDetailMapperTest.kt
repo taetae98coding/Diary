@@ -7,7 +7,6 @@ import io.github.taetae98coding.diary.core.database.api.entity.RoutineDetailLoca
 import io.github.taetae98coding.diary.core.model.routine.RoutineDetail
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import kotlinx.datetime.LocalDate
 
 class RoutineDetailMapperTest : FunSpec() {
     private val fixtureMonkey = FixtureMonkey.builder()
@@ -16,10 +15,7 @@ class RoutineDetailMapperTest : FunSpec() {
 
     init {
         test("Domain to Local") {
-            val detail = fixtureMonkey.giveMeKotlinBuilder<RoutineDetail>()
-                .set(RoutineDetail::start, LocalDate(2026, 1, 1))
-                .set(RoutineDetail::endInclusive, LocalDate(2026, 12, 31))
-                .sample()
+            val detail = fixtureMonkey.giveMeKotlinBuilder<RoutineDetail>().sample()
 
             val result = detail.toLocal()
 
@@ -32,10 +28,7 @@ class RoutineDetailMapperTest : FunSpec() {
         }
 
         test("Local to Domain") {
-            val entity = fixtureMonkey.giveMeKotlinBuilder<RoutineDetailLocalEntity>()
-                .set(RoutineDetailLocalEntity::start, LocalDate(2026, 1, 1))
-                .set(RoutineDetailLocalEntity::endInclusive, LocalDate(2026, 12, 31))
-                .sample()
+            val entity = fixtureMonkey.giveMeKotlinBuilder<RoutineDetailLocalEntity>().sample()
 
             val result = entity.toDomain()
 

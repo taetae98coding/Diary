@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.mapLatest
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Provided
 
@@ -24,7 +23,7 @@ public class GetHolidayUseCase(
         return flow {
             combine(
                 holidayRepository.get(year),
-                holidayFilterRepository.get().mapLatest { it.toSet() },
+                holidayFilterRepository.get(),
             ) { holidays, filter ->
                 if (filter.isEmpty()) {
                     holidays

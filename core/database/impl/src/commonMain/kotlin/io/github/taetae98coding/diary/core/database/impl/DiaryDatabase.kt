@@ -23,6 +23,7 @@ import io.github.taetae98coding.diary.core.database.impl.converter.RoutineRRuleL
 import io.github.taetae98coding.diary.core.database.impl.converter.SyncStateTypeConverter
 import io.github.taetae98coding.diary.core.database.impl.dao.AccountCalendarMemoDao
 import io.github.taetae98coding.diary.core.database.impl.dao.AccountCalendarMemoFilterTagDao
+import io.github.taetae98coding.diary.core.database.impl.dao.AccountCalendarRoutineDao
 import io.github.taetae98coding.diary.core.database.impl.dao.AccountListMemoDao
 import io.github.taetae98coding.diary.core.database.impl.dao.AccountListMemoFilterTagDao
 import io.github.taetae98coding.diary.core.database.impl.dao.AccountMemoDao
@@ -48,15 +49,15 @@ import io.github.taetae98coding.diary.library.room.common.converter.UuidTypeConv
         MemoLocalEntity::class,
         TagLocalEntity::class,
         MemoTagLocalEntity::class,
-        RoutineLocalEntity::class,
         CalendarMemoFilterTagLocalEntity::class,
         ListMemoFilterTagLocalEntity::class,
         AccountMemoLocalEntity::class,
         AccountTagLocalEntity::class,
-        AccountRoutineLocalEntity::class,
         SyncMemoLocalEntity::class,
         SyncTagLocalEntity::class,
         SyncMemoTagLocalEntity::class,
+        RoutineLocalEntity::class,
+        AccountRoutineLocalEntity::class,
         SyncRoutineLocalEntity::class,
     ],
     version = 3,
@@ -83,6 +84,7 @@ internal abstract class DiaryDatabase : RoomDatabase() {
     abstract fun accountListMemoFilterTagDao(): AccountListMemoFilterTagDao
     abstract fun accountCalendarMemoFilterTagDao(): AccountCalendarMemoFilterTagDao
     abstract fun accountRoutineDao(): AccountRoutineDao
+    abstract fun accountCalendarRoutineDao(): AccountCalendarRoutineDao
 
     abstract fun memoDao(): MemoDao
     abstract fun memoTagDao(): MemoTagDao

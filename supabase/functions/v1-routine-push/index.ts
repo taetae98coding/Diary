@@ -9,15 +9,23 @@ const routineRepository = new RoutineRepository(supabaseAdmin);
 function toRoutine(v1: RoutineV1): Routine {
   return {
     id: v1.id,
-    title: v1.title,
-    description: v1.description,
-    start: v1.start,
-    endInclusive: v1.endInclusive,
-    color: v1.color,
-    rRules: v1.rRules,
+    detail: {
+      title: v1.detail.title,
+      description: v1.detail.description,
+      start: v1.detail.start,
+      endInclusive: v1.detail.endInclusive,
+      color: v1.detail.color,
+      routineCount: v1.detail.routineCount,
+    },
+    rRules: v1.rRules.map((rule) => ({
+      diaryByDay: {
+        days: rule.diaryByDay.days,
+        ordinal: rule.diaryByDay.ordinal,
+      },
+      byMonthDay: rule.byMonthDay,
+    })),
     rDates: v1.rDates,
     exDates: v1.exDates,
-    routineCount: v1.routineCount,
     isFinished: v1.isFinished,
     isDeleted: v1.isDeleted,
     updatedAt: v1.updatedAt,

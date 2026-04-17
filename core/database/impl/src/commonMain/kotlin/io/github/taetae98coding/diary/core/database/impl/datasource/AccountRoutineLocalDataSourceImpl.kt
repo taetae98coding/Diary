@@ -6,7 +6,6 @@ import io.github.taetae98coding.diary.core.database.api.entity.AccountRoutineLoc
 import io.github.taetae98coding.diary.core.database.api.entity.RoutineLocalEntity
 import io.github.taetae98coding.diary.core.database.impl.DiaryDatabase
 import kotlin.uuid.Uuid
-import kotlinx.coroutines.flow.Flow
 import org.koin.core.annotation.Factory
 
 @Factory
@@ -17,13 +16,6 @@ internal class AccountRoutineLocalDataSourceImpl(private val database: DiaryData
 
     override suspend fun upsert(entities: Collection<AccountRoutineLocalEntity>) {
         database.accountRoutineDao().upsert(entities)
-    }
-
-    override fun getByYear(
-        accountId: Uuid,
-        year: Int,
-    ): Flow<List<RoutineLocalEntity>> {
-        return database.accountRoutineDao().getByYear(accountId, year)
     }
 
     override fun page(accountId: Uuid): PagingSource<Int, RoutineLocalEntity> {

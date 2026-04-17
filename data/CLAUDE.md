@@ -16,7 +16,7 @@ Repository 구현체와 DataSource 조합 레이어.
 ### 다중 DataSource 조합
 
 - 트랜잭션이 필요하면 `DatabaseTransactor`를 사용한다.
-- 타임스탬프: `clock.now().toEpochMilliseconds()` (Clock은 생성자로 주입받아 사용, `Clock.System` 직접 사용 금지)
+- 타임스탬프: `clock.now().toEpochMilliseconds()` (@.claude/docs/clock-convention.md 참조)
 - 매핑: `toDomain()`, `toLocal()` 등 mapper 확장 함수 사용
 
 ### Koin 등록

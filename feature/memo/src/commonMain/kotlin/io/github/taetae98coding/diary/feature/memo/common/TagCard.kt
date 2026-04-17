@@ -2,7 +2,10 @@ package io.github.taetae98coding.diary.feature.memo.common
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.FlexAlignContent
+import androidx.compose.foundation.layout.FlexBox
+import androidx.compose.foundation.layout.FlexJustifyContent
+import androidx.compose.foundation.layout.FlexWrap
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -71,10 +74,14 @@ private fun TagFlowRow(
     onTag: (Uuid) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    FlowRow(
+    FlexBox(
         modifier = modifier.padding(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterHorizontally),
-        verticalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterVertically),
+        config = {
+            wrap(FlexWrap.Wrap)
+            gap(6.dp)
+            justifyContent(FlexJustifyContent.Center)
+            alignContent(FlexAlignContent.Center)
+        },
     ) {
         when (val uiState = uiStateProvider()) {
             TagCardUiState.Loading -> Unit

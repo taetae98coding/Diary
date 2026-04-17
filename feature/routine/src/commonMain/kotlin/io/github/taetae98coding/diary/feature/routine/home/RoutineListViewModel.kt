@@ -6,10 +6,12 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import io.github.taetae98coding.diary.core.model.routine.Routine
 import io.github.taetae98coding.diary.domain.routine.usecase.PageRoutineUseCase
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.mapLatest
 import org.koin.core.annotation.KoinViewModel
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @KoinViewModel
 internal class RoutineListViewModel(pageRoutineUseCase: PageRoutineUseCase) : ViewModel() {
     val pagingData: Flow<PagingData<Routine>> = pageRoutineUseCase()

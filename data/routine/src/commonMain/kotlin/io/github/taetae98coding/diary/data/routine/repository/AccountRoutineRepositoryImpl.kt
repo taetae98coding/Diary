@@ -20,7 +20,8 @@ import io.github.taetae98coding.diary.library.paging.common.mapPagingLatest
 import kotlin.time.Clock
 import kotlin.uuid.Uuid
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.first
+import kotlinx.datetime.LocalDate
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Provided
 
@@ -41,6 +42,8 @@ public class AccountRoutineRepositoryImpl(
         accountId: Uuid,
         detail: RoutineDetail,
         rRules: List<RoutineRRule>,
+        rDates: Set<LocalDate>,
+        exDates: Set<LocalDate>,
     ) {
         val routineId = Uuid.random()
         val now = clock.now().toEpochMilliseconds()
@@ -50,7 +53,9 @@ public class AccountRoutineRepositoryImpl(
                 RoutineLocalEntity(
                     id = routineId,
                     detail = detail.toLocal(),
-                    rRules = rRules.map(RoutineRRule::toLocal),
+                    rRules = rRules.map { it.toLocal() },
+                    rDates = rDates.toList(),
+                    exDates = exDates.toList(),
                     createdAt = now,
                     updatedAt = now,
                 ),
@@ -67,60 +72,30 @@ public class AccountRoutineRepositoryImpl(
         }
     }
 
-    override suspend fun updateDetail(
+    override suspend fun update(
         routineId: Uuid,
         detail: RoutineDetail,
+        rRules: List<RoutineRRule>,
+        rDates: Set<LocalDate>,
+        exDates: Set<LocalDate>,
     ) {
         databaseTransactor.writeTransaction {
-            routineLocalDataSource.updateDetail(
-                routineId = routineId,
-                detail = detail.toLocal(),
-                updatedAt = clock.now().toEpochMilliseconds(),
+            val existing = routineLocalDataSource.get(routineId).first() ?: return@writeTransaction
+            val now = clock.now().toEpochMilliseconds()
+
+            routineLocalDataSource.upsert(
+                existing.copy(
+                    detail = detail.toLocal(),
+                    rRules = rRules.map { it.toLocal() },
+                    rDates = rDates.toList(),
+                    exDates = exDates.toList(),
+                    updatedAt = now,
+                ),
             )
             syncRoutineLocalDataSource.upsert(
                 SyncRoutineLocalEntity(routineId = routineId),
             )
         }
-    }
-
-    override suspend fun updateFinish(
-        routineId: Uuid,
-        isFinished: Boolean,
-    ) {
-        databaseTransactor.writeTransaction {
-            routineLocalDataSource.updateFinish(
-                routineId = routineId,
-                isFinished = isFinished,
-                updatedAt = clock.now().toEpochMilliseconds(),
-            )
-            syncRoutineLocalDataSource.upsert(
-                SyncRoutineLocalEntity(routineId = routineId),
-            )
-        }
-    }
-
-    override suspend fun updateDelete(
-        routineId: Uuid,
-        isDeleted: Boolean,
-    ) {
-        databaseTransactor.writeTransaction {
-            routineLocalDataSource.updateDelete(
-                routineId = routineId,
-                isDeleted = isDeleted,
-                updatedAt = clock.now().toEpochMilliseconds(),
-            )
-            syncRoutineLocalDataSource.upsert(
-                SyncRoutineLocalEntity(routineId = routineId),
-            )
-        }
-    }
-
-    override fun getByYear(
-        accountId: Uuid,
-        year: Int,
-    ): Flow<List<Routine>> {
-        return accountRoutineLocalDataSource.getByYear(accountId, year)
-            .map { entities -> entities.map(RoutineLocalEntity::toDomain) }
     }
 
     override fun page(accountId: Uuid): Flow<PagingData<Routine>> {
