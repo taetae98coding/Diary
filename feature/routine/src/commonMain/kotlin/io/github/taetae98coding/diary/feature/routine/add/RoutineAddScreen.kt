@@ -1,16 +1,13 @@
 package io.github.taetae98coding.diary.feature.routine.add
 
-import androidx.compose.foundation.text.input.clearText
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.taetae98coding.diary.compose.core.snackbar.showImmediate
-import io.github.taetae98coding.diary.library.compose.ui.random
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -24,11 +21,11 @@ internal fun RoutineAddScreen(
     val state = rememberRoutineAddScaffoldState()
 
     RoutineAddScaffold(
+        modifier = modifier,
         state = state,
         isInProgressProvider = { isInProgress },
         onNavigateUp = navigateUp,
-        onAdd = { viewModel.add(state.detail, state.rRules) },
-        modifier = modifier,
+        onAdd = { viewModel.add(detail = state.detail, rRules = state.rRules.toList()) },
     )
 
     TitleFocusEffect(state = state)
@@ -59,13 +56,8 @@ private fun RoutineAddEffectHandler(
         when (effect) {
             RoutineAddEffect.AddFinish -> {
                 coroutineScope.launch { state.hostState.showImmediate("루틴이 추가되었습니다") }
-                state.titleCardState.textFieldState.clearText()
-                state.descriptionCardState.textFieldState.clearText()
+                coroutineScope.launch { state.reset() }
                 state.titleCardState.focusRequester.requestFocus()
-                coroutineScope.launch { state.colorCardState.updateColor(Color.random()) }
-                state.dateRangeCardState.clear()
-                state.routineCountCardState.clear()
-                state.rRuleCardState.clear()
                 viewModel.consumeEffect()
             }
 
@@ -75,8 +67,8 @@ private fun RoutineAddEffectHandler(
                 viewModel.consumeEffect()
             }
 
-            RoutineAddEffect.RRulesEmpty -> {
-                coroutineScope.launch { state.hostState.showImmediate("반복 규칙을 추가해주세요") }
+            RoutineAddEffect.RRuleEmpty -> {
+                coroutineScope.launch { state.hostState.showImmediate("반복 규칙을 1개 이상 추가하세요") }
                 viewModel.consumeEffect()
             }
 

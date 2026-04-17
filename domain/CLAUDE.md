@@ -16,7 +16,7 @@
 
 ### Clock
 
-- `Clock.System`을 직접 사용하지 않고, 생성자로 주입받아 사용한다.
+@.claude/docs/clock-convention.md
 
 ### 테스트 커버리지
 

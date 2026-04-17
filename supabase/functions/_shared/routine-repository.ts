@@ -1,5 +1,45 @@
 import { SupabaseClient } from "jsr:@supabase/supabase-js@2";
 import { Routine } from "./entity/routine.ts";
+import { RoutineRRule } from "./entity/routine-rrule.ts";
+
+function parseRRules(value: string | null): RoutineRRule[] {
+  if (!value) return [];
+  try {
+    return JSON.parse(value) as RoutineRRule[];
+  } catch (_) {
+    return [];
+  }
+}
+
+function parseStringList(value: string | null): string[] {
+  if (!value) return [];
+  try {
+    return JSON.parse(value) as string[];
+  } catch (_) {
+    return [];
+  }
+}
+
+function rowToRoutine(row: any): Routine {
+  return {
+    id: row.id,
+    detail: {
+      title: row.title,
+      description: row.description,
+      start: row.start,
+      endInclusive: row.end_inclusive,
+      color: row.color,
+      routineCount: row.routine_count,
+    },
+    rRules: parseRRules(row.r_rules),
+    rDates: parseStringList(row.r_dates),
+    exDates: parseStringList(row.ex_dates),
+    isFinished: row.is_finished,
+    isDeleted: row.is_deleted,
+    updatedAt: row.updated_at,
+    createdAt: row.created_at,
+  };
+}
 
 export class RoutineRepository {
   constructor(private readonly supabase: SupabaseClient) {}
@@ -26,15 +66,15 @@ export class RoutineRepository {
 
     const routineRow = {
       id: routine.id,
-      title: routine.title,
-      description: routine.description,
-      start: routine.start,
-      end_inclusive: routine.endInclusive,
-      color: routine.color,
-      r_rules: routine.rRules,
-      r_dates: routine.rDates,
-      ex_dates: routine.exDates,
-      routine_count: routine.routineCount,
+      title: routine.detail.title,
+      description: routine.detail.description,
+      start: routine.detail.start,
+      end_inclusive: routine.detail.endInclusive,
+      color: routine.detail.color,
+      routine_count: routine.detail.routineCount,
+      r_rules: JSON.stringify(routine.rRules),
+      r_dates: JSON.stringify(routine.rDates),
+      ex_dates: JSON.stringify(routine.exDates),
       is_finished: routine.isFinished,
       is_deleted: routine.isDeleted,
       updated_at: routine.updatedAt,
@@ -57,7 +97,9 @@ export class RoutineRepository {
       );
 
     if (accountRoutineError) {
-      throw new Error(`AccountRoutine upsert failed: ${accountRoutineError.message}`);
+      throw new Error(
+        `AccountRoutine upsert failed: ${accountRoutineError.message}`,
+      );
     }
   }
 
@@ -77,21 +119,6 @@ export class RoutineRepository {
       throw new Error(`Routine pull failed: ${error.message}`);
     }
 
-    return (data ?? []).map((row: any) => ({
-      id: row.id,
-      title: row.title,
-      description: row.description,
-      start: row.start,
-      endInclusive: row.end_inclusive,
-      color: row.color,
-      rRules: row.r_rules,
-      rDates: row.r_dates,
-      exDates: row.ex_dates,
-      routineCount: row.routine_count,
-      isFinished: row.is_finished,
-      isDeleted: row.is_deleted,
-      updatedAt: row.updated_at,
-      createdAt: row.created_at,
-    }));
+    return (data ?? []).map(rowToRoutine);
   }
 }

@@ -30,7 +30,7 @@ internal class CalendarFilterViewModel(
         .cachedIn(viewModelScope)
 
     private val selectedTagIds = getCalendarMemoFilterTagUseCase()
-        .mapLatest { it.getOrDefault(emptyList()).toSet() }
+        .mapLatest { it.getOrDefault(emptySet()) }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),

@@ -2,7 +2,7 @@ package io.github.taetae98coding.diary.domain.routine.usecase
 
 import io.github.taetae98coding.diary.core.model.routine.RoutineDetail
 import io.github.taetae98coding.diary.core.model.routine.RoutineRRule
-import io.github.taetae98coding.diary.core.model.routine.RoutineRRulesEmptyException
+import io.github.taetae98coding.diary.core.model.routine.RoutineRRuleEmptyException
 import io.github.taetae98coding.diary.core.model.routine.RoutineTitleBlankException
 import io.github.taetae98coding.diary.core.model.sync.SyncType
 import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
@@ -25,7 +25,7 @@ public class AddRoutineUseCase(
     ): Result<Unit> {
         return runCatching {
             if (detail.title.isBlank()) throw RoutineTitleBlankException()
-            if (rRules.isEmpty()) throw RoutineRRulesEmptyException()
+            if (rRules.isEmpty()) throw RoutineRRuleEmptyException()
 
             val account = getAccountUseCase().first().getOrThrow()
 

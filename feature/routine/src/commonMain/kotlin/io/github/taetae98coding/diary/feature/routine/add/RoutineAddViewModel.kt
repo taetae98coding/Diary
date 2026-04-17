@@ -4,10 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.github.taetae98coding.diary.core.model.routine.RoutineDetail
 import io.github.taetae98coding.diary.core.model.routine.RoutineRRule
-import io.github.taetae98coding.diary.core.model.routine.RoutineRRulesEmptyException
+import io.github.taetae98coding.diary.core.model.routine.RoutineRRuleEmptyException
 import io.github.taetae98coding.diary.core.model.routine.RoutineTitleBlankException
 import io.github.taetae98coding.diary.domain.routine.usecase.AddRoutineUseCase
-import kotlin.uuid.Uuid
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -35,7 +34,7 @@ internal class RoutineAddViewModel(private val addRoutineUseCase: AddRoutineUseC
                 .onFailure { throwable ->
                     _effect.value = when (throwable) {
                         is RoutineTitleBlankException -> RoutineAddEffect.TitleBlank
-                        is RoutineRRulesEmptyException -> RoutineAddEffect.RRulesEmpty
+                        is RoutineRRuleEmptyException -> RoutineAddEffect.RRuleEmpty
                         else -> RoutineAddEffect.UnknownError
                     }
                 }

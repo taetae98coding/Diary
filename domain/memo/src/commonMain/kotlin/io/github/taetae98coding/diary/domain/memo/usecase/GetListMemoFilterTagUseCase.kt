@@ -19,7 +19,7 @@ public class GetListMemoFilterTagUseCase(
     @param:Provided
     private val accountListMemoFilterTagRepository: AccountListMemoFilterTagRepository,
 ) {
-    public operator fun invoke(): Flow<Result<List<Uuid>>> {
+    public operator fun invoke(): Flow<Result<Set<Uuid>>> {
         return flow {
             getAccountUseCase().mapLatest { it.getOrThrow() }
                 .flatMapLatest { accountListMemoFilterTagRepository.get(it.accountId) }

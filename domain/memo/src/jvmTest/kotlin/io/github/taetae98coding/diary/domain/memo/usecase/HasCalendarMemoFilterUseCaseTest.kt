@@ -29,7 +29,7 @@ class HasCalendarMemoFilterUseCaseTest : BehaviorSpec() {
         Given("필터 태그가 존재하는 경우") {
             clearAllMocks()
             val account = fixtureMonkey.giveMeOne<Account.User>()
-            val tags = listOf(Uuid.random())
+            val tags = setOf(Uuid.random())
 
             every { getAccountUseCase() } returns flowOf(Result.success(account))
             every { accountCalendarMemoFilterTagRepository.get(account.accountId) } returns flowOf(tags)
@@ -50,7 +50,7 @@ class HasCalendarMemoFilterUseCaseTest : BehaviorSpec() {
         Given("필터 태그가 비어있는 경우") {
             clearAllMocks()
             val account = fixtureMonkey.giveMeOne<Account.User>()
-            val tags = emptyList<Uuid>()
+            val tags = emptySet<Uuid>()
 
             every { getAccountUseCase() } returns flowOf(Result.success(account))
             every { accountCalendarMemoFilterTagRepository.get(account.accountId) } returns flowOf(tags)

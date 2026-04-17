@@ -1,6 +1,5 @@
 package io.github.taetae98coding.diary.feature.routine.detail
 
-import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.scaleIn
@@ -9,11 +8,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.CircularWavyProgressIndicator
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconToggleButton
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Text
@@ -28,41 +25,33 @@ import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.isMetaPressed
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.type
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.dropUnlessResumed
 import io.github.taetae98coding.diary.compose.core.button.CheckFloatingButton
 import io.github.taetae98coding.diary.compose.core.button.NavigateUpButton
 import io.github.taetae98coding.diary.compose.core.card.ColorCard
 import io.github.taetae98coding.diary.compose.core.card.DescriptionCard
+import io.github.taetae98coding.diary.compose.core.card.LocalDateRangeCard
 import io.github.taetae98coding.diary.compose.core.card.TitleCard
-import io.github.taetae98coding.diary.compose.core.icon.DeleteIcon
-import io.github.taetae98coding.diary.compose.core.icon.FinishIcon
+import io.github.taetae98coding.diary.compose.core.icon.AddIcon
 import io.github.taetae98coding.diary.compose.core.modifier.focusableKeyEvent
-import io.github.taetae98coding.diary.compose.core.preview.ScreenPreview
 import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
-import io.github.taetae98coding.diary.core.model.routine.RoutineDetail
-import io.github.taetae98coding.diary.core.model.routine.RoutineRRule
-import io.github.taetae98coding.diary.feature.routine.add.card.RRuleCard
-import io.github.taetae98coding.diary.feature.routine.add.card.RoutineCountCard
-import io.github.taetae98coding.diary.feature.routine.add.card.RoutineDateRangeCard
+import io.github.taetae98coding.diary.core.model.routine.Routine
+import io.github.taetae98coding.diary.feature.routine.add.component.RRuleEditorDialog
+import io.github.taetae98coding.diary.feature.routine.add.component.RRuleSummaryCard
+import io.github.taetae98coding.diary.feature.routine.add.component.RoutineCountEditor
+import io.github.taetae98coding.diary.feature.routine.detail.component.RoutineDateListCard
 
 @Composable
 internal fun RoutineDetailScaffold(
     state: RoutineDetailScaffoldState,
+    routineProvider: () -> Routine?,
+    updateInProgressProvider: () -> Boolean,
     modifier: Modifier = Modifier,
-    detailProvider: () -> RoutineDetail? = { null },
-    finishUiStateProvider: () -> RoutineDetailFinishUiState = { RoutineDetailFinishUiState() },
-    deleteUiStateProvider: () -> RoutineDetailDeleteUiState = { RoutineDetailDeleteUiState() },
-    updateInProgressProvider: () -> Boolean = { false },
-    rRulesProvider: () -> List<RoutineRRule> = { emptyList() },
     onNavigateUp: () -> Unit = {},
     onUpdate: () -> Unit = {},
-    onAddRRule: (List<RoutineRRule>) -> Unit = {},
-    onRemoveRRule: (RoutineRRule) -> Unit = {},
-    onFinish: () -> Unit = {},
-    onRestart: () -> Unit = {},
-    onDelete: () -> Unit = {},
 ) {
+    val isLoading by remember { derivedStateOf { routineProvider() == null } }
+
     Scaffold(
         modifier = modifier
             .focusableKeyEvent(autoFocus = false) { event ->
@@ -72,23 +61,22 @@ internal fun RoutineDetailScaffold(
                 } else {
                     false
                 }
-            }.imePadding(),
+            }
+            .imePadding(),
         topBar = {
             TopBar(
-                detailProvider = detailProvider,
-                finishUiStateProvider = finishUiStateProvider,
-                deleteUiStateProvider = deleteUiStateProvider,
+                routineProvider = routineProvider,
                 onNavigateUp = onNavigateUp,
-                onFinish = onFinish,
-                onRestart = onRestart,
-                onDelete = onDelete,
             )
         },
         floatingActionButton = {
             val isVisible by remember(state) {
                 derivedStateOf {
-                    val detail = detailProvider()
-                    detail != null && state.detail != detail && state.isFabVisible
+                    val routine = routineProvider() ?: return@derivedStateOf false
+                    routine.detail != state.detail ||
+                        routine.rRules != state.rRules.toList() ||
+                        routine.rDates != state.rDates.toSet() ||
+                        routine.exDates != state.exDates.toSet()
                 }
             }
 
@@ -105,125 +93,97 @@ internal fun RoutineDetailScaffold(
         },
         snackbarHost = { SnackbarHost(hostState = state.hostState) },
     ) { paddingValues ->
-        LazyColumn(
-            modifier = Modifier
-                .padding(paddingValues)
-                .fillMaxSize(),
-            state = state.lazyListState,
-            contentPadding = DiaryTheme.dimen.screenPaddingValues,
-            verticalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.screenCardSpace),
-        ) {
-            item { TitleCard(state = state.titleCardState) }
-            item { DescriptionCard(state = state.descriptionCardState) }
-            item { ColorCard(state = state.colorCardState, modifier = Modifier.fillParentMaxWidth()) }
-            item { RoutineDateRangeCard(state = state.dateRangeCardState, modifier = Modifier.fillParentMaxWidth()) }
-            item {
-                RRuleCard(
-                    rRulesProvider = rRulesProvider,
-                    onAdd = onAddRRule,
-                    onRemove = onRemoveRRule,
-                    modifier = Modifier.fillParentMaxWidth(),
-                )
-            }
-            item {
-                RoutineCountCard(
-                    state = state.routineCountCardState,
-                    modifier = Modifier.fillParentMaxWidth(),
-                )
+        Crossfade(
+            targetState = isLoading,
+            modifier = Modifier.padding(paddingValues),
+        ) { isLoading ->
+            if (!isLoading) {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = DiaryTheme.dimen.screenPaddingValues,
+                    verticalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.screenCardSpace),
+                ) {
+                    item {
+                        TitleCard(state = state.titleCardState)
+                    }
+                    item {
+                        DescriptionCard(state = state.descriptionCardState)
+                    }
+                    item {
+                        ColorCard(
+                            state = state.colorCardState,
+                            modifier = Modifier.fillParentMaxWidth(),
+                        )
+                    }
+                    item {
+                        LocalDateRangeCard(
+                            state = state.localDateRangeCardState,
+                            modifier = Modifier.fillParentMaxWidth(),
+                        )
+                    }
+                    item {
+                        RoutineCountEditor(
+                            state = state.routineCountState,
+                            modifier = Modifier.fillParentMaxWidth(),
+                        )
+                    }
+                    items(items = state.rRules) { rule ->
+                        RRuleSummaryCard(
+                            rRule = rule,
+                            onDelete = { state.removeRule(rule) },
+                            modifier = Modifier.fillParentMaxWidth(),
+                        )
+                    }
+                    item {
+                        FilledTonalButton(
+                            onClick = state::showRRuleDialog,
+                            modifier = Modifier.fillParentMaxWidth(),
+                        ) {
+                            AddIcon()
+                            Text(text = "규칙 추가")
+                        }
+                    }
+                    item {
+                        RoutineDateListCard(
+                            title = "추가 날짜",
+                            dates = state.rDates,
+                            onAdd = state::addRDate,
+                            onRemove = state::removeRDate,
+                            modifier = Modifier.fillParentMaxWidth(),
+                        )
+                    }
+                    item {
+                        RoutineDateListCard(
+                            title = "제외 날짜",
+                            dates = state.exDates,
+                            onAdd = state::addExDate,
+                            onRemove = state::removeExDate,
+                            modifier = Modifier.fillParentMaxWidth(),
+                        )
+                    }
+                }
             }
         }
     }
-}
 
-@Composable
-private fun TopBar(
-    detailProvider: () -> RoutineDetail?,
-    finishUiStateProvider: () -> RoutineDetailFinishUiState,
-    deleteUiStateProvider: () -> RoutineDetailDeleteUiState,
-    onNavigateUp: () -> Unit,
-    onFinish: () -> Unit,
-    onRestart: () -> Unit,
-    onDelete: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    TopAppBar(
-        title = { detailProvider()?.let { Text(text = it.title) } },
-        modifier = modifier,
-        navigationIcon = { NavigateUpButton(onClick = dropUnlessResumed(block = onNavigateUp)) },
-        actions = {
-            FinishButton(
-                uiStateProvider = finishUiStateProvider,
-                onFinish = onFinish,
-                onRestart = onRestart,
-            )
-            DeleteButton(
-                uiStateProvider = deleteUiStateProvider,
-                onDelete = onDelete,
-            )
+    RRuleEditorDialog(
+        state = state.rRuleEditorDialogState,
+        onConfirm = {
+            state.addRRule(it)
+            state.hideRRuleDialog()
         },
     )
 }
 
 @Composable
-private fun FinishButton(
-    uiStateProvider: () -> RoutineDetailFinishUiState,
-    onFinish: () -> Unit,
-    onRestart: () -> Unit,
+private fun TopBar(
+    routineProvider: () -> Routine?,
     modifier: Modifier = Modifier,
+    onNavigateUp: () -> Unit = {},
 ) {
-    val uiState = uiStateProvider()
-
-    AnimatedContent(targetState = uiState.isInProgress, modifier = modifier) { isInProgress ->
-        if (isInProgress) {
-            CircularWavyProgressIndicator(modifier = Modifier.size(24.dp))
-        } else {
-            IconToggleButton(
-                checked = uiState.isFinished,
-                onCheckedChange = { checked ->
-                    if (checked) onFinish() else onRestart()
-                },
-            ) {
-                FinishIcon()
-            }
-        }
-    }
-}
-
-@Composable
-private fun DeleteButton(
-    uiStateProvider: () -> RoutineDetailDeleteUiState,
-    onDelete: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    val uiState = uiStateProvider()
-
-    Crossfade(targetState = uiState.isInProgress, modifier = modifier) { isInProgress ->
-        if (isInProgress) {
-            CircularWavyProgressIndicator(modifier = Modifier.size(24.dp))
-        } else {
-            IconButton(onClick = onDelete) {
-                DeleteIcon()
-            }
-        }
-    }
-}
-
-@ScreenPreview
-@Composable
-private fun Preview() {
-    DiaryTheme {
-        RoutineDetailScaffold(
-            state = rememberRoutineDetailScaffoldState(routineProvider = { null }),
-            detailProvider = {
-                RoutineDetail(
-                    title = "루틴 제목",
-                    description = "",
-                    start = null,
-                    endInclusive = null,
-                    color = 0,
-                    routineCount = 1,
-                )
-            },
-        )
-    }
+    TopAppBar(
+        title = { routineProvider()?.let { Text(text = it.detail.title) } },
+        modifier = modifier,
+        navigationIcon = { NavigateUpButton(onClick = dropUnlessResumed(block = onNavigateUp)) },
+    )
 }
