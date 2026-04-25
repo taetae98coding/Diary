@@ -10400,6 +10400,9 @@
               "id": ":core:database:api"
             },
             {
+              "id": ":core:datastore:api"
+            },
+            {
               "id": ":domain:routine"
             }
           ]
@@ -10426,6 +10429,9 @@
               "id": ":core:database:api"
             },
             {
+              "id": ":core:datastore:api"
+            },
+            {
               "id": ":domain:routine"
             }
           ]
@@ -10450,6 +10456,9 @@
             },
             {
               "id": ":core:database:api"
+            },
+            {
+              "id": ":core:datastore:api"
             },
             {
               "id": ":domain:routine"
@@ -10502,6 +10511,9 @@
               "id": ":core:database:api"
             },
             {
+              "id": ":core:datastore:api"
+            },
+            {
               "id": ":domain:routine"
             }
           ]
@@ -10526,6 +10538,9 @@
             },
             {
               "id": ":core:database:api"
+            },
+            {
+              "id": ":core:datastore:api"
             },
             {
               "id": ":domain:routine"
@@ -10554,6 +10569,9 @@
               "id": ":core:database:api"
             },
             {
+              "id": ":core:datastore:api"
+            },
+            {
               "id": ":domain:routine"
             }
           ]
@@ -10578,6 +10596,9 @@
             },
             {
               "id": ":core:database:api"
+            },
+            {
+              "id": ":core:datastore:api"
             },
             {
               "id": ":domain:routine"
@@ -10606,6 +10627,9 @@
               "id": ":core:database:api"
             },
             {
+              "id": ":core:datastore:api"
+            },
+            {
               "id": ":domain:routine"
             }
           ]
@@ -10632,6 +10656,9 @@
               "id": ":core:database:api"
             },
             {
+              "id": ":core:datastore:api"
+            },
+            {
               "id": ":domain:routine"
             }
           ]
@@ -10656,6 +10683,9 @@
             },
             {
               "id": ":core:database:api"
+            },
+            {
+              "id": ":core:datastore:api"
             },
             {
               "id": ":domain:routine"
@@ -17857,7 +17887,73 @@
               "id": ":domain:routine"
             },
             {
+              "id": ":domain:sync"
+            },
+            {
               "id": "androidx.paging:paging-compose",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "androidDeviceTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": ":compose:core"
+            },
+            {
+              "id": ":core:navigation"
+            },
+            {
+              "id": ":library:compose-ui"
+            },
+            {
+              "id": ":library:koin-compose"
+            },
+            {
+              "id": "org.jetbrains.androidx.navigation3:navigation3-ui",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-compose-viewmodel",
+              "isLibrary": true
+            },
+            {
+              "id": ":domain:routine"
+            },
+            {
+              "id": ":domain:sync"
+            },
+            {
+              "id": "androidx.paging:paging-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.compose.ui:ui-test-junit4-android",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.compose.ui:ui-test-manifest",
               "isLibrary": true
             }
           ]
@@ -17911,6 +18007,9 @@
             },
             {
               "id": ":domain:routine"
+            },
+            {
+              "id": ":domain:sync"
             },
             {
               "id": "androidx.paging:paging-compose",
@@ -17993,6 +18092,9 @@
               "id": ":domain:routine"
             },
             {
+              "id": ":domain:sync"
+            },
+            {
               "id": "androidx.paging:paging-compose",
               "isLibrary": true
             }
@@ -18043,6 +18145,9 @@
             },
             {
               "id": ":domain:routine"
+            },
+            {
+              "id": ":domain:sync"
             },
             {
               "id": "androidx.paging:paging-compose",
@@ -18105,6 +18210,9 @@
               "id": ":domain:routine"
             },
             {
+              "id": ":domain:sync"
+            },
+            {
               "id": "androidx.paging:paging-compose",
               "isLibrary": true
             }
@@ -18155,6 +18263,9 @@
             },
             {
               "id": ":domain:routine"
+            },
+            {
+              "id": ":domain:sync"
             },
             {
               "id": "androidx.paging:paging-compose",
@@ -18209,6 +18320,9 @@
               "id": ":domain:routine"
             },
             {
+              "id": ":domain:sync"
+            },
+            {
               "id": "androidx.paging:paging-compose",
               "isLibrary": true
             }
@@ -18259,6 +18373,9 @@
             },
             {
               "id": ":domain:routine"
+            },
+            {
+              "id": ":domain:sync"
             },
             {
               "id": "androidx.paging:paging-compose",
@@ -18313,6 +18430,9 @@
               "id": ":domain:routine"
             },
             {
+              "id": ":domain:sync"
+            },
+            {
               "id": "androidx.paging:paging-compose",
               "isLibrary": true
             }
@@ -18363,6 +18483,9 @@
             },
             {
               "id": ":domain:routine"
+            },
+            {
+              "id": ":domain:sync"
             },
             {
               "id": "androidx.paging:paging-compose",
@@ -18417,6 +18540,9 @@
               "id": ":domain:routine"
             },
             {
+              "id": ":domain:sync"
+            },
+            {
               "id": "androidx.paging:paging-compose",
               "isLibrary": true
             }
@@ -18469,6 +18595,9 @@
               "id": ":domain:routine"
             },
             {
+              "id": ":domain:sync"
+            },
+            {
               "id": "androidx.paging:paging-compose",
               "isLibrary": true
             }
@@ -18519,6 +18648,9 @@
             },
             {
               "id": ":domain:routine"
+            },
+            {
+              "id": ":domain:sync"
             },
             {
               "id": "androidx.paging:paging-compose",
