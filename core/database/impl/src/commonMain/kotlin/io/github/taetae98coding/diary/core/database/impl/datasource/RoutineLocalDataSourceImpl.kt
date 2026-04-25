@@ -3,11 +3,9 @@ package io.github.taetae98coding.diary.core.database.impl.datasource
 import io.github.taetae98coding.diary.core.database.api.datasource.RoutineLocalDataSource
 import io.github.taetae98coding.diary.core.database.api.entity.RoutineDetailLocalEntity
 import io.github.taetae98coding.diary.core.database.api.entity.RoutineLocalEntity
-import io.github.taetae98coding.diary.core.database.api.entity.RoutineRRuleLocalEntity
 import io.github.taetae98coding.diary.core.database.impl.DiaryDatabase
 import kotlin.uuid.Uuid
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import org.koin.core.annotation.Factory
 
 @Factory
@@ -33,34 +31,6 @@ internal class RoutineLocalDataSourceImpl(private val database: DiaryDatabase) :
             endInclusive = detail.endInclusive,
             color = detail.color,
             routineCount = detail.routineCount,
-            updatedAt = updatedAt,
-        )
-    }
-
-    override suspend fun addRRules(
-        routineId: Uuid,
-        rRules: List<RoutineRRuleLocalEntity>,
-        updatedAt: Long,
-    ) {
-        val entity = database.routineDao().get(routineId).first() ?: return
-
-        database.routineDao().updateRRules(
-            routineId = routineId,
-            rRules = (entity.rRules + rRules).distinct(),
-            updatedAt = updatedAt,
-        )
-    }
-
-    override suspend fun removeRRule(
-        routineId: Uuid,
-        rRule: RoutineRRuleLocalEntity,
-        updatedAt: Long,
-    ) {
-        val entity = database.routineDao().get(routineId).first() ?: return
-
-        database.routineDao().updateRRules(
-            routineId = routineId,
-            rRules = entity.rRules - rRule,
             updatedAt = updatedAt,
         )
     }

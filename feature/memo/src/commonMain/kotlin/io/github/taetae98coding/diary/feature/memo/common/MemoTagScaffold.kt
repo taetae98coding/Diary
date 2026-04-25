@@ -3,7 +3,10 @@ package io.github.taetae98coding.diary.feature.memo.common
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.FlexAlignContent
+import androidx.compose.foundation.layout.FlexBox
+import androidx.compose.foundation.layout.FlexJustifyContent
+import androidx.compose.foundation.layout.FlexWrap
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -146,13 +149,17 @@ private fun TagCard(
 ) {
     Card(modifier = modifier) {
         title()
-        FlowRow(
+        FlexBox(
             modifier = Modifier.fillMaxWidth()
                 .weight(1F)
                 .verticalScroll(rememberScrollState())
                 .padding(top = 8.dp),
-            horizontalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterHorizontally),
-            verticalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterVertically),
+            config = {
+                wrap(FlexWrap.Wrap)
+                gap(6.dp)
+                justifyContent(FlexJustifyContent.Center)
+                alignContent(FlexAlignContent.Center)
+            },
         ) {
             if (pagingItems.loadState.refresh !is LoadState.Loading && pagingItems.itemCount == 0) {
                 Text(

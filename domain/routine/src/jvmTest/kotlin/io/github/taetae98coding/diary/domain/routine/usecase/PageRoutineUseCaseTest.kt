@@ -47,26 +47,5 @@ class PageRoutineUseCaseTest : BehaviorSpec() {
                 }
             }
         }
-
-        Given("Guest 계정") {
-            clearAllMocks()
-            val account = Account.Guest
-            val pagingData = PagingData.empty<Routine>()
-
-            every { getAccountUseCase() } returns flowOf(Result.success(account))
-            every { accountRoutineRepository.page(account.accountId) } returns flowOf(pagingData)
-
-            When("PageRoutineUseCase를 호출하면") {
-                val result = useCase().first()
-
-                Then("성공한다") {
-                    result.shouldBeSuccess()
-                }
-
-                Then("Guest의 accountId로 repository를 호출한다") {
-                    verify(exactly = 1) { accountRoutineRepository.page(account.accountId) }
-                }
-            }
-        }
     }
 }

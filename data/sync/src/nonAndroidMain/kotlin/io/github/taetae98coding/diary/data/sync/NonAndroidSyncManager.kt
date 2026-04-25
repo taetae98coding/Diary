@@ -5,6 +5,7 @@ import io.github.taetae98coding.diary.core.model.sync.SyncType
 import io.github.taetae98coding.diary.data.sync.di.SyncCoroutineScope
 import io.github.taetae98coding.diary.domain.sync.manager.SyncManager
 import kotlin.uuid.Uuid
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,7 +38,13 @@ internal class NonAndroidSyncManager(
                 _syncStatus.value = SyncStatus.Syncing(type)
                 runCatching { synchronizer.sync(accountId) }
                     .onSuccess { _syncStatus.value = SyncStatus.Idle }
-                    .onFailure { _syncStatus.value = SyncStatus.Failed }
+                    .onFailure { throwable ->
+                        if (throwable is CancellationException) {
+                            throw throwable
+                        } else {
+                            _syncStatus.value = SyncStatus.Failed
+                        }
+                    }
             }
         }
     }

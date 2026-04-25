@@ -1,16 +1,13 @@
 package io.github.taetae98coding.diary.feature.tag.add
 
-import androidx.compose.foundation.text.input.clearText
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.taetae98coding.diary.compose.core.snackbar.showImmediate
-import io.github.taetae98coding.diary.library.compose.ui.random
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -59,10 +56,8 @@ private fun TagAddEffectHandler(
         when (effect) {
             TagAddEffect.AddFinish -> {
                 coroutineScope.launch { state.hostState.showImmediate("태그가 추가되었습니다") }
-                state.titleCardState.textFieldState.clearText()
-                state.descriptionCardState.textFieldState.clearText()
+                coroutineScope.launch { state.reset() }
                 state.titleCardState.focusRequester.requestFocus()
-                coroutineScope.launch { state.colorCardState.updateColor(Color.random()) }
                 viewModel.consumeEffect()
             }
 

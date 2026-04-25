@@ -38,7 +38,7 @@ internal class MemoListFilterViewModel(
         .cachedIn(viewModelScope)
 
     private val selectedTagIds = getListMemoFilterTagUseCase()
-        .mapLatest { it.getOrDefault(emptyList()).toSet() }
+        .mapLatest { it.getOrDefault(emptySet()) }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),

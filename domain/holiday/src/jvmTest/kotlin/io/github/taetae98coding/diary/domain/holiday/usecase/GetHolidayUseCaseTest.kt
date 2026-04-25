@@ -42,7 +42,7 @@ class GetHolidayUseCaseTest : BehaviorSpec() {
             )
 
             every { holidayRepository.get(year) } returns flowOf(holidays)
-            every { holidayFilterRepository.get() } returns flowOf(emptyList())
+            every { holidayFilterRepository.get() } returns flowOf(emptySet())
 
             When("GetHolidayUseCase를 호출하면") {
                 val result = useCase(year).first()
@@ -75,7 +75,7 @@ class GetHolidayUseCaseTest : BehaviorSpec() {
                 .set(Holiday::localDateRange, LocalDate(2026, 1, 28)..LocalDate(2026, 1, 30))
                 .sample()
             val holidays = listOf(sinjeong, seolnal)
-            val filter = listOf("신정")
+            val filter = setOf("신정")
 
             every { holidayRepository.get(year) } returns flowOf(holidays)
             every { holidayFilterRepository.get() } returns flowOf(filter)
@@ -103,7 +103,7 @@ class GetHolidayUseCaseTest : BehaviorSpec() {
                 .set(Holiday::localDateRange, LocalDate(2026, 1, 28)..LocalDate(2026, 1, 30))
                 .sample()
             val holidays = listOf(sinjeong, seolnal)
-            val filter = listOf("설날")
+            val filter = setOf("설날")
 
             every { holidayRepository.get(year) } returns flowOf(holidays)
             every { holidayFilterRepository.get() } returns flowOf(filter)
@@ -127,7 +127,7 @@ class GetHolidayUseCaseTest : BehaviorSpec() {
                     .set(Holiday::localDateRange, LocalDate(2026, 1, 1)..LocalDate(2026, 1, 1))
                     .sample(),
             )
-            val filter = listOf("존재하지않는공휴일")
+            val filter = setOf("존재하지않는공휴일")
 
             every { holidayRepository.get(year) } returns flowOf(holidays)
             every { holidayFilterRepository.get() } returns flowOf(filter)
@@ -147,7 +147,7 @@ class GetHolidayUseCaseTest : BehaviorSpec() {
             val exception = RuntimeException("error")
 
             every { holidayRepository.get(year) } throws exception
-            every { holidayFilterRepository.get() } returns flowOf(emptyList())
+            every { holidayFilterRepository.get() } returns flowOf(emptySet())
 
             When("GetHolidayUseCase를 호출하면") {
                 val result = useCase(year).first()

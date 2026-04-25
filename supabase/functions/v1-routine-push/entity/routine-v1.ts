@@ -1,14 +1,12 @@
+import { RoutineDetailV1 } from "./routine-detail-v1.ts";
+import { RoutineRRuleV1 } from "./routine-rrule-v1.ts";
+
 export interface RoutineV1 {
   id: string;
-  title: string;
-  description: string;
-  start: string | null;
-  endInclusive: string | null;
-  color: number;
-  rRules: string;
-  rDates: string;
-  exDates: string;
-  routineCount: number;
+  detail: RoutineDetailV1;
+  rRules: RoutineRRuleV1[];
+  rDates: string[];
+  exDates: string[];
   isFinished: boolean;
   isDeleted: boolean;
   updatedAt: number;

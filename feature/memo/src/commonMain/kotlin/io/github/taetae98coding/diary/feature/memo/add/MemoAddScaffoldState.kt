@@ -1,9 +1,11 @@
 package io.github.taetae98coding.diary.feature.memo.add
 
+import androidx.compose.foundation.text.input.clearText
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.retain.retain
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import io.github.taetae98coding.diary.compose.core.card.ColorCardState
 import io.github.taetae98coding.diary.compose.core.card.DateRangeCardState
@@ -14,8 +16,11 @@ import io.github.taetae98coding.diary.compose.core.card.rememberDateRangeCardSta
 import io.github.taetae98coding.diary.compose.core.card.rememberDescriptionCardState
 import io.github.taetae98coding.diary.compose.core.card.rememberTitleCardState
 import io.github.taetae98coding.diary.core.model.memo.MemoDetail
+import io.github.taetae98coding.diary.library.compose.ui.random
 import kotlin.time.Clock
 import kotlin.time.Duration.Companion.hours
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDateRange
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
@@ -40,6 +45,14 @@ internal class MemoAddScaffoldState(
             localDateTimeRange = dateRangeCardState.localDateRange,
             color = colorCardState.value.toArgb(),
         )
+
+    suspend fun reset() {
+        coroutineScope {
+            launch { colorCardState.updateColor(Color.random()) }
+            titleCardState.textFieldState.clearText()
+            descriptionCardState.textFieldState.clearText()
+        }
+    }
 }
 
 @Composable

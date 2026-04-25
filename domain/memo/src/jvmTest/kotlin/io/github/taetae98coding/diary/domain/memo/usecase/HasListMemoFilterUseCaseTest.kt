@@ -32,7 +32,7 @@ class HasListMemoFilterUseCaseTest : BehaviorSpec() {
         Given("필터 태그가 존재하는 경우") {
             clearAllMocks()
             val account = fixtureMonkey.giveMeOne<Account.User>()
-            val tags = listOf(Uuid.random())
+            val tags = setOf(Uuid.random())
             val option = ListMemoFilterOption()
 
             every { getAccountUseCase() } returns flowOf(Result.success(account))
@@ -51,7 +51,7 @@ class HasListMemoFilterUseCaseTest : BehaviorSpec() {
         Given("태그는 비어있지만 tagPresence가 NONE이 아닌 경우") {
             clearAllMocks()
             val account = fixtureMonkey.giveMeOne<Account.User>()
-            val tags = emptyList<Uuid>()
+            val tags = emptySet<Uuid>()
             val option = ListMemoFilterOption(tagPresence = FilterPresence.YES)
 
             every { getAccountUseCase() } returns flowOf(Result.success(account))
@@ -70,7 +70,7 @@ class HasListMemoFilterUseCaseTest : BehaviorSpec() {
         Given("태그는 비어있지만 datePresence가 NONE이 아닌 경우") {
             clearAllMocks()
             val account = fixtureMonkey.giveMeOne<Account.User>()
-            val tags = emptyList<Uuid>()
+            val tags = emptySet<Uuid>()
             val option = ListMemoFilterOption(datePresence = FilterPresence.NO)
 
             every { getAccountUseCase() } returns flowOf(Result.success(account))
@@ -89,7 +89,7 @@ class HasListMemoFilterUseCaseTest : BehaviorSpec() {
         Given("태그가 비어있고 모든 필터 옵션이 NONE인 경우") {
             clearAllMocks()
             val account = fixtureMonkey.giveMeOne<Account.User>()
-            val tags = emptyList<Uuid>()
+            val tags = emptySet<Uuid>()
             val option = ListMemoFilterOption()
 
             every { getAccountUseCase() } returns flowOf(Result.success(account))

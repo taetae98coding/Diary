@@ -7,6 +7,7 @@ import kotlin.uuid.Uuid
 
 public interface SyncRoutineLocalDataSource {
     public suspend fun upsert(entity: SyncRoutineLocalEntity)
+
     public suspend fun upsert(entities: Collection<SyncRoutineLocalEntity>)
 
     public suspend fun getBySyncState(
