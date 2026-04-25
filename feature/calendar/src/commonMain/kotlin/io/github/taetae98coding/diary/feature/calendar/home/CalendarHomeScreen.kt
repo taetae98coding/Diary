@@ -24,6 +24,7 @@ import org.koin.compose.viewmodel.koinViewModel
 internal fun CalendarHomeScreen(
     navigateToMemoAdd: (LocalDateRange) -> Unit,
     navigateToMemoDetail: (Uuid) -> Unit,
+    navigateToRoutineDetail: (Uuid) -> Unit,
     navigateToFilter: () -> Unit,
     modifier: Modifier = Modifier,
     homeViewModel: CalendarHomeViewModel = koinViewModel(),
@@ -59,6 +60,7 @@ internal fun CalendarHomeScreen(
         onFilterClick = navigateToFilter,
         onLocalDateRangeSelect = navigateToMemoAdd,
         onMemoClick = navigateToMemoDetail,
+        onRoutineClick = navigateToRoutineDetail,
     )
 
     LocalDatePickerDialogHost(

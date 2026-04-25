@@ -1,14 +1,12 @@
+import { RoutineDetail } from "./routine-detail.ts";
+import { RoutineRRule } from "./routine-rrule.ts";
+
 export interface Routine {
   id: string;
-  title: string;
-  description: string;
-  start: string | null;
-  endInclusive: string | null;
-  color: number;
-  rRules: string;
-  rDates: string;
-  exDates: string;
-  routineCount: number;
+  detail: RoutineDetail;
+  rRules: RoutineRRule[];
+  rDates: string[];
+  exDates: string[];
   isFinished: boolean;
   isDeleted: boolean;
   updatedAt: number;

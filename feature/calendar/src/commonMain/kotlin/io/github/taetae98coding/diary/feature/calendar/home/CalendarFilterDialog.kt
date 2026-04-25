@@ -2,7 +2,10 @@ package io.github.taetae98coding.diary.feature.calendar.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.FlexAlignContent
+import androidx.compose.foundation.layout.FlexBox
+import androidx.compose.foundation.layout.FlexJustifyContent
+import androidx.compose.foundation.layout.FlexWrap
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -49,10 +52,14 @@ internal fun CalendarFilterDialog(
                 text = "메모태그",
                 style = DiaryTheme.typography.titleMedium,
             )
-            FlowRow(
+            FlexBox(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterHorizontally),
-                verticalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterVertically),
+                config = {
+                    wrap(FlexWrap.Wrap)
+                    gap(6.dp)
+                    justifyContent(FlexJustifyContent.Center)
+                    alignContent(FlexAlignContent.Center)
+                },
             ) {
                 if (pagingItems.loadState.refresh !is LoadState.Loading && pagingItems.itemCount == 0) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {

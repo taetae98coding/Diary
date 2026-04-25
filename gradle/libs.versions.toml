@@ -1,31 +1,30 @@
 [versions]
 # kotlin
-kotlin = "2.3.20"                               # https://github.com/JetBrains/kotlin/releases
-ksp = "2.3.6"                                   # https://github.com/google/ksp/releases
+kotlin = "2.3.21"                               # https://github.com/JetBrains/kotlin/releases
+ksp = "2.3.7"                                   # https://github.com/google/ksp/releases
 # agp
-agp = "9.1.0"                                   # https://developer.android.com/build/releases/gradle-plugin?hl=en
+agp = "9.1.1"                                   # https://developer.android.com/build/releases/gradle-plugin?hl=en
 # jetbrains
-jetbrains-compose = "1.11.0-beta02"             # https://github.com/JetBrains/compose-multiplatform/releases
+jetbrains-compose = "1.11.0-beta03"             # https://github.com/JetBrains/compose-multiplatform/releases
 jetbrains-compose-material-icons = "1.7.3"
-jetbrains-compose-material3 = "1.11.0-alpha06"
+jetbrains-compose-material3 = "1.11.0-alpha07"
 jetbrains-lifecycle = "2.11.0-alpha03"
-jetbrains-navigation3 = "1.1.0-rc01"
+jetbrains-navigation3 = "1.1.0"
 # kotlinx
-kotlinx-coroutines = "1.10.2"                   # https://github.com/Kotlin/kotlinx.coroutines/releases
-kotlinx-datetime = "0.7.1"                      # https://github.com/Kotlin/kotlinx-datetime/releases
+kotlinx-coroutines = "1.11.0-rc01"              # https://github.com/Kotlin/kotlinx.coroutines/releases
+kotlinx-datetime = "0.8.0-rc01"                 # https://github.com/Kotlin/kotlinx-datetime/releases
 kotlinx-serialization = "1.11.0"                # https://github.com/Kotlin/kotlinx.serialization/releases
 # androidx
 androidx-activity = "1.13.0"                    # https://developer.android.com/jetpack/androidx/releases/activity?hl=en
-androidx-compose = "1.11.0-beta02"
-androidx-navigation3 = "1.1.0-rc01"             # https://developer.android.com/jetpack/androidx/releases/navigation3?hl=en
+androidx-compose = "1.11.0-rc01"
+androidx-navigation3 = "1.1.0"                  # https://developer.android.com/jetpack/androidx/releases/navigation3?hl=en
 androidx-credentials = "1.6.0"                  # https://developer.android.com/jetpack/androidx/releases/credentials?hl=en
 androidx-lifecycle = "2.11.0-alpha03"           # https://developer.android.com/jetpack/androidx/releases/lifecycle?hl=en
-androidx-datastore = "1.3.0-alpha07"            # https://developer.android.com/jetpack/androidx/releases/datastore?hl=en
-androidx-paging = "3.5.0-beta01"                # https://developer.android.com/jetpack/androidx/releases/paging?hl=en
+androidx-datastore = "1.3.0-alpha08"            # https://developer.android.com/jetpack/androidx/releases/datastore?hl=en
+androidx-paging = "3.5.0-rc01"                  # https://developer.android.com/jetpack/androidx/releases/paging?hl=en
 androidx-room3 = "3.0.0-alpha03"                # https://developer.android.com/jetpack/androidx/releases/room3?hl=en
 androidx-sqlite = "2.7.0-alpha03"               # https://developer.android.com/jetpack/androidx/releases/sqlite?hl=en
 androidx-test-core = "1.7.0"					# https://developer.android.com/jetpack/androidx/releases/test?hl=en
-androidx-test-runner = "1.7.0"					# https://developer.android.com/jetpack/androidx/releases/test?hl=en
 androidx-work = "2.11.2"						# https://developer.android.com/jetpack/androidx/releases/work?hl=en
 # abc
 buildkonfig = "0.18.0"						    # https://github.com/yshrsmz/BuildKonfig/releases
@@ -42,13 +41,13 @@ fixture-monkey = "1.1.19"						# https://github.com/naver/fixture-monkey/release
 google-identity = "1.2.0"						# https://developers.google.com/identity/android-credential-manager/releases?hl=en
 google-oauth-client = "1.39.0"					# https://github.com/googleapis/google-oauth-java-client/releases
 kotest = "6.1.11"                               # https://github.com/kotest/kotest/releases
-ktor = "3.4.2"                                  # https://github.com/ktorio/ktor/releases
+ktor = "3.4.3"                                  # https://github.com/ktorio/ktor/releases
 leakcanary = "2.14"							    # https://github.com/square/leakcanary/releases
 mockk = "1.14.9"								# https://github.com/mockk/mockk/releases
 robolectric = "4.16.1"							# https://github.com/robolectric/robolectric/releases
 multiplatform-markdown = "0.40.2"               # https://github.com/mikepenz/multiplatform-markdown-renderer/releases
 spotless = "8.4.0"                              # https://github.com/diffplug/spotless/blob/main/plugin-gradle/CHANGES.md
-spm = "1.7.0"                                   # https://github.com/frankois944/spm4Kmp/releases
+spm = "1.9.0"                                   # https://github.com/frankois944/spm4Kmp/releases
 supabase = "3.5.0"                              # https://github.com/supabase-community/supabase-kt/releases
 turbine = "1.2.1"								# https://github.com/cashapp/turbine/releases
 
@@ -96,7 +95,6 @@ androidx-sqlite-bundled = { group = "androidx.sqlite", name = "sqlite-bundled", 
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4-android", version.ref = "androidx-compose" }
 androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "androidx-compose" }
 androidx-test-core = { group = "androidx.test", name = "core", version.ref = "androidx-test-core" }
-androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidx-test-runner" }
 androidx-work-runtime = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "androidx-work" }
 # abc
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }

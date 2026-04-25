@@ -79,6 +79,7 @@ internal fun CalendarScaffold(
     onFilterClick: () -> Unit = {},
     onLocalDateRangeSelect: (LocalDateRange) -> Unit = {},
     onMemoClick: (Uuid) -> Unit = {},
+    onRoutineClick: (Uuid) -> Unit = {},
 ) {
     val uriHandler = LocalUriHandler.current
     val coroutineScope = rememberCoroutineScope()
@@ -170,14 +171,15 @@ internal fun CalendarScaffold(
 
                 items(
                     items = routineListProvider(),
-                    key = { "${it.id}-${it.localDateRange}" },
-                    contentType = { CALENDAR_COLOR_LABEL_TEXT_CONTENT_TYPE },
+                    key = { "${it.id}-${it.occurrence}" },
+                    contentType = { CALENDAR_TEXT_CONTENT_TYPE },
                     localDateRange = { it.localDateRange },
                 ) {
                     CalendarText(
                         text = it.title,
                         color = Color(it.color),
-                        modifier = Modifier.animateItem(),
+                        modifier = Modifier.animateItem()
+                            .clickable(onClick = dropUnlessResumed { onRoutineClick(it.id) }),
                     )
                 }
 

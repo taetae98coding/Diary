@@ -8,8 +8,10 @@ import io.github.taetae98coding.diary.core.navigation.CalendarFilterNavKey
 import io.github.taetae98coding.diary.core.navigation.CalendarHomeNavKey
 import io.github.taetae98coding.diary.core.navigation.MemoAddNavKey
 import io.github.taetae98coding.diary.core.navigation.MemoDetailNavKey
+import io.github.taetae98coding.diary.core.navigation.RoutineDetailNavKey
 import io.github.taetae98coding.diary.core.navigation.TagAddNavKey
 import io.github.taetae98coding.diary.core.navigation.argument.MemoId
+import io.github.taetae98coding.diary.core.navigation.argument.RoutineId
 import io.github.taetae98coding.diary.feature.calendar.home.CalendarFilterDialog
 import io.github.taetae98coding.diary.feature.calendar.home.CalendarHomeScreen
 
@@ -18,6 +20,7 @@ public fun EntryProviderScope<NavKey>.calendarEntry(backStack: NavBackStack<NavK
         CalendarHomeScreen(
             navigateToMemoAdd = { backStack.add(MemoAddNavKey(it)) },
             navigateToMemoDetail = { backStack.add(MemoDetailNavKey(MemoId(it))) },
+            navigateToRoutineDetail = { backStack.add(RoutineDetailNavKey(RoutineId(it))) },
             navigateToFilter = { backStack.add(CalendarFilterNavKey) },
         )
     }

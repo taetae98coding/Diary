@@ -1,7 +1,6 @@
 package io.github.taetae98coding.diary.domain.routine.usecase
 
 import androidx.paging.PagingData
-import io.github.taetae98coding.diary.core.model.account.Account
 import io.github.taetae98coding.diary.core.model.routine.Routine
 import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
 import io.github.taetae98coding.diary.domain.routine.repository.AccountRoutineRepository
@@ -23,7 +22,7 @@ public class PageRoutineUseCase(
 ) {
     public operator fun invoke(): Flow<Result<PagingData<Routine>>> {
         return flow {
-            getAccountUseCase().mapLatest(Result<Account>::getOrThrow)
+            getAccountUseCase().mapLatest { it.getOrThrow() }
                 .flatMapLatest { accountRoutineRepository.page(it.accountId) }
                 .also { emitAll(it) }
         }.map {

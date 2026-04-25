@@ -22,6 +22,7 @@ internal class ComposePrimitivePlugin : Plugin<Project> {
                     optIn.addAll(
                         "androidx.compose.ui.ExperimentalComposeUiApi",
                         "androidx.compose.foundation.ExperimentalFoundationApi",
+                        "androidx.compose.foundation.layout.ExperimentalFlexBoxApi",
                         "androidx.compose.material3.ExperimentalMaterial3Api",
                         "androidx.compose.material3.ExperimentalMaterial3ExpressiveApi",
                         "androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi",

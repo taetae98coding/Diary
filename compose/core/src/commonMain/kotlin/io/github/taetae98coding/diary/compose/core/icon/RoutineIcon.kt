@@ -1,7 +1,7 @@
 package io.github.taetae98coding.diary.compose.core.icon
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.EventRepeat
+import androidx.compose.material.icons.rounded.Repeat
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -12,7 +12,7 @@ import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
 @Composable
 public fun RoutineIcon(modifier: Modifier = Modifier) {
     Icon(
-        imageVector = Icons.Rounded.EventRepeat,
+        imageVector = Icons.Rounded.Repeat,
         contentDescription = null,
         modifier = modifier,
     )

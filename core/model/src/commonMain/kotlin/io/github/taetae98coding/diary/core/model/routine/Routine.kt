@@ -13,11 +13,4 @@ public data class Routine(
     val isDeleted: Boolean,
     val updatedAt: Long,
     val createdAt: Long,
-) {
-    public fun isActive(localDate: LocalDate): Boolean {
-        if (localDate in rDates) return true
-        if (localDate in exDates) return false
-
-        return rRules.any { it.isActive(localDate) }
-    }
-}
+)

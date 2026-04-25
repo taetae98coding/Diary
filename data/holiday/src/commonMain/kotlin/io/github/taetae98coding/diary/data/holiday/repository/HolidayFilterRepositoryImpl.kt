@@ -7,9 +7,9 @@ import org.koin.core.annotation.Factory
 
 @Factory
 public class HolidayFilterRepositoryImpl : HolidayFilterRepository {
-    override fun get(): Flow<List<String>> {
+    override fun get(): Flow<Set<String>> {
         return flowOf(
-            listOf(
+            setOf(
                 "입춘",
                 "정월대보름",
                 "근로자의 날",

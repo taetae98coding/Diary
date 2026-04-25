@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import io.github.taetae98coding.diary.core.model.routine.CalendarRoutine
 import io.github.taetae98coding.diary.domain.routine.usecase.GetCalendarRoutineUseCase
 import io.github.taetae98coding.diary.library.coroutines.combine
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

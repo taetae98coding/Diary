@@ -19,7 +19,7 @@ public class GetCalendarMemoFilterTagUseCase(
     @param:Provided
     private val accountCalendarMemoFilterTagRepository: AccountCalendarMemoFilterTagRepository,
 ) {
-    public operator fun invoke(): Flow<Result<List<Uuid>>> {
+    public operator fun invoke(): Flow<Result<Set<Uuid>>> {
         return flow {
             getAccountUseCase().mapLatest { it.getOrThrow() }
                 .flatMapLatest { accountCalendarMemoFilterTagRepository.get(it.accountId) }

@@ -1,8 +1,10 @@
 package io.github.taetae98coding.diary.feature.tag.add
 
+import androidx.compose.foundation.text.input.clearText
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.retain.retain
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import io.github.taetae98coding.diary.compose.core.card.ColorCardState
 import io.github.taetae98coding.diary.compose.core.card.DescriptionCardState
@@ -11,6 +13,9 @@ import io.github.taetae98coding.diary.compose.core.card.rememberColorCardState
 import io.github.taetae98coding.diary.compose.core.card.rememberDescriptionCardState
 import io.github.taetae98coding.diary.compose.core.card.rememberTitleCardState
 import io.github.taetae98coding.diary.core.model.tag.TagDetail
+import io.github.taetae98coding.diary.library.compose.ui.random
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 internal class TagAddScaffoldState(
     val titleCardState: TitleCardState,
@@ -25,6 +30,14 @@ internal class TagAddScaffoldState(
             description = descriptionCardState.textFieldState.text.toString(),
             color = colorCardState.value.toArgb(),
         )
+
+    suspend fun reset() {
+        coroutineScope {
+            launch { colorCardState.updateColor(Color.random()) }
+            titleCardState.textFieldState.clearText()
+            descriptionCardState.textFieldState.clearText()
+        }
+    }
 }
 
 @Composable
