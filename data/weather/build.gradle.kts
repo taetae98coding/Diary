@@ -7,6 +7,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(projects.core.ipNetwork.api)
+                implementation(projects.core.location.api)
                 implementation(projects.core.weatherNetwork.api)
                 implementation(projects.domain.weather)
             }

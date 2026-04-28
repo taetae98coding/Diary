@@ -29,6 +29,7 @@ import io.github.taetae98coding.diary.compose.core.icon.AddIcon
 import io.github.taetae98coding.diary.compose.core.modifier.focusableKeyEvent
 import io.github.taetae98coding.diary.compose.core.preview.ScreenPreview
 import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
+import io.github.taetae98coding.diary.feature.routine.add.component.CalendarVisibilityCard
 import io.github.taetae98coding.diary.feature.routine.add.component.RRuleEditorDialog
 import io.github.taetae98coding.diary.feature.routine.add.component.RRuleSummaryCard
 import io.github.taetae98coding.diary.feature.routine.add.component.RoutineCountEditor
@@ -89,6 +90,12 @@ internal fun RoutineAddScaffold(
             item {
                 RoutineCountEditor(
                     state = state.routineCountState,
+                    modifier = Modifier.fillParentMaxWidth(),
+                )
+            }
+            item {
+                CalendarVisibilityCard(
+                    state = state.calendarVisibilityState,
                     modifier = Modifier.fillParentMaxWidth(),
                 )
             }

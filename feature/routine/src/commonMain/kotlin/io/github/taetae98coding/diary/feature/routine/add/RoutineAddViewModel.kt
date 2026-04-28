@@ -24,12 +24,17 @@ internal class RoutineAddViewModel(private val addRoutineUseCase: AddRoutineUseC
     fun add(
         detail: RoutineDetail,
         rRules: List<RoutineRRule>,
+        isCalendarVisible: Boolean,
     ) {
         if (isInProgress.value) return
 
         viewModelScope.launch {
             _isInProgress.value = true
-            addRoutineUseCase(detail = detail, rRules = rRules)
+            addRoutineUseCase(
+                detail = detail,
+                rRules = rRules,
+                isCalendarVisible = isCalendarVisible,
+            )
                 .onSuccess { _effect.value = RoutineAddEffect.AddFinish }
                 .onFailure { throwable ->
                     _effect.value = when (throwable) {

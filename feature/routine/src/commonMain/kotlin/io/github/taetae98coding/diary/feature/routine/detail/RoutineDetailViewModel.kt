@@ -47,6 +47,7 @@ internal class RoutineDetailViewModel(
         rRules: List<RoutineRRule>,
         rDates: Set<LocalDate>,
         exDates: Set<LocalDate>,
+        isCalendarVisible: Boolean,
     ) {
         if (_updateInProgress.value) return
 
@@ -58,6 +59,7 @@ internal class RoutineDetailViewModel(
                 rRules = rRules,
                 rDates = rDates,
                 exDates = exDates,
+                isCalendarVisible = isCalendarVisible,
             ).onSuccess {
                 _effect.value = RoutineDetailEffect.UpdateFinish
             }.onFailure {

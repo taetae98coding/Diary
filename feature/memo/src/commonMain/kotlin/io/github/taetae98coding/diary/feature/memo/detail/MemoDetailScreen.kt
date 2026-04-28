@@ -21,6 +21,7 @@ internal fun MemoDetailScreen(
 ) {
     val updateInProgress by viewModel.updateInProgress.collectAsStateWithLifecycle()
     val finishUiState by viewModel.finishUiState.collectAsStateWithLifecycle()
+    val copyUiState by viewModel.copyUiState.collectAsStateWithLifecycle()
     val deleteUiState by viewModel.deleteUiState.collectAsStateWithLifecycle()
     val memo by viewModel.memo.collectAsStateWithLifecycle()
     val tagCardUiState by viewModel.tagCardUiState.collectAsStateWithLifecycle()
@@ -30,6 +31,7 @@ internal fun MemoDetailScreen(
         state = state,
         detailProvider = { memo?.detail },
         finishUiStateProvider = { finishUiState },
+        copyUiStateProvider = { copyUiState },
         deleteUiStateProvider = { deleteUiState },
         updateInProgressProvider = { updateInProgress },
         tagCardUiStateProvider = { tagCardUiState },
@@ -37,6 +39,7 @@ internal fun MemoDetailScreen(
         onUpdate = { viewModel.update(state.detail) },
         onFinish = viewModel::finish,
         onRestart = viewModel::restart,
+        onCopy = viewModel::copy,
         onDelete = viewModel::delete,
         onTagCard = navigateToMemoDetailTag,
         onTag = navigateToTagDetail,
@@ -63,6 +66,11 @@ private fun MemoDetailEffectHandler(
         when (effect) {
             MemoDetailEffect.UpdateFinish -> {
                 coroutineScope.launch { state.hostState.showImmediate("메모가 수정되었습니다") }
+                viewModel.consumeEffect()
+            }
+
+            MemoDetailEffect.CopyFinish -> {
+                coroutineScope.launch { state.hostState.showImmediate("메모가 복사되었습니다") }
                 viewModel.consumeEffect()
             }
 

@@ -2,6 +2,8 @@ package io.github.taetae98coding.diary.data.weather.repository
 
 import io.github.taetae98coding.diary.core.ip.network.api.datasource.IpRemoteDataSource
 import io.github.taetae98coding.diary.core.ip.network.api.entity.IpRemoteEntity
+import io.github.taetae98coding.diary.core.location.api.Location
+import io.github.taetae98coding.diary.core.location.api.LocationProvider
 import io.github.taetae98coding.diary.core.weather.network.api.datasource.WeatherRemoteDataSource
 import io.github.taetae98coding.diary.core.weather.network.api.entity.WeahterMainRemoteEntity
 import io.github.taetae98coding.diary.core.weather.network.api.entity.WeatherRemoteEntity
@@ -13,15 +15,19 @@ import io.kotest.matchers.collections.shouldHaveSize
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.every
 import io.mockk.mockk
 import kotlin.time.Clock
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOf
 
 class WeatherRepositoryImplTest : FunSpec() {
+    private lateinit var locationProvider: LocationProvider
     private lateinit var ipRemoteDataSource: IpRemoteDataSource
     private lateinit var weatherRemoteDataSource: WeatherRemoteDataSource
     private lateinit var repository: WeatherRepositoryImpl
 
+    private val deviceLocation = Location(latitude = 35.1796, longitude = 129.0756)
     private val ip = IpRemoteEntity(latitude = 37.5665, longitude = 126.9780)
     private val current = WeatherRemoteEntity(
         weather = listOf(WeatherTypeRemoteEntity(icon = WeatherTypeIconRemoteEntity("01d"), description = "clear")),
@@ -39,15 +45,30 @@ class WeatherRepositoryImplTest : FunSpec() {
     init {
         beforeTest {
             clearAllMocks()
+            locationProvider = mockk()
             ipRemoteDataSource = mockk()
             weatherRemoteDataSource = mockk()
             repository = WeatherRepositoryImpl(
+                locationProvider,
                 ipRemoteDataSource,
                 weatherRemoteDataSource,
             )
         }
 
-        test("fetchCurrentWeather - IP 위치를 가져온 후 current와 forecast를 병렬 호출한다") {
+        test("fetchCurrentWeather - 디바이스 위치가 있을 때 device 좌표로 weather를 호출하고 IP는 호출하지 않는다") {
+            every { locationProvider.currentLocation } returns flowOf(deviceLocation)
+            coEvery { weatherRemoteDataSource.getCurrent(deviceLocation.latitude, deviceLocation.longitude) } returns current
+            coEvery { weatherRemoteDataSource.getForecast(deviceLocation.latitude, deviceLocation.longitude) } returns forecast
+
+            repository.fetchCurrentWeather()
+
+            coVerify(exactly = 0) { ipRemoteDataSource.get() }
+            coVerify(exactly = 1) { weatherRemoteDataSource.getCurrent(deviceLocation.latitude, deviceLocation.longitude) }
+            coVerify(exactly = 1) { weatherRemoteDataSource.getForecast(deviceLocation.latitude, deviceLocation.longitude) }
+        }
+
+        test("fetchCurrentWeather - 디바이스 위치가 null이면 IP fallback으로 weather를 호출한다") {
+            every { locationProvider.currentLocation } returns flowOf(null)
             coEvery { ipRemoteDataSource.get() } returns ip
             coEvery { weatherRemoteDataSource.getCurrent(ip.latitude, ip.longitude) } returns current
             coEvery { weatherRemoteDataSource.getForecast(ip.latitude, ip.longitude) } returns forecast
@@ -59,10 +80,10 @@ class WeatherRepositoryImplTest : FunSpec() {
             coVerify(exactly = 1) { weatherRemoteDataSource.getForecast(ip.latitude, ip.longitude) }
         }
 
-        test("fetchCurrentWeather - 결과를 getCurrentWeather Flow에 반영한다") {
-            coEvery { ipRemoteDataSource.get() } returns ip
-            coEvery { weatherRemoteDataSource.getCurrent(ip.latitude, ip.longitude) } returns current
-            coEvery { weatherRemoteDataSource.getForecast(ip.latitude, ip.longitude) } returns forecast
+        test("fetchCurrentWeather - current와 forecast 결과를 getCurrentWeather Flow에 반영한다") {
+            every { locationProvider.currentLocation } returns flowOf(deviceLocation)
+            coEvery { weatherRemoteDataSource.getCurrent(deviceLocation.latitude, deviceLocation.longitude) } returns current
+            coEvery { weatherRemoteDataSource.getForecast(deviceLocation.latitude, deviceLocation.longitude) } returns forecast
 
             repository.fetchCurrentWeather()
 

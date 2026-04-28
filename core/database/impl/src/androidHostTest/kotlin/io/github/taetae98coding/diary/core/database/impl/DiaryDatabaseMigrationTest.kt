@@ -31,4 +31,16 @@ class DiaryDatabaseMigrationTest {
         migrationTestHelper.createDatabase(1).close()
         migrationTestHelper.runMigrationsAndValidate(2).close()
     }
+
+    @Test
+    fun `version 2에서 3으로 AutoMigration이 정상 동작한다`() = runTest {
+        migrationTestHelper.createDatabase(2).close()
+        migrationTestHelper.runMigrationsAndValidate(3).close()
+    }
+
+    @Test
+    fun `version 3에서 4로 AutoMigration이 정상 동작한다`() = runTest {
+        migrationTestHelper.createDatabase(3).close()
+        migrationTestHelper.runMigrationsAndValidate(4).close()
+    }
 }

@@ -117,6 +117,22 @@
       "restrictions": []
     },
     {
+      "module": ":core:location",
+      "restrictions": []
+    },
+    {
+      "module": ":core:location:api",
+      "restrictions": []
+    },
+    {
+      "module": ":core:location:compose",
+      "restrictions": []
+    },
+    {
+      "module": ":core:location:impl",
+      "restrictions": []
+    },
+    {
       "module": ":core:mapper",
       "restrictions": []
     },

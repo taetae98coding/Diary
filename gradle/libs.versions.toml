@@ -36,10 +36,11 @@ firebase-crashlytics-plugin = "3.0.7"
 firebase-perf-plugin = "2.0.2"
 coil = "3.4.0"								    # https://github.com/coil-kt/coil/releases
 koin = "4.2.1"                                  # https://github.com/InsertKoinIO/koin/releases
-koin-compiler-plugin = "1.0.0-RC1"              # https://github.com/InsertKoinIO/koin-compiler-plugin/releases
+koin-compiler-plugin = "1.0.0-RC2"              # https://github.com/InsertKoinIO/koin-compiler-plugin/releases
 fixture-monkey = "1.1.19"						# https://github.com/naver/fixture-monkey/releases
 google-identity = "1.2.0"						# https://developers.google.com/identity/android-credential-manager/releases?hl=en
 google-oauth-client = "1.39.0"					# https://github.com/googleapis/google-oauth-java-client/releases
+google-play-services-location = "21.3.0"		# https://developers.google.com/android/guides/releases?hl=en
 kotest = "6.1.11"                               # https://github.com/kotest/kotest/releases
 ktor = "3.4.3"                                  # https://github.com/ktorio/ktor/releases
 leakcanary = "2.14"							    # https://github.com/square/leakcanary/releases
@@ -71,6 +72,7 @@ jetbrains-lifecycle-viewmodel-navigation3 = { group = "org.jetbrains.androidx.li
 jetbrains-navigation3-ui = { group = "org.jetbrains.androidx.navigation3", name = "navigation3-ui", version.ref = "jetbrains-navigation3" }
 # kotlinx
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-play-services = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-play-services", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
@@ -111,6 +113,7 @@ koin-compose-viewmodel = { group = "io.insert-koin", name = "koin-compose-viewmo
 fixture-monkey = { group = "com.navercorp.fixturemonkey", name = "fixture-monkey-starter-kotlin", version.ref = "fixture-monkey" }
 google-identity = { group = "com.google.android.libraries.identity.googleid", name = "googleid", version.ref = "google-identity" }
 google-oauth-client-jetty = { group = "com.google.oauth-client", name = "google-oauth-client-jetty", version.ref = "google-oauth-client" }
+google-play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "google-play-services-location" }
 kotest-framework-engine = { group = "io.kotest", name = "kotest-framework-engine", version.ref = "kotest" }
 kotest-assertions-core = { group = "io.kotest", name = "kotest-assertions-core", version.ref = "kotest" }
 kotest-runner-junit5 = { group = "io.kotest", name = "kotest-runner-junit5", version.ref = "kotest" }

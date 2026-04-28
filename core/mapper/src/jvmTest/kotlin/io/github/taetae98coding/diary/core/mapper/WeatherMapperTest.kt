@@ -7,6 +7,7 @@ import io.github.taetae98coding.diary.core.weather.network.api.entity.WeahterMai
 import io.github.taetae98coding.diary.core.weather.network.api.entity.WeatherRemoteEntity
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import kotlin.time.Instant
 
 class WeatherMapperTest : FunSpec() {
     private val fixtureMonkey = FixtureMonkey.builder()
@@ -16,6 +17,7 @@ class WeatherMapperTest : FunSpec() {
     init {
         test("Remote to Domain") {
             val entity = fixtureMonkey.giveMeKotlinBuilder<WeatherRemoteEntity>()
+                .set(WeatherRemoteEntity::instant, Instant.fromEpochSeconds(0))
                 .sample()
 
             val result = entity.toDomain()
@@ -39,6 +41,7 @@ class WeatherMapperTest : FunSpec() {
 
             val entity = fixtureMonkey.giveMeKotlinBuilder<WeatherRemoteEntity>()
                 .set(WeatherRemoteEntity::main, main)
+                .set(WeatherRemoteEntity::instant, Instant.fromEpochSeconds(0))
                 .sample()
 
             val result = entity.toDomain()

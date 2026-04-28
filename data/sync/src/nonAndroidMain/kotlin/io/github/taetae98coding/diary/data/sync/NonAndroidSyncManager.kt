@@ -42,6 +42,7 @@ internal class NonAndroidSyncManager(
                         if (throwable is CancellationException) {
                             throw throwable
                         } else {
+                            throwable.printStackTrace()
                             _syncStatus.value = SyncStatus.Failed
                         }
                     }

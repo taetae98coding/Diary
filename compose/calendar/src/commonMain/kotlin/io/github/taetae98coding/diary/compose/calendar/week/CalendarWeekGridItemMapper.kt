@@ -35,20 +35,21 @@ internal class CalendarWeekGridItemMapper(
     private fun buildPlaceable(items: List<CalendarWeekGridItem>): List<Placeable> {
         val isCheckedGrid = Array(items.size) { BooleanArray(7) { false } }
 
-        return items.map { item ->
-            val item = item.copy(
-                localDateRange = LocalDateRange(
-                    maxOf(item.localDateRange.start, weekRange.start),
-                    minOf(item.localDateRange.endInclusive, weekRange.endInclusive),
-                ),
-            )
+        return items.sortedWith(compareBy<CalendarWeekGridItem> { it.localDateRange.start }.thenByDescending { it.localDateRange.endInclusive })
+            .map { item ->
+                val item = item.copy(
+                    localDateRange = LocalDateRange(
+                        maxOf(item.localDateRange.start, weekRange.start),
+                        minOf(item.localDateRange.endInclusive, weekRange.endInclusive),
+                    ),
+                )
 
-            val itemColumnIndexList = item.localDateRange.map { it.dayOfWeek.toSundayBasedNumber() }
-            val row = isCheckedGrid.indexOfFirst { row -> itemColumnIndexList.none { row[it] } }
+                val itemColumnIndexList = item.localDateRange.map { it.dayOfWeek.toSundayBasedNumber() }
+                val row = isCheckedGrid.indexOfFirst { row -> itemColumnIndexList.none { row[it] } }
 
-            itemColumnIndexList.forEach { isCheckedGrid[row][it] = true }
-            Placeable(row, item)
-        }
+                itemColumnIndexList.forEach { isCheckedGrid[row][it] = true }
+                Placeable(row, item)
+            }
     }
 
     fun mapToCalendarWeekLazyGridItem(items: List<CalendarWeekGridItem>): List<CalendarWeekLazyGridItem> {
@@ -62,7 +63,7 @@ internal class CalendarWeekGridItemMapper(
                 }
             }
 
-            buildPlaceable(items).sortedWith(compareBy(Placeable::row, { it.item.localDateRange.start }))
+            buildPlaceable(items).sortedWith(compareBy(Placeable::row))
                 .forEach { placeable ->
                     if (placeable.row != currentRow) {
                         addEndPaddingIfNeed()

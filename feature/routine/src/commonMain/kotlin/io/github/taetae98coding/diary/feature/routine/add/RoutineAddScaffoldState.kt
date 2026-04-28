@@ -20,7 +20,9 @@ import io.github.taetae98coding.diary.compose.core.card.rememberTitleCardState
 import io.github.taetae98coding.diary.compose.core.dialog.DialogState
 import io.github.taetae98coding.diary.core.model.routine.RoutineDetail
 import io.github.taetae98coding.diary.core.model.routine.RoutineRRule
+import io.github.taetae98coding.diary.feature.routine.add.component.CalendarVisibilityCardState
 import io.github.taetae98coding.diary.feature.routine.add.component.RoutineCountEditorState
+import io.github.taetae98coding.diary.feature.routine.add.component.rememberCalendarVisibilityCardState
 import io.github.taetae98coding.diary.feature.routine.add.component.rememberRoutineCountEditorState
 import io.github.taetae98coding.diary.library.compose.ui.random
 import kotlinx.coroutines.coroutineScope
@@ -33,6 +35,7 @@ internal class RoutineAddScaffoldState(
     val colorCardState: ColorCardState,
     val localDateRangeCardState: LocalDateRangeCardState,
     val routineCountState: RoutineCountEditorState,
+    val calendarVisibilityState: CalendarVisibilityCardState,
 ) {
     val hostState: SnackbarHostState = SnackbarHostState()
 
@@ -77,6 +80,7 @@ internal class RoutineAddScaffoldState(
             localDateRangeCardState.updateStart(null)
             localDateRangeCardState.updateEndInclusive(null)
             routineCountState.updateCount(1)
+            calendarVisibilityState.update(true)
             rRules.clear()
         }
     }
@@ -89,6 +93,7 @@ internal fun rememberRoutineAddScaffoldState(): RoutineAddScaffoldState {
     val colorCardState = rememberColorCardState()
     val localDateRangeCardState = rememberLocalDateRangeCardState()
     val routineCountState = rememberRoutineCountEditorState()
+    val calendarVisibilityState = rememberCalendarVisibilityCardState()
 
     return retain(
         titleCardState,
@@ -96,6 +101,7 @@ internal fun rememberRoutineAddScaffoldState(): RoutineAddScaffoldState {
         colorCardState,
         localDateRangeCardState,
         routineCountState,
+        calendarVisibilityState,
     ) {
         RoutineAddScaffoldState(
             titleCardState = titleCardState,
@@ -103,6 +109,7 @@ internal fun rememberRoutineAddScaffoldState(): RoutineAddScaffoldState {
             colorCardState = colorCardState,
             localDateRangeCardState = localDateRangeCardState,
             routineCountState = routineCountState,
+            calendarVisibilityState = calendarVisibilityState,
         )
     }
 }

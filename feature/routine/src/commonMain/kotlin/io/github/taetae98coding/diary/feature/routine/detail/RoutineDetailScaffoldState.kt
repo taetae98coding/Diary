@@ -19,7 +19,9 @@ import io.github.taetae98coding.diary.compose.core.dialog.DialogState
 import io.github.taetae98coding.diary.core.model.routine.Routine
 import io.github.taetae98coding.diary.core.model.routine.RoutineDetail
 import io.github.taetae98coding.diary.core.model.routine.RoutineRRule
+import io.github.taetae98coding.diary.feature.routine.add.component.CalendarVisibilityCardState
 import io.github.taetae98coding.diary.feature.routine.add.component.RoutineCountEditorState
+import io.github.taetae98coding.diary.feature.routine.add.component.rememberCalendarVisibilityCardState
 import io.github.taetae98coding.diary.feature.routine.add.component.rememberRoutineCountEditorState
 import kotlinx.datetime.LocalDate
 
@@ -30,6 +32,7 @@ internal class RoutineDetailScaffoldState(
     val colorCardState: ColorCardState,
     val localDateRangeCardState: LocalDateRangeCardState,
     val routineCountState: RoutineCountEditorState,
+    val calendarVisibilityState: CalendarVisibilityCardState,
     initialRRules: List<RoutineRRule> = emptyList(),
     initialRDates: List<LocalDate> = emptyList(),
     initialExDates: List<LocalDate> = emptyList(),
@@ -121,6 +124,10 @@ internal fun rememberRoutineDetailScaffoldState(routineProvider: () -> Routine?)
         inputs = arrayOf(key),
         initialCount = detail?.routineCount ?: 1,
     )
+    val calendarVisibilityState = rememberCalendarVisibilityCardState(
+        inputs = arrayOf(key),
+        initialVisible = routine?.isCalendarVisible ?: true,
+    )
 
     return retain(
         key,
@@ -129,6 +136,7 @@ internal fun rememberRoutineDetailScaffoldState(routineProvider: () -> Routine?)
         colorCardState,
         localDateRangeCardState,
         routineCountState,
+        calendarVisibilityState,
     ) {
         RoutineDetailScaffoldState(
             titleCardState = titleCardState,
@@ -136,6 +144,7 @@ internal fun rememberRoutineDetailScaffoldState(routineProvider: () -> Routine?)
             colorCardState = colorCardState,
             localDateRangeCardState = localDateRangeCardState,
             routineCountState = routineCountState,
+            calendarVisibilityState = calendarVisibilityState,
             initialRRules = routine?.rRules.orEmpty(),
             initialRDates = routine?.rDates.orEmpty().sorted(),
             initialExDates = routine?.exDates.orEmpty().sorted(),

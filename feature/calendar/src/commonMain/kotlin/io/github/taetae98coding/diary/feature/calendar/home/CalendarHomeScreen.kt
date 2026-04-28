@@ -11,6 +11,7 @@ import androidx.lifecycle.compose.LifecycleStartEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.taetae98coding.diary.compose.core.dialog.LocalDatePickerDialogHost
 import io.github.taetae98coding.diary.compose.core.snackbar.showImmediate
+import io.github.taetae98coding.diary.core.location.compose.rememberLocationPermissionRequester
 import kotlin.time.Clock
 import kotlin.uuid.Uuid
 import kotlinx.coroutines.launch
@@ -41,6 +42,9 @@ internal fun CalendarHomeScreen(
     val weatherList by weatherViewModel.weather.collectAsStateWithLifecycle()
     val state = rememberCalendarScaffoldState()
     val coroutineScope = rememberCoroutineScope()
+    val locationPermissionRequester = rememberLocationPermissionRequester { isGranted ->
+        if (isGranted) weatherViewModel.fetch()
+    }
 
     SyncFailedEffect(
         viewModel = homeViewModel,
@@ -70,6 +74,7 @@ internal fun CalendarHomeScreen(
     )
 
     LifecycleEventEffect(Lifecycle.Event.ON_START) {
+        locationPermissionRequester.request()
         state.updatePrimaryDate(Clock.System.todayIn(TimeZone.currentSystemDefault()))
         weatherViewModel.fetch()
     }

@@ -12,11 +12,13 @@ public data class RoutineRemoteEntity(
     @SerialName("detail")
     val detail: RoutineDetailRemoteEntity,
     @SerialName("rRules")
-    val rRules: List<RoutineRRuleRemoteEntity> = emptyList(),
+    val rRules: List<RoutineRRuleRemoteEntity>,
     @SerialName("rDates")
-    val rDates: List<LocalDate> = emptyList(),
+    val rDates: List<LocalDate>,
     @SerialName("exDates")
-    val exDates: List<LocalDate> = emptyList(),
+    val exDates: List<LocalDate>,
+    @SerialName("isCalendarVisible")
+    val isCalendarVisible: Boolean,
     @SerialName("isFinished")
     val isFinished: Boolean,
     @SerialName("isDeleted")

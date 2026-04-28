@@ -50,5 +50,15 @@ class RoutineMapperTest : FunSpec() {
 
             result.rRules shouldBe emptyList()
         }
+
+        test("Local to Domain — isCalendarVisible 매핑") {
+            val entity = fixtureMonkey.giveMeKotlinBuilder<RoutineLocalEntity>()
+                .setExp(RoutineLocalEntity::isCalendarVisible, false)
+                .sample()
+
+            val result = entity.toDomain()
+
+            result.isCalendarVisible shouldBe false
+        }
     }
 }

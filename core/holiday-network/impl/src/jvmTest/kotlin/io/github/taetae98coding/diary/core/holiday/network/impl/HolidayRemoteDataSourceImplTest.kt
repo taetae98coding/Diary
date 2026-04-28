@@ -37,7 +37,7 @@ class HolidayRemoteDataSourceImplTest : FunSpec() {
             val koinApp = koinApplication<HolidayTestKoinApplication> {
                 modules(
                     module {
-                        single<HttpClientEngine>(qualifier = qualifier(HolidayHttpEngine::class.simpleName.orEmpty())) { engine }
+                        single<HttpClientEngine>(qualifier = qualifier<HolidayHttpEngine>()) { engine }
                     },
                 )
             }

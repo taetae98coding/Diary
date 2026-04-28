@@ -27,6 +27,7 @@ function toRoutineV1(routine: Routine): RoutineV1 {
     })),
     rDates: routine.rDates,
     exDates: routine.exDates,
+    isCalendarVisible: routine.isCalendarVisible,
     isFinished: routine.isFinished,
     isDeleted: routine.isDeleted,
     updatedAt: routine.updatedAt,

@@ -28,4 +28,7 @@ Tag는 `isFinished` 상태를 가지며 **재시작(restart)** 을 통해 완료
 
 ## 4. 참고
 
-- 관련 모듈: `core/model/tag`, `domain/tag`, `data/tag`, `feature/tag`
+- 관련 모듈
+  - 모델: `core/model` (패키지 `...core.model.tag`)
+  - 도메인/데이터: `domain/tag`, `data/tag`
+  - UI: `feature/tag`, `presenter/tag`

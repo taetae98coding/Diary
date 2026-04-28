@@ -22,6 +22,7 @@ public class AddRoutineUseCase(
     public suspend operator fun invoke(
         detail: RoutineDetail,
         rRules: List<RoutineRRule>,
+        isCalendarVisible: Boolean,
     ): Result<Unit> {
         return runCatching {
             if (detail.title.isBlank()) throw RoutineTitleBlankException()
@@ -33,6 +34,7 @@ public class AddRoutineUseCase(
                 accountId = account.accountId,
                 detail = detail,
                 rRules = rRules,
+                isCalendarVisible = isCalendarVisible,
             )
 
             requestSyncUseCase(SyncType.Background)

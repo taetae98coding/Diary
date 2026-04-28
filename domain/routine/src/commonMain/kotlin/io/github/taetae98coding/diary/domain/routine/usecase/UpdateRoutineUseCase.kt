@@ -26,6 +26,7 @@ public class UpdateRoutineUseCase(
         rRules: List<RoutineRRule>,
         rDates: Set<LocalDate>,
         exDates: Set<LocalDate>,
+        isCalendarVisible: Boolean,
     ): Result<Unit> {
         return runCatching {
             val routine = requireNotNull(routineRepository.get(routineId).first())
@@ -38,6 +39,7 @@ public class UpdateRoutineUseCase(
                 rRules = rRules.ifEmpty { routine.rRules },
                 rDates = rDates,
                 exDates = exDates,
+                isCalendarVisible = isCalendarVisible,
             )
 
             requestSyncUseCase(SyncType.Background)

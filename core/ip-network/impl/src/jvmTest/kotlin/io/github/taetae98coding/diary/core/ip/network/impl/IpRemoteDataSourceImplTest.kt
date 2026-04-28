@@ -35,7 +35,7 @@ class IpRemoteDataSourceImplTest : FunSpec() {
             val koinApp = koinApplication<IpTestKoinApplication> {
                 modules(
                     module {
-                        single<HttpClientEngine>(qualifier = qualifier(IpHttpEngine::class.simpleName.orEmpty())) { engine }
+                        single<HttpClientEngine>(qualifier = qualifier<IpHttpEngine>()) { engine }
                     },
                 )
             }

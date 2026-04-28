@@ -20,6 +20,8 @@ public data class RoutineLocalEntity(
     val rDates: List<LocalDate> = emptyList(),
     @ColumnInfo(name = "exDates", defaultValue = "[]")
     val exDates: List<LocalDate> = emptyList(),
+    @ColumnInfo(name = "isCalendarVisible", defaultValue = "1")
+    val isCalendarVisible: Boolean = true,
     @ColumnInfo(name = "isFinished", defaultValue = "0")
     val isFinished: Boolean = false,
     @ColumnInfo(name = "isDeleted", defaultValue = "0")
