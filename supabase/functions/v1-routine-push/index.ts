@@ -26,6 +26,7 @@ function toRoutine(v1: RoutineV1): Routine {
     })),
     rDates: v1.rDates,
     exDates: v1.exDates,
+    isCalendarVisible: v1.isCalendarVisible ?? true,
     isFinished: v1.isFinished,
     isDeleted: v1.isDeleted,
     updatedAt: v1.updatedAt,

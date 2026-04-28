@@ -9,6 +9,7 @@ public data class Routine(
     val rRules: List<RoutineRRule>,
     val rDates: Set<LocalDate>,
     val exDates: Set<LocalDate>,
+    val isCalendarVisible: Boolean,
     val isFinished: Boolean,
     val isDeleted: Boolean,
     val updatedAt: Long,

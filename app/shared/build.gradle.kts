@@ -22,6 +22,7 @@ kotlin {
                 implementation(projects.core.holidayDatabase.impl)
                 implementation(projects.core.holidayNetwork.impl)
                 implementation(projects.core.ipNetwork.impl)
+                implementation(projects.core.location.impl)
                 implementation(projects.core.navigation)
                 implementation(projects.core.network.impl)
                 implementation(projects.core.weatherNetwork.impl)

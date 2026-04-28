@@ -32,6 +32,7 @@ internal fun RoutineDetailScreen(
                 rRules = state.rRules.toList(),
                 rDates = state.rDates.toSet(),
                 exDates = state.exDates.toSet(),
+                isCalendarVisible = state.calendarVisibilityState.isVisible,
             )
         },
     )

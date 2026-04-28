@@ -193,6 +193,7 @@ com.google.android.gms:play-services-base:18.5.0
 com.google.android.gms:play-services-basement:18.9.0
 com.google.android.gms:play-services-fido:21.0.0
 com.google.android.gms:play-services-identity-credentials:16.0.0-alpha08
+com.google.android.gms:play-services-location:21.3.0
 com.google.android.gms:play-services-measurement-api:23.2.0
 com.google.android.gms:play-services-measurement-base:23.2.0
 com.google.android.gms:play-services-measurement-impl:23.2.0

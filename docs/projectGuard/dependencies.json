@@ -540,6 +540,9 @@
               "id": ":core:ip-network:impl"
             },
             {
+              "id": ":core:location:impl"
+            },
+            {
               "id": ":core:navigation"
             },
             {
@@ -680,6 +683,9 @@
               "id": ":core:ip-network:impl"
             },
             {
+              "id": ":core:location:impl"
+            },
+            {
               "id": ":core:navigation"
             },
             {
@@ -818,6 +824,9 @@
             },
             {
               "id": ":core:ip-network:impl"
+            },
+            {
+              "id": ":core:location:impl"
             },
             {
               "id": ":core:navigation"
@@ -968,6 +977,9 @@
               "id": ":core:ip-network:impl"
             },
             {
+              "id": ":core:location:impl"
+            },
+            {
               "id": ":core:navigation"
             },
             {
@@ -1106,6 +1118,9 @@
             },
             {
               "id": ":core:ip-network:impl"
+            },
+            {
+              "id": ":core:location:impl"
             },
             {
               "id": ":core:navigation"
@@ -1248,6 +1263,9 @@
               "id": ":core:ip-network:impl"
             },
             {
+              "id": ":core:location:impl"
+            },
+            {
               "id": ":core:navigation"
             },
             {
@@ -1386,6 +1404,9 @@
             },
             {
               "id": ":core:ip-network:impl"
+            },
+            {
+              "id": ":core:location:impl"
             },
             {
               "id": ":core:navigation"
@@ -1528,6 +1549,9 @@
               "id": ":core:ip-network:impl"
             },
             {
+              "id": ":core:location:impl"
+            },
+            {
               "id": ":core:navigation"
             },
             {
@@ -1666,6 +1690,9 @@
             },
             {
               "id": ":core:ip-network:impl"
+            },
+            {
+              "id": ":core:location:impl"
             },
             {
               "id": ":core:navigation"
@@ -1812,6 +1839,9 @@
               "id": ":core:ip-network:impl"
             },
             {
+              "id": ":core:location:impl"
+            },
+            {
               "id": ":core:navigation"
             },
             {
@@ -1950,6 +1980,9 @@
             },
             {
               "id": ":core:ip-network:impl"
+            },
+            {
+              "id": ":core:location:impl"
             },
             {
               "id": ":core:navigation"
@@ -2092,6 +2125,9 @@
               "id": ":core:ip-network:impl"
             },
             {
+              "id": ":core:location:impl"
+            },
+            {
               "id": ":core:navigation"
             },
             {
@@ -2232,6 +2268,9 @@
               "id": ":core:ip-network:impl"
             },
             {
+              "id": ":core:location:impl"
+            },
+            {
               "id": ":core:navigation"
             },
             {
@@ -2370,6 +2409,9 @@
             },
             {
               "id": ":core:ip-network:impl"
+            },
+            {
+              "id": ":core:location:impl"
             },
             {
               "id": ":core:navigation"
@@ -6884,6 +6926,595 @@
             },
             {
               "id": "io.ktor:ktor-client-js",
+              "isLibrary": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": ":core:location",
+      "configurations": []
+    },
+    {
+      "module": ":core:location:api",
+      "configurations": [
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": ":core:location:compose",
+      "configurations": [
+        {
+          "id": "androidCompileClasspath",
+          "dependencies": [
+            {
+              "id": "androidx.activity:activity-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.runtime:runtime",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.runtime:runtime",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmDevCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.runtime:runtime",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.hot-reload:hot-reload-runtime-api",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.desktop:desktop-jvm-macos-arm64",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.runtime:runtime",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.runtime:runtime",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.runtime:runtime",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.runtime:runtime",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.runtime:runtime",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.runtime:runtime",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.runtime:runtime",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.runtime:runtime",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.runtime:runtime",
+              "isLibrary": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": ":core:location:impl",
+      "configurations": [
+        {
+          "id": "androidCompileClasspath",
+          "dependencies": [
+            {
+              "id": "com.google.android.gms:play-services-location",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-play-services",
+              "isLibrary": true
+            },
+            {
+              "id": ":core:location:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:location:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:location:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:location:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:location:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:location:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:location:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:location:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:location:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:location:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":core:location:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-core",
+              "isLibrary": true
+            },
+            {
+              "id": "io.insert-koin:koin-annotations",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
               "isLibrary": true
             }
           ]
@@ -11425,6 +12056,9 @@
               "id": ":core:ip-network:api"
             },
             {
+              "id": ":core:location:api"
+            },
+            {
               "id": ":core:weather-network:api"
             },
             {
@@ -11454,6 +12088,9 @@
               "id": ":core:ip-network:api"
             },
             {
+              "id": ":core:location:api"
+            },
+            {
               "id": ":core:weather-network:api"
             },
             {
@@ -11481,6 +12118,9 @@
             },
             {
               "id": ":core:ip-network:api"
+            },
+            {
+              "id": ":core:location:api"
             },
             {
               "id": ":core:weather-network:api"
@@ -11536,6 +12176,9 @@
               "id": ":core:ip-network:api"
             },
             {
+              "id": ":core:location:api"
+            },
+            {
               "id": ":core:weather-network:api"
             },
             {
@@ -11563,6 +12206,9 @@
             },
             {
               "id": ":core:ip-network:api"
+            },
+            {
+              "id": ":core:location:api"
             },
             {
               "id": ":core:weather-network:api"
@@ -11594,6 +12240,9 @@
               "id": ":core:ip-network:api"
             },
             {
+              "id": ":core:location:api"
+            },
+            {
               "id": ":core:weather-network:api"
             },
             {
@@ -11621,6 +12270,9 @@
             },
             {
               "id": ":core:ip-network:api"
+            },
+            {
+              "id": ":core:location:api"
             },
             {
               "id": ":core:weather-network:api"
@@ -11652,6 +12304,9 @@
               "id": ":core:ip-network:api"
             },
             {
+              "id": ":core:location:api"
+            },
+            {
               "id": ":core:weather-network:api"
             },
             {
@@ -11681,6 +12336,9 @@
               "id": ":core:ip-network:api"
             },
             {
+              "id": ":core:location:api"
+            },
+            {
               "id": ":core:weather-network:api"
             },
             {
@@ -11708,6 +12366,9 @@
             },
             {
               "id": ":core:ip-network:api"
+            },
+            {
+              "id": ":core:location:api"
             },
             {
               "id": ":core:weather-network:api"
@@ -14419,6 +15080,9 @@
               "id": ":compose:calendar"
             },
             {
+              "id": ":core:location:compose"
+            },
+            {
               "id": ":domain:holiday"
             },
             {
@@ -14498,6 +15162,9 @@
             },
             {
               "id": ":compose:calendar"
+            },
+            {
+              "id": ":core:location:compose"
             },
             {
               "id": ":domain:holiday"
@@ -14605,6 +15272,9 @@
               "id": ":compose:calendar"
             },
             {
+              "id": ":core:location:compose"
+            },
+            {
               "id": ":domain:holiday"
             },
             {
@@ -14680,6 +15350,9 @@
             },
             {
               "id": ":compose:calendar"
+            },
+            {
+              "id": ":core:location:compose"
             },
             {
               "id": ":domain:holiday"
@@ -14767,6 +15440,9 @@
               "id": ":compose:calendar"
             },
             {
+              "id": ":core:location:compose"
+            },
+            {
               "id": ":domain:holiday"
             },
             {
@@ -14842,6 +15518,9 @@
             },
             {
               "id": ":compose:calendar"
+            },
+            {
+              "id": ":core:location:compose"
             },
             {
               "id": ":domain:holiday"
@@ -14921,6 +15600,9 @@
               "id": ":compose:calendar"
             },
             {
+              "id": ":core:location:compose"
+            },
+            {
               "id": ":domain:holiday"
             },
             {
@@ -14996,6 +15678,9 @@
             },
             {
               "id": ":compose:calendar"
+            },
+            {
+              "id": ":core:location:compose"
             },
             {
               "id": ":domain:holiday"
@@ -15075,6 +15760,9 @@
               "id": ":compose:calendar"
             },
             {
+              "id": ":core:location:compose"
+            },
+            {
               "id": ":domain:holiday"
             },
             {
@@ -15150,6 +15838,9 @@
             },
             {
               "id": ":compose:calendar"
+            },
+            {
+              "id": ":core:location:compose"
             },
             {
               "id": ":domain:holiday"
@@ -15229,6 +15920,9 @@
               "id": ":compose:calendar"
             },
             {
+              "id": ":core:location:compose"
+            },
+            {
               "id": ":domain:holiday"
             },
             {
@@ -15306,6 +16000,9 @@
               "id": ":compose:calendar"
             },
             {
+              "id": ":core:location:compose"
+            },
+            {
               "id": ":domain:holiday"
             },
             {
@@ -15381,6 +16078,9 @@
             },
             {
               "id": ":compose:calendar"
+            },
+            {
+              "id": ":core:location:compose"
             },
             {
               "id": ":domain:holiday"

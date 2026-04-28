@@ -36,6 +36,7 @@ import io.github.taetae98coding.diary.compose.core.icon.AddIcon
 import io.github.taetae98coding.diary.compose.core.modifier.focusableKeyEvent
 import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
 import io.github.taetae98coding.diary.core.model.routine.Routine
+import io.github.taetae98coding.diary.feature.routine.add.component.CalendarVisibilityCard
 import io.github.taetae98coding.diary.feature.routine.add.component.RRuleEditorDialog
 import io.github.taetae98coding.diary.feature.routine.add.component.RRuleSummaryCard
 import io.github.taetae98coding.diary.feature.routine.add.component.RoutineCountEditor
@@ -76,7 +77,8 @@ internal fun RoutineDetailScaffold(
                     routine.detail != state.detail ||
                         routine.rRules != state.rRules.toList() ||
                         routine.rDates != state.rDates.toSet() ||
-                        routine.exDates != state.exDates.toSet()
+                        routine.exDates != state.exDates.toSet() ||
+                        routine.isCalendarVisible != state.calendarVisibilityState.isVisible
                 }
             }
 
@@ -124,6 +126,12 @@ internal fun RoutineDetailScaffold(
                     item {
                         RoutineCountEditor(
                             state = state.routineCountState,
+                            modifier = Modifier.fillParentMaxWidth(),
+                        )
+                    }
+                    item {
+                        CalendarVisibilityCard(
+                            state = state.calendarVisibilityState,
                             modifier = Modifier.fillParentMaxWidth(),
                         )
                     }

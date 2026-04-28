@@ -15,6 +15,7 @@ public interface AccountRoutineRepository {
         rRules: List<RoutineRRule>,
         rDates: Set<LocalDate> = emptySet(),
         exDates: Set<LocalDate> = emptySet(),
+        isCalendarVisible: Boolean,
     )
 
     public suspend fun update(
@@ -23,6 +24,7 @@ public interface AccountRoutineRepository {
         rRules: List<RoutineRRule>,
         rDates: Set<LocalDate>,
         exDates: Set<LocalDate>,
+        isCalendarVisible: Boolean,
     )
 
     public fun page(accountId: Uuid): Flow<PagingData<Routine>>

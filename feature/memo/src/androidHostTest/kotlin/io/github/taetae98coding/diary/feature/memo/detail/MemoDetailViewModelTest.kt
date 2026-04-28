@@ -6,6 +6,7 @@ import com.navercorp.fixturemonkey.kotlin.giveMeOne
 import io.github.taetae98coding.diary.core.model.memo.Memo
 import io.github.taetae98coding.diary.core.model.memo.MemoDetail
 import io.github.taetae98coding.diary.core.navigation.argument.MemoId
+import io.github.taetae98coding.diary.domain.memo.usecase.CopyMemoUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.DeleteMemoUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.FinishMemoUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.GetMemoTagUseCase
@@ -42,6 +43,7 @@ class MemoDetailViewModelTest {
     private val memoId = MemoId(Uuid.random())
     private val getMemoUseCase = mockk<GetMemoUseCase>()
     private val getMemoTagUseCase = mockk<GetMemoTagUseCase>()
+    private val copyMemoUseCase = mockk<CopyMemoUseCase>()
     private val updateMemoUseCase = mockk<UpdateMemoUseCase>()
     private val finishMemoUseCase = mockk<FinishMemoUseCase>()
     private val restartMemoUseCase = mockk<RestartMemoUseCase>()
@@ -56,7 +58,7 @@ class MemoDetailViewModelTest {
         clearAllMocks()
         every { getMemoUseCase(memoId.value) } returns flowOf(Result.success(mockk<Memo>(relaxed = true)))
         every { getMemoTagUseCase(memoId.value) } returns flowOf(Result.success(emptyList()))
-        viewModel = MemoDetailViewModel(memoId, getMemoUseCase, getMemoTagUseCase, updateMemoUseCase, finishMemoUseCase, restartMemoUseCase, deleteMemoUseCase)
+        viewModel = MemoDetailViewModel(memoId, getMemoUseCase, getMemoTagUseCase, copyMemoUseCase, updateMemoUseCase, finishMemoUseCase, restartMemoUseCase, deleteMemoUseCase)
     }
 
     @After
@@ -123,6 +125,45 @@ class MemoDetailViewModelTest {
         advanceUntilIdle()
 
         coVerify(exactly = 1) { deleteMemoUseCase(memoId.value) }
+    }
+
+    @Test
+    fun `copy 성공 시 CopyFinish effect를 발행한다`() = runTest(testDispatcher) {
+        coEvery { copyMemoUseCase(memoId.value) } returns Result.success(Unit)
+
+        viewModel.copy()
+        advanceUntilIdle()
+
+        viewModel.effect.value shouldBe MemoDetailEffect.CopyFinish
+        viewModel.copyUiState.value.isInProgress shouldBe false
+    }
+
+    @Test
+    fun `copy 실패 시 UnknownError effect를 발행한다`() = runTest(testDispatcher) {
+        coEvery { copyMemoUseCase(memoId.value) } returns Result.failure(RuntimeException())
+
+        viewModel.copy()
+        advanceUntilIdle()
+
+        viewModel.effect.value shouldBe MemoDetailEffect.UnknownError
+        viewModel.copyUiState.value.isInProgress shouldBe false
+    }
+
+    @Test
+    fun `copy 진행중이면 중복 호출을 무시한다`() = runTest(testDispatcher) {
+        val deferred = CompletableDeferred<Result<Unit>>()
+        coEvery { copyMemoUseCase(memoId.value) } coAnswers { deferred.await() }
+
+        viewModel.copy()
+        runCurrent()
+        viewModel.copyUiState.value.isInProgress shouldBe true
+
+        viewModel.copy()
+
+        deferred.complete(Result.success(Unit))
+        advanceUntilIdle()
+
+        coVerify(exactly = 1) { copyMemoUseCase(memoId.value) }
     }
 
     @Test

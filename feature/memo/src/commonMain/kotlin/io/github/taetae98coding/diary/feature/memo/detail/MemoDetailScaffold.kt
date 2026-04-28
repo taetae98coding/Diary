@@ -39,6 +39,7 @@ import io.github.taetae98coding.diary.compose.core.card.ColorCard
 import io.github.taetae98coding.diary.compose.core.card.DateRangeCard
 import io.github.taetae98coding.diary.compose.core.card.DescriptionCard
 import io.github.taetae98coding.diary.compose.core.card.TitleCard
+import io.github.taetae98coding.diary.compose.core.icon.CopyIcon
 import io.github.taetae98coding.diary.compose.core.icon.DeleteIcon
 import io.github.taetae98coding.diary.compose.core.icon.FinishIcon
 import io.github.taetae98coding.diary.compose.core.modifier.focusableKeyEvent
@@ -54,6 +55,7 @@ internal fun MemoDetailScaffold(
     state: MemoDetailScaffoldState,
     detailProvider: () -> MemoDetail?,
     finishUiStateProvider: () -> MemoDetailFinishUiState,
+    copyUiStateProvider: () -> MemoDetailCopyUiState,
     deleteUiStateProvider: () -> MemoDetailDeleteUiState,
     updateInProgressProvider: () -> Boolean,
     tagCardUiStateProvider: () -> TagCardUiState,
@@ -62,6 +64,7 @@ internal fun MemoDetailScaffold(
     onUpdate: () -> Unit = {},
     onFinish: () -> Unit = {},
     onRestart: () -> Unit = {},
+    onCopy: () -> Unit = {},
     onDelete: () -> Unit = {},
     onTagCard: () -> Unit = {},
     onTag: (Uuid) -> Unit = {},
@@ -82,10 +85,12 @@ internal fun MemoDetailScaffold(
             TopBar(
                 detailProvider = detailProvider,
                 finishUiStateProvider = finishUiStateProvider,
+                copyUiStateProvider = copyUiStateProvider,
                 deleteUiStateProvider = deleteUiStateProvider,
                 onNavigateUp = onNavigateUp,
                 onFinish = onFinish,
                 onRestart = onRestart,
+                onCopy = onCopy,
                 onDelete = onDelete,
             )
         },
@@ -157,11 +162,13 @@ internal fun MemoDetailScaffold(
 private fun TopBar(
     detailProvider: () -> MemoDetail?,
     finishUiStateProvider: () -> MemoDetailFinishUiState,
+    copyUiStateProvider: () -> MemoDetailCopyUiState,
     deleteUiStateProvider: () -> MemoDetailDeleteUiState,
     modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit = {},
     onFinish: () -> Unit = {},
     onRestart: () -> Unit = {},
+    onCopy: () -> Unit = {},
     onDelete: () -> Unit = {},
 ) {
     TopAppBar(
@@ -173,6 +180,10 @@ private fun TopBar(
                 finishUiStateProvider = finishUiStateProvider,
                 onFinish = dropUnlessResumed(block = onFinish),
                 onRestart = dropUnlessResumed(block = onRestart),
+            )
+            CopyButton(
+                copyUiStateProvider = copyUiStateProvider,
+                onClick = dropUnlessResumed(block = onCopy),
             )
             DeleteButton(
                 deleteUiStateProvider = deleteUiStateProvider,
@@ -221,6 +232,25 @@ private fun FinishButton(
 }
 
 @Composable
+private fun CopyButton(
+    copyUiStateProvider: () -> MemoDetailCopyUiState,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {},
+) {
+    Crossfade(targetState = copyUiStateProvider().isInProgress, modifier = modifier) { isInProgress ->
+        if (isInProgress) {
+            IconButton(onClick = {}) {
+                CircularWavyProgressIndicator(modifier = Modifier.size(24.dp))
+            }
+        } else {
+            IconButton(onClick = onClick) {
+                CopyIcon()
+            }
+        }
+    }
+}
+
+@Composable
 private fun DeleteButton(
     deleteUiStateProvider: () -> MemoDetailDeleteUiState,
     modifier: Modifier = Modifier,
@@ -256,6 +286,7 @@ private fun Preview() {
             state = state,
             detailProvider = { detail },
             finishUiStateProvider = { MemoDetailFinishUiState() },
+            copyUiStateProvider = { MemoDetailCopyUiState() },
             deleteUiStateProvider = { MemoDetailDeleteUiState() },
             updateInProgressProvider = { false },
             tagCardUiStateProvider = { TagCardUiState.State(emptyList()) },

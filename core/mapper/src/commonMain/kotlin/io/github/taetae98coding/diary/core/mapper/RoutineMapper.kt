@@ -10,6 +10,7 @@ public fun RoutineLocalEntity.toDomain(): Routine {
         rRules = rRules.map { it.toDomain() },
         rDates = rDates.toSet(),
         exDates = exDates.toSet(),
+        isCalendarVisible = isCalendarVisible,
         isFinished = isFinished,
         isDeleted = isDeleted,
         updatedAt = updatedAt,

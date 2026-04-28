@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import io.github.taetae98coding.diary.core.model.memo.Memo
 import io.github.taetae98coding.diary.core.model.memo.MemoDetail
 import io.github.taetae98coding.diary.core.navigation.argument.MemoId
+import io.github.taetae98coding.diary.domain.memo.usecase.CopyMemoUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.DeleteMemoUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.FinishMemoUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.GetMemoTagUseCase
@@ -31,6 +32,7 @@ internal class MemoDetailViewModel(
     private val memoId: MemoId,
     getMemoUseCase: GetMemoUseCase,
     getMemoTagUseCase: GetMemoTagUseCase,
+    private val copyMemoUseCase: CopyMemoUseCase,
     private val updateMemoUseCase: UpdateMemoUseCase,
     private val finishMemoUseCase: FinishMemoUseCase,
     private val restartMemoUseCase: RestartMemoUseCase,
@@ -79,6 +81,9 @@ internal class MemoDetailViewModel(
         initialValue = MemoDetailFinishUiState(),
     )
 
+    private val _copyUiState = MutableStateFlow(MemoDetailCopyUiState())
+    val copyUiState = _copyUiState.asStateFlow()
+
     private val _deleteUiState = MutableStateFlow(MemoDetailDeleteUiState())
     val deleteUiState = _deleteUiState.asStateFlow()
 
@@ -116,6 +121,18 @@ internal class MemoDetailViewModel(
             restartMemoUseCase(memoId.value)
                 .onFailure { _effect.value = MemoDetailEffect.UnknownError }
             finishInProgress.value = false
+        }
+    }
+
+    fun copy() {
+        if (_copyUiState.value.isInProgress) return
+
+        viewModelScope.launch {
+            _copyUiState.update { it.copy(isInProgress = true) }
+            copyMemoUseCase(memoId.value)
+                .onSuccess { _effect.value = MemoDetailEffect.CopyFinish }
+                .onFailure { _effect.value = MemoDetailEffect.UnknownError }
+            _copyUiState.update { it.copy(isInProgress = false) }
         }
     }
 

@@ -44,6 +44,7 @@ public class AccountRoutineRepositoryImpl(
         rRules: List<RoutineRRule>,
         rDates: Set<LocalDate>,
         exDates: Set<LocalDate>,
+        isCalendarVisible: Boolean,
     ) {
         val routineId = Uuid.random()
         val now = clock.now().toEpochMilliseconds()
@@ -56,6 +57,7 @@ public class AccountRoutineRepositoryImpl(
                     rRules = rRules.map { it.toLocal() },
                     rDates = rDates.toList(),
                     exDates = exDates.toList(),
+                    isCalendarVisible = isCalendarVisible,
                     createdAt = now,
                     updatedAt = now,
                 ),
@@ -78,10 +80,12 @@ public class AccountRoutineRepositoryImpl(
         rRules: List<RoutineRRule>,
         rDates: Set<LocalDate>,
         exDates: Set<LocalDate>,
+        isCalendarVisible: Boolean,
     ) {
+        val now = clock.now().toEpochMilliseconds()
+
         databaseTransactor.writeTransaction {
             val existing = routineLocalDataSource.get(routineId).first() ?: return@writeTransaction
-            val now = clock.now().toEpochMilliseconds()
 
             routineLocalDataSource.upsert(
                 existing.copy(
@@ -89,6 +93,7 @@ public class AccountRoutineRepositoryImpl(
                     rRules = rRules.map { it.toLocal() },
                     rDates = rDates.toList(),
                     exDates = exDates.toList(),
+                    isCalendarVisible = isCalendarVisible,
                     updatedAt = now,
                 ),
             )

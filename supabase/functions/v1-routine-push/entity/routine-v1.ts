@@ -7,6 +7,7 @@ export interface RoutineV1 {
   rRules: RoutineRRuleV1[];
   rDates: string[];
   exDates: string[];
+  isCalendarVisible?: boolean;
   isFinished: boolean;
   isDeleted: boolean;
   updatedAt: number;

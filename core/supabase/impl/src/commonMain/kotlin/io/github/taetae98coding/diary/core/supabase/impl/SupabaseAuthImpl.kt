@@ -1,7 +1,10 @@
 package io.github.taetae98coding.diary.core.supabase.impl
 
 import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.annotations.SupabaseExperimental
 import io.github.jan.supabase.auth.auth
+import io.github.jan.supabase.auth.event.AuthEvent
+import io.github.jan.supabase.auth.status.RefreshFailureCause
 import io.github.jan.supabase.auth.status.SessionStatus
 import io.github.taetae98coding.diary.core.supabase.api.SupabaseAuth
 import io.github.taetae98coding.diary.core.supabase.api.SupabaseSessionStatus
@@ -10,23 +13,44 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.mapLatest
 import org.koin.core.annotation.Factory
 
+@OptIn(SupabaseExperimental::class)
 @Factory
 internal class SupabaseAuthImpl(private val supabase: SupabaseClient) : SupabaseAuth {
     override val sessionStatus: Flow<SupabaseSessionStatus>
         get() = supabase.auth.sessionStatus.mapLatest { status ->
             when (status) {
-                is SessionStatus.Authenticated -> SupabaseSessionStatus.Authenticated(
-                    userId = status.session.user?.id ?: "",
-                    email = status.session.user?.email,
-                )
+                is SessionStatus.Authenticated -> {
+                    SupabaseSessionStatus.Authenticated(
+                        userId = status.session.user?.id.orEmpty(),
+                        email = status.session.user?.email,
+                    )
+                }
 
                 is SessionStatus.NotAuthenticated -> SupabaseSessionStatus.NotAuthenticated
 
                 is SessionStatus.Initializing -> SupabaseSessionStatus.Loading
 
-                is SessionStatus.RefreshFailure -> SupabaseSessionStatus.Loading
+                is SessionStatus.RefreshFailure -> {
+                    val cause = (supabase.auth.events.first() as? AuthEvent.RefreshFailure)?.cause
+                    resolveRefreshFailure(cause)
+                }
             }
         }
+
+    private suspend fun resolveRefreshFailure(cause: RefreshFailureCause?): SupabaseSessionStatus {
+        return when (cause) {
+            is RefreshFailureCause.InternalServerError -> SupabaseSessionStatus.NotAuthenticated
+
+            is RefreshFailureCause.NetworkError, null -> {
+                val user = supabase.auth.sessionManager.loadSession()?.user
+                if (user != null) {
+                    SupabaseSessionStatus.Authenticated(userId = user.id, email = user.email)
+                } else {
+                    SupabaseSessionStatus.NotAuthenticated
+                }
+            }
+        }
+    }
 
     override suspend fun signOut() {
         supabase.auth.signOut()

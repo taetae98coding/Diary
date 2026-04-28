@@ -25,7 +25,13 @@ internal fun RoutineAddScreen(
         state = state,
         isInProgressProvider = { isInProgress },
         onNavigateUp = navigateUp,
-        onAdd = { viewModel.add(detail = state.detail, rRules = state.rRules.toList()) },
+        onAdd = {
+            viewModel.add(
+                detail = state.detail,
+                rRules = state.rRules.toList(),
+                isCalendarVisible = state.calendarVisibilityState.isVisible,
+            )
+        },
     )
 
     TitleFocusEffect(state = state)

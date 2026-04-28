@@ -35,6 +35,7 @@ class RoutineRemoteMapperTest : FunSpec() {
             result.id shouldBe entity.id
             result.detail shouldBe entity.detail.toRemote()
             result.rRules shouldBe rRules.map { it.toRemote() }
+            result.isCalendarVisible shouldBe entity.isCalendarVisible
             result.isFinished shouldBe entity.isFinished
             result.isDeleted shouldBe entity.isDeleted
             result.updatedAt shouldBe entity.updatedAt
@@ -56,6 +57,7 @@ class RoutineRemoteMapperTest : FunSpec() {
             result.id shouldBe entity.id
             result.detail shouldBe entity.detail.toLocal()
             result.rRules shouldBe rRules.map { it.toLocal() }
+            result.isCalendarVisible shouldBe entity.isCalendarVisible
             result.isFinished shouldBe entity.isFinished
             result.isDeleted shouldBe entity.isDeleted
             result.updatedAt shouldBe entity.updatedAt
