@@ -29,6 +29,9 @@
                 android:name="androidx.work.WorkManagerInitializer"
                 android:value="androidx.startup"
                 tools:node="remove" />
+            <meta-data
+                android:name="io.github.taetae98coding.diary.initializer.LoggerInitializer"
+                android:value="androidx.startup" />
         </provider>
     </application>
 

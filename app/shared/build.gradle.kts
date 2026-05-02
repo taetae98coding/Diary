@@ -116,6 +116,9 @@ buildkonfig {
             buildConfigField(type = STRING, name = "APP_NAME", value = "DiaryDev", nullable = false, const = true)
             buildConfigField(type = STRING, name = "GOOGLE_CLIENT_ID", value = requireNotNull(localProperties.getProperty("dev.desktop.google.client.id")), nullable = false, const = true)
         }
+        create("wasmJs") {
+            buildConfigField(type = STRING, name = "GOOGLE_CLIENT_ID", value = requireNotNull(localProperties.getProperty("dev.web.google.client.id")), nullable = false, const = true)
+        }
     }
 
     targetConfigs("real") {
@@ -125,6 +128,9 @@ buildkonfig {
         create("jvm") {
             buildConfigField(type = STRING, name = "APP_NAME", value = "Diary", nullable = false, const = true)
             buildConfigField(type = STRING, name = "GOOGLE_CLIENT_ID", value = requireNotNull(localProperties.getProperty("real.desktop.google.client.id")), nullable = false, const = true)
+        }
+        create("wasmJs") {
+            buildConfigField(type = STRING, name = "GOOGLE_CLIENT_ID", value = requireNotNull(localProperties.getProperty("real.web.google.client.id")), nullable = false, const = true)
         }
     }
 }

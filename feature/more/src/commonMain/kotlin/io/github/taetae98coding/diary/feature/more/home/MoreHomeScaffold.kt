@@ -20,6 +20,9 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.dropUnlessResumed
 import io.github.taetae98coding.diary.compose.core.preview.ScreenPreview
 import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
+import io.github.taetae98coding.diary.logger.analytics.api.AnalyticsLogEntry
+import io.github.taetae98coding.diary.logger.core.DiaryLogger
+import io.github.taetae98coding.diary.logger.crashlytics.api.CrashlyticsLogEntry
 
 @Composable
 internal fun MoreHomeScaffold(
@@ -66,6 +69,35 @@ internal fun MoreHomeScaffold(
                         )
                         Text(
                             text = "황금연휴",
+                            style = DiaryTheme.typography.bodySmall,
+                        )
+                    }
+                }
+            }
+
+            item {
+                Card(
+                    onClick = {
+                        val throwable = IllegalStateException("test crash")
+
+                        DiaryLogger.log(AnalyticsLogEntry(name = "test_crash"))
+                        DiaryLogger.log(CrashlyticsLogEntry(message = "test crash", throwable = throwable))
+
+                        throw throwable
+                    },
+                    modifier = Modifier.aspectRatio(1F),
+                ) {
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        Text(
+                            text = "💥",
+                            fontSize = 24.sp,
+                        )
+                        Text(
+                            text = "Crash",
                             style = DiaryTheme.typography.bodySmall,
                         )
                     }

@@ -7,15 +7,17 @@ import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularWavyProgressIndicator
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconToggleButton
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -43,7 +45,9 @@ import io.github.taetae98coding.diary.compose.core.icon.CopyIcon
 import io.github.taetae98coding.diary.compose.core.icon.DeleteIcon
 import io.github.taetae98coding.diary.compose.core.icon.FinishIcon
 import io.github.taetae98coding.diary.compose.core.modifier.focusableKeyEvent
+import io.github.taetae98coding.diary.compose.core.padding.plus
 import io.github.taetae98coding.diary.compose.core.preview.ScreenPreview
+import io.github.taetae98coding.diary.compose.core.scaffold.DiaryScaffold
 import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
 import io.github.taetae98coding.diary.core.model.memo.MemoDetail
 import io.github.taetae98coding.diary.feature.memo.common.TagCard
@@ -71,7 +75,7 @@ internal fun MemoDetailScaffold(
 ) {
     val isLoading by remember { derivedStateOf { detailProvider() == null } }
 
-    Scaffold(
+    DiaryScaffold(
         modifier = modifier
             .focusableKeyEvent { event ->
                 if (event.type == KeyEventType.KeyDown && event.isMetaPressed && event.key == Key.Enter) {
@@ -123,7 +127,7 @@ internal fun MemoDetailScaffold(
             if (!isLoading) {
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
-                    contentPadding = DiaryTheme.dimen.screenPaddingValues,
+                    contentPadding = DiaryTheme.dimen.screenPaddingValues + WindowInsets.navigationBars.asPaddingValues(),
                     verticalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.screenCardSpace),
                 ) {
                     item {

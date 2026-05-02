@@ -11,8 +11,9 @@ jetbrains-compose-material3 = "1.11.0-alpha07"
 jetbrains-lifecycle = "2.11.0-alpha03"
 jetbrains-navigation3 = "1.1.0"
 # kotlinx
-kotlinx-coroutines = "1.11.0-rc01"              # https://github.com/Kotlin/kotlinx.coroutines/releases
-kotlinx-datetime = "0.8.0-rc01"                 # https://github.com/Kotlin/kotlinx-datetime/releases
+kotlinx-browser = "0.5.0"                       # https://github.com/Kotlin/kotlinx-browser/releases
+kotlinx-coroutines = "1.11.0-rc02"              # https://github.com/Kotlin/kotlinx.coroutines/releases
+kotlinx-datetime = "0.8.0-rc02"                 # https://github.com/Kotlin/kotlinx-datetime/releases
 kotlinx-serialization = "1.11.0"                # https://github.com/Kotlin/kotlinx.serialization/releases
 # androidx
 androidx-activity = "1.13.0"                    # https://developer.android.com/jetpack/androidx/releases/activity?hl=en
@@ -24,6 +25,7 @@ androidx-datastore = "1.3.0-alpha08"            # https://developer.android.com/
 androidx-paging = "3.5.0-rc01"                  # https://developer.android.com/jetpack/androidx/releases/paging?hl=en
 androidx-room3 = "3.0.0-alpha03"                # https://developer.android.com/jetpack/androidx/releases/room3?hl=en
 androidx-sqlite = "2.7.0-alpha03"               # https://developer.android.com/jetpack/androidx/releases/sqlite?hl=en
+androidx-startup = "1.2.0"						# https://developer.android.com/jetpack/androidx/releases/startup?hl=en
 androidx-test-core = "1.7.0"					# https://developer.android.com/jetpack/androidx/releases/test?hl=en
 androidx-work = "2.11.2"						# https://developer.android.com/jetpack/androidx/releases/work?hl=en
 # abc
@@ -45,11 +47,12 @@ kotest = "6.1.11"                               # https://github.com/kotest/kote
 ktor = "3.4.3"                                  # https://github.com/ktorio/ktor/releases
 leakcanary = "2.14"							    # https://github.com/square/leakcanary/releases
 mockk = "1.14.9"								# https://github.com/mockk/mockk/releases
+napier = "2.7.1"								# https://github.com/AAkira/Napier/releases
 robolectric = "4.16.1"							# https://github.com/robolectric/robolectric/releases
 multiplatform-markdown = "0.40.2"               # https://github.com/mikepenz/multiplatform-markdown-renderer/releases
 spotless = "8.4.0"                              # https://github.com/diffplug/spotless/blob/main/plugin-gradle/CHANGES.md
-spm = "1.9.0"                                   # https://github.com/frankois944/spm4Kmp/releases
-supabase = "3.5.0"                              # https://github.com/supabase-community/supabase-kt/releases
+spm = "1.9.1"                                   # https://github.com/frankois944/spm4Kmp/releases
+supabase = "3.6.0"                              # https://github.com/supabase-community/supabase-kt/releases
 turbine = "1.2.1"								# https://github.com/cashapp/turbine/releases
 
 [libraries]
@@ -60,10 +63,11 @@ buildlogic-android = { group = "com.android.tools.build", name = "gradle", versi
 buildlogic-jetbrains-compose = { group = "org.jetbrains.compose", name = "compose-gradle-plugin", version.ref = "jetbrains-compose" }
 buildlogic-koin-compiler = { group = "io.insert-koin", name = "koin-compiler-gradle-plugin", version.ref = "koin-compiler-plugin" }
 # jetbrains
+jetbrains-compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime", version.ref = "jetbrains-compose" }
+jetbrains-compose-components-resources = { group = "org.jetbrains.compose.components", name = "components-resources", version.ref = "jetbrains-compose" }
 jetbrains-compose-ui = { group = "org.jetbrains.compose.ui", name = "ui", version.ref = "jetbrains-compose" }
 jetbrains-compose-ui-tooling = { group = "org.jetbrains.compose.ui", name = "ui-tooling", version.ref = "jetbrains-compose" }
 jetbrains-compose-ui-tooling-preview = { group = "org.jetbrains.compose.ui", name = "ui-tooling-preview", version.ref = "jetbrains-compose" }
-jetbrains-compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime", version.ref = "jetbrains-compose" }
 jetbrains-compose-material-icons-extended = { group = "org.jetbrains.compose.material", name = "material-icons-extended", version.ref = "jetbrains-compose-material-icons" }
 jetbrains-compose-material3 = { group = "org.jetbrains.compose.material3", name = "material3", version.ref = "jetbrains-compose-material3" }
 jetbrains-compose-material3-navigation-suite = { group = "org.jetbrains.compose.material3", name = "material3-adaptive-navigation-suite", version.ref = "jetbrains-compose-material3" }
@@ -71,6 +75,7 @@ jetbrains-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycl
 jetbrains-lifecycle-viewmodel-navigation3 = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel-navigation3", version.ref = "jetbrains-lifecycle" }
 jetbrains-navigation3-ui = { group = "org.jetbrains.androidx.navigation3", name = "navigation3-ui", version.ref = "jetbrains-navigation3" }
 # kotlinx
+kotlinx-browser = { group = "org.jetbrains.kotlinx", name = "kotlinx-browser", version.ref = "kotlinx-browser" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-play-services = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-play-services", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
@@ -94,6 +99,8 @@ androidx-lifecycle-process = { group = "androidx.lifecycle", name = "lifecycle-p
 androidx-paging-common = { group = "androidx.paging", name = "paging-common", version.ref = "androidx-paging" }
 androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "androidx-paging" }
 androidx-sqlite-bundled = { group = "androidx.sqlite", name = "sqlite-bundled", version.ref = "androidx-sqlite" }
+androidx-sqlite-web = { group = "androidx.sqlite", name = "sqlite-web", version.ref = "androidx-sqlite" }
+androidx-startup-runtime = { group = "androidx.startup", name = "startup-runtime", version.ref = "androidx-startup" }
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4-android", version.ref = "androidx-compose" }
 androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "androidx-compose" }
 androidx-test-core = { group = "androidx.test", name = "core", version.ref = "androidx-test-core" }
@@ -127,6 +134,7 @@ ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serializatio
 leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakcanary" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 multiplatform-markdown-material3 = { group = "com.mikepenz", name = "multiplatform-markdown-renderer-m3", version.ref = "multiplatform-markdown" }
+napier = { group = "io.github.aakira", name = "napier", version.ref = "napier" }
 robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
 supabase-auth = { group = "io.github.jan-tennert.supabase", name = "auth-kt", version.ref = "supabase" }
 supabase-functions = { group = "io.github.jan-tennert.supabase", name = "functions-kt", version.ref = "supabase" }

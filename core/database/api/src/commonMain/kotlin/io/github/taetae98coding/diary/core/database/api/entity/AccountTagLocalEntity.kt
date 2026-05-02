@@ -3,6 +3,7 @@ package io.github.taetae98coding.diary.core.database.api.entity
 import androidx.room3.ColumnInfo
 import androidx.room3.Entity
 import androidx.room3.ForeignKey
+import androidx.room3.Index
 import kotlin.uuid.Uuid
 
 @Entity(
@@ -17,6 +18,7 @@ import kotlin.uuid.Uuid
             onUpdate = ForeignKey.CASCADE,
         ),
     ],
+    indices = [Index(value = ["tagId"])],
 )
 public data class AccountTagLocalEntity(
     @ColumnInfo(name = "accountId", defaultValue = "00000000-0000-0000-0000-000000000000")

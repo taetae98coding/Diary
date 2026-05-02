@@ -22,6 +22,10 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(projects.app.shared)
+                implementation(projects.logger.core)
+                implementation(projects.logger.analytics.impl)
+                implementation(projects.logger.console.impl)
+                implementation(projects.logger.crashlytics.impl)
                 implementation(libs.jetbrains.compose.ui)
             }
         }

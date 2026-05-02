@@ -13,6 +13,8 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(projects.app.shared)
+                implementation(projects.logger.core)
+                implementation(projects.logger.console.impl)
                 implementation(libs.jetbrains.compose.ui)
                 runtimeOnly(compose.desktop.currentOs)
             }

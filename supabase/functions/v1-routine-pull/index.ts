@@ -2,6 +2,7 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { supabaseAdmin } from "../_shared/supabase-admin.ts";
 import { RoutineRepository } from "../_shared/routine-repository.ts";
 import { Routine } from "../_shared/entity/routine.ts";
+import { corsHeaders, handleCorsPreflight } from "../_shared/cors.ts";
 import { RoutinePullRequestV1 } from "./entity/routine-pull-request-v1.ts";
 import { RoutineV1 } from "../v1-routine-push/entity/routine-v1.ts";
 
@@ -36,10 +37,13 @@ function toRoutineV1(routine: Routine): RoutineV1 {
 }
 
 Deno.serve(async (req: Request) => {
+  const preflight = handleCorsPreflight(req);
+  if (preflight) return preflight;
+
   if (req.method !== "POST") {
     return new Response(JSON.stringify({ error: "Method not allowed" }), {
       status: 405,
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   }
 
@@ -48,7 +52,7 @@ Deno.serve(async (req: Request) => {
     if (!authorization) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), {
         status: 401,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     }
 
@@ -59,7 +63,7 @@ Deno.serve(async (req: Request) => {
     if (authError || !user) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), {
         status: 401,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     }
 
@@ -68,12 +72,12 @@ Deno.serve(async (req: Request) => {
 
     return new Response(JSON.stringify(routineList.map(toRoutineV1)), {
       status: 200,
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   } catch (error) {
     return new Response(JSON.stringify({ error: error.message }), {
       status: 400,
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   }
 });

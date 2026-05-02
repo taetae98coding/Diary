@@ -1,11 +1,13 @@
 package io.github.taetae98coding.diary.feature.tag.add
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -23,7 +25,9 @@ import io.github.taetae98coding.diary.compose.core.card.ColorCard
 import io.github.taetae98coding.diary.compose.core.card.DescriptionCard
 import io.github.taetae98coding.diary.compose.core.card.TitleCard
 import io.github.taetae98coding.diary.compose.core.modifier.focusableKeyEvent
+import io.github.taetae98coding.diary.compose.core.padding.plus
 import io.github.taetae98coding.diary.compose.core.preview.ScreenPreview
+import io.github.taetae98coding.diary.compose.core.scaffold.DiaryScaffold
 import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
 
 @Composable
@@ -34,7 +38,7 @@ internal fun TagAddScaffold(
     onNavigateUp: () -> Unit = {},
     onAdd: () -> Unit = {},
 ) {
-    Scaffold(
+    DiaryScaffold(
         modifier = modifier
             .focusableKeyEvent(autoFocus = false) { event ->
                 if (event.type == KeyEventType.KeyDown && event.isMetaPressed && event.key == Key.Enter) {
@@ -57,7 +61,7 @@ internal fun TagAddScaffold(
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize(),
-            contentPadding = DiaryTheme.dimen.screenPaddingValues,
+            contentPadding = DiaryTheme.dimen.screenPaddingValues + WindowInsets.navigationBars.asPaddingValues(),
             verticalArrangement = Arrangement.spacedBy(DiaryTheme.dimen.screenCardSpace),
         ) {
             item {

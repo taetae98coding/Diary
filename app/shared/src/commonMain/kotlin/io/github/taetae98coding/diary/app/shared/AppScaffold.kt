@@ -25,8 +25,8 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 internal fun AppScaffold(
+    state: AppState,
     modifier: Modifier = Modifier,
-    state: AppState = rememberAppState(),
 ) {
     NavigationSuiteScaffold(
         modifier = modifier

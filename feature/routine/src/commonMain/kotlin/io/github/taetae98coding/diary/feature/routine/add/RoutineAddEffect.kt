@@ -1,13 +1,13 @@
 package io.github.taetae98coding.diary.feature.routine.add
 
-internal sealed class RoutineAddEffect {
-    data object None : RoutineAddEffect()
+internal sealed interface RoutineAddEffect {
+    data object None : RoutineAddEffect
 
-    data object AddFinish : RoutineAddEffect()
+    data object AddFinish : RoutineAddEffect
 
-    data object TitleBlank : RoutineAddEffect()
+    data object TitleBlank : RoutineAddEffect
 
-    data object RRuleEmpty : RoutineAddEffect()
+    data object RRuleEmpty : RoutineAddEffect
 
-    data object UnknownError : RoutineAddEffect()
+    data object UnknownError : RoutineAddEffect
 }
