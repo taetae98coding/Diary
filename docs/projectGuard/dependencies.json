@@ -22,7 +22,23 @@
               "id": ":app:shared"
             },
             {
+              "id": ":logger:core"
+            },
+            {
+              "id": ":logger:analytics:impl"
+            },
+            {
+              "id": ":logger:console:impl"
+            },
+            {
+              "id": ":logger:crashlytics:impl"
+            },
+            {
               "id": "androidx.activity:activity-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.startup:startup-runtime",
               "isLibrary": true
             },
             {
@@ -62,7 +78,23 @@
               "id": ":app:shared"
             },
             {
+              "id": ":logger:core"
+            },
+            {
+              "id": ":logger:analytics:impl"
+            },
+            {
+              "id": ":logger:console:impl"
+            },
+            {
+              "id": ":logger:crashlytics:impl"
+            },
+            {
               "id": "androidx.activity:activity-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.startup:startup-runtime",
               "isLibrary": true
             },
             {
@@ -102,7 +134,23 @@
               "id": ":app:shared"
             },
             {
+              "id": ":logger:core"
+            },
+            {
+              "id": ":logger:analytics:impl"
+            },
+            {
+              "id": ":logger:console:impl"
+            },
+            {
+              "id": ":logger:crashlytics:impl"
+            },
+            {
               "id": "androidx.activity:activity-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.startup:startup-runtime",
               "isLibrary": true
             },
             {
@@ -138,7 +186,23 @@
               "id": ":app:shared"
             },
             {
+              "id": ":logger:core"
+            },
+            {
+              "id": ":logger:analytics:impl"
+            },
+            {
+              "id": ":logger:console:impl"
+            },
+            {
+              "id": ":logger:crashlytics:impl"
+            },
+            {
               "id": "androidx.activity:activity-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.startup:startup-runtime",
               "isLibrary": true
             },
             {
@@ -178,7 +242,23 @@
               "id": ":app:shared"
             },
             {
+              "id": ":logger:core"
+            },
+            {
+              "id": ":logger:analytics:impl"
+            },
+            {
+              "id": ":logger:console:impl"
+            },
+            {
+              "id": ":logger:crashlytics:impl"
+            },
+            {
               "id": "androidx.activity:activity-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.startup:startup-runtime",
               "isLibrary": true
             },
             {
@@ -218,7 +298,23 @@
               "id": ":app:shared"
             },
             {
+              "id": ":logger:core"
+            },
+            {
+              "id": ":logger:analytics:impl"
+            },
+            {
+              "id": ":logger:console:impl"
+            },
+            {
+              "id": ":logger:crashlytics:impl"
+            },
+            {
               "id": "androidx.activity:activity-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.startup:startup-runtime",
               "isLibrary": true
             },
             {
@@ -258,7 +354,23 @@
               "id": ":app:shared"
             },
             {
+              "id": ":logger:core"
+            },
+            {
+              "id": ":logger:analytics:impl"
+            },
+            {
+              "id": ":logger:console:impl"
+            },
+            {
+              "id": ":logger:crashlytics:impl"
+            },
+            {
               "id": "androidx.activity:activity-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.startup:startup-runtime",
               "isLibrary": true
             },
             {
@@ -294,7 +406,23 @@
               "id": ":app:shared"
             },
             {
+              "id": ":logger:core"
+            },
+            {
+              "id": ":logger:analytics:impl"
+            },
+            {
+              "id": ":logger:console:impl"
+            },
+            {
+              "id": ":logger:crashlytics:impl"
+            },
+            {
               "id": "androidx.activity:activity-compose",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.startup:startup-runtime",
               "isLibrary": true
             },
             {
@@ -335,6 +463,18 @@
               "id": ":app:shared"
             },
             {
+              "id": ":logger:core"
+            },
+            {
+              "id": ":logger:analytics:impl"
+            },
+            {
+              "id": ":logger:console:impl"
+            },
+            {
+              "id": ":logger:crashlytics:impl"
+            },
+            {
               "id": "org.jetbrains.compose.ui:ui",
               "isLibrary": true
             }
@@ -349,6 +489,18 @@
             },
             {
               "id": ":app:shared"
+            },
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": ":logger:analytics:impl"
+            },
+            {
+              "id": ":logger:console:impl"
+            },
+            {
+              "id": ":logger:crashlytics:impl"
             },
             {
               "id": "org.jetbrains.compose.ui:ui",
@@ -367,6 +519,18 @@
               "id": ":app:shared"
             },
             {
+              "id": ":logger:core"
+            },
+            {
+              "id": ":logger:analytics:impl"
+            },
+            {
+              "id": ":logger:console:impl"
+            },
+            {
+              "id": ":logger:crashlytics:impl"
+            },
+            {
               "id": "org.jetbrains.compose.ui:ui",
               "isLibrary": true
             }
@@ -383,6 +547,18 @@
               "id": ":app:shared"
             },
             {
+              "id": ":logger:core"
+            },
+            {
+              "id": ":logger:analytics:impl"
+            },
+            {
+              "id": ":logger:console:impl"
+            },
+            {
+              "id": ":logger:crashlytics:impl"
+            },
+            {
               "id": "org.jetbrains.compose.ui:ui",
               "isLibrary": true
             }
@@ -397,6 +573,18 @@
             },
             {
               "id": ":app:shared"
+            },
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": ":logger:analytics:impl"
+            },
+            {
+              "id": ":logger:console:impl"
+            },
+            {
+              "id": ":logger:crashlytics:impl"
             },
             {
               "id": "org.jetbrains.compose.ui:ui",
@@ -420,6 +608,12 @@
               "id": ":app:shared"
             },
             {
+              "id": ":logger:core"
+            },
+            {
+              "id": ":logger:console:impl"
+            },
+            {
               "id": "org.jetbrains.compose.ui:ui",
               "isLibrary": true
             }
@@ -434,6 +628,12 @@
             },
             {
               "id": ":app:shared"
+            },
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": ":logger:console:impl"
             },
             {
               "id": "org.jetbrains.compose.ui:ui",
@@ -460,6 +660,12 @@
               "id": ":app:shared"
             },
             {
+              "id": ":logger:core"
+            },
+            {
+              "id": ":logger:console:impl"
+            },
+            {
               "id": "org.jetbrains.compose.ui:ui",
               "isLibrary": true
             }
@@ -476,6 +682,12 @@
               "id": ":app:shared"
             },
             {
+              "id": ":logger:core"
+            },
+            {
+              "id": ":logger:console:impl"
+            },
+            {
               "id": "org.jetbrains.compose.ui:ui",
               "isLibrary": true
             }
@@ -490,6 +702,12 @@
             },
             {
               "id": ":app:shared"
+            },
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": ":logger:console:impl"
             },
             {
               "id": "org.jetbrains.compose.ui:ui",
@@ -2536,7 +2754,15 @@
               "id": ":app:shared"
             },
             {
+              "id": "org.jetbrains.compose.components:components-resources",
+              "isLibrary": true
+            },
+            {
               "id": "org.jetbrains.compose.ui:ui",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.material3:material3",
               "isLibrary": true
             }
           ]
@@ -2552,7 +2778,15 @@
               "id": ":app:shared"
             },
             {
+              "id": "org.jetbrains.compose.components:components-resources",
+              "isLibrary": true
+            },
+            {
               "id": "org.jetbrains.compose.ui:ui",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.material3:material3",
               "isLibrary": true
             }
           ]
@@ -2568,7 +2802,15 @@
               "id": ":app:shared"
             },
             {
+              "id": "org.jetbrains.compose.components:components-resources",
+              "isLibrary": true
+            },
+            {
               "id": "org.jetbrains.compose.ui:ui",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.compose.material3:material3",
               "isLibrary": true
             }
           ]
@@ -4172,6 +4414,13 @@
             {
               "id": "org.jetbrains.kotlinx:kotlinx-serialization-json",
               "isLibrary": true
+            },
+            {
+              "id": "androidx.sqlite:sqlite-web",
+              "isLibrary": true
+            },
+            {
+              "id": ":library:sqlite-wasm-worker"
             }
           ]
         },
@@ -4210,6 +4459,13 @@
             {
               "id": "org.jetbrains.kotlinx:kotlinx-serialization-json",
               "isLibrary": true
+            },
+            {
+              "id": "androidx.sqlite:sqlite-web",
+              "isLibrary": true
+            },
+            {
+              "id": ":library:sqlite-wasm-worker"
             }
           ]
         }
@@ -5223,6 +5479,10 @@
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
               "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+              "isLibrary": true
             }
           ]
         },
@@ -5234,6 +5494,10 @@
             },
             {
               "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
               "isLibrary": true
             }
           ]
@@ -5817,6 +6081,13 @@
             {
               "id": "androidx.room3:room3-runtime",
               "isLibrary": true
+            },
+            {
+              "id": ":library:sqlite-wasm-worker"
+            },
+            {
+              "id": "androidx.sqlite:sqlite-web",
+              "isLibrary": true
             }
           ]
         },
@@ -5846,6 +6117,13 @@
             },
             {
               "id": "androidx.room3:room3-runtime",
+              "isLibrary": true
+            },
+            {
+              "id": ":library:sqlite-wasm-worker"
+            },
+            {
+              "id": "androidx.sqlite:sqlite-web",
               "isLibrary": true
             }
           ]
@@ -17772,6 +18050,12 @@
             },
             {
               "id": ":library:kotlinx-datetime"
+            },
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             }
           ]
         },
@@ -17836,6 +18120,12 @@
             },
             {
               "id": ":library:kotlinx-datetime"
+            },
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             },
             {
               "id": "androidx.test:core",
@@ -17924,6 +18214,12 @@
             },
             {
               "id": ":library:kotlinx-datetime"
+            },
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             }
           ]
         },
@@ -17984,6 +18280,12 @@
             },
             {
               "id": ":library:kotlinx-datetime"
+            },
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             },
             {
               "id": "org.jetbrains.compose.hot-reload:hot-reload-runtime-api",
@@ -18052,6 +18354,12 @@
             },
             {
               "id": ":library:kotlinx-datetime"
+            },
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             }
           ]
         },
@@ -18112,6 +18420,12 @@
             },
             {
               "id": ":library:kotlinx-datetime"
+            },
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             }
           ]
         },
@@ -18172,6 +18486,12 @@
             },
             {
               "id": ":library:kotlinx-datetime"
+            },
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             }
           ]
         },
@@ -18232,6 +18552,12 @@
             },
             {
               "id": ":library:kotlinx-datetime"
+            },
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             }
           ]
         },
@@ -18292,6 +18618,12 @@
             },
             {
               "id": ":library:kotlinx-datetime"
+            },
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             }
           ]
         },
@@ -18352,6 +18684,12 @@
             },
             {
               "id": ":library:kotlinx-datetime"
+            },
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             }
           ]
         },
@@ -18412,6 +18750,12 @@
             },
             {
               "id": ":library:kotlinx-datetime"
+            },
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             }
           ]
         },
@@ -18472,6 +18816,12 @@
             },
             {
               "id": ":library:kotlinx-datetime"
+            },
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             }
           ]
         },
@@ -18532,6 +18882,12 @@
             },
             {
               "id": ":library:kotlinx-datetime"
+            },
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             }
           ]
         }
@@ -21703,6 +22059,1004 @@
             },
             {
               "id": "androidx.room3:room3-common",
+              "isLibrary": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": ":library:sqlite-wasm-worker",
+      "configurations": [
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-browser",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.sqlite:sqlite-web",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "org.jetbrains.kotlinx:kotlinx-browser",
+              "isLibrary": true
+            },
+            {
+              "id": "androidx.sqlite:sqlite-web",
+              "isLibrary": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": ":logger",
+      "configurations": []
+    },
+    {
+      "module": ":logger:analytics",
+      "configurations": []
+    },
+    {
+      "module": ":logger:analytics:api",
+      "configurations": [
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": ":logger:analytics:impl",
+      "configurations": [
+        {
+          "id": "androidCompileClasspath",
+          "dependencies": [
+            {
+              "id": "com.google.firebase:firebase-bom",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-analytics",
+              "isLibrary": true
+            },
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:analytics:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": ":logger:console",
+      "configurations": []
+    },
+    {
+      "module": ":logger:console:api",
+      "configurations": [
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": ":logger:console:impl",
+      "configurations": [
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:console:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.github.aakira:napier",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:console:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.github.aakira:napier",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:console:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.github.aakira:napier",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:console:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.github.aakira:napier",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:console:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.github.aakira:napier",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:console:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.github.aakira:napier",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:console:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.github.aakira:napier",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:console:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.github.aakira:napier",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:console:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.github.aakira:napier",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:console:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            },
+            {
+              "id": "io.github.aakira:napier",
+              "isLibrary": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": ":logger:core",
+      "configurations": [
+        {
+          "id": "androidCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": ":logger:crashlytics",
+      "configurations": []
+    },
+    {
+      "module": ":logger:crashlytics:api",
+      "configurations": [
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:core"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": ":logger:crashlytics:impl",
+      "configurations": [
+        {
+          "id": "androidCompileClasspath",
+          "dependencies": [
+            {
+              "id": "com.google.firebase:firebase-bom",
+              "isLibrary": true
+            },
+            {
+              "id": "com.google.firebase:firebase-crashlytics",
+              "isLibrary": true
+            },
+            {
+              "id": ":logger:crashlytics:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:crashlytics:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:crashlytics:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "jvmTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:crashlytics:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataAppleMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:crashlytics:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCommonMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:crashlytics:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:crashlytics:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataIosMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:crashlytics:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "metadataNativeMainCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:crashlytics:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:crashlytics:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
+              "isLibrary": true
+            }
+          ]
+        },
+        {
+          "id": "wasmJsTestCompileClasspath",
+          "dependencies": [
+            {
+              "id": ":logger:crashlytics:api"
+            },
+            {
+              "id": "org.jetbrains.kotlin:kotlin-stdlib",
               "isLibrary": true
             }
           ]

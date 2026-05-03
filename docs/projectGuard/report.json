@@ -317,6 +317,54 @@
       "restrictions": []
     },
     {
+      "module": ":library:sqlite-wasm-worker",
+      "restrictions": []
+    },
+    {
+      "module": ":logger",
+      "restrictions": []
+    },
+    {
+      "module": ":logger:analytics",
+      "restrictions": []
+    },
+    {
+      "module": ":logger:analytics:api",
+      "restrictions": []
+    },
+    {
+      "module": ":logger:analytics:impl",
+      "restrictions": []
+    },
+    {
+      "module": ":logger:console",
+      "restrictions": []
+    },
+    {
+      "module": ":logger:console:api",
+      "restrictions": []
+    },
+    {
+      "module": ":logger:console:impl",
+      "restrictions": []
+    },
+    {
+      "module": ":logger:core",
+      "restrictions": []
+    },
+    {
+      "module": ":logger:crashlytics",
+      "restrictions": []
+    },
+    {
+      "module": ":logger:crashlytics:api",
+      "restrictions": []
+    },
+    {
+      "module": ":logger:crashlytics:impl",
+      "restrictions": []
+    },
+    {
       "module": ":presenter",
       "restrictions": []
     },
