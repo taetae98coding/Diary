@@ -11,7 +11,6 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -29,6 +28,7 @@ import androidx.lifecycle.viewmodel.compose.rememberViewModelStoreProvider
 import io.github.taetae98coding.diary.compose.core.button.NavigateUpButton
 import io.github.taetae98coding.diary.compose.core.chip.DiaryFilterChip
 import io.github.taetae98coding.diary.compose.core.icon.SettingsIcon
+import io.github.taetae98coding.diary.compose.core.scaffold.DiaryScaffold
 import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.datetime.LocalDateRange
@@ -62,7 +62,7 @@ private fun GoldenHolidayScreen(
 ) {
     val provider = rememberViewModelStoreProvider()
 
-    Scaffold(
+    DiaryScaffold(
         modifier = modifier,
         topBar = {
             TopBar(

@@ -2,6 +2,7 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { supabaseAdmin } from "../_shared/supabase-admin.ts";
 import { MemoRepository } from "../_shared/memo-repository.ts";
 import { Memo } from "../_shared/entity/memo.ts";
+import { corsHeaders, handleCorsPreflight } from "../_shared/cors.ts";
 import { MemoV2 } from "./entity/memo-v2.ts";
 
 const memoRepository = new MemoRepository(supabaseAdmin);
@@ -26,10 +27,13 @@ function toMemo(v2: MemoV2): Memo {
 }
 
 Deno.serve(async (req: Request) => {
+  const preflight = handleCorsPreflight(req);
+  if (preflight) return preflight;
+
   if (req.method !== "POST") {
     return new Response(JSON.stringify({ error: "Method not allowed" }), {
       status: 405,
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   }
 
@@ -38,7 +42,7 @@ Deno.serve(async (req: Request) => {
     if (!authorization) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), {
         status: 401,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     }
 
@@ -49,18 +53,18 @@ Deno.serve(async (req: Request) => {
     if (authError || !user) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), {
         status: 401,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     }
 
     const { memoList }: { memoList: MemoV2[] } = await req.json();
     await memoRepository.upsertIfNewer(user.id, memoList.map(toMemo));
 
-    return new Response(null, { status: 204 });
+    return new Response(null, { status: 204, headers: corsHeaders });
   } catch (error) {
     return new Response(JSON.stringify({ error: error.message }), {
       status: 400,
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   }
 });

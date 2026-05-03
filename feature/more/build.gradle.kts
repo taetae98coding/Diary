@@ -11,6 +11,8 @@ kotlin {
                 implementation(projects.domain.credentials)
                 implementation(projects.domain.holiday)
                 implementation(projects.library.kotlinxDatetime)
+                implementation(projects.logger.analytics.api)
+                implementation(projects.logger.crashlytics.api)
             }
         }
     }

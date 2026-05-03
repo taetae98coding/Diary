@@ -28,7 +28,7 @@ internal class SupabaseAuthImpl(private val supabase: SupabaseClient) : Supabase
 
                 is SessionStatus.NotAuthenticated -> SupabaseSessionStatus.NotAuthenticated
 
-                is SessionStatus.Initializing -> SupabaseSessionStatus.Loading
+                is SessionStatus.Initializing -> getSessionStatusFromStorage() ?: SupabaseSessionStatus.Loading
 
                 is SessionStatus.RefreshFailure -> {
                     val cause = (supabase.auth.events.first() as? AuthEvent.RefreshFailure)?.cause
@@ -40,16 +40,13 @@ internal class SupabaseAuthImpl(private val supabase: SupabaseClient) : Supabase
     private suspend fun resolveRefreshFailure(cause: RefreshFailureCause?): SupabaseSessionStatus {
         return when (cause) {
             is RefreshFailureCause.InternalServerError -> SupabaseSessionStatus.NotAuthenticated
-
-            is RefreshFailureCause.NetworkError, null -> {
-                val user = supabase.auth.sessionManager.loadSession()?.user
-                if (user != null) {
-                    SupabaseSessionStatus.Authenticated(userId = user.id, email = user.email)
-                } else {
-                    SupabaseSessionStatus.NotAuthenticated
-                }
-            }
+            else -> getSessionStatusFromStorage() ?: SupabaseSessionStatus.NotAuthenticated
         }
+    }
+
+    private suspend fun getSessionStatusFromStorage(): SupabaseSessionStatus? {
+        return supabase.auth.sessionManager.loadSession().user
+            ?.let { SupabaseSessionStatus.Authenticated(userId = it.id, email = it.email) }
     }
 
     override suspend fun signOut() {

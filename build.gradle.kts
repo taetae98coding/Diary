@@ -57,6 +57,9 @@ projectGuard {
         deny(":core:network")
         deny(":core:supabase")
         deny(":core:weather-network")
+        deny(":logger:analytics:impl")
+        deny(":logger:console:impl")
+        deny(":logger:crashlytics:impl")
     }
 
     guard(":feature") {
@@ -70,6 +73,9 @@ projectGuard {
         deny(":core:network")
         deny(":core:supabase")
         deny(":core:weather-network")
+        deny(":logger:analytics:impl")
+        deny(":logger:console:impl")
+        deny(":logger:crashlytics:impl")
     }
 
     guard(":presenter") {
@@ -83,5 +89,8 @@ projectGuard {
         deny(":core:network")
         deny(":core:supabase")
         deny(":core:weather-network")
+        deny(":logger:analytics:impl")
+        deny(":logger:console:impl")
+        deny(":logger:crashlytics:impl")
     }
 }

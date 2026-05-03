@@ -22,7 +22,7 @@ public fun App(configuration: KoinAppDeclaration = {}) {
         },
     ) {
         DiaryTheme {
-            AppScaffold()
+            AppScaffold(state = rememberAppState())
         }
     }
 }

@@ -17,8 +17,16 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(projects.app.shared)
+                implementation(libs.jetbrains.compose.components.resources)
                 implementation(libs.jetbrains.compose.ui)
+                implementation(libs.jetbrains.compose.material3)
             }
         }
     }
+}
+
+compose.resources {
+    publicResClass = false
+    packageOfResClass = "io.github.taetae98coding.diary"
+    generateResClass = always
 }

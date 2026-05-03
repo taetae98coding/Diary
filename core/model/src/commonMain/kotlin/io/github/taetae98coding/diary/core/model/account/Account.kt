@@ -2,10 +2,10 @@ package io.github.taetae98coding.diary.core.model.account
 
 import kotlin.uuid.Uuid
 
-public sealed class Account {
-    public abstract val accountId: Uuid
+public sealed interface Account {
+    public val accountId: Uuid
 
-    public data object Guest : Account() {
+    public data object Guest : Account {
         override val accountId: Uuid = Uuid.NIL
     }
 
@@ -13,5 +13,5 @@ public sealed class Account {
         override val accountId: Uuid,
         val email: String,
         val profileImage: String?,
-    ) : Account()
+    ) : Account
 }

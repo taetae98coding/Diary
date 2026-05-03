@@ -43,4 +43,46 @@ class DiaryDatabaseMigrationTest {
         migrationTestHelper.createDatabase(3).close()
         migrationTestHelper.runMigrationsAndValidate(4).close()
     }
+
+    @Test
+    fun `version 4에서 5로 AutoMigration이 정상 동작한다`() = runTest {
+        migrationTestHelper.createDatabase(4).close()
+        migrationTestHelper.runMigrationsAndValidate(5).close()
+    }
+
+    @Test
+    fun `version 5 마이그레이션 후 FK 보조 인덱스가 생성되어 있다`() = runTest {
+        migrationTestHelper.createDatabase(4).close()
+        val connection = migrationTestHelper.runMigrationsAndValidate(5)
+
+        val expectedIndices = setOf(
+            "AccountMemo" to "memoId",
+            "AccountTag" to "tagId",
+            "AccountRoutine" to "routineId",
+            "MemoTag" to "tagId",
+        )
+
+        val actualIndices = mutableSetOf<Pair<String, String>>()
+        connection.prepare(
+            """
+            SELECT m.tbl_name, ii.name
+            FROM sqlite_master m
+            JOIN pragma_index_list(m.tbl_name) il ON il.name = m.name
+            JOIN pragma_index_info(m.name) ii
+            WHERE m.type = 'index'
+              AND m.tbl_name IN ('AccountMemo', 'AccountTag', 'AccountRoutine', 'MemoTag')
+              AND il.origin = 'c'
+            """.trimIndent(),
+        ).use { stmt ->
+            while (stmt.step()) {
+                actualIndices += stmt.getText(0) to stmt.getText(1)
+            }
+        }
+
+        connection.close()
+
+        assert(actualIndices.containsAll(expectedIndices)) {
+            "FK 보조 인덱스 누락. expected=$expectedIndices, actual=$actualIndices"
+        }
+    }
 }

@@ -50,5 +50,11 @@ kotlin {
                 implementation(libs.google.oauth.client.jetty)
             }
         }
+
+        wasmJsMain {
+            dependencies {
+                implementation(libs.kotlinx.coroutines.core)
+            }
+        }
     }
 }

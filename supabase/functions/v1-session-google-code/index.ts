@@ -3,6 +3,7 @@ import { supabaseAdmin } from "../_shared/supabase-admin.ts";
 import { GoogleRepository } from "../_shared/google-repository.ts";
 import { AccountRepository } from "../_shared/account-repository.ts";
 import { AuthRepository } from "../_shared/auth-repository.ts";
+import { corsHeaders, handleCorsPreflight } from "../_shared/cors.ts";
 import { SessionGoogleCodeRequestV1 } from "./entity/session-google-code-request-v1.ts";
 import { SessionGoogleCodeResponseV1 } from "./entity/session-google-code-response-v1.ts";
 
@@ -11,10 +12,13 @@ const accountRepository = new AccountRepository(supabaseAdmin);
 const authRepository = new AuthRepository(supabaseAdmin);
 
 Deno.serve(async (req: Request) => {
+  const preflight = handleCorsPreflight(req);
+  if (preflight) return preflight;
+
   if (req.method !== "POST") {
     return new Response(JSON.stringify({ error: "Method not allowed" }), {
       status: 405,
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   }
 
@@ -40,12 +44,12 @@ Deno.serve(async (req: Request) => {
 
     return new Response(JSON.stringify(response), {
       status: 200,
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   } catch (error) {
     return new Response(JSON.stringify({ error: error.message }), {
       status: 400,
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   }
 });

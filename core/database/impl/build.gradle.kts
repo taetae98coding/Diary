@@ -29,6 +29,13 @@ kotlin {
             }
         }
 
+        wasmJsMain {
+            dependencies {
+                implementation(libs.androidx.sqlite.web)
+                implementation(projects.library.sqliteWasmWorker)
+            }
+        }
+
         getByName("androidHostTest") {
             dependencies {
                 implementation(libs.androidx.room3.testing)
