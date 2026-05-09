@@ -2,6 +2,7 @@ package io.github.taetae98coding.diary.core.database.impl.dao
 
 import androidx.room3.Dao
 import androidx.room3.Query
+import androidx.room3.RewriteQueriesToDropUnusedColumns
 import io.github.taetae98coding.diary.core.database.api.entity.CalendarMemoLocalEntity
 import kotlin.uuid.Uuid
 import kotlinx.coroutines.flow.Flow
@@ -38,6 +39,7 @@ internal interface AccountCalendarMemoDao {
         ORDER BY Memo.isAllDay DESC, Memo.start, Memo.endInclusive DESC, Memo.title
         """,
     )
+    @RewriteQueriesToDropUnusedColumns
     fun get(
         accountId: Uuid,
         year: Int,

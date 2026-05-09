@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
 package io.github.taetae98coding.diary.feature.tag.memo
 
 import androidx.lifecycle.ViewModel
@@ -8,6 +10,7 @@ import io.github.taetae98coding.diary.core.navigation.argument.TagId
 import io.github.taetae98coding.diary.domain.sync.usecase.GetSyncStatusUseCase
 import io.github.taetae98coding.diary.domain.sync.usecase.RequestSyncUseCase
 import io.github.taetae98coding.diary.domain.tag.usecase.GetTagUseCase
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest

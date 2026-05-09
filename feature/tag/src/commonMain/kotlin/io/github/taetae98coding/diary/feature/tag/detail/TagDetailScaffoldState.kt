@@ -2,6 +2,7 @@ package io.github.taetae98coding.diary.feature.tag.detail
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.retain.retain
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
@@ -14,6 +15,7 @@ import io.github.taetae98coding.diary.compose.core.card.rememberTitleCardState
 import io.github.taetae98coding.diary.core.model.tag.Tag
 import io.github.taetae98coding.diary.core.model.tag.TagDetail
 
+@Stable
 internal class TagDetailScaffoldState(
     val titleCardState: TitleCardState,
     val descriptionCardState: DescriptionCardState,

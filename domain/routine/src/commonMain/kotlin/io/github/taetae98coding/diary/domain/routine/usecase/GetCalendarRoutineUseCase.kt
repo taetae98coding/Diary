@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
 package io.github.taetae98coding.diary.domain.routine.usecase
 
 import io.github.taetae98coding.diary.core.model.account.Account
@@ -9,6 +11,7 @@ import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
 import io.github.taetae98coding.diary.domain.routine.repository.AccountCalendarRoutineRepository
 import io.github.taetae98coding.diary.library.datetime.toLocalDateRanges
 import io.github.taetae98coding.diary.library.datetime.toSundayBasedNumber
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.emitAll

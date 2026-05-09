@@ -1,3 +1,8 @@
+@file:OptIn(
+    ExperimentalMaterial3Api::class,
+    ExperimentalMaterial3ExpressiveApi::class,
+)
+
 package io.github.taetae98coding.diary.feature.memo.detail
 
 import androidx.compose.animation.AnimatedContent
@@ -5,6 +10,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
@@ -16,6 +22,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularWavyProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.SnackbarHost
@@ -176,7 +184,16 @@ private fun TopBar(
     onDelete: () -> Unit = {},
 ) {
     TopAppBar(
-        title = { detailProvider()?.let { Text(text = it.title) } },
+        title = {
+            detailProvider()
+                ?.let {
+                    Text(
+                        text = it.title,
+                        modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE),
+                        maxLines = 1,
+                    )
+                }
+        },
         modifier = modifier,
         navigationIcon = { NavigateUpButton(onClick = dropUnlessResumed(block = onNavigateUp)) },
         actions = {

@@ -4,6 +4,8 @@ import io.github.taetae98coding.diary.core.model.sync.SyncStatus
 import io.github.taetae98coding.diary.core.model.sync.SyncType
 import io.github.taetae98coding.diary.data.sync.di.SyncCoroutineScope
 import io.github.taetae98coding.diary.domain.sync.manager.SyncManager
+import io.github.taetae98coding.diary.logger.core.DiaryLogger
+import io.github.taetae98coding.diary.logger.crashlytics.api.CrashlyticsLogEntry
 import kotlin.uuid.Uuid
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -42,7 +44,12 @@ internal class NonAndroidSyncManager(
                         if (throwable is CancellationException) {
                             throw throwable
                         } else {
-                            throwable.printStackTrace()
+                            DiaryLogger.log(
+                                CrashlyticsLogEntry(
+                                    message = "동기화 실패[$type]",
+                                    throwable = throwable,
+                                ),
+                            )
                             _syncStatus.value = SyncStatus.Failed
                         }
                     }

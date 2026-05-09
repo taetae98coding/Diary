@@ -3,6 +3,7 @@ package io.github.taetae98coding.diary.feature.tag.add
 import androidx.compose.foundation.text.input.clearText
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.retain.retain
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
@@ -17,6 +18,7 @@ import io.github.taetae98coding.diary.library.compose.ui.random
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
+@Stable
 internal class TagAddScaffoldState(
     val titleCardState: TitleCardState,
     val descriptionCardState: DescriptionCardState,

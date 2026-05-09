@@ -18,7 +18,6 @@ kotlin {
             dependencies {
                 implementation(projects.app.shared)
                 implementation(libs.jetbrains.compose.components.resources)
-                implementation(libs.jetbrains.compose.ui)
                 implementation(libs.jetbrains.compose.material3)
             }
         }

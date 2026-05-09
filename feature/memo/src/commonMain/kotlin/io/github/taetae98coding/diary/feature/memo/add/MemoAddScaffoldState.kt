@@ -3,6 +3,7 @@ package io.github.taetae98coding.diary.feature.memo.add
 import androidx.compose.foundation.text.input.clearText
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.retain.retain
 import androidx.compose.ui.graphics.Color
@@ -29,6 +30,7 @@ import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 import kotlinx.datetime.todayIn
 
+@Stable
 internal class MemoAddScaffoldState(
     val titleCardState: TitleCardState,
     val descriptionCardState: DescriptionCardState,

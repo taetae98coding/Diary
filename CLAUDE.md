@@ -17,6 +17,13 @@ Kotlin Multiplatform 일기/메모 앱 (Android, iOS, JVM, WASM).
 
 ProjectGuard로 강제한다. domain은 data/feature를 알 수 없고, feature는 data를 직접 참조할 수 없다.
 
+## 의존성 추가 규칙
+
+- **코드 최소화**: 상위 의존성으로 transitively 포함되는 의존성은 명시적으로 추가하지 않는다.
+  - 예: `compose-material3` 추가 시 `compose-foundation`, `compose-ui`는 transitive로 함께 적용되므로 별도로 추가하지 않는다.
+- **범위 최소화**: 실제 사용하는 최소 범위의 의존성만 추가한다.
+  - 예: `compose-runtime`만 필요하면 `compose-runtime`만 추가한다. `compose-ui`, `compose-foundation` 등 상위 의존성은 추가하지 않는다.
+
 ## 공통 컨벤션
 
 - Clock 주입: @.claude/docs/clock-convention.md

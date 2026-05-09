@@ -1,7 +1,13 @@
+@file:OptIn(
+    ExperimentalFlexBoxApi::class,
+    ExperimentalMaterial3Api::class,
+)
+
 package io.github.taetae98coding.diary.feature.calendar.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalFlexBoxApi
 import androidx.compose.foundation.layout.FlexAlignContent
 import androidx.compose.foundation.layout.FlexBox
 import androidx.compose.foundation.layout.FlexJustifyContent
@@ -11,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text

@@ -8,6 +8,12 @@
 - UseCase, Repository, DataSource 등 시간을 다루는 모든 레이어에 적용된다.
 - 타임스탬프가 필요한 경우: `clock.now().toEpochMilliseconds()`.
 
+### 예외: Compose 레이어
+
+- Composable, `remember*` 함수, ScaffoldState 등 **Compose 레이어**에서는 `Clock.System` 직접 사용을 허용한다.
+- 이유: Composable/`remember*` 시그니처에 `Clock`을 강제 주입하면 호출부 부담이 커지고, UI 상태 초기값에 사용되는 현재 시각은 테스트 결정성보다 호출 시점의 자연스러운 사용성이 더 중요하다.
+- 대신 Compose 레이어가 호출하는 ViewModel/UseCase/Repository는 컨벤션을 지킨다.
+
 ### 이유
 
 - 테스트에서 시간을 고정할 수 있어야 TC가 결정론적으로 동작한다.

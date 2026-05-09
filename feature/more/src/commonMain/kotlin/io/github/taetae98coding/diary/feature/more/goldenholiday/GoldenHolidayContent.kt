@@ -6,9 +6,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
@@ -25,6 +28,7 @@ import io.github.taetae98coding.diary.compose.calendar.item.CalendarText
 import io.github.taetae98coding.diary.compose.calendar.rememberCalendarSelectState
 import io.github.taetae98coding.diary.compose.calendar.week.CalendarWeekOfMonth
 import io.github.taetae98coding.diary.compose.core.box.LoadingBox
+import io.github.taetae98coding.diary.compose.core.padding.plus
 import io.github.taetae98coding.diary.compose.core.preview.ComponentPreview
 import io.github.taetae98coding.diary.compose.core.theme.DiaryTheme
 import io.github.taetae98coding.diary.core.model.holiday.GoldenHoliday
@@ -78,7 +82,7 @@ internal fun GoldenHolidayContent(
                 LazyVerticalStaggeredGrid(
                     columns = StaggeredGridCells.Adaptive(300.dp),
                     modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(8.dp),
+                    contentPadding = PaddingValues(8.dp) + WindowInsets.navigationBars.asPaddingValues(),
                     verticalItemSpacing = 8.dp,
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
