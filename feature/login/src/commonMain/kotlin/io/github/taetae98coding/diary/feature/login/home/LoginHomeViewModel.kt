@@ -49,7 +49,6 @@ internal class LoginHomeViewModel(
     }
 
     fun handleLoginError(throwable: Throwable) {
-        throwable.printStackTrace()
         when (throwable) {
             else -> _effect.value = LoginEffect.UnknownError
         }

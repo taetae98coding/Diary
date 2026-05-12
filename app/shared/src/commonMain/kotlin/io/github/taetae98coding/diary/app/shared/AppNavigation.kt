@@ -12,6 +12,7 @@ import androidx.navigation3.scene.Scene
 import androidx.navigation3.scene.SinglePaneSceneStrategy
 import androidx.navigation3.ui.NavDisplay
 import androidx.navigationevent.NavigationEvent
+import io.github.taetae98coding.diary.app.shared.navigation3.rememberAnalyticsNavEntryDecorator
 import io.github.taetae98coding.diary.app.shared.navigation3.rememberRetainedValuesStoreNavEntryDecorator
 import io.github.taetae98coding.diary.feature.calendar.calendarEntry
 import io.github.taetae98coding.diary.feature.login.loginEntry
@@ -32,6 +33,7 @@ internal fun AppNavigation(
             rememberSaveableStateHolderNavEntryDecorator(),
             rememberRetainedValuesStoreNavEntryDecorator(),
             rememberViewModelStoreNavEntryDecorator(),
+            rememberAnalyticsNavEntryDecorator(),
         ),
         sceneStrategies = listOf(
             DialogSceneStrategy(),

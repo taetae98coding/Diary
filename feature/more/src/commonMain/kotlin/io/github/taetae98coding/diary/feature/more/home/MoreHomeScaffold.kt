@@ -74,35 +74,6 @@ internal fun MoreHomeScaffold(
                     }
                 }
             }
-
-            item {
-                Card(
-                    onClick = {
-                        val throwable = IllegalStateException("test crash")
-
-                        DiaryLogger.log(AnalyticsLogEntry(name = "test_crash"))
-                        DiaryLogger.log(CrashlyticsLogEntry(message = "test crash", throwable = throwable))
-
-                        throw throwable
-                    },
-                    modifier = Modifier.aspectRatio(1F),
-                ) {
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
-                        Text(
-                            text = "💥",
-                            fontSize = 24.sp,
-                        )
-                        Text(
-                            text = "Crash",
-                            style = DiaryTheme.typography.bodySmall,
-                        )
-                    }
-                }
-            }
         }
     }
 }

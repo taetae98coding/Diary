@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package io.github.taetae98coding.diary.compose.core.date
 
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TimePickerState
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable

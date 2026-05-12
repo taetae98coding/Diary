@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
 package io.github.taetae98coding.diary.feature.memo.add
 
 import androidx.lifecycle.ViewModel
@@ -16,6 +18,7 @@ import io.github.taetae98coding.diary.feature.memo.common.MemoTagStateHolder
 import io.github.taetae98coding.diary.feature.memo.common.MemoTagUiState
 import io.github.taetae98coding.diary.feature.memo.common.TagCardUiState
 import kotlin.uuid.Uuid
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted

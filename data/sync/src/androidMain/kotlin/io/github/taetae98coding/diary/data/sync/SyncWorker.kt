@@ -4,7 +4,10 @@ import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
+import io.github.taetae98coding.diary.logger.core.DiaryLogger
+import io.github.taetae98coding.diary.logger.crashlytics.api.CrashlyticsLogEntry
 import kotlin.uuid.Uuid
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.first
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -28,7 +31,17 @@ internal class SyncWorker(
             }
 
             Result.success()
-        } catch (_: Throwable) {
+        } catch (throwable: Throwable) {
+            if (throwable is CancellationException) {
+                throw throwable
+            }
+
+            DiaryLogger.log(
+                CrashlyticsLogEntry(
+                    message = "동기화 실패[$runAttemptCount]",
+                    throwable = throwable,
+                ),
+            )
             Result.retry()
         }
     }

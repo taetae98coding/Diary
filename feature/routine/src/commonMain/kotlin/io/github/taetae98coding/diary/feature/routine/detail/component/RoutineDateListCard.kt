@@ -1,7 +1,10 @@
+@file:OptIn(ExperimentalFlexBoxApi::class)
+
 package io.github.taetae98coding.diary.feature.routine.detail.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalFlexBoxApi
 import androidx.compose.foundation.layout.FlexBox
 import androidx.compose.foundation.layout.FlexWrap
 import androidx.compose.foundation.layout.padding

@@ -10,7 +10,6 @@ kotlin {
                 implementation(projects.domain.sync)
                 implementation(projects.domain.tag)
                 implementation(projects.presenter.memo)
-                implementation(projects.library.composeUi)
                 implementation(libs.androidx.paging.compose)
             }
         }

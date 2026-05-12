@@ -50,6 +50,7 @@ kotlin {
                 implementation(projects.feature.routine)
                 implementation(projects.feature.tag)
                 implementation(projects.library.navigation3Runtime)
+                implementation(projects.logger.analytics.api)
                 implementation(libs.jetbrains.compose.material3.navigation.suite)
                 implementation(libs.jetbrains.navigation3.ui)
                 implementation(libs.coil.compose)

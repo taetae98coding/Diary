@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
 package io.github.taetae98coding.diary.feature.calendar.home
 
 import androidx.lifecycle.ViewModel
@@ -6,6 +8,7 @@ import io.github.taetae98coding.diary.core.model.memo.CalendarMemo
 import io.github.taetae98coding.diary.domain.memo.usecase.GetCalendarMemoUseCase
 import io.github.taetae98coding.diary.domain.memo.usecase.HasCalendarMemoFilterUseCase
 import io.github.taetae98coding.diary.library.coroutines.combine
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

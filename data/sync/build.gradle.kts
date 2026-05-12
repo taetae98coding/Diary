@@ -13,6 +13,7 @@ kotlin {
                 implementation(projects.core.network.api)
                 implementation(projects.domain.account)
                 implementation(projects.domain.sync)
+                implementation(projects.logger.crashlytics.api)
             }
         }
 

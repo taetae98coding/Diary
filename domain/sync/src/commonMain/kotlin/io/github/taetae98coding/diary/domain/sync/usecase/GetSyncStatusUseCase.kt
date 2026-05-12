@@ -1,7 +1,10 @@
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
 package io.github.taetae98coding.diary.domain.sync.usecase
 
 import io.github.taetae98coding.diary.core.model.sync.SyncStatus
 import io.github.taetae98coding.diary.domain.sync.manager.SyncManager
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.emitAll

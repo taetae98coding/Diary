@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
 package io.github.taetae98coding.diary.core.supabase.impl
 
 import io.github.jan.supabase.SupabaseClient
@@ -8,6 +10,7 @@ import io.github.jan.supabase.auth.status.RefreshFailureCause
 import io.github.jan.supabase.auth.status.SessionStatus
 import io.github.taetae98coding.diary.core.supabase.api.SupabaseAuth
 import io.github.taetae98coding.diary.core.supabase.api.SupabaseSessionStatus
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.mapLatest
@@ -45,8 +48,10 @@ internal class SupabaseAuthImpl(private val supabase: SupabaseClient) : Supabase
     }
 
     private suspend fun getSessionStatusFromStorage(): SupabaseSessionStatus? {
-        return supabase.auth.sessionManager.loadSession().user
-            ?.let { SupabaseSessionStatus.Authenticated(userId = it.id, email = it.email) }
+        return runCatching {
+            supabase.auth.sessionManager.loadSession().user
+                ?.let { SupabaseSessionStatus.Authenticated(userId = it.id, email = it.email) }
+        }.getOrNull()
     }
 
     override suspend fun signOut() {

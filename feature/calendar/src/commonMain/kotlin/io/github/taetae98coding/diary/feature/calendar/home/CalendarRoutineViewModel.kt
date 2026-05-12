@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
 package io.github.taetae98coding.diary.feature.calendar.home
 
 import androidx.lifecycle.ViewModel

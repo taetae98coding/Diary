@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
 package io.github.taetae98coding.diary.data.account.repository
 
 import io.github.taetae98coding.diary.core.model.account.AccountInfo
@@ -5,6 +7,7 @@ import io.github.taetae98coding.diary.core.supabase.api.SupabaseAuth
 import io.github.taetae98coding.diary.core.supabase.api.SupabaseSessionStatus
 import io.github.taetae98coding.diary.domain.account.repository.AccountInfoRepository
 import kotlin.uuid.Uuid
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.mapLatest

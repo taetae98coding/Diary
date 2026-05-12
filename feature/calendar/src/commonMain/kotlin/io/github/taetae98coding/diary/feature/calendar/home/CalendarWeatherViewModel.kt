@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
 package io.github.taetae98coding.diary.feature.calendar.home
 
 import androidx.lifecycle.ViewModel
@@ -7,6 +9,7 @@ import io.github.taetae98coding.diary.domain.weather.usecase.FetchCurrentWeather
 import io.github.taetae98coding.diary.domain.weather.usecase.GetCurrentWeatherUseCase
 import kotlin.math.abs
 import kotlin.time.Clock
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.mapLatest

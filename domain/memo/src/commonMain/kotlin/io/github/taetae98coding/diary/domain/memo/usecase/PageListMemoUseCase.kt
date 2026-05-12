@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
 package io.github.taetae98coding.diary.domain.memo.usecase
 
 import androidx.paging.PagingData
@@ -5,6 +7,7 @@ import io.github.taetae98coding.diary.core.model.memo.Memo
 import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
 import io.github.taetae98coding.diary.domain.memo.repository.AccountListMemoRepository
 import io.github.taetae98coding.diary.domain.memo.repository.ListMemoFilterOptionRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine

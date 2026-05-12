@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
 package io.github.taetae98coding.diary.domain.holiday.usecase
 
 import io.github.taetae98coding.diary.core.model.holiday.GoldenHoliday
@@ -5,6 +7,7 @@ import io.github.taetae98coding.diary.core.model.holiday.Holiday
 import io.github.taetae98coding.diary.domain.holiday.repository.HolidayRepository
 import io.github.taetae98coding.diary.library.datetime.isWeekend
 import io.github.taetae98coding.diary.library.datetime.overlaps
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.emitAll

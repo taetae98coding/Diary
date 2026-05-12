@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
 package io.github.taetae98coding.diary.feature.tag.detail
 
 import androidx.lifecycle.ViewModel
@@ -10,6 +12,7 @@ import io.github.taetae98coding.diary.domain.tag.usecase.FinishTagUseCase
 import io.github.taetae98coding.diary.domain.tag.usecase.GetTagUseCase
 import io.github.taetae98coding.diary.domain.tag.usecase.RestartTagUseCase
 import io.github.taetae98coding.diary.domain.tag.usecase.UpdateTagUseCase
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

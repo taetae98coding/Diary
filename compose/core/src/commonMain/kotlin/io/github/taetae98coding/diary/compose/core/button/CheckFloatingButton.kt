@@ -1,8 +1,11 @@
+@file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
+
 package io.github.taetae98coding.diary.compose.core.button
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularWavyProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

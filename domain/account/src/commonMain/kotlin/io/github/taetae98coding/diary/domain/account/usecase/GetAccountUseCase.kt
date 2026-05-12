@@ -1,8 +1,11 @@
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
 package io.github.taetae98coding.diary.domain.account.usecase
 
 import io.github.taetae98coding.diary.core.model.account.Account
 import io.github.taetae98coding.diary.domain.account.repository.AccountInfoRepository
 import io.github.taetae98coding.diary.domain.account.repository.AccountMetaDataRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
