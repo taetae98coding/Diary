@@ -842,6 +842,9 @@
               "id": ":library:navigation3-runtime"
             },
             {
+              "id": ":logger:analytics:api"
+            },
+            {
               "id": "org.jetbrains.compose.material3:material3-adaptive-navigation-suite",
               "isLibrary": true
             },
@@ -985,6 +988,9 @@
               "id": ":library:navigation3-runtime"
             },
             {
+              "id": ":logger:analytics:api"
+            },
+            {
               "id": "org.jetbrains.compose.material3:material3-adaptive-navigation-suite",
               "isLibrary": true
             },
@@ -1126,6 +1132,9 @@
             },
             {
               "id": ":library:navigation3-runtime"
+            },
+            {
+              "id": ":logger:analytics:api"
             },
             {
               "id": "org.jetbrains.compose.material3:material3-adaptive-navigation-suite",
@@ -1279,6 +1288,9 @@
               "id": ":library:navigation3-runtime"
             },
             {
+              "id": ":logger:analytics:api"
+            },
+            {
               "id": "org.jetbrains.compose.material3:material3-adaptive-navigation-suite",
               "isLibrary": true
             },
@@ -1420,6 +1432,9 @@
             },
             {
               "id": ":library:navigation3-runtime"
+            },
+            {
+              "id": ":logger:analytics:api"
             },
             {
               "id": "org.jetbrains.compose.material3:material3-adaptive-navigation-suite",
@@ -1565,6 +1580,9 @@
               "id": ":library:navigation3-runtime"
             },
             {
+              "id": ":logger:analytics:api"
+            },
+            {
               "id": "org.jetbrains.compose.material3:material3-adaptive-navigation-suite",
               "isLibrary": true
             },
@@ -1706,6 +1724,9 @@
             },
             {
               "id": ":library:navigation3-runtime"
+            },
+            {
+              "id": ":logger:analytics:api"
             },
             {
               "id": "org.jetbrains.compose.material3:material3-adaptive-navigation-suite",
@@ -1851,6 +1872,9 @@
               "id": ":library:navigation3-runtime"
             },
             {
+              "id": ":logger:analytics:api"
+            },
+            {
               "id": "org.jetbrains.compose.material3:material3-adaptive-navigation-suite",
               "isLibrary": true
             },
@@ -1992,6 +2016,9 @@
             },
             {
               "id": ":library:navigation3-runtime"
+            },
+            {
+              "id": ":logger:analytics:api"
             },
             {
               "id": "org.jetbrains.compose.material3:material3-adaptive-navigation-suite",
@@ -2141,6 +2168,9 @@
               "id": ":library:navigation3-runtime"
             },
             {
+              "id": ":logger:analytics:api"
+            },
+            {
               "id": "org.jetbrains.compose.material3:material3-adaptive-navigation-suite",
               "isLibrary": true
             },
@@ -2282,6 +2312,9 @@
             },
             {
               "id": ":library:navigation3-runtime"
+            },
+            {
+              "id": ":logger:analytics:api"
             },
             {
               "id": "org.jetbrains.compose.material3:material3-adaptive-navigation-suite",
@@ -2427,6 +2460,9 @@
               "id": ":library:navigation3-runtime"
             },
             {
+              "id": ":logger:analytics:api"
+            },
+            {
               "id": "org.jetbrains.compose.material3:material3-adaptive-navigation-suite",
               "isLibrary": true
             },
@@ -2570,6 +2606,9 @@
               "id": ":library:navigation3-runtime"
             },
             {
+              "id": ":logger:analytics:api"
+            },
+            {
               "id": "org.jetbrains.compose.material3:material3-adaptive-navigation-suite",
               "isLibrary": true
             },
@@ -2711,6 +2750,9 @@
             },
             {
               "id": ":library:navigation3-runtime"
+            },
+            {
+              "id": ":logger:analytics:api"
             },
             {
               "id": "org.jetbrains.compose.material3:material3-adaptive-navigation-suite",
@@ -2758,10 +2800,6 @@
               "isLibrary": true
             },
             {
-              "id": "org.jetbrains.compose.ui:ui",
-              "isLibrary": true
-            },
-            {
               "id": "org.jetbrains.compose.material3:material3",
               "isLibrary": true
             }
@@ -2782,10 +2820,6 @@
               "isLibrary": true
             },
             {
-              "id": "org.jetbrains.compose.ui:ui",
-              "isLibrary": true
-            },
-            {
               "id": "org.jetbrains.compose.material3:material3",
               "isLibrary": true
             }
@@ -2803,10 +2837,6 @@
             },
             {
               "id": "org.jetbrains.compose.components:components-resources",
-              "isLibrary": true
-            },
-            {
-              "id": "org.jetbrains.compose.ui:ui",
               "isLibrary": true
             },
             {
@@ -11639,6 +11669,9 @@
             },
             {
               "id": ":domain:sync"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             }
           ]
         },
@@ -11671,6 +11704,9 @@
             },
             {
               "id": ":domain:sync"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             }
           ]
         },
@@ -11703,6 +11739,9 @@
             },
             {
               "id": ":domain:sync"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             }
           ]
         },
@@ -11735,6 +11774,9 @@
             },
             {
               "id": ":domain:sync"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             },
             {
               "id": "org.jetbrains.kotlinx:kotlinx-coroutines-test",
@@ -11791,6 +11833,9 @@
             },
             {
               "id": ":domain:sync"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             }
           ]
         },
@@ -11823,6 +11868,9 @@
             },
             {
               "id": ":domain:sync"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             }
           ]
         },
@@ -11855,6 +11903,9 @@
             },
             {
               "id": ":domain:sync"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             }
           ]
         },
@@ -11887,6 +11938,9 @@
             },
             {
               "id": ":domain:sync"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             }
           ]
         },
@@ -11919,6 +11973,9 @@
             },
             {
               "id": ":domain:sync"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             }
           ]
         },
@@ -11951,6 +12008,9 @@
             },
             {
               "id": ":domain:sync"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             }
           ]
         },
@@ -11983,6 +12043,9 @@
             },
             {
               "id": ":domain:sync"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             }
           ]
         },
@@ -12015,6 +12078,9 @@
             },
             {
               "id": ":domain:sync"
+            },
+            {
+              "id": ":logger:crashlytics:api"
             }
           ]
         }
