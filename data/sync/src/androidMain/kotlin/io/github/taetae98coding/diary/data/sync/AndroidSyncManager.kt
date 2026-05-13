@@ -21,11 +21,13 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.mapLatest
+import org.koin.core.annotation.Provided
 import org.koin.core.annotation.Single
 
 @Single
 internal class AndroidSyncManager(
     private val context: Context,
+    @param:Provided
     private val clock: Clock,
     getAccountUseCase: GetAccountUseCase,
 ) : SyncManager {
