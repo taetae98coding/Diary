@@ -68,9 +68,8 @@ class GetAccountUseCaseTest : BehaviorSpec() {
                     result.shouldBeSuccess()
                         .shouldBeInstanceOf<Account.User>()
                         .should {
-                            it.accountId shouldBe accountInfo.id
-                            it.email shouldBe accountInfo.email
-                            it.profileImage shouldBe accountMetaData.profileImage
+                            it.accountInfo shouldBe accountInfo
+                            it.accountMetaData shouldBe accountMetaData
                         }
                 }
 
@@ -94,13 +93,12 @@ class GetAccountUseCaseTest : BehaviorSpec() {
             When("GetAccountUseCase를 호출하면") {
                 val result = useCase().first()
 
-                Then("profileImage가 null인 Account.User를 반환한다") {
+                Then("accountMetaData가 null인 Account.User를 반환한다") {
                     result.shouldBeSuccess()
                         .shouldBeInstanceOf<Account.User>()
                         .should {
-                            it.accountId shouldBe accountInfo.id
-                            it.email shouldBe accountInfo.email
-                            it.profileImage shouldBe null
+                            it.accountInfo shouldBe accountInfo
+                            it.accountMetaData shouldBe null
                         }
                 }
             }

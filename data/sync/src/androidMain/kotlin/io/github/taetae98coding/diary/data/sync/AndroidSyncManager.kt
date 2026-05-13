@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
 package io.github.taetae98coding.diary.data.sync
 
 import android.content.Context
@@ -13,10 +15,9 @@ import io.github.taetae98coding.diary.core.model.sync.SyncStatus
 import io.github.taetae98coding.diary.core.model.sync.SyncType
 import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
 import io.github.taetae98coding.diary.domain.sync.manager.SyncManager
+import kotlin.time.Clock
 import kotlin.uuid.Uuid
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.mapLatest
@@ -25,28 +26,32 @@ import org.koin.core.annotation.Single
 @Single
 internal class AndroidSyncManager(
     private val context: Context,
+    private val clock: Clock,
     getAccountUseCase: GetAccountUseCase,
 ) : SyncManager {
-    private val syncTypeFlow = MutableStateFlow(SyncType.Background)
-    override val syncStatus: Flow<SyncStatus> = combine(
-        syncTypeFlow,
-        getAccountUseCase(),
-    ) { syncType, accountResult ->
+    override val syncStatus = getAccountUseCase().flatMapLatest { accountResult ->
         accountResult.fold(
             onSuccess = { account ->
                 WorkManager.getInstance(context).getWorkInfosForUniqueWorkFlow("SYNC_${account.accountId}")
                     .mapLatest { workInfos ->
-                        when {
-                            workInfos.any { it.state == WorkInfo.State.RUNNING || it.state == WorkInfo.State.ENQUEUED } -> SyncStatus.Syncing(syncType)
-                            workInfos.any { it.state == WorkInfo.State.FAILED } -> SyncStatus.Failed
+                        val last = workInfos.maxByOrNull { info ->
+                            info.tags.find { it.startsWith("timestamp") }
+                                ?.removePrefix("timestamp")
+                                ?.toLongOrNull()
+                                ?: 0L
+                        } ?: return@mapLatest SyncStatus.Idle
+
+                        val syncType = SyncType.entries.find { last.tags.contains(it.name) } ?: SyncType.Background
+
+                        when (last.state) {
+                            WorkInfo.State.RUNNING, WorkInfo.State.ENQUEUED -> SyncStatus.Syncing(syncType)
+                            WorkInfo.State.FAILED -> SyncStatus.Failed(syncType)
                             else -> SyncStatus.Idle
                         }
                     }
             },
             onFailure = { flowOf(SyncStatus.Idle) },
         )
-    }.flatMapLatest {
-        it
     }
 
     override fun requestSync(
@@ -61,9 +66,10 @@ internal class AndroidSyncManager(
             .setConstraints(constraints)
             .setInputData(workDataOf(SyncWorker.ACCOUNT_ID to accountId.toString()))
             .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+            .addTag("timestamp${clock.now().toEpochMilliseconds()}")
+            .addTag(type.name)
             .build()
 
-        syncTypeFlow.value = type
         WorkManager.getInstance(context).enqueueUniqueWork(
             uniqueWorkName = "SYNC_$accountId",
             existingWorkPolicy = ExistingWorkPolicy.REPLACE,

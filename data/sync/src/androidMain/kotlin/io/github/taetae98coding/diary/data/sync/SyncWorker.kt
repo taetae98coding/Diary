@@ -48,5 +48,6 @@ internal class SyncWorker(
 
     companion object {
         const val ACCOUNT_ID = "accountId"
+        const val SYNC_TYPE = "syncType"
     }
 }

@@ -6,6 +6,14 @@ public sealed interface SupabaseSessionStatus {
         val email: String?,
     ) : SupabaseSessionStatus
 
-    public data object NotAuthenticated : SupabaseSessionStatus
+    public data class NotAuthenticated(
+        val userId: String?,
+        val email: String?,
+    ) : SupabaseSessionStatus {
+        public companion object {
+            public val NotLogin: NotAuthenticated = NotAuthenticated(userId = null, email = null)
+        }
+    }
+
     public data object Loading : SupabaseSessionStatus
 }

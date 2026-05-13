@@ -2,8 +2,11 @@ package io.github.taetae98coding.diary.domain.sync.usecase
 
 import com.navercorp.fixturemonkey.FixtureMonkey
 import com.navercorp.fixturemonkey.kotlin.KotlinPlugin
+import com.navercorp.fixturemonkey.kotlin.giveMeKotlinBuilder
 import com.navercorp.fixturemonkey.kotlin.giveMeOne
 import io.github.taetae98coding.diary.core.model.account.Account
+import io.github.taetae98coding.diary.core.model.account.AccountInfo
+import io.github.taetae98coding.diary.core.model.account.AccountMetaData
 import io.github.taetae98coding.diary.core.model.sync.SyncType
 import io.github.taetae98coding.diary.domain.account.usecase.GetAccountUseCase
 import io.github.taetae98coding.diary.domain.sync.manager.SyncManager
@@ -26,7 +29,12 @@ class RequestSyncUseCaseTest : BehaviorSpec() {
     init {
         Given("User 계정") {
             clearAllMocks()
-            val account = fixtureMonkey.giveMeOne<Account.User>()
+            val account = Account.User(
+                accountInfo = fixtureMonkey.giveMeKotlinBuilder<AccountInfo>()
+                    .set(AccountInfo::isAuthorized, true)
+                    .sample(),
+                accountMetaData = fixtureMonkey.giveMeOne<AccountMetaData>(),
+            )
             val syncType = SyncType.Background
 
             every { getAccountUseCase() } returns flowOf(Result.success(account))
@@ -42,7 +50,12 @@ class RequestSyncUseCaseTest : BehaviorSpec() {
 
         Given("User 계정이고 Foreground 동기화") {
             clearAllMocks()
-            val account = fixtureMonkey.giveMeOne<Account.User>()
+            val account = Account.User(
+                accountInfo = fixtureMonkey.giveMeKotlinBuilder<AccountInfo>()
+                    .set(AccountInfo::isAuthorized, true)
+                    .sample(),
+                accountMetaData = fixtureMonkey.giveMeOne<AccountMetaData>(),
+            )
             val syncType = SyncType.Foreground
 
             every { getAccountUseCase() } returns flowOf(Result.success(account))

@@ -32,9 +32,8 @@ public class GetAccountUseCase(
                     Account.Guest
                 } else {
                     Account.User(
-                        accountId = accountInfo.id,
-                        email = accountInfo.email,
-                        profileImage = accountMetaData?.profileImage,
+                        accountInfo = accountInfo,
+                        accountMetaData = accountMetaData,
                     )
                 }
             }.also {
