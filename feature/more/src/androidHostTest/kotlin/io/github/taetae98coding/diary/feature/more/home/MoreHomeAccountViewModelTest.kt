@@ -82,8 +82,8 @@ class MoreHomeAccountViewModelTest {
         advanceUntilIdle()
 
         viewModel.uiState.value shouldBe MoreHomeAccountUiState.Login(
-            email = user.email,
-            profileImage = user.profileImage,
+            email = user.accountInfo.email,
+            profileImage = user.accountMetaData?.profileImage,
         )
     }
 

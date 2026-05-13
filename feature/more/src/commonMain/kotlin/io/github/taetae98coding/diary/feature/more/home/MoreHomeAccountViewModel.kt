@@ -37,8 +37,8 @@ internal class MoreHomeAccountViewModel(
                         is Account.Guest -> MoreHomeAccountUiState.NotLogin
 
                         is Account.User -> MoreHomeAccountUiState.Login(
-                            email = account.email,
-                            profileImage = account.profileImage,
+                            email = account.accountInfo.email,
+                            profileImage = account.accountMetaData?.profileImage,
                         )
                     }
                 },

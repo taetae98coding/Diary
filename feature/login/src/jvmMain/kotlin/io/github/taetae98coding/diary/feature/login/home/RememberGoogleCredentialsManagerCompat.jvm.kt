@@ -5,9 +5,9 @@ import io.github.taetae98coding.diary.core.google.credentials.api.GoogleCredenti
 import io.github.taetae98coding.diary.core.google.credentials.compose.rememberGoogleCredentialsManager
 import io.github.taetae98coding.diary.feature.login.di.GoogleClientId
 import org.koin.compose.koinInject
-import org.koin.core.qualifier.StringQualifier
+import org.koin.core.qualifier.qualifier
 
 @Composable
 internal actual fun rememberGoogleCredentialsManagerCompat(): GoogleCredentialsManager {
-    return rememberGoogleCredentialsManager(clientId = koinInject(qualifier = StringQualifier(requireNotNull(GoogleClientId::class.simpleName))))
+    return rememberGoogleCredentialsManager(clientId = koinInject(qualifier = qualifier<GoogleClientId>()))
 }

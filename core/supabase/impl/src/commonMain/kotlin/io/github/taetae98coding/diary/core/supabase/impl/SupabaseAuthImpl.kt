@@ -29,7 +29,7 @@ internal class SupabaseAuthImpl(private val supabase: SupabaseClient) : Supabase
                     )
                 }
 
-                is SessionStatus.NotAuthenticated -> SupabaseSessionStatus.NotAuthenticated
+                is SessionStatus.NotAuthenticated -> getSessionStatusFromStorage() ?: SupabaseSessionStatus.NotAuthenticated.NotLogin
 
                 is SessionStatus.Initializing -> getSessionStatusFromStorage() ?: SupabaseSessionStatus.Loading
 
@@ -40,17 +40,17 @@ internal class SupabaseAuthImpl(private val supabase: SupabaseClient) : Supabase
             }
         }
 
-    private suspend fun resolveRefreshFailure(cause: RefreshFailureCause?): SupabaseSessionStatus {
+    private suspend fun resolveRefreshFailure(cause: RefreshFailureCause?): SupabaseSessionStatus.NotAuthenticated {
         return when (cause) {
-            is RefreshFailureCause.InternalServerError -> SupabaseSessionStatus.NotAuthenticated
-            else -> getSessionStatusFromStorage() ?: SupabaseSessionStatus.NotAuthenticated
+            is RefreshFailureCause.InternalServerError -> SupabaseSessionStatus.NotAuthenticated.NotLogin
+            else -> getSessionStatusFromStorage() ?: SupabaseSessionStatus.NotAuthenticated.NotLogin
         }
     }
 
-    private suspend fun getSessionStatusFromStorage(): SupabaseSessionStatus? {
+    private suspend fun getSessionStatusFromStorage(): SupabaseSessionStatus.NotAuthenticated? {
         return runCatching {
             supabase.auth.sessionManager.loadSession().user
-                ?.let { SupabaseSessionStatus.Authenticated(userId = it.id, email = it.email) }
+                ?.let { SupabaseSessionStatus.NotAuthenticated(userId = it.id, email = it.email) }
         }.getOrNull()
     }
 

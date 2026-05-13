@@ -50,7 +50,7 @@ internal class NonAndroidSyncManager(
                                     throwable = throwable,
                                 ),
                             )
-                            _syncStatus.value = SyncStatus.Failed
+                            _syncStatus.value = SyncStatus.Failed(type)
                         }
                     }
             }

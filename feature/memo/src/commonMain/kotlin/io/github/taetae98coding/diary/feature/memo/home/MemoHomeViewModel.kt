@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.koin.core.annotation.KoinViewModel
@@ -23,10 +24,9 @@ internal class MemoHomeViewModel(
     private val requestSyncUseCase: RequestSyncUseCase,
 ) : ViewModel() {
     private val syncStatus = getSyncStatusUseCase().mapLatest { it.getOrNull() }
-        .stateIn(
+        .shareIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = null,
         )
 
     val isSyncing: StateFlow<Boolean> = syncStatus
@@ -38,7 +38,7 @@ internal class MemoHomeViewModel(
         )
 
     val isFailed: StateFlow<Boolean> = syncStatus
-        .map { it is SyncStatus.Failed }
+        .map { it is SyncStatus.Failed && it.type == SyncType.Foreground }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),

@@ -30,12 +30,21 @@ internal class AccountInfoRepositoryImpl(
             status is SupabaseSessionStatus.Authenticated || status is SupabaseSessionStatus.NotAuthenticated
         }.mapLatest { status ->
             when (status) {
-                is SupabaseSessionStatus.Authenticated -> AccountInfo(
-                    id = Uuid.parse(status.userId),
-                    email = requireNotNull(status.email),
-                )
+                is SupabaseSessionStatus.Authenticated -> {
+                    AccountInfo(
+                        id = Uuid.parse(status.userId),
+                        email = status.email ?: return@mapLatest null,
+                        isAuthorized = true,
+                    )
+                }
 
-                is SupabaseSessionStatus.NotAuthenticated -> null
+                is SupabaseSessionStatus.NotAuthenticated -> {
+                    AccountInfo(
+                        id = Uuid.parse(status.userId ?: return@mapLatest null),
+                        email = status.email ?: return@mapLatest null,
+                        isAuthorized = false,
+                    )
+                }
 
                 else -> null
             }
