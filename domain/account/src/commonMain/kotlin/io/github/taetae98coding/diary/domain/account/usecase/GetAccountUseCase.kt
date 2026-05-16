@@ -8,9 +8,10 @@ import io.github.taetae98coding.diary.domain.account.repository.AccountMetaDataR
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.mapLatest
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Provided
@@ -24,21 +25,21 @@ public class GetAccountUseCase(
 ) {
     public operator fun invoke(): Flow<Result<Account>> {
         return flow {
-            combine(
-                accountInfoRepository.get(),
-                accountMetaDataRepository.get(),
-            ) { accountInfo, accountMetaData ->
-                if (accountInfo == null) {
-                    Account.Guest
-                } else {
-                    Account.User(
-                        accountInfo = accountInfo,
-                        accountMetaData = accountMetaData,
-                    )
+            accountInfoRepository.get()
+                .flatMapLatest { accountInfo ->
+                    if (accountInfo == null) {
+                        flowOf(Account.Guest)
+                    } else {
+                        accountMetaDataRepository.get(accountInfo.id)
+                            .mapLatest { accountMetaData ->
+                                Account.User(
+                                    accountInfo = accountInfo,
+                                    accountMetaData = accountMetaData,
+                                )
+                            }
+                    }
                 }
-            }.also {
-                emitAll(it)
-            }
+                .also { emitAll(it) }
         }.mapLatest {
             Result.success(it)
         }.catch {

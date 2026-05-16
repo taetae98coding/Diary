@@ -39,7 +39,7 @@ firebase-perf-plugin = "2.0.2"
 coil = "3.4.0"								    # https://github.com/coil-kt/coil/releases
 koin = "4.2.1"                                  # https://github.com/InsertKoinIO/koin/releases
 koin-compiler-plugin = "1.0.0-RC2"              # https://github.com/InsertKoinIO/koin-compiler-plugin/releases
-fixture-monkey = "1.1.19"						# https://github.com/naver/fixture-monkey/releases
+fixture-monkey = "1.1.20"						# https://github.com/naver/fixture-monkey/releases
 google-identity = "1.2.0"						# https://developers.google.com/identity/android-credential-manager/releases?hl=en
 google-oauth-client = "1.39.0"					# https://github.com/googleapis/google-oauth-java-client/releases
 google-play-services-location = "21.3.0"		# https://developers.google.com/android/guides/releases?hl=en

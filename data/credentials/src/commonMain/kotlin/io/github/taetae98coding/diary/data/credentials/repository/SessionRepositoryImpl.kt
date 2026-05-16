@@ -37,7 +37,12 @@ public class SessionRepositoryImpl(
     }
 
     private suspend fun updateSession(sessionRemote: SessionRemoteEntity) {
-        accountMetaDataDataStoreDataSource.upsert(AccountMetaDataDataStoreEntity(profileImage = sessionRemote.account.profileImage))
+        accountMetaDataDataStoreDataSource.upsert(
+            AccountMetaDataDataStoreEntity(
+                accountId = sessionRemote.account.id,
+                profileImage = sessionRemote.account.profileImage,
+            ),
+        )
         supabaseAuth.importAuthToken(sessionRemote.accessToken, sessionRemote.refreshToken)
     }
 }

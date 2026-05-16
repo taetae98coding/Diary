@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalFlexBoxApi
 import androidx.compose.foundation.layout.FlexAlignContent
+import androidx.compose.foundation.layout.FlexAlignItems
 import androidx.compose.foundation.layout.FlexBox
 import androidx.compose.foundation.layout.FlexJustifyContent
 import androidx.compose.foundation.layout.FlexWrap
@@ -83,6 +84,7 @@ private fun TagFlowRow(
             wrap(FlexWrap.Wrap)
             gap(6.dp)
             justifyContent(FlexJustifyContent.Center)
+            alignItems(FlexAlignItems.Center)
             alignContent(FlexAlignContent.Center)
         },
     ) {

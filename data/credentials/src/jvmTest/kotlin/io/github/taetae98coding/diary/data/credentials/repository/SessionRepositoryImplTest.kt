@@ -43,7 +43,10 @@ class SessionRepositoryImplTest : FunSpec() {
             coVerifyOrder {
                 sessionRemoteDataSource.getByGoogleIdToken(idToken)
                 accountMetaDataDataStoreDataSource.upsert(
-                    AccountMetaDataDataStoreEntity(profileImage = sessionRemote.account.profileImage),
+                    AccountMetaDataDataStoreEntity(
+                        accountId = sessionRemote.account.id,
+                        profileImage = sessionRemote.account.profileImage,
+                    ),
                 )
                 supabaseAuth.importAuthToken(sessionRemote.accessToken, sessionRemote.refreshToken)
             }
@@ -62,7 +65,10 @@ class SessionRepositoryImplTest : FunSpec() {
             coVerifyOrder {
                 sessionRemoteDataSource.getByGoogleAuthorizationCode(clientId, code, redirectUri)
                 accountMetaDataDataStoreDataSource.upsert(
-                    AccountMetaDataDataStoreEntity(profileImage = sessionRemote.account.profileImage),
+                    AccountMetaDataDataStoreEntity(
+                        accountId = sessionRemote.account.id,
+                        profileImage = sessionRemote.account.profileImage,
+                    ),
                 )
                 supabaseAuth.importAuthToken(sessionRemote.accessToken, sessionRemote.refreshToken)
             }
