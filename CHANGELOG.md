@@ -1,3 +1,9 @@
+## [1.8.4] - 2026-05-16
+
+### 🐛 Bug Fixes
+
+- Android koin build error
+- Account Not Authorized
 ## [1.8.3] - 2026-05-13
 
 ### 🐛 Bug Fixes
