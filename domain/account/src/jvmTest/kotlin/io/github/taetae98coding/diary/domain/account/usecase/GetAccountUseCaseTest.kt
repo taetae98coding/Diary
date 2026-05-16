@@ -35,7 +35,6 @@ class GetAccountUseCaseTest : BehaviorSpec() {
             clearAllMocks()
 
             every { accountInfoRepository.get() } returns flowOf(null)
-            every { accountMetaDataRepository.get() } returns flowOf(null)
 
             When("GetAccountUseCase를 호출하면") {
                 val result = useCase().first()
@@ -59,7 +58,7 @@ class GetAccountUseCaseTest : BehaviorSpec() {
                 .sample()
 
             every { accountInfoRepository.get() } returns flowOf(accountInfo)
-            every { accountMetaDataRepository.get() } returns flowOf(accountMetaData)
+            every { accountMetaDataRepository.get(accountInfo.id) } returns flowOf(accountMetaData)
 
             When("GetAccountUseCase를 호출하면") {
                 val result = useCase().first()
@@ -78,7 +77,7 @@ class GetAccountUseCaseTest : BehaviorSpec() {
                 }
 
                 Then("AccountMetaDataRepository를 호출한다") {
-                    verify(exactly = 1) { accountMetaDataRepository.get() }
+                    verify(exactly = 1) { accountMetaDataRepository.get(accountInfo.id) }
                 }
             }
         }
@@ -88,7 +87,7 @@ class GetAccountUseCaseTest : BehaviorSpec() {
             val accountInfo = fixtureMonkey.giveMeOne<AccountInfo>()
 
             every { accountInfoRepository.get() } returns flowOf(accountInfo)
-            every { accountMetaDataRepository.get() } returns flowOf(null)
+            every { accountMetaDataRepository.get(accountInfo.id) } returns flowOf(null)
 
             When("GetAccountUseCase를 호출하면") {
                 val result = useCase().first()
